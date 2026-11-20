@@ -30,13 +30,35 @@ namespace VVRace
 
             foreach (var pawn in colonists)
             {
-                AddOrStackBlight(pawn, blightDef);
+                AddOrStackBlight(pawn, blightDef, durationTicks: -1);
             }
 
             Messages.Message(
                 LocalizeString_Message.VV_Message_DoomFlowerBloomed.Translate(blightDef.label.Named("BLIGHT")),
                 new LookTargets(new TargetInfo(sourceCell, map)),
                 MessageTypeDefOf.NegativeEvent);
+        }
+
+        // 고대 유적 시련 복도 오답 등 기간제(예: 1일) 랜덤 멸망꽃 페널티를 맵 내 전체 정착민에게 부여한다.
+        public static HediffDef ApplyTimedDoomBlight(Map map, int durationTicks)
+        {
+            if (map == null || durationTicks <= 0) { return null; }
+
+            var colonists = new List<Pawn>(map.mapPawns.FreeColonistsSpawned);
+            if (colonists.Count == 0) { return null; }
+
+            if (!BlightDefs.Where(def => AnyBelowMaxLevel(colonists, def)).TryRandomElement(out var blightDef)
+                && !BlightDefs.TryRandomElement(out blightDef))
+            {
+                return null;
+            }
+
+            for (int i = 0; i < colonists.Count; i++)
+            {
+                AddOrStackBlight(colonists[i], blightDef, durationTicks);
+            }
+
+            return blightDef;
         }
 
         public static bool ClearDoomBlights(Map map)
@@ -82,20 +104,36 @@ namespace VVRace
             return false;
         }
 
-        private static void AddOrStackBlight(Pawn pawn, HediffDef def)
+        private static void AddOrStackBlight(Pawn pawn, HediffDef def, int durationTicks)
         {
             if (pawn.Dead) { return; }
 
+            var now = Find.TickManager.TicksGame;
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(def);
             if (hediff == null)
             {
                 hediff = HediffMaker.MakeHediff(def, pawn);
                 hediff.Severity = 1f;
+                if (durationTicks > 0 && hediff is Hediff_DoomBlight timed)
+                {
+                    timed.SetTimedExpiration(now + durationTicks);
+                }
                 pawn.health.AddHediff(hediff);
             }
             else
             {
                 hediff.Severity = System.Math.Min(MaxBlightLevel, hediff.Severity + 1f);
+                if (hediff is Hediff_DoomBlight existing)
+                {
+                    if (durationTicks > 0)
+                    {
+                        existing.ExtendTimedExpiration(now + durationTicks);
+                    }
+                    else
+                    {
+                        existing.ClearTimedExpiration();
+                    }
+                }
             }
         }
     }

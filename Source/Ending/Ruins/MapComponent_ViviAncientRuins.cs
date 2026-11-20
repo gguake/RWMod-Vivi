@@ -10,14 +10,67 @@ using Verse.Sound;
 
 namespace VVRace
 {
+    public class RuinGalleryBlastAim : IExposable
+    {
+        public IntVec3 cell = IntVec3.Invalid;
+        public int detonateTick = -1;
+
+        private Mote _targetMote;
+        private Effecter _effecter;
+
+        public RuinGalleryBlastAim()
+        {
+        }
+
+        public RuinGalleryBlastAim(IntVec3 cell, int detonateTick)
+        {
+            this.cell = cell;
+            this.detonateTick = detonateTick;
+        }
+
+        public void TickVisuals(Map map, int aimTicks)
+        {
+            if (map == null || !cell.InBounds(map)) { return; }
+
+            var aimStartTick = Mathf.Min(detonateTick - aimTicks, Find.TickManager.TicksGame);
+            if (_targetMote == null || _targetMote.Destroyed)
+            {
+                _targetMote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), map, VVThingDefOf.VV_Mote_ApocryphaAimTarget, 1f, makeOffscreen: true);
+                _targetMote?.ForceSpawnTick(aimStartTick);
+            }
+
+            _targetMote?.Maintain();
+
+            var target = new TargetInfo(cell, map);
+            EndingVfxUtility.MaintainEffecter(ref _effecter, VVEffecterDefOf.VV_Effecter_ApocryphaAim, target, target);
+        }
+
+        public void CleanupVisuals()
+        {
+            EndingVfxUtility.CleanupEffecter(ref _effecter);
+            _targetMote = null;
+        }
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref cell, "cell", IntVec3.Invalid);
+            Scribe_Values.Look(ref detonateTick, "detonateTick", -1);
+        }
+    }
+
     public class MapComponent_ViviAncientRuins : MapComponent
     {
         public const int DoomRespawnDelayTicks = 90;
         public const int PuzzleTetherDurationTicks = 3600;
         public const int UnsealFadeDurationTicks = 90;
         public const int ResealDurationTicks = 180;
+        public const int TrialBlightDurationTicks = GenDate.TicksPerDay;
+        public const int GalleryBlastAimTicks = 240;
+        private const int MaxConcurrentGalleryBlasts = 3;
+        private const float GalleryBlastMinSpacing = 3.0f;
+        private const int GalleryTargetRescanTicks = 30;
+        private static readonly IntRange GalleryBlastIntervalTicks = new IntRange(120, 210);
         private const float PathGuideCellsPerTick = 0.14f;
-        private const float TrialBlastDamage = 8f;
         private const int TrapCooldownTicks = 15;
 
         private static readonly Color AlignedLinkColor = new Color(1f, 0.88f, 0.46f, 0.92f);
@@ -45,6 +98,11 @@ namespace VVRace
         private Pawn _tetheredPawn;
         private int _tetherExpireTick = -1;
 
+        private bool _galleryAlarmActive;
+        private int _nextGalleryBlastTick = -1;
+        private List<RuinGalleryBlastAim> _galleryAims = new List<RuinGalleryBlastAim>();
+        private Effecter _galleryAimSustainer;
+
         private readonly int[] _unsealStartTicks = { -1, -1, -1, -1 };
         private HashSet<IntVec3> _safePathSet = new HashSet<IntVec3>();
         private Dictionary<IntVec3, int> _potIndexByCell = new Dictionary<IntVec3, int>();
@@ -54,6 +112,8 @@ namespace VVRace
         public bool IsTrialCleared => _trialCleared;
         public bool IsHexagonSolved => _hexagonSolved;
         public bool IsResealing => _resealStartTick >= 0;
+        public bool IsGalleryAlarmActive => _galleryAlarmActive;
+        public int ActiveGalleryBlastAimCount => _galleryAims.Count;
         public IReadOnlyList<IntVec3> SafePath => _safePath;
         public IReadOnlyList<Building_RuinPuzzleFairyFlower> PuzzleFlowers => _puzzleFlowers;
         public Building_RuinPuzzleFairyFlower SelectedFlower => _selectedFlower;
@@ -97,6 +157,9 @@ namespace VVRace
             _guideLastStepIndices.Clear();
             _puzzleFlowers.Clear();
             ClearPuzzleTether(notify: false);
+            _galleryAlarmActive = false;
+            _nextGalleryBlastTick = -1;
+            CancelGallerySecurityAims();
 
             _safePath = RuinLayoutUtility.GenerateHiddenPath(origin, seed);
             RebuildCaches();
@@ -393,41 +456,30 @@ namespace VVRace
             _trapCooldownUntilTick = now + TrapCooldownTicks;
 
             var trialRect = RuinLayoutUtility.TrialRect(_origin);
-            var blastRect = RuinLayoutUtility.Zone3BlastRect(_origin);
+            var doomCell = RuinLayoutUtility.RuinDoomFlowerCell(_origin);
             var returnAnchor = RuinLayoutUtility.RuinDoomReturnCell(_origin);
 
-            // 방 전체에 퍼지는 마나 폭발 연출
-            var centerVec = trialRect.CenterVector3;
-            if (centerVec.ShouldSpawnMotesAt(map))
+            // 잔향의 멸망꽃 파동 연출 (폭발 피해 없음)
+            var pulsePos = doomCell.InBounds(map) ? doomCell.ToVector3Shifted() : trialRect.CenterVector3;
+            if (pulsePos.ShouldSpawnMotesAt(map))
             {
                 if (VVFleckDefOf.VV_Fleck_GimmickDoomLaunchWave != null)
                 {
-                    map.flecks.CreateFleck(FleckMaker.GetDataStatic(centerVec, map, VVFleckDefOf.VV_Fleck_GimmickDoomLaunchWave, 1.25f));
+                    map.flecks.CreateFleck(FleckMaker.GetDataStatic(pulsePos, map, VVFleckDefOf.VV_Fleck_GimmickDoomLaunchWave, 1.15f));
                 }
-
-                for (int k = 0; k < 16; k++)
+                if (VVFleckDefOf.VV_Fleck_GimmickDoomRing != null)
                 {
-                    var burstPos = new Vector3(
-                        Rand.Range(trialRect.minX + 0.5f, trialRect.maxX + 0.5f),
-                        0f,
-                        Rand.Range(trialRect.minZ + 0.5f, trialRect.maxZ + 0.5f));
-                    if (VVFleckDefOf.VV_Fleck_GimmickDoomRing != null)
-                    {
-                        map.flecks.CreateFleck(FleckMaker.GetDataStatic(burstPos, map, VVFleckDefOf.VV_Fleck_GimmickDoomRing, Rand.Range(0.9f, 1.5f)));
-                    }
-                    if (VVFleckDefOf.VV_Fleck_GimmickFlash != null)
-                    {
-                        var flash = FleckMaker.GetDataStatic(burstPos, map, VVFleckDefOf.VV_Fleck_GimmickFlash, Rand.Range(2.2f, 3.4f));
-                        flash.instanceColor = new Color(1f, 0.42f, 0.78f, 0.8f);
-                        map.flecks.CreateFleck(flash);
-                    }
+                    map.flecks.CreateFleck(FleckMaker.GetDataStatic(pulsePos, map, VVFleckDefOf.VV_Fleck_GimmickDoomRing, 1.6f));
                 }
             }
 
             VVSoundDefOf.VV_FairyTeleport?.PlayOneShot(new TargetInfo(trialRect.CenterCell, map));
-            ApocryphaUtility.ShakeCamera(map, 0.6f);
+            ApocryphaUtility.ShakeCamera(map, 0.4f);
 
-            // 방 전체 폰에게 약한 피해 적용 + 시련 격자 위 폰들을 멸망꽃 앞으로 강제 이동
+            // 전체 정착민 대상 랜덤 멸망꽃 페널티 적용 (1일 지속)
+            var blightDef = DoomBlightUtility.ApplyTimedDoomBlight(map, TrialBlightDurationTicks);
+
+            // 시련 격자 위 폰들을 멸망꽃 앞으로 강제 이동
             var candidates = map.mapPawns.AllPawnsSpawned.ToList();
             int offsetIdx = 0;
             IntVec2[] returnOffsets =
@@ -441,48 +493,39 @@ namespace VVRace
             {
                 var pawn = candidates[i];
                 if (pawn == null || pawn.Dead || !pawn.Spawned) { continue; }
-                if (!blastRect.Contains(pawn.Position)) { continue; }
+                if (!trialRect.Contains(pawn.Position)) { continue; }
 
-                if (VVDamageDefOf.VV_RuinTrialBlast != null)
+                var oldPos = pawn.Position;
+                var dest = returnAnchor;
+                for (int r = 0; r < returnOffsets.Length; r++)
                 {
-                    pawn.TakeDamage(new DamageInfo(VVDamageDefOf.VV_RuinTrialBlast, TrialBlastDamage, 0f));
+                    var cand = new IntVec3(
+                        returnAnchor.x + returnOffsets[(offsetIdx + r) % returnOffsets.Length].x,
+                        0,
+                        returnAnchor.z + returnOffsets[(offsetIdx + r) % returnOffsets.Length].z);
+                    if (cand.InBounds(map) && cand.Standable(map) && !trialRect.Contains(cand))
+                    {
+                        dest = cand;
+                        offsetIdx++;
+                        break;
+                    }
                 }
 
-                if (pawn.Dead || !pawn.Spawned) { continue; }
-
-                if (trialRect.Contains(pawn.Position))
+                if (VVFleckDefOf.VV_Fleck_GimmickPhaseRing != null)
                 {
-                    var oldPos = pawn.Position;
-                    var dest = returnAnchor;
-                    for (int r = 0; r < returnOffsets.Length; r++)
-                    {
-                        var cand = new IntVec3(
-                            returnAnchor.x + returnOffsets[(offsetIdx + r) % returnOffsets.Length].x,
-                            0,
-                            returnAnchor.z + returnOffsets[(offsetIdx + r) % returnOffsets.Length].z);
-                        if (cand.InBounds(map) && cand.Standable(map) && !trialRect.Contains(cand))
-                        {
-                            dest = cand;
-                            offsetIdx++;
-                            break;
-                        }
-                    }
-
-                    if (VVFleckDefOf.VV_Fleck_GimmickPhaseRing != null)
-                    {
-                        map.flecks.CreateFleck(FleckMaker.GetDataStatic(oldPos.ToVector3Shifted(), map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 1.2f));
-                        map.flecks.CreateFleck(FleckMaker.GetDataStatic(dest.ToVector3Shifted(), map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 1.2f));
-                    }
-
-                    pawn.pather?.StopDead();
-                    pawn.jobs?.StopAll();
-                    pawn.Position = dest;
-                    pawn.Notify_Teleported(endCurrentJob: false, resetTweenedPos: true);
+                    map.flecks.CreateFleck(FleckMaker.GetDataStatic(oldPos.ToVector3Shifted(), map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 1.2f));
+                    map.flecks.CreateFleck(FleckMaker.GetDataStatic(dest.ToVector3Shifted(), map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 1.2f));
                 }
+
+                pawn.pather?.StopDead();
+                pawn.jobs?.StopAll();
+                pawn.Position = dest;
+                pawn.Notify_Teleported(endCurrentJob: false, resetTweenedPos: true);
             }
 
+            var blightLabel = blightDef != null ? blightDef.label : string.Empty;
             Messages.Message(
-                LocalizeString_Message.VV_Message_RuinTrialTriggered.Translate(),
+                LocalizeString_Message.VV_Message_RuinTrialTriggered.Translate(blightLabel.Named("BLIGHT")),
                 new LookTargets(returnAnchor, map),
                 MessageTypeDefOf.NegativeEvent,
                 historical: false);
@@ -514,6 +557,11 @@ namespace VVRace
             if (!_active || _hexagonSolved || vivi == null || flower == null || !flower.Spawned) { return; }
 
             var now = Find.TickManager.TicksGame;
+            if (!_galleryAlarmActive)
+            {
+                ActivateGallerySecurityAlarm(now);
+            }
+
             if (!HasValidTether || _tetheredPawn != vivi)
             {
                 _tetheredPawn = vivi;
@@ -635,6 +683,9 @@ namespace VVRace
             if (_hexagonSolved && IsStageUnsealed(4)) { return; }
 
             _hexagonSolved = true;
+            _galleryAlarmActive = false;
+            _nextGalleryBlastTick = -1;
+            CancelGallerySecurityAims();
             ClearPuzzleTether(notify: false);
             ViviEndingQuest.Current?.Ruins.Notify_HexagonSolved();
 
@@ -702,6 +753,172 @@ namespace VVRace
             }
         }
 
+        private void ActivateGallerySecurityAlarm(int now)
+        {
+            if (_galleryAlarmActive || _hexagonSolved) { return; }
+
+            _galleryAlarmActive = true;
+            _nextGalleryBlastTick = now + 30;
+
+            var ringCenter = RuinLayoutUtility.RingCenter(_origin);
+            if (ringCenter.InBounds(map))
+            {
+                if (ringCenter.ToVector3Shifted().ShouldSpawnMotesAt(map) && VVFleckDefOf.VV_Fleck_GimmickDoomRing != null)
+                {
+                    map.flecks.CreateFleck(FleckMaker.GetDataStatic(ringCenter.ToVector3Shifted(), map, VVFleckDefOf.VV_Fleck_GimmickDoomRing, 2.2f));
+                }
+
+                SoundDefOf.MechanoidsWakeUp?.PlayOneShot(new TargetInfo(ringCenter, map));
+                ApocryphaUtility.ShakeCamera(map, 0.7f);
+            }
+
+            Messages.Message(
+                LocalizeString_Message.VV_Message_RuinGalleryAlarm.Translate(),
+                ringCenter.InBounds(map) ? new LookTargets(ringCenter, map) : LookTargets.Invalid,
+                MessageTypeDefOf.ThreatBig);
+        }
+
+        private void TickGallerySecurity(int now)
+        {
+            if (!_galleryAlarmActive || _hexagonSolved || !IsStageUnsealed(3) || IsResealing)
+            {
+                if (_galleryAims.Count > 0 || _galleryAimSustainer != null)
+                {
+                    CancelGallerySecurityAims();
+                }
+                return;
+            }
+
+            for (int i = _galleryAims.Count - 1; i >= 0; i--)
+            {
+                var aim = _galleryAims[i];
+                if (now < aim.detonateTick) { continue; }
+
+                _galleryAims.RemoveAt(i);
+                aim.CleanupVisuals();
+                DetonateGalleryBlast(aim.cell);
+            }
+
+            if (_galleryAims.Count < MaxConcurrentGalleryBlasts && now >= _nextGalleryBlastTick)
+            {
+                if (TryPickGalleryBlastTarget(out var targetCell))
+                {
+                    _galleryAims.Add(new RuinGalleryBlastAim(targetCell, now + GalleryBlastAimTicks));
+                    _nextGalleryBlastTick = now + GalleryBlastIntervalTicks.RandomInRange;
+                }
+                else
+                {
+                    _nextGalleryBlastTick = now + GalleryTargetRescanTicks;
+                }
+            }
+
+            if (_galleryAims.Count == 0)
+            {
+                EndingVfxUtility.CleanupEffecter(ref _galleryAimSustainer);
+                return;
+            }
+
+            for (int i = 0; i < _galleryAims.Count; i++)
+            {
+                _galleryAims[i].TickVisuals(map, GalleryBlastAimTicks);
+            }
+
+            var originTarget = new TargetInfo(_origin, map);
+            EndingVfxUtility.MaintainEffecter(ref _galleryAimSustainer, VVEffecterDefOf.VV_Effecter_ApocryphaAimSustain, originTarget, originTarget);
+        }
+
+        private bool TryPickGalleryBlastTarget(out IntVec3 result)
+        {
+            var candidates = new List<Pawn>();
+            var pawns = map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                var p = pawns[i];
+                if (p == null || p.Dead || p.Downed || !p.Spawned) { continue; }
+                if (p.Faction != Faction.OfPlayer && !p.IsPrisonerOfColony) { continue; }
+                if (RuinLayoutUtility.GetSealStage(p.Position, _origin) != 3) { continue; }
+                candidates.Add(p);
+            }
+
+            if (candidates.Count == 0)
+            {
+                result = IntVec3.Invalid;
+                return false;
+            }
+
+            // 회랑 내 랜덤 대상을 고르되 기존 예고 장판과 완전히 겹치지 않는 위치를 우선 선택한다.
+            var picked = candidates.RandomElement();
+            if (!IsNearGalleryAim(picked.Position))
+            {
+                result = picked.Position;
+                return true;
+            }
+
+            if (CellFinder.TryFindRandomCellNear(picked.Position, map, 4,
+                c => c.InBounds(map) && c.Standable(map)
+                    && RuinLayoutUtility.GetSealStage(c, _origin) == 3
+                    && !IsNearGalleryAim(c),
+                out result))
+            {
+                return true;
+            }
+
+            result = picked.Position;
+            return true;
+        }
+
+        private bool IsNearGalleryAim(IntVec3 cell)
+        {
+            for (int i = 0; i < _galleryAims.Count; i++)
+            {
+                if (_galleryAims[i].cell.InHorDistOf(cell, GalleryBlastMinSpacing))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void DetonateGalleryBlast(IntVec3 cell)
+        {
+            var shellDef = VVThingDefOf.VV_Projectile_FairyShell;
+            if (shellDef?.projectile == null || !cell.InBounds(map)) { return; }
+
+            var impactEffecter = shellDef.GetModExtension<ApocryphaProjectileExtension>()?.impactEffecter
+                ?? VVEffecterDefOf.VV_Effecter_FairyShellImpact;
+            ApocryphaGimmicks.PlayEffect(impactEffecter, cell, map);
+
+            var ignored = new List<Thing>();
+            ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinPuzzlePot));
+            ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinPuzzleFairyFlower));
+            ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_AncientSanctumWall));
+            ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_AncientSanctumLamp));
+            ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinSpatialBarrier));
+
+            GenExplosion.DoExplosion(
+                cell,
+                map,
+                shellDef.projectile.explosionRadius,
+                shellDef.projectile.damageDef,
+                null,
+                shellDef.projectile.GetDamageAmount((Thing)null),
+                shellDef.projectile.GetArmorPenetration(),
+                projectile: shellDef,
+                ignoredThings: ignored,
+                screenShakeFactor: shellDef.projectile.screenShakeFactor);
+        }
+
+        private void CancelGallerySecurityAims()
+        {
+            for (int i = 0; i < _galleryAims.Count; i++)
+            {
+                _galleryAims[i].CleanupVisuals();
+            }
+
+            _galleryAims.Clear();
+            EndingVfxUtility.CleanupEffecter(ref _galleryAimSustainer);
+        }
+
         #endregion
 
         #region 코어 추출 후 재봉인 연출 및 월드 추방
@@ -711,6 +928,9 @@ namespace VVRace
             if (!_active || _resealStartTick >= 0) { return; }
 
             _resealStartTick = Find.TickManager.TicksGame;
+            _galleryAlarmActive = false;
+            _nextGalleryBlastTick = -1;
+            CancelGallerySecurityAims();
             ClearPuzzleTether(notify: false);
 
             var altarCell = RuinLayoutUtility.CentralAltarCell(_origin);
@@ -928,6 +1148,7 @@ namespace VVRace
             }
 
             TickTrial(now);
+            TickGallerySecurity(now);
 
             if ((_selectedFlower != null || _tetheredPawn != null) && !HasValidTether)
             {
@@ -1085,6 +1306,12 @@ namespace VVRace
             }
         }
 
+        public override void MapRemoved()
+        {
+            base.MapRemoved();
+            CancelGallerySecurityAims();
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -1103,13 +1330,18 @@ namespace VVRace
             Scribe_References.Look(ref _selectedFlower, "selectedFlower");
             Scribe_References.Look(ref _tetheredPawn, "tetheredPawn");
             Scribe_Values.Look(ref _tetherExpireTick, "tetherExpireTick", -1);
+            Scribe_Values.Look(ref _galleryAlarmActive, "galleryAlarmActive", false);
+            Scribe_Values.Look(ref _nextGalleryBlastTick, "nextGalleryBlastTick", -1);
+            Scribe_Collections.Look(ref _galleryAims, "galleryAims", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (_safePath == null) { _safePath = new List<IntVec3>(); }
                 if (_guideStartTicks == null) { _guideStartTicks = new List<int>(); }
                 if (_puzzleFlowers == null) { _puzzleFlowers = new List<Building_RuinPuzzleFairyFlower>(); }
+                if (_galleryAims == null) { _galleryAims = new List<RuinGalleryBlastAim>(); }
                 _puzzleFlowers.RemoveAll(f => f == null);
+                _galleryAims.RemoveAll(a => a == null || !a.cell.IsValid);
                 _guideLastStepIndices.Clear();
                 RebuildCaches();
             }

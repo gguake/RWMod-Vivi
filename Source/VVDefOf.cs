@@ -158,6 +158,7 @@ namespace VVRace
         public static ThingDef VV_RuinSpatialBarrier;
         public static ThingDef VV_AncientRuinWall;
         public static ThingDef VV_AncientSanctumWall;
+        public static ThingDef VV_RuinCreamWall;
         public static ThingDef VV_AncientSanctumLamp;
         public static ThingDef VV_RuinDoomFlower;
         public static ThingDef VV_RuinPuzzlePot;

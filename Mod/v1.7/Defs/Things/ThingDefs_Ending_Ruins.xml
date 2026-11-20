@@ -253,6 +253,74 @@
     <stuffCategories Inherit="False" />
   </ThingDef>
 
+  <!-- 고대 유적 전용 연쇄 붕괴 크림 벽: 살덩이처럼 파괴 시 연결된 일부분이 함께 무너진다 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_RuinCreamWall</defName>
+    <label>hardened cream wall</label>
+    <description>An overgrown mass of hardened ancient vivicream choking the ruin passages. Brittle along its fault lines, shattering one section causes nearby connected chunks to collapse with it.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <linkType>CornerFiller</linkType>
+      <linkFlags>
+        <li>Wall</li>
+      </linkFlags>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(0.98, 0.88, 0.68, 1.0)</color>
+      <colorTwo>(1.0, 0.97, 0.88, 1.0)</colorTwo>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+        <edgeTop>Damage/Edge</edgeTop>
+        <edgeBot>Damage/Edge</edgeBot>
+        <edgeLeft>Damage/Edge</edgeLeft>
+        <edgeRight>Damage/Edge</edgeRight>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>1</fillPercent>
+    <coversFloor>true</coversFloor>
+    <rotatable>false</rotatable>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <holdsRoof>true</holdsRoof>
+    <staticSunShadowHeight>1.0</staticSunShadowHeight>
+    <blockLight>true</blockLight>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <autoTargetNearbyIdenticalThings>true</autoTargetNearbyIdenticalThings>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <statBases>
+      <MaxHitPoints>45</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+      <Beauty>-2</Beauty>
+    </statBases>
+    <building>
+      <isInert>true</isInert>
+      <claimable>false</claimable>
+      <deconstructible>false</deconstructible>
+      <repairable>false</repairable>
+      <quickTargetable>true</quickTargetable>
+      <isTargetable>true</isTargetable>
+      <canBeDamagedByAttacks>true</canBeDamagedByAttacks>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+      <destroyShakeAmount>0</destroyShakeAmount>
+    </building>
+    <comps>
+      <li Class="CompProperties_CascadeOnDestroyed">
+        <cascadeCountRange>4~7</cascadeCountRange>
+        <cascadeThingDefs>
+          <li>VV_RuinCreamWall</li>
+        </cascadeThingDefs>
+      </li>
+    </comps>
+  </ThingDef>
+
   <!-- 고대 성소 등불 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AncientSanctumLamp</defName>

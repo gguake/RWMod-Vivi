@@ -42,6 +42,9 @@
 <VV_AncientSanctumWall.label>고대 성소 벽</VV_AncientSanctumWall.label>
 <VV_AncientSanctumWall.description>공간 왜곡 결계 안에서 옛 비비 제국 전성기의 모습 그대로 온전히 보존된 강화 벌집 벽입니다.</VV_AncientSanctumWall.description>
 
+<VV_RuinCreamWall.label>굳어진 크림 벽</VV_RuinCreamWall.label>
+<VV_RuinCreamWall.description>오랜 세월 유적 통로를 뒤덮고 굳어 버린 고대 비비 크림 덩어리입니다. 내부 결이 약해 한 부분을 부수면 연결된 주변 덩어리도 함께 무너져 내립니다.</VV_RuinCreamWall.description>
+
 <VV_AncientSanctumLamp.label>고대 마나 등불</VV_AncientSanctumLamp.label>
 <VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 따스한 금빛을 비추는 옛 비비 제국의 성소 등불입니다.</VV_AncientSanctumLamp.description>
 

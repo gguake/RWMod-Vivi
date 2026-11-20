@@ -18,7 +18,8 @@
 <VV_Message_RuinCoreExtracted>{PAWN_labelShort} has extracted the ancient amber core from the central altar.</VV_Message_RuinCoreExtracted>
 <VV_Message_RuinZoneUnsealed>The spatial distortion lifted, unsealing the inner sanctum zone.</VV_Message_RuinZoneUnsealed>
 <VV_Message_RuinPathGuideSpawned>A lingering wisp from the shattered doom bloom drifts along the unseen path.</VV_Message_RuinPathGuideSpawned>
-<VV_Message_RuinTrialTriggered>A wrong step triggered a hall-wide mana blast, sending everyone back before the doom bloom!</VV_Message_RuinTrialTriggered>
+<VV_Message_RuinTrialTriggered>A wrong step triggered the doom bloom's lingering backlash, afflicting the expedition with {BLIGHT} and sending trespassers back before the doom bloom!</VV_Message_RuinTrialTriggered>
+<VV_Message_RuinGalleryAlarm>The circular gallery's ancient security alarm has sounded! Telegraphed mana blasts will strike targets in the gallery until the seal is completely lifted!</VV_Message_RuinGalleryAlarm>
 <VV_Message_RuinPuzzleTethered>{PAWN_labelShort} is now linked by a resonance thread. Touch another resonating bloom to swap their positions.</VV_Message_RuinPuzzleTethered>
 <VV_Message_RuinPuzzleUntethered>The resonance thread link with the fairy bloom ended.</VV_Message_RuinPuzzleUntethered>
 <VV_Message_RuinPuzzleSwapped>The two resonating fairy blooms swapped positions.</VV_Message_RuinPuzzleSwapped>

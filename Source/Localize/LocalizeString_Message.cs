@@ -24,6 +24,7 @@
         public const string VV_Message_RuinZoneUnsealed = nameof(VV_Message_RuinZoneUnsealed);
         public const string VV_Message_RuinPathGuideSpawned = nameof(VV_Message_RuinPathGuideSpawned);
         public const string VV_Message_RuinTrialTriggered = nameof(VV_Message_RuinTrialTriggered);
+        public const string VV_Message_RuinGalleryAlarm = nameof(VV_Message_RuinGalleryAlarm);
         public const string VV_Message_RuinPuzzleTethered = nameof(VV_Message_RuinPuzzleTethered);
         public const string VV_Message_RuinPuzzleUntethered = nameof(VV_Message_RuinPuzzleUntethered);
         public const string VV_Message_RuinPuzzleSwapped = nameof(VV_Message_RuinPuzzleSwapped);

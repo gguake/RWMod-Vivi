@@ -795,18 +795,20 @@ namespace VVRace
         {
             if (VVPawnKindDefOf.VV_TitanicHornet == null) { return; }
 
-            IntVec2[] anchors =
+            // 전정 양옆과 진입로를 감싸도록 배치해 1번 요정꽃 접근 시 실제로 교전이 발생하게 한다.
+            (int dx, int dz, float wander, float guard)[] posts =
             {
-                new IntVec2(-16, -64),
-                new IntVec2(16, -64),
-                new IntVec2(-44, -44),
-                new IntVec2(44, -44),
+                (-8, -64, 4.5f, 11.5f),
+                (8, -64, 4.5f, 11.5f),
+                (-13, -70, 5.5f, 12.5f),
+                (13, -70, 5.5f, 12.5f),
             };
 
-            for (int i = 0; i < anchors.Length; i++)
+            for (int i = 0; i < posts.Length; i++)
             {
-                var anchor = new IntVec3(origin.x + anchors[i].x, 0, origin.z + anchors[i].z).ClampInsideMap(map);
-                if (!CellFinder.TryFindRandomCellNear(anchor, map, 5, c => c.InBounds(map) && c.Standable(map) && GetSealStage(c, origin) == 0, out var spawnCell))
+                var p = posts[i];
+                var anchor = new IntVec3(origin.x + p.dx, 0, origin.z + p.dz).ClampInsideMap(map);
+                if (!CellFinder.TryFindRandomCellNear(anchor, map, 4, c => c.InBounds(map) && c.Standable(map) && GetSealStage(c, origin) == 0, out var spawnCell))
                 {
                     continue;
                 }
@@ -815,12 +817,20 @@ namespace VVRace
                 GenSpawn.Spawn(hornet, spawnCell, map, Rot4.South);
                 hornet.mindState?.mentalStateHandler?.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, forceWake: true);
 
-                var lordJob = new LordJob_RuinHornetWander(spawnCell, wanderRadius: 7.5f, guardRadius: 10.5f, retaliationRadius: 28f);
+                var lordJob = new LordJob_RuinHornetWander(spawnCell, wanderRadius: p.wander, guardRadius: p.guard, retaliationRadius: 28f);
                 LordMaker.MakeNewLord(null, lordJob, map, new[] { hornet });
             }
         }
 
-        // 제1구간(거대 육각형 미로): 중앙 성소와 북쪽 복도를 빙 둘러싼 대규모 미궁, 중간중간 파괴 가능한 크림벽, 북단 출구의 2번 요정꽃.
+        private static Faction FindHostileRuinsFaction()
+        {
+            return Faction.OfAncientsHostile
+                ?? Faction.OfMechanoids
+                ?? Faction.OfInsects
+                ?? Find.FactionManager.RandomEnemyFaction();
+        }
+
+        // 제1구간(거대 육각형 미로): 중앙 성소와 북쪽 복도를 빙 둘러싼 대규모 미궁, 연쇄 붕괴 크림벽, 적대 콩뿌리개·밀랍화분, 북단 출구의 2번 요정꽃.
         public static void BuildZone2Maze(Map map, IntVec3 origin, int investigated, bool zone3Open, int seed)
         {
             // 1) 전체 Stage 1 육각형 링 초기화: 바닥·지붕·고대 벽 채우기
@@ -904,7 +914,8 @@ namespace VVRace
                 }
             }
 
-            // 5) 통로 개방 및 파괴 가능한 비비 크림벽 봉쇄 설치 (3칸 폭 출입구)
+            // 5) 통로 개방 및 연쇄 붕괴 유적 크림벽(VV_RuinCreamWall) 봉쇄 설치 (3칸 폭 출입구)
+            var creamWallDef = VVThingDefOf.VV_RuinCreamWall ?? VVThingDefOf.VV_ViviCreamWall;
             foreach (var kv in passages)
             {
                 var (a, b) = kv.Key;
@@ -916,14 +927,29 @@ namespace VVRace
 
                     if (isCream)
                     {
-                        SpawnBuildingClean(map, VVThingDefOf.VV_ViviCreamWall, cell);
+                        SpawnBuildingClean(map, creamWallDef, cell);
                     }
                 }
             }
 
-            // 6) 미로 내 주요 거점 등불 배치 (어두운 미궁 분위기 유지 + 크림벽 시인성 확보)
+            // 6) 일부 미로 방(5x5 칸 전체)을 유적 전용 연쇄 붕괴 크림벽으로 가득 채워 막는다.
+            var sortedNodes = connected.OrderBy(n => n.z).ThenBy(n => n.x).ToList();
+            var creamFilledRooms = SelectCreamFilledMazeRooms(sortedNodes, startNode, goalNode, rng);
+            foreach (var node in creamFilledRooms)
+            {
+                var center = MazeRoomCenter(origin, node.x, node.z);
+                foreach (var cell in CellRect.CenteredOn(center, 5, 5))
+                {
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    SpawnBuildingClean(map, creamWallDef, cell);
+                }
+            }
+
+            // 7) 미로 내 주요 거점 등불 배치 (크림벽으로 가득 찬 방은 제외)
             foreach (var node in connected)
             {
+                if (creamFilledRooms.Contains(node)) { continue; }
+
                 bool isMilestone = node == startNode
                     || (Math.Abs(node.x) % 3 == 0 && Math.Abs(node.z) % 3 == 0);
                 if (!isMilestone || node == goalNode) { continue; }
@@ -934,6 +960,12 @@ namespace VVRace
                 {
                     SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, lampCell);
                 }
+            }
+
+            // 8) 미로 일부 구역에 적대 콩뿌리개 + 밀랍 마법식물 화분 배치
+            if (!zone3Open)
+            {
+                SpawnMazeHostilePeashooters(map, origin, sortedNodes, startNode, goalNode, creamFilledRooms, rng);
             }
 
             // 북단 출구 성소(0, +9) 장식 등불 및 2번 요정꽃
@@ -948,6 +980,139 @@ namespace VVRace
             if (zone3Open)
             {
                 OpenZone2NorthGate(map, origin);
+            }
+        }
+
+        private static HashSet<IntVec2> SelectCreamFilledMazeRooms(List<IntVec2> sortedNodes, IntVec2 startNode, IntVec2 goalNode, System.Random rng)
+        {
+            var result = new HashSet<IntVec2>();
+            var candidates = new List<IntVec2>();
+            for (int i = 0; i < sortedNodes.Count; i++)
+            {
+                var n = sortedNodes[i];
+                if (n == startNode || n == goalNode) { continue; }
+                // 시작 방 바로 인접한 구역과 북단 출구 양옆은 열어 두어 입·출구 가독성을 확보한다.
+                if (Math.Abs(n.x - startNode.x) + Math.Abs(n.z - startNode.z) <= 1) { continue; }
+                if (Math.Abs(n.x - goalNode.x) + Math.Abs(n.z - goalNode.z) <= 1) { continue; }
+                candidates.Add(n);
+            }
+
+            // 피셔-예이츠 셔플로 결정론적 분산 선택 (약 20개 방, 서로 직접 인접하지 않게 배치)
+            for (int i = candidates.Count - 1; i > 0; i--)
+            {
+                int j = rng.Next(i + 1);
+                var tmp = candidates[i];
+                candidates[i] = candidates[j];
+                candidates[j] = tmp;
+            }
+
+            const int targetCount = 20;
+            for (int i = 0; i < candidates.Count && result.Count < targetCount; i++)
+            {
+                var cand = candidates[i];
+                bool adjacentTaken = false;
+                foreach (var existing in result)
+                {
+                    if (Math.Abs(existing.x - cand.x) + Math.Abs(existing.z - cand.z) <= 1)
+                    {
+                        adjacentTaken = true;
+                        break;
+                    }
+                }
+
+                if (!adjacentTaken)
+                {
+                    result.Add(cand);
+                }
+            }
+
+            return result;
+        }
+
+        private static void SpawnMazeHostilePeashooters(
+            Map map,
+            IntVec3 origin,
+            List<IntVec2> sortedNodes,
+            IntVec2 startNode,
+            IntVec2 goalNode,
+            HashSet<IntVec2> creamFilledRooms,
+            System.Random rng)
+        {
+            if (VVThingDefOf.VV_Peashooter == null || VVThingDefOf.VV_ArcanePlantPot == null || VVThingDefOf.VV_Viviwax == null)
+            {
+                return;
+            }
+
+            var hostileFaction = FindHostileRuinsFaction();
+            if (hostileFaction == null) { return; }
+
+            var chosen = new List<IntVec2>();
+
+            // 북단 출구 직전 양쪽 접근로((-1,9), (+1,9))에 우선 수비 콩뿌리개 배치
+            IntVec2[] priorityGuards = { new IntVec2(-1, 9), new IntVec2(1, 9) };
+            for (int i = 0; i < priorityGuards.Length; i++)
+            {
+                var g = priorityGuards[i];
+                if (sortedNodes.Contains(g) && !creamFilledRooms.Contains(g))
+                {
+                    chosen.Add(g);
+                }
+            }
+
+            var candidates = new List<IntVec2>();
+            for (int i = 0; i < sortedNodes.Count; i++)
+            {
+                var n = sortedNodes[i];
+                if (n == startNode || n == goalNode || creamFilledRooms.Contains(n)) { continue; }
+                // 남쪽 입구 직후(거리 2 이내)에는 배치하지 않아 진입 직후 억까 피격을 방지한다.
+                if (Math.Abs(n.x - startNode.x) + Math.Abs(n.z - startNode.z) <= 2) { continue; }
+                if (chosen.Contains(n)) { continue; }
+                candidates.Add(n);
+            }
+
+            for (int i = candidates.Count - 1; i > 0; i--)
+            {
+                int j = rng.Next(i + 1);
+                var tmp = candidates[i];
+                candidates[i] = candidates[j];
+                candidates[j] = tmp;
+            }
+
+            const int targetCount = 14;
+            for (int i = 0; i < candidates.Count && chosen.Count < targetCount; i++)
+            {
+                var cand = candidates[i];
+                bool tooClose = false;
+                for (int k = 0; k < chosen.Count; k++)
+                {
+                    if (Math.Abs(chosen[k].x - cand.x) + Math.Abs(chosen[k].z - cand.z) < 3)
+                    {
+                        tooClose = true;
+                        break;
+                    }
+                }
+
+                if (!tooClose)
+                {
+                    chosen.Add(cand);
+                }
+            }
+
+            for (int i = 0; i < chosen.Count; i++)
+            {
+                var cell = MazeRoomCenter(origin, chosen[i].x, chosen[i].z);
+                if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1 || cell.GetEdifice(map) != null)
+                {
+                    continue;
+                }
+
+                var pot = ThingMaker.MakeThing(VVThingDefOf.VV_ArcanePlantPot, VVThingDefOf.VV_Viviwax);
+                pot.SetFaction(hostileFaction);
+                GenSpawn.Spawn(pot, cell, map, WipeMode.Vanish);
+
+                var peashooter = ThingMaker.MakeThing(VVThingDefOf.VV_Peashooter);
+                peashooter.SetFaction(hostileFaction);
+                GenSpawn.Spawn(peashooter, cell, map, WipeMode.Vanish);
             }
         }
 
@@ -1628,6 +1793,15 @@ namespace VVRace
         public static void ClearCellObstacles(Map map, IntVec3 cell, bool removePlants)
         {
             var things = cell.GetThingList(map);
+            // 화분을 먼저 지우면 위의 마법 식물이 자동 포장(MinifiedArcanePlant)되므로 식물을 먼저 제거한다.
+            for (int i = things.Count - 1; i >= 0; i--)
+            {
+                if (things[i] is ArcanePlant plant)
+                {
+                    DestroyForce(plant);
+                }
+            }
+
             for (int i = things.Count - 1; i >= 0; i--)
             {
                 var t = things[i];
