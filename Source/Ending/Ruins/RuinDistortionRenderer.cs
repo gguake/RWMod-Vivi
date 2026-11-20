@@ -28,7 +28,7 @@ namespace VVRace
             }
         }
 
-        public static void Draw(IntVec3 origin, Vector4 sealState, float distortionStrength = 13.5f)
+        public static void Draw(IntVec3 origin, Vector4 sealState, float distortionStrength = 13.5f, int rotation = 0)
         {
             if (DistortionMat == null) { return; }
             if (sealState.x <= 0.001f && sealState.y <= 0.001f && sealState.z <= 0.001f && sealState.w <= 0.001f) { return; }
@@ -41,7 +41,8 @@ namespace VVRace
             PropertyBlock.SetVector(SealStateId, sealState);
             PropertyBlock.SetFloat(DistortionId, distortionStrength);
 
-            var matrix = Matrix4x4.TRS(symPos, Quaternion.identity, new Vector3(SymSizeX, 1f, SymSizeZ));
+            var rotQuat = Quaternion.Euler(0f, (rotation & 3) * 90f, 0f);
+            var matrix = Matrix4x4.TRS(symPos, rotQuat, new Vector3(SymSizeX, 1f, SymSizeZ));
             Graphics.DrawMesh(MeshPool.plane10, matrix, DistortionMat, 0, null, 0, PropertyBlock);
         }
     }

@@ -15,10 +15,11 @@ namespace VVRace
             var coreExtracted = ruins?.CoreExtracted ?? false;
 
             var origin = map.Center;
-            var usedRects = MapGenerator.GetOrGenerateVar<List<CellRect>>("UsedRects");
-            usedRects?.Add(RuinLayoutUtility.FootprintBounds(origin).ExpandedBy(8).ClipInsideMap(map));
-
             var seed = Gen.HashCombineInt(Find.World?.info?.Seed ?? 0, map.Tile.tileId);
+            var rotation = RuinLayoutUtility.RotationFromSeed(seed);
+            var usedRects = MapGenerator.GetOrGenerateVar<List<CellRect>>("UsedRects");
+            usedRects?.Add(RuinLayoutUtility.FootprintBounds(origin, rotation).ExpandedBy(8).ClipInsideMap(map));
+
             var comp = map.GetComponent<MapComponent_ViviAncientRuins>();
             comp?.InitializeFromGenStep(origin, seed, investigated, hexagonSolved, coreExtracted);
         }

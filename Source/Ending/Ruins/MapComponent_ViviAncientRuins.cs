@@ -82,6 +82,7 @@ namespace VVRace
         private bool _active;
         private IntVec3 _origin = IntVec3.Invalid;
         private int _layoutSeed;
+        private int _rotation;
         private int _unsealedMask;
         private bool _trialCleared;
         private bool _hexagonSolved;
@@ -109,6 +110,7 @@ namespace VVRace
 
         public bool IsActiveRuinsMap => _active;
         public IntVec3 Origin => _origin;
+        public int LayoutRotation => _rotation;
         public bool IsTrialCleared => _trialCleared;
         public bool IsHexagonSolved => _hexagonSolved;
         public bool IsResealing => _resealStartTick >= 0;
@@ -147,6 +149,7 @@ namespace VVRace
             _active = true;
             _origin = origin;
             _layoutSeed = seed;
+            _rotation = RuinLayoutUtility.RotationFromSeed(seed);
             _unsealedMask = 0;
             _trialCleared = investigated >= 3;
             _hexagonSolved = hexagonSolved || investigated >= 4 || coreExtracted;
@@ -161,48 +164,48 @@ namespace VVRace
             _nextGalleryBlastTick = -1;
             CancelGallerySecurityAims();
 
-            _safePath = RuinLayoutUtility.GenerateHiddenPath(origin, seed);
+            _safePath = RuinLayoutUtility.GenerateHiddenPath(origin, seed, _rotation);
             RebuildCaches();
 
-            RuinLayoutUtility.PrepareFootprintGround(map, origin);
-            RuinLayoutUtility.BuildZone1Forecourt(map, origin, investigated, coreExtracted, spawnHornets: true);
+            RuinLayoutUtility.PrepareFootprintGround(map, origin, _rotation);
+            RuinLayoutUtility.BuildZone1Forecourt(map, origin, investigated, coreExtracted, spawnHornets: true, _rotation);
 
             if (investigated >= 1)
             {
                 MarkStageUnsealed(1, animate: false);
-                RuinLayoutUtility.BuildZone2Maze(map, origin, investigated, zone3Open: investigated >= 2, seed);
+                RuinLayoutUtility.BuildZone2Maze(map, origin, investigated, zone3Open: investigated >= 2, seed, _rotation);
             }
 
             if (investigated >= 2)
             {
                 MarkStageUnsealed(2, animate: false);
-                RuinLayoutUtility.BuildZone3Hall(map, origin, investigated, zone4Open: investigated >= 3, _safePath);
+                RuinLayoutUtility.BuildZone3Hall(map, origin, investigated, zone4Open: investigated >= 3, _safePath, _rotation);
             }
 
             if (investigated >= 3)
             {
                 MarkStageUnsealed(3, animate: false);
-                _puzzleFlowers = RuinLayoutUtility.BuildZone4Ring(map, origin, _hexagonSolved, seed);
+                _puzzleFlowers = RuinLayoutUtility.BuildZone4Ring(map, origin, _hexagonSolved, seed, _rotation);
             }
 
             if (_hexagonSolved)
             {
                 MarkStageUnsealed(4, animate: false);
-                RuinLayoutUtility.BuildZone5AltarSanctum(map, origin, investigated, coreExtracted);
+                RuinLayoutUtility.BuildZone5AltarSanctum(map, origin, investigated, coreExtracted, _rotation);
             }
 
-            RuinLayoutUtility.RefreshSpatialBarriers(map, origin, IsStageUnsealed);
-            RuinLayoutUtility.UnfogSanctuary(map, origin);
+            RuinLayoutUtility.RefreshSpatialBarriers(map, origin, IsStageUnsealed, _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, origin, forceMeshDirty: false, rotation: _rotation);
         }
 
         public void PostMapGenerationCleanup()
         {
             if (!_active) { return; }
 
-            RuinLayoutUtility.CleanupPostGenDebris(map, _origin, IsStageUnsealed);
-            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed);
-            RuinLayoutUtility.EnsureExteriorApproachReachability(map, _origin);
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: false);
+            RuinLayoutUtility.CleanupPostGenDebris(map, _origin, IsStageUnsealed, _rotation);
+            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed, _rotation);
+            RuinLayoutUtility.EnsureExteriorApproachReachability(map, _origin, _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: false, rotation: _rotation);
         }
 
         public override void FinalizeInit()
@@ -211,7 +214,7 @@ namespace VVRace
             if (!_active) { return; }
 
             RebuildCaches();
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true, rotation: _rotation);
         }
 
         private void RebuildCaches()
@@ -228,7 +231,7 @@ namespace VVRace
             _potIndexByCell.Clear();
             if (_origin.IsValid)
             {
-                var pots = RuinLayoutUtility.GetHexagonPotCells(_origin);
+                var pots = RuinLayoutUtility.GetHexagonPotCells(_origin, _rotation);
                 for (int i = 0; i < pots.Length; i++)
                 {
                     _potIndexByCell[pots[i]] = i;
@@ -247,23 +250,23 @@ namespace VVRace
             if (echoIndex >= 1 && !IsStageUnsealed(1))
             {
                 MarkStageUnsealed(1, animate: true);
-                RuinLayoutUtility.BuildZone2Maze(map, _origin, investigated, zone3Open: investigated >= 2, _layoutSeed);
-                PlayUnsealEffects(new IntVec3(_origin.x, 0, _origin.z - 57));
+                RuinLayoutUtility.BuildZone2Maze(map, _origin, investigated, zone3Open: investigated >= 2, _layoutSeed, _rotation);
+                PlayUnsealEffects(RuinLayoutUtility.LocalToWorld(_origin, 0, -57, _rotation));
             }
 
             if (echoIndex >= 2 && !IsStageUnsealed(2))
             {
                 MarkStageUnsealed(2, animate: true);
-                RuinLayoutUtility.BuildZone3Hall(map, _origin, investigated, zone4Open: investigated >= 3, _safePath);
-                PlayUnsealEffects(new IntVec3(_origin.x, 0, _origin.z + 50));
+                RuinLayoutUtility.BuildZone3Hall(map, _origin, investigated, zone4Open: investigated >= 3, _safePath, _rotation);
+                PlayUnsealEffects(RuinLayoutUtility.LocalToWorld(_origin, 0, 50, _rotation));
             }
 
             if (echoIndex >= 3 && !IsStageUnsealed(3))
             {
                 DisarmTrialZone();
                 MarkStageUnsealed(3, animate: true);
-                _puzzleFlowers = RuinLayoutUtility.BuildZone4Ring(map, _origin, _hexagonSolved, _layoutSeed);
-                PlayUnsealEffects(new IntVec3(_origin.x, 0, _origin.z + 21));
+                _puzzleFlowers = RuinLayoutUtility.BuildZone4Ring(map, _origin, _hexagonSolved, _layoutSeed, _rotation);
+                PlayUnsealEffects(RuinLayoutUtility.LocalToWorld(_origin, 0, 21, _rotation));
             }
 
             if (echoIndex >= 4 && !_hexagonSolved)
@@ -271,8 +274,8 @@ namespace VVRace
                 CompleteHexagonPuzzle(playEffects: false);
             }
 
-            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed);
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true);
+            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed, _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true, rotation: _rotation);
         }
 
         private void DisarmTrialZone()
@@ -342,7 +345,7 @@ namespace VVRace
                 _doomRespawnTick = -1;
                 if (map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinDoomFlower).Count == 0)
                 {
-                    var doomCell = RuinLayoutUtility.RuinDoomFlowerCell(_origin);
+                    var doomCell = RuinLayoutUtility.RuinDoomFlowerCell(_origin, _rotation);
                     if (doomCell.InBounds(map))
                     {
                         RuinLayoutUtility.SpawnBuildingClean(map, VVThingDefOf.VV_RuinDoomFlower, doomCell);
@@ -370,7 +373,7 @@ namespace VVRace
 
             if (now < _trapCooldownUntilTick) { return; }
 
-            var trialRect = RuinLayoutUtility.TrialRect(_origin);
+            var trialRect = RuinLayoutUtility.TrialRect(_origin, _rotation);
             List<Pawn> violators = null;
 
             var pawns = map.mapPawns.AllPawnsSpawned;
@@ -415,7 +418,8 @@ namespace VVRace
                 }
 
                 var curCell = _safePath[segIndex];
-                var nextCell = segIndex + 1 < _safePath.Count ? _safePath[segIndex + 1] : curCell + IntVec3.South;
+                var stepEnd = RuinLayoutUtility.LocalOffsetToWorld(0, -1, _rotation);
+                var nextCell = segIndex + 1 < _safePath.Count ? _safePath[segIndex + 1] : new IntVec3(curCell.x + stepEnd.x, 0, curCell.z + stepEnd.z);
                 var frac = dist - segIndex;
                 var wispPos = Vector3.Lerp(curCell.ToVector3Shifted(), nextCell.ToVector3Shifted(), frac);
 
@@ -455,9 +459,9 @@ namespace VVRace
         {
             _trapCooldownUntilTick = now + TrapCooldownTicks;
 
-            var trialRect = RuinLayoutUtility.TrialRect(_origin);
-            var doomCell = RuinLayoutUtility.RuinDoomFlowerCell(_origin);
-            var returnAnchor = RuinLayoutUtility.RuinDoomReturnCell(_origin);
+            var trialRect = RuinLayoutUtility.TrialRect(_origin, _rotation);
+            var doomCell = RuinLayoutUtility.RuinDoomFlowerCell(_origin, _rotation);
+            var returnAnchor = RuinLayoutUtility.RuinDoomReturnCell(_origin, _rotation);
 
             // 잔향의 멸망꽃 파동 연출 (폭발 피해 없음)
             var pulsePos = doomCell.InBounds(map) ? doomCell.ToVector3Shifted() : trialRect.CenterVector3;
@@ -498,10 +502,12 @@ namespace VVRace
                 var dest = returnAnchor;
                 for (int r = 0; r < returnOffsets.Length; r++)
                 {
+                    var localOff = returnOffsets[(offsetIdx + r) % returnOffsets.Length];
+                    var worldOff = RuinLayoutUtility.LocalOffsetToWorld(localOff.x, localOff.z, _rotation);
                     var cand = new IntVec3(
-                        returnAnchor.x + returnOffsets[(offsetIdx + r) % returnOffsets.Length].x,
+                        returnAnchor.x + worldOff.x,
                         0,
-                        returnAnchor.z + returnOffsets[(offsetIdx + r) % returnOffsets.Length].z);
+                        returnAnchor.z + worldOff.z);
                     if (cand.InBounds(map) && cand.Standable(map) && !trialRect.Contains(cand))
                     {
                         dest = cand;
@@ -655,7 +661,7 @@ namespace VVRace
             if (!_active || _hexagonSolved) { return; }
 
             RefreshPuzzleFlowerList();
-            var potCells = RuinLayoutUtility.GetHexagonPotCells(_origin);
+            var potCells = RuinLayoutUtility.GetHexagonPotCells(_origin, _rotation);
             if (_puzzleFlowers.Count == 6 && potCells.Length == 6)
             {
                 var ordered = _puzzleFlowers.OrderBy(f => f.NodeIndex).ToList();
@@ -693,9 +699,9 @@ namespace VVRace
             bool coreExtracted = ruins?.CoreExtracted ?? false;
 
             MarkStageUnsealed(4, animate: playEffects);
-            RuinLayoutUtility.BuildZone5AltarSanctum(map, _origin, investigated, coreExtracted);
-            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed);
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true);
+            RuinLayoutUtility.BuildZone5AltarSanctum(map, _origin, investigated, coreExtracted, _rotation);
+            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed, _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true, rotation: _rotation);
 
             if (playEffects)
             {
@@ -835,7 +841,7 @@ namespace VVRace
                 var p = pawns[i];
                 if (p == null || p.Dead || p.Downed || !p.Spawned) { continue; }
                 if (p.Faction != Faction.OfPlayer && !p.IsPrisonerOfColony) { continue; }
-                if (RuinLayoutUtility.GetSealStage(p.Position, _origin) != 3) { continue; }
+                if (RuinLayoutUtility.GetSealStage(p.Position, _origin, _rotation) != 3) { continue; }
                 candidates.Add(p);
             }
 
@@ -855,7 +861,7 @@ namespace VVRace
 
             if (CellFinder.TryFindRandomCellNear(picked.Position, map, 4,
                 c => c.InBounds(map) && c.Standable(map)
-                    && RuinLayoutUtility.GetSealStage(c, _origin) == 3
+                    && RuinLayoutUtility.GetSealStage(c, _origin, _rotation) == 3
                     && !IsNearGalleryAim(c),
                 out result))
             {
@@ -960,7 +966,7 @@ namespace VVRace
                     ApocryphaUtility.ShakeCamera(map, 0.45f);
                 }
 
-                var pots = RuinLayoutUtility.GetHexagonPotCells(_origin);
+                var pots = RuinLayoutUtility.GetHexagonPotCells(_origin, _rotation);
                 for (int i = 0; i < pots.Length; i++)
                 {
                     if (pots[i].InBounds(map) && VVFleckDefOf.VV_Fleck_GimmickPhaseRing != null)
@@ -973,7 +979,7 @@ namespace VVRace
             }
             else if (elapsed == 90)
             {
-                var hallMid = new IntVec3(_origin.x, 0, _origin.z + 36);
+                var hallMid = RuinLayoutUtility.LocalToWorld(_origin, 0, 36, _rotation);
                 if (hallMid.InBounds(map))
                 {
                     ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellImpact, hallMid, map);
@@ -982,7 +988,7 @@ namespace VVRace
             }
             else if (elapsed == 135)
             {
-                var southGate = new IntVec3(_origin.x, 0, _origin.z - 56);
+                var southGate = RuinLayoutUtility.LocalToWorld(_origin, 0, -56, _rotation);
                 if (southGate.InBounds(map))
                 {
                     ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellImpact, southGate, map);
@@ -1094,7 +1100,7 @@ namespace VVRace
             var gravEngine = GravshipUtility.GetPlayerGravEngine_NewTemp(map);
             var anchor = gravEngine != null && gravEngine.Spawned
                 ? gravEngine.Position
-                : new IntVec3(_origin.x, 0, _origin.z - 64).ClampInsideMap(map);
+                : RuinLayoutUtility.LocalToWorld(_origin, 0, -64, _rotation).ClampInsideMap(map);
 
             _unsealedMask = 0;
             _trialCleared = false;
@@ -1106,10 +1112,10 @@ namespace VVRace
             {
                 var p = pawns[i];
                 if (!IsExpellablePawn(p)) { continue; }
-                if (RuinLayoutUtility.GetSealStage(p.Position, _origin) <= 0) { continue; }
+                if (RuinLayoutUtility.GetSealStage(p.Position, _origin, _rotation) <= 0) { continue; }
 
                 if (CellFinder.TryFindRandomCellNear(anchor, map, 12,
-                    c => c.InBounds(map) && c.Standable(map) && RuinLayoutUtility.GetSealStage(c, _origin) == 0,
+                    c => c.InBounds(map) && c.Standable(map) && RuinLayoutUtility.GetSealStage(c, _origin, _rotation) == 0,
                     out var safe))
                 {
                     p.pather?.StopDead();
@@ -1122,7 +1128,7 @@ namespace VVRace
                 }
             }
 
-            RuinLayoutUtility.ResealAllStagesToNaturalGround(map, _origin);
+            RuinLayoutUtility.ResealAllStagesToNaturalGround(map, _origin, _rotation);
 
             Messages.Message(
                 LocalizeString_Message.VV_Message_RuinResealedGravship.Translate(),
@@ -1157,20 +1163,20 @@ namespace VVRace
             // 봉인된 영역 안으로 도약/수송 포드/순간이동 등이 들어갔을 때 바깥으로 밀어낸다.
             if (now % 15 == 0 && _unsealedMask != 0b1111)
             {
-                var forecourtFallback = RuinLayoutUtility.ForecourtAnchorCell(_origin).ClampInsideMap(map);
+                var forecourtFallback = RuinLayoutUtility.ForecourtAnchorCell(_origin, _rotation).ClampInsideMap(map);
                 var pawns = map.mapPawns.AllPawnsSpawned;
                 for (int i = 0; i < pawns.Count; i++)
                 {
                     var p = pawns[i];
                     if (p == null || !p.Spawned) { continue; }
-                    var st = RuinLayoutUtility.GetSealStage(p.Position, _origin);
+                    var st = RuinLayoutUtility.GetSealStage(p.Position, _origin, _rotation);
                     if (st > 0 && !IsStageUnsealed(st))
                     {
                         if (!CellFinder.TryFindRandomCellNear(p.Position, map, 16,
-                                c => c.InBounds(map) && c.Standable(map) && IsStageUnsealed(RuinLayoutUtility.GetSealStage(c, _origin)),
+                                c => c.InBounds(map) && c.Standable(map) && IsStageUnsealed(RuinLayoutUtility.GetSealStage(c, _origin, _rotation)),
                                 out var safe)
                             && !CellFinder.TryFindRandomCellNear(forecourtFallback, map, 8,
-                                c => c.InBounds(map) && c.Standable(map) && RuinLayoutUtility.GetSealStage(c, _origin) == 0,
+                                c => c.InBounds(map) && c.Standable(map) && RuinLayoutUtility.GetSealStage(c, _origin, _rotation) == 0,
                                 out safe))
                         {
                             safe = forecourtFallback;
@@ -1244,7 +1250,7 @@ namespace VVRace
                 }
             }
 
-            RuinDistortionRenderer.Draw(_origin, state, distortionStrength);
+            RuinDistortionRenderer.Draw(_origin, state, distortionStrength, _rotation);
         }
 
         private static float SmoothStep01(float edge0, float edge1, float x)
@@ -1317,6 +1323,7 @@ namespace VVRace
             Scribe_Values.Look(ref _active, "active", false);
             Scribe_Values.Look(ref _origin, "origin", IntVec3.Invalid);
             Scribe_Values.Look(ref _layoutSeed, "layoutSeed", 0);
+            Scribe_Values.Look(ref _rotation, "rotation", 0);
             Scribe_Values.Look(ref _unsealedMask, "unsealedMask", 0);
             Scribe_Values.Look(ref _trialCleared, "trialCleared", false);
             Scribe_Values.Look(ref _hexagonSolved, "hexagonSolved", false);

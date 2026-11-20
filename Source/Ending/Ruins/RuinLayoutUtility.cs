@@ -59,6 +59,59 @@ namespace VVRace
             },
         };
 
+        public static int RotationFromSeed(int seed)
+        {
+            return (int)((uint)Gen.HashCombineInt(seed, 51923) % 4u);
+        }
+
+        // 로컬 (lx, lz) → 월드 셀 (Unity Quaternion.Euler(0, rot * 90, 0)의 Y축 시계방향 회전과 일치)
+        // rot=0: 남쪽 입구, rot=1: 서쪽 입구, rot=2: 북쪽 입구, rot=3: 동쪽 입구
+        public static IntVec3 LocalToWorld(IntVec3 origin, int lx, int lz, int rotation)
+        {
+            switch (rotation & 3)
+            {
+                case 1: return new IntVec3(origin.x + lz, 0, origin.z - lx);
+                case 2: return new IntVec3(origin.x - lx, 0, origin.z - lz);
+                case 3: return new IntVec3(origin.x - lz, 0, origin.z + lx);
+                default: return new IntVec3(origin.x + lx, 0, origin.z + lz);
+            }
+        }
+
+        public static IntVec2 LocalOffsetToWorld(int lx, int lz, int rotation)
+        {
+            switch (rotation & 3)
+            {
+                case 1: return new IntVec2(lz, -lx);
+                case 2: return new IntVec2(-lx, -lz);
+                case 3: return new IntVec2(-lz, lx);
+                default: return new IntVec2(lx, lz);
+            }
+        }
+
+        public static void WorldToLocal(IntVec3 cell, IntVec3 origin, int rotation, out int lx, out int lz)
+        {
+            int wx = cell.x - origin.x;
+            int wz = cell.z - origin.z;
+            switch (rotation & 3)
+            {
+                case 1: lx = -wz; lz = wx; break;
+                case 2: lx = -wx; lz = -wz; break;
+                case 3: lx = wz; lz = -wx; break;
+                default: lx = wx; lz = wz; break;
+            }
+        }
+
+        public static CellRect LocalRectToWorld(IntVec3 origin, int minLx, int minLz, int maxLx, int maxLz, int rotation)
+        {
+            var a = LocalToWorld(origin, minLx, minLz, rotation);
+            var b = LocalToWorld(origin, maxLx, maxLz, rotation);
+            int minX = Math.Min(a.x, b.x);
+            int maxX = Math.Max(a.x, b.x);
+            int minZ = Math.Min(a.z, b.z);
+            int maxZ = Math.Max(a.z, b.z);
+            return new CellRect(minX, minZ, maxX - minX + 1, maxZ - minZ + 1);
+        }
+
         public static float HexDist(float dx, float dz)
         {
             var adx = Mathf.Abs(dx);
@@ -66,51 +119,51 @@ namespace VVRace
             return Mathf.Max(adz, adz * 0.5f + adx * Sqrt3Over2);
         }
 
-        public static CellRect FootprintBounds(IntVec3 origin)
+        public static CellRect FootprintBounds(IntVec3 origin, int rotation = 0)
         {
-            // 전체 거대 육각형(dx: -68..+68, dz: -59..+59) + 남쪽 전정(dz: -73..-59)
-            return new CellRect(origin.x - 68, origin.z - 73, 137, 133);
+            // 전체 거대 육각형(lx: -68..+68, lz: -59..+59) + 입구 전정(lz: -73..-59)
+            return LocalRectToWorld(origin, -68, -73, 68, 59, rotation);
         }
 
-        public static CellRect GladeBounds(IntVec3 origin)
+        public static CellRect GladeBounds(IntVec3 origin, int rotation = 0)
         {
-            // 육각형 외곽 공터(dx: -76..+76, dz: -67..+67) + 남쪽 전정 광장(dz: -78..-57)
-            return new CellRect(origin.x - 76, origin.z - 78, 153, 146);
+            // 육각형 외곽 공터(lx: -76..+76, lz: -67..+67) + 입구 전정 광장(lz: -78..-57)
+            return LocalRectToWorld(origin, -76, -78, 76, 67, rotation);
         }
 
-        public static IntVec3 ForecourtAnchorCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z - 66);
+        public static IntVec3 ForecourtAnchorCell(IntVec3 origin, int rotation = 0) => LocalToWorld(origin, 0, -66, rotation);
 
         public static IntVec3 RingCenter(IntVec3 origin) => origin;
 
         public static IntVec3 CentralAltarCell(IntVec3 origin) => origin;
 
-        public static IntVec3 RuinDoomFlowerCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z + 48);
+        public static IntVec3 RuinDoomFlowerCell(IntVec3 origin, int rotation = 0) => LocalToWorld(origin, 0, 48, rotation);
 
-        public static IntVec3 RuinDoomReturnCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z + 49);
+        public static IntVec3 RuinDoomReturnCell(IntVec3 origin, int rotation = 0) => LocalToWorld(origin, 0, 49, rotation);
 
-        // 복도 전체 폭(dx: -9..+9, dz: +26..+46)을 시련 구역으로 지정해 측면 열주 우회를 원천 차단한다.
-        public static CellRect TrialRect(IntVec3 origin) => new CellRect(origin.x - 9, origin.z + 26, 19, 21);
+        // 복도 전체 폭(lx: -9..+9, lz: +26..+46)을 시련 구역으로 지정해 측면 열주 우회를 원천 차단한다.
+        public static CellRect TrialRect(IntVec3 origin, int rotation = 0) => LocalRectToWorld(origin, -9, 26, 9, 46, rotation);
 
-        public static CellRect Zone3BlastRect(IntVec3 origin) => new CellRect(origin.x - 10, origin.z + 21, 21, 31);
+        public static CellRect Zone3BlastRect(IntVec3 origin, int rotation = 0) => LocalRectToWorld(origin, -10, 21, 10, 51, rotation);
 
-        public static IntVec3 EchoFlowerCell(int index, IntVec3 origin)
+        public static IntVec3 EchoFlowerCell(int index, IntVec3 origin, int rotation = 0)
         {
             switch (index)
             {
-                case 1: return new IntVec3(origin.x, 0, origin.z - 62);
-                case 2: return new IntVec3(origin.x, 0, origin.z + 54);
-                case 3: return new IntVec3(origin.x, 0, origin.z + 24);
-                case 4: return new IntVec3(origin.x, 0, origin.z + 5);
+                case 1: return LocalToWorld(origin, 0, -62, rotation);
+                case 2: return LocalToWorld(origin, 0, 54, rotation);
+                case 3: return LocalToWorld(origin, 0, 24, rotation);
+                case 4: return LocalToWorld(origin, 0, 5, rotation);
                 default: return origin;
             }
         }
 
-        public static IntVec3[] GetHexagonPotCells(IntVec3 origin)
+        public static IntVec3[] GetHexagonPotCells(IntVec3 origin, int rotation = 0)
         {
             var result = new IntVec3[HexagonPotOffsets.Length];
             for (int i = 0; i < HexagonPotOffsets.Length; i++)
             {
-                result[i] = new IntVec3(origin.x + HexagonPotOffsets[i].x, 0, origin.z + HexagonPotOffsets[i].z);
+                result[i] = LocalToWorld(origin, HexagonPotOffsets[i].x, HexagonPotOffsets[i].z, rotation);
             }
             return result;
         }
@@ -118,13 +171,12 @@ namespace VVRace
         // 봉인 단계:
         // 0 = 외부(항상 개방)
         // 1 = 중앙과 복도를 둘러싼 거대 육각형 미로
-        // 2 = 북쪽에서 중앙으로 향하는 길쭉하고 넓은 시련 복도
+        // 2 = 출구 쪽에서 중앙으로 향하는 길쭉하고 넓은 시련 복도
         // 3 = 정중앙 원형 회랑 & 육각형 화분 퍼즐
         // 4 = 정중앙 제단 성소
-        public static int GetSealStage(IntVec3 cell, IntVec3 origin)
+        public static int GetSealStage(IntVec3 cell, IntVec3 origin, int rotation = 0)
         {
-            var dx = cell.x - origin.x;
-            var dz = cell.z - origin.z;
+            WorldToLocal(cell, origin, rotation, out int dx, out int dz);
             var distSq = dx * dx + dz * dz;
 
             if (distSq <= SanctumInnerRadius * SanctumInnerRadius)
@@ -155,14 +207,14 @@ namespace VVRace
             return Mathf.Abs(dx) <= 10 && dz >= 20 && dz <= 51;
         }
 
-        public static List<IntVec3> GenerateHiddenPath(IntVec3 origin, int seed)
+        public static List<IntVec3> GenerateHiddenPath(IntVec3 origin, int seed, int rotation = 0)
         {
             var template = HiddenPathTemplates[Mathf.Abs(seed) % HiddenPathTemplates.Length];
             var path = new List<IntVec3>(64);
 
             for (int i = 0; i < template.Length; i++)
             {
-                var target = new IntVec3(origin.x + template[i].x, 0, origin.z + template[i].z);
+                var target = LocalToWorld(origin, template[i].x, template[i].z, rotation);
                 if (path.Count == 0)
                 {
                     path.Add(target);
@@ -182,29 +234,28 @@ namespace VVRace
             return path;
         }
 
-        private static bool IsInSanctuaryGlade(Map map, IntVec3 cell, IntVec3 origin)
+        private static bool IsInSanctuaryGlade(Map map, IntVec3 cell, IntVec3 origin, int rotation)
         {
-            var dx = cell.x - origin.x;
-            var dz = cell.z - origin.z;
+            WorldToLocal(cell, origin, rotation, out int dx, out int dz);
             var hex = HexDist(dx, dz);
 
             // 거대 육각형 외곽을 따라 자연스러운 곡선 공터(여유 6~7칸) 형성
             int jitter = Math.Abs(cell.x * 37 + cell.z * 17) % 2;
             if (hex <= HexOuterApothem + 5.5f + jitter) { return true; }
 
-            // 남쪽 전정 광장 (가장자리 진입 연결은 후처리에서 지형에 맞춰 자동 보장한다)
+            // 입구 전정 광장 (가장자리 진입 연결은 후처리에서 지형에 맞춰 자동 보장한다)
             if (Mathf.Abs(dx) <= 18 && dz >= -75 && dz <= -57) { return true; }
 
             return false;
         }
 
         // 봉인 구역 및 전정 주변의 자연 지형·바위·수목·간헐천을 정리해 지형만 자연스럽게 보이게 한다.
-        public static void PrepareFootprintGround(Map map, IntVec3 origin)
+        public static void PrepareFootprintGround(Map map, IntVec3 origin, int rotation = 0)
         {
-            var bounds = GladeBounds(origin).ClipInsideMap(map);
+            var bounds = GladeBounds(origin, rotation).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
-                if (!IsInSanctuaryGlade(map, cell, origin)) { continue; }
+                if (!IsInSanctuaryGlade(map, cell, origin, rotation)) { continue; }
 
                 ClearCellObstacles(map, cell, removePlants: true);
                 EnsureSolidNaturalGround(map, cell, stripArtificialFloor: true);
@@ -213,17 +264,16 @@ namespace VVRace
         }
 
         // 후속 바닐라·DLC GenStep(500~1700: 변이 구조물, 고대 잔해, 일반 폐허, 바위 덩어리, 수목 등)이 성소 영역에 뿌린 방해물을 정리한다.
-        public static void CleanupPostGenDebris(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed)
+        public static void CleanupPostGenDebris(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed, int rotation = 0)
         {
-            var bounds = GladeBounds(origin).ClipInsideMap(map);
+            var bounds = GladeBounds(origin, rotation).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
-                if (!IsInSanctuaryGlade(map, cell, origin)) { continue; }
+                if (!IsInSanctuaryGlade(map, cell, origin, rotation)) { continue; }
 
-                var stage = GetSealStage(cell, origin);
+                var stage = GetSealStage(cell, origin, rotation);
                 bool isSealed = stage > 0 && !isStageUnsealed(stage);
-                var dx = cell.x - origin.x;
-                var dz = cell.z - origin.z;
+                WorldToLocal(cell, origin, rotation, out int dx, out int dz);
                 bool inForecourtCore = Mathf.Abs(dx) <= 14 && dz >= -73 && dz <= -58;
                 bool onPavedPath = Mathf.Abs(dx) <= 5 && dz >= -73 && dz <= -58;
 
@@ -264,20 +314,20 @@ namespace VVRace
             }
         }
 
-        // 산악·깊은 강·호수·용암·해안 등으로 남쪽 전정과 원정대 진입 가장자리(최대 가장자리 구역 포함)가 단절되지 않도록 자연 통로를 보장한다.
-        public static void EnsureExteriorApproachReachability(Map map, IntVec3 origin)
+        // 산악·깊은 강·호수·용암·해안 등으로 입구 전정과 원정대 진입 가장자리(최대 가장자리 구역 포함)가 단절되지 않도록 자연 통로를 보장한다.
+        public static void EnsureExteriorApproachReachability(Map map, IntVec3 origin, int rotation = 0)
         {
             if (map == null || !origin.IsValid) { return; }
 
-            var anchor = ForecourtAnchorCell(origin).ClampInsideMap(map);
-            var flower1 = EchoFlowerCell(1, origin).ClampInsideMap(map);
+            var anchor = ForecourtAnchorCell(origin, rotation).ClampInsideMap(map);
+            var flower1 = EchoFlowerCell(1, origin, rotation).ClampInsideMap(map);
 
             // 전정 핵심 진입 지점과 1번 요정꽃 주변이 절대 물·용암·통행불가 지형이 아니도록 재검증한다.
             foreach (var core in new[] { anchor, flower1 })
             {
                 foreach (var c in CellRect.CenteredOn(core, 3, 3))
                 {
-                    if (!c.InBounds(map) || GetSealStage(c, origin) != 0) { continue; }
+                    if (!c.InBounds(map) || GetSealStage(c, origin, rotation) != 0) { continue; }
                     ClearNonViviObstacles(map, c, removePlants: true);
                     map.roofGrid.SetRoof(c, null);
                     EnsureSolidNaturalGround(map, c);
@@ -294,7 +344,7 @@ namespace VVRace
             {
                 for (int x = 0; x < w; x++)
                 {
-                    passable[Idx(x, z)] = IsExteriorPassableForCaravan(map, new IntVec3(x, 0, z), origin);
+                    passable[Idx(x, z)] = IsExteriorPassableForCaravan(map, new IntVec3(x, 0, z), origin, rotation);
                 }
             }
 
@@ -303,7 +353,7 @@ namespace VVRace
             int anchorIdx = Idx(anchor.x, anchor.z);
             if (!passable[anchorIdx])
             {
-                CarveApproachCell(map, anchor, origin, passable, w);
+                CarveApproachCell(map, anchor, origin, rotation, passable, w);
             }
 
             fromForecourt[anchorIdx] = true;
@@ -377,7 +427,7 @@ namespace VVRace
                     if (comp.connected) { continue; }
                     if (i > 0 && (comp.size < 120 || bridgesCarved >= 3)) { continue; }
 
-                    if (CarveMinimumCostApproach(map, origin, passable, fromForecourt, w, h,
+                    if (CarveMinimumCostApproach(map, origin, rotation, passable, fromForecourt, w, h,
                         idx => edgeCompId[idx] == comp.id, allowOcean: i == 0, out var reachedIdx))
                     {
                         carvedAny = true;
@@ -394,7 +444,7 @@ namespace VVRace
             else
             {
                 // 극단적 사면 봉쇄(사방 산맥/절벽/깊은 물) 시 가장 비용이 낮은 맵 가장자리로 진입 통로를 개척한다.
-                if (CarveMinimumCostApproach(map, origin, passable, fromForecourt, w, h,
+                if (CarveMinimumCostApproach(map, origin, rotation, passable, fromForecourt, w, h,
                     idx =>
                     {
                         int bx = idx % w;
@@ -460,6 +510,7 @@ namespace VVRace
         private static bool CarveMinimumCostApproach(
             Map map,
             IntVec3 origin,
+            int rotation,
             bool[] passable,
             bool[] fromForecourt,
             int w,
@@ -558,7 +609,7 @@ namespace VVRace
                     int nxt = nz * w + nx;
                     if (fromForecourt[nxt]) { continue; }
 
-                    int stepCost = GetApproachCarveStepCost(map, new IntVec3(nx, 0, nz), origin, passable[nxt], allowOcean);
+                    int stepCost = GetApproachCarveStepCost(map, new IntVec3(nx, 0, nz), origin, rotation, passable[nxt], allowOcean);
                     if (stepCost < 0) { continue; }
 
                     int nextCost = curCost + stepCost;
@@ -583,10 +634,10 @@ namespace VVRace
                 {
                     foreach (var radial in GenRadial.RadialCellsAround(center, 2.15f, useCenter: true))
                     {
-                        if (!radial.InBounds(map) || GetSealStage(radial, origin) != 0) { continue; }
+                        if (!radial.InBounds(map) || GetSealStage(radial, origin, rotation) != 0) { continue; }
                         if (HasViviThing(map, radial)) { continue; }
 
-                        CarveApproachCell(map, radial, origin, passable, w);
+                        CarveApproachCell(map, radial, origin, rotation, passable, w);
                     }
                 }
 
@@ -597,15 +648,15 @@ namespace VVRace
             var goalCell = new IntVec3(goalIdx % w, 0, goalIdx / w);
             if (!passable[goalIdx])
             {
-                CarveApproachCell(map, goalCell, origin, passable, w);
+                CarveApproachCell(map, goalCell, origin, rotation, passable, w);
             }
 
             return true;
         }
 
-        private static int GetApproachCarveStepCost(Map map, IntVec3 cell, IntVec3 origin, bool alreadyPassable, bool allowOcean)
+        private static int GetApproachCarveStepCost(Map map, IntVec3 cell, IntVec3 origin, int rotation, bool alreadyPassable, bool allowOcean)
         {
-            if (GetSealStage(cell, origin) != 0) { return -1; }
+            if (GetSealStage(cell, origin, rotation) != 0) { return -1; }
             if (HasViviThing(map, cell)) { return -1; }
             if (alreadyPassable) { return 1; }
 
@@ -617,9 +668,9 @@ namespace VVRace
             return 25;
         }
 
-        private static void CarveApproachCell(Map map, IntVec3 cell, IntVec3 origin, bool[] passable, int w)
+        private static void CarveApproachCell(Map map, IntVec3 cell, IntVec3 origin, int rotation, bool[] passable, int w)
         {
-            if (!cell.InBounds(map) || GetSealStage(cell, origin) != 0) { return; }
+            if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 0) { return; }
 
             ClearNonViviObstacles(map, cell, removePlants: true);
             map.roofGrid.SetRoof(cell, null);
@@ -660,12 +711,12 @@ namespace VVRace
                 map.fogGrid.Unfog(cell);
             }
 
-            passable[cell.z * w + cell.x] = IsExteriorPassableForCaravan(map, cell, origin);
+            passable[cell.z * w + cell.x] = IsExteriorPassableForCaravan(map, cell, origin, rotation);
         }
 
-        private static bool IsExteriorPassableForCaravan(Map map, IntVec3 cell, IntVec3 origin)
+        private static bool IsExteriorPassableForCaravan(Map map, IntVec3 cell, IntVec3 origin, int rotation)
         {
-            if (!cell.InBounds(map) || GetSealStage(cell, origin) != 0) { return false; }
+            if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 0) { return false; }
 
             var terr = cell.GetTerrain(map);
             if (terr == null || terr.passability == Traversability.Impassable
@@ -714,17 +765,17 @@ namespace VVRace
             }
         }
 
-        // 외부 전정: 거대 육각형 남쪽 입구 앞 풍화된 유적 파편, 1번 고대 요정꽃, 떠도는 소수의 거대 말벌.
-        public static void BuildZone1Forecourt(Map map, IntVec3 origin, int investigated, bool coreExtracted, bool spawnHornets)
+        // 외부 전정: 거대 육각형 입구 앞 풍화된 유적 파편, 1번 고대 요정꽃, 떠도는 소수의 거대 말벌.
+        public static void BuildZone1Forecourt(Map map, IntVec3 origin, int investigated, bool coreExtracted, bool spawnHornets, int rotation = 0)
         {
-            var flowerCell = EchoFlowerCell(1, origin);
+            var flowerCell = EchoFlowerCell(1, origin, rotation);
 
-            // 부서진 고대 진입로 바닥 (dz: -71..-59)
+            // 부서진 고대 진입로 바닥 (lz: -71..-59)
             for (int dz = -71; dz <= -59; dz++)
             {
                 for (int dx = -4; dx <= 4; dx++)
                 {
-                    var c = new IntVec3(origin.x + dx, 0, origin.z + dz);
+                    var c = LocalToWorld(origin, dx, dz, rotation);
                     if (!c.InBounds(map)) { continue; }
 
                     var adx = Mathf.Abs(dx);
@@ -757,7 +808,7 @@ namespace VVRace
             for (int i = 0; i < pillars.Length; i++)
             {
                 var p = pillars[i];
-                var cell = new IntVec3(origin.x + p.dx, 0, origin.z + p.dz);
+                var cell = LocalToWorld(origin, p.dx, p.dz, rotation);
                 if (!cell.InBounds(map)) { continue; }
 
                 ClearCellObstacles(map, cell, removePlants: true);
@@ -773,7 +824,7 @@ namespace VVRace
             };
             for (int i = 0; i < flowerSpots.Length; i++)
             {
-                var cell = new IntVec3(origin.x + flowerSpots[i].x, 0, origin.z + flowerSpots[i].z);
+                var cell = LocalToWorld(origin, flowerSpots[i].x, flowerSpots[i].z, rotation);
                 if (cell.InBounds(map) && cell.GetEdifice(map) == null)
                 {
                     ArcanePlantUtility.TrySpawnViviFlower(map, cell, out _);
@@ -787,11 +838,11 @@ namespace VVRace
 
             if (spawnHornets && !coreExtracted)
             {
-                SpawnExteriorHornets(map, origin);
+                SpawnExteriorHornets(map, origin, rotation);
             }
         }
 
-        private static void SpawnExteriorHornets(Map map, IntVec3 origin)
+        private static void SpawnExteriorHornets(Map map, IntVec3 origin, int rotation)
         {
             if (VVPawnKindDefOf.VV_TitanicHornet == null) { return; }
 
@@ -804,17 +855,18 @@ namespace VVRace
                 (13, -70, 5.5f, 12.5f),
             };
 
+            var faceRot = new Rot4((2 + rotation) & 3);
             for (int i = 0; i < posts.Length; i++)
             {
                 var p = posts[i];
-                var anchor = new IntVec3(origin.x + p.dx, 0, origin.z + p.dz).ClampInsideMap(map);
-                if (!CellFinder.TryFindRandomCellNear(anchor, map, 4, c => c.InBounds(map) && c.Standable(map) && GetSealStage(c, origin) == 0, out var spawnCell))
+                var anchor = LocalToWorld(origin, p.dx, p.dz, rotation).ClampInsideMap(map);
+                if (!CellFinder.TryFindRandomCellNear(anchor, map, 4, c => c.InBounds(map) && c.Standable(map) && GetSealStage(c, origin, rotation) == 0, out var spawnCell))
                 {
                     continue;
                 }
 
                 var hornet = PawnGenerator.GeneratePawn(VVPawnKindDefOf.VV_TitanicHornet, null);
-                GenSpawn.Spawn(hornet, spawnCell, map, Rot4.South);
+                GenSpawn.Spawn(hornet, spawnCell, map, faceRot);
                 hornet.mindState?.mentalStateHandler?.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, forceWake: true);
 
                 var lordJob = new LordJob_RuinHornetWander(spawnCell, wanderRadius: p.wander, guardRadius: p.guard, retaliationRadius: 28f);
@@ -830,20 +882,20 @@ namespace VVRace
                 ?? Find.FactionManager.RandomEnemyFaction();
         }
 
-        // 제1구간(거대 육각형 미로): 중앙 성소와 북쪽 복도를 빙 둘러싼 대규모 미궁, 연쇄 붕괴 크림벽, 적대 콩뿌리개·밀랍화분, 북단 출구의 2번 요정꽃.
-        public static void BuildZone2Maze(Map map, IntVec3 origin, int investigated, bool zone3Open, int seed)
+        // 제1구간(거대 육각형 미로): 중앙 성소와 시련 복도를 빙 둘러싼 대규모 미궁, 연쇄 붕괴 크림벽, 적대 콩뿌리개·밀랍화분, 출구의 2번 요정꽃.
+        public static void BuildZone2Maze(Map map, IntVec3 origin, int investigated, bool zone3Open, int seed, int rotation = 0)
         {
             // 1) 전체 Stage 1 육각형 링 초기화: 바닥·지붕·고대 벽 채우기
             for (int dz = -59; dz <= 59; dz++)
             {
                 for (int dx = -68; dx <= 68; dx++)
                 {
-                    var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
 
                     DisplacePawnsAndClear(map, cell);
 
-                    // 남쪽 입구 쪽은 풍화된 크림 바닥, 동·서 날개를 지나 북쪽 출구로 갈수록 정돈된 벌집 타일로 전이
+                    // 입구 쪽은 풍화된 크림 바닥, 양쪽 날개를 지나 출구로 갈수록 정돈된 벌집 타일로 전이
                     TerrainDef floor = VVTerrainDefOf.VV_ViviCreamFloor;
                     if (dz >= 34 || (dz >= 8 && Math.Abs(dx * 5 + dz * 3) % 3 != 0) || (dz >= -18 && Math.Abs(dx * 7 + dz * 5) % 4 == 0))
                     {
@@ -866,7 +918,7 @@ namespace VVRace
             {
                 for (int col = -10; col <= 10; col++)
                 {
-                    if (IsValidMazeRoom(origin, col, row))
+                    if (IsValidMazeRoom(origin, col, row, rotation))
                     {
                         validNodes.Add(new IntVec2(col, row));
                     }
@@ -888,10 +940,10 @@ namespace VVRace
             // 4) 방 내부(5x5) 파내기
             foreach (var node in connected)
             {
-                var center = MazeRoomCenter(origin, node.x, node.z);
+                var center = MazeRoomCenter(origin, node.x, node.z, rotation);
                 foreach (var cell in CellRect.CenteredOn(center, 5, 5))
                 {
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
                     DestroyEdifice(map, cell);
 
                     if (node == goalNode)
@@ -901,13 +953,13 @@ namespace VVRace
                 }
             }
 
-            // 남쪽 대문(dz: -58..-57)과 시작 방(0, -9) 완전 연결
+            // 입구 대문(lz: -58..-56)과 시작 방(0, -9) 완전 연결
             for (int dz = -58; dz <= -56; dz++)
             {
                 for (int dx = -1; dx <= 1; dx++)
                 {
-                    var gateCell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (gateCell.InBounds(map) && GetSealStage(gateCell, origin) == 1)
+                    var gateCell = LocalToWorld(origin, dx, dz, rotation);
+                    if (gateCell.InBounds(map) && GetSealStage(gateCell, origin, rotation) == 1)
                     {
                         DestroyEdifice(map, gateCell);
                     }
@@ -920,9 +972,9 @@ namespace VVRace
             {
                 var (a, b) = kv.Key;
                 bool isCream = kv.Value;
-                foreach (var cell in GetMazeDoorCells(origin, a, b))
+                foreach (var cell in GetMazeDoorCells(origin, a, b, rotation))
                 {
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
                     DestroyEdifice(map, cell);
 
                     if (isCream)
@@ -937,10 +989,10 @@ namespace VVRace
             var creamFilledRooms = SelectCreamFilledMazeRooms(sortedNodes, startNode, goalNode, rng);
             foreach (var node in creamFilledRooms)
             {
-                var center = MazeRoomCenter(origin, node.x, node.z);
+                var center = MazeRoomCenter(origin, node.x, node.z, rotation);
                 foreach (var cell in CellRect.CenteredOn(center, 5, 5))
                 {
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
                     SpawnBuildingClean(map, creamWallDef, cell);
                 }
             }
@@ -954,9 +1006,12 @@ namespace VVRace
                     || (Math.Abs(node.x) % 3 == 0 && Math.Abs(node.z) % 3 == 0);
                 if (!isMilestone || node == goalNode) { continue; }
 
-                var center = MazeRoomCenter(origin, node.x, node.z);
-                var lampCell = new IntVec3(center.x + (node.x >= 0 ? -2 : 2), 0, center.z + (node.z >= 0 ? -2 : 2));
-                if (lampCell.InBounds(map) && GetSealStage(lampCell, origin) == 1 && lampCell.GetEdifice(map) == null)
+                var lampCell = LocalToWorld(
+                    origin,
+                    node.x * MazePitch + (node.x >= 0 ? -2 : 2),
+                    node.z * MazePitch + (node.z >= 0 ? -2 : 2),
+                    rotation);
+                if (lampCell.InBounds(map) && GetSealStage(lampCell, origin, rotation) == 1 && lampCell.GetEdifice(map) == null)
                 {
                     SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, lampCell);
                 }
@@ -965,24 +1020,24 @@ namespace VVRace
             // 8) 미로 일부 구역에 적대 콩뿌리개 + 밀랍 마법식물 화분 배치
             if (!zone3Open)
             {
-                SpawnMazeHostilePeashooters(map, origin, sortedNodes, startNode, goalNode, creamFilledRooms, rng);
+                SpawnMazeHostilePeashooters(map, origin, sortedNodes, startNode, goalNode, creamFilledRooms, rng, rotation);
             }
 
-            // 9) 남쪽 입구(폐허·불탄 바닥·해골·쓰레기·비비아꽃) → 북쪽 출구(원형 보존) 그라데이션 연출
-            DecorateMazeRuinGradient(map, origin, sortedNodes, goalNode, creamFilledRooms, seed, rng);
+            // 9) 입구(폐허·불탄 바닥·해골·쓰레기·비비아꽃) → 출구(원형 보존) 그라데이션 연출
+            DecorateMazeRuinGradient(map, origin, sortedNodes, goalNode, creamFilledRooms, seed, rng, rotation);
 
-            // 북단 출구 성소(0, +9) 장식 등불 및 2번 요정꽃
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 2, 0, origin.z + 56));
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 2, 0, origin.z + 56));
+            // 출구 성소(0, +9) 장식 등불 및 2번 요정꽃
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, -2, 56, rotation));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, 2, 56, rotation));
 
             if (investigated < 2)
             {
-                SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinFairyFlowerII, EchoFlowerCell(2, origin));
+                SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinFairyFlowerII, EchoFlowerCell(2, origin, rotation));
             }
 
             if (zone3Open)
             {
-                OpenZone2NorthGate(map, origin);
+                OpenZone2NorthGate(map, origin, rotation);
             }
         }
 
@@ -1039,7 +1094,8 @@ namespace VVRace
             IntVec2 startNode,
             IntVec2 goalNode,
             HashSet<IntVec2> creamFilledRooms,
-            System.Random rng)
+            System.Random rng,
+            int rotation)
         {
             if (VVThingDefOf.VV_Peashooter == null || VVThingDefOf.VV_ArcanePlantPot == null || VVThingDefOf.VV_Viviwax == null)
             {
@@ -1103,8 +1159,8 @@ namespace VVRace
 
             for (int i = 0; i < chosen.Count; i++)
             {
-                var cell = MazeRoomCenter(origin, chosen[i].x, chosen[i].z);
-                if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1 || cell.GetEdifice(map) != null)
+                var cell = MazeRoomCenter(origin, chosen[i].x, chosen[i].z, rotation);
+                if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1 || cell.GetEdifice(map) != null)
                 {
                     continue;
                 }
@@ -1126,7 +1182,8 @@ namespace VVRace
             IntVec2 goalNode,
             HashSet<IntVec2> creamFilledRooms,
             int seed,
-            System.Random rng)
+            System.Random rng,
+            int rotation)
         {
             var burnedCarpet = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedCarpet");
             var burnedStraw = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedStrawMatting");
@@ -1137,7 +1194,7 @@ namespace VVRace
             if (burnedStraw != null) { burnedTerrains.Add(burnedStraw); }
             if (burnedWood != null) { burnedTerrains.Add(burnedWood); }
 
-            var goalRect = CellRect.CenteredOn(MazeRoomCenter(origin, goalNode.x, goalNode.z), 5, 5);
+            var goalRect = CellRect.CenteredOn(MazeRoomCenter(origin, goalNode.x, goalNode.z, rotation), 5, 5);
             var exposedSoilCells = new List<IntVec3>();
             var burnedCells = new HashSet<IntVec3>();
             var skeletonCandidates = new List<(IntVec3 cell, float ruin)>();
@@ -1146,18 +1203,18 @@ namespace VVRace
             int burnSeed = Gen.HashCombineInt(seed, 41203);
             int gapSeed = Gen.HashCombineInt(seed, 90749);
 
-            // A) 바닥 풍화·불탄 바닥·바닥 유실(자연 흙 노출) 패스: 남쪽 입구일수록 심하고 북쪽 목적지(dz >= 26)는 원형 보존
+            // A) 바닥 풍화·불탄 바닥·바닥 유실(자연 흙 노출) 패스: 입구일수록 심하고 출구 목적지(lz >= 26)는 원형 보존
             for (int dz = -58; dz <= 26; dz++)
             {
-                // progress: 남쪽 입구(-54) = 0.0 → 북쪽 접근로(+28) = 1.0
+                // progress: 입구(-54) = 0.0 → 출구 접근로(+28) = 1.0
                 float progress = Mathf.Clamp01((dz + 54f) / 82f);
                 float ruin = Mathf.Pow(1f - progress, 1.25f);
                 if (ruin <= 0.02f) { continue; }
 
                 for (int dx = -66; dx <= 66; dx++)
                 {
-                    var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
                     if (goalRect.Contains(cell)) { continue; }
                     if (cell.GetEdifice(map) != null) { continue; }
                     if (HasSpecialMazeProp(map, cell)) { continue; }
@@ -1226,30 +1283,32 @@ namespace VVRace
                 var node = sortedNodes[i];
                 if (node == goalNode || creamFilledRooms.Contains(node)) { continue; }
 
-                var center = MazeRoomCenter(origin, node.x, node.z);
-                int dz = center.z - origin.z;
-                if (dz > 12) { continue; }
+                int localCenterZ = node.z * MazePitch;
+                if (localCenterZ > 12) { continue; }
 
-                float progress = Mathf.Clamp01((dz + 54f) / 72f);
+                float progress = Mathf.Clamp01((localCenterZ + 54f) / 72f);
                 float ruin = Mathf.Pow(1f - progress, 1.35f);
                 if (ruin <= 0.08f) { continue; }
 
-                foreach (var cell in CellRect.CenteredOn(center, 5, 5))
+                for (int oz = -2; oz <= 2; oz++)
                 {
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
-                    if (cell.GetEdifice(map) != null || cell.GetPlant(map) != null || HasSpecialMazeProp(map, cell)) { continue; }
-                    // 방 출입구 정중앙(바깥 테두리 중앙 칸)은 피해서 이동 경로를 깔끔하게 유지
-                    int lx = cell.x - center.x;
-                    int lz = cell.z - center.z;
-                    if ((Math.Abs(lx) == 2 && lz == 0) || (Math.Abs(lz) == 2 && lx == 0)) { continue; }
+                    for (int ox = -2; ox <= 2; ox++)
+                    {
+                        // 방 출입구 정중앙(바깥 테두리 중앙 칸)은 피해서 이동 경로를 깔끔하게 유지
+                        if ((Math.Abs(ox) == 2 && oz == 0) || (Math.Abs(oz) == 2 && ox == 0)) { continue; }
 
-                    if (rng.NextDouble() < 0.35 * ruin)
-                    {
-                        skeletonCandidates.Add((cell, ruin));
-                    }
-                    if (dz <= -4 && rng.NextDouble() < 0.30 * ruin)
-                    {
-                        skullCandidates.Add((cell, ruin));
+                        var cell = LocalToWorld(origin, node.x * MazePitch + ox, localCenterZ + oz, rotation);
+                        if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
+                        if (cell.GetEdifice(map) != null || cell.GetPlant(map) != null || HasSpecialMazeProp(map, cell)) { continue; }
+
+                        if (rng.NextDouble() < 0.35 * ruin)
+                        {
+                            skeletonCandidates.Add((cell, ruin));
+                        }
+                        if (localCenterZ <= -4 && rng.NextDouble() < 0.30 * ruin)
+                        {
+                            skullCandidates.Add((cell, ruin));
+                        }
                     }
                 }
             }
@@ -1456,13 +1515,13 @@ namespace VVRace
             return false;
         }
 
-        private static void OpenZone2NorthGate(Map map, IntVec3 origin)
+        private static void OpenZone2NorthGate(Map map, IntVec3 origin, int rotation)
         {
             for (int dx = -1; dx <= 1; dx++)
             {
                 for (int dz = 51; dz <= 52; dz++)
                 {
-                    var gateCell = new IntVec3(origin.x + dx, 0, origin.z + dz);
+                    var gateCell = LocalToWorld(origin, dx, dz, rotation);
                     if (gateCell.InBounds(map))
                     {
                         DestroyEdifice(map, gateCell);
@@ -1472,25 +1531,28 @@ namespace VVRace
             }
         }
 
-        private static bool IsValidMazeRoom(IntVec3 origin, int col, int row)
+        private static bool IsValidMazeRoom(IntVec3 origin, int col, int row, int rotation)
         {
-            var center = MazeRoomCenter(origin, col, row);
+            int cx = col * MazePitch;
+            int cz = row * MazePitch;
             for (int oz = -2; oz <= 2; oz++)
             {
                 for (int ox = -2; ox <= 2; ox++)
                 {
-                    var c = new IntVec3(center.x + ox, 0, center.z + oz);
-                    if (GetSealStage(c, origin) != 1) { return false; }
-                    if (HexDist(c.x - origin.x, c.z - origin.z) > HexShellInnerApothem) { return false; }
+                    var lx = cx + ox;
+                    var lz = cz + oz;
+                    var c = LocalToWorld(origin, lx, lz, rotation);
+                    if (GetSealStage(c, origin, rotation) != 1) { return false; }
+                    if (HexDist(lx, lz) > HexShellInnerApothem) { return false; }
                 }
             }
 
             return true;
         }
 
-        private static IntVec3 MazeRoomCenter(IntVec3 origin, int col, int row)
+        private static IntVec3 MazeRoomCenter(IntVec3 origin, int col, int row, int rotation)
         {
-            return new IntVec3(origin.x + col * MazePitch, 0, origin.z + row * MazePitch);
+            return LocalToWorld(origin, col * MazePitch, row * MazePitch, rotation);
         }
 
         private static HashSet<IntVec2> CollectConnectedNodes(HashSet<IntVec2> validNodes, IntVec2 start)
@@ -1650,39 +1712,38 @@ namespace VVRace
             return passages;
         }
 
-        private static IEnumerable<IntVec3> GetMazeDoorCells(IntVec3 origin, IntVec2 a, IntVec2 b)
+        private static IEnumerable<IntVec3> GetMazeDoorCells(IntVec3 origin, IntVec2 a, IntVec2 b, int rotation)
         {
-            var ca = MazeRoomCenter(origin, a.x, a.z);
-            var cb = MazeRoomCenter(origin, b.x, b.z);
-            var mid = new IntVec3((ca.x + cb.x) / 2, 0, (ca.z + cb.z) / 2);
+            int midLx = (a.x + b.x) * MazePitch / 2;
+            int midLz = (a.z + b.z) * MazePitch / 2;
 
             if (a.x != b.x)
             {
                 for (int dz = -1; dz <= 1; dz++)
                 {
-                    yield return new IntVec3(mid.x, 0, mid.z + dz);
+                    yield return LocalToWorld(origin, midLx, midLz + dz, rotation);
                 }
             }
             else
             {
                 for (int dx = -1; dx <= 1; dx++)
                 {
-                    yield return new IntVec3(mid.x + dx, 0, mid.z);
+                    yield return LocalToWorld(origin, midLx + dx, midLz, rotation);
                 }
             }
         }
 
-        // 제2구간(길쭉하고 넓은 시련 복도): 미로 북단에서 정중앙 원형 성소로 이어지는 21x30 온전한 제국 대복도.
-        public static void BuildZone3Hall(Map map, IntVec3 origin, int investigated, bool zone4Open, IReadOnlyCollection<IntVec3> safePath)
+        // 제2구간(길쭉하고 넓은 시련 복도): 미로 출구에서 정중앙 원형 성소로 이어지는 21x30 온전한 제국 대복도.
+        public static void BuildZone3Hall(Map map, IntVec3 origin, int investigated, bool zone4Open, IReadOnlyCollection<IntVec3> safePath, int rotation = 0)
         {
-            OpenZone2NorthGate(map, origin);
+            OpenZone2NorthGate(map, origin, rotation);
 
             for (int dz = 20; dz <= 51; dz++)
             {
                 for (int dx = -10; dx <= 10; dx++)
                 {
-                    var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 2) { continue; }
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 2) { continue; }
 
                     DisplacePawnsAndClear(map, cell);
                     SetFloor(map, cell, VVTerrainDefOf.VV_HoneycombTile);
@@ -1690,55 +1751,55 @@ namespace VVRace
 
                     bool isNorthGate = dz == 51 && Mathf.Abs(dx) <= 1;
                     bool isSouthGate = zone4Open && dz <= 23 && Mathf.Abs(dx) <= 2;
-                    if (!isNorthGate && !isSouthGate && IsCorridorOuterWall(cell, origin))
+                    if (!isNorthGate && !isSouthGate && IsCorridorOuterWall(cell, origin, rotation))
                     {
                         SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, cell);
                     }
                 }
             }
 
-            // 시련 구역 북·남 경계 장식선 (dz = 47, dz = 25)
+            // 시련 구역 양단 경계 장식선 (lz = 47, lz = 25)
             for (int dx = -9; dx <= 9; dx++)
             {
-                var northEdge = new IntVec3(origin.x + dx, 0, origin.z + 47);
-                var southEdge = new IntVec3(origin.x + dx, 0, origin.z + 25);
-                if (northEdge.InBounds(map) && GetSealStage(northEdge, origin) == 2 && northEdge.GetEdifice(map) == null)
+                var northEdge = LocalToWorld(origin, dx, 47, rotation);
+                var southEdge = LocalToWorld(origin, dx, 25, rotation);
+                if (northEdge.InBounds(map) && GetSealStage(northEdge, origin, rotation) == 2 && northEdge.GetEdifice(map) == null)
                 {
                     SetFloor(map, northEdge, VVTerrainDefOf.VV_SterileHoneycombTile);
                 }
-                if (southEdge.InBounds(map) && GetSealStage(southEdge, origin) == 2 && southEdge.GetEdifice(map) == null)
+                if (southEdge.InBounds(map) && GetSealStage(southEdge, origin, rotation) == 2 && southEdge.GetEdifice(map) == null)
                 {
                     SetFloor(map, southEdge, VVTerrainDefOf.VV_SterileHoneycombTile);
                 }
             }
 
-            // 좌·우 대칭 황금 열주(dx = ±6, 4칸 간격: 최대 지붕 거리 6.32 < 6.9로 지붕 붕괴 0) + 측면 성소 등불
+            // 좌·우 대칭 황금 열주(lx = ±6, 4칸 간격: 최대 지붕 거리 6.32 < 6.9로 지붕 붕괴 0) + 측면 성소 등불
             int[] pillarZ = { 26, 30, 34, 38, 42, 46 };
             for (int i = 0; i < pillarZ.Length; i++)
             {
-                var z = origin.z + pillarZ[i];
-                SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, new IntVec3(origin.x - 6, 0, z));
-                SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, new IntVec3(origin.x + 6, 0, z));
+                var pz = pillarZ[i];
+                SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, LocalToWorld(origin, -6, pz, rotation));
+                SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, LocalToWorld(origin, 6, pz, rotation));
 
                 if (i == 0 || i == 2 || i == 4)
                 {
-                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 8, 0, z + 2));
-                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 8, 0, z + 2));
+                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, -8, pz + 2, rotation));
+                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, 8, pz + 2, rotation));
                 }
             }
 
-            // 북단 입구 전실 및 남단 단상 등불
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 5, 0, origin.z + 49));
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 5, 0, origin.z + 49));
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 4, 0, origin.z + 24));
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 4, 0, origin.z + 24));
+            // 입구 전실 및 끝단 단상 등불
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, -5, 49, rotation));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, 5, 49, rotation));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, -4, 24, rotation));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, LocalToWorld(origin, 4, 24, rotation));
 
-            var flower3Cell = EchoFlowerCell(3, origin);
+            var flower3Cell = EchoFlowerCell(3, origin, rotation);
             SetFloor(map, flower3Cell, VVTerrainDefOf.VV_SterileHoneycombTile);
 
             if (investigated < 3)
             {
-                var doomCell = RuinDoomFlowerCell(origin);
+                var doomCell = RuinDoomFlowerCell(origin, rotation);
                 SetFloor(map, doomCell, VVTerrainDefOf.VV_SterileHoneycombTile);
                 SpawnBuildingClean(map, VVThingDefOf.VV_RuinDoomFlower, doomCell);
                 SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinFairyFlowerIII, flower3Cell);
@@ -1762,16 +1823,15 @@ namespace VVRace
             }
         }
 
-        private static bool IsCorridorOuterWall(IntVec3 cell, IntVec3 origin)
+        private static bool IsCorridorOuterWall(IntVec3 cell, IntVec3 origin, int rotation)
         {
-            var dx = cell.x - origin.x;
-            var dz = cell.z - origin.z;
+            WorldToLocal(cell, origin, rotation, out int dx, out int dz);
             if (dz == 51 || Mathf.Abs(dx) == 10) { return true; }
 
             for (int i = 0; i < 4; i++)
             {
                 var adj = cell + GenAdj.CardinalDirections[i];
-                if (GetSealStage(adj, origin) != 2)
+                if (GetSealStage(adj, origin, rotation) != 2)
                 {
                     return true;
                 }
@@ -1781,14 +1841,14 @@ namespace VVRace
         }
 
         // 제3구간(정중앙 원형 회랑): 거대 육각형의 정중앙(origin)에 배치된 원형 성소 + 육각형 화분 6개와 공명 요정꽃 6개.
-        public static List<Building_RuinPuzzleFairyFlower> BuildZone4Ring(Map map, IntVec3 origin, bool hexagonSolved, int seed)
+        public static List<Building_RuinPuzzleFairyFlower> BuildZone4Ring(Map map, IntVec3 origin, bool hexagonSolved, int seed, int rotation = 0)
         {
-            // 제2구간 남쪽 경계 대문(dx: -2..+2, dz: 21..23) 개방
+            // 제2구간 경계 대문(lx: -2..+2, lz: 21..23) 개방
             for (int dx = -2; dx <= 2; dx++)
             {
                 for (int dz = 21; dz <= 23; dz++)
                 {
-                    var gateCell = new IntVec3(origin.x + dx, 0, origin.z + dz);
+                    var gateCell = LocalToWorld(origin, dx, dz, rotation);
                     if (gateCell.InBounds(map))
                     {
                         DestroyEdifice(map, gateCell);
@@ -1801,8 +1861,8 @@ namespace VVRace
             {
                 for (int dx = -23; dx <= 23; dx++)
                 {
-                    var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 3) { continue; }
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 3) { continue; }
 
                     bool isNorthDoor = dz >= 20 && Mathf.Abs(dx) <= 2;
                     if (!isNorthDoor)
@@ -1811,7 +1871,7 @@ namespace VVRace
                     }
 
                     var dist = Mathf.Sqrt(dx * dx + dz * dz);
-                    bool isOuterWall = !isNorthDoor && IsRingOuterWall(cell, origin);
+                    bool isOuterWall = !isNorthDoor && IsRingOuterWall(cell, origin, rotation);
 
                     // 외곽 아케이드(15.8 ~ 22.5, 외벽까지 최대 6.7 < 6.9)만 지붕을 얹어 중앙 성소 광장은 하늘로 열어 둔다.
                     if (dist >= 15.8f)
@@ -1846,15 +1906,15 @@ namespace VVRace
             };
             for (int i = 0; i < lampOffsets.Length; i++)
             {
-                var lampCell = new IntVec3(origin.x + lampOffsets[i].dx, 0, origin.z + lampOffsets[i].dz);
-                if (lampCell.InBounds(map) && GetSealStage(lampCell, origin) == 3 && lampCell.GetEdifice(map) == null)
+                var lampCell = LocalToWorld(origin, lampOffsets[i].dx, lampOffsets[i].dz, rotation);
+                if (lampCell.InBounds(map) && GetSealStage(lampCell, origin, rotation) == 3 && lampCell.GetEdifice(map) == null)
                 {
                     SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, lampCell);
                 }
             }
 
             // 육각형 꼭짓점 6개 화분 및 공명 요정꽃 배치
-            var potCells = GetHexagonPotCells(origin);
+            var potCells = GetHexagonPotCells(origin, rotation);
             int[] baseScramble = { 0, 3, 1, 4, 2, 5 };
             int rot = Mathf.Abs(seed) % 6;
 
@@ -1866,7 +1926,7 @@ namespace VVRace
 
                 foreach (var c in CellRect.CenteredOn(potCell, 3, 3))
                 {
-                    if (c.InBounds(map) && GetSealStage(c, origin) == 3 && c.GetEdifice(map) == null)
+                    if (c.InBounds(map) && GetSealStage(c, origin, rotation) == 3 && c.GetEdifice(map) == null)
                     {
                         SetFloor(map, c, c == potCell ? VVTerrainDefOf.VV_SterileHoneycombTile : VVTerrainDefOf.VV_HoneycombTile);
                     }
@@ -1883,12 +1943,12 @@ namespace VVRace
             return flowers;
         }
 
-        private static bool IsRingOuterWall(IntVec3 cell, IntVec3 origin)
+        private static bool IsRingOuterWall(IntVec3 cell, IntVec3 origin, int rotation)
         {
             for (int i = 0; i < 4; i++)
             {
                 var adj = cell + GenAdj.CardinalDirections[i];
-                var stage = GetSealStage(adj, origin);
+                var stage = GetSealStage(adj, origin, rotation);
                 if (stage == 0 || stage == 1 || stage == 2)
                 {
                     return true;
@@ -1899,14 +1959,14 @@ namespace VVRace
         }
 
         // 제4구간(정중앙 제단 성소): 육각형 퍼즐 완료 시 봉인이 풀리며 중심 제단과 마지막 4번 요정꽃이 드러난다.
-        public static void BuildZone5AltarSanctum(Map map, IntVec3 origin, int investigated, bool coreExtracted)
+        public static void BuildZone5AltarSanctum(Map map, IntVec3 origin, int investigated, bool coreExtracted, int rotation = 0)
         {
             for (int dz = -9; dz <= 9; dz++)
             {
                 for (int dx = -9; dx <= 9; dx++)
                 {
-                    var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 4) { continue; }
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 4) { continue; }
 
                     DisplacePawnsAndClear(map, cell);
                     map.roofGrid.SetRoof(cell, null);
@@ -1921,17 +1981,17 @@ namespace VVRace
 
             if (investigated < 4 && !coreExtracted)
             {
-                SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinFairyFlowerIV, EchoFlowerCell(4, origin));
+                SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinFairyFlowerIV, EchoFlowerCell(4, origin, rotation));
             }
         }
 
         // 중력선 체류 등 맵이 남는 경우, 거대 육각형 내부 전체를 다시 자연 지형·결계 장벽으로 되돌린다.
-        public static void ResealAllStagesToNaturalGround(Map map, IntVec3 origin)
+        public static void ResealAllStagesToNaturalGround(Map map, IntVec3 origin, int rotation = 0)
         {
-            var bounds = FootprintBounds(origin).ClipInsideMap(map);
+            var bounds = FootprintBounds(origin, rotation).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
-                if (GetSealStage(cell, origin) <= 0) { continue; }
+                if (GetSealStage(cell, origin, rotation) <= 0) { continue; }
 
                 ClearCellObstacles(map, cell, removePlants: true);
                 ClearAncientRuinRemains(map, cell);
@@ -1940,11 +2000,11 @@ namespace VVRace
                 EnsureSolidNaturalGround(map, cell, stripArtificialFloor: true);
             }
 
-            RefreshSpatialBarriers(map, origin, _ => false);
-            UnfogSanctuary(map, origin, forceMeshDirty: true);
+            RefreshSpatialBarriers(map, origin, _ => false, rotation);
+            UnfogSanctuary(map, origin, forceMeshDirty: true, rotation: rotation);
         }
 
-        public static void RefreshSpatialBarriers(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed)
+        public static void RefreshSpatialBarriers(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed, int rotation = 0)
         {
             if (map == null || VVThingDefOf.VV_RuinSpatialBarrier == null) { return; }
 
@@ -1960,11 +2020,11 @@ namespace VVRace
             bool IsSealed(IntVec3 c)
             {
                 if (!c.InBounds(map)) { return false; }
-                var st = GetSealStage(c, origin);
+                var st = GetSealStage(c, origin, rotation);
                 return st > 0 && !isStageUnsealed(st);
             }
 
-            var bounds = FootprintBounds(origin).ClipInsideMap(map);
+            var bounds = FootprintBounds(origin, rotation).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
                 if (!IsSealed(cell)) { continue; }
@@ -1987,15 +2047,15 @@ namespace VVRace
             }
         }
 
-        public static void UnfogSanctuary(Map map, IntVec3 origin, bool forceMeshDirty = false)
+        public static void UnfogSanctuary(Map map, IntVec3 origin, bool forceMeshDirty = false, int rotation = 0)
         {
             if (map?.fogGrid == null) { return; }
 
-            var bounds = GladeBounds(origin).ClipInsideMap(map);
+            var bounds = GladeBounds(origin, rotation).ClipInsideMap(map);
             bool canDirty = forceMeshDirty && Current.ProgramState == ProgramState.Playing && map.mapDrawer != null;
             foreach (var cell in bounds)
             {
-                if (!IsInSanctuaryGlade(map, cell, origin)) { continue; }
+                if (!IsInSanctuaryGlade(map, cell, origin, rotation)) { continue; }
 
                 if (map.fogGrid.IsFogged(cell))
                 {
