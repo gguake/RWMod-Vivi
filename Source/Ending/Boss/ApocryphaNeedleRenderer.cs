@@ -7,7 +7,7 @@ namespace VVRace
     [StaticConstructorOnStartup]
     internal static class ApocryphaNeedleRenderer
     {
-        private const string NeedleTexPath = "Things/Item/Equipment/VV_NeedleProjectile";
+        private const string NeedleTexPath = "Things/Mote/VV_ApocryphaNeedle";
 
         private const float NeedleDrawSize = 5.5f;
         private static readonly Vector2 AuraDrawSize = new Vector2(1.6f, 4.6f);
