@@ -371,7 +371,7 @@ namespace VVRace
             if (now < _trapCooldownUntilTick) { return; }
 
             var trialRect = RuinLayoutUtility.TrialRect(_origin);
-            Pawn violator = null;
+            List<Pawn> violators = null;
 
             var pawns = map.mapPawns.AllPawnsSpawned;
             for (int i = 0; i < pawns.Count; i++)
@@ -381,13 +381,13 @@ namespace VVRace
                 if (!trialRect.Contains(p.Position)) { continue; }
                 if (_safePathSet.Contains(p.Position)) { continue; }
 
-                violator = p;
-                break;
+                if (violators == null) { violators = new List<Pawn>(); }
+                violators.Add(p);
             }
 
-            if (violator != null)
+            if (violators != null && violators.Count > 0)
             {
-                TriggerTrialBacklash(now);
+                TriggerTrialBacklash(now, violators);
             }
         }
 
@@ -451,7 +451,7 @@ namespace VVRace
             }
         }
 
-        private void TriggerTrialBacklash(int now)
+        private void TriggerTrialBacklash(int now, List<Pawn> violators)
         {
             _trapCooldownUntilTick = now + TrapCooldownTicks;
 
@@ -479,8 +479,7 @@ namespace VVRace
             // 전체 정착민 대상 랜덤 멸망꽃 페널티 적용 (1일 지속)
             var blightDef = DoomBlightUtility.ApplyTimedDoomBlight(map, TrialBlightDurationTicks);
 
-            // 시련 격자 위 폰들을 멸망꽃 앞으로 강제 이동
-            var candidates = map.mapPawns.AllPawnsSpawned.ToList();
+            // 잘못된 칸을 밟은 대상만 멸망꽃 앞으로 강제 이동 (안전 경로 위 인원은 유지)
             int offsetIdx = 0;
             IntVec2[] returnOffsets =
             {
@@ -489,11 +488,11 @@ namespace VVRace
                 new IntVec2(-1, -1), new IntVec2(1, -1),
             };
 
-            for (int i = 0; i < candidates.Count; i++)
+            for (int i = 0; i < violators.Count; i++)
             {
-                var pawn = candidates[i];
+                var pawn = violators[i];
                 if (pawn == null || pawn.Dead || !pawn.Spawned) { continue; }
-                if (!trialRect.Contains(pawn.Position)) { continue; }
+                if (!trialRect.Contains(pawn.Position) || _safePathSet.Contains(pawn.Position)) { continue; }
 
                 var oldPos = pawn.Position;
                 var dest = returnAnchor;
