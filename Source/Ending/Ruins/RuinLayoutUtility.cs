@@ -968,6 +968,9 @@ namespace VVRace
                 SpawnMazeHostilePeashooters(map, origin, sortedNodes, startNode, goalNode, creamFilledRooms, rng);
             }
 
+            // 9) 남쪽 입구(폐허·불탄 바닥·해골·쓰레기·비비아꽃) → 북쪽 출구(원형 보존) 그라데이션 연출
+            DecorateMazeRuinGradient(map, origin, sortedNodes, goalNode, creamFilledRooms, seed, rng);
+
             // 북단 출구 성소(0, +9) 장식 등불 및 2번 요정꽃
             SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 2, 0, origin.z + 56));
             SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 2, 0, origin.z + 56));
@@ -1114,6 +1117,343 @@ namespace VVRace
                 peashooter.SetFaction(hostileFaction);
                 GenSpawn.Spawn(peashooter, cell, map, WipeMode.Vanish);
             }
+        }
+
+        private static void DecorateMazeRuinGradient(
+            Map map,
+            IntVec3 origin,
+            List<IntVec2> sortedNodes,
+            IntVec2 goalNode,
+            HashSet<IntVec2> creamFilledRooms,
+            int seed,
+            System.Random rng)
+        {
+            var burnedCarpet = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedCarpet");
+            var burnedStraw = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedStrawMatting");
+            var burnedWood = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedWoodPlankFloor");
+
+            var burnedTerrains = new List<TerrainDef>();
+            if (burnedCarpet != null) { burnedTerrains.Add(burnedCarpet); }
+            if (burnedStraw != null) { burnedTerrains.Add(burnedStraw); }
+            if (burnedWood != null) { burnedTerrains.Add(burnedWood); }
+
+            var goalRect = CellRect.CenteredOn(MazeRoomCenter(origin, goalNode.x, goalNode.z), 5, 5);
+            var exposedSoilCells = new List<IntVec3>();
+            var burnedCells = new HashSet<IntVec3>();
+            var skeletonCandidates = new List<(IntVec3 cell, float ruin)>();
+            var skullCandidates = new List<(IntVec3 cell, float ruin)>();
+
+            int burnSeed = Gen.HashCombineInt(seed, 41203);
+            int gapSeed = Gen.HashCombineInt(seed, 90749);
+
+            // A) 바닥 풍화·불탄 바닥·바닥 유실(자연 흙 노출) 패스: 남쪽 입구일수록 심하고 북쪽 목적지(dz >= 26)는 원형 보존
+            for (int dz = -58; dz <= 26; dz++)
+            {
+                // progress: 남쪽 입구(-54) = 0.0 → 북쪽 접근로(+28) = 1.0
+                float progress = Mathf.Clamp01((dz + 54f) / 82f);
+                float ruin = Mathf.Pow(1f - progress, 1.25f);
+                if (ruin <= 0.02f) { continue; }
+
+                for (int dx = -66; dx <= 66; dx++)
+                {
+                    var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    if (goalRect.Contains(cell)) { continue; }
+                    if (cell.GetEdifice(map) != null) { continue; }
+                    if (HasSpecialMazeProp(map, cell)) { continue; }
+
+                    float gapNoise = SmoothValueNoise2D(dx / 3.2f, dz / 3.2f, gapSeed);
+                    float burnNoise = SmoothValueNoise2D(dx / 3.6f, dz / 3.6f, burnSeed);
+
+                    bool isSouthGate = dz <= -56 && Math.Abs(dx) <= 1;
+                    bool exposedSoil = false;
+                    bool burned = false;
+
+                    // 바닥이 뜯겨 나간 흙 구간 (입구 근처 ~26%에서 점진적으로 감소)
+                    if (!isSouthGate && gapNoise > 1f - 0.26f * ruin)
+                    {
+                        map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
+                        var under = cell.GetTerrain(map);
+                        if (under == null || !under.natural || under.IsFloor || under.fertility < 0.5f)
+                        {
+                            map.terrainGrid.SetTerrain(cell, TerrainDefOf.Soil);
+                        }
+                        exposedSoil = true;
+                        exposedSoilCells.Add(cell);
+                    }
+                    // 불탄 바닥 흉터 (입구 근처 ~34%에서 점진적으로 감소)
+                    else if (burnedTerrains.Count > 0 && burnNoise > 1f - 0.34f * ruin)
+                    {
+                        int pick = Math.Abs(Gen.HashCombineInt(dx * 31 + dz * 17, burnSeed)) % burnedTerrains.Count;
+                        SetFloor(map, cell, burnedTerrains[pick]);
+                        burned = true;
+                        burnedCells.Add(cell);
+                    }
+
+                    // 쓰레기·재·건물 잔해·폭발 흔적 (폐허도에 비례해 분포)
+                    if (dz < 22 && rng.NextDouble() < 0.24 * ruin)
+                    {
+                        var filthDef = PickMazeRuinFilth(burned, exposedSoil, rng);
+                        if (filthDef != null)
+                        {
+                            FilthMaker.TryMakeFilth(cell, map, filthDef, count: 1);
+                        }
+                    }
+                }
+            }
+
+            // B) 바닥이 없어진 흙 칸 중 일부에 야생 비비아 꽃 자생 (부드러운 발광으로 폐허 분위기 강조)
+            for (int i = 0; i < exposedSoilCells.Count; i++)
+            {
+                var cell = exposedSoilCells[i];
+                if (rng.NextDouble() >= 0.42) { continue; }
+                if (cell.GetEdifice(map) != null || cell.GetPlant(map) != null || cell.GetCover(map) != null) { continue; }
+                if (cell.GetFertility(map) < 0.5f) { continue; }
+
+                var flowerDef = PickWeightedViviaFlower(rng);
+                if (flowerDef == null) { continue; }
+
+                if (ThingMaker.MakeThing(flowerDef) is Plant plant)
+                {
+                    plant.Growth = 0.72f + 0.28f * (float)rng.NextDouble();
+                    GenSpawn.Spawn(plant, cell, map, WipeMode.Vanish);
+                }
+            }
+
+            // C) 해골(백골화 고대 시체) 및 두개골 배치 후보 수집 (앞쪽·중간쪽 비크림 방 내부, 통로/화분/꽃 제외)
+            for (int i = 0; i < sortedNodes.Count; i++)
+            {
+                var node = sortedNodes[i];
+                if (node == goalNode || creamFilledRooms.Contains(node)) { continue; }
+
+                var center = MazeRoomCenter(origin, node.x, node.z);
+                int dz = center.z - origin.z;
+                if (dz > 12) { continue; }
+
+                float progress = Mathf.Clamp01((dz + 54f) / 72f);
+                float ruin = Mathf.Pow(1f - progress, 1.35f);
+                if (ruin <= 0.08f) { continue; }
+
+                foreach (var cell in CellRect.CenteredOn(center, 5, 5))
+                {
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    if (cell.GetEdifice(map) != null || cell.GetPlant(map) != null || HasSpecialMazeProp(map, cell)) { continue; }
+                    // 방 출입구 정중앙(바깥 테두리 중앙 칸)은 피해서 이동 경로를 깔끔하게 유지
+                    int lx = cell.x - center.x;
+                    int lz = cell.z - center.z;
+                    if ((Math.Abs(lx) == 2 && lz == 0) || (Math.Abs(lz) == 2 && lx == 0)) { continue; }
+
+                    if (rng.NextDouble() < 0.35 * ruin)
+                    {
+                        skeletonCandidates.Add((cell, ruin));
+                    }
+                    if (dz <= -4 && rng.NextDouble() < 0.30 * ruin)
+                    {
+                        skullCandidates.Add((cell, ruin));
+                    }
+                }
+            }
+
+            ShuffleDeterministic(skeletonCandidates, rng);
+            ShuffleDeterministic(skullCandidates, rng);
+
+            var placedRemains = new List<IntVec3>();
+            const int maxSkeletons = 10;
+            int skeletonCount = 0;
+            for (int i = 0; i < skeletonCandidates.Count && skeletonCount < maxSkeletons; i++)
+            {
+                var (cell, ruin) = skeletonCandidates[i];
+                if (rng.NextDouble() > ruin + 0.15f) { continue; }
+                if (IsNearAny(cell, placedRemains, 7)) { continue; }
+
+                if (TrySpawnAncientSkeleton(map, cell, useVivi: (skeletonCount % 2 == 0), rng))
+                {
+                    placedRemains.Add(cell);
+                    skeletonCount++;
+                }
+            }
+
+            if (ThingDefOf.Skull != null)
+            {
+                const int maxSkulls = 8;
+                int skullCount = 0;
+                for (int i = 0; i < skullCandidates.Count && skullCount < maxSkulls; i++)
+                {
+                    var (cell, ruin) = skullCandidates[i];
+                    if (rng.NextDouble() > ruin + 0.1f) { continue; }
+                    if (IsNearAny(cell, placedRemains, 6)) { continue; }
+
+                    var skull = ThingMaker.MakeThing(ThingDefOf.Skull);
+                    skull.stackCount = 1;
+                    GenSpawn.Spawn(skull, cell, map, WipeMode.Vanish);
+                    skull.SetForbidden(true, warnOnFail: false);
+                    placedRemains.Add(cell);
+                    skullCount++;
+                }
+            }
+        }
+
+        private static bool HasSpecialMazeProp(Map map, IntVec3 cell)
+        {
+            var list = cell.GetThingList(map);
+            for (int i = 0; i < list.Count; i++)
+            {
+                var t = list[i];
+                if (t is ArcanePlantPot || t is ArcanePlant) { return true; }
+                if (t.def == VVThingDefOf.VV_AncientSanctumLamp || t.def == VVThingDefOf.VV_AncientRuinFairyFlowerII) { return true; }
+            }
+            return false;
+        }
+
+        private static ThingDef PickMazeRuinFilth(bool burned, bool exposedSoil, System.Random rng)
+        {
+            double r = rng.NextDouble();
+            if (burned)
+            {
+                if (r < 0.55) { return ThingDefOf.Filth_Ash; }
+                if (r < 0.80) { return ThingDefOf.Filth_BlastMark ?? ThingDefOf.Filth_Ash; }
+                return ThingDefOf.Filth_RubbleBuilding;
+            }
+
+            if (exposedSoil)
+            {
+                if (r < 0.50) { return ThingDefOf.Filth_RubbleBuilding; }
+                if (r < 0.85) { return ThingDefOf.Filth_Trash; }
+                return ThingDefOf.Filth_Ash;
+            }
+
+            if (r < 0.40) { return ThingDefOf.Filth_Trash; }
+            if (r < 0.70) { return ThingDefOf.Filth_RubbleBuilding; }
+            if (r < 0.90) { return ThingDefOf.Filth_Ash; }
+            return ThingDefOf.Filth_ScatteredDocuments ?? ThingDefOf.Filth_Trash;
+        }
+
+        private static ThingDef PickWeightedViviaFlower(System.Random rng)
+        {
+            double r = rng.NextDouble();
+            if (r < 0.40 && VVThingDefOf.VV_Plant_LifeArcaneFlower != null) { return VVThingDefOf.VV_Plant_LifeArcaneFlower; }
+            if (r < 0.60 && VVThingDefOf.VV_Plant_FireArcaneFlower != null) { return VVThingDefOf.VV_Plant_FireArcaneFlower; }
+            if (r < 0.80 && VVThingDefOf.VV_Plant_IceArcaneFlower != null) { return VVThingDefOf.VV_Plant_IceArcaneFlower; }
+            return VVThingDefOf.VV_Plant_LightningArcaneFlower ?? VVThingDefOf.VV_Plant_LifeArcaneFlower;
+        }
+
+        private static bool TrySpawnAncientSkeleton(Map map, IntVec3 cell, bool useVivi, System.Random rng)
+        {
+            var kind = (useVivi ? VVPawnKindDefOf.VV_PlayerVivi : null)
+                ?? PawnKindDefOf.AncientSoldier
+                ?? PawnKindDefOf.Villager;
+            if (kind == null) { return false; }
+
+            var request = new PawnGenerationRequest(
+                kind,
+                faction: null,
+                context: PawnGenerationContext.NonPlayer,
+                tile: map.Tile,
+                forceGenerateNewPawn: false,
+                allowDead: true,
+                allowDowned: false,
+                canGeneratePawnRelations: false,
+                mustBeCapableOfViolence: false,
+                colonistRelationChanceFactor: 0f,
+                forceAddFreeWarmLayerIfNeeded: false,
+                allowGay: true,
+                allowPregnant: false,
+                allowFood: false,
+                allowAddictions: false,
+                inhabitant: false,
+                certainlyBeenInCryptosleep: false,
+                forceRedressWorldPawnIfFormerColonist: false,
+                worldPawnFactionDoesntMatter: true,
+                forceNoIdeo: true,
+                forceNoBackstory: true,
+                forbidAnyTitle: true);
+
+            var pawn = PawnGenerator.GeneratePawn(request);
+            if (pawn == null) { return false; }
+
+            if (!pawn.Dead)
+            {
+                pawn.Kill(null, null);
+            }
+
+            pawn.inventory?.DestroyAll();
+            pawn.apparel?.DestroyAll();
+            pawn.equipment?.DestroyAllEquipment();
+
+            var corpse = pawn.Corpse;
+            if (corpse == null) { return false; }
+
+            corpse.Age = 180_000_000 + rng.Next(0, 540_000_000);
+            if (pawn.relations != null)
+            {
+                pawn.relations.hidePawnRelations = true;
+            }
+
+            GenSpawn.Spawn(corpse, cell, map, WipeMode.Vanish);
+            var rot = corpse.GetComp<CompRottable>();
+            if (rot != null)
+            {
+                rot.RotProgress += corpse.Age;
+            }
+            corpse.SetForbidden(true, warnOnFail: false);
+            return true;
+        }
+
+        private static float SmoothValueNoise2D(float x, float y, int seed)
+        {
+            int x0 = Mathf.FloorToInt(x);
+            int y0 = Mathf.FloorToInt(y);
+            float tx = x - x0;
+            float ty = y - y0;
+            tx = tx * tx * (3f - 2f * tx);
+            ty = ty * ty * (3f - 2f * ty);
+
+            float v00 = Hash01(x0, y0, seed);
+            float v10 = Hash01(x0 + 1, y0, seed);
+            float v01 = Hash01(x0, y0 + 1, seed);
+            float v11 = Hash01(x0 + 1, y0 + 1, seed);
+
+            float a = Mathf.Lerp(v00, v10, tx);
+            float b = Mathf.Lerp(v01, v11, tx);
+            return Mathf.Lerp(a, b, ty);
+        }
+
+        private static float Hash01(int x, int y, int seed)
+        {
+            unchecked
+            {
+                uint h = (uint)seed;
+                h ^= (uint)x * 374761393u;
+                h = (h << 13) | (h >> 19);
+                h ^= (uint)y * 668265263u;
+                h *= 1274126177u;
+                h ^= h >> 16;
+                return (h & 0x00FFFFFFu) / 16777215f;
+            }
+        }
+
+        private static void ShuffleDeterministic<T>(List<T> list, System.Random rng)
+        {
+            for (int i = list.Count - 1; i > 0; i--)
+            {
+                int j = rng.Next(i + 1);
+                var tmp = list[i];
+                list[i] = list[j];
+                list[j] = tmp;
+            }
+        }
+
+        private static bool IsNearAny(IntVec3 cell, List<IntVec3> others, int minDist)
+        {
+            int minDistSq = minDist * minDist;
+            for (int i = 0; i < others.Count; i++)
+            {
+                if ((cell - others[i]).LengthHorizontalSquared < minDistSq)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static void OpenZone2NorthGate(Map map, IntVec3 origin)
@@ -1594,6 +1934,7 @@ namespace VVRace
                 if (GetSealStage(cell, origin) <= 0) { continue; }
 
                 ClearCellObstacles(map, cell, removePlants: true);
+                ClearAncientRuinRemains(map, cell);
                 map.roofGrid.SetRoof(cell, null);
                 map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
                 EnsureSolidNaturalGround(map, cell, stripArtificialFloor: true);
@@ -1823,6 +2164,23 @@ namespace VVRace
             }
 
             return GenSpawn.Spawn(ThingMaker.MakeThing(def), cell, map, WipeMode.Vanish);
+        }
+
+        private static void ClearAncientRuinRemains(Map map, IntVec3 cell)
+        {
+            var things = cell.GetThingList(map);
+            for (int i = things.Count - 1; i >= 0; i--)
+            {
+                var t = things[i];
+                if (t is Corpse corpse && corpse.InnerPawn?.Faction == null && corpse.GetRotStage() == RotStage.Dessicated)
+                {
+                    DestroyForce(corpse);
+                }
+                else if (ThingDefOf.Skull != null && t.def == ThingDefOf.Skull && t.IsForbidden(Faction.OfPlayer))
+                {
+                    DestroyForce(t);
+                }
+            }
         }
 
         private static void DestroyForce(Thing thing)
