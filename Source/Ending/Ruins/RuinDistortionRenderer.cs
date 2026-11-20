@@ -7,9 +7,9 @@ namespace VVRace
     public static class RuinDistortionRenderer
     {
         private const string ShaderPath = "Map/VV_RuinDistortion";
-        private const string BaseTexPath = "Things/Mote/Black";
-        private const float SymSizeX = 148f;
-        private const float SymSizeZ = 132f;
+        private const string BaseTexPath = "VFX/VV_EverflowerPetal";
+        private const float SymSizeX = 156f;
+        private const float SymSizeZ = 140f;
 
         private static readonly Material DistortionMat;
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
