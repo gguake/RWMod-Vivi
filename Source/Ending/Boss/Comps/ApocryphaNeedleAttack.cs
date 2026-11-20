@@ -155,7 +155,7 @@ namespace VVRace
             }
         }
 
-        public bool TryStartBreach(Thing target, out IntVec3 standCell)
+        public bool TryStartBreach(Thing target, float maxDistance, out IntVec3 standCell)
         {
             standCell = IntVec3.Invalid;
             EndBreach();
@@ -171,6 +171,7 @@ namespace VVRace
             {
                 if (c == origin) { continue; }
                 if (targetRect.Contains(c)) { break; }
+                if (maxDistance > 0f && !origin.InHorDistOf(c, maxDistance)) { break; }
                 if (!ApocryphaUtility.IsBreachableCell(map, c)) { return false; }
 
                 var edifice = c.GetEdifice(map);

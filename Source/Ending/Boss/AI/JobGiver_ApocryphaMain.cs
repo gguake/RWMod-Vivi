@@ -20,6 +20,9 @@ namespace VVRace
 
         private const int BreachRecheckTicks = 60;
         private const int SkipRecoverTicks = 120;
+        private const float BreachRangeBuffer = 2f;
+        private const float ApproachGoalTolerance = 2f;
+        private const float StealRangeMargin = 1.5f;
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -58,13 +61,19 @@ namespace VVRace
                 if (boundJob != null) { return boundJob; }
             }
 
-            return WanderOrWaitJob(pawn, comp);
+            return WanderOrWaitJob(pawn, comp, target, range);
         }
 
         private static Job TryGiveBoundJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
         {
+            if (target != null)
+            {
+                comp.EnsureApproachRadius(target);
+            }
+
             if (target != null && GenTicks.TicksGame >= comp.NextApproachTick && comp.TrySkipToStealTarget(target, range))
             {
+                comp.SyncApproachRadiusAfterSkip(target, range);
                 comp.Notify_Approached();
                 return WaitJob(SkipRecoverTicks);
             }
@@ -83,14 +92,27 @@ namespace VVRace
 
             if (GenTicks.TicksGame < comp.NextApproachTick) { return null; }
 
-            comp.Notify_Approached();
+            comp.AdvanceApproach(target);
 
-            if (comp.NeedleAttack.TryStartBreach(target, out var breachCell))
+            var originDist = pawn.Position.DistanceTo(target.Position);
+            if (comp.ApproachRadius > range && originDist <= comp.ApproachRadius + 1f)
+            {
+                return null;
+            }
+
+            var approachJob = ApproachJob(pawn, comp, target, range, requireGoalProgress: true);
+            if (approachJob != null)
+            {
+                return approachJob;
+            }
+
+            var maxBreachDist = comp.Props.approachDistance + BreachRangeBuffer;
+            if (comp.NeedleAttack.TryStartBreach(target, maxBreachDist, out var breachCell))
             {
                 return BreachJob(pawn, breachCell);
             }
 
-            return ApproachJob(pawn, comp, target, range);
+            return ApproachJob(pawn, comp, target, range, requireGoalProgress: false);
         }
 
         private static Job WaitJob(int ticks)
@@ -109,28 +131,69 @@ namespace VVRace
             return job;
         }
 
-        private static Job ApproachJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
+        private static Job ApproachJob(Pawn pawn, CompApocrypha comp, Thing target, float range, bool requireGoalProgress)
         {
             var map = pawn.Map;
             var origin = pawn.Position;
             var distance = origin.DistanceTo(target.Position);
             if (distance < 1f) { return null; }
 
-            var direction = (target.Position - origin).ToVector3();
-            direction.Normalize();
+            var targetRadius = Mathf.Max(0f, comp.ApproachRadius);
+            var desiredRadius = Mathf.Max(targetRadius, distance - comp.Props.approachDistance);
+            var safeMin = targetRadius > range ? range + StealRangeMargin : 0f;
+            var maxGoalDistance = desiredRadius + ApproachGoalTolerance;
 
-            bool Reachable(IntVec3 c) => c.InBounds(map) && c != origin && pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly);
+            bool Reachable(IntVec3 c) =>
+                c.InBounds(map)
+                && c != origin
+                && c.Standable(map)
+                && pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly)
+                && (safeMin <= 0f || c.DistanceTo(target.Position) >= safeMin);
 
-            var cell = IntVec3.Invalid;
-            if (distance <= comp.Props.approachDistance)
+            bool MeetsGoal(IntVec3 c)
             {
-                cell = CellFinder.StandableCellNear(EdgeCellToward(pawn, target, range), map, 3f, Reachable);
+                if (!Reachable(c)) { return false; }
+
+                var d = c.DistanceTo(target.Position);
+                if (requireGoalProgress)
+                {
+                    if (desiredRadius <= range)
+                    {
+                        return d <= range;
+                    }
+
+                    return d <= maxGoalDistance && d < distance - 1f;
+                }
+
+                return d < distance - 1.5f;
             }
 
-            for (var step = Mathf.Min(comp.Props.approachDistance, distance); !cell.IsValid && step >= 3f; step -= 3f)
+            var cell = IntVec3.Invalid;
+            if (desiredRadius <= range)
             {
-                var point = (origin.ToVector3Shifted() + direction * step).ToIntVec3();
-                cell = CellFinder.StandableCellNear(point, map, 4f, Reachable);
+                cell = CellFinder.StandableCellNear(EdgeCellToward(pawn, target, range), map, 3f, MeetsGoal);
+            }
+
+            if (!cell.IsValid)
+            {
+                var direction = (target.Position - origin).ToVector3();
+                direction.Normalize();
+
+                var maxStep = requireGoalProgress
+                    ? Mathf.Min(comp.Props.approachDistance, Mathf.Max(0f, distance - desiredRadius))
+                    : Mathf.Min(comp.Props.approachDistance, distance);
+
+                for (var step = maxStep; !cell.IsValid && step >= 3f; step -= 3f)
+                {
+                    var point = (origin.ToVector3Shifted() + direction * step).ToIntVec3().ClampInsideMap(map);
+                    cell = CellFinder.StandableCellNear(point, map, 4f, MeetsGoal);
+                }
+
+                if (!cell.IsValid && maxStep > 0f && maxStep < 3f)
+                {
+                    var point = (origin.ToVector3Shifted() + direction * maxStep).ToIntVec3().ClampInsideMap(map);
+                    cell = CellFinder.StandableCellNear(point, map, 4f, MeetsGoal);
+                }
             }
 
             return cell.IsValid ? MakeMoveJob(VVJobDefOf.VV_ApocryphaApproach, cell, 2500) : null;
@@ -167,7 +230,7 @@ namespace VVRace
             return best.IsValid ? best : target.Position;
         }
 
-        private static Job WanderOrWaitJob(Pawn pawn, CompApocrypha comp)
+        private static Job WanderOrWaitJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
         {
             var mindState = pawn.mindState;
             if (mindState.nextMoveOrderIsWait)
@@ -178,13 +241,90 @@ namespace VVRace
 
             mindState.nextMoveOrderIsWait = true;
 
-            var dest = RCellFinder.RandomWanderDestFor(pawn, pawn.Position, comp.Props.wanderRadius, null, Danger.Deadly);
+            var dest = comp.Phase == ApocryphaPhase.Bound && target != null
+                ? FindDonutWanderDest(pawn, comp, target, range)
+                : RCellFinder.RandomWanderDestFor(pawn, pawn.Position, comp.Props.wanderRadius, null, Danger.Deadly);
+
             if (!dest.IsValid || dest == pawn.Position)
             {
                 return WaitJob(comp.Props.wanderWaitTicks.RandomInRange);
             }
 
             return MakeMoveJob(VVJobDefOf.VV_ApocryphaWander, dest, 2500);
+        }
+
+        private static IntVec3 FindDonutWanderDest(Pawn pawn, CompApocrypha comp, Thing target, float stealRange)
+        {
+            comp.EnsureApproachRadius(target);
+
+            var map = pawn.Map;
+            var origin = pawn.Position;
+            var center = target.Position;
+            comp.GetApproachRing(stealRange, out var minRadius, out var maxRadius);
+
+            var minSq = minRadius * minRadius;
+            var maxSq = maxRadius * maxRadius;
+            var safeMinSq = comp.ApproachRadius > stealRange ? (stealRange + StealRangeMargin) * (stealRange + StealRangeMargin) : 0f;
+            var wanderRadius = comp.Props.wanderRadius;
+
+            bool BaseValid(IntVec3 c)
+            {
+                if (!c.InBounds(map) || c == origin || !c.Standable(map)) { return false; }
+                if (!pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly)) { return false; }
+
+                return (c - center).LengthHorizontalSquared >= safeMinSq;
+            }
+
+            bool InDonut(IntVec3 c)
+            {
+                if (!BaseValid(c)) { return false; }
+
+                var distSq = (c - center).LengthHorizontalSquared;
+                return distSq >= minSq && distSq <= maxSq;
+            }
+
+            var dest = RCellFinder.RandomWanderDestFor(pawn, origin, wanderRadius, (p, c, r) => InDonut(c), Danger.Deadly);
+            if (dest.IsValid && dest != origin && InDonut(dest))
+            {
+                return dest;
+            }
+
+            var targetRadius = Mathf.Clamp(comp.ApproachRadius, minRadius, maxRadius);
+            var originDist = origin.DistanceTo(center);
+            var originError = Mathf.Abs(originDist - targetRadius);
+            if (originError > 1f)
+            {
+                bool CloserToRing(IntVec3 c)
+                {
+                    if (!BaseValid(c)) { return false; }
+
+                    return Mathf.Abs(c.DistanceTo(center) - targetRadius) < originError - 1f;
+                }
+
+                if (originDist > 0.5f)
+                {
+                    var radial = (origin - center).ToVector3();
+                    radial.y = 0f;
+                    radial.Normalize();
+                    var step = Mathf.Min(wanderRadius, originError);
+                    var dir = originDist > targetRadius ? -radial : radial;
+                    var point = (origin.ToVector3Shifted() + dir * step).ToIntVec3().ClampInsideMap(map);
+                    dest = CellFinder.StandableCellNear(point, map, 4f, CloserToRing);
+                    if (dest.IsValid && dest != origin)
+                    {
+                        return dest;
+                    }
+                }
+
+                dest = RCellFinder.RandomWanderDestFor(pawn, origin, wanderRadius, (p, c, r) => CloserToRing(c), Danger.Deadly);
+                if (dest.IsValid && dest != origin && CloserToRing(dest))
+                {
+                    return dest;
+                }
+            }
+
+            dest = RCellFinder.RandomWanderDestFor(pawn, origin, wanderRadius, (p, c, r) => BaseValid(c), Danger.Deadly);
+            return dest.IsValid && dest != origin && BaseValid(dest) ? dest : IntVec3.Invalid;
         }
 
         private static Job ChargeJob(Pawn pawn, CompApocrypha comp, Thing target, float range)

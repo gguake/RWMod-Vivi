@@ -83,6 +83,12 @@ namespace VVRace
 
         private void DebugApproachAltarNow()
         {
+            if (_channel.TryGetStealTarget(out var target, out _, out _))
+            {
+                var currentDistance = Pawn.Position.DistanceTo(target.Position);
+                _approachRadius = _approachRadius < 0f ? currentDistance : Mathf.Min(_approachRadius, currentDistance);
+            }
+
             _nextApproachTick = 0;
             _nextStealTargetSkipCheckTick = 0;
             InterruptCurrentJob();

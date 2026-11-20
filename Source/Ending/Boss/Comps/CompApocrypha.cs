@@ -39,6 +39,7 @@ namespace VVRace
         private bool _transformSwapped;
         private bool _pendingDeath;
         private int _nextApproachTick;
+        private float _approachRadius = -1f;
         private int _releaseCount;
         private int _nextMeleeTick;
         private float _manaShield;
@@ -148,6 +149,7 @@ namespace VVRace
             }
         }
         public int NextApproachTick => _nextApproachTick;
+        public float ApproachRadius => _approachRadius;
 
         public Vector3 BodyCenter => ApocryphaGimmicks.GetBossBodyPos(Pawn);
 
@@ -250,6 +252,7 @@ namespace VVRace
             Scribe_Values.Look(ref _transformSwapped, "transformSwapped", false);
             Scribe_Values.Look(ref _pendingDeath, "pendingDeath", false);
             Scribe_Values.Look(ref _nextApproachTick, "nextApproachTick", 0);
+            Scribe_Values.Look(ref _approachRadius, "approachRadius", -1f);
             Scribe_Values.Look(ref _nextMeleeTick, "nextMeleeTick", 0);
             Scribe_Values.Look(ref _manaShield, "manaShield", 0f);
             Scribe_Values.Look(ref _shieldBroken, "shieldBroken", false);
@@ -348,6 +351,11 @@ namespace VVRace
 
                 _needleAttack.DestroyAll();
                 return;
+            }
+
+            if (_approachRadius < 0f && _channel.TryGetStealTarget(out var target, out _, out _))
+            {
+                EnsureApproachRadius(target);
             }
 
             if (!stunned)
@@ -630,6 +638,49 @@ namespace VVRace
         {
             _nextApproachTick = GenTicks.TicksGame + Props.approachIntervalTicks.RandomInRange;
         }
+
+        internal void EnsureApproachRadius(Thing target)
+        {
+            if (_approachRadius >= 0f || target == null || !parent.Spawned) { return; }
+
+            _approachRadius = parent.Position.DistanceTo(target.Position);
+        }
+
+        internal void AdvanceApproach(Thing target)
+        {
+            EnsureApproachRadius(target);
+            _approachRadius = Mathf.Max(0f, _approachRadius - Props.approachDistance);
+            Notify_Approached();
+        }
+
+        internal void SyncApproachRadiusAfterSkip(Thing target, float stealRange)
+        {
+            if (target == null || !parent.Spawned) { return; }
+
+            var currentDistance = parent.Position.DistanceTo(target.Position);
+            _approachRadius = Mathf.Max(stealRange + 1.5f, currentDistance);
+        }
+
+        public void GetApproachRing(float stealRange, out float minRadius, out float maxRadius)
+        {
+            var radius = Mathf.Max(0f, _approachRadius);
+            var halfWidth = Mathf.Max(1f, Props.approachRingHalfWidth);
+            maxRadius = radius + halfWidth;
+
+            if (radius <= stealRange)
+            {
+                minRadius = 0f;
+            }
+            else
+            {
+                var safeMin = stealRange + 1.5f;
+                minRadius = Mathf.Max(safeMin, radius - halfWidth);
+                if (maxRadius < minRadius)
+                {
+                    maxRadius = minRadius + halfWidth;
+                }
+            }
+        }
         #endregion
 
         #region 페이즈 전환
@@ -658,7 +709,8 @@ namespace VVRace
             _phase = ApocryphaPhase.Dying;
             ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Dying);
 
-            ViviEndingUtility.VanishEscorts(Pawn);
+            ApocryphaUtility.ReleaseEscorts(Pawn);
+            ViviEndingUtility.VanishAllTitanicHornets(map);
             HornetManifestation.CancelAll(map);
             GenSpawn.Spawn(stolen, parent.Position, map);
             Pawn.Destroy(DestroyMode.Vanish);

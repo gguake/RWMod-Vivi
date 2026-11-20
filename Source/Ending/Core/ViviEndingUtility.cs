@@ -301,7 +301,9 @@ namespace VVRace
             if (boss == null || boss.Destroyed || !boss.Spawned) { return; }
 
             var map = boss.Map;
-            VanishEscorts(boss);
+            ApocryphaUtility.ReleaseEscorts(boss);
+            VanishAllTitanicHornets(map);
+            HornetManifestation.CancelAll(map);
 
             ApocryphaVanishEffect.Spawn(boss.Position, map, 2.5f).Cleanup();
             boss.Destroy(DestroyMode.Vanish);

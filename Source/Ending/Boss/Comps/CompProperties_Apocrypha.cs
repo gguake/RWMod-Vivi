@@ -49,6 +49,7 @@ namespace VVRace
 
         public IntRange approachIntervalTicks = new IntRange(9000, 13500);
         public float approachDistance = 9f;
+        public float approachRingHalfWidth = 5f;
         public float wanderRadius = 10f;
         public IntRange wanderWaitTicks = new IntRange(600, 1200);
 
