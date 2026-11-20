@@ -14,6 +14,7 @@ namespace VVRace
     {
         public IntVec3 cell = IntVec3.Invalid;
         public int detonateTick = -1;
+        public bool isTargeted;
 
         private Mote _targetMote;
         private Effecter _effecter;
@@ -22,10 +23,11 @@ namespace VVRace
         {
         }
 
-        public RuinGalleryBlastAim(IntVec3 cell, int detonateTick)
+        public RuinGalleryBlastAim(IntVec3 cell, int detonateTick, bool isTargeted = true)
         {
             this.cell = cell;
             this.detonateTick = detonateTick;
+            this.isTargeted = isTargeted;
         }
 
         public void TickVisuals(Map map, int aimTicks)
@@ -55,6 +57,7 @@ namespace VVRace
         {
             Scribe_Values.Look(ref cell, "cell", IntVec3.Invalid);
             Scribe_Values.Look(ref detonateTick, "detonateTick", -1);
+            Scribe_Values.Look(ref isTargeted, "isTargeted", false);
         }
     }
 
@@ -66,10 +69,12 @@ namespace VVRace
         public const int ResealDurationTicks = 180;
         public const int TrialBlightDurationTicks = GenDate.TicksPerDay;
         public const int GalleryBlastAimTicks = 240;
-        private const int MaxConcurrentGalleryBlasts = 3;
-        private const float GalleryBlastMinSpacing = 3.0f;
-        private const int GalleryTargetRescanTicks = 30;
-        private static readonly IntRange GalleryBlastIntervalTicks = new IntRange(120, 210);
+        private const int MaxConcurrentGalleryBlasts = 12;
+        private const float GalleryBlastMinSpacing = 2.8f;
+        private const int GalleryTargetRescanTicks = 20;
+        private const int RandomGalleryCellAttempts = 40;
+        private static readonly IntRange GalleryBlastIntervalTicks = new IntRange(45, 80);
+        private static readonly IntRange GalleryBlastWaveCount = new IntRange(2, 3);
         private const float PathGuideCellsPerTick = 0.14f;
         private const int TrapCooldownTicks = 15;
 
@@ -195,7 +200,7 @@ namespace VVRace
             }
 
             RuinLayoutUtility.RefreshSpatialBarriers(map, origin, IsStageUnsealed, _rotation);
-            RuinLayoutUtility.UnfogSanctuary(map, origin, forceMeshDirty: false, rotation: _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, origin, IsStageUnsealed, forceMeshDirty: false, rotation: _rotation);
         }
 
         public void PostMapGenerationCleanup()
@@ -205,7 +210,11 @@ namespace VVRace
             RuinLayoutUtility.CleanupPostGenDebris(map, _origin, IsStageUnsealed, _rotation);
             RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed, _rotation);
             RuinLayoutUtility.EnsureExteriorApproachReachability(map, _origin, _rotation);
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: false, rotation: _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, IsStageUnsealed, forceMeshDirty: false, rotation: _rotation);
+            if (IsStageUnsealed(1))
+            {
+                RuinLayoutUtility.UnfogMazeEntrances(map, _origin, zone3Open: IsStageUnsealed(2), _rotation);
+            }
         }
 
         public override void FinalizeInit()
@@ -214,7 +223,7 @@ namespace VVRace
             if (!_active) { return; }
 
             RebuildCaches();
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true, rotation: _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, IsStageUnsealed, forceMeshDirty: true, rotation: _rotation);
         }
 
         private void RebuildCaches()
@@ -275,7 +284,7 @@ namespace VVRace
             }
 
             RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed, _rotation);
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true, rotation: _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, IsStageUnsealed, forceMeshDirty: true, rotation: _rotation);
         }
 
         private void DisarmTrialZone()
@@ -701,7 +710,7 @@ namespace VVRace
             MarkStageUnsealed(4, animate: playEffects);
             RuinLayoutUtility.BuildZone5AltarSanctum(map, _origin, investigated, coreExtracted, _rotation);
             RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed, _rotation);
-            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true, rotation: _rotation);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, IsStageUnsealed, forceMeshDirty: true, rotation: _rotation);
 
             if (playEffects)
             {
@@ -763,7 +772,7 @@ namespace VVRace
             if (_galleryAlarmActive || _hexagonSolved) { return; }
 
             _galleryAlarmActive = true;
-            _nextGalleryBlastTick = now + 30;
+            _nextGalleryBlastTick = now + 20;
 
             var ringCenter = RuinLayoutUtility.RingCenter(_origin);
             if (ringCenter.InBounds(map))
@@ -806,9 +815,8 @@ namespace VVRace
 
             if (_galleryAims.Count < MaxConcurrentGalleryBlasts && now >= _nextGalleryBlastTick)
             {
-                if (TryPickGalleryBlastTarget(out var targetCell))
+                if (TrySpawnGalleryBlastWave(now))
                 {
-                    _galleryAims.Add(new RuinGalleryBlastAim(targetCell, now + GalleryBlastAimTicks));
                     _nextGalleryBlastTick = now + GalleryBlastIntervalTicks.RandomInRange;
                 }
                 else
@@ -832,7 +840,78 @@ namespace VVRace
             EndingVfxUtility.MaintainEffecter(ref _galleryAimSustainer, VVEffecterDefOf.VV_Effecter_ApocryphaAimSustain, originTarget, originTarget);
         }
 
-        private bool TryPickGalleryBlastTarget(out IntVec3 result)
+        private bool TrySpawnGalleryBlastWave(int now)
+        {
+            var candidates = CollectGalleryTargetCandidates();
+            if (candidates.Count == 0)
+            {
+                return false;
+            }
+
+            int slots = MaxConcurrentGalleryBlasts - _galleryAims.Count;
+            if (slots <= 0)
+            {
+                return false;
+            }
+
+            int waveCount = Mathf.Min(GalleryBlastWaveCount.RandomInRange, slots);
+            int spawned = 0;
+            int detonateTick = now + GalleryBlastAimTicks;
+
+            for (int i = 0; i < waveCount; i++)
+            {
+                bool preferTargeted;
+                if (waveCount >= 2)
+                {
+                    // 매 웨이브마다 타겟팅 장판과 랜덤 장판이 자연스럽게 섞여 나오도록 보장한다.
+                    preferTargeted = i == 0 || (i >= 2 && Rand.Chance(0.4f));
+                }
+                else
+                {
+                    preferTargeted = Rand.Chance(0.5f);
+                }
+
+                IntVec3 targetCell;
+                bool isTargeted;
+                if (preferTargeted)
+                {
+                    if (TryPickTargetedGalleryBlastCell(candidates, out targetCell))
+                    {
+                        isTargeted = true;
+                    }
+                    else if (TryPickRandomGalleryBlastCell(out targetCell))
+                    {
+                        isTargeted = false;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (TryPickRandomGalleryBlastCell(out targetCell))
+                    {
+                        isTargeted = false;
+                    }
+                    else if (TryPickTargetedGalleryBlastCell(candidates, out targetCell))
+                    {
+                        isTargeted = true;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                _galleryAims.Add(new RuinGalleryBlastAim(targetCell, detonateTick, isTargeted));
+                spawned++;
+            }
+
+            return spawned > 0;
+        }
+
+        private List<Pawn> CollectGalleryTargetCandidates()
         {
             var candidates = new List<Pawn>();
             var pawns = map.mapPawns.AllPawnsSpawned;
@@ -844,21 +923,37 @@ namespace VVRace
                 if (RuinLayoutUtility.GetSealStage(p.Position, _origin, _rotation) != 3) { continue; }
                 candidates.Add(p);
             }
+            return candidates;
+        }
 
-            if (candidates.Count == 0)
+        private bool TryPickTargetedGalleryBlastCell(List<Pawn> candidates, out IntVec3 result)
+        {
+            if (candidates == null || candidates.Count == 0)
             {
                 result = IntVec3.Invalid;
                 return false;
             }
 
-            // 회랑 내 랜덤 대상을 고르되 기존 예고 장판과 완전히 겹치지 않는 위치를 우선 선택한다.
-            var picked = candidates.RandomElement();
-            if (!IsNearGalleryAim(picked.Position))
+            // 아직 장판과 겹치지 않은 회랑 내 대상을 우선 조준한다.
+            List<Pawn> uncovered = null;
+            for (int i = 0; i < candidates.Count; i++)
             {
-                result = picked.Position;
+                var pos = candidates[i].Position;
+                if (pos.InBounds(map) && pos.Standable(map) && !IsNearGalleryAim(pos))
+                {
+                    if (uncovered == null) { uncovered = new List<Pawn>(); }
+                    uncovered.Add(candidates[i]);
+                }
+            }
+
+            if (uncovered != null && uncovered.Count > 0)
+            {
+                result = uncovered.RandomElement().Position;
                 return true;
             }
 
+            // 모든 대상이 이미 장판 근처라면 대상 주변 4칸 이내의 빈 회랑 칸으로 퇴로를 압박한다.
+            var picked = candidates.RandomElement();
             if (CellFinder.TryFindRandomCellNear(picked.Position, map, 4,
                 c => c.InBounds(map) && c.Standable(map)
                     && RuinLayoutUtility.GetSealStage(c, _origin, _rotation) == 3
@@ -868,8 +963,32 @@ namespace VVRace
                 return true;
             }
 
-            result = picked.Position;
-            return true;
+            result = IntVec3.Invalid;
+            return false;
+        }
+
+        private bool TryPickRandomGalleryBlastCell(out IntVec3 result)
+        {
+            float rMinSq = (RuinLayoutUtility.SanctumInnerRadius + 0.8f) * (RuinLayoutUtility.SanctumInnerRadius + 0.8f);
+            float rMaxSq = (RuinLayoutUtility.RingOuterRadius - 1.2f) * (RuinLayoutUtility.RingOuterRadius - 1.2f);
+
+            for (int i = 0; i < RandomGalleryCellAttempts; i++)
+            {
+                float r = Mathf.Sqrt(Rand.Range(rMinSq, rMaxSq));
+                float theta = Rand.Range(0f, Mathf.PI * 2f);
+                int dx = Mathf.RoundToInt(r * Mathf.Cos(theta));
+                int dz = Mathf.RoundToInt(r * Mathf.Sin(theta));
+                var cand = RuinLayoutUtility.LocalToWorld(_origin, dx, dz, _rotation);
+                if (!cand.InBounds(map) || !cand.Standable(map)) { continue; }
+                if (RuinLayoutUtility.GetSealStage(cand, _origin, _rotation) != 3) { continue; }
+                if (IsNearGalleryAim(cand)) { continue; }
+
+                result = cand;
+                return true;
+            }
+
+            result = IntVec3.Invalid;
+            return false;
         }
 
         private bool IsNearGalleryAim(IntVec3 cell)

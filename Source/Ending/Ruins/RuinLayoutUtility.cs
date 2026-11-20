@@ -953,7 +953,9 @@ namespace VVRace
                 }
             }
 
-            // 입구 대문(lz: -58..-56)과 시작 방(0, -9) 완전 연결
+            // 입구 대문(lz: -58..-56)과 시작 방(0, -9) 연결:
+            // 바깥 홈(lz = -58)은 개방해 입구 위치를 드러내고, 안쪽 관문선(lz = -57)은 얇은 크림벽(1칸 두께)으로 막아 내부 시야를 가린다.
+            var creamWallDef = VVThingDefOf.VV_RuinCreamWall ?? VVThingDefOf.VV_ViviCreamWall;
             for (int dz = -58; dz <= -56; dz++)
             {
                 for (int dx = -1; dx <= 1; dx++)
@@ -962,25 +964,23 @@ namespace VVRace
                     if (gateCell.InBounds(map) && GetSealStage(gateCell, origin, rotation) == 1)
                     {
                         DestroyEdifice(map, gateCell);
+                        if (dz == -57)
+                        {
+                            SpawnBuildingClean(map, creamWallDef, gateCell);
+                        }
                     }
                 }
             }
 
-            // 5) 통로 개방 및 연쇄 붕괴 유적 크림벽(VV_RuinCreamWall) 봉쇄 설치 (3칸 폭 출입구)
-            var creamWallDef = VVThingDefOf.VV_RuinCreamWall ?? VVThingDefOf.VV_ViviCreamWall;
+            // 5) 모든 미로 통로(3칸 폭 × 1칸 두께)를 연쇄 붕괴 유적 크림벽(VV_RuinCreamWall)으로 봉쇄해 방 단위 안개 시야를 유지한다.
             foreach (var kv in passages)
             {
                 var (a, b) = kv.Key;
-                bool isCream = kv.Value;
                 foreach (var cell in GetMazeDoorCells(origin, a, b, rotation))
                 {
                     if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
                     DestroyEdifice(map, cell);
-
-                    if (isCream)
-                    {
-                        SpawnBuildingClean(map, creamWallDef, cell);
-                    }
+                    SpawnBuildingClean(map, creamWallDef, cell);
                 }
             }
 
@@ -1039,6 +1039,8 @@ namespace VVRace
             {
                 OpenZone2NorthGate(map, origin, rotation);
             }
+
+            ApplyMazeFog(map, origin, zone3Open, rotation);
         }
 
         private static HashSet<IntVec2> SelectCreamFilledMazeRooms(List<IntVec2> sortedNodes, IntVec2 startNode, IntVec2 goalNode, System.Random rng)
@@ -1673,40 +1675,11 @@ namespace VVRace
                 }
             }
 
-            // 동·서 날개와 남쪽 접근로의 핵심 관문에 파괴 가능한 비비 크림벽 봉쇄를 배치한다.
+            // 모든 미로 통과 구역을 얇은 크림벽(1칸 두께)으로 봉쇄해 지붕 안개 아래 방 단위로 시야가 열리게 한다.
             var keys = passages.Keys.ToList();
             for (int i = 0; i < keys.Count; i++)
             {
-                var edge = keys[i];
-                var a = edge.Item1;
-                var b = edge.Item2;
-
-                // 시작 방 바로 옆 통로는 열어두어 입구에서 바로 걸어 들어갈 수 있게 한다.
-                if (a == start || b == start)
-                {
-                    passages[edge] = false;
-                    continue;
-                }
-
-                // 북단 출구 방(0, +9)으로 들어가는 모든 문은 반드시 크림벽으로 봉쇄한다.
-                if (a == goal || b == goal)
-                {
-                    passages[edge] = true;
-                    continue;
-                }
-
-                // 남쪽 관문선(row -7 -> -6), 적도 관문선(row -1 -> 0), 북쪽 관문선(row 5 -> 6)을 넘는 세로 통로에 크림벽 배치
-                if (a.x == b.x && ((a.z == -7 && b.z == -6) || (a.z == -1 && b.z == 0) || (a.z == 5 && b.z == 6)))
-                {
-                    passages[edge] = true;
-                    continue;
-                }
-
-                // 시작 방 양옆의 2차 관문(±1,-9 <-> ±2,-9)에 크림벽을 두어 초반부터 기믹을 인지시킨다.
-                if (a.z == start.z && b.z == start.z && ((a.x == -2 && b.x == -1) || (a.x == 1 && b.x == 2)))
-                {
-                    passages[edge] = true;
-                }
+                passages[keys[i]] = true;
             }
 
             return passages;
@@ -1736,7 +1709,8 @@ namespace VVRace
         // 제2구간(길쭉하고 넓은 시련 복도): 미로 출구에서 정중앙 원형 성소로 이어지는 21x30 온전한 제국 대복도.
         public static void BuildZone3Hall(Map map, IntVec3 origin, int investigated, bool zone4Open, IReadOnlyCollection<IntVec3> safePath, int rotation = 0)
         {
-            OpenZone2NorthGate(map, origin, rotation);
+            // 외곽 공간 결계 제거 중 인접한 미탐험 미로 방으로 안개 해제가 새지 않도록 제2구간을 잠시 안개로 덮은 뒤 외벽을 교체한다.
+            SetStageFog(map, origin, targetStage: 2, minLx: -10, minLz: 20, maxLx: 10, maxLz: 51, fogged: true, rotation);
 
             for (int dz = 20; dz <= 51; dz++)
             {
@@ -1745,18 +1719,24 @@ namespace VVRace
                     var cell = LocalToWorld(origin, dx, dz, rotation);
                     if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 2) { continue; }
 
-                    DisplacePawnsAndClear(map, cell);
+                    bool isNorthGate = dz == 51 && Mathf.Abs(dx) <= 1;
+                    bool isSouthGate = zone4Open && dz <= 23 && Mathf.Abs(dx) <= 2;
+                    if (!isNorthGate)
+                    {
+                        DisplacePawnsAndClear(map, cell);
+                    }
                     SetFloor(map, cell, VVTerrainDefOf.VV_HoneycombTile);
                     map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
 
-                    bool isNorthGate = dz == 51 && Mathf.Abs(dx) <= 1;
-                    bool isSouthGate = zone4Open && dz <= 23 && Mathf.Abs(dx) <= 2;
                     if (!isNorthGate && !isSouthGate && IsCorridorOuterWall(cell, origin, rotation))
                     {
                         SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, cell);
                     }
                 }
             }
+
+            SetStageFog(map, origin, targetStage: 2, minLx: -10, minLz: 20, maxLx: 10, maxLz: 51, fogged: false, rotation);
+            OpenZone2NorthGate(map, origin, rotation);
 
             // 시련 구역 양단 경계 장식선 (lz = 47, lz = 25)
             for (int dx = -9; dx <= 9; dx++)
@@ -1843,19 +1823,8 @@ namespace VVRace
         // 제3구간(정중앙 원형 회랑): 거대 육각형의 정중앙(origin)에 배치된 원형 성소 + 육각형 화분 6개와 공명 요정꽃 6개.
         public static List<Building_RuinPuzzleFairyFlower> BuildZone4Ring(Map map, IntVec3 origin, bool hexagonSolved, int seed, int rotation = 0)
         {
-            // 제2구간 경계 대문(lx: -2..+2, lz: 21..23) 개방
-            for (int dx = -2; dx <= 2; dx++)
-            {
-                for (int dz = 21; dz <= 23; dz++)
-                {
-                    var gateCell = LocalToWorld(origin, dx, dz, rotation);
-                    if (gateCell.InBounds(map))
-                    {
-                        DestroyEdifice(map, gateCell);
-                        SetFloor(map, gateCell, VVTerrainDefOf.VV_SterileHoneycombTile);
-                    }
-                }
-            }
+            // 외곽 공간 결계 제거 중 인접한 미탐험 미로 방(±3, ±3)으로 안개 해제가 새지 않도록 제3구간을 잠시 안개로 덮은 뒤 외벽을 교체한다.
+            SetStageFog(map, origin, targetStage: 3, minLx: -23, minLz: -23, maxLx: 23, maxLz: 23, fogged: true, rotation);
 
             for (int dz = -23; dz <= 23; dz++)
             {
@@ -1891,6 +1860,22 @@ namespace VVRace
                     if (isOuterWall)
                     {
                         SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, cell);
+                    }
+                }
+            }
+
+            SetStageFog(map, origin, targetStage: 3, minLx: -23, minLz: -23, maxLx: 23, maxLz: 23, fogged: false, rotation);
+
+            // 제2구간 경계 대문(lx: -2..+2, lz: 21..23) 개방
+            for (int dx = -2; dx <= 2; dx++)
+            {
+                for (int dz = 21; dz <= 23; dz++)
+                {
+                    var gateCell = LocalToWorld(origin, dx, dz, rotation);
+                    if (gateCell.InBounds(map))
+                    {
+                        DestroyEdifice(map, gateCell);
+                        SetFloor(map, gateCell, VVTerrainDefOf.VV_SterileHoneycombTile);
                     }
                 }
             }
@@ -2001,7 +1986,7 @@ namespace VVRace
             }
 
             RefreshSpatialBarriers(map, origin, _ => false, rotation);
-            UnfogSanctuary(map, origin, forceMeshDirty: true, rotation: rotation);
+            UnfogSanctuary(map, origin, _ => false, forceMeshDirty: true, rotation: rotation);
         }
 
         public static void RefreshSpatialBarriers(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed, int rotation = 0)
@@ -2047,15 +2032,158 @@ namespace VVRace
             }
         }
 
-        public static void UnfogSanctuary(Map map, IntVec3 origin, bool forceMeshDirty = false, int rotation = 0)
+        private static void SetStageFog(Map map, IntVec3 origin, int targetStage, int minLx, int minLz, int maxLx, int maxLz, bool fogged, int rotation)
         {
             if (map?.fogGrid == null) { return; }
 
+            for (int dz = minLz; dz <= maxLz; dz++)
+            {
+                for (int dx = minLx; dx <= maxLx; dx++)
+                {
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != targetStage) { continue; }
+
+                    if (fogged)
+                    {
+                        if (!map.fogGrid.IsFogged(cell))
+                        {
+                            map.fogGrid.Refog(CellRect.SingleCell(cell));
+                        }
+                    }
+                    else
+                    {
+                        if (map.fogGrid.IsFogged(cell))
+                        {
+                            map.fogGrid.Unfog(cell);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void ApplyMazeFog(Map map, IntVec3 origin, bool zone3Open, int rotation = 0)
+        {
+            if (map?.fogGrid == null) { return; }
+
+            // 1) 제1구간(거대 육각형 미로) 전체를 안개로 덮어 지붕 아래 미궁 시야를 가린다.
+            for (int dz = -59; dz <= 59; dz++)
+            {
+                for (int dx = -68; dx <= 68; dx++)
+                {
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
+
+                    if (!map.fogGrid.IsFogged(cell))
+                    {
+                        map.fogGrid.Refog(CellRect.SingleCell(cell));
+                    }
+                }
+            }
+
+            // 2) 남쪽 입구 바깥 홈(lz = -58)과 입구 크림벽(lz = -57)을 드러내고, 필요 시 북단 출구 방을 복도와 연결한다.
+            UnfogMazeEntrances(map, origin, zone3Open, rotation);
+
+            // 3) 외부(Stage 0)와 맞닿은 육각형 외벽 테두리만 시야에 노출한다.
+            UnfogMazeExteriorShell(map, origin, rotation);
+
+            if (Current.ProgramState == ProgramState.Playing)
+            {
+                map.roofGrid?.Drawer?.SetDirty();
+                map.mapTemperature?.Drawer?.SetDirty();
+            }
+        }
+
+        public static void UnfogMazeEntrances(Map map, IntVec3 origin, bool zone3Open, int rotation = 0)
+        {
+            if (map?.fogGrid == null) { return; }
+
+            var southAlcove = LocalToWorld(origin, 0, -58, rotation);
+            if (southAlcove.InBounds(map))
+            {
+                if (map.fogGrid.IsFogged(southAlcove))
+                {
+                    FloodFillerFog.FloodUnfog(southAlcove, map);
+                }
+
+                // 입구 바깥 홈(lz = -58) 및 바로 안쪽의 얇은 입구 크림벽(lz = -57)과 양옆 문설주가 항상 보이도록 보장한다.
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    var alcoveCell = LocalToWorld(origin, dx, -58, rotation);
+                    if (alcoveCell.InBounds(map) && map.fogGrid.IsFogged(alcoveCell))
+                    {
+                        map.fogGrid.Unfog(alcoveCell);
+                    }
+
+                    var gateCreamCell = LocalToWorld(origin, dx, -57, rotation);
+                    if (gateCreamCell.InBounds(map) && map.fogGrid.IsFogged(gateCreamCell))
+                    {
+                        map.fogGrid.Unfog(gateCreamCell);
+                    }
+                }
+            }
+
+            if (zone3Open)
+            {
+                var northGate = LocalToWorld(origin, 0, 52, rotation);
+                if (northGate.InBounds(map) && map.fogGrid.IsFogged(northGate))
+                {
+                    FloodFillerFog.FloodUnfog(northGate, map);
+                }
+            }
+        }
+
+        private static void UnfogMazeExteriorShell(Map map, IntVec3 origin, int rotation)
+        {
+            if (map?.fogGrid == null) { return; }
+
+            for (int dz = -59; dz <= 59; dz++)
+            {
+                for (int dx = -68; dx <= 68; dx++)
+                {
+                    var cell = LocalToWorld(origin, dx, dz, rotation);
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
+                    if (!IsMazeExteriorPerimeter(map, cell, origin, rotation)) { continue; }
+
+                    if (map.fogGrid.IsFogged(cell))
+                    {
+                        map.fogGrid.Unfog(cell);
+                    }
+                }
+            }
+        }
+
+        private static bool IsMazeExteriorPerimeter(Map map, IntVec3 cell, IntVec3 origin, int rotation)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                var adj = cell + GenAdj.AdjacentCells[i];
+                if (adj.InBounds(map) && GetSealStage(adj, origin, rotation) == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static void UnfogSanctuary(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed = null, bool forceMeshDirty = false, int rotation = 0)
+        {
+            if (map?.fogGrid == null) { return; }
+
+            bool mazeUnsealed = isStageUnsealed != null && isStageUnsealed(1);
             var bounds = GladeBounds(origin, rotation).ClipInsideMap(map);
             bool canDirty = forceMeshDirty && Current.ProgramState == ProgramState.Playing && map.mapDrawer != null;
             foreach (var cell in bounds)
             {
                 if (!IsInSanctuaryGlade(map, cell, origin, rotation)) { continue; }
+
+                if (mazeUnsealed && GetSealStage(cell, origin, rotation) == 1)
+                {
+                    if (IsMazeExteriorPerimeter(map, cell, origin, rotation) && map.fogGrid.IsFogged(cell))
+                    {
+                        map.fogGrid.Unfog(cell);
+                    }
+                    continue;
+                }
 
                 if (map.fogGrid.IsFogged(cell))
                 {
