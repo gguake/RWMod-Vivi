@@ -138,6 +138,7 @@ namespace VVRace
 
             RuinLayoutUtility.CleanupPostGenDebris(map, _origin, IsStageUnsealed);
             RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed);
+            RuinLayoutUtility.EnsureExteriorApproachReachability(map, _origin);
             RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: false);
         }
 
@@ -933,9 +934,10 @@ namespace VVRace
                 ClearPuzzleTether(notify: false);
             }
 
-            // 봉인된 영역 안으로 도약/순간이동 등이 들어갔을 때 바깥으로 밀어낸다.
+            // 봉인된 영역 안으로 도약/수송 포드/순간이동 등이 들어갔을 때 바깥으로 밀어낸다.
             if (now % 15 == 0 && _unsealedMask != 0b1111)
             {
+                var forecourtFallback = RuinLayoutUtility.ForecourtAnchorCell(_origin).ClampInsideMap(map);
                 var pawns = map.mapPawns.AllPawnsSpawned;
                 for (int i = 0; i < pawns.Count; i++)
                 {
@@ -944,13 +946,22 @@ namespace VVRace
                     var st = RuinLayoutUtility.GetSealStage(p.Position, _origin);
                     if (st > 0 && !IsStageUnsealed(st))
                     {
-                        if (CellFinder.TryFindRandomCellNear(p.Position, map, 16,
-                            c => c.InBounds(map) && c.Standable(map) && IsStageUnsealed(RuinLayoutUtility.GetSealStage(c, _origin)),
-                            out var safe))
+                        if (!CellFinder.TryFindRandomCellNear(p.Position, map, 16,
+                                c => c.InBounds(map) && c.Standable(map) && IsStageUnsealed(RuinLayoutUtility.GetSealStage(c, _origin)),
+                                out var safe)
+                            && !CellFinder.TryFindRandomCellNear(forecourtFallback, map, 8,
+                                c => c.InBounds(map) && c.Standable(map) && RuinLayoutUtility.GetSealStage(c, _origin) == 0,
+                                out safe))
                         {
-                            p.pather?.StopDead();
-                            p.Position = safe;
-                            p.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
+                            safe = forecourtFallback;
+                        }
+
+                        p.pather?.StopDead();
+                        p.Position = safe;
+                        p.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
+                        if (p.DrawPos.ShouldSpawnMotesAt(map))
+                        {
+                            FleckMaker.Static(p.DrawPos, map, FleckDefOf.PsycastSkipFlashEntry, 1.5f);
                         }
                     }
                 }

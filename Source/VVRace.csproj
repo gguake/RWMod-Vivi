@@ -139,6 +139,7 @@
     <Compile Include="Ending\Core\ViviEndingUtility.cs" />
     <Compile Include="Ending\Core\WeatherOverlay_GoldenBloom.cs" />
     <Compile Include="Ending\Core\WorldObjectComp_ViviEndingRaidBeacon.cs" />
+    <Compile Include="Ending\Ruins\AncientRuinsSiteExtension.cs" />
     <Compile Include="Ending\Ruins\Comps\CompUseEffect_ExtractAmberCore.cs" />
     <Compile Include="Ending\Ruins\Comps\CompUseEffect_RuinEcho.cs" />
     <Compile Include="Ending\Ruins\Comps\CompUseEffect_RuinPuzzleFlower.cs" />

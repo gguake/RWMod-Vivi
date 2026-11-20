@@ -72,6 +72,14 @@ namespace VVRace
             return new CellRect(origin.x - 68, origin.z - 73, 137, 133);
         }
 
+        public static CellRect GladeBounds(IntVec3 origin)
+        {
+            // 육각형 외곽 공터(dx: -76..+76, dz: -67..+67) + 남쪽 전정 광장(dz: -78..-57)
+            return new CellRect(origin.x - 76, origin.z - 78, 153, 146);
+        }
+
+        public static IntVec3 ForecourtAnchorCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z - 66);
+
         public static IntVec3 RingCenter(IntVec3 origin) => origin;
 
         public static IntVec3 CentralAltarCell(IntVec3 origin) => origin;
@@ -184,9 +192,8 @@ namespace VVRace
             int jitter = Math.Abs(cell.x * 37 + cell.z * 17) % 2;
             if (hex <= HexOuterApothem + 5.5f + jitter) { return true; }
 
-            // 남쪽 전정 광장 및 남쪽 맵 가장자리 진입 통로 확보
-            if (Mathf.Abs(dx) <= 18 && dz >= -74 && dz <= -57) { return true; }
-            if (Mathf.Abs(dx) <= 6 && cell.z <= origin.z - 70) { return true; }
+            // 남쪽 전정 광장 (가장자리 진입 연결은 후처리에서 지형에 맞춰 자동 보장한다)
+            if (Mathf.Abs(dx) <= 18 && dz >= -75 && dz <= -57) { return true; }
 
             return false;
         }
@@ -194,21 +201,21 @@ namespace VVRace
         // 봉인 구역 및 전정 주변의 자연 지형·바위·수목·간헐천을 정리해 지형만 자연스럽게 보이게 한다.
         public static void PrepareFootprintGround(Map map, IntVec3 origin)
         {
-            var bounds = new CellRect(origin.x - 76, 0, 153, origin.z + 67).ClipInsideMap(map);
+            var bounds = GladeBounds(origin).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
                 if (!IsInSanctuaryGlade(map, cell, origin)) { continue; }
 
                 ClearCellObstacles(map, cell, removePlants: true);
-                EnsureSolidNaturalGround(map, cell);
+                EnsureSolidNaturalGround(map, cell, stripArtificialFloor: true);
                 map.roofGrid.SetRoof(cell, null);
             }
         }
 
-        // 후속 바닐라 GenStep(750~1200: 고대 잔해 차량, 일반 폐허, 바위 덩어리, 수목 등)이 성소 영역에 뿌린 방해물을 정리한다.
+        // 후속 바닐라·DLC GenStep(500~1700: 변이 구조물, 고대 잔해, 일반 폐허, 바위 덩어리, 수목 등)이 성소 영역에 뿌린 방해물을 정리한다.
         public static void CleanupPostGenDebris(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed)
         {
-            var bounds = new CellRect(origin.x - 76, 0, 153, origin.z + 67).ClipInsideMap(map);
+            var bounds = GladeBounds(origin).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
                 if (!IsInSanctuaryGlade(map, cell, origin)) { continue; }
@@ -217,8 +224,8 @@ namespace VVRace
                 bool isSealed = stage > 0 && !isStageUnsealed(stage);
                 var dx = cell.x - origin.x;
                 var dz = cell.z - origin.z;
-                bool inForecourtCore = Mathf.Abs(dx) <= 14 && dz >= -72 && dz <= -58;
-                bool onPavedPath = Mathf.Abs(dx) <= 5 && dz >= -72 && dz <= -58;
+                bool inForecourtCore = Mathf.Abs(dx) <= 14 && dz >= -73 && dz <= -58;
+                bool onPavedPath = Mathf.Abs(dx) <= 5 && dz >= -73 && dz <= -58;
 
                 if (stage == 0 || isSealed)
                 {
@@ -250,10 +257,460 @@ namespace VVRace
                     }
                 }
 
-                if (isSealed)
+                if (stage == 0 || isSealed)
                 {
-                    EnsureSolidNaturalGround(map, cell);
+                    EnsureSolidNaturalGround(map, cell, stripArtificialFloor: isSealed);
                 }
+            }
+        }
+
+        // 산악·깊은 강·호수·용암·해안 등으로 남쪽 전정과 원정대 진입 가장자리(최대 가장자리 구역 포함)가 단절되지 않도록 자연 통로를 보장한다.
+        public static void EnsureExteriorApproachReachability(Map map, IntVec3 origin)
+        {
+            if (map == null || !origin.IsValid) { return; }
+
+            var anchor = ForecourtAnchorCell(origin).ClampInsideMap(map);
+            var flower1 = EchoFlowerCell(1, origin).ClampInsideMap(map);
+
+            // 전정 핵심 진입 지점과 1번 요정꽃 주변이 절대 물·용암·통행불가 지형이 아니도록 재검증한다.
+            foreach (var core in new[] { anchor, flower1 })
+            {
+                foreach (var c in CellRect.CenteredOn(core, 3, 3))
+                {
+                    if (!c.InBounds(map) || GetSealStage(c, origin) != 0) { continue; }
+                    ClearNonViviObstacles(map, c, removePlants: true);
+                    map.roofGrid.SetRoof(c, null);
+                    EnsureSolidNaturalGround(map, c);
+                }
+            }
+
+            int w = map.Size.x;
+            int h = map.Size.z;
+            int total = w * h;
+            int Idx(int x, int z) => z * w + x;
+
+            var passable = new bool[total];
+            for (int z = 0; z < h; z++)
+            {
+                for (int x = 0; x < w; x++)
+                {
+                    passable[Idx(x, z)] = IsExteriorPassableForCaravan(map, new IntVec3(x, 0, z), origin);
+                }
+            }
+
+            var fromForecourt = new bool[total];
+            var queue = new Queue<int>(4096);
+            int anchorIdx = Idx(anchor.x, anchor.z);
+            if (!passable[anchorIdx])
+            {
+                CarveApproachCell(map, anchor, origin, passable, w);
+            }
+
+            fromForecourt[anchorIdx] = true;
+            queue.Enqueue(anchorIdx);
+            FloodFillExterior(queue, passable, fromForecourt, w, h);
+
+            // 맵 4면 가장자리에 접한 모든 통행 가능 연결 요소를 수집한다.
+            var edgeCompId = new int[total];
+            var edgeComponents = new List<(int id, int size, bool connected)>();
+            int nextCompId = 1;
+
+            void TryScanBorderCell(int x, int z)
+            {
+                int start = Idx(x, z);
+                if (!passable[start] || edgeCompId[start] != 0) { return; }
+
+                int cid = nextCompId++;
+                int size = 0;
+                bool connected = false;
+                edgeCompId[start] = cid;
+                queue.Enqueue(start);
+
+                while (queue.Count > 0)
+                {
+                    int cur = queue.Dequeue();
+                    size++;
+                    if (fromForecourt[cur]) { connected = true; }
+
+                    int cx = cur % w;
+                    int cz = cur / w;
+                    if (cx > 0) { TryEnqueueComp(cur - 1, cid); }
+                    if (cx + 1 < w) { TryEnqueueComp(cur + 1, cid); }
+                    if (cz > 0) { TryEnqueueComp(cur - w, cid); }
+                    if (cz + 1 < h) { TryEnqueueComp(cur + w, cid); }
+                }
+
+                edgeComponents.Add((cid, size, connected));
+            }
+
+            void TryEnqueueComp(int nxt, int cid)
+            {
+                if (passable[nxt] && edgeCompId[nxt] == 0)
+                {
+                    edgeCompId[nxt] = cid;
+                    queue.Enqueue(nxt);
+                }
+            }
+
+            for (int x = 0; x < w; x++)
+            {
+                TryScanBorderCell(x, 0);
+                TryScanBorderCell(x, h - 1);
+            }
+            for (int z = 1; z < h - 1; z++)
+            {
+                TryScanBorderCell(0, z);
+                TryScanBorderCell(w - 1, z);
+            }
+
+            bool carvedAny = false;
+            if (edgeComponents.Count > 0)
+            {
+                // CaravanEnterMapUtility.FindNearEdgeCell이 사용하는 최대 가장자리 구역을 최우선으로,
+                // 단절된 주요 가장자리 구역(최대 3곳)을 최소 비용의 자연 여울·산길로 전정과 연결한다.
+                edgeComponents.Sort((a, b) => b.size.CompareTo(a.size));
+
+                int bridgesCarved = 0;
+                for (int i = 0; i < edgeComponents.Count; i++)
+                {
+                    var comp = edgeComponents[i];
+                    if (comp.connected) { continue; }
+                    if (i > 0 && (comp.size < 120 || bridgesCarved >= 3)) { continue; }
+
+                    if (CarveMinimumCostApproach(map, origin, passable, fromForecourt, w, h,
+                        idx => edgeCompId[idx] == comp.id, allowOcean: i == 0, out var reachedIdx))
+                    {
+                        carvedAny = true;
+                        bridgesCarved++;
+                        if (!fromForecourt[reachedIdx])
+                        {
+                            fromForecourt[reachedIdx] = true;
+                            queue.Enqueue(reachedIdx);
+                        }
+                        FloodFillExterior(queue, passable, fromForecourt, w, h);
+                    }
+                }
+            }
+            else
+            {
+                // 극단적 사면 봉쇄(사방 산맥/절벽/깊은 물) 시 가장 비용이 낮은 맵 가장자리로 진입 통로를 개척한다.
+                if (CarveMinimumCostApproach(map, origin, passable, fromForecourt, w, h,
+                    idx =>
+                    {
+                        int bx = idx % w;
+                        int bz = idx / w;
+                        return bx == 0 || bx == w - 1 || bz == 0 || bz == h - 1;
+                    }, allowOcean: true, out var reachedIdx))
+                {
+                    carvedAny = true;
+                    if (!fromForecourt[reachedIdx])
+                    {
+                        fromForecourt[reachedIdx] = true;
+                        queue.Enqueue(reachedIdx);
+                    }
+                    FloodFillExterior(queue, passable, fromForecourt, w, h);
+                }
+            }
+
+            // PlayerStartSpot이 단절 영역이나 무효 위치에 잡혔다면 전정으로 맞춘다.
+            if (!MapGenerator.PlayerStartSpotValid
+                || !MapGenerator.PlayerStartSpot.InBounds(map)
+                || !fromForecourt[Idx(MapGenerator.PlayerStartSpot.x, MapGenerator.PlayerStartSpot.z)])
+            {
+                MapGenerator.PlayerStartSpot = anchor;
+            }
+
+            if (carvedAny)
+            {
+                map.regionAndRoomUpdater?.RebuildAllRegionsAndRooms();
+            }
+        }
+
+        private static void FloodFillExterior(Queue<int> queue, bool[] passable, bool[] visited, int w, int h)
+        {
+            while (queue.Count > 0)
+            {
+                int cur = queue.Dequeue();
+                int cx = cur % w;
+                int cz = cur / w;
+
+                if (cx > 0 && passable[cur - 1] && !visited[cur - 1])
+                {
+                    visited[cur - 1] = true;
+                    queue.Enqueue(cur - 1);
+                }
+                if (cx + 1 < w && passable[cur + 1] && !visited[cur + 1])
+                {
+                    visited[cur + 1] = true;
+                    queue.Enqueue(cur + 1);
+                }
+                if (cz > 0 && passable[cur - w] && !visited[cur - w])
+                {
+                    visited[cur - w] = true;
+                    queue.Enqueue(cur - w);
+                }
+                if (cz + 1 < h && passable[cur + w] && !visited[cur + w])
+                {
+                    visited[cur + w] = true;
+                    queue.Enqueue(cur + w);
+                }
+            }
+        }
+
+        private static bool CarveMinimumCostApproach(
+            Map map,
+            IntVec3 origin,
+            bool[] passable,
+            bool[] fromForecourt,
+            int w,
+            int h,
+            Func<int, bool> isGoal,
+            bool allowOcean,
+            out int goalIdx)
+        {
+            int total = w * h;
+            var dist = new int[total];
+            var parent = new int[total];
+            for (int i = 0; i < total; i++)
+            {
+                dist[i] = int.MaxValue;
+                parent[i] = -1;
+            }
+
+            var heap = new List<(int cost, int idx)>(4096);
+            void Push(int cost, int idx)
+            {
+                heap.Add((cost, idx));
+                int ci = heap.Count - 1;
+                while (ci > 0)
+                {
+                    int pi = (ci - 1) >> 1;
+                    if (heap[pi].cost <= heap[ci].cost) { break; }
+                    var tmp = heap[pi];
+                    heap[pi] = heap[ci];
+                    heap[ci] = tmp;
+                    ci = pi;
+                }
+            }
+
+            (int cost, int idx) Pop()
+            {
+                var top = heap[0];
+                int last = heap.Count - 1;
+                heap[0] = heap[last];
+                heap.RemoveAt(last);
+                int pi = 0;
+                while (true)
+                {
+                    int li = (pi << 1) + 1;
+                    if (li >= heap.Count) { break; }
+                    int ri = li + 1;
+                    int best = (ri < heap.Count && heap[ri].cost < heap[li].cost) ? ri : li;
+                    if (heap[pi].cost <= heap[best].cost) { break; }
+                    var tmp = heap[pi];
+                    heap[pi] = heap[best];
+                    heap[best] = tmp;
+                    pi = best;
+                }
+                return top;
+            }
+
+            // 현재 전정에서 도달 가능한 모든 셀(경계 셀 우선)을 거리 0 출발점으로 등록한다.
+            for (int i = 0; i < total; i++)
+            {
+                if (!fromForecourt[i]) { continue; }
+                dist[i] = 0;
+                int x = i % w;
+                int z = i / w;
+                bool onFrontier = (x > 0 && !fromForecourt[i - 1])
+                    || (x + 1 < w && !fromForecourt[i + 1])
+                    || (z > 0 && !fromForecourt[i - w])
+                    || (z + 1 < h && !fromForecourt[i + w]);
+                if (onFrontier)
+                {
+                    Push(0, i);
+                }
+            }
+
+            goalIdx = -1;
+            int[] dxs = { -1, 1, 0, 0 };
+            int[] dzs = { 0, 0, -1, 1 };
+
+            while (heap.Count > 0)
+            {
+                var (curCost, cur) = Pop();
+                if (curCost > dist[cur]) { continue; }
+
+                if (isGoal(cur) && !fromForecourt[cur])
+                {
+                    goalIdx = cur;
+                    break;
+                }
+
+                int cx = cur % w;
+                int cz = cur / w;
+                for (int d = 0; d < 4; d++)
+                {
+                    int nx = cx + dxs[d];
+                    int nz = cz + dzs[d];
+                    if (nx < 0 || nx >= w || nz < 0 || nz >= h) { continue; }
+
+                    int nxt = nz * w + nx;
+                    if (fromForecourt[nxt]) { continue; }
+
+                    int stepCost = GetApproachCarveStepCost(map, new IntVec3(nx, 0, nz), origin, passable[nxt], allowOcean);
+                    if (stepCost < 0) { continue; }
+
+                    int nextCost = curCost + stepCost;
+                    if (nextCost < dist[nxt])
+                    {
+                        dist[nxt] = nextCost;
+                        parent[nxt] = cur;
+                        Push(nextCost, nxt);
+                    }
+                }
+            }
+
+            if (goalIdx < 0) { return false; }
+
+            // 찾아낸 최소 비용 경로를 따라 3~5칸 폭의 자연 통로(산길 / 얕은 여울)를 개척한다.
+            int trace = goalIdx;
+            while (trace >= 0 && !fromForecourt[trace])
+            {
+                var center = new IntVec3(trace % w, 0, trace / w);
+                bool needsCarve = !passable[trace];
+                if (needsCarve)
+                {
+                    foreach (var radial in GenRadial.RadialCellsAround(center, 2.15f, useCenter: true))
+                    {
+                        if (!radial.InBounds(map) || GetSealStage(radial, origin) != 0) { continue; }
+                        if (HasViviThing(map, radial)) { continue; }
+
+                        CarveApproachCell(map, radial, origin, passable, w);
+                    }
+                }
+
+                trace = parent[trace];
+            }
+
+            // 가장자리 목표 지점 자체가 통행 불가였다면 확실히 개방한다.
+            var goalCell = new IntVec3(goalIdx % w, 0, goalIdx / w);
+            if (!passable[goalIdx])
+            {
+                CarveApproachCell(map, goalCell, origin, passable, w);
+            }
+
+            return true;
+        }
+
+        private static int GetApproachCarveStepCost(Map map, IntVec3 cell, IntVec3 origin, bool alreadyPassable, bool allowOcean)
+        {
+            if (GetSealStage(cell, origin) != 0) { return -1; }
+            if (HasViviThing(map, cell)) { return -1; }
+            if (alreadyPassable) { return 1; }
+
+            var terr = cell.GetTerrain(map);
+            if (terr == null) { return 40; }
+            if (terr.IsOcean) { return allowOcean ? 300 : -1; }
+            if (terr.IsWater) { return 15; }
+            if (terr.dangerous || terr.exposesToVacuum || terr.burnDamage > 0) { return 35; }
+            return 25;
+        }
+
+        private static void CarveApproachCell(Map map, IntVec3 cell, IntVec3 origin, bool[] passable, int w)
+        {
+            if (!cell.InBounds(map) || GetSealStage(cell, origin) != 0) { return; }
+
+            ClearNonViviObstacles(map, cell, removePlants: true);
+            map.roofGrid.SetRoof(cell, null);
+
+            var terr = cell.GetTerrain(map);
+            if (terr == null || terr.dangerous || terr.exposesToVacuum || terr.burnDamage > 0)
+            {
+                map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
+                map.terrainGrid.SetTerrain(cell, GetBiomeNaturalGround(map));
+            }
+            else if (terr.IsWater && terr.passability == Traversability.Impassable)
+            {
+                TerrainDef ford;
+                if (terr == TerrainDefOf.ToxicWaterDeep)
+                {
+                    ford = GetBiomeNaturalGround(map);
+                }
+                else if (terr.IsRiver)
+                {
+                    ford = map.Biome?.waterMovingShallowTerrain ?? TerrainDefOf.WaterMovingShallow;
+                }
+                else
+                {
+                    ford = map.Biome?.waterShallowTerrain ?? TerrainDefOf.WaterShallow;
+                }
+
+                map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
+                map.terrainGrid.SetTerrain(cell, ford ?? TerrainDefOf.WaterShallow);
+            }
+            else if (terr.passability == Traversability.Impassable)
+            {
+                map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
+                map.terrainGrid.SetTerrain(cell, GetBiomeNaturalGround(map));
+            }
+
+            if (map.fogGrid != null && map.fogGrid.IsFogged(cell))
+            {
+                map.fogGrid.Unfog(cell);
+            }
+
+            passable[cell.z * w + cell.x] = IsExteriorPassableForCaravan(map, cell, origin);
+        }
+
+        private static bool IsExteriorPassableForCaravan(Map map, IntVec3 cell, IntVec3 origin)
+        {
+            if (!cell.InBounds(map) || GetSealStage(cell, origin) != 0) { return false; }
+
+            var terr = cell.GetTerrain(map);
+            if (terr == null || terr.passability == Traversability.Impassable
+                || terr.dangerous || terr.exposesToVacuum || terr.burnDamage > 0)
+            {
+                return false;
+            }
+
+            var things = cell.GetThingList(map);
+            for (int i = 0; i < things.Count; i++)
+            {
+                if (things[i].def.passability == Traversability.Impassable)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool HasViviThing(Map map, IntVec3 cell)
+        {
+            var things = cell.GetThingList(map);
+            for (int i = 0; i < things.Count; i++)
+            {
+                var defName = things[i].def?.defName;
+                if (defName != null && defName.StartsWith("VV_"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static void ClearNonViviObstacles(Map map, IntVec3 cell, bool removePlants)
+        {
+            var things = cell.GetThingList(map);
+            for (int i = things.Count - 1; i >= 0; i--)
+            {
+                var t = things[i];
+                if (t is Pawn || t.def.category == ThingCategory.Item) { continue; }
+                if (t.def.defName != null && t.def.defName.StartsWith("VV_")) { continue; }
+                if (!removePlants && t.def.category == ThingCategory.Plant) { continue; }
+
+                DestroyForce(t);
             }
         }
 
@@ -974,7 +1431,7 @@ namespace VVRace
                 ClearCellObstacles(map, cell, removePlants: true);
                 map.roofGrid.SetRoof(cell, null);
                 map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
-                EnsureSolidNaturalGround(map, cell);
+                EnsureSolidNaturalGround(map, cell, stripArtificialFloor: true);
             }
 
             RefreshSpatialBarriers(map, origin, _ => false);
@@ -1028,7 +1485,7 @@ namespace VVRace
         {
             if (map?.fogGrid == null) { return; }
 
-            var bounds = new CellRect(origin.x - 76, 0, 153, origin.z + 67).ClipInsideMap(map);
+            var bounds = GladeBounds(origin).ClipInsideMap(map);
             bool canDirty = forceMeshDirty && Current.ProgramState == ProgramState.Playing && map.mapDrawer != null;
             foreach (var cell in bounds)
             {
@@ -1053,13 +1510,88 @@ namespace VVRace
             map.terrainGrid.SetTerrain(cell, floorDef);
         }
 
-        private static void EnsureSolidNaturalGround(Map map, IntVec3 cell)
+        private static bool IsSafeSolidNaturalTerrain(TerrainDef t)
+        {
+            if (t == null) { return false; }
+            if (t.IsWater || t.IsFlood || t.dangerous || t.exposesToVacuum || t.burnDamage > 0) { return false; }
+            if (t.passability == Traversability.Impassable) { return false; }
+            return t.affordances != null && t.affordances.Contains(TerrainAffordanceDefOf.Medium);
+        }
+
+        private static TerrainDef GetBiomeNaturalGround(Map map)
+        {
+            var biome = map?.Biome;
+            if (biome != null)
+            {
+                if (!biome.terrainsByFertility.NullOrEmpty())
+                {
+                    float[] sampleFertilities = { 0.5f, 0.25f, 0.8f, 0.05f };
+                    for (int i = 0; i < sampleFertilities.Length; i++)
+                    {
+                        var sample = TerrainThreshold.TerrainAtValue(biome.terrainsByFertility, sampleFertilities[i]);
+                        if (IsSafeSolidNaturalTerrain(sample))
+                        {
+                            return sample;
+                        }
+                    }
+
+                    for (int i = 0; i < biome.terrainsByFertility.Count; i++)
+                    {
+                        var cand = biome.terrainsByFertility[i].terrain;
+                        if (IsSafeSolidNaturalTerrain(cand))
+                        {
+                            return cand;
+                        }
+                    }
+                }
+
+                if (IsSafeSolidNaturalTerrain(biome.gravelTerrain))
+                {
+                    return biome.gravelTerrain;
+                }
+
+                var heavy = biome.TerrainForAffordance(TerrainAffordanceDefOf.Heavy);
+                if (IsSafeSolidNaturalTerrain(heavy))
+                {
+                    return heavy;
+                }
+            }
+
+            return TerrainDefOf.Soil;
+        }
+
+        private static void EnsureSolidNaturalGround(Map map, IntVec3 cell, bool stripArtificialFloor = false)
         {
             var cur = cell.GetTerrain(map);
-            if (cur == null || cur.IsWater || !cur.affordances.Contains(TerrainAffordanceDefOf.Medium))
+            if (!stripArtificialFloor && cur != null && cur.defName != null && cur.defName.StartsWith("VV_"))
+            {
+                var under = map.terrainGrid.UnderTerrainAt(cell);
+                if (IsSafeSolidNaturalTerrain(under))
+                {
+                    return;
+                }
+
+                map.terrainGrid.SetUnderTerrain(cell, GetBiomeNaturalGround(map));
+                return;
+            }
+
+            if (stripArtificialFloor && cur != null && (!cur.natural || cur.IsFloor || cur.IsRoad))
             {
                 map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
-                map.terrainGrid.SetTerrain(cell, TerrainDefOf.Soil);
+                cur = cell.GetTerrain(map);
+                if (cur == null || !cur.natural || cur.IsFloor || cur.IsRoad || !IsSafeSolidNaturalTerrain(cur))
+                {
+                    map.terrainGrid.SetTerrain(cell, GetBiomeNaturalGround(map));
+                }
+                return;
+            }
+
+            if (IsSafeSolidNaturalTerrain(cur)) { return; }
+
+            map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
+            if (!IsSafeSolidNaturalTerrain(cell.GetTerrain(map)))
+            {
+                map.terrainGrid.SetTerrain(cell, GetBiomeNaturalGround(map));
             }
         }
 

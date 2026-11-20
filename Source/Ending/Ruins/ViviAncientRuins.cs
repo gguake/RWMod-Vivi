@@ -1,5 +1,7 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
+using System;
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
@@ -12,6 +14,9 @@ namespace VVRace
 
         private const int MinSiteDistance = 6;
         private const int MaxSiteDistance = 14;
+        private const int ExpandedMaxSiteDistance = 24;
+        private const int FallbackMinSiteDistance = 4;
+        private const int FallbackMaxSiteDistance = 28;
         private static readonly IntRange MissiveDelayTicks = new IntRange(60000, 120000);
 
         private static readonly string[] EchoLabelKeys =
@@ -140,10 +145,175 @@ namespace VVRace
             }
         }
 
-        private static bool TryFindSiteTile(out PlanetTile tile)
+        public static bool TryFindSiteTile(out PlanetTile tile)
         {
-            var near = Find.AnyPlayerHomeMap?.Tile ?? PlanetTile.Invalid;
-            return TileFinder.TryFindNewSiteTile(out tile, near, MinSiteDistance, MaxSiteDistance, allowCaravans: false, selectLandmarkChance: 0f);
+            var surface = Find.WorldGrid.Surface;
+            var anchor = FindSurfaceAnchorTile(surface);
+            bool requireReachable = anchor.Valid && !Find.World.Impassable(anchor);
+            var allowedLandmarks = VVSitePartDefOf.VV_AncientRuins?.GetModExtension<AncientRuinsSiteExtension>()?.allowedLandmarks;
+
+            // 1순위: 비비 고대 유적 분위기에 가장 어울리는 온화·비산악·비해안·비강 지표 타일 (허용된 안전 랜드마크 외 랜드마크 제외)
+            if (TryFindSiteTileWith(out tile, anchor, surface, MinSiteDistance, MaxSiteDistance, allowedLandmarks,
+                t => IsValidBaseSurfaceTile(t, anchor, requireReachable) && IsIdealRuinsTile(t, allowedLandmarks)))
+            {
+                return true;
+            }
+
+            // 2순위: 같은 거리 내에서 사막·툰드라·늪지·구릉·강·해안을 허용하되 극한/용암/흉터/산악/비허용 랜드마크 제외
+            if (TryFindSiteTileWith(out tile, anchor, surface, MinSiteDistance, MaxSiteDistance, allowedLandmarks,
+                t => IsValidBaseSurfaceTile(t, anchor, requireReachable) && IsAcceptableRuinsTile(t, allowedLandmarks)))
+            {
+                return true;
+            }
+
+            // 3순위: 극지·산맥·용암지대 한가운데 정착한 경우를 위해 탐색 반경을 넓혀 적합한 지형을 우선 탐색
+            if (TryFindSiteTileWith(out tile, anchor, surface, MinSiteDistance, ExpandedMaxSiteDistance, allowedLandmarks,
+                t => IsValidBaseSurfaceTile(t, anchor, requireReachable) && IsAcceptableRuinsTile(t, allowedLandmarks)))
+            {
+                return true;
+            }
+
+            // 4순위(소프트락 방지): 이동 가능한 모든 지표 타일 허용 (도보 도달 가능 우선 -> 고립 섬/궤도 기지 대비 최후 폴백)
+            if (requireReachable && TryFindSiteTileWith(out tile, anchor, surface, MinSiteDistance, ExpandedMaxSiteDistance, allowedLandmarks,
+                t => IsValidBaseSurfaceTile(t, anchor, requireReachable: true)))
+            {
+                return true;
+            }
+
+            return TryFindSiteTileWith(out tile, anchor, surface, FallbackMinSiteDistance, FallbackMaxSiteDistance, allowedLandmarks,
+                t => IsValidBaseSurfaceTile(t, anchor, requireReachable: false));
+        }
+
+        private static bool TryFindSiteTileWith(out PlanetTile tile, PlanetTile near, PlanetLayer surface, int minDist, int maxDist, List<LandmarkDef> allowedLandmarks, Predicate<PlanetTile> validator)
+        {
+            return TileFinder.TryFindNewSiteTile(
+                out tile,
+                near,
+                minDist,
+                maxDist,
+                allowCaravans: false,
+                allowedLandmarks: allowedLandmarks,
+                selectLandmarkChance: 0f,
+                canSelectComboLandmarks: false,
+                tileFinderMode: TileFinderMode.Near,
+                exitOnFirstTileFound: false,
+                canBeSpace: false,
+                layer: surface,
+                validator: validator);
+        }
+
+        private static PlanetTile FindSurfaceAnchorTile(PlanetLayer surface)
+        {
+            var maps = Find.Maps;
+            for (int i = 0; i < maps.Count; i++)
+            {
+                var m = maps[i];
+                if (m != null && m.IsPlayerHome && m.Tile.Valid && m.Tile.Layer != null && m.Tile.Layer.IsRootSurface)
+                {
+                    return m.Tile;
+                }
+            }
+
+            var anyHome = Find.AnyPlayerHomeMap;
+            if (anyHome != null && anyHome.Tile.Valid && surface != null)
+            {
+                var projected = surface.GetClosestTile_NewTemp(anyHome.Tile, validSettlement: true);
+                if (projected.Valid)
+                {
+                    return projected;
+                }
+            }
+
+            if (TileFinder.TryFindRandomPlayerTile(out var playerTile, allowCaravans: true, validator: null, canBeSpace: false, layer: surface))
+            {
+                return playerTile;
+            }
+
+            return PlanetTile.Invalid;
+        }
+
+        private static bool IsValidBaseSurfaceTile(PlanetTile pt, PlanetTile anchor, bool requireReachable)
+        {
+            if (!pt.Valid || pt.Layer == null || !pt.Layer.IsRootSurface) { return false; }
+
+            var t = pt.Tile;
+            if (t == null || !t.OnSurface || t.WaterCovered || Find.World.Impassable(pt)) { return false; }
+
+            var biome = t.PrimaryBiome;
+            if (biome == null || !biome.implemented || !biome.canBuildBase
+                || biome.impassable || biome.isWaterBiome || biome.inVacuum || biome.isBackgroundBiome)
+            {
+                return false;
+            }
+
+            if (Find.WorldObjects.AnyWorldObjectAt(pt)) { return false; }
+
+            if (requireReachable && anchor.Valid && !Find.WorldReachability.CanReach(anchor, pt))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool IsAllowedLandmark(Tile tile, List<LandmarkDef> allowedLandmarks)
+        {
+            var landmark = tile?.Landmark;
+            if (landmark == null) { return true; }
+            if (landmark.isComboLandmark) { return false; }
+            return allowedLandmarks != null && allowedLandmarks.Contains(landmark.def);
+        }
+
+        private static bool IsHarshOrUnfittingBiome(BiomeDef biome)
+        {
+            if (biome == null) { return true; }
+            if (biome.isExtremeBiome) { return true; }
+            if (biome == BiomeDefOf.Scarlands) { return true; }
+            if (string.Equals(biome.defName, "LavaField", StringComparison.OrdinalIgnoreCase)) { return true; }
+            return false;
+        }
+
+        private static bool IsIdealRuinsTile(PlanetTile pt, List<LandmarkDef> allowedLandmarks)
+        {
+            var t = pt.Tile;
+            if (t == null || !IsAllowedLandmark(t, allowedLandmarks)) { return false; }
+
+            var biome = t.PrimaryBiome;
+            if (IsHarshOrUnfittingBiome(biome)) { return false; }
+            if (biome.plantDensity < 0.2f || t.swampiness > 0.25f) { return false; }
+
+            if (t.hilliness != Hilliness.Flat && t.hilliness != Hilliness.SmallHills) { return false; }
+            if (t.IsCoastal) { return false; }
+
+            if (t is SurfaceTile surfaceTile && !surfaceTile.Rivers.NullOrEmpty()) { return false; }
+
+            return !HasDisruptiveNaturalMutator(t, allowJunkOrPollution: false);
+        }
+
+        private static bool IsAcceptableRuinsTile(PlanetTile pt, List<LandmarkDef> allowedLandmarks)
+        {
+            var t = pt.Tile;
+            if (t == null || !IsAllowedLandmark(t, allowedLandmarks)) { return false; }
+            if (IsHarshOrUnfittingBiome(t.PrimaryBiome)) { return false; }
+            if (t.hilliness == Hilliness.Mountainous || t.hilliness == Hilliness.Impassable) { return false; }
+
+            return !HasDisruptiveNaturalMutator(t, allowJunkOrPollution: true);
+        }
+
+        private static bool HasDisruptiveNaturalMutator(Tile tile, bool allowJunkOrPollution)
+        {
+            var mutators = tile?.Mutators;
+            if (mutators == null || mutators.Count == 0) { return false; }
+
+            for (int i = 0; i < mutators.Count; i++)
+            {
+                var m = mutators[i];
+                if (m == null) { continue; }
+                if (m.IsCave || m.structureGenParms != null) { return true; }
+                if (!allowJunkOrPollution && (m.junkDensityFactor > 1.01f || m.pollutionRange.min > 0f)) { return true; }
+            }
+
+            return false;
         }
 
         private bool SpawnSite()
