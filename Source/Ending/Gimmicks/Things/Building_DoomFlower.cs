@@ -98,7 +98,7 @@ namespace VVRace
             if (!Spawned || HitPoints < MaxHitPoints) { return; }
 
             var boss = ApocryphaGimmicks.FindBoss(Map);
-            if (!ApocryphaGimmicks.IsGimmickActive(boss)) { return; }
+            if (!ApocryphaGimmicks.IsDoomGimmickActive(boss)) { return; }
 
             var count = boss.TryGetComp<CompApocrypha>()?.Props.doomFlowerHornetCount ?? 1;
             HornetManifestation.SummonFromFlower(this, boss, count);
@@ -111,7 +111,7 @@ namespace VVRace
             var map = Map;
             var cell = Position;
 
-            if (!ApocryphaGimmicks.IsGimmickActive(ApocryphaGimmicks.FindBoss(map)))
+            if (!ApocryphaGimmicks.IsDoomGimmickActive(ApocryphaGimmicks.FindBoss(map)))
             {
                 Wither();
                 return;

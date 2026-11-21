@@ -16,7 +16,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 아스포델 전환 충격파 -->
+  <!-- 여왕 처치 충격파 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_ApocryphaShockWave</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -36,9 +36,9 @@
         <_Distortion>0.012</_Distortion>
         <_Brightness>1.5</_Brightness>
         <_ArcIntensity>1.0</_ArcIntensity>
-        <_CoreColor>(1.0, 0.82, 0.98, 1)</_CoreColor>
-        <_GlowColor>(1.0, 0.25, 0.85, 1)</_GlowColor>
-        <_FringeColor>(0.55, 0.2, 1.0, 1)</_FringeColor>
+        <_CoreColor>(0.92, 0.78, 1.0, 1)</_CoreColor>
+        <_GlowColor>(0.62, 0.2, 1.0, 1)</_GlowColor>
+        <_FringeColor>(0.32, 0.08, 0.75, 1)</_FringeColor>
       </shaderParameters>
     </graphicData>
   </FleckDef>
@@ -136,6 +136,22 @@
     </graphicData>
   </FleckDef>
 
+  <!-- 아스포델 요정 빛 입자 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_ApocryphaFairyLight</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>0.25</fadeOutTime>
+    <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    <rotateTowardsMoveDirectionExtraAngle>180</rotateTowardsMoveDirectionExtraAngle>
+    <graphicData>
+      <texPath>VFX/VV_ScentComet</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
   <!-- 아스포델 잿가루 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_ApocryphaAsh</defName>
@@ -178,6 +194,36 @@
       <texPath>Things/Gas/GasCloudThickA</texPath>
       <shaderType>TransparentPostLight</shaderType>
       <color>(0.66, 0.24, 0.78, 0.45)</color>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 아스포델 부패 가스 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_ApocryphaRotGas</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.08</fadeInTime>
+    <solidTime>0.45</solidTime>
+    <fadeOutTime>1.2</fadeOutTime>
+    <growthRate>1.6</growthRate>
+    <graphicData>
+      <texPath>Things/Gas/GasCloudThickA</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(0.42, 0.3, 0.14, 0.55)</color>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 아스포델 황록 부패 가스 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_ApocryphaRotGasBile</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.08</fadeInTime>
+    <solidTime>0.4</solidTime>
+    <fadeOutTime>1.1</fadeOutTime>
+    <growthRate>1.5</growthRate>
+    <graphicData>
+      <texPath>Things/Gas/GasCloudThickA</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(0.66, 0.7, 0.16, 0.45)</color>
     </graphicData>
   </FleckDef>
 
@@ -604,39 +650,6 @@
     </graphicData>
   </ThingDef>
 
-  <!-- 요정 비비 사출 충전 문양 -->
-  <ThingDef ParentName="MoteBase">
-    <defName>VV_Mote_ApocryphaAimCharge</defName>
-    <thingClass>MoteAttached</thingClass>
-    <altitudeLayer>MoteOverhead</altitudeLayer>
-    <drawOffscreen>true</drawOffscreen>
-    <mote>
-      <fadeInTime>0.15</fadeInTime>
-      <fadeOutTime>0.35</fadeOutTime>
-      <solidTime>999999</solidTime>
-      <needsMaintenance>True</needsMaintenance>
-      <fadeOutUnmaintained>true</fadeOutUnmaintained>
-    </mote>
-    <graphicData>
-      <texPath>Things/Mote/Black</texPath>
-      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
-      <shaderType>VV_MagicCircle</shaderType>
-      <color>(1, 0.84, 0.45, 1)</color>
-      <shaderParameters>
-        <_CoreColor>(1, 0.94, 0.75, 1)</_CoreColor>
-        <_Duration>4</_Duration>
-        <_PetalCount>6</_PetalCount>
-        <_RingAlpha>0</_RingAlpha>
-        <_GuideAlpha>0.6</_GuideAlpha>
-        <_CoreGlow>1</_CoreGlow>
-        <_FadeInSecs>0.25</_FadeInSecs>
-        <_LineScale>1.8</_LineScale>
-        <_Brightness>0.85</_Brightness>
-      </shaderParameters>
-      <drawSize>(2, 2)</drawSize>
-    </graphicData>
-  </ThingDef>
-
   <!-- 요정 비비 사출 조준 반짝임 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_ApocryphaAimTwinkle</defName>
@@ -699,9 +712,9 @@
     </children>
   </EffecterDef>
 
-  <!-- 아스포델 전환 충격파 효과 -->
+  <!-- 여왕 처치 효과 -->
   <EffecterDef>
-    <defName>VV_Effecter_ApocryphaShockwave</defName>
+    <defName>VV_Effecter_ApocryphaQueenDeath</defName>
     <maintainTicks>20</maintainTicks>
     <children>
       <li>
@@ -716,14 +729,6 @@
         <burstCount>1</burstCount>
       </li>
       <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>VV_Fleck_ApocryphaShockWave</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <burstCount>1</burstCount>
-        <absoluteAngle>true</absoluteAngle>
-        <rotation>0~360</rotation>
-      </li>
-      <li>
         <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
         <fleckDef>VV_Fleck_ApocryphaShockWave</fleckDef>
         <spawnLocType>OnSource</spawnLocType>
@@ -735,7 +740,7 @@
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>VV_Fleck_ApocryphaEmber</fleckDef>
+        <fleckDef>VV_Fleck_ApocryphaManifestSpark</fleckDef>
         <spawnLocType>OnSource</spawnLocType>
         <burstCount>30~40</burstCount>
         <positionRadius>1.5</positionRadius>
@@ -743,34 +748,7 @@
         <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
         <speed>3~7</speed>
         <scale>0.3~0.7</scale>
-        <color>(1, 0.45, 0.9, 1)</color>
-      </li>
-    </children>
-  </EffecterDef>
-
-  <!-- 아스포델 변신 맥동 효과 -->
-  <EffecterDef>
-    <defName>VV_Effecter_ApocryphaMorphPulse</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>VV_Fleck_ApocryphaMorphPulse</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <burstCount>1</burstCount>
-        <absoluteAngle>true</absoluteAngle>
-        <rotation>0~360</rotation>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>VV_Fleck_ApocryphaEmber</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <burstCount>6~10</burstCount>
-        <positionRadius>1.6</positionRadius>
-        <angle>0~360</angle>
-        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-        <speed>1.5~3.5</speed>
-        <scale>0.3~0.6</scale>
-        <color>(0.9, 0.12, 0.4, 1)</color>
+        <color>(0.72, 0.38, 1, 1)</color>
       </li>
     </children>
   </EffecterDef>
@@ -1472,6 +1450,19 @@
     <drawOffscreen>true</drawOffscreen>
     <altitudeLayer>Pawn</altitudeLayer>
     <selectable>false</selectable>
+  </ThingDef>
+
+  <!-- 재탄생하는 아스포델 -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_ApocryphaRebirth</defName>
+    <label>radiant core</label>
+    <thingClass>VVRace.ApocryphaRebirth</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <selectable>true</selectable>
   </ThingDef>
 
   <!-- 출현하는 아스포델 -->

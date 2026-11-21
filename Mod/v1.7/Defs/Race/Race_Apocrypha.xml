@@ -4,10 +4,10 @@
   <ThingDef ParentName="BasePawn">
     <defName>VV_Apocrypha</defName>
     <label>Asphodel</label>
-    <description>Asphodel, the last empress of the old vivi empire.\n\nUnable to sleep for long ages, she wandered in search of the flower's shade in her memory, until the altar's waves drew her here. Around her twisted form linger countless little lights, layer upon layer, that remember the empress's last kindness.</description>
+    <description>Asphodel, the last empress of the old vivi empire.\n\nSleepless for long ages in search of the flower's shade in her memory, she has been drawn to the altar's waves in the twisted form of a giant hornet queen. When that monstrous shell falls, countless little lights gather from the everflower to wrap around the empress once more.</description>
     <drawOffscreen>true</drawOffscreen>
     <statBases>
-      <MoveSpeed>1.5</MoveSpeed>
+      <MoveSpeed>1.0</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
       <ArmorRating_Sharp>0</ArmorRating_Sharp>
       <ArmorRating_Blunt>0</ArmorRating_Blunt>
@@ -100,7 +100,7 @@
 
       <lifeStageAges>
         <li>
-          <def>VV_ApocryphaBound</def>
+          <def>VV_ApocryphaQueen</def>
           <minAge>0</minAge>
           <soundWounded>Pawn_BigInsect_Pain</soundWounded>
           <soundDeath>Pawn_BigInsect_Death</soundDeath>
@@ -108,7 +108,7 @@
           <soundAngry>Pawn_BigInsect_Angry</soundAngry>
         </li>
         <li>
-          <def>VV_ApocryphaUnbound</def>
+          <def>VV_ApocryphaAsphodel</def>
           <minAge>999</minAge>
           <soundWounded>Pawn_BigInsect_Pain</soundWounded>
           <soundDeath>Pawn_BigInsect_Death</soundDeath>

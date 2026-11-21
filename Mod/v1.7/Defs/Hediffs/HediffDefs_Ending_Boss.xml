@@ -3,8 +3,8 @@
   <!-- 요정 비비 결속 -->
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
-    <label>vivi fairy</label>
-    <description>Countless fairy vivis wrapped layer upon layer around Asphodel form a shield that takes every attack in her place.</description>
+    <label>fairy vivi bond</label>
+    <description>Countless fairy vivis wrap layer upon layer around Asphodel, protecting her body from all damage. Their bond unravels only where the links of fairy attunement touch her. Once the bond grows weak enough, the remaining fairy vivis begin to drift away on their own.</description>
     <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
     <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
     <isBad>false</isBad>
@@ -13,13 +13,20 @@
     <priceImpact>false</priceImpact>
     <initialSeverity>1</initialSeverity>
     <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <statOffsets>
+          <MoveSpeed>0.5</MoveSpeed>
+        </statOffsets>
+      </li>
+    </stages>
   </HediffDef>
 
   <!-- 고대 엘텍스 바늘 -->
   <HediffDef>
     <defName>VV_ApocryphaStuckNeedle</defName>
     <label>ancient eltex needle</label>
-    <description>An ancient eltex needle lodged in the body. The more needles are lodged, the more damage it takes; once all three are lodged, it staggers for a while and then tears them out.</description>
+    <description>An ancient eltex needle lodged deep in the carapace. Each lodged needle greatly increases the damage taken. If no new needle is driven in for a while, all lodged needles are shaken off.</description>
     <hediffClass>VVRace.Hediff_ApocryphaStuckNeedle</hediffClass>
     <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>
     <isBad>true</isBad>
@@ -31,12 +38,12 @@
     <maxSeverity>3</maxSeverity>
   </HediffDef>
 
-  <!-- 오염된 영원꽃 동화 -->
+  <!-- 멸망꽃 환영 -->
   <HediffDef>
-    <defName>VV_CorruptedEverflowerAssimilation</defName>
-    <label>corrupted everflower assimilation</label>
-    <description>Assimilated into everflower mana twisted by Asphodel. Unaffected by toxic environments. On death, the body crumbles into ash and leaves no corpse.</description>
-    <hediffClass>VVRace.Hediff_CorruptedEverflowerAssimilation</hediffClass>
+    <defName>VV_DoomPhantasm</defName>
+    <label>doom bloom phantasm</label>
+    <description>A phantasm conjured from the memories within a doom bloom. It feels no pain, hunger, heat, or cold and cannot burn, but takes greater damage than a living body. Upon death, it crumbles into ash and leaves nothing behind.</description>
+    <hediffClass>VVRace.Hediff_DoomPhantasm</hediffClass>
     <defaultLabelColor>(0.85, 0.35, 0.75)</defaultLabelColor>
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
@@ -45,8 +52,16 @@
     <stages>
       <li>
         <statOffsets>
+          <PainShockThreshold>1</PainShockThreshold>
           <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+          <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+          <ComfyTemperatureMax>200</ComfyTemperatureMax>
+          <IncomingDamageFactor>0.35</IncomingDamageFactor>
         </statOffsets>
+        <statFactors>
+          <Flammability>0</Flammability>
+        </statFactors>
+        <hungerRateFactor>0</hungerRateFactor>
       </li>
     </stages>
   </HediffDef>

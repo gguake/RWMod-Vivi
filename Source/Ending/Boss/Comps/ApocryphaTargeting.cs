@@ -1,6 +1,5 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -11,6 +10,7 @@ namespace VVRace
     {
         private const int EnemyDetectInterval = 30;
         private const int PursuitInterruptIntervalTicks = 300;
+        private const float MinPursuitDistance = 3.9f;
 
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
 
@@ -18,6 +18,8 @@ namespace VVRace
 
         private Thing _rangedAttacker;
         private int _rangedAttackerUntilTick = -1;
+        private Pawn _engageTarget;
+        private int _lastCombatTick = -99999;
         private bool _pendingPursuitCheck;
         private int _lastPursuitInterruptTick = -99999;
 
@@ -29,7 +31,7 @@ namespace VVRace
             get
             {
                 var attacker = _rangedAttacker;
-                if (attacker == null || _comp.Phase != ApocryphaPhase.Bound || GenTicks.TicksGame > _rangedAttackerUntilTick) { return null; }
+                if (attacker == null || _comp.Phase != ApocryphaPhase.Asphodel || GenTicks.TicksGame > _rangedAttackerUntilTick) { return null; }
                 if (attacker.Destroyed || !attacker.Spawned || attacker.Map != Pawn.Map) { return null; }
                 if (attacker is Pawn pawn && (pawn.Dead || pawn.Downed)) { return null; }
                 if (!Pawn.HostileTo(attacker)) { return null; }
@@ -37,6 +39,10 @@ namespace VVRace
                 return attacker;
             }
         }
+
+        public Pawn EngageTarget => IsTarget(_engageTarget, Props.engageRange) ? _engageTarget : null;
+
+        public bool InCombat => GenTicks.TicksGame - _lastCombatTick <= Props.combatMemoryTicks;
 
         public ApocryphaTargeting(CompApocrypha comp)
         {
@@ -47,6 +53,8 @@ namespace VVRace
         {
             Scribe_References.Look(ref _rangedAttacker, "rangedAttacker");
             Scribe_Values.Look(ref _rangedAttackerUntilTick, "rangedAttackerUntilTick", -1);
+            Scribe_References.Look(ref _engageTarget, "engageTarget");
+            Scribe_Values.Look(ref _lastCombatTick, "lastCombatTick", -99999);
         }
 
         public void Tick(int now)
@@ -54,7 +62,7 @@ namespace VVRace
             if (!_pendingPursuitCheck) { return; }
 
             _pendingPursuitCheck = false;
-            if (_comp.Phase == ApocryphaPhase.Bound)
+            if (_comp.Phase == ApocryphaPhase.Asphodel)
             {
                 InterruptIdleJobForPursuit(now);
             }
@@ -63,18 +71,58 @@ namespace VVRace
         public void TickEnemyDetection()
         {
             if (!Pawn.IsHashIntervalTick(EnemyDetectInterval)) { return; }
-            if (!(ApocryphaUtility.FindEscortLord(Pawn)?.LordJob is LordJob_ApocryphaEscort escortJob)) { return; }
 
-            var target = escortJob.FocusTarget;
-            if (target == null || !IsTarget(target, Props.shellRange) || (!(target is Pawn) && AnyTargetPawn(Props.shellRange)))
+            var escortJob = ApocryphaUtility.FindEscortLord(Pawn)?.LordJob as LordJob_ApocryphaEscort;
+            var target = escortJob?.FocusTarget;
+            if (target == null || !IsTarget(target, Props.engageRange) || (!(target is Pawn) && AnyTargetPawn(Props.engageRange)))
             {
                 target = FindNearestTarget();
             }
 
-            if (target != null)
+            if (target == null) { return; }
+
+            if (_comp.Phase == ApocryphaPhase.Asphodel)
             {
-                escortJob.SetFocus(target, GenTicks.TicksGame + Props.escortFocusTicks);
+                _lastCombatTick = GenTicks.TicksGame;
             }
+
+            escortJob?.SetFocus(target, GenTicks.TicksGame + Props.escortFocusTicks);
+        }
+
+        public void TickQueenEngagement()
+        {
+            if (!Pawn.IsHashIntervalTick(EnemyDetectInterval)) { return; }
+
+            CollectTargets(_tmpTargets, Props.queenEngageRadius, Pawn.Position);
+
+            Pawn nearest = null;
+            var nearestDistance = int.MaxValue;
+            var origin = Pawn.Position;
+            for (int i = 0; i < _tmpTargets.Count; i++)
+            {
+                if (!(_tmpTargets[i] is Pawn pawn)) { continue; }
+
+                var distance = (pawn.Position - origin).LengthHorizontalSquared;
+                if (distance < nearestDistance)
+                {
+                    nearest = pawn;
+                    nearestDistance = distance;
+                }
+            }
+
+            _tmpTargets.Clear();
+
+            _engageTarget = nearest ?? EngageTarget;
+
+            if (_engageTarget != null)
+            {
+                _lastCombatTick = GenTicks.TicksGame;
+            }
+        }
+
+        public void ClearEngageTarget()
+        {
+            _engageTarget = null;
         }
 
         public void NoteAttacker(Thing instigator)
@@ -90,7 +138,10 @@ namespace VVRace
             }
 
             if (!Pawn.HostileTo(instigator)) { return; }
-            if (instigator != _rangedAttacker && IsTarget(instigator, Props.shellRange)) { return; }
+
+            _lastCombatTick = GenTicks.TicksGame;
+            if (_comp.Phase != ApocryphaPhase.Asphodel) { return; }
+            if (instigator != _rangedAttacker && IsTarget(instigator, Props.engageRange)) { return; }
 
             _rangedAttacker = instigator;
             _rangedAttackerUntilTick = GenTicks.TicksGame + Props.rangedAttackerMemoryTicks;
@@ -101,20 +152,20 @@ namespace VVRace
         {
             cell = IntVec3.Invalid;
             var attacker = RangedAttacker;
-            if (attacker == null || IsTarget(attacker, Props.shellRange)) { return false; }
+            if (attacker == null || IsTarget(attacker, Props.engageRange)) { return false; }
 
             var map = Pawn.Map;
             var origin = Pawn.Position;
             var toBoss = EndingVfxUtility.SafeNormalizeHorizontal((origin - attacker.Position).ToVector3(), Vector3.forward);
 
             bool Reachable(IntVec3 c) => c.InBounds(map) && c != origin && Pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly);
-            bool CanShellFrom(IntVec3 c) => Reachable(c) && (attacker is Pawn p ? IsTargetPawn(p, Props.shellRange, c) : IsTargetTurret(attacker, Props.shellRange, c));
+            bool CanAttackFrom(IntVec3 c) => Reachable(c) && (attacker is Pawn p ? IsTargetPawn(p, Props.engageRange, c) : IsTargetTurret(attacker, Props.engageRange, c));
 
-            var maxDistance = Mathf.Min(Props.shellRange - 3f, origin.DistanceTo(attacker.Position));
-            for (var distance = maxDistance; distance >= Props.shellMinRange + 1f; distance -= 2f)
+            var maxDistance = Mathf.Min(Props.engageRange - 3f, origin.DistanceTo(attacker.Position));
+            for (var distance = maxDistance; distance >= MinPursuitDistance; distance -= 2f)
             {
                 var point = (attacker.Position.ToVector3Shifted() + toBoss * distance).ToIntVec3();
-                cell = CellFinder.StandableCellNear(point, map, 3f, CanShellFrom);
+                cell = CellFinder.StandableCellNear(point, map, 3f, CanAttackFrom);
                 if (cell.IsValid) { return true; }
             }
 
@@ -122,18 +173,25 @@ namespace VVRace
             return cell.IsValid;
         }
 
-        public bool TryFindTargetCell(float range, System.Predicate<IntVec3> isAimed, System.Predicate<IntVec3> excluded, out IntVec3 cell)
+        public bool TryFindTargetCells(float range, out IntVec3 first, out IntVec3 second)
         {
             CollectTargets(_tmpTargets, range, Pawn.Position);
-            if (excluded != null)
+            first = IntVec3.Invalid;
+            second = IntVec3.Invalid;
+            if (_tmpTargets.Count > 0)
             {
-                _tmpTargets.RemoveAll(v => excluded(v.Position));
+                var attacker = RangedAttacker;
+                var picked = attacker != null && _tmpTargets.Contains(attacker) ? attacker : _tmpTargets.RandomElement();
+                _tmpTargets.Remove(picked);
+                first = picked.Position;
+                if (_tmpTargets.TryRandomElement(out var other))
+                {
+                    second = other.Position;
+                }
             }
 
-            cell = _tmpTargets.Count > 0 ? PickAttackTarget(_tmpTargets, isAimed).Position : IntVec3.Invalid;
-
             _tmpTargets.Clear();
-            return cell.IsValid;
+            return first.IsValid;
         }
 
         private void InterruptIdleJobForPursuit(int now)
@@ -148,20 +206,9 @@ namespace VVRace
             Pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
         }
 
-        private Thing PickAttackTarget(List<Thing> candidates, System.Predicate<IntVec3> isAimed)
-        {
-            var attacker = RangedAttacker;
-            if (attacker != null && candidates.Contains(attacker) && !isAimed(attacker.Position))
-            {
-                return attacker;
-            }
-
-            return candidates.Where(v => !isAimed(v.Position)).TryRandomElement(out var target) ? target : candidates.RandomElement();
-        }
-
         private Thing FindNearestTarget()
         {
-            CollectTargets(_tmpTargets, Props.shellRange, Pawn.Position);
+            CollectTargets(_tmpTargets, Props.engageRange, Pawn.Position);
 
             Thing best = null;
             var bestDistance = int.MaxValue;
@@ -224,7 +271,7 @@ namespace VVRace
             return thing is Pawn pawn ? IsTargetPawn(pawn, range, Pawn.Position) : IsTargetTurret(thing, range, Pawn.Position);
         }
 
-        private bool IsTargetPawn(Pawn target, float range, IntVec3 origin)
+        internal bool IsTargetPawn(Pawn target, float range, IntVec3 origin)
         {
             if (target == Pawn || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
             if ((target.Position - origin).LengthHorizontalSquared > range * range) { return false; }

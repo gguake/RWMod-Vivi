@@ -253,7 +253,7 @@ namespace VVRace
                 var progress = Mathf.Clamp01((now - _stateStartTick) / (float)AimTicks);
                 ApocryphaNeedleRenderer.DrawLane(
                     start: _laneStart, direction: _laneDir, length: _laneLength, width: HalfWidth * 2f,
-                    progress: progress, alpha: 1f, bossInside: false, breach: false,
+                    progress: progress, alpha: 1f, bossInside: false,
                     aimSecs: elapsedSecs, aimDuration: AimTicks / 60f, seed: thingIDNumber);
             }
 

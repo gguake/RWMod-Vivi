@@ -2,25 +2,23 @@
 <LanguageData>
 
 <VV_Apocrypha.label>아스포델</VV_Apocrypha.label>
-<VV_Apocrypha.description>옛 비비 제국의 마지막 여제, 아스포델입니다.\n\n긴 세월 잠들지 못한 채 기억 속의 꽃그늘만을 찾아 헤매다 제단의 파동에 이끌려 나타났습니다. 일그러진 형체 둘레에는 여제의 마지막 선의를 기억하는 수많은 작은 빛들이 겹겹이 머물고 있습니다.</VV_Apocrypha.description>
+<VV_Apocrypha.description>옛 비비 제국의 마지막 여제, 아스포델입니다.\n\n긴 세월 잠들지 못한 채 기억 속의 꽃그늘을 찾아 헤매다, 거대한 말벌 여왕의 형상으로 일그러져 제단의 파동을 따라 나타났습니다. 뒤틀린 껍질이 무너져 내리면 영원꽃에서 모여든 수많은 작은 빛들이 본래의 여제를 다시 감싸 안습니다.</VV_Apocrypha.description>
 <VV_Apocrypha.tools.left_claw.label>왼쪽 발톱</VV_Apocrypha.tools.left_claw.label>
 <VV_Apocrypha.tools.right_claw.label>오른쪽 발톱</VV_Apocrypha.tools.right_claw.label>
 <VV_Apocrypha.tools.jaw.label>턱</VV_Apocrypha.tools.jaw.label>
 
 <VV_DyingApocrypha.label>아스포델</VV_DyingApocrypha.label>
+<VV_ApocryphaRebirth.label>빛 덩어리</VV_ApocryphaRebirth.label>
 <VV_ApocryphaManifestation.label>???</VV_ApocryphaManifestation.label>
 <VV_HornetManifestation.label>???</VV_HornetManifestation.label>
 <VV_ApocryphaNeedle.label>고대 엘텍스 바늘</VV_ApocryphaNeedle.label>
 
-<VV_Projectile_FairyShell.label>요정 비비</VV_Projectile_FairyShell.label>
-<VV_Projectile_DoomSeed.label>멸망꽃 씨앗</VV_Projectile_DoomSeed.label>
-<VV_Projectile_FairySeed.label>요정꽃 씨앗</VV_Projectile_FairySeed.label>
 
 <VV_DoomFlower.label>멸망꽃</VV_DoomFlower.label>
 <VV_DoomFlower.description>아스포델의 일그러진 기억과 마나가 피워낸 저주받은 꽃입니다. 만개하기 전에 파괴하지 않으면 옛 재앙의 환영이 퍼져 지역 내 모든 정착민에게 치명적인 저주를 내립니다.</VV_DoomFlower.description>
 
 <VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
-<VV_FairyFlower.description>아스포델을 감싸고 있던 요정 비비들의 마나가 번져 피어난 꽃입니다. 성체 비비가 이 꽃과 결속한 뒤 아스포델에게 다가가면 두 마나가 간섭을 일으켜, 여제의 짐을 덜듯 요정 비비들을 대규모로 놓아주고 결속자에게 내려진 멸망꽃 저주도 씻어냅니다.</VV_FairyFlower.description>
+<VV_FairyFlower.description>아스포델을 감싼 요정 비비들의 마나가 번져 피어난 꽃입니다. 비비가 공명하면 〈요정 교화〉를 얻습니다. 내버려 두면 문양이 완성되며 터져, 주변의 비비는 요정이 되어 아스포델에게 묶이고 그 밖의 이들은 심한 화상을 입습니다.</VV_FairyFlower.description>
 
 <VV_EverflowerAltar.label>영원꽃 제단</VV_EverflowerAltar.label>
 <VV_EverflowerAltar.description>고대 호박 코어의 마나 회로를 바탕으로 복원한 제단입니다. 땅의 마나를 모아 영원꽃이 마지막 개화에 이를 수 있도록 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 제단이 피해를 받지 않고 해체할 수 없으며, 영원꽃도 옮길 수 없습니다. 지붕 아래에는 건설할 수 없으며 지역마다 하나만 건설할 수 있습니다.</VV_EverflowerAltar.description>

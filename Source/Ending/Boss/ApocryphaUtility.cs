@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
@@ -174,7 +175,6 @@ namespace VVRace
             return target.Spawned && target.Map == map ? target.OccupiedRect() : CellRect.SingleCell(target.PositionHeld);
         }
 
-        // processor 안에서 도달 판정·안개 해제처럼 홍수 채우기를 쓰는 호출을 하면 안 된다.
         private static void FloodFromStealTarget(Map map, CellRect rect, bool passDestroyable, System.Action<IntVec3> processor)
         {
             var roots = new List<IntVec3>();
@@ -249,7 +249,7 @@ namespace VVRace
         public static Pawn SpawnBossFightHornet(Map map, IntVec3 cell, Rot4 rotation)
         {
             var hornet = PawnGenerator.GeneratePawn(new PawnGenerationRequest(VVPawnKindDefOf.VV_TitanicHornet, null, PawnGenerationContext.NonPlayer, map.Tile));
-            hornet.health.AddHediff(VVHediffDefOf.VV_CorruptedEverflowerAssimilation);
+            hornet.health.AddHediff(VVHediffDefOf.VV_DoomPhantasm);
             GenSpawn.Spawn(hornet, cell, map, rotation);
 
             hornet.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, transitionSilently: true);
@@ -379,7 +379,57 @@ namespace VVRace
 
         public static bool IsDefeatInProgress(Map map)
         {
-            return map != null && map.listerThings.ThingsOfDef(VVThingDefOf.VV_DyingApocrypha).Count > 0;
+            return map != null && (map.listerThings.ThingsOfDef(VVThingDefOf.VV_DyingApocrypha).Count > 0 || map.listerThings.ThingsOfDef(VVThingDefOf.VV_ApocryphaRebirth).Count > 0);
+        }
+
+        public static void ReleaseAsphodelBound(Map map, IntVec3 fallbackCell)
+        {
+            var mana = GameComponent_Mana.Of(Current.Game);
+            if (map == null || mana == null || mana.AsphodelBoundVivis.Count == 0) { return; }
+
+            var anchor = ViviEndingQuest.Current?.AnchorEverflower;
+            var root = anchor != null && anchor.Spawned && anchor.Map == map ? EverflowerPawnHolder.FindReturnCell(anchor, map, 4f) : IntVec3.Invalid;
+            if (!root.IsValid)
+            {
+                root = fallbackCell.ClampInsideMap(map);
+            }
+
+            var released = new List<Pawn>();
+            foreach (var vivi in mana.AsphodelBoundVivis.ToList())
+            {
+                if (vivi == null || vivi.Destroyed || vivi.Dead)
+                {
+                    mana.UnbindFromAsphodel(vivi);
+                    continue;
+                }
+
+                if (!GenPlace.TryPlaceThing(vivi, root, map, ThingPlaceMode.Near)) { continue; }
+
+                mana.UnbindFromAsphodel(vivi);
+                VVEffecterDefOf.VV_Effecter_FairyReturn.SpawnMaintained(vivi, map);
+                released.Add(vivi);
+            }
+
+            if (released.Count == 0) { return; }
+
+            Find.LetterStack.ReceiveLetter(
+                LocalizeString_Letter.VV_Letter_AsphodelReleasedLabel.Translate(),
+                LocalizeString_Letter.VV_Letter_AsphodelReleased.Translate(released.Select(v => v.LabelShortCap).ToLineList("  - ").Named("PAWNS")),
+                LetterDefOf.PositiveEvent,
+                new LookTargets(released));
+        }
+
+        public static void DissolvePhantasms(Map map)
+        {
+            if (map == null) { return; }
+
+            foreach (var pawn in map.mapPawns.AllPawnsSpawned.ToList())
+            {
+                if (pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_DoomPhantasm) == true)
+                {
+                    Hediff_DoomPhantasm.Dissolve(pawn);
+                }
+            }
         }
 
         public static void ShakeCamera(Map map, float magnitude)
@@ -390,7 +440,6 @@ namespace VVRace
             }
         }
 
-        // 3차 이징(smoothstep). Mathf.SmoothStep은 계산 순서가 달라 float 결과가 다를 수 있으므로 식을 그대로 쓴다.
         public static float EaseInOut(float t)
         {
             return t * t * (3f - 2f * t);

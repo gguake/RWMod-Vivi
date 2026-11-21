@@ -50,7 +50,6 @@ namespace VVRace
         private int _lastVisualFrame = -1;
         private Rot4 _facing = Rot4.South;
 
-        // 궤도 변주는 thingIDNumber를 시드로 매번 같은 값이 나오므로 저장하지 않는다.
         [Unsaved]
         private bool _orbitVariationInitialized;
         [Unsaved]
@@ -91,7 +90,6 @@ namespace VVRace
         internal float MotionCurveOffsetFactor { get { EnsureOrbitVariation(); return _motionCurveOffsetFactor; } }
 
         public bool InAction => Role != FairyRole.None;
-        // 작업이 끝난 요정은 다음 틱에 대기 작업을 받으므로 대기 중으로 본다.
         public bool IsAvailable => _state == FairyState.Idle && (CurrentJob == null || CurrentJob.Kind == FairyJobKind.Idle);
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
 
@@ -220,7 +218,6 @@ namespace VVRace
                         FairyJobInterruptReason.LifespanExpired :
                         FairyJobInterruptReason.DematerializeAll);
 
-                    // OnInterrupted가 소멸 작업을 시작한 경우 다시 시작하면 페이즈 이펙트가 중복 재생된다.
                     if (_job != null && !_job.Ended && _job.Kind == FairyJobKind.Dematerialize)
                     {
                         return;
@@ -347,7 +344,7 @@ namespace VVRace
                 var stagger = hitPawn.stances?.stagger;
                 if (stagger != null)
                 {
-                    stagger.StaggerFor(30);
+                    stagger.StaggerFor(CurrentJob?.ImpactStaggerTicks ?? 30);
                 }
             }
         }
@@ -534,12 +531,10 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                // 이동·공격은 저장된 토일이 이어서 처리하므로 저장되지 않는 공격 그래픽만 복원한다.
                 if (_state == FairyState.Attacking)
                 {
                     _attackGraphicActive = true;
                 }
-                // 작업과 토일의 요정 참조는 저장되지 않으므로 다시 연결한다. 끝난 작업은 다음 틱에 교체된다.
                 CurrentJob?.Notify_AssignedToFairy(this);
             }
         }

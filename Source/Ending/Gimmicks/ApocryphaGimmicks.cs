@@ -8,108 +8,12 @@ namespace VVRace
 {
     public static class ApocryphaGimmicks
     {
-        private const float MinSeedDistanceFromBoss = 8f;
-
-        private const float MinVolleySeedSpacing = 5f;
+        private const float MinBloomSpacing = 5f;
 
         private const int BloomCellFallbackRadius = 4;
 
-        private static readonly Vector3 BoundBodyOffset = new Vector3(0f, 0f, 0.28f);
-        private static readonly Vector3 UnboundBodyOffset = new Vector3(0f, 0f, 1.5f);
-
-        private static readonly Vector3 PawnLinkOffset = new Vector3(0f, 0f, 0.35f);
-        private static readonly Color InterferenceLinkColor = new Color(1f, 0.9f, 0.6f);
-        private const float InterferenceLinkWidth = 1f;
-        private const float InterferenceLinkFadeInTicks = 45f;
-
-        private const float ManaBackflowBeamWidth = 1.6f;
-        private const float ManaBackflowCameraShake = 1.5f;
-
-        public static bool TryFireFairyShell(Pawn boss, LocalTargetInfo target)
-        {
-            if (!IsBoundBoss(boss, out var comp)) { return false; }
-            if (!target.IsValid) { return false; }
-
-            var map = boss.Map;
-            var cell = target.Cell;
-            if (!cell.InBounds(map)) { return false; }
-
-            var shellDef = VVThingDefOf.VV_Projectile_FairyShell;
-            var projectile = (Projectile)GenSpawn.Spawn(shellDef, boss.Position, map);
-            projectile.Launch(boss, GetBossBodyPos(boss), target, target, ProjectileHitFlags.IntendedTarget);
-
-            PlayLaunchEffect(shellDef, boss);
-            comp.Notify_FairyShellFired();
-            return true;
-        }
-
-        // 보스는 TryLaunchSeedVolley만 사용한다. 아래 두 메서드는 자동 테스트가 리플렉션으로 호출하므로
-        // 이름이나 시그니처를 바꿀 때 테스트 스크립트도 함께 수정해야 한다.
-
-        public static bool TryLaunchDoomSeed(Pawn boss)
-        {
-            TryLaunchSeedVolley(boss, 1, false, out var doomLaunched, out _);
-            return doomLaunched > 0;
-        }
-
-        public static bool TryLaunchFairySeed(Pawn boss)
-        {
-            TryLaunchSeedVolley(boss, 0, true, out _, out var fairyLaunched);
-            return fairyLaunched > 0;
-        }
-
-        public static void TryLaunchSeedVolley(Pawn boss, int doomCount, bool withFairy, out int doomLaunched, out int fairyLaunched)
-        {
-            doomLaunched = 0;
-            fairyLaunched = 0;
-            if (!IsBoundBoss(boss, out var comp) || (doomCount <= 0 && !withFairy)) { return; }
-
-            var map = boss.Map;
-            var doomSeedDef = VVThingDefOf.VV_Projectile_DoomSeed;
-            var fairySeedDef = VVThingDefOf.VV_Projectile_FairySeed;
-            var doomRoom = comp.Props.maxDoomFlowers - CountFlowersAndSeeds(map, VVThingDefOf.VV_DoomFlower, doomSeedDef);
-            var fairyRoom = comp.Props.maxFairyFlowers - CountFlowersAndSeeds(map, VVThingDefOf.VV_FairyFlower, fairySeedDef);
-
-            var fairyCount = withFairy && fairyRoom > 0 ? 1 : 0;
-            doomCount = Mathf.Min(doomCount, doomRoom);
-
-            var targets = new List<IntVec3>();
-            if (fairyCount > 0 && TryLaunchSeedTo(boss, fairySeedDef, targets))
-            {
-                fairyLaunched = 1;
-            }
-
-            for (int i = 0; i < doomCount; i++)
-            {
-                if (!TryLaunchSeedTo(boss, doomSeedDef, targets)) { break; }
-                doomLaunched++;
-            }
-
-            if (fairyLaunched > 0)
-            {
-                PlayLaunchEffect(fairySeedDef, boss);
-            }
-
-            if (doomLaunched > 0)
-            {
-                PlayLaunchEffect(doomSeedDef, boss);
-            }
-        }
-
-        private static int CountFlowersAndSeeds(Map map, ThingDef flowerDef, ThingDef seedDef)
-        {
-            return map.listerThings.ThingsOfDef(flowerDef).Count + map.listerThings.ThingsOfDef(seedDef).Count;
-        }
-
-        private static bool TryLaunchSeedTo(Pawn boss, ThingDef seedDef, List<IntVec3> targets)
-        {
-            if (!TryFindSeedTargetCell(boss, targets, out var cell)) { return false; }
-
-            targets.Add(cell);
-            var projectile = (Projectile)GenSpawn.Spawn(seedDef, boss.Position, boss.Map);
-            projectile.Launch(boss, GetBossBodyPos(boss), cell, cell, ProjectileHitFlags.None);
-            return true;
-        }
+        private static readonly Vector3 QueenBodyOffset = new Vector3(0f, 0f, 1.5f);
+        private static readonly Vector3 AsphodelBodyOffset = new Vector3(0f, 0f, 0.28f);
 
         public static void DrawLinks(Pawn boss)
         {
@@ -120,26 +24,6 @@ namespace VVRace
 
             DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_DoomFlower));
             DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_FairyFlower));
-            DrawSeedLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_Projectile_DoomSeed));
-            DrawSeedLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_Projectile_FairySeed));
-
-            var pawns = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
-            for (int i = 0; i < pawns.Count; i++)
-            {
-                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyInterference);
-                if (hediff == null) { continue; }
-
-                var color = InterferenceLinkColor;
-                color.a *= Mathf.Clamp01(hediff.ageTicks / InterferenceLinkFadeInTicks);
-                PetalLinkRenderer.Draw(bossPos, pawns[i].DrawPos + PawnLinkOffset, InterferenceLinkWidth, color, pawns[i].thingIDNumber);
-            }
-        }
-
-        public static void Notify_BossPhaseChanged(Pawn boss, ApocryphaPhase phase)
-        {
-            if (phase == ApocryphaPhase.Bound) { return; }
-
-            CleanupAll(boss?.MapHeld);
         }
 
         public static void CleanupAll(Map map)
@@ -147,31 +31,19 @@ namespace VVRace
             if (map == null) { return; }
 
             ClearGimmickThings(map);
-            RemoveFairyInterference(map);
+            RemoveFairyAttunement(map);
             DoomBlightUtility.ClearDoomBlights(map);
         }
 
         #region 내부 공용
 
-        internal static bool IsBoundBoss(Pawn boss, out CompApocrypha comp)
-        {
-            comp = null;
-            if (boss == null || !boss.Spawned || boss.Dead) { return false; }
-
-            comp = boss.TryGetComp<CompApocrypha>();
-            return comp != null && comp.Phase == ApocryphaPhase.Bound;
-        }
-
-        internal static bool IsBoundBoss(Pawn boss)
-        {
-            return IsBoundBoss(boss, out _);
-        }
-
         internal static bool IsBossFightActive => ViviEndingQuest.Current?.Stage == ViviEndingStage.Boss;
 
-        internal static bool IsGimmickActive(Pawn boss)
+        internal static bool IsDoomGimmickActive(Pawn boss)
         {
-            return IsBossFightActive && IsBoundBoss(boss);
+            if (!IsBossFightActive || boss == null || !boss.Spawned || boss.Dead) { return false; }
+
+            return boss.TryGetComp<CompApocrypha>()?.Phase == ApocryphaPhase.Queen;
         }
 
         internal static Pawn FindBoss(Map map)
@@ -192,7 +64,7 @@ namespace VVRace
 
         internal static Vector3 GetBossBodyOffset(Pawn boss)
         {
-            return boss.ageTracker.CurLifeStageIndex == 0 ? BoundBodyOffset : UnboundBodyOffset;
+            return boss.ageTracker.CurLifeStageIndex == 0 ? QueenBodyOffset : AsphodelBodyOffset;
         }
 
         internal static Vector3 GetBossBodyPos(Pawn boss)
@@ -215,20 +87,6 @@ namespace VVRace
             {
                 effecter.Cleanup();
             }
-        }
-
-        internal static void PlayManaBackflow(Pawn vivi, Pawn boss)
-        {
-            var map = boss.Map;
-            var bossPos = GetBossBodyPos(boss);
-            PlayEffect(VVEffecterDefOf.VV_Effecter_ManaBackflow, boss.Position, map, EndingVfxUtility.OffsetFromCell(bossPos, boss.Position));
-
-            if (vivi != null && vivi.Spawned && vivi.Map == map && bossPos.ShouldSpawnMotesAt(map))
-            {
-                FleckMaker.ConnectingLine(vivi.DrawPos, bossPos, VVFleckDefOf.VV_Fleck_GimmickBackflowBeam, map, ManaBackflowBeamWidth);
-            }
-
-            ApocryphaUtility.ShakeCamera(map, ManaBackflowCameraShake);
         }
 
         internal static List<Thing> GetBlastIgnoredThings(Map map, Thing boss)
@@ -272,7 +130,40 @@ namespace VVRace
             return CellFinder.TryFindRandomCellNear(cell, map, BloomCellFallbackRadius, c => IsValidBloomCell(c, map, altarRect, colonyAnchor), out result);
         }
 
-        internal static Thing SpawnFlower(ThingDef flowerDef, IntVec3 cell, Map map, Pawn boss, int linkSeed = -1)
+        internal static bool TryGetEverflowerBudPos(Map map, out Vector3 pos)
+        {
+            var everflower = ViviEndingQuest.Current?.AnchorEverflower;
+            if (everflower == null || !everflower.Spawned || everflower.Map != map)
+            {
+                pos = Vector3.zero;
+                return false;
+            }
+
+            pos = EverflowerBudPos(everflower);
+            return true;
+        }
+
+        internal static Vector3 EverflowerBudPos(ArcanePlant_Everflower everflower)
+        {
+            return (everflower.DrawPos + (everflower.EverflowerComp?.RitualEffecterOffset ?? Vector3.zero)).Yto0();
+        }
+
+        internal static void ThrowFairyLight(Map map, Vector3 from, Vector3 to, float speed, float scale, Color color)
+        {
+            var travel = (to - from).Yto0();
+            var distance = travel.magnitude;
+            if (distance < 0.05f || !from.ShouldSpawnMotesAt(map)) { return; }
+
+            var def = VVFleckDefOf.VV_Fleck_ApocryphaFairyLight;
+            var data = FleckMaker.GetDataStatic(from, map, def, scale);
+            data.velocityAngle = travel.AngleFlat();
+            data.velocitySpeed = speed;
+            data.solidTimeOverride = Mathf.Max(0f, distance / speed - def.fadeInTime - def.fadeOutTime);
+            data.instanceColor = color;
+            map.flecks.CreateFleck(data);
+        }
+
+        internal static void SpawnFlower(Thing flower, IntVec3 cell, Map map, Pawn boss)
         {
             var plant = cell.GetPlant(map);
             if (plant != null && !plant.Destroyed)
@@ -280,43 +171,46 @@ namespace VVRace
                 plant.Destroy(DestroyMode.Vanish);
             }
 
-            var flower = ThingMaker.MakeThing(flowerDef);
-            if (flowerDef == VVThingDefOf.VV_DoomFlower)
+            if (flower.def == VVThingDefOf.VV_DoomFlower)
             {
                 flower.SetFaction(boss?.Faction ?? Faction.OfInsects);
             }
 
-            if (linkSeed >= 0 && flower is Building_ApocryphaFlower apocryphaFlower)
-            {
-                apocryphaFlower.InheritLink(linkSeed);
-            }
-
-            return GenSpawn.Spawn(flower, cell, map, WipeMode.Vanish);
+            GenSpawn.Spawn(flower, cell, map, WipeMode.Vanish);
         }
 
         #endregion
 
-        #region 씨앗 발사
+        #region 멸망꽃 위치
 
-        private static bool TryFindSeedTargetCell(Pawn boss, List<IntVec3> avoid, out IntVec3 result)
+        internal static List<IntVec3> FindBloomCells(Pawn boss, int count, FloatRange distance)
         {
+            var result = new List<IntVec3>();
+            if (count <= 0) { return result; }
+
             var map = boss.Map;
             var bossCell = boss.Position;
             var altar = Building_EverflowerAltar.FindOnMap(map);
             var altarRect = GetAltarRect(altar);
             var colonyAnchor = GetColonyAnchor(map, altar);
-            var minDistanceSquared = MinSeedDistanceFromBoss * MinSeedDistanceFromBoss;
+            var minDistanceSquared = distance.min * distance.min;
+            var maxDistanceSquared = distance.max * distance.max;
 
-            if (CellFinder.TryFindRandomCell(map, cell =>
-                cell.DistanceToSquared(bossCell) >= minDistanceSquared
-                && !IsNearAny(avoid, cell, MinVolleySeedSpacing)
-                && IsValidBloomCell(cell, map, altarRect, colonyAnchor), out result))
+            for (int i = 0; i < count; i++)
             {
-                return true;
+                if (!CellFinder.TryFindRandomCellNear(bossCell, map, Mathf.CeilToInt(distance.max), c =>
+                    c.DistanceToSquared(bossCell) >= minDistanceSquared
+                    && c.DistanceToSquared(bossCell) <= maxDistanceSquared
+                    && !IsNearAny(result, c, MinBloomSpacing)
+                    && IsValidBloomCell(c, map, altarRect, colonyAnchor), out var cell))
+                {
+                    break;
+                }
+
+                result.Add(cell);
             }
 
-            result = IntVec3.Invalid;
-            return false;
+            return result;
         }
 
         private static bool IsNearAny(List<IntVec3> cells, IntVec3 cell, float radius)
@@ -378,15 +272,6 @@ namespace VVRace
             return altar != null && altar.Spawned ? altar.OccupiedRect() : CellRect.Empty;
         }
 
-        private static void PlayLaunchEffect(ThingDef projectileDef, Pawn boss)
-        {
-            var effecterDef = projectileDef.GetModExtension<ApocryphaProjectileExtension>()?.launchEffecter;
-            if (effecterDef == null) { return; }
-
-            var offset = EndingVfxUtility.OffsetFromCell(GetBossBodyPos(boss), boss.Position);
-            PlayEffect(effecterDef, boss.Position, boss.Map, offset);
-        }
-
         #endregion
 
         #region 연결선
@@ -402,20 +287,7 @@ namespace VVRace
 
                 var color = extension.linkColor;
                 color.a *= flower.LinkAlpha;
-                PetalLinkRenderer.Draw(bossPos, flower.LinkAnchor, extension.linkWidth, color, flower.LinkSeed);
-            }
-        }
-
-        private static void DrawSeedLinks(Vector3 bossPos, List<Thing> seeds)
-        {
-            for (int i = 0; i < seeds.Count; i++)
-            {
-                if (!(seeds[i] is Projectile_ApocryphaSeed seed) || !seed.Spawned) { continue; }
-
-                var extension = seed.def.projectile.spawnsThingDef?.GetModExtension<ApocryphaFlowerExtension>();
-                if (extension == null) { continue; }
-
-                PetalLinkRenderer.Draw(bossPos, seed.ArcDrawPos, extension.linkWidth, extension.linkColor, seed.thingIDNumber);
+                PetalLinkRenderer.Draw(bossPos, flower.LinkAnchor, extension.linkWidth, color, flower.thingIDNumber);
             }
         }
 
@@ -425,9 +297,6 @@ namespace VVRace
 
         private static void ClearGimmickThings(Map map)
         {
-            EndingVfxUtility.DestroyAllOfDef(map, VVThingDefOf.VV_Projectile_DoomSeed);
-            EndingVfxUtility.DestroyAllOfDef(map, VVThingDefOf.VV_Projectile_FairySeed);
-
             WitherAll(map, VVThingDefOf.VV_FairyFlower);
             WitherAll(map, VVThingDefOf.VV_DoomFlower);
         }
@@ -448,12 +317,12 @@ namespace VVRace
             }
         }
 
-        private static void RemoveFairyInterference(Map map)
+        private static void RemoveFairyAttunement(Map map)
         {
             var pawns = new List<Pawn>(map.mapPawns.AllPawnsSpawned);
             for (int i = 0; i < pawns.Count; i++)
             {
-                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyInterference);
+                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyAttunement);
                 if (hediff != null)
                 {
                     pawns[i].health.RemoveHediff(hediff);

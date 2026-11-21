@@ -10,53 +10,22 @@ using Verse.Sound;
 
 namespace VVRace
 {
-    public class RuinGalleryBlastAim : IExposable
+    public class RuinGalleryBlastAim : FairyBlastAim
     {
-        public IntVec3 cell = IntVec3.Invalid;
-        public int detonateTick = -1;
         public bool isTargeted;
-
-        private Mote _targetMote;
-        private Effecter _effecter;
 
         public RuinGalleryBlastAim()
         {
         }
 
-        public RuinGalleryBlastAim(IntVec3 cell, int detonateTick, bool isTargeted = true)
+        public RuinGalleryBlastAim(IntVec3 cell, int detonateTick, bool isTargeted) : base(cell, detonateTick)
         {
-            this.cell = cell;
-            this.detonateTick = detonateTick;
             this.isTargeted = isTargeted;
         }
 
-        public void TickVisuals(Map map, int aimTicks)
+        public override void ExposeData()
         {
-            if (map == null || !cell.InBounds(map)) { return; }
-
-            var aimStartTick = Mathf.Min(detonateTick - aimTicks, Find.TickManager.TicksGame);
-            if (_targetMote == null || _targetMote.Destroyed)
-            {
-                _targetMote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), map, VVThingDefOf.VV_Mote_ApocryphaAimTarget, 1f, makeOffscreen: true);
-                _targetMote?.ForceSpawnTick(aimStartTick);
-            }
-
-            _targetMote?.Maintain();
-
-            var target = new TargetInfo(cell, map);
-            EndingVfxUtility.MaintainEffecter(ref _effecter, VVEffecterDefOf.VV_Effecter_ApocryphaAim, target, target);
-        }
-
-        public void CleanupVisuals()
-        {
-            EndingVfxUtility.CleanupEffecter(ref _effecter);
-            _targetMote = null;
-        }
-
-        public void ExposeData()
-        {
-            Scribe_Values.Look(ref cell, "cell", IntVec3.Invalid);
-            Scribe_Values.Look(ref detonateTick, "detonateTick", -1);
+            base.ExposeData();
             Scribe_Values.Look(ref isTargeted, "isTargeted", false);
         }
     }
@@ -109,9 +78,10 @@ namespace VVRace
         private const int MaxConcurrentCorridorSweeps = 2;
         private const int CorridorSweepPetalInterval = 4;
         private static readonly IntRange CorridorSweepIntervalTicks = new IntRange(100, 150);
-        public const int GalleryBlastAimTicks = 240;
         private const int MaxConcurrentGalleryBlasts = 12;
         private const float GalleryBlastMinSpacing = 2.8f;
+        private const float GalleryBlastRadius = 2.4f;
+        private const float GalleryBlastScreenShake = 0.6f;
         private const int GalleryTargetRescanTicks = 20;
         private const int RandomGalleryCellAttempts = 40;
         private static readonly IntRange GalleryBlastIntervalTicks = new IntRange(45, 80);
@@ -529,7 +499,6 @@ namespace VVRace
             var doomCell = RuinLayoutUtility.RuinDoomFlowerCell(_origin, _rotation);
             var returnAnchor = RuinLayoutUtility.RuinDoomReturnCell(_origin, _rotation);
 
-            // 잔향의 멸망꽃 파동 연출 (폭발 피해 없음)
             var pulsePos = doomCell.InBounds(map) ? doomCell.ToVector3Shifted() : trialRect.CenterVector3;
             if (pulsePos.ShouldSpawnMotesAt(map))
             {
@@ -546,10 +515,8 @@ namespace VVRace
             VVSoundDefOf.VV_FairyTeleport?.PlayOneShot(new TargetInfo(trialRect.CenterCell, map));
             ApocryphaUtility.ShakeCamera(map, 0.4f);
 
-            // 전체 정착민 대상 랜덤 멸망꽃 페널티 적용 (1일 지속)
             var blightDef = DoomBlightUtility.ApplyTimedDoomBlight(map, TrialBlightDurationTicks);
 
-            // 잘못된 칸을 밟은 대상만 멸망꽃 앞으로 강제 이동 (안전 경로 위 인원은 유지)
             ReturnPawnsToTrialStart(violators, trialRect, returnAnchor, skipSafePath: true);
 
             var blightLabel = blightDef != null ? blightDef.label : string.Empty;
@@ -812,7 +779,6 @@ namespace VVRace
                         progress: progress,
                         alpha: 1f,
                         bossInside: false,
-                        breach: false,
                         aimSecs: elapsed / 60f,
                         aimDuration: totalTicks / 60f,
                         seed: sweep.seed);
@@ -1094,8 +1060,7 @@ namespace VVRace
                 if (now < aim.detonateTick) { continue; }
 
                 _galleryAims.RemoveAt(i);
-                aim.CleanupVisuals();
-                DetonateGalleryBlast(aim.cell);
+                DetonateGalleryBlast(aim);
             }
 
             if (_galleryAims.Count < MaxConcurrentGalleryBlasts && now >= _nextGalleryBlastTick)
@@ -1118,7 +1083,7 @@ namespace VVRace
 
             for (int i = 0; i < _galleryAims.Count; i++)
             {
-                _galleryAims[i].TickVisuals(map, GalleryBlastAimTicks);
+                _galleryAims[i].TickVisuals(map);
             }
 
             var originTarget = new TargetInfo(_origin, map);
@@ -1141,14 +1106,13 @@ namespace VVRace
 
             int waveCount = Mathf.Min(GalleryBlastWaveCount.RandomInRange, slots);
             int spawned = 0;
-            int detonateTick = now + GalleryBlastAimTicks;
+            int detonateTick = now + FairyBlastAim.AimTicks;
 
             for (int i = 0; i < waveCount; i++)
             {
                 bool preferTargeted;
                 if (waveCount >= 2)
                 {
-                    // 매 웨이브마다 타겟팅 장판과 랜덤 장판이 자연스럽게 섞여 나오도록 보장한다.
                     preferTargeted = i == 0 || (i >= 2 && Rand.Chance(0.4f));
                 }
                 else
@@ -1219,7 +1183,6 @@ namespace VVRace
                 return false;
             }
 
-            // 아직 장판과 겹치지 않은 회랑 내 대상을 우선 조준한다.
             List<Pawn> uncovered = null;
             for (int i = 0; i < candidates.Count; i++)
             {
@@ -1237,7 +1200,6 @@ namespace VVRace
                 return true;
             }
 
-            // 모든 대상이 이미 장판 근처라면 대상 주변 4칸 이내의 빈 회랑 칸으로 퇴로를 압박한다.
             var picked = candidates.RandomElement();
             if (CellFinder.TryFindRandomCellNear(picked.Position, map, 4,
                 c => c.InBounds(map) && c.Standable(map)
@@ -1288,15 +1250,8 @@ namespace VVRace
             return false;
         }
 
-        private void DetonateGalleryBlast(IntVec3 cell)
+        private void DetonateGalleryBlast(RuinGalleryBlastAim aim)
         {
-            var shellDef = VVThingDefOf.VV_Projectile_FairyShell;
-            if (shellDef?.projectile == null || !cell.InBounds(map)) { return; }
-
-            var impactEffecter = shellDef.GetModExtension<ApocryphaProjectileExtension>()?.impactEffecter
-                ?? VVEffecterDefOf.VV_Effecter_FairyShellImpact;
-            ApocryphaGimmicks.PlayEffect(impactEffecter, cell, map);
-
             var ignored = new List<Thing>();
             ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinPuzzlePot));
             ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinPuzzleFairyFlower));
@@ -1304,17 +1259,7 @@ namespace VVRace
             ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_AncientSanctumLamp));
             ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinSpatialBarrier));
 
-            GenExplosion.DoExplosion(
-                cell,
-                map,
-                shellDef.projectile.explosionRadius,
-                shellDef.projectile.damageDef,
-                null,
-                shellDef.projectile.GetDamageAmount((Thing)null),
-                shellDef.projectile.GetArmorPenetration(),
-                projectile: shellDef,
-                ignoredThings: ignored,
-                screenShakeFactor: shellDef.projectile.screenShakeFactor);
+            aim.Detonate(map, GalleryBlastRadius, ignored, null, GalleryBlastScreenShake);
         }
 
         private void CancelGallerySecurityAims()
@@ -1435,14 +1380,12 @@ namespace VVRace
         {
             _resealStartTick = -1;
 
-            // 오디세이 중력선이 맵에 착륙해 있는 경우: 함선 손실을 막기 위해 거대 육각형만 완전 재봉인하고 내부 인원을 중력선 곁으로 밀어낸다.
             if (ModsConfig.OdysseyActive && GravshipUtility.PlayerHasGravEngine(map))
             {
                 ExpelInsideHexagonNearGravship();
                 return;
             }
 
-            // 운반 중인 폰·아이템이 소실되지 않도록 먼저 정리한다.
             var snapshot = map.mapPawns.AllPawnsSpawned.ToList();
             for (int i = 0; i < snapshot.Count; i++)
             {
@@ -1565,7 +1508,6 @@ namespace VVRace
                 ClearPuzzleTether(notify: false);
             }
 
-            // 봉인된 영역 안으로 도약/수송 포드/순간이동 등이 들어갔을 때 바깥으로 밀어낸다.
             if (now % 15 == 0 && _unsealedMask != 0b1111)
             {
                 var forecourtFallback = RuinLayoutUtility.ForecourtAnchorCell(_origin, _rotation).ClampInsideMap(map);
@@ -1618,7 +1560,6 @@ namespace VVRace
             if (_resealStartTick >= 0)
             {
                 var elapsed = Mathf.Max(0, now - _resealStartTick);
-                // 중앙 제단(Stage 4) -> 원형 회랑(Stage 3) -> 장대 복도(Stage 2) -> 거대 육각형 미로(Stage 1) 순으로 역방향 재봉인 파동
                 state.w = SmoothStep01(0f, 55f, elapsed);
                 state.z = SmoothStep01(35f, 95f, elapsed);
                 state.y = SmoothStep01(70f, 135f, elapsed);

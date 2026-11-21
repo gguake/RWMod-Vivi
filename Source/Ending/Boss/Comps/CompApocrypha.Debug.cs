@@ -6,36 +6,23 @@ namespace VVRace
 {
     public partial class CompApocrypha
     {
-        public void DebugReduceBond(float fractionOfInitial)
-        {
-            if (_phase != ApocryphaPhase.Bound) { return; }
-
-            var amount = (long)System.Math.Round(Props.initialBondCount * (double)fractionOfInitial);
-            _bondCount = System.Math.Max(0L, _bondCount - System.Math.Max(1L, amount));
-            if (_bondCount <= 0 && parent.Spawned)
-            {
-                StartTransformation();
-            }
-        }
-
         public void DebugForcePhase2()
         {
             if (!parent.Spawned) { return; }
 
-            if (_phase == ApocryphaPhase.Bound)
+            if (_phase == ApocryphaPhase.Queen)
             {
-                _bondCount = 0;
-                StartTransformation();
+                StartRebirth();
             }
-            else if (_phase == ApocryphaPhase.Transforming)
+            else if (_phase == ApocryphaPhase.Asphodel)
             {
-                _transformStartTick = GenTicks.TicksGame - Props.transformTicks;
+                StartDying();
             }
         }
 
         public void DebugDamageShield(float fractionOfMax)
         {
-            if (_phase != ApocryphaPhase.Bound || ShieldBroken) { return; }
+            if (_phase != ApocryphaPhase.Asphodel || ShieldBroken) { return; }
 
             _manaShield = Mathf.Max(0f, _manaShield - MaxManaShield * fractionOfMax);
             if (_manaShield <= 0f)
@@ -46,7 +33,7 @@ namespace VVRace
 
         public void DebugDamageVitality(float fractionOfMax)
         {
-            if (_phase != ApocryphaPhase.Unbound || _pendingDeath) { return; }
+            if (_phase != ApocryphaPhase.Queen || _pendingDeath) { return; }
 
             _vitality = Mathf.Max(0f, _vitality - MaxVitality * fractionOfMax);
             if (_vitality <= 0f)
@@ -64,21 +51,28 @@ namespace VVRace
 
             if (!DebugSettings.godMode) { yield break; }
 
-            yield return EndingVfxUtility.DevAction("DEV: Bond -25%", () => DebugReduceBond(0.25f));
             yield return EndingVfxUtility.DevAction("DEV: Force phase 2", DebugForcePhase2);
-            yield return EndingVfxUtility.DevAction("DEV: Vitality -25%", () => DebugDamageVitality(0.25f));
             yield return EndingVfxUtility.DevAction("DEV: Start channel", _channel.DebugStart);
             yield return EndingVfxUtility.DevAction("DEV: Finish channel", _channel.DebugFinish);
-            yield return EndingVfxUtility.DevAction("DEV: Stick a needle", _needleAttack.DebugStickNeedle);
-            yield return EndingVfxUtility.DevAction("DEV: Shell ready now", () => _shell.SetReadyTick(0));
-            yield return EndingVfxUtility.DevAction("DEV: Needle ready now", () => _needleAttack.SetReadyTick(0));
-            yield return EndingVfxUtility.DevAction("DEV: Mana shield -25%", () => DebugDamageShield(0.25f));
-            yield return EndingVfxUtility.DevAction("DEV: Doom seed now", () => _seeds.SetReadyTick(0));
-            yield return EndingVfxUtility.DevAction("DEV: Fairy seed now", () => ApocryphaGimmicks.TryLaunchFairySeed(Pawn));
-            yield return EndingVfxUtility.DevAction("DEV: Summon assault hornets", () => HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault));
-            yield return EndingVfxUtility.DevAction("DEV: Breath ready now", () => _breath.SetReadyTick(0));
             yield return EndingVfxUtility.DevAction("DEV: Approach altar now", DebugApproachAltarNow);
-            yield return EndingVfxUtility.DevAction("DEV: Summon escort hornets", () => HornetManifestation.SummonAround(Pawn, Props.volleyEscortCount, HornetSummonRole.Escort));
+            yield return EndingVfxUtility.DevAction("DEV: Summon escort hornets", () => HornetManifestation.SummonAround(Pawn, ScaledHornetCount(Props.escortSummonCount), HornetSummonRole.Escort));
+
+            if (_phase == ApocryphaPhase.Queen)
+            {
+                yield return EndingVfxUtility.DevAction("DEV: Vitality -25%", () => DebugDamageVitality(0.25f));
+                yield return EndingVfxUtility.DevAction("DEV: Stick a needle", _needleAttack.DebugStickNeedle);
+                yield return EndingVfxUtility.DevAction("DEV: Shake off needles now", _needleAttack.DebugShakeOffNow);
+                yield return EndingVfxUtility.DevAction("DEV: Doom wave now", () => _doomWave.SetReadyTick(0));
+                yield return EndingVfxUtility.DevAction("DEV: Breath ready now", () => _breath.SetReadyTick(0));
+                yield return EndingVfxUtility.DevAction("DEV: Recall escorts now", () => _escortSummon.StartCast(GenTicks.TicksGame));
+            }
+            else if (_phase == ApocryphaPhase.Asphodel)
+            {
+                yield return EndingVfxUtility.DevAction("DEV: Needle ready now", () => _needleAttack.SetReadyTick(0));
+                yield return EndingVfxUtility.DevAction("DEV: Fairy barrier -25%", () => DebugDamageShield(0.25f));
+                yield return EndingVfxUtility.DevAction("DEV: Restore barrier now", () => _shieldRestoreTick = GenTicks.TicksGame);
+                yield return EndingVfxUtility.DevAction("DEV: Fairy bond -10%", () => DrainBond(_bond.Max * 0.1f));
+            }
         }
 
         private void DebugApproachAltarNow()

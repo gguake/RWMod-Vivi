@@ -1,5 +1,5 @@
 ﻿using RimWorld;
-using System.Linq;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using Verse;
@@ -7,20 +7,19 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 세이브에 기록되는 전투 단계 값이므로 기존 값을 변경하면 안 된다.
     public enum ApocryphaPhase : byte
     {
-        Bound = 1,
-        Transforming = 2,
-        Unbound = 3,
+        Queen = 1,
+        Rebirth = 2,
+        Asphodel = 3,
         Dying = 4,
     }
 
-    // 동물의 CompTickInterval은 15틱 간격이므로 타이머는 매 틱 호출되는 CompTick에서 처리한다.
     public partial class CompApocrypha : ThingComp, IRoofCollapseAlert
     {
         private const int RoofCollapseEscapeRadius = 15;
         private const int StealTargetSkipCheckInterval = 250;
+        private const int SwarmCheckInterval = 120;
 
         private static readonly Color DamageTextColor = new Color(1f, 0.72f, 0.4f);
         private static readonly Color ShieldDamageTextColor = new Color(0.55f, 0.85f, 1f);
@@ -28,60 +27,56 @@ namespace VVRace
         private const int BlockedTextMoteInterval = 60;
         private const int DamageTextInterval = 30;
 
-        private ApocryphaPhase _phase = ApocryphaPhase.Bound;
+        private ApocryphaPhase _phase = ApocryphaPhase.Queen;
         private bool _initialized;
-        private long _bondCount;
         private float _vitality;
         private float _maxVitality;
         private float _threatScale = 1f;
         private float _threatPoints;
-        private int _transformStartTick = -1;
-        private bool _transformSwapped;
         private bool _pendingDeath;
         private int _nextApproachTick;
         private float _approachRadius = -1f;
-        private int _releaseCount;
         private int _nextMeleeTick;
         private float _manaShield;
         private bool _shieldBroken;
         private bool _pendingShieldBreak;
+        private int _shieldRestoreTick = -1;
+        private List<SkillDef> _fairyFlowerSkills = new List<SkillDef>();
 
         private int _nextStealTargetSkipCheckTick;
 
         private ApocryphaTargeting _targeting;
-        private ApocryphaShellAttack _shell;
         private ApocryphaNeedleAttack _needleAttack;
         private ApocryphaBreathAttack _breath;
         private ApocryphaChanneling _channel;
-        private ApocryphaSeedVolley _seeds;
+        private ApocryphaDoomWave _doomWave;
+        private ApocryphaEscortSummon _escortSummon;
+        private ApocryphaBlastBreach _blastBreach;
+        private ApocryphaFairyBond _bond;
+        private ApocryphaFairySwarm _swarm;
+        private ApocryphaAttunementLinks _attunement;
 
         private int _lastBlockedTextTick = -99999;
         private float _pendingDamageText;
         private int _lastDamageTextTick = -99999;
         private int _lastStunImmuneTextTick = -99999;
 
-        private Rot4? _deathRotation;
-        private IntVec3 _deathCell = IntVec3.Invalid;
-        private Vector3 _deathDrawOffset;
-
-        internal static void CaptureDeathState(Pawn pawn)
+        internal static bool TryInterceptKill(Pawn pawn)
         {
-            if (pawn == null || pawn.Dead) { return; }
-
             var comp = pawn.TryGetComp<CompApocrypha>();
-            if (comp == null) { return; }
+            if (comp == null || comp._phase == ApocryphaPhase.Dying) { return false; }
 
-            comp._deathRotation = pawn.Rotation;
-            if (pawn.Spawned)
+            if (comp._phase == ApocryphaPhase.Queen)
             {
-                comp._deathCell = pawn.Position;
-                comp._deathDrawOffset = EndingVfxUtility.OffsetFromCell(pawn.DrawPos, pawn.Position);
+                comp._vitality = 0f;
+                comp._pendingDeath = true;
             }
-            else
+            else if (comp._phase == ApocryphaPhase.Asphodel && pawn.Spawned)
             {
-                comp._deathCell = IntVec3.Invalid;
-                comp._deathDrawOffset = Vector3.zero;
+                comp.TryThrowStatusText(ref comp._lastBlockedTextTick, 1f, LocalizeString_Etc.VV_TextMote_DamageBlockedByFairy.Translate());
             }
+
+            return true;
         }
 
         public CompProperties_Apocrypha Props => (CompProperties_Apocrypha)props;
@@ -91,13 +86,19 @@ namespace VVRace
         public ApocryphaPhase Phase => _phase;
 
         public ApocryphaTargeting Targeting => _targeting;
-        public ApocryphaShellAttack Shell => _shell;
         public ApocryphaNeedleAttack NeedleAttack => _needleAttack;
         public ApocryphaBreathAttack Breath => _breath;
         public ApocryphaChanneling Channel => _channel;
+        public ApocryphaDoomWave DoomWave => _doomWave;
+        public ApocryphaEscortSummon EscortSummon => _escortSummon;
+        public ApocryphaBlastBreach BlastBreach => _blastBreach;
+        public ApocryphaFairyBond Bond => _bond;
+        public ApocryphaFairySwarm Swarm => _swarm;
+        public ApocryphaAttunementLinks Attunement => _attunement;
 
-        public long BondCount => _bondCount;
-        public long InitialBondCount => Props.initialBondCount;
+        public float BondFraction => _bond.Fraction;
+        public bool IsAsphodelActive => _phase == ApocryphaPhase.Asphodel && parent.Spawned;
+        public int ShieldRestoreTick => _shieldRestoreTick;
 
         public float ManaShield => _manaShield;
         public float MaxManaShield => Props.manaShieldMax * HitPointsDifficultyFactor;
@@ -107,16 +108,12 @@ namespace VVRace
 
         public int ArrivalHornetCount => ScaledHornetCount(Props.arrivalHornetCount);
 
-        public int InterferenceHornetCount(int releaseIndex)
-        {
-            return ScaledHornetCount(Props.interferenceHornetCount + Props.interferenceHornetGrowth * releaseIndex);
-        }
-
-        private int ScaledHornetCount(int baseCount)
+        public int ScaledHornetCount(int baseCount)
         {
             var factor = Props.hornetCountFactorByThreatPoints?.Evaluate(_threatPoints) ?? 1f;
             return Mathf.Max(1, Mathf.RoundToInt(baseCount * factor));
         }
+
         public bool ShieldBroken => _shieldBroken || _pendingShieldBreak;
 
         public float Vitality => _vitality;
@@ -126,7 +123,7 @@ namespace VVRace
         {
             get
             {
-                if (_phase != ApocryphaPhase.Unbound) { return 0f; }
+                if (_phase != ApocryphaPhase.Queen) { return 0f; }
 
                 var table = Props.damageFactorByStuckNeedles;
                 if (table.NullOrEmpty()) { return 1f; }
@@ -135,10 +132,7 @@ namespace VVRace
             }
         }
 
-        public bool IsActive => _phase == ApocryphaPhase.Bound || _phase == ApocryphaPhase.Unbound;
-
-        public float TransformAgeSecs => _transformStartTick < 0 ? 0f : Mathf.Max(0, GenTicks.TicksGame - _transformStartTick) / 60f;
-        public float TransformProgress => _transformStartTick < 0 ? 0f : Mathf.Clamp01((GenTicks.TicksGame - _transformStartTick) / (float)Mathf.Max(1, Props.transformTicks));
+        public bool IsActive => _phase == ApocryphaPhase.Queen || _phase == ApocryphaPhase.Asphodel;
 
         public bool IsQuestBossFight
         {
@@ -156,11 +150,15 @@ namespace VVRace
         public CompApocrypha()
         {
             _targeting = new ApocryphaTargeting(this);
-            _shell = new ApocryphaShellAttack(this);
             _needleAttack = new ApocryphaNeedleAttack(this);
             _breath = new ApocryphaBreathAttack(this);
             _channel = new ApocryphaChanneling(this);
-            _seeds = new ApocryphaSeedVolley(this);
+            _doomWave = new ApocryphaDoomWave(this);
+            _escortSummon = new ApocryphaEscortSummon(this);
+            _blastBreach = new ApocryphaBlastBreach(this);
+            _bond = new ApocryphaFairyBond(this);
+            _swarm = new ApocryphaFairySwarm(this);
+            _attunement = new ApocryphaAttunementLinks(this);
         }
 
         #region 초기화/저장
@@ -175,21 +173,6 @@ namespace VVRace
 
             SyncLifeStage();
             SyncPhaseHediffs();
-
-            if (_phase == ApocryphaPhase.Transforming)
-            {
-                PrepareMorph();
-            }
-        }
-
-        // 불러오기 중 스폰은 별도 스레드에서 실행되지만 ContentFinder의 텍스처 조회는 메인 스레드에서만 가능하다.
-        private void PrepareMorph()
-        {
-            LongEventHandler.ExecuteWhenFinished(() =>
-            {
-                ApocryphaMorphMaterials.EnsureInitialized(Props.transformTicks / 60f);
-                Pawn.Drawer?.renderer?.SetAllGraphicsDirty();
-            });
         }
 
         private void InitializeState()
@@ -197,33 +180,32 @@ namespace VVRace
             var now = GenTicks.TicksGame;
 
             _initialized = true;
-            _phase = ApocryphaPhase.Bound;
+            _phase = ApocryphaPhase.Queen;
             _threatScale = Find.Storyteller?.difficulty?.threatScale ?? 1f;
             _threatPoints = parent.MapHeld != null ? StorytellerUtility.DefaultThreatPointsNow(parent.MapHeld) : 0f;
-            _bondCount = Props.initialBondCount;
             _maxVitality = Props.maxVitality * HitPointsDifficultyFactor;
             _vitality = _maxVitality;
             _manaShield = MaxManaShield;
 
             _nextApproachTick = now + Props.approachIntervalTicks.RandomInRange;
 
-            _seeds.SetReadyTick(now + Props.firstDoomSeedDelayTicks);
-            _needleAttack.SetReadyTick(now + Props.needleFirstDelayTicks);
-            _shell.SetReadyTick(now + 600);
+            _doomWave.SetReadyTick(now + Props.firstDoomWaveDelayTicks);
+            _escortSummon.SetPeriodicTick(now + Props.escortSummonIntervalTicks.RandomInRange);
             _breath.SetReadyTick(now);
         }
 
         private void SyncLifeStage()
         {
-            var useBoundStage = _phase == ApocryphaPhase.Bound || (_phase == ApocryphaPhase.Transforming && !_transformSwapped);
+            if (_phase == ApocryphaPhase.Dying) { return; }
+
             var maxIndex = Pawn.RaceProps.lifeStageAges.Count - 1;
-            Pawn.ageTracker.LockCurrentLifeStageIndex(Mathf.Clamp(useBoundStage ? 0 : 1, 0, maxIndex));
+            Pawn.ageTracker.LockCurrentLifeStageIndex(Mathf.Clamp(_phase == ApocryphaPhase.Asphodel ? 1 : 0, 0, maxIndex));
         }
 
         private void SyncPhaseHediffs()
         {
             var def = VVHediffDefOf.VV_ApocryphaFairyBond;
-            var shouldHave = _phase == ApocryphaPhase.Bound;
+            var shouldHave = _phase == ApocryphaPhase.Asphodel;
             var hediff = Pawn.health.hediffSet.GetFirstHediffOfDef(def);
             if (shouldHave && hediff == null)
             {
@@ -241,15 +223,12 @@ namespace VVRace
         {
             base.PostExposeData();
 
-            Scribe_Values.Look(ref _phase, "phase", ApocryphaPhase.Bound);
+            Scribe_Values.Look(ref _phase, "phase", ApocryphaPhase.Queen);
             Scribe_Values.Look(ref _initialized, "initialized", false);
-            Scribe_Values.Look(ref _bondCount, "bondCount", 0L);
             Scribe_Values.Look(ref _vitality, "vitality", 0f);
             Scribe_Values.Look(ref _maxVitality, "maxVitality", 0f);
             Scribe_Values.Look(ref _threatScale, "threatScale", 1f);
             Scribe_Values.Look(ref _threatPoints, "threatPoints", 0f);
-            Scribe_Values.Look(ref _transformStartTick, "transformStartTick", -1);
-            Scribe_Values.Look(ref _transformSwapped, "transformSwapped", false);
             Scribe_Values.Look(ref _pendingDeath, "pendingDeath", false);
             Scribe_Values.Look(ref _nextApproachTick, "nextApproachTick", 0);
             Scribe_Values.Look(ref _approachRadius, "approachRadius", -1f);
@@ -257,20 +236,24 @@ namespace VVRace
             Scribe_Values.Look(ref _manaShield, "manaShield", 0f);
             Scribe_Values.Look(ref _shieldBroken, "shieldBroken", false);
             Scribe_Values.Look(ref _pendingShieldBreak, "pendingShieldBreak", false);
-            Scribe_Values.Look(ref _releaseCount, "releaseCount", 0);
+            Scribe_Values.Look(ref _shieldRestoreTick, "shieldRestoreTick", -1);
+            Scribe_Collections.Look(ref _fairyFlowerSkills, "fairyFlowerSkills", LookMode.Def);
 
             Scribe_Deep.Look(ref _targeting, "targeting", this);
-            Scribe_Deep.Look(ref _shell, "shell", this);
             Scribe_Deep.Look(ref _needleAttack, "needleAttack", this);
             Scribe_Deep.Look(ref _breath, "breath", this);
             Scribe_Deep.Look(ref _channel, "channel", this);
-            Scribe_Deep.Look(ref _seeds, "seeds", this);
-        }
+            Scribe_Deep.Look(ref _doomWave, "doomWave", this);
+            Scribe_Deep.Look(ref _escortSummon, "escortSummon", this);
+            Scribe_Deep.Look(ref _blastBreach, "blastBreach", this);
+            Scribe_Deep.Look(ref _bond, "bond", this);
+            Scribe_Deep.Look(ref _swarm, "swarm", this);
 
-        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
-        {
-            base.PostDeSpawn(map, mode);
-            _shell.CleanupVisuals();
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                _fairyFlowerSkills ??= new List<SkillDef>();
+                _fairyFlowerSkills.RemoveAll(v => v == null);
+            }
         }
         #endregion
 
@@ -283,7 +266,14 @@ namespace VVRace
             if (_pendingDeath)
             {
                 _pendingDeath = false;
-                StartDying();
+                if (_phase == ApocryphaPhase.Queen)
+                {
+                    StartRebirth();
+                }
+                else
+                {
+                    StartDying();
+                }
                 return;
             }
 
@@ -296,7 +286,7 @@ namespace VVRace
             if (_pendingShieldBreak)
             {
                 _pendingShieldBreak = false;
-                if (_phase == ApocryphaPhase.Bound)
+                if (_phase == ApocryphaPhase.Asphodel)
                 {
                     BreakShield();
                 }
@@ -307,16 +297,12 @@ namespace VVRace
 
             switch (_phase)
             {
-                case ApocryphaPhase.Bound:
-                    TickBound(now);
+                case ApocryphaPhase.Queen:
+                    TickQueen(now);
                     break;
 
-                case ApocryphaPhase.Transforming:
-                    TickTransforming(now);
-                    break;
-
-                case ApocryphaPhase.Unbound:
-                    TickUnbound(now);
+                case ApocryphaPhase.Asphodel:
+                    TickAsphodel(now);
                     break;
             }
 
@@ -333,23 +319,53 @@ namespace VVRace
             }
         }
 
-        private void TickBound(int now)
+        private void TickQueen(int now)
         {
             var stunned = Pawn.stances.stunner.Stunned;
 
-            if (_shieldBroken && !stunned)
+            _needleAttack.TickQueen(now, stunned);
+
+            if (IsQuestBossFight)
+            {
+                _doomWave.Tick(now, !stunned);
+                _escortSummon.Tick(now, stunned);
+
+                if (!stunned)
+                {
+                    _targeting.TickQueenEngagement();
+                    _targeting.TickEnemyDetection();
+                }
+            }
+
+            _breath.Tick(now, stunned);
+
+            if (!stunned && !_breath.IsBreathing && !_channel.IsChanneling && !_escortSummon.IsCasting && now >= _nextMeleeTick)
+            {
+                _nextMeleeTick = now + Props.meleeIntervalTicks;
+
+                var target = FindAdjacentEnemy();
+                if (target != null)
+                {
+                    Pawn.meleeVerbs.TryMeleeAttack(target);
+                }
+            }
+        }
+
+        private void TickAsphodel(int now)
+        {
+            var stunned = Pawn.stances.stunner.Stunned;
+
+            if (_shieldBroken && now >= _shieldRestoreTick)
             {
                 RestoreShield();
             }
 
             if (!IsQuestBossFight)
             {
-                if (_shell.IsAiming)
-                {
-                    _shell.Cancel();
-                }
-
                 _needleAttack.DestroyAll();
+                _blastBreach.Cancel();
+                _swarm.Disperse();
+                _attunement.Clear();
                 return;
             }
 
@@ -360,53 +376,17 @@ namespace VVRace
 
             if (!stunned)
             {
-                _seeds.Tick(now);
                 _targeting.TickEnemyDetection();
             }
 
-            _shell.Tick(now, stunned);
-            _needleAttack.TickBound(now, stunned);
-        }
+            _needleAttack.TickAsphodel(now, stunned);
+            _blastBreach.Tick(now, stunned);
+            _bond.Tick(now);
+            _attunement.Tick();
 
-        private void TickTransforming(int now)
-        {
-            var elapsed = now - _transformStartTick;
-
-            if (!_transformSwapped && elapsed >= Props.transformGraphicSwapTicks)
+            if (!ShieldBroken && Pawn.IsHashIntervalTick(SwarmCheckInterval))
             {
-                _transformSwapped = true;
-                SyncLifeStage();
-            }
-
-            var beatTicks = Mathf.RoundToInt(60f / ApocryphaMorphMaterials.BeatRate);
-            if (elapsed > 0 && elapsed < Props.transformTicks && elapsed % beatTicks == 0)
-            {
-                SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaMorphPulse, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
-                ApocryphaUtility.ShakeCamera(parent.Map, 0.25f + 0.5f * Mathf.Sin(Mathf.PI * TransformProgress));
-            }
-
-            if (elapsed >= Props.transformTicks)
-            {
-                BecomeUnbound();
-            }
-        }
-
-        private void TickUnbound(int now)
-        {
-            var stunned = Pawn.stances.stunner.Stunned;
-
-            _needleAttack.TickUnbound(stunned);
-            _breath.Tick(now, stunned);
-
-            if (!stunned && !_breath.IsBreathing && !_channel.IsChanneling && now >= _nextMeleeTick)
-            {
-                _nextMeleeTick = now + Props.meleeIntervalTicks;
-
-                var target = FindAdjacentEnemy();
-                if (target != null)
-                {
-                    Pawn.meleeVerbs.TryMeleeAttack(target);
-                }
+                _swarm.EnsureSummoned();
             }
         }
 
@@ -422,7 +402,7 @@ namespace VVRace
                 var things = cell.GetThingList(map);
                 for (int i = 0; i < things.Count; i++)
                 {
-                    if (things[i] is Pawn target && target != parent && !target.Dead && !target.Downed && Pawn.HostileTo(target))
+                    if (things[i] is Pawn target && _targeting.IsTargetPawn(target, 1.5f, origin))
                     {
                         return target;
                     }
@@ -452,9 +432,11 @@ namespace VVRace
 
             if (!damageDef.harmsHealth) { return; }
 
-            if (_phase == ApocryphaPhase.Bound)
+            _targeting.NoteAttacker(dinfo.Instigator);
+
+            if (_phase == ApocryphaPhase.Asphodel)
             {
-                ApplyBoundShieldDamage(dinfo);
+                ApplyShieldDamage(dinfo);
                 return;
             }
 
@@ -478,10 +460,8 @@ namespace VVRace
             }
         }
 
-        private void ApplyBoundShieldDamage(DamageInfo dinfo)
+        private void ApplyShieldDamage(DamageInfo dinfo)
         {
-            _targeting.NoteAttacker(dinfo.Instigator);
-
             if (ShieldBroken || _manaShield <= 0f)
             {
                 TryThrowStatusText(ref _lastBlockedTextTick, 1f, LocalizeString_Etc.VV_TextMote_DamageBlockedByFairy.Translate());
@@ -503,13 +483,13 @@ namespace VVRace
 
         private void BreakShield()
         {
-            var now = GenTicks.TicksGame;
-
             _manaShield = 0f;
             _shieldBroken = true;
+            _shieldRestoreTick = GenTicks.TicksGame + Props.shieldRestoreTicks;
 
-            CancelBoundAttacks();
+            _needleAttack.CancelAims();
             _channel.Interrupt();
+            _swarm.Disperse();
             GimmickStun(Props.shieldBreakStunTicks, null);
 
             SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaShieldBreak, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
@@ -517,7 +497,7 @@ namespace VVRace
 
             if (IsQuestBossFight)
             {
-                _seeds.Notify_ShieldBroken(now);
+                SpawnFairyFlowers();
             }
 
             Messages.Message(LocalizeString_Message.VV_Message_ApocryphaShieldBroken.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
@@ -526,19 +506,44 @@ namespace VVRace
         private void RestoreShield()
         {
             _shieldBroken = false;
+            _shieldRestoreTick = -1;
             _manaShield = MaxManaShield;
+            _swarm.EnsureSummoned();
 
             SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaShieldRestore, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             Messages.Message(LocalizeString_Message.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
         }
 
-        internal void GimmickStun(int ticks, Thing instigator, bool replaceExisting = false)
+        private void SpawnFairyFlowers()
         {
-            if (replaceExisting)
+            var map = parent.Map;
+            foreach (var cell in ApocryphaGimmicks.FindBloomCells(Pawn, Props.fairyFlowerCount, Props.fairyFlowerDistance))
             {
-                Pawn.stances.stunner.StopStun();
+                ApocryphaGimmicks.SpawnFlower(ThingMaker.MakeThing(VVThingDefOf.VV_FairyFlower), cell, map, Pawn);
+            }
+        }
+
+        public SkillDef NextFairyFlowerSkill()
+        {
+            if (_fairyFlowerSkills.Count == 0)
+            {
+                RefillFairyFlowerSkills();
             }
 
+            var skill = _fairyFlowerSkills[0];
+            _fairyFlowerSkills.RemoveAt(0);
+            return skill;
+        }
+
+        private void RefillFairyFlowerSkills()
+        {
+            _fairyFlowerSkills.Clear();
+            _fairyFlowerSkills.AddRange(FairySigil.SupportedSkills);
+            _fairyFlowerSkills.Shuffle();
+        }
+
+        internal void GimmickStun(int ticks, Thing instigator)
+        {
             Pawn.stances.stunner.StunFor(ticks, instigator, addBattleLog: false);
         }
 
@@ -571,49 +576,14 @@ namespace VVRace
                 new Vector3(drawPos.x + 1.2f, drawPos.y, drawPos.z + 0.8f),
                 parent.Map,
                 "-" + amount.ToString(amount < 10f ? "0.#" : "0"),
-                _phase == ApocryphaPhase.Bound ? ShieldDamageTextColor : DamageTextColor);
+                _phase == ApocryphaPhase.Asphodel ? ShieldDamageTextColor : DamageTextColor);
         }
         #endregion
 
         #region 계약 API
-        public void ReleaseBond(Pawn releaser)
-        {
-            if (!parent.Spawned || _phase != ApocryphaPhase.Bound) { return; }
-
-            _bondCount = System.Math.Max(0L, _bondCount - Props.bondReleaseAmount);
-
-            GimmickStun(Props.releaseStunTicks, releaser, replaceExisting: true);
-            _channel.Interrupt();
-            CancelBoundAttacks();
-
-            var curJob = Pawn.CurJob;
-            if (curJob != null && curJob.def == VVJobDefOf.VV_ApocryphaWait && curJob.expiryInterval > Props.releaseStunTicks + 1)
-            {
-                InterruptCurrentJob();
-            }
-
-            if (IsQuestBossFight)
-            {
-                HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault);
-            }
-            _releaseCount++;
-
-            if (_bondCount <= 0)
-            {
-                StartTransformation();
-            }
-            else
-            {
-                Messages.Message(
-                    LocalizeString_Message.VV_Message_ApocryphaBondReleased.Translate(_bondCount.ToString("N0").Named("COUNT")),
-                    Pawn,
-                    MessageTypeDefOf.PositiveEvent);
-            }
-        }
-
         internal void TakeVitalityDamage(float amount)
         {
-            if (_phase != ApocryphaPhase.Unbound || _pendingDeath || amount <= 0f) { return; }
+            if (_phase != ApocryphaPhase.Queen || _pendingDeath || amount <= 0f) { return; }
 
             _vitality = Mathf.Max(0f, _vitality - amount);
             _pendingDamageText += amount;
@@ -623,14 +593,25 @@ namespace VVRace
             }
         }
 
-        public void Notify_FairyShellFired()
+        public void DrainBond(float amount)
         {
-            if (_phase != ApocryphaPhase.Bound || _bondCount <= 0) { return; }
+            if (!IsAsphodelActive || _pendingDeath) { return; }
 
-            _bondCount--;
-            if (_bondCount <= 0 && parent.Spawned)
+            _bond.Drain(amount);
+        }
+
+        public void RecoverBond(float fraction)
+        {
+            if (!IsAsphodelActive || _pendingDeath) { return; }
+
+            _bond.Recover(fraction);
+        }
+
+        internal void Notify_BondExhausted()
+        {
+            if (_phase == ApocryphaPhase.Asphodel)
             {
-                StartTransformation();
+                _pendingDeath = true;
             }
         }
 
@@ -707,7 +688,7 @@ namespace VVRace
             }
 
             _phase = ApocryphaPhase.Dying;
-            ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Dying);
+            ApocryphaGimmicks.CleanupAll(map);
 
             ApocryphaUtility.ReleaseEscorts(Pawn);
             ViviEndingUtility.VanishAllTitanicHornets(map);
@@ -716,37 +697,37 @@ namespace VVRace
             Pawn.Destroy(DestroyMode.Vanish);
         }
 
-        private void StartTransformation()
+        private void StartRebirth()
         {
-            if (_phase != ApocryphaPhase.Bound || !parent.Spawned) { return; }
+            if (_phase != ApocryphaPhase.Queen || !parent.Spawned) { return; }
 
             var map = parent.Map;
+            var cell = parent.Position;
 
-            _phase = ApocryphaPhase.Transforming;
-            _bondCount = 0;
-            _transformStartTick = GenTicks.TicksGame;
-            _transformSwapped = false;
-            _channel.Reset();
+            _phase = ApocryphaPhase.Rebirth;
             _pendingShieldBreak = false;
-            _shieldBroken = false;
-            _shell.Cancel();
+            _blastBreach.Cancel();
+            _channel.Reset();
+            _breath.Cancel();
+            _escortSummon.Cancel();
+            _doomWave.Clear();
+            _targeting.ClearEngageTarget();
+            _needleAttack.DropAll();
             ApocryphaUtility.ClearEscortFocus(Pawn);
 
-            _needleAttack.ScatterAll();
+            SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaQueenDeath, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
+            var center = BodyCenter;
+            EndingVfxUtility.SpawnShockWave(map, center, VVFleckDefOf.VV_Fleck_ApocryphaShockWave, EndingVfxUtility.ShockWaveHalfSize(EndingVfxUtility.MaxDistanceToMapCorner(map, center)));
+            ApocryphaUtility.ShakeCamera(map, 2.5f);
 
-            SyncPhaseHediffs();
+            HornetManifestation.CancelAll(map);
+            ApocryphaUtility.DissolvePhantasms(map);
+            ApocryphaGimmicks.CleanupAll(map);
 
-            foreach (var pawn in map.mapPawns.AllPawnsSpawned.ToList())
-            {
-                if (pawn == parent || pawn.Dead || pawn.Downed) { continue; }
-
-                pawn.stances?.stunner?.StunFor(Props.transformStunTicks, Pawn, addBattleLog: false);
-            }
-
-            SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaShockwave);
-            ApocryphaUtility.ShakeCamera(map, 2f);
-            InterruptCurrentJob();
-            PrepareMorph();
+            var rebirth = (ApocryphaRebirth)ThingMaker.MakeThing(VVThingDefOf.VV_ApocryphaRebirth);
+            rebirth.Init(Pawn);
+            GenSpawn.Spawn(rebirth, cell, map, WipeMode.Vanish);
+            rebirth.Hold(Pawn);
 
             var music = Find.MusicManagerPlay;
             if (music != null && !music.disabled)
@@ -755,37 +736,46 @@ namespace VVRace
             }
 
             Find.TickManager.slower.SignalForceNormalSpeedShort();
-
-            ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Transforming);
         }
 
-        private void BecomeUnbound()
+        internal void Notify_Reborn()
         {
+            if (_phase != ApocryphaPhase.Rebirth || !parent.Spawned) { return; }
+
             var now = GenTicks.TicksGame;
 
-            _phase = ApocryphaPhase.Unbound;
-            _transformSwapped = true;
-            _maxVitality = Props.maxVitality * HitPointsDifficultyFactor;
-            _vitality = _maxVitality;
-            _needleAttack.ClearStun();
-            _breath.SetReadyTick(now + 600);
-            _nextMeleeTick = now;
+            _phase = ApocryphaPhase.Asphodel;
+            _manaShield = MaxManaShield;
+            _shieldBroken = false;
+            _pendingShieldBreak = false;
+            _shieldRestoreTick = -1;
+            _approachRadius = -1f;
+            _nextApproachTick = now + Props.approachIntervalTicks.RandomInRange;
+            _needleAttack.SetReadyTick(now + Props.needleFirstDelayTicks);
+            _bond.Reset();
+            RefillFairyFlowerSkills();
+            if (_channel.TryGetStealTarget(out var stealTarget, out _, out _))
+            {
+                EnsureApproachRadius(stealTarget);
+            }
 
+            Pawn.stances.stunner.StopStun();
             SyncLifeStage();
             SyncPhaseHediffs();
             InterruptCurrentJob();
-
             Pawn.Drawer?.renderer?.SetAllGraphicsDirty();
-            SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaTransform);
+
+            _needleAttack.RecallAll();
+            _swarm.EnsureSummoned();
+
+            SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaTransform, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             ApocryphaUtility.ShakeCamera(parent.Map, 1.5f);
 
             Find.LetterStack.ReceiveLetter(
-                LocalizeString_Letter.VV_Letter_ApocryphaUnboundLabel.Translate(),
-                LocalizeString_Letter.VV_Letter_ApocryphaUnbound.Translate(),
+                LocalizeString_Letter.VV_Letter_ApocryphaRebirthLabel.Translate(),
+                LocalizeString_Letter.VV_Letter_ApocryphaRebirth.Translate(),
                 LetterDefOf.ThreatBig,
                 new LookTargets(Pawn));
-
-            ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Unbound);
         }
 
         private void StartDying()
@@ -793,55 +783,20 @@ namespace VVRace
             if (_phase == ApocryphaPhase.Dying || !parent.Spawned) { return; }
 
             var map = parent.Map;
-            BeginDissolve(map, parent.Position);
-
-            Find.TickManager.slower.SignalForceNormalSpeedShort();
-            Pawn.Destroy(DestroyMode.Vanish);
-        }
-
-        private void BeginDissolve(Map map, IntVec3 cell)
-        {
-            var rotationOverride = _deathRotation;
-            var drawOffsetOverride = _deathCell.IsValid && _deathCell == cell ? (Vector3?)_deathDrawOffset : null;
-            _deathRotation = null;
-            _deathCell = IntVec3.Invalid;
-            _deathDrawOffset = Vector3.zero;
-
-            DyingApocrypha dying = null;
-            if (map != null && cell.InBounds(map))
-            {
-                dying = (DyingApocrypha)ThingMaker.MakeThing(VVThingDefOf.VV_DyingApocrypha);
-                dying.InitFrom(Pawn, rotationOverride, drawOffsetOverride);
-            }
+            var dying = (DyingApocrypha)ThingMaker.MakeThing(VVThingDefOf.VV_DyingApocrypha);
+            dying.InitFrom(Pawn);
 
             _phase = ApocryphaPhase.Dying;
             CancelAllAttacks();
-
-            if (dying != null)
-            {
-                GenSpawn.Spawn(dying, cell, map);
-            }
+            GenSpawn.Spawn(dying, parent.Position, map);
 
             ApocryphaUtility.ReleaseEscorts(Pawn);
             ViviEndingUtility.VanishAllTitanicHornets(map);
             HornetManifestation.CancelAll(map);
+            ApocryphaGimmicks.CleanupAll(map);
 
-            if (parent.Spawned)
-            {
-                ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Dying);
-            }
-            else if (map != null)
-            {
-                ApocryphaGimmicks.CleanupAll(map);
-            }
-        }
-
-        public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
-        {
-            base.Notify_Killed(prevMap, dinfo);
-            if (_phase == ApocryphaPhase.Dying) { return; }
-
-            BeginDissolve(prevMap, parent.Position);
+            Find.TickManager.slower.SignalForceNormalSpeedShort();
+            Pawn.Destroy(DestroyMode.Vanish);
         }
 
         public RoofCollapseResponse Notify_OnBeforeRoofCollapse()
@@ -901,39 +856,14 @@ namespace VVRace
             if (ApocryphaUtility.CanBreachReach(map, from, target)) { return false; }
             if (!ApocryphaUtility.TryFindSkipCell(map, target, from, stealRange, out var cell)) { return false; }
 
-            CancelBoundAttacks();
-            _needleAttack.EndBreach();
+            _needleAttack.CancelAims();
+            _blastBreach.Cancel();
             TeleportTo(cell, endCurrentJob: false);
             return true;
         }
         #endregion
 
         #region 그리기/UI
-        // 병렬 렌더 서브워커에서도 조회하므로 저장 필드·def·현재 틱만 읽는다.
-        public float CurrentVisualDrawSize
-        {
-            get
-            {
-                var stages = Pawn.kindDef?.lifeStages;
-                if (stages.NullOrEmpty()) { return 1f; }
-
-                var boundSize = stages[0].bodyGraphicData?.drawSize.x ?? 1f;
-                var unboundSize = stages[stages.Count - 1].bodyGraphicData?.drawSize.x ?? boundSize;
-                switch (_phase)
-                {
-                    case ApocryphaPhase.Bound:
-                        return boundSize;
-
-                    case ApocryphaPhase.Transforming:
-                        return Mathf.Lerp(boundSize, unboundSize, TransformProgress);
-
-                    default:
-                        return unboundSize;
-                }
-            }
-        }
-
-        // Pawn.DrawAt이 매 프레임 호출한다. 병렬 실행되는 렌더 서브워커에서는 그리지 않는다.
         public override void PostDraw()
         {
             base.PostDraw();
@@ -941,12 +871,12 @@ namespace VVRace
 
             ApocryphaGimmicks.DrawLinks(Pawn);
 
-            if (_phase == ApocryphaPhase.Bound)
+            if (_phase == ApocryphaPhase.Asphodel)
             {
                 ApocryphaShroudGlow.Draw(Pawn);
+                _attunement.Draw();
             }
 
-            _shell.Draw();
             _channel.Draw();
         }
 
@@ -955,13 +885,12 @@ namespace VVRace
             var sb = new StringBuilder();
             sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaPhase.Translate(PhaseLabel(_phase)));
 
-            if (_phase == ApocryphaPhase.Bound)
+            if (_phase == ApocryphaPhase.Asphodel)
             {
-                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaBond.Translate(_bondCount.ToString("N0")));
                 if (ShieldBroken)
                 {
                     sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaShieldBroken.Translate(
-                        Pawn.stances.stunner.StunTicksLeft.ToStringTicksToPeriod()));
+                        Mathf.Max(0, _shieldRestoreTick - GenTicks.TicksGame).ToStringTicksToPeriod()));
                 }
                 else
                 {
@@ -969,8 +898,10 @@ namespace VVRace
                         Mathf.CeilToInt(ManaShield).ToString("N0"),
                         Mathf.CeilToInt(MaxManaShield).ToString("N0")));
                 }
+
+                sb.AppendInNewLine(BondLabel);
             }
-            else if (_phase == ApocryphaPhase.Unbound)
+            else if (_phase == ApocryphaPhase.Queen)
             {
                 sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaVitality.Translate(
                     Mathf.CeilToInt(_vitality).ToString("N0"),
@@ -987,38 +918,40 @@ namespace VVRace
             return sb.ToString();
         }
 
+        public string BondLabel => LocalizeString_Inspector.VV_Inspector_ApocryphaFairyBond.Translate(
+            Mathf.CeilToInt(_bond.Value).ToString("N0"),
+            Mathf.CeilToInt(_bond.Max).ToString("N0"),
+            _bond.Fraction.ToStringPercent());
+
         public static string PhaseLabel(ApocryphaPhase phase)
         {
             switch (phase)
             {
-                case ApocryphaPhase.Transforming:
-                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Transforming.Translate();
+                case ApocryphaPhase.Rebirth:
+                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Rebirth.Translate();
 
-                case ApocryphaPhase.Unbound:
-                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Unbound.Translate();
+                case ApocryphaPhase.Asphodel:
+                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Asphodel.Translate();
 
                 case ApocryphaPhase.Dying:
                     return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Dying.Translate();
 
                 default:
-                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Bound.Translate();
+                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Queen.Translate();
             }
         }
         #endregion
 
         #region 내부 도우미
-        private void CancelBoundAttacks()
-        {
-            _shell.Cancel();
-            _needleAttack.CancelAims();
-        }
-
         private void CancelAllAttacks()
         {
             _channel.Reset();
-            _shell.Cancel();
             _breath.Cancel();
+            _escortSummon.Cancel();
+            _doomWave.Clear();
             _needleAttack.DestroyAll();
+            _blastBreach.Cancel();
+            _swarm.Disperse();
         }
 
         internal void InterruptCurrentJob()

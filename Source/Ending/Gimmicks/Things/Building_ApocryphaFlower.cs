@@ -13,22 +13,13 @@ namespace VVRace
 
         private int _spawnTick = -1;
 
-        private int _inheritedLinkSeed = -1;
-
         [Unsaved]
         private ApocryphaFlowerExtension _extension;
         public ApocryphaFlowerExtension Extension => _extension ?? (_extension = def.GetModExtension<ApocryphaFlowerExtension>());
 
         public Vector3 LinkAnchor => DrawPos + (Extension?.linkOffset ?? Vector3.zero);
 
-        public int LinkSeed => _inheritedLinkSeed >= 0 ? _inheritedLinkSeed : thingIDNumber;
-
-        public float LinkAlpha => _spawnTick < 0 || _inheritedLinkSeed >= 0 ? 1f : Mathf.Clamp01((Find.TickManager.TicksGame - _spawnTick) / LinkFadeInTicks);
-
-        public void InheritLink(int linkSeed)
-        {
-            _inheritedLinkSeed = linkSeed;
-        }
+        public virtual float LinkAlpha => _spawnTick < 0 ? 1f : Mathf.Clamp01((Find.TickManager.TicksGame - _spawnTick) / LinkFadeInTicks);
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -89,7 +80,6 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Values.Look(ref _spawnTick, "spawnTick", -1);
-            Scribe_Values.Look(ref _inheritedLinkSeed, "inheritedLinkSeed", -1);
         }
     }
 }

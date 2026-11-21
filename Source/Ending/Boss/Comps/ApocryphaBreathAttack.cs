@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -18,11 +19,14 @@ namespace VVRace
         private int _readyTick;
         private IntVec3 _cell = IntVec3.Invalid;
         private int _endTick = -1;
+        private bool _rot;
+        private bool _lastRot = true;
 
         private Pawn Pawn => _comp.Pawn;
         private CompProperties_Apocrypha Props => _comp.Props;
 
         public bool IsBreathing => _endTick >= 0;
+        public bool IsRotBreath => _rot;
         public IntVec3 BreathCell => _cell;
 
         public ApocryphaBreathAttack(CompApocrypha comp)
@@ -35,6 +39,8 @@ namespace VVRace
             Scribe_Values.Look(ref _readyTick, "readyTick", 0);
             Scribe_Values.Look(ref _cell, "cell", IntVec3.Invalid);
             Scribe_Values.Look(ref _endTick, "endTick", -1);
+            Scribe_Values.Look(ref _rot, "rot", false);
+            Scribe_Values.Look(ref _lastRot, "lastRot", true);
         }
 
         public void SetReadyTick(int tick)
@@ -61,16 +67,31 @@ namespace VVRace
                 return;
             }
 
-            if (stunned || now < _readyTick || _comp.Channel.IsChanneling || _comp.Channel.PendingSteal) { return; }
+            if (stunned || now < _readyTick || _comp.Channel.IsChanneling || _comp.Channel.PendingSteal || _comp.EscortSummon.IsCasting) { return; }
             if (!Pawn.IsHashIntervalTick(TargetScanInterval)) { return; }
 
-            if (TryFindTarget(out var cell))
+            var target = FindTarget();
+            if (target != null)
             {
-                _cell = cell;
+                _rot = !_lastRot;
+                if (HasBreathEffect(target, _rot) && !HasBreathEffect(target, !_rot))
+                {
+                    _rot = !_rot;
+                }
+
+                _cell = target.Position;
                 _endTick = now + Props.breathWarmupTicks;
-                Pawn.rotationTracker.FaceCell(cell);
+                Pawn.rotationTracker.FaceCell(_cell);
                 _comp.InterruptCurrentJob();
             }
+        }
+
+        private static bool HasBreathEffect(Pawn pawn, bool rot)
+        {
+            var hediffs = pawn.health.hediffSet;
+            return rot
+                ? hediffs.HasHediff(HediffDefOf.LungRotExposure) || hediffs.HasHediff(HediffDefOf.LungRot)
+                : hediffs.HasHediff(HediffDefOf.ToxicBuildup);
         }
 
         public void Cancel()
@@ -81,7 +102,7 @@ namespace VVRace
 
         public Vector3 MouthOffset()
         {
-            var size = _comp.CurrentVisualDrawSize;
+            var size = Pawn.ageTracker.CurKindLifeStage?.bodyGraphicData?.drawSize.x ?? 1f;
             var rot = Pawn.Rotation;
             if (rot == Rot4.North) { return new Vector3(0f, 0f, 0.28f * size); }
             if (rot == Rot4.East) { return new Vector3(0.36f * size, 0f, 0.05f * size); }
@@ -89,35 +110,30 @@ namespace VVRace
             return new Vector3(0f, 0f, 0.1f * size);
         }
 
-        private bool TryFindTarget(out IntVec3 cell)
+        private Pawn FindTarget()
         {
-            cell = IntVec3.Invalid;
+            Pawn best = null;
 
-            var map = Pawn.Map;
             var origin = Pawn.Position;
             var facing = Pawn.Rotation.AsAngle;
-            var rangeSquared = Props.breathRange * Props.breathRange;
             var bestDistance = float.MaxValue;
 
-            var pawns = map.mapPawns.AllPawnsSpawned;
+            var pawns = Pawn.Map.mapPawns.AllPawnsSpawned;
             for (int i = 0; i < pawns.Count; i++)
             {
                 var target = pawns[i];
-                if (target == Pawn || target.Dead || target.Downed) { continue; }
-
                 var distance = (target.Position - origin).LengthHorizontalSquared;
-                if (distance > rangeSquared || distance >= bestDistance || distance == 0) { continue; }
+                if (distance >= bestDistance || distance == 0) { continue; }
 
                 var angle = (target.Position - origin).ToVector3().AngleFlat();
                 if (Mathf.Abs(Mathf.DeltaAngle(facing, angle)) > FrontSearchAngle) { continue; }
-                if (!Pawn.HostileTo(target)) { continue; }
-                if (!GenSight.LineOfSight(origin, target.Position, map, skipFirstCell: true)) { continue; }
+                if (!_comp.Targeting.IsTargetPawn(target, Props.breathRange, origin)) { continue; }
 
                 bestDistance = distance;
-                cell = target.Position;
+                best = target;
             }
 
-            return cell.IsValid;
+            return best;
         }
 
         private void Release(int now)
@@ -127,6 +143,7 @@ namespace VVRace
             var target = _cell;
 
             Cancel();
+            _lastRot = _rot;
             _readyTick = now + Props.breathCooldownTicks;
             if (!target.IsValid || target == origin) { return; }
 
@@ -148,28 +165,67 @@ namespace VVRace
                     if (victim.def == hornetDef) { continue; }
                     if (victim.Faction != null && victim.Faction == Pawn.Faction) { continue; }
 
-                    var toxic = Props.breathToxicSeverity * Mathf.Max(0f, 1f - victim.GetStatValue(StatDefOf.ToxicResistance));
-                    if (toxic > 0f)
+                    if (_rot)
                     {
-                        HealthUtility.AdjustSeverity(victim, HediffDefOf.ToxicBuildup, toxic);
+                        ApplyRot(victim);
                     }
-
-                    if (Props.breathAcidBurnDamage > 0f && !victim.Dead && DamageDefOf.AcidBurn != null)
+                    else
                     {
-                        victim.TakeDamage(new DamageInfo(DamageDefOf.AcidBurn, Props.breathAcidBurnDamage, 0f, baseAngle, Pawn));
+                        ApplyToxic(victim, baseAngle);
                     }
                 }
             }
             _tmpCellThings.Clear();
 
-            if (ModsConfig.BiotechActive && Props.breathGasRadius > 0f)
+            if (Props.breathGasRadius > 0f)
             {
-                GasUtility.AddGas(target, map, GasType.ToxGas, Props.breathGasRadius);
+                if (_rot)
+                {
+                    GasUtility.AddGas(target, map, GasType.RotStink, Props.breathGasRadius);
+                }
+                else if (ModsConfig.BiotechActive)
+                {
+                    GasUtility.AddGas(target, map, GasType.ToxGas, Props.breathGasRadius);
+                }
             }
 
             ThrowFlecks(baseAngle, halfAngle);
             _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaBreath, MouthOffset());
             ApocryphaUtility.ShakeCamera(map, 0.6f);
+        }
+
+        private void ApplyToxic(Pawn victim, float angle)
+        {
+            var toxic = Props.breathToxicSeverity * Mathf.Max(0f, 1f - victim.GetStatValue(StatDefOf.ToxicResistance));
+            if (toxic > 0f)
+            {
+                HealthUtility.AdjustSeverity(victim, HediffDefOf.ToxicBuildup, toxic);
+            }
+
+            if (Props.breathAcidBurnDamage > 0f && !victim.Dead)
+            {
+                victim.TakeDamage(new DamageInfo(DamageDefOf.AcidBurn, Props.breathAcidBurnDamage, 0f, angle, Pawn));
+            }
+        }
+
+        private static void ApplyRot(Pawn victim)
+        {
+            var race = victim.RaceProps;
+            if (!race.Animal && !race.Humanlike) { return; }
+            if (race.isImmuneToInfections || victim.health.hediffSet.HasHediff(HediffDefOf.LungRotExposure)) { return; }
+            if (!GasUtility.GetLungRotAffectedBodyParts(victim).Any()) { return; }
+
+            victim.health.AddHediff(HediffDefOf.LungRotExposure);
+        }
+
+        public FleckDef GasFleck(bool accent)
+        {
+            if (_rot)
+            {
+                return accent ? VVFleckDefOf.VV_Fleck_ApocryphaRotGasBile : VVFleckDefOf.VV_Fleck_ApocryphaRotGas;
+            }
+
+            return accent ? VVFleckDefOf.VV_Fleck_ApocryphaToxicGasViolet : VVFleckDefOf.VV_Fleck_ApocryphaToxicGas;
         }
 
         private void ThrowFlecks(float baseAngle, float halfAngle)
@@ -180,7 +236,7 @@ namespace VVRace
 
             for (int i = 0; i < 42; i++)
             {
-                var fleckDef = Rand.Chance(0.3f) ? VVFleckDefOf.VV_Fleck_ApocryphaToxicGasViolet : VVFleckDefOf.VV_Fleck_ApocryphaToxicGas;
+                var fleckDef = GasFleck(Rand.Chance(0.3f));
                 var data = FleckMaker.GetDataStatic(mouth + Gen.RandomHorizontalVector(0.3f), map, fleckDef, Rand.Range(1.1f, 2.1f));
                 data.velocityAngle = baseAngle + Rand.Range(-halfAngle, halfAngle);
                 data.velocitySpeed = Rand.Range(2.5f, 6.5f);

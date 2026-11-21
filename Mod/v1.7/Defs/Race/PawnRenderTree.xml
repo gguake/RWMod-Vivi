@@ -359,9 +359,6 @@
           <nodeClass>PawnRenderNode_AnimalPart_Body</nodeClass>
           <workerClass>PawnRenderNodeWorker_AnimalBody</workerClass>
           <useRottenColor>true</useRottenColor>
-          <subworkerClasses>
-            <li>VVRace.PawnRenderSubWorker_ApocryphaGrow</li>
-          </subworkerClasses>
           <children>
             <li>
               <debugLabel>Wounds</debugLabel>

@@ -136,21 +136,22 @@
         public const string VV_FailReason_AltarHasEnshrinedEverflower = nameof(VV_FailReason_AltarHasEnshrinedEverflower);
 
         public const string VV_Hediff_ApocryphaStuckNeedleTip = nameof(VV_Hediff_ApocryphaStuckNeedleTip);
-        public const string VV_Hediff_ApocryphaFairyBondTip = nameof(VV_Hediff_ApocryphaFairyBondTip);
 
         public const string VV_FloatMenu_ActivateApocryphaNeedle = nameof(VV_FloatMenu_ActivateApocryphaNeedle);
         public const string VV_FailReason_ApocryphaNeedleDormant = nameof(VV_FailReason_ApocryphaNeedleDormant);
 
         public const string VV_TextMote_ApocryphaStunImmune = nameof(VV_TextMote_ApocryphaStunImmune);
+        public const string VV_Speech_AsphodelRebirth1 = nameof(VV_Speech_AsphodelRebirth1);
+        public const string VV_Speech_AsphodelRebirth2 = nameof(VV_Speech_AsphodelRebirth2);
+        public const string VV_Speech_AsphodelDeath = nameof(VV_Speech_AsphodelDeath);
 
-        public const string VV_FloatMenu_BondFairyFlower = nameof(VV_FloatMenu_BondFairyFlower);
+        public const string VV_FloatMenu_ResonateFairyFlower = nameof(VV_FloatMenu_ResonateFairyFlower);
         public const string VV_FailReason_FairyFlowerNotVivi = nameof(VV_FailReason_FairyFlowerNotVivi);
         public const string VV_FailReason_FairyFlowerNotAdult = nameof(VV_FailReason_FairyFlowerNotAdult);
         public const string VV_FailReason_CannotMove = nameof(VV_FailReason_CannotMove);
-        public const string VV_FailReason_FairyFlowerAlreadyInterfered = nameof(VV_FailReason_FairyFlowerAlreadyInterfered);
+        public const string VV_FailReason_FairyFlowerResonanceFailed = nameof(VV_FailReason_FairyFlowerResonanceFailed);
 
         public const string VV_Hediff_DoomBlightLevel = nameof(VV_Hediff_DoomBlightLevel);
-        public const string VV_Hediff_FairyInterferenceRemaining = nameof(VV_Hediff_FairyInterferenceRemaining);
 
         public const string VV_ManaBarrierTargetMana = nameof(VV_ManaBarrierTargetMana);
 

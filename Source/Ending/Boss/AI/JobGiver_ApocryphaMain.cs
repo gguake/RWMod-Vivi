@@ -23,6 +23,8 @@ namespace VVRace
         private const float BreachRangeBuffer = 2f;
         private const float ApproachGoalTolerance = 2f;
         private const float StealRangeMargin = 1.5f;
+        private const float EngageRange = 1.5f;
+        private const int EngageHoldTicks = 30;
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -44,27 +46,52 @@ namespace VVRace
                 return JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaBreath, comp.Breath.BreathCell);
             }
 
+            if (comp.EscortSummon.IsCasting)
+            {
+                return WaitJob(Mathf.Max(15, comp.EscortSummon.CastTicksLeft + 1));
+            }
+
             comp.Channel.TryGetStealTarget(out var target, out var range, out var everflower);
             if (target != null && comp.Channel.InStealRange())
             {
                 return JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaChannel, target, everflower);
             }
 
-            if (comp.Phase == ApocryphaPhase.Unbound && target != null)
+            if (comp.Phase == ApocryphaPhase.Queen)
             {
-                return ChargeJob(pawn, comp, target, range);
+                var engageTarget = comp.Targeting.EngageTarget;
+                if (engageTarget != null)
+                {
+                    return EngageJob(pawn, comp, engageTarget);
+                }
+
+                if (target != null)
+                {
+                    return ChargeJob(pawn, comp, target, range, VVJobDefOf.VV_ApocryphaCharge, allowSkip: true);
+                }
             }
 
-            if (comp.Phase == ApocryphaPhase.Bound)
+            if (comp.Phase == ApocryphaPhase.Asphodel)
             {
-                var boundJob = TryGiveBoundJob(pawn, comp, target, range);
-                if (boundJob != null) { return boundJob; }
+                var asphodelJob = TryGiveAsphodelJob(pawn, comp, target, range);
+                if (asphodelJob != null) { return asphodelJob; }
             }
 
             return WanderOrWaitJob(pawn, comp, target, range);
         }
 
-        private static Job TryGiveBoundJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
+        private static Job EngageJob(Pawn pawn, CompApocrypha comp, Pawn target)
+        {
+            if (pawn.Position.InHorDistOf(target.Position, EngageRange))
+            {
+                pawn.rotationTracker.FaceTarget(target);
+                return WaitJob(EngageHoldTicks);
+            }
+
+            return ChargeJob(pawn, comp, target, EngageRange, VVJobDefOf.VV_ApocryphaPursue, allowSkip: false);
+        }
+
+        private static Job TryGiveAsphodelJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
         {
             if (target != null)
             {
@@ -85,12 +112,18 @@ namespace VVRace
 
             if (target == null) { return null; }
 
-            if (comp.NeedleAttack.BreachInProgress)
+            if (comp.BlastBreach.InProgress)
             {
-                return comp.NeedleAttack.TryContinueBreach(out var standCell) ? BreachJob(pawn, standCell) : null;
+                return comp.BlastBreach.TryContinue(out var standCell) ? BreachJob(pawn, standCell) : null;
             }
 
             if (GenTicks.TicksGame < comp.NextApproachTick) { return null; }
+
+            if (comp.Targeting.InCombat)
+            {
+                comp.Notify_Approached();
+                return null;
+            }
 
             comp.AdvanceApproach(target);
 
@@ -107,7 +140,7 @@ namespace VVRace
             }
 
             var maxBreachDist = comp.Props.approachDistance + BreachRangeBuffer;
-            if (comp.NeedleAttack.TryStartBreach(target, maxBreachDist, out var breachCell))
+            if (comp.BlastBreach.TryStart(target, maxBreachDist, out var breachCell))
             {
                 return BreachJob(pawn, breachCell);
             }
@@ -241,7 +274,7 @@ namespace VVRace
 
             mindState.nextMoveOrderIsWait = true;
 
-            var dest = comp.Phase == ApocryphaPhase.Bound && target != null
+            var dest = comp.Phase == ApocryphaPhase.Asphodel && target != null
                 ? FindDonutWanderDest(pawn, comp, target, range)
                 : RCellFinder.RandomWanderDestFor(pawn, pawn.Position, comp.Props.wanderRadius, null, Danger.Deadly);
 
@@ -327,7 +360,7 @@ namespace VVRace
             return dest.IsValid && dest != origin && BaseValid(dest) ? dest : IntVec3.Invalid;
         }
 
-        private static Job ChargeJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
+        private static Job ChargeJob(Pawn pawn, CompApocrypha comp, Thing target, float range, JobDef moveDef, bool allowSkip)
         {
             var map = pawn.Map;
             var goal = EdgeCellToward(pawn, target, range);
@@ -344,7 +377,7 @@ namespace VVRace
                 }
             }
 
-            if (!found && comp.TrySkipToStealTarget(target, range))
+            if (!found && allowSkip && comp.TrySkipToStealTarget(target, range))
             {
                 return WaitJob(SkipRecoverTicks);
             }
@@ -361,7 +394,7 @@ namespace VVRace
                 return WaitJob(ChargeRepathTicks.RandomInRange);
             }
 
-            return MakeMoveJob(VVJobDefOf.VV_ApocryphaCharge, goal, ChargeRepathTicks.RandomInRange);
+            return MakeMoveJob(moveDef, goal, ChargeRepathTicks.RandomInRange);
         }
 
         public static bool CanSmash(Thing blocker, Thing stealTarget)

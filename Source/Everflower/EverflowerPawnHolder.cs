@@ -337,7 +337,7 @@ namespace VVRace
                 // 품지 못하면 회복한 채 영원꽃 앞으로 돌려보낸다.
                 if (!queen.Spawned && queen.holdingOwner == null)
                 {
-                    GenSpawn.Spawn(queen, FindReturnCell(_everflower.Map, RebirthCellSearchRadius), _everflower.Map);
+                    GenSpawn.Spawn(queen, FindReturnCell(_everflower, _everflower.Map, RebirthCellSearchRadius), _everflower.Map);
                 }
 
                 return;
@@ -409,7 +409,7 @@ namespace VVRace
         {
             var pawn = held.pawn;
             var map = _everflower.Map;
-            var cell = FindReturnCell(map, held.rebirth ? RebirthCellSearchRadius : ReturnCellSearchRadius);
+            var cell = FindReturnCell(_everflower, map, held.rebirth ? RebirthCellSearchRadius : ReturnCellSearchRadius);
 
             _container.Remove(pawn);
             GenSpawn.Spawn(pawn, cell, map);
@@ -469,7 +469,7 @@ namespace VVRace
         private void TeleportToReturnCell(Pawn pawn)
         {
             var map = pawn.Map;
-            var cell = FindReturnCell(map, ReturnCellSearchRadius);
+            var cell = FindReturnCell(_everflower, map, ReturnCellSearchRadius);
             if (!cell.IsValid || cell == pawn.Position) { return; }
 
             EffecterDefOf.Skip_EntryNoDelay.Spawn(pawn, map).Cleanup();
@@ -483,9 +483,9 @@ namespace VVRace
                 MessageTypeDefOf.PositiveEvent);
         }
 
-        private IntVec3 FindReturnCell(Map map, float radius)
+        internal static IntVec3 FindReturnCell(ArcanePlant_Everflower everflower, Map map, float radius)
         {
-            var root = FindReturnRoot(map);
+            var root = FindReturnRoot(everflower, map);
             var cell = CellFinder.StandableCellNear(root, map, radius, c => c.InBounds(map) && !c.Fogged(map));
             if (!cell.IsValid)
             {
@@ -495,12 +495,12 @@ namespace VVRace
             return cell;
         }
 
-        private IntVec3 FindReturnRoot(Map map)
+        private static IntVec3 FindReturnRoot(ArcanePlant_Everflower everflower, Map map)
         {
-            var altar = ViviEndingUtility.AltarOf(_everflower);
+            var altar = ViviEndingUtility.AltarOf(everflower);
             if (altar != null && altar.Spawned && altar.Map == map) { return altar.FrontCell; }
 
-            return _everflower.Spawned && _everflower.Map == map ? _everflower.Position : DropCellFinder.TradeDropSpot(map);
+            return everflower.Spawned && everflower.Map == map ? everflower.Position : DropCellFinder.TradeDropSpot(map);
         }
     }
 }

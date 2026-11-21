@@ -19,8 +19,6 @@ namespace VVRace
         private static readonly Color LaneCoreColor = new Color(1f, 0.94f, 0.75f, 1f);
         private static readonly Color LaneColorBossInside = new Color(1f, 0.36f, 0.82f, 1f);
         private static readonly Color LaneCoreColorBossInside = new Color(1f, 0.8f, 0.95f, 1f);
-        private static readonly Color LaneColorBreach = new Color(1f, 0.22f, 0.18f, 1f);
-        private static readonly Color LaneCoreColorBreach = new Color(1f, 0.7f, 0.62f, 1f);
 
         private const float LotusRingRadius = 0.95f;
         private const float LaneEdgeInset = 0.07f;
@@ -123,12 +121,12 @@ namespace VVRace
             DrawQuad(CrackGlowMat, pos, rotation, StuckDrawSize, crackColor);
         }
 
-        public static void DrawLane(Vector3 start, Vector3 direction, float length, float width, float progress, float alpha, bool bossInside, bool breach, float aimSecs, float aimDuration, int seed)
+        public static void DrawLane(Vector3 start, Vector3 direction, float length, float width, float progress, float alpha, bool bossInside, float aimSecs, float aimDuration, int seed)
         {
             if (length < 0.1f || width <= 0f) { return; }
 
             var matrix = MakeLaneMatrix(start, direction, length, width, AltitudeLayer.MoteLow.AltitudeFor());
-            SelectLaneColors(breach, bossInside, alpha, out var color, out var coreColor);
+            SelectLaneColors(bossInside, alpha, out var color, out var coreColor);
 
             PropertyBlock.Clear();
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, LinkRenderUtility.WrappedAgeSecs);
@@ -181,14 +179,9 @@ namespace VVRace
             return Matrix4x4.TRS(center, Quaternion.AngleAxis(angle, Vector3.up), new Vector3(length, 1f, width));
         }
 
-        private static void SelectLaneColors(bool breach, bool bossInside, float alpha, out Color color, out Color coreColor)
+        private static void SelectLaneColors(bool bossInside, float alpha, out Color color, out Color coreColor)
         {
-            if (breach)
-            {
-                color = LaneColorBreach;
-                coreColor = LaneCoreColorBreach;
-            }
-            else if (bossInside)
+            if (bossInside)
             {
                 color = LaneColorBossInside;
                 coreColor = LaneCoreColorBossInside;

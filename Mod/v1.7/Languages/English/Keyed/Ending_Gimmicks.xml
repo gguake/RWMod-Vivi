@@ -2,25 +2,25 @@
 <LanguageData>
 
 <!-- 요정꽃 우클릭 메뉴 -->
-<VV_FloatMenu_BondFairyFlower>Bond with fairy bloom</VV_FloatMenu_BondFairyFlower>
+<VV_FloatMenu_ResonateFairyFlower>Resonate with fairy bloom</VV_FloatMenu_ResonateFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>not a vivi</VV_FailReason_FairyFlowerNotVivi>
-<VV_FailReason_FairyFlowerNotAdult>babies cannot bond</VV_FailReason_FairyFlowerNotAdult>
+<VV_FailReason_FairyFlowerNotAdult>babies cannot resonate</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>cannot move</VV_FailReason_CannotMove>
-<VV_FailReason_FairyFlowerAlreadyInterfered>already has fairy interference</VV_FailReason_FairyFlowerAlreadyInterfered>
+<VV_FailReason_FairyFlowerResonanceFailed>already failed to resonate</VV_FailReason_FairyFlowerResonanceFailed>
 
 <!-- 메시지 -->
-<VV_Message_FairyFlowerBonded>{PAWN_labelShort} has bonded with the fairy bloom and gained fairy interference.</VV_Message_FairyFlowerBonded>
-<VV_Message_FairyBondReleased>{PAWN_labelShort} has freed the fairy vivis. The doom blights on {PAWN_labelShort} have been lifted.</VV_Message_FairyBondReleased>
+<VV_Message_FairyFlowerResonated>{PAWN_labelShort} has resonated with the fairy bloom and gained fairy attunement.</VV_Message_FairyFlowerResonated>
+<VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort} failed to resonate with the fairy bloom.</VV_Message_FairyFlowerResonanceFailed>
+<VV_Message_FairyFlowerBurst>A fairy bloom's sigil has completed and burst.</VV_Message_FairyFlowerBurst>
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->
 <VV_Hediff_DoomBlightLevel>Curse level: {0} / {1}</VV_Hediff_DoomBlightLevel>
-<VV_Hediff_FairyInterferenceRemaining>Time left: {0}</VV_Hediff_FairyInterferenceRemaining>
 
 <!-- 정보창 -->
 <VV_Inspector_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspector_DoomFlowerBloomIn>
 <VV_Inspector_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspector_DoomFlowerHint>
-<VV_Inspector_FairyFlowerFadeIn>Fades in: {0}</VV_Inspector_FairyFlowerFadeIn>
-<VV_Inspector_FairyFlowerHint>A vivi bonded with it can interfere with the fairy vivis' bonds.</VV_Inspector_FairyFlowerHint>
+<VV_Inspector_FairyFlowerSkill>Resonance skill: {0}</VV_Inspector_FairyFlowerSkill>
+<VV_Inspector_FairyFlowerBurstIn>Bursts in: {0}</VV_Inspector_FairyFlowerBurstIn>
 
 </LanguageData>

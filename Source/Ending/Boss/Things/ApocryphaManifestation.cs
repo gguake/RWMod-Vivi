@@ -18,7 +18,8 @@ namespace VVRace
         private const float HoldReveal = 0.3f;
         private const float PushRevealSecs = 0.35f;
 
-        private const float FormHeight = 2.6f;
+        private const float FormHeightBase = 1.1f;
+        private const float FormHeightPerSize = 0.4f;
         private const float BobAmplitude = 0.15f;
         private const float BobSpeed = 2.2f;
         private const float GatherStartScale = 0.92f;
@@ -31,14 +32,7 @@ namespace VVRace
 
         private static readonly FloatRange ChargeRadius = new FloatRange(2.5f, 6f);
 
-        // 맵 끝까지 퍼지는 파면의 반지름은 VV_ShockWave와 동일하게 쿼드 반지름 × mix(0.02, 0.96, 1-(1-t)³)로 계산한다.
-        // t는 경과 시간 / _Duration이며 WaveDurationSecs는 XML의 VV_Fleck_ApocryphaRepelWave._Duration과 맞춘다.
         private const float WaveDurationSecs = 2.6f;
-        private const float WaveFrontStart = 0.02f;
-        private const float WaveFrontReach = 0.96f;
-        private const float WaveCoverMargin = 1.05f;
-
-        private const int WaveAgeLeadTicks = 1;
 
         private const float PushLeadFactor = 0.3f;
         private const float PushArcFactor = 0.06f;
@@ -83,24 +77,19 @@ namespace VVRace
             _texPath = graphicData.texPath;
             _drawSize = graphicData.drawSize.x;
 
-            var map = everflower.Map;
-            _budPos = everflower.DrawPos + (everflower.EverflowerComp?.RitualEffecterOffset ?? Vector3.zero);
-            _budPos.y = 0f;
+            _budPos = ApocryphaGimmicks.EverflowerBudPos(everflower);
             _formPos = _budPos + new Vector3(0f, 0f, FormHeight);
             _landPos = landCell.ToVector3Shifted();
             _landPos.y = 0f;
             _landRot = landRot;
 
-            var farthest = EndingVfxUtility.MaxDistanceToMapCorner(map, _budPos);
-            _waveHalfSize = farthest * WaveCoverMargin / WaveFrontReach;
-
-            var front = Vector3.Distance(_budPos, _landPos) - PushLead;
-            var u = Mathf.Clamp01((front / _waveHalfSize - WaveFrontStart) / (WaveFrontReach - WaveFrontStart));
-            var t = 1f - Mathf.Pow(1f - u, 1f / 3f);
-            _pushTicks = Mathf.Max(2, Mathf.CeilToInt(t * WaveDurationSecs * 60f) - WaveAgeLeadTicks);
+            _waveHalfSize = EndingVfxUtility.ShockWaveHalfSize(EndingVfxUtility.MaxDistanceToMapCorner(everflower.Map, _budPos));
+            _pushTicks = Mathf.Max(2, EndingVfxUtility.ShockWaveArrivalTicks(Vector3.Distance(_budPos, _landPos) - PushLead, _waveHalfSize, WaveDurationSecs));
         }
 
         private float PushLead => _drawSize * PushLeadFactor;
+
+        private float FormHeight => FormHeightBase + _drawSize * FormHeightPerSize;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -248,10 +237,7 @@ namespace VVRace
             var map = Map;
             VVEffecterDefOf.VV_Effecter_ApocryphaRepel.Spawn(Position, map, EndingVfxUtility.OffsetFromCell(_budPos, Position)).Cleanup();
 
-            var waveScale = _waveHalfSize * 2f / VVFleckDefOf.VV_Fleck_ApocryphaRepelWave.graphicData.drawSize.x;
-            var data = FleckMaker.GetDataStatic(_budPos, map, VVFleckDefOf.VV_Fleck_ApocryphaRepelWave, waveScale);
-            data.rotation = Rand.Range(0f, 360f);
-            map.flecks.CreateFleck(data);
+            EndingVfxUtility.SpawnShockWave(map, _budPos, VVFleckDefOf.VV_Fleck_ApocryphaRepelWave, _waveHalfSize);
 
             ApocryphaUtility.ShakeCamera(map, 2.5f);
             Find.TickManager.slower.SignalForceNormalSpeedShort();
@@ -311,18 +297,12 @@ namespace VVRace
             var s = 1f;
             if (age < LandTick && landDist > 0.5f)
             {
-                s = Mathf.Clamp01((WaveFrontAt((age - WaveTick + WaveAgeLeadTicks) / 60f) + PushLead) / landDist);
+                s = Mathf.Clamp01((EndingVfxUtility.ShockWaveFrontAt(_waveHalfSize, (age - WaveTick + EndingVfxUtility.ShockWaveAgeLeadTicks) / 60f, WaveDurationSecs) + PushLead) / landDist);
             }
 
             var height = (FormHeight + BobAmplitude * Mathf.Sin(WaveTick / 60f * BobSpeed)) * (1f - s)
                 + Mathf.Min(PushArcMax, landDist * PushArcFactor) * 4f * s * (1f - s);
             return _budPos + toLand * s + new Vector3(0f, 0f, height);
-        }
-
-        private float WaveFrontAt(float secs)
-        {
-            var t = Mathf.Clamp01(secs / WaveDurationSecs);
-            return _waveHalfSize * Mathf.Lerp(WaveFrontStart, WaveFrontReach, 1f - Mathf.Pow(1f - t, 3f));
         }
 
         private float FormProgress(float secs)

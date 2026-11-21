@@ -462,23 +462,6 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 요정 비비 결속 해방음 -->
-  <SoundDef>
-    <defName>VV_ApocryphaBondRelease</defName>
-    <context>MapOnly</context>
-    <maxSimultaneous>1</maxSimultaneous>
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>SFX/VV_ApocryphaBondRelease</clipPath>
-          </li>
-        </grains>
-        <volumeRange>95</volumeRange>
-        <sustainLoop>False</sustainLoop>
-      </li>
-    </subSounds>
-  </SoundDef>
 
   <!-- 멸망꽃 발아음 -->
   <SoundDef>

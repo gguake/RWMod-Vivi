@@ -11,17 +11,17 @@ namespace VVRace
             if (!base.IsTransitionSatisfied()) { return false; }
 
             var comp = ViviEndingQuest.Current?.BossComp;
-            return comp != null && comp.parent.Spawned && comp.IsQuestBossFight && PlaysInPhase(comp.Phase);
+            return comp != null && comp.parent.MapHeld != null && comp.IsQuestBossFight && PlaysInPhase(comp.Phase);
         }
     }
 
-    public class MusicTransition_ApocryphaBound : MusicTransition_Apocrypha
+    public class MusicTransition_ApocryphaQueen : MusicTransition_Apocrypha
     {
-        protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Bound;
+        protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Queen;
     }
 
-    public class MusicTransition_ApocryphaUnbound : MusicTransition_Apocrypha
+    public class MusicTransition_ApocryphaAsphodel : MusicTransition_Apocrypha
     {
-        protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Transforming || phase == ApocryphaPhase.Unbound;
+        protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Rebirth || phase == ApocryphaPhase.Asphodel;
     }
 }

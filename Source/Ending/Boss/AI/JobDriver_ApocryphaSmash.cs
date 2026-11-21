@@ -31,7 +31,7 @@ namespace VVRace
             this.FailOn(() =>
             {
                 var comp = pawn.TryGetComp<CompApocrypha>();
-                return comp == null || comp.Phase != ApocryphaPhase.Unbound;
+                return comp == null || comp.Phase != ApocryphaPhase.Queen;
             });
 
             yield return Toils_Goto.GotoCell(StandCellIndex, PathEndMode.OnCell);

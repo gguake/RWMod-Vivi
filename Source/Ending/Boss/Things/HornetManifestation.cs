@@ -55,6 +55,8 @@ namespace VVRace
 
         private int Age => _startTick < 0 ? -1 : Find.TickManager.TicksGame - _startTick;
 
+        public bool IsEscortOf(Pawn boss) => _role == HornetSummonRole.Escort && _boss == boss;
+
         #region 소환
 
         public static void SummonAround(Pawn boss, int count, HornetSummonRole role)

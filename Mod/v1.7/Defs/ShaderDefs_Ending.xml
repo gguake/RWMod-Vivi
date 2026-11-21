@@ -152,25 +152,6 @@
     <shaderPath>Map/VV_ShockWave</shaderPath>
   </ShaderTypeDef>
 
-  <!-- 아스포델 변신 셰이더 -->
-  <ShaderDef>
-    <defName>VV_Morph</defName>
-    <shaderProgram>
-      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
-      <fragmentShaderFileName>VV_Morph.frag.glsl</fragmentShaderFileName>
-      <transparent>true</transparent>
-      <depthWrite>false</depthWrite>
-      <cullMode>None</cullMode>
-      <renderQueue>3000</renderQueue>
-    </shaderProgram>
-  </ShaderDef>
-
-  <!-- 아스포델 변신 셰이더 유형 -->
-  <ShaderTypeDef>
-    <defName>VV_Morph</defName>
-    <shaderPath>Map/VV_Morph</shaderPath>
-  </ShaderTypeDef>
-
   <!-- 연꽃 마법진 셰이더 -->
   <ShaderDef>
     <defName>VV_MagicCircle</defName>

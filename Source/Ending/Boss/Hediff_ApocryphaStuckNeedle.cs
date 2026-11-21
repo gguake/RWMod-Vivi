@@ -15,7 +15,7 @@ namespace VVRace
                 if (comp == null) { return tip; }
 
                 var needles = LocalizeString_Etc.VV_Hediff_ApocryphaStuckNeedleTip.Translate(
-                    comp.NeedleAttack.StuckNeedleCount, comp.Props.unboundNeedleCount, comp.IncomingDamageFactor.ToStringPercent());
+                    comp.NeedleAttack.StuckNeedleCount, comp.Props.queenNeedleCount, comp.IncomingDamageFactor.ToStringPercent());
                 return EndingVfxUtility.AppendTipLine(tip, needles);
             }
         }

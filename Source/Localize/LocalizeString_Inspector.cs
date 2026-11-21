@@ -30,20 +30,20 @@
         public const string VV_Inspector_EverflowerAttunementLevelOnly = nameof(VV_Inspector_EverflowerAttunementLevelOnly);
 
         public const string VV_Inspector_ApocryphaPhase = nameof(VV_Inspector_ApocryphaPhase);
-        public const string VV_Inspector_ApocryphaPhase_Bound = nameof(VV_Inspector_ApocryphaPhase_Bound);
-        public const string VV_Inspector_ApocryphaPhase_Transforming = nameof(VV_Inspector_ApocryphaPhase_Transforming);
-        public const string VV_Inspector_ApocryphaPhase_Unbound = nameof(VV_Inspector_ApocryphaPhase_Unbound);
+        public const string VV_Inspector_ApocryphaPhase_Queen = nameof(VV_Inspector_ApocryphaPhase_Queen);
+        public const string VV_Inspector_ApocryphaPhase_Rebirth = nameof(VV_Inspector_ApocryphaPhase_Rebirth);
+        public const string VV_Inspector_ApocryphaPhase_Asphodel = nameof(VV_Inspector_ApocryphaPhase_Asphodel);
         public const string VV_Inspector_ApocryphaPhase_Dying = nameof(VV_Inspector_ApocryphaPhase_Dying);
-        public const string VV_Inspector_ApocryphaBond = nameof(VV_Inspector_ApocryphaBond);
         public const string VV_Inspector_ApocryphaVitality = nameof(VV_Inspector_ApocryphaVitality);
         public const string VV_Inspector_ApocryphaShield = nameof(VV_Inspector_ApocryphaShield);
         public const string VV_Inspector_ApocryphaShieldBroken = nameof(VV_Inspector_ApocryphaShieldBroken);
+        public const string VV_Inspector_ApocryphaFairyBond = nameof(VV_Inspector_ApocryphaFairyBond);
         public const string VV_Inspector_ApocryphaChanneling = nameof(VV_Inspector_ApocryphaChanneling);
 
         public const string VV_Inspector_DoomFlowerBloomIn = nameof(VV_Inspector_DoomFlowerBloomIn);
         public const string VV_Inspector_DoomFlowerHint = nameof(VV_Inspector_DoomFlowerHint);
-        public const string VV_Inspector_FairyFlowerFadeIn = nameof(VV_Inspector_FairyFlowerFadeIn);
-        public const string VV_Inspector_FairyFlowerHint = nameof(VV_Inspector_FairyFlowerHint);
+        public const string VV_Inspector_FairyFlowerSkill = nameof(VV_Inspector_FairyFlowerSkill);
+        public const string VV_Inspector_FairyFlowerBurstIn = nameof(VV_Inspector_FairyFlowerBurstIn);
 
         public const string VV_Inspector_SkyShieldRemaining = nameof(VV_Inspector_SkyShieldRemaining);
 

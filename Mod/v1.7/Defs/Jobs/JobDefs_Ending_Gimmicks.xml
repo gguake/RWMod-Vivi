@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 요정꽃 결속 -->
+  <!-- 요정꽃 공명 -->
   <JobDef>
-    <defName>VV_BondFairyFlower</defName>
-    <driverClass>VVRace.JobDriver_BondFairyFlower</driverClass>
-    <reportString>bonding with TargetA.</reportString>
+    <defName>VV_ResonateFairyFlower</defName>
+    <driverClass>VVRace.JobDriver_ResonateFairyFlower</driverClass>
+    <reportString>resonating with TargetA.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 </Defs>

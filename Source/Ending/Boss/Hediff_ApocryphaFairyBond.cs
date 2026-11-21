@@ -10,12 +10,8 @@ namespace VVRace
         {
             get
             {
-                var comp = pawn?.TryGetComp<CompApocrypha>();
-                if (comp == null) { return base.TipStringExtra; }
-
-                return LocalizeString_Etc.VV_Hediff_ApocryphaFairyBondTip.Translate(
-                    comp.BondCount.ToString("N0"),
-                    comp.InitialBondCount.ToString("N0"));
+                var comp = pawn.TryGetComp<CompApocrypha>();
+                return comp == null ? base.TipStringExtra : comp.BondLabel;
             }
         }
     }

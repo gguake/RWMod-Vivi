@@ -10,7 +10,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 모드 생성자에서 실행되므로 DefOf나 DefDatabase를 읽지 않는다. 패치 하나가 실패해도 나머지는 계속 적용한다.
     internal static class EndingCorePatch
     {
         private static readonly FieldInfo PawnRendererResultsField = AccessTools.Field(typeof(PawnRenderer), "results");
@@ -32,7 +31,7 @@ namespace VVRace
                 AccessTools.Method(typeof(Fire), "TrySpread"),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Fire_TrySpread_Prefix)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "Pawn.Kill (queen life resonance and dissolve death state)",
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn.Kill (queen life resonance and apocrypha phase death)",
                 AccessTools.Method(typeof(Pawn), nameof(Pawn.Kill)),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Pawn_Kill_Prefix)) { priority = Priority.First });
 
@@ -158,15 +157,13 @@ namespace VVRace
 
             try
             {
-                Hediff_CorruptedEverflowerAssimilation.CaptureDeathState(__instance);
-                CompApocrypha.CaptureDeathState(__instance);
+                return !ApocryphaUtility.IsApocrypha(__instance) || !CompApocrypha.TryInterceptKill(__instance);
             }
             catch (Exception ex)
             {
-                Log.ErrorOnce($"[ViViRace] failed to capture dissolve death state: {ex}", ViviEndingUtility.ErrorKeyDissolveDeathCapture);
+                Log.ErrorOnce($"[ViViRace] failed to intercept the apocrypha's death: {ex}", ViviEndingUtility.ErrorKeyApocryphaKillIntercept);
+                return true;
             }
-
-            return true;
         }
 
         private static void FactionDialogMaker_FactionDialogFor_Postfix(Pawn negotiator, Faction faction, DiaNode __result)

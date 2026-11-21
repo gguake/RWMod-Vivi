@@ -3,31 +3,37 @@ using Verse;
 
 namespace VVRace
 {
-    public class Hediff_CorruptedEverflowerAssimilation : HediffWithComps
+    public class Hediff_DoomPhantasm : HediffWithComps
     {
         private Rot4? _deathRotation;
         private IntVec3 _deathCell = IntVec3.Invalid;
         private Vector3 _deathDrawOffset;
 
-        // Pawn.Kill은 Notify_PawnDied보다 먼저 Corpse.SpawnSetup을 호출해 InnerPawn.Rotation을 South로 덮어쓴다.
-        internal static void CaptureDeathState(Pawn pawn)
+        public static void Dissolve(Pawn pawn)
         {
-            if (pawn == null || pawn.Dead) { return; }
+            if (pawn == null || !pawn.Spawned || pawn.Destroyed) { return; }
 
-            var hediff = pawn.health?.hediffSet?.GetFirstHediff<Hediff_CorruptedEverflowerAssimilation>();
-            if (hediff == null) { return; }
+            var dissolving = (DissolvingHornet)ThingMaker.MakeThing(VVThingDefOf.VV_DissolvingHornet);
+            dissolving.InitAshen(pawn, null, pawn.Rotation, EndingVfxUtility.OffsetFromCell(pawn.DrawPos, pawn.Position));
+            GenSpawn.Spawn(dissolving, pawn.Position, pawn.Map);
+            pawn.Destroy(DestroyMode.Vanish);
+        }
 
-            hediff._deathRotation = pawn.Rotation;
+        public override void Notify_PawnKilled()
+        {
+            base.Notify_PawnKilled();
+
+            _deathRotation = pawn.Rotation;
             if (pawn.Spawned)
             {
-                hediff._deathCell = pawn.Position;
-                hediff._deathDrawOffset = EndingVfxUtility.OffsetFromCell(pawn.DrawPos, pawn.Position);
+                _deathCell = pawn.Position;
+                _deathDrawOffset = EndingVfxUtility.OffsetFromCell(pawn.DrawPos, pawn.Position);
             }
-            else
-            {
-                hediff._deathCell = IntVec3.Invalid;
-                hediff._deathDrawOffset = Vector3.zero;
-            }
+
+            pawn.inventory?.DestroyAll();
+            pawn.equipment?.DestroyAllEquipment();
+            pawn.apparel?.DestroyAll();
+            pawn.carryTracker?.DestroyCarriedThing();
         }
 
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)

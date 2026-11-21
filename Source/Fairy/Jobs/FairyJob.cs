@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -45,6 +45,7 @@ namespace VVRace
         public bool Ended => ended;
         public abstract FairyJobKind Kind { get; }
         public virtual FairyRole Role => FairyRole.None;
+        public virtual int ImpactStaggerTicks => 30;
 
         public FairyToil CurrentToil
         {

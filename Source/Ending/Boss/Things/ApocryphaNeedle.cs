@@ -21,17 +21,14 @@ namespace VVRace
             Scattering = 8,
         }
 
-        private const float FinRootX = 0.46f;
-        private const float FinRootZ = 0.41f;
-        private const float FinStepX = 0.32f;
-        private const float FinStepZ = -0.14f;
-        private const float FinTiltInner = 16f;
-        private const float FinTiltStep = 11f;
-        private const float FinCenterFromRoot = 2f;
-        private const float FinSwayDegrees = 2.5f;
-        private const float FinBobHeight = 0.08f;
-        private const float FinBehindAltitude = 0.03f;
-        private const float FinRackReturnProgress = 0.85f;
+        private const float HaloLift = 0.9f;
+        private const float HaloRootRadius = 0.55f;
+        private const float HaloCenterFromRoot = 2f;
+        private const float HaloSpreadDegrees = 72f;
+        private const float HaloSwayDegrees = 2.5f;
+        private const float HaloBobHeight = 0.08f;
+        private const float HaloBehindAltitude = 0.03f;
+        private const float HaloReturnProgress = 0.85f;
         private const float SlotBobHeight = 0.14f;
         private const float IdleFollow = 0.16f;
 
@@ -78,7 +75,6 @@ namespace VVRace
         private const int PlantedGlintInterval = 45;
         private const float ClickRadius = 1.4f;
 
-        // 발사 왜곡의 재생 시간. VV_NeedleWarp의 _Duration(0.55초)과 맞춘다.
         private const int WarpTicks = 33;
 
         private const int FadeInTicks = 40;
@@ -97,8 +93,6 @@ namespace VVRace
         private int _aimTicks;
         private int _fireTick = -1;
         private float _travelled;
-        private bool _breach;
-        private Vector3 _breachOrigin;
         private Vector3 _returnFrom;
         private float _returnLength;
         private float _returnProgress;
@@ -130,24 +124,21 @@ namespace VVRace
         public bool IsFlying => _state == NeedleState.Firing || _state == NeedleState.Lodged || _state == NeedleState.Returning;
         public bool IsStuck => _state == NeedleState.Stuck;
         public bool IsPlanted => _state == NeedleState.Planted;
+        public bool IsScattering => _state == NeedleState.Scattering;
 
-        public bool CanActivate => Spawned && IsPlanted && IsUnbound;
+        public bool CanActivate => Spawned && IsPlanted && IsQueen;
 
-        public int ActivateTicks => BossComp?.Props.unboundNeedleActivateTicks ?? 60;
+        public int ActivateTicks => BossComp?.Props.needleActivateTicks ?? 60;
 
         public IntVec3 GroundCell => _groundCell;
 
-        public Pawn LockTarget => _state == NeedleState.LockOn || (_state == NeedleState.Aiming && IsUnbound) ? _lockTarget : null;
+        public Pawn LockTarget => _state == NeedleState.LockOn || (_state == NeedleState.Aiming && IsQueen) ? _lockTarget : null;
 
         public float AimProgress => IsAiming ? Mathf.Clamp01((GenTicks.TicksGame - _stateStartTick) / (float)Mathf.Max(1, _aimTicks)) : 0f;
 
-        public Vector3 LaneStart => _laneStart;
-        public Vector3 LaneEnd => _laneStart + _laneDir * _laneLength;
-        public float LaneLength => _laneLength;
-
         public override Vector3 DrawPos => new Vector3(_pos.x, DrawAltitude, _pos.z);
 
-        private bool IsRacked => !IsUnbound && (_state == NeedleState.Idle || (_state == NeedleState.Returning && _returnProgress >= FinRackReturnProgress));
+        private bool IsRacked => !IsQueen && (_state == NeedleState.Idle || (_state == NeedleState.Returning && _returnProgress >= HaloReturnProgress));
 
         private float DrawAltitude
         {
@@ -155,13 +146,11 @@ namespace VVRace
             {
                 if (_state == NeedleState.Planted) { return AltitudeLayer.BuildingOnTop.AltitudeFor(); }
 
-                return IsRacked && FinBehindBody ? AltitudeLayer.Pawn.AltitudeFor() - FinBehindAltitude : AltitudeLayer.MoteOverhead.AltitudeFor();
+                return IsRacked && HaloBehindBody ? AltitudeLayer.Pawn.AltitudeFor() - HaloBehindAltitude : AltitudeLayer.MoteOverhead.AltitudeFor();
             }
         }
 
-        private float FinSide => _boss != null && (_boss.Rotation == Rot4.South || _boss.Rotation == Rot4.West) ? 1f : -1f;
-
-        private bool FinBehindBody => _boss != null && _boss.Rotation != Rot4.North;
+        private bool HaloBehindBody => _boss != null && _boss.Rotation != Rot4.North;
 
         private CompApocrypha BossComp
         {
@@ -184,7 +173,7 @@ namespace VVRace
 
         private float LaneAngle => _laneDir.AngleFlat();
 
-        private bool IsUnbound => BossComp?.Phase == ApocryphaPhase.Unbound;
+        private bool IsQueen => BossComp?.Phase == ApocryphaPhase.Queen;
 
         public void Init(Pawn boss, int slot)
         {
@@ -231,8 +220,6 @@ namespace VVRace
             Scribe_Values.Look(ref _aimTicks, "aimTicks", 0);
             Scribe_Values.Look(ref _fireTick, "fireTick", -1);
             Scribe_Values.Look(ref _travelled, "travelled", 0f);
-            Scribe_Values.Look(ref _breach, "breach", false);
-            Scribe_Values.Look(ref _breachOrigin, "breachOrigin");
             Scribe_Values.Look(ref _returnFrom, "returnFrom");
             Scribe_Values.Look(ref _returnLength, "returnLength", 0f);
             Scribe_Values.Look(ref _returnProgress, "returnProgress", 0f);
@@ -255,35 +242,37 @@ namespace VVRace
         }
 
         #region 보스가 부르는 API
-        public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null, bool breach = false)
+        public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null)
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
-            var now = GenTicks.TicksGame;
-            var origin = IsUnbound ? _pos.Yto0() : BodyCenter;
-            _breach = breach;
-            _breachOrigin = origin;
+            var origin = BodyCenter;
             var target = targetCell.ToVector3Shifted().Yto0();
-            var direction = (target - origin).Yto0();
-            if (direction.sqrMagnitude < 0.01f)
+            var direction = EndingVfxUtility.SafeNormalizeHorizontal(target - origin, EndingVfxUtility.SafeNormalizeHorizontal(_pos - origin, Vector3.forward));
+
+            var start = origin + direction * LaunchOffset;
+            fanAngle ??= ResolveCloseTargetFanAngle(origin, target, direction);
+            if (fanAngle.HasValue)
             {
-                direction = (_pos - BodyCenter).Yto0();
+                var radius = BossComp?.Props.needleFanRadius ?? 5f;
+                start = origin + Quaternion.AngleAxis(fanAngle.Value, Vector3.up) * direction * radius;
+                direction = EndingVfxUtility.SafeNormalizeHorizontal(target - start, direction);
             }
 
-            direction.Normalize();
+            BeginAim(start, direction, aimTicks);
+        }
 
-            var start = IsUnbound ? origin : origin + direction * LaunchOffset;
-            if (!IsUnbound)
-            {
-                fanAngle ??= ResolveCloseTargetFanAngle(origin, target, direction);
-                if (fanAngle.HasValue)
-                {
-                    var radius = BossComp?.Props.needleFanRadius ?? 5f;
-                    start = origin + Quaternion.AngleAxis(fanAngle.Value, Vector3.up) * direction * radius;
-                    direction = EndingVfxUtility.SafeNormalizeHorizontal(target - start, direction);
-                }
-            }
+        public void StartAimDirection(Vector3 direction, int aimTicks)
+        {
+            if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
+            direction = EndingVfxUtility.SafeNormalizeHorizontal(direction, Vector3.forward);
+            BeginAim(BodyCenter + direction * LaunchOffset, direction, aimTicks);
+        }
+
+        private void BeginAim(Vector3 start, Vector3 direction, int aimTicks)
+        {
+            var now = GenTicks.TicksGame;
             _laneDir = direction;
             _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, start);
             _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, direction, BossComp?.Props.needleRange ?? 32f);
@@ -300,7 +289,7 @@ namespace VVRace
 
         public bool CancelAim()
         {
-            if (_state != NeedleState.Aiming || IsUnbound) { return false; }
+            if (_state != NeedleState.Aiming || IsQueen) { return false; }
 
             _state = NeedleState.Idle;
             _stateStartTick = GenTicks.TicksGame;
@@ -346,10 +335,8 @@ namespace VVRace
             if (!CanActivate || activator == null) { return; }
 
             var now = GenTicks.TicksGame;
-            var props = BossComp.Props;
 
             _lockTarget = activator;
-            _breach = false;
             _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, _plantTip);
             _laneDir = EndingVfxUtility.SafeNormalizeHorizontal(_plantTip - _pos, Vector3.forward);
             UpdateLockDirection();
@@ -357,7 +344,7 @@ namespace VVRace
             _moveFrom = _pos;
             _moveFromAngle = _angle;
             _activateTick = now;
-            _lockEndTick = now + Mathf.Max(1, props.unboundNeedleLockOnTicks);
+            _lockEndTick = now + Mathf.Max(1, BossComp.Props.needleLockOnTicks);
             _state = NeedleState.LockOn;
             _stateStartTick = now;
 
@@ -388,12 +375,35 @@ namespace VVRace
             return best;
         }
 
+        public void AttachStuck(Vector3 direction)
+        {
+            if (!Spawned || _boss == null || !_boss.Spawned) { return; }
+
+            _laneDir = EndingVfxUtility.SafeNormalizeHorizontal(direction, Vector3.forward);
+            SetStuck(GenTicks.TicksGame - StuckShakeTicks);
+        }
+
+        public void Recall()
+        {
+            if (!Spawned || (_state != NeedleState.Planted && _state != NeedleState.Scattering && _state != NeedleState.Stuck)) { return; }
+
+            _lockTarget = null;
+            StartReturn(GenTicks.TicksGame, _pos, EndingVfxUtility.SafeNormalizeHorizontal(_pos - BodyCenter, Vector3.forward));
+        }
+
         public void DebugStick()
         {
-            if (!Spawned || !IsUnbound || _state == NeedleState.Stuck || IsFlying) { return; }
+            if (!Spawned || !IsQueen || _state == NeedleState.Stuck || IsFlying) { return; }
 
             _laneDir = EndingVfxUtility.SafeNormalizeHorizontal(BodyCenter - _pos, Vector3.forward);
             Stick(GenTicks.TicksGame);
+        }
+
+        public override void Kill(DamageInfo? dinfo = null, Hediff exactCulprit = null)
+        {
+            if (dinfo?.Category == DamageInfo.SourceCategory.Collapse) { return; }
+
+            base.Kill(dinfo, exactCulprit);
         }
 
         public void Vanish()
@@ -407,11 +417,6 @@ namespace VVRace
 
             Destroy(DestroyMode.Vanish);
         }
-
-        public bool LaneContains(Vector3 point)
-        {
-            return ApocryphaNeedleLane.Contains(_laneStart, _laneDir, _laneLength, HalfWidth, point);
-        }
         #endregion
 
         #region 틱
@@ -421,8 +426,8 @@ namespace VVRace
             if (!Spawned) { return; }
 
             var comp = BossComp;
-            if (comp == null || !_boss.Spawned || _boss.Map != Map
-                || (comp.Phase != ApocryphaPhase.Bound && comp.Phase != ApocryphaPhase.Unbound && comp.Phase != ApocryphaPhase.Transforming))
+            if (comp == null || comp.Phase == ApocryphaPhase.Dying || _boss.MapHeld != Map
+                || (comp.Phase == ApocryphaPhase.Rebirth ? !IsPlanted && !IsScattering : !_boss.Spawned))
             {
                 Vanish();
                 return;
@@ -520,7 +525,7 @@ namespace VVRace
             _hitIds.Clear();
             _ignored = null;
 
-            _stickAlong = IsUnbound ? BossContactAlong() : -1f;
+            _stickAlong = IsQueen ? BossContactAlong() : -1f;
 
             _pos = BodyOnLane(_travelled);
             Trail?.ResetTrail();
@@ -531,12 +536,6 @@ namespace VVRace
 
             if (_stickAlong < 0f)
             {
-                if (_breach)
-                {
-                    DamageBeforeLane();
-                    if (Destroyed) { return; }
-                }
-
                 DamageAlong(0f, Mathf.Clamp(_travelled, 0f, _laneLength));
                 if (Destroyed) { return; }
             }
@@ -548,7 +547,7 @@ namespace VVRace
         {
             var from = _travelled;
 
-            if (_stickAlong < 0f && IsUnbound)
+            if (_stickAlong < 0f && IsQueen)
             {
                 var contact = BossContactAlong();
                 if (contact >= 0f && contact <= from + FireSpeed)
@@ -593,7 +592,7 @@ namespace VVRace
 
             if (elapsed >= LodgedTicks)
             {
-                if (IsUnbound)
+                if (IsQueen)
                 {
                     PlantAtLaneEnd(now);
                 }
@@ -695,7 +694,7 @@ namespace VVRace
 
             _moveFrom = _pos;
             _moveFromAngle = _angle;
-            _aimTicks = Mathf.Max(1, BossComp?.Props.unboundNeedleLockedTicks ?? 75);
+            _aimTicks = Mathf.Max(1, BossComp?.Props.needleLockedTicks ?? 75);
             _fireTick = now + _aimTicks;
             _state = NeedleState.Aiming;
             _stateStartTick = now;
@@ -725,10 +724,21 @@ namespace VVRace
 
         private void Stick(int now)
         {
+            SetStuck(now);
+
+            PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleStick, BodyCenter);
+            ApocryphaUtility.ShakeCamera(Map, 0.7f);
+
+            BossComp?.NeedleAttack.Notify_NeedleStuck();
+        }
+
+        private void SetStuck(int now)
+        {
             _state = NeedleState.Stuck;
             _stateStartTick = now;
             _stickAlong = -1f;
             _stuckAngle = LaneAngle;
+            _lockTarget = null;
 
             var perpendicular = EndingVfxUtility.HorizontalPerpendicular(_laneDir);
             _stuckOffset = -_laneDir * StuckDepth + perpendicular * ((_slot - 1) * StuckSpread);
@@ -736,10 +746,6 @@ namespace VVRace
             _angle = _stuckAngle;
 
             Trail?.FinishTrail();
-            PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleStick, BodyCenter);
-            ApocryphaUtility.ShakeCamera(Map, 0.7f);
-
-            BossComp?.NeedleAttack.Notify_NeedleStuck(this);
         }
 
         private void TickStuck(int now)
@@ -852,21 +858,6 @@ namespace VVRace
             ApocryphaNeedleLane.PierceAlong(this, _laneStart, _laneDir, _laneLength, comp.Props.needleHalfWidth, from, to, _hitIds, CanPierce, thing => Pierce(thing, comp));
         }
 
-        private void DamageBeforeLane()
-        {
-            var map = Map;
-            var comp = BossComp;
-            if (map == null || comp == null) { return; }
-
-            var segment = (_laneStart - _breachOrigin).Yto0();
-            var length = segment.magnitude;
-            if (length < 0.01f) { return; }
-
-            EnsureIgnoredThings(map);
-            ApocryphaNeedleLane.PierceAlong(this, _breachOrigin, segment / length, length, comp.Props.needleHalfWidth, 0f, length, _hitIds,
-                thing => thing is Building && CanPierce(thing), thing => Pierce(thing, comp));
-        }
-
         private void EnsureIgnoredThings(Map map)
         {
             _ignored ??= ApocryphaGimmicks.GetBlastIgnoredThings(map, _boss);
@@ -881,13 +872,7 @@ namespace VVRace
 
         private void Pierce(Thing thing, CompApocrypha comp)
         {
-            var damage = comp.Props.needleDamage;
-            if (_breach && ApocryphaUtility.BlocksPath(thing))
-            {
-                damage *= comp.Props.needleBreachDamageFactor;
-            }
-
-            ApocryphaNeedleLane.Pierce(thing, damage, comp.Props.needleArmorPenetration, LaneAngle, _boss);
+            ApocryphaNeedleLane.Pierce(thing, comp.Props.needleDamage, comp.Props.needleArmorPenetration, LaneAngle, _boss);
         }
         #endregion
 
@@ -926,20 +911,20 @@ namespace VVRace
 
         private void DrawAimLane(int now, float alpha)
         {
-            var unbound = IsUnbound;
-            var bossInLane = unbound && BossContactAlong() >= 0f;
+            var queen = IsQueen;
+            var bossInLane = queen && BossContactAlong() >= 0f;
             float progress;
             float aimSecs;
             float aimDuration;
 
-            if (unbound)
+            if (queen)
             {
                 var lockTicks = Mathf.Max(1, _lockEndTick - _activateTick);
                 progress = _state == NeedleState.LockOn
                     ? 0.5f * Mathf.Clamp01((now - _activateTick) / (float)lockTicks)
                     : 0.5f + 0.5f * AimProgress;
                 aimSecs = (now - _activateTick) / 60f;
-                aimDuration = (lockTicks + (BossComp?.Props.unboundNeedleLockedTicks ?? 75)) / 60f;
+                aimDuration = (lockTicks + (BossComp?.Props.needleLockedTicks ?? 75)) / 60f;
             }
             else
             {
@@ -950,7 +935,7 @@ namespace VVRace
 
             ApocryphaNeedleRenderer.DrawLane(
                 start: _laneStart, direction: _laneDir, length: _laneLength, width: HalfWidth * 2f,
-                progress: progress, alpha: alpha, bossInside: bossInLane, breach: _breach,
+                progress: progress, alpha: alpha, bossInside: bossInLane,
                 aimSecs: aimSecs, aimDuration: aimDuration, seed: thingIDNumber);
         }
 
@@ -1009,22 +994,24 @@ namespace VVRace
 
         private Vector3 SlotPos(int now)
         {
-            if (IsUnbound)
+            if (IsQueen)
             {
                 var bob = SlotBobHeight * Mathf.Sin(now * 0.05f + _slot * 1.9f);
                 var orbit = OrbitDegrees(now) * Mathf.Deg2Rad;
                 return BodyCenter + new Vector3(Mathf.Cos(orbit) * OrbitRadiusX, 0f, Mathf.Sin(orbit) * OrbitRadiusZ + bob);
             }
 
-            var side = FinSide;
-            var root = new Vector3((FinRootX + _slot * FinStepX) * side, 0f, FinRootZ + _slot * FinStepZ + FinBobHeight * Mathf.Sin(now * 0.04f));
-            return BodyCenter + root + FinDirection(now, side) * FinCenterFromRoot;
+            return BodyCenter + new Vector3(0f, 0f, HaloLift + HaloBobHeight * Mathf.Sin(now * 0.04f)) + HaloDirection(now) * (HaloRootRadius + HaloCenterFromRoot);
         }
 
-        private Vector3 FinDirection(int now, float side)
+        private Vector3 HaloDirection(int now)
         {
-            var tilt = (FinTiltInner + _slot * FinTiltStep + FinSwayDegrees * Mathf.Sin(now * 0.02f + _slot * 0.9f)) * Mathf.Deg2Rad;
-            return new Vector3(Mathf.Sin(tilt) * side, 0f, Mathf.Cos(tilt));
+            var count = Mathf.Max(1, BossComp?.NeedleAttack.NeedleCount ?? 1);
+            var half = (count + 1) / 2;
+            var order = _slot < half ? _slot * 2 : (_slot - half) * 2 + 1;
+            var t = count > 1 ? order / (float)(count - 1) : 0.5f;
+            var angle = (Mathf.Lerp(-HaloSpreadDegrees, HaloSpreadDegrees, t) + HaloSwayDegrees * Mathf.Sin(now * 0.02f + _slot * 0.9f)) * Mathf.Deg2Rad;
+            return new Vector3(Mathf.Sin(angle), 0f, Mathf.Cos(angle));
         }
 
         private float OrbitDegrees(int now)
@@ -1035,9 +1022,9 @@ namespace VVRace
 
         private float SlotAngle(int now)
         {
-            if (!IsUnbound)
+            if (!IsQueen)
             {
-                return FinDirection(now, FinSide).AngleFlat();
+                return HaloDirection(now).AngleFlat();
             }
 
             var orbit = OrbitDegrees(now) * Mathf.Deg2Rad;

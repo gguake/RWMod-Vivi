@@ -89,7 +89,10 @@ namespace VVRace
             FloatRange ashSpeed,
             float emberJitterZ,
             FloatRange emberScale,
-            FloatRange emberSpeed)
+            FloatRange emberSpeed,
+            Color? ashColor = null,
+            FleckDef emberDef = null,
+            Color? emberColor = null)
         {
             if (age % ashInterval == 0)
             {
@@ -99,16 +102,18 @@ namespace VVRace
                 data.velocitySpeed = ashSpeed.RandomInRange;
                 data.rotation = Rand.Range(0f, 360f);
                 data.rotationRate = Rand.Range(-50f, 50f);
+                data.instanceColor = ashColor;
                 map.flecks.CreateFleck(data);
             }
 
             if (age % emberInterval == 0)
             {
                 var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-emberJitterZ, emberJitterZ));
-                var data = FleckMaker.GetDataStatic(pos, map, VVFleckDefOf.VV_Fleck_ApocryphaEmber, emberScale.RandomInRange);
+                var data = FleckMaker.GetDataStatic(pos, map, emberDef ?? VVFleckDefOf.VV_Fleck_ApocryphaEmber, emberScale.RandomInRange);
                 data.velocityAngle = Rand.Range(-25f, 25f);
                 data.velocitySpeed = emberSpeed.RandomInRange;
                 data.rotation = Rand.Range(0f, 360f);
+                data.instanceColor = emberColor;
                 map.flecks.CreateFleck(data);
             }
         }

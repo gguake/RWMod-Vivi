@@ -42,7 +42,7 @@
   </MusicTransitionDef>
 
   <MusicSequenceDef>
-    <defName>VV_ApocryphaBound</defName>
+    <defName>VV_ApocryphaQueen</defName>
     <song>VV_TheFallenQueen</song>
     <loop>true</loop>
     <canBeInterrupted>false</canBeInterrupted>
@@ -52,7 +52,7 @@
   </MusicSequenceDef>
 
   <MusicSequenceDef>
-    <defName>VV_ApocryphaUnbound</defName>
+    <defName>VV_ApocryphaAsphodel</defName>
     <song>VV_TheFallenQueen_Phase2</song>
     <loop>true</loop>
     <canBeInterrupted>false</canBeInterrupted>
@@ -61,20 +61,20 @@
     <pausedVolumeFactor>0.5</pausedVolumeFactor>
   </MusicSequenceDef>
 
-  <!-- 아스포델 1페이즈 음악 전환 -->
+  <!-- 거대 말벌 여왕 음악 전환 -->
   <MusicTransitionDef>
-    <defName>VV_ApocryphaBound</defName>
-    <workerType>VVRace.MusicTransition_ApocryphaBound</workerType>
-    <sequence>VV_ApocryphaBound</sequence>
+    <defName>VV_ApocryphaQueen</defName>
+    <workerType>VVRace.MusicTransition_ApocryphaQueen</workerType>
+    <sequence>VV_ApocryphaQueen</sequence>
     <overridesInterruptions>true</overridesInterruptions>
     <priority>1100</priority>
   </MusicTransitionDef>
 
-  <!-- 아스포델 2페이즈 음악 전환 -->
+  <!-- 아스포델 음악 전환 -->
   <MusicTransitionDef>
-    <defName>VV_ApocryphaUnbound</defName>
-    <workerType>VVRace.MusicTransition_ApocryphaUnbound</workerType>
-    <sequence>VV_ApocryphaUnbound</sequence>
+    <defName>VV_ApocryphaAsphodel</defName>
+    <workerType>VVRace.MusicTransition_ApocryphaAsphodel</workerType>
+    <sequence>VV_ApocryphaAsphodel</sequence>
     <overridesInterruptions>true</overridesInterruptions>
     <priority>1101</priority>
   </MusicTransitionDef>

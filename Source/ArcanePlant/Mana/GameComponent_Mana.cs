@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Verse;
+using Verse.AI.Group;
 
 namespace VVRace
 {
@@ -26,7 +27,6 @@ namespace VVRace
                 _manaCompsByMapTick = ticksGame;
                 _manaCompsByMap.Clear();
 
-                // HashSet은 순회 중에 지울 수 없으므로 파괴된 항목은 돌기 전에 걸러낸다.
                 _manaComps.RemoveWhere(v => v.parent == null || v.parent.Destroyed);
 
                 foreach (var comp in _manaComps)
@@ -51,7 +51,6 @@ namespace VVRace
 
         private Game _game;
 
-        // 저장하지 않는다. 새로 만든 물건은 PostPostMake에서, 불러온 물건은 PostLoadInit에서 CompMana가 스스로 등록한다.
         private readonly HashSet<CompMana> _manaComps = new HashSet<CompMana>();
         private readonly Dictionary<Map, List<CompMana>> _manaCompsByMap = new Dictionary<Map, List<CompMana>>();
         private int _manaCompsByMapTick = -1;
@@ -59,11 +58,12 @@ namespace VVRace
         public IEnumerable<Pawn> GetFairyficatedPawns(Pawn pawn) => _fairyficated.Where(v => v.linker == pawn).Select(v => v.fairy);
         private List<FairyficatedPawn> _fairyficated = new List<FairyficatedPawn>();
 
+        public IReadOnlyList<Pawn> AsphodelBoundVivis => _asphodelBound;
+        private List<Pawn> _asphodelBound = new List<Pawn>();
+
         public ViviEndingQuest EndingQuest => _endingQuest;
         private ViviEndingQuest _endingQuest = new ViviEndingQuest();
 
-        // 스토리텔러·보스전에서 자주 찾으므로 GetComponent처럼 목록을 앞에서부터 형식 검사하지 않고 마지막으로 찾은 위치를 먼저 본다.
-        // 이전 게임을 붙잡지 않도록 컴포넌트가 아니라 위치만 기억하고, 그 위치에 없으면 다시 찾는다.
         private static int _cachedIndex = -1;
 
         public static GameComponent_Mana Of(Game game)
@@ -98,15 +98,18 @@ namespace VVRace
         public override void ExposeData()
         {
             Scribe_Collections.Look(ref _fairyficated, "fairyficated", LookMode.Deep);
+            Scribe_Collections.Look(ref _asphodelBound, "asphodelBound", LookMode.Deep);
             Scribe_Deep.Look(ref _endingQuest, "endingQuest");
 
-            // PostLoadInit 호출 순서는 정해져 있지 않아 물건이 먼저 등록했을 수 있으므로 여기서 등록부를 비우지 않는다.
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (_fairyficated == null)
                 {
                     _fairyficated = new List<FairyficatedPawn>();
                 }
+
+                _asphodelBound ??= new List<Pawn>();
+                _asphodelBound.RemoveAll(v => v == null);
 
                 if (_endingQuest == null)
                 {
@@ -120,7 +123,6 @@ namespace VVRace
             _endingQuest?.Tick();
         }
 
-        // 화면 섬광 제거 등 실시간 연출은 일시정지 중에도 처리한다.
         public override void GameComponentUpdate()
         {
             _endingQuest?.Update();
@@ -155,6 +157,39 @@ namespace VVRace
         public void UnregisterAllFairy(Pawn linker)
         {
             _fairyficated.RemoveAll(v => v.linker == linker);
+        }
+
+        public void BindToAsphodel(Pawn vivi)
+        {
+            if (vivi == null || vivi.Dead || vivi.Destroyed || _asphodelBound.Contains(vivi)) { return; }
+
+            vivi.GetLord()?.Notify_PawnLost(vivi, PawnLostCondition.Vanished);
+            if (vivi.Spawned)
+            {
+                vivi.jobs?.StopAll();
+                if (vivi.carryTracker?.CarriedThing != null)
+                {
+                    vivi.carryTracker.TryDropCarriedThing(vivi.Position, ThingPlaceMode.Near, out _);
+                }
+
+                vivi.DeSpawnOrDeselect(DestroyMode.Vanish);
+            }
+            else
+            {
+                vivi.holdingOwner?.Remove(vivi);
+            }
+
+            if (Find.WorldPawns.Contains(vivi))
+            {
+                Find.WorldPawns.RemovePawn(vivi);
+            }
+
+            _asphodelBound.Add(vivi);
+        }
+
+        public void UnbindFromAsphodel(Pawn vivi)
+        {
+            _asphodelBound.Remove(vivi);
         }
     }
 }

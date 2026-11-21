@@ -20,7 +20,7 @@ namespace VVRace
         internal const int ErrorKeyAssimilationTick = 0x5645_4E30;
         internal const int ErrorKeyAmberCommsOption = 0x5645_4E40;
         internal const int ErrorKeyQueenDeathIntercept = 0x5645_4E50;
-        internal const int ErrorKeyDissolveDeathCapture = 0x5645_4E60;
+        internal const int ErrorKeyApocryphaKillIntercept = 0x5645_4E60;
 
         private static readonly FieldInfo QueuedIncidentsField = AccessTools.Field(typeof(IncidentQueue), "queuedIncidents");
 
@@ -298,30 +298,24 @@ namespace VVRace
 
         public static void VanishBoss(Pawn boss)
         {
-            if (boss == null || boss.Destroyed || !boss.Spawned) { return; }
+            if (boss == null || boss.Destroyed) { return; }
 
-            var map = boss.Map;
+            var rebirth = boss.ParentHolder as ApocryphaRebirth;
+            if (!boss.Spawned && (rebirth == null || !rebirth.Spawned)) { return; }
+
+            var map = boss.MapHeld;
             ApocryphaUtility.ReleaseEscorts(boss);
             VanishAllTitanicHornets(map);
             HornetManifestation.CancelAll(map);
 
-            ApocryphaVanishEffect.Spawn(boss.Position, map, 2.5f).Cleanup();
-            boss.Destroy(DestroyMode.Vanish);
-        }
-
-        public static void VanishEscorts(Pawn boss)
-        {
-            var vanishEffect = ApocryphaVanishEffect;
-            foreach (var hornet in ApocryphaUtility.GetEscorts(boss))
+            ApocryphaVanishEffect.Spawn(boss.PositionHeld, map, 2.5f).Cleanup();
+            if (rebirth != null)
             {
-                if (hornet == null || hornet.Destroyed) { continue; }
-
-                if (hornet.Spawned)
-                {
-                    vanishEffect.Spawn(hornet.Position, hornet.Map).Cleanup();
-                }
-
-                hornet.Destroy(DestroyMode.Vanish);
+                rebirth.Destroy(DestroyMode.Vanish);
+            }
+            else
+            {
+                boss.Destroy(DestroyMode.Vanish);
             }
         }
 

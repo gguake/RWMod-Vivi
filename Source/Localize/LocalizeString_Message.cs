@@ -38,18 +38,17 @@
         public const string VV_Message_EverflowerAltarRequiresLevel = nameof(VV_Message_EverflowerAltarRequiresLevel);
         public const string VV_Message_AnchorEverflowerLeftAltar = nameof(VV_Message_AnchorEverflowerLeftAltar);
 
-        public const string VV_Message_ApocryphaBondReleased = nameof(VV_Message_ApocryphaBondReleased);
         public const string VV_Message_ApocryphaChannelInterrupted = nameof(VV_Message_ApocryphaChannelInterrupted);
         public const string VV_Message_ApocryphaEscapedRoofCollapse = nameof(VV_Message_ApocryphaEscapedRoofCollapse);
         public const string VV_Message_ApocryphaShieldBroken = nameof(VV_Message_ApocryphaShieldBroken);
         public const string VV_Message_ApocryphaShieldRestored = nameof(VV_Message_ApocryphaShieldRestored);
         public const string VV_Message_ApocryphaNeedleStuck = nameof(VV_Message_ApocryphaNeedleStuck);
-        public const string VV_Message_ApocryphaAllNeedlesStuck = nameof(VV_Message_ApocryphaAllNeedlesStuck);
-        public const string VV_Message_ApocryphaNeedlesPulled = nameof(VV_Message_ApocryphaNeedlesPulled);
+        public const string VV_Message_ApocryphaNeedlesShakenOff = nameof(VV_Message_ApocryphaNeedlesShakenOff);
         public const string VV_Message_ApocryphaNeedleActivated = nameof(VV_Message_ApocryphaNeedleActivated);
 
-        public const string VV_Message_FairyFlowerBonded = nameof(VV_Message_FairyFlowerBonded);
-        public const string VV_Message_FairyBondReleased = nameof(VV_Message_FairyBondReleased);
+        public const string VV_Message_FairyFlowerResonated = nameof(VV_Message_FairyFlowerResonated);
+        public const string VV_Message_FairyFlowerResonanceFailed = nameof(VV_Message_FairyFlowerResonanceFailed);
+        public const string VV_Message_FairyFlowerBurst = nameof(VV_Message_FairyFlowerBurst);
         public const string VV_Message_DoomFlowerBloomed = nameof(VV_Message_DoomFlowerBloomed);
 
         public const string VV_Message_SkyShieldRaised = nameof(VV_Message_SkyShieldRaised);

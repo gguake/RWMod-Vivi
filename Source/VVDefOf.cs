@@ -8,6 +8,7 @@ namespace VVRace
     public static class VVDamageDefOf
     {
         public static DamageDef VV_ManawaveStun;
+        public static DamageDef VV_FairyBlast;
 
         public static DamageDef VV_GiantNeedlePierce;
         public static DamageDef VV_RuinTrialBlast;
@@ -77,7 +78,7 @@ namespace VVRace
         public static JobDef VV_ApocryphaSmash;
         public static JobDef VV_ActivateApocryphaNeedle;
 
-        public static JobDef VV_BondFairyFlower;
+        public static JobDef VV_ResonateFairyFlower;
     }
 
     [DefOf]
@@ -162,20 +163,17 @@ namespace VVRace
 
         public static ThingDef VV_Apocrypha;
         public static ThingDef VV_DyingApocrypha;
+        public static ThingDef VV_ApocryphaRebirth;
         public static ThingDef VV_ApocryphaManifestation;
         public static ThingDef VV_HornetManifestation;
 
         public static ThingDef VV_Mote_ApocryphaAimTarget;
-        public static ThingDef VV_Mote_ApocryphaAimCharge;
         public static ThingDef VV_Mote_ApocryphaDrainVortex;
         public static ThingDef VV_Mote_ApocryphaRepelCharge;
-        public static ThingDef VV_Mote_FairyInterferenceShimmer;
+        public static ThingDef VV_Mote_FairyAttunementShimmer;
 
         public static ThingDef VV_ApocryphaNeedle;
 
-        public static ThingDef VV_Projectile_FairyShell;
-        public static ThingDef VV_Projectile_DoomSeed;
-        public static ThingDef VV_Projectile_FairySeed;
 
         public static ThingDef VV_DoomFlower;
         public static ThingDef VV_FairyFlower;
@@ -272,9 +270,9 @@ namespace VVRace
 
         public static HediffDef VV_ApocryphaFairyBond;
         public static HediffDef VV_ApocryphaStuckNeedle;
-        public static HediffDef VV_CorruptedEverflowerAssimilation;
+        public static HediffDef VV_DoomPhantasm;
 
-        public static HediffDef VV_FairyInterference;
+        public static HediffDef VV_FairyAttunement;
         public static HediffDef VV_DoomBlight_Fear;
         public static HediffDef VV_DoomBlight_Hunger;
         public static HediffDef VV_DoomBlight_Plague;
@@ -349,9 +347,8 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaArrive;
         public static EffecterDef VV_Effecter_ApocryphaAim;
         public static EffecterDef VV_Effecter_ApocryphaAimSustain;
-        public static EffecterDef VV_Effecter_ApocryphaShockwave;
+        public static EffecterDef VV_Effecter_ApocryphaQueenDeath;
         public static EffecterDef VV_Effecter_ApocryphaTransform;
-        public static EffecterDef VV_Effecter_ApocryphaMorphPulse;
         public static EffecterDef VV_Effecter_ApocryphaChannel;
         public static EffecterDef VV_Effecter_ApocryphaBreath;
         public static EffecterDef VV_Effecter_ApocryphaDeath;
@@ -374,13 +371,14 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaManifestLand;
 
         public static EffecterDef VV_Effecter_DoomBloomCurse;
-        public static EffecterDef VV_Effecter_SeedBloomDoom;
         public static EffecterDef VV_Effecter_SeedBloomFairy;
         public static EffecterDef VV_Effecter_FairyShellLaunch;
         public static EffecterDef VV_Effecter_FairyShellImpact;
-        public static EffecterDef VV_Effecter_FairyFlowerBonding;
-        public static EffecterDef VV_Effecter_ManaBackflow;
-        public static EffecterDef VV_Effecter_FairyInterferenceAura;
+        public static EffecterDef VV_Effecter_DoomWaveCast;
+        public static EffecterDef VV_Effecter_FairyFlowerResonance;
+        public static EffecterDef VV_Effecter_FairyFlowerResonated;
+        public static EffecterDef VV_Effecter_FairyFlowerBurst;
+        public static EffecterDef VV_Effecter_FairyAttunementAura;
         public static EffecterDef VV_Effecter_FairyReturn;
 
         public static EffecterDef VV_Effecter_QueenCorpseBloom;
@@ -423,22 +421,25 @@ namespace VVRace
 
         public static FleckDef VV_Fleck_ApocryphaToxicGas;
         public static FleckDef VV_Fleck_ApocryphaToxicGasViolet;
+        public static FleckDef VV_Fleck_ApocryphaRotGas;
+        public static FleckDef VV_Fleck_ApocryphaRotGasBile;
+        public static FleckDef VV_Fleck_ApocryphaShockWave;
         public static FleckDef VV_Fleck_ApocryphaAsh;
         public static FleckDef VV_Fleck_ApocryphaEmber;
         public static FleckDef VV_Fleck_ApocryphaStealPetal;
+        public static FleckDef VV_Fleck_ApocryphaFairyLight;
         public static FleckDef VV_Fleck_ApocryphaDarkWisp;
         public static FleckDef VV_Fleck_ApocryphaManifestSpark;
         public static FleckDef VV_Fleck_ApocryphaRepelWave;
         public static FleckDef VV_Fleck_ApocryphaAimSpark;
         public static FleckDef VV_Fleck_ApocryphaAimTwinkle;
 
-        public static FleckDef VV_Fleck_GimmickBackflowBeam;
+        public static FleckDef VV_Fleck_GimmickDoomBloomWave;
         public static FleckDef VV_Fleck_GimmickTwinkle;
         public static FleckDef VV_Fleck_GimmickHalo;
         public static FleckDef VV_Fleck_GimmickPhaseRing;
         public static FleckDef VV_Fleck_GimmickDoomLaunchWave;
         public static FleckDef VV_Fleck_GimmickDoomRing;
-        public static FleckDef VV_Fleck_GimmickFlash;
 
         public static FleckDef VV_Fleck_WindOfRestGust;
         public static FleckDef VV_Fleck_HornetDust;

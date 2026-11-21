@@ -4,9 +4,9 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class JobDriver_BondFairyFlower : JobDriver
+    public class JobDriver_ResonateFairyFlower : JobDriver
     {
-        public const int BondTicks = 180;
+        public const int ResonateTicks = 180;
 
         private const TargetIndex FlowerIndex = TargetIndex.A;
 
@@ -20,15 +20,15 @@ namespace VVRace
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedOrNull(FlowerIndex);
-            this.FailOn(() => Flower == null || !Building_FairyFlower.CanBond(pawn).Accepted);
+            this.FailOn(() => Flower == null || !Flower.CanResonate(pawn).Accepted);
 
             yield return Toils_Goto.GotoThing(FlowerIndex, PathEndMode.Touch);
 
-            yield return Toils_General.Wait(BondTicks, FlowerIndex)
+            yield return Toils_General.Wait(ResonateTicks, FlowerIndex)
                 .WithProgressBarToilDelay(FlowerIndex)
-                .WithEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerBonding, FlowerIndex);
+                .WithEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerResonance, FlowerIndex);
 
-            yield return Toils_General.DoAtomic(() => Flower?.Notify_BondedBy(pawn));
+            yield return Toils_General.DoAtomic(() => Flower?.Notify_Resonated(pawn, Rand.Chance(Flower.ResonanceChance(pawn))));
         }
     }
 }

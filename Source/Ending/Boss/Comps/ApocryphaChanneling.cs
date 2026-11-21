@@ -25,7 +25,7 @@ namespace VVRace
 
         public bool IsChanneling => Pawn.Spawned && Pawn.CurJobDef == VVJobDefOf.VV_ApocryphaChannel;
         public bool PendingSteal => _pendingSteal;
-        public int DurationTicks => _comp.Phase == ApocryphaPhase.Unbound ? Props.channelTicksUnbound : Props.channelTicksBound;
+        public int DurationTicks => _comp.Phase == ApocryphaPhase.Queen ? Props.channelTicksQueen : Props.channelTicksAsphodel;
         public float Progress => IsChanneling ? Mathf.Clamp01((float)_ticks / DurationTicks) : 0f;
         public int TicksLeft => Mathf.Max(0, DurationTicks - _ticks);
 
@@ -78,7 +78,7 @@ namespace VVRace
         public void TickContactCheck()
         {
             if (!Pawn.IsHashIntervalTick(ContactCheckInterval)) { return; }
-            if (IsChanneling || _comp.Breath.IsBreathing || _pendingSteal) { return; }
+            if (IsChanneling || _comp.Breath.IsBreathing || _comp.EscortSummon.IsCasting || _pendingSteal) { return; }
             if (Pawn.stances.stunner.Stunned) { return; }
             if (!InStealRange()) { return; }
 
@@ -134,8 +134,7 @@ namespace VVRace
         {
             if (IsChanneling && TryGetStealTarget(out _, out _, out var everflower))
             {
-                var flowerPos = everflower.DrawPos + everflower.EverflowerComp.RitualEffecterOffset;
-                SoulLinkRenderer.Draw(flowerPos, _comp.BodyCenter, 0.9f, BeamColor);
+                SoulLinkRenderer.Draw(ApocryphaGimmicks.EverflowerBudPos(everflower), _comp.BodyCenter, 0.9f, BeamColor);
             }
         }
 
@@ -145,9 +144,9 @@ namespace VVRace
 
             _devForce = true;
             Pawn.stances.stunner.StopStun();
-            _comp.Shell.Cancel();
             _comp.NeedleAttack.CancelAims();
             _comp.Breath.Cancel();
+            _comp.EscortSummon.Cancel();
             _comp.InterruptCurrentJob();
         }
 

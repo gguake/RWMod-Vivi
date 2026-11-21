@@ -74,8 +74,14 @@
         public const string VV_Letter_EverflowerAttunementLevel5Preamble = nameof(VV_Letter_EverflowerAttunementLevel5Preamble);
         public const string VV_Letter_EverflowerAttunementLevel6Preamble = nameof(VV_Letter_EverflowerAttunementLevel6Preamble);
 
-        public const string VV_Letter_ApocryphaUnboundLabel = nameof(VV_Letter_ApocryphaUnboundLabel);
-        public const string VV_Letter_ApocryphaUnbound = nameof(VV_Letter_ApocryphaUnbound);
+        public const string VV_Letter_ApocryphaRebirthLabel = nameof(VV_Letter_ApocryphaRebirthLabel);
+        public const string VV_Letter_ApocryphaRebirth = nameof(VV_Letter_ApocryphaRebirth);
+        public const string VV_Letter_AsphodelFallenLabel = nameof(VV_Letter_AsphodelFallenLabel);
+        public const string VV_Letter_AsphodelFallen = nameof(VV_Letter_AsphodelFallen);
+        public const string VV_Letter_AsphodelReleasedLabel = nameof(VV_Letter_AsphodelReleasedLabel);
+        public const string VV_Letter_AsphodelReleased = nameof(VV_Letter_AsphodelReleased);
+        public const string VV_Letter_FairyFlowerBoundLabel = nameof(VV_Letter_FairyFlowerBoundLabel);
+        public const string VV_Letter_FairyFlowerBound = nameof(VV_Letter_FairyFlowerBound);
 
         public const string VV_Letter_QueenLifeResonanceLabel = nameof(VV_Letter_QueenLifeResonanceLabel);
         public const string VV_Letter_QueenLifeResonance = nameof(VV_Letter_QueenLifeResonance);

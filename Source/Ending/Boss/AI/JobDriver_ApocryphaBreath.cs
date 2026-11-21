@@ -51,7 +51,7 @@ namespace VVRace
             var mouth = pawn.DrawPos + comp.Breath.MouthOffset();
             if (!mouth.ShouldSpawnMotesAt(map)) { return; }
 
-            var data = FleckMaker.GetDataStatic(mouth + Gen.RandomHorizontalVector(0.35f), map, VVFleckDefOf.VV_Fleck_ApocryphaToxicGas, Rand.Range(0.6f, 1.1f));
+            var data = FleckMaker.GetDataStatic(mouth + Gen.RandomHorizontalVector(0.35f), map, comp.Breath.GasFleck(false), Rand.Range(0.6f, 1.1f));
             data.velocityAngle = Rand.Range(150f, 210f);
             data.velocitySpeed = Rand.Range(0.3f, 0.8f);
             data.rotation = Rand.Range(0f, 360f);

@@ -38,7 +38,7 @@ namespace VVRace
 
         public bool IsManifesting => _manifestSpawnTick >= 0;
 
-        public bool IsBossAlive => _boss != null && !_boss.Destroyed && !_boss.Dead && _boss.Spawned;
+        public bool IsBossAlive => _boss != null && !_boss.Destroyed && !_boss.Dead && (_boss.Spawned || _boss.ParentHolder is ApocryphaRebirth);
 
         private Map AnchorMap => ViviEndingUtility.AnchorMapOf(anchor);
 

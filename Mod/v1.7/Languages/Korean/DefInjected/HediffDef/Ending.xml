@@ -2,17 +2,17 @@
 <LanguageData>
 
 <VV_ApocryphaFairyBond.label>요정 비비 결속</VV_ApocryphaFairyBond.label>
-<VV_ApocryphaFairyBond.description>아스포델을 겹겹이 감싼 수많은 요정 비비들이 보호장을 이루어 모든 공격을 대신 받아냅니다.</VV_ApocryphaFairyBond.description>
+<VV_ApocryphaFairyBond.description>수많은 요정 비비가 아스포델을 겹겹이 감싸 모든 공격을 막아내므로, 아스포델 본체는 어떠한 피해도 받지 않습니다. 이 결속은 〈요정 교화〉로 이어진 빛이 아스포델에게 닿을 때만 풀려납니다. 결속이 충분히 약해지면 남은 요정 비비들도 스스로 흩어지기 시작합니다.</VV_ApocryphaFairyBond.description>
 
 <VV_ApocryphaStuckNeedle.label>고대 엘텍스 바늘</VV_ApocryphaStuckNeedle.label>
-<VV_ApocryphaStuckNeedle.description>몸에 꽂힌 고대 엘텍스 바늘입니다. 꽂힌 바늘이 많을수록 받는 피해가 커지며 세 개가 모두 꽂히면 한동안 비틀거리다 바늘을 뽑아냅니다.</VV_ApocryphaStuckNeedle.description>
+<VV_ApocryphaStuckNeedle.description>외피에 깊숙이 꽂힌 고대 엘텍스 바늘입니다. 꽂힌 바늘이 많을수록 받는 피해가 크게 늘어납니다. 한동안 새로운 바늘이 꽂히지 않으면 몸에 박힌 바늘을 모두 떨쳐냅니다.</VV_ApocryphaStuckNeedle.description>
 
-<VV_CorruptedEverflowerAssimilation.label>오염된 영원꽃 동화</VV_CorruptedEverflowerAssimilation.label>
-<VV_CorruptedEverflowerAssimilation.description>아스포델이 일그러뜨린 영원꽃의 마나에 동화되어 있습니다. 독성 환경에 영향을 받지 않으며, 죽으면 시체를 남기지 않고 잿가루로 흩어집니다.</VV_CorruptedEverflowerAssimilation.description>
+<VV_DoomPhantasm.label>멸망꽃 환영</VV_DoomPhantasm.label>
+<VV_DoomPhantasm.description>멸망꽃에 서린 기억에서 불려 나온 환영입니다. 고통과 허기, 더위와 추위를 느끼지 않고 불에 타지도 않지만, 살아 있는 몸보다 더 큰 피해를 받습니다. 쓰러지면 잿가루로 흩어져 아무것도 남기지 않습니다.</VV_DoomPhantasm.description>
 
-<VV_FairyInterference.label>요정 간섭</VV_FairyInterference.label>
-<VV_FairyInterference.description>아스포델과 요정 비비들의 결속에 간섭해 끊어내어 요정 비비들을 해방시킬 수 있습니다.</VV_FairyInterference.description>
-<VV_FairyInterference.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 간섭이 사라졌습니다.</VV_FairyInterference.comps.0.messageOnDisappear>
+<VV_FairyAttunement.label>요정 교화</VV_FairyAttunement.label>
+<VV_FairyAttunement.description>요정꽃의 마나와 공명한 상태입니다. 가까이 있는 다른 교화된 이들과 금빛 선으로 이어지며, 이 빛이 아스포델에게 닿으면 그녀를 감싼 요정 비비들의 결속이 풀려납니다.</VV_FairyAttunement.description>
+<VV_FairyAttunement.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 교화가 사라졌습니다.</VV_FairyAttunement.comps.0.messageOnDisappear>
 
 <VV_DoomBlight_Fear.label>멸망의 공포</VV_DoomBlight_Fear.label>
 <VV_DoomBlight_Fear.description>멸망꽃이 피워낸 환영 속에서 불타는 옛 둥지와 비명이 끊이지 않습니다. 고통에 쉽게 쓰러지고 정신이상에 빠지기 쉬워집니다.</VV_DoomBlight_Fear.description>

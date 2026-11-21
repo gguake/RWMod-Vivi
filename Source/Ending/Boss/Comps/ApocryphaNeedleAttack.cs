@@ -13,27 +13,26 @@ namespace VVRace
         private const int SpawnCheckInterval = 60;
         private const int StuckSyncInterval = 30;
         private const int StunRecoverTicks = 120;
-        private const int BreachHoldTicks = 600;
-        private const int BreachDeadlineTicks = 5000;
-        private const float BreachStandRadius = 2f;
+        private const int PatternCount = 3;
+        private const float RepeatedPatternWeight = 0.25f;
+
+        public const int AsphodelNeedleCount = 6;
 
         private readonly CompApocrypha _comp;
 
         private List<ApocryphaNeedle> _needles = new List<ApocryphaNeedle>();
         private int _readyTick;
-        private bool _stunned;
-        private IntVec3 _breachTarget = IntVec3.Invalid;
-        private IntVec3 _breachStandCell = IntVec3.Invalid;
-        private IntVec3 _breachBlockedCell = IntVec3.Invalid;
-        private int _breachDeadlineTick = -1;
-        private int _breachUntilTick = -1;
+        private int _lastStickTick = -1;
+        private int _lastPattern = -1;
 
         private Pawn Pawn => _comp.Pawn;
         private CompProperties_Apocrypha Props => _comp.Props;
 
         public IReadOnlyList<ApocryphaNeedle> Needles => _needles;
-        public bool BreachInProgress => _breachBlockedCell.IsValid;
-        public int NeedleCount => _comp.Phase == ApocryphaPhase.Unbound ? Props.unboundNeedleCount : Props.needleCount;
+        public int LastPattern => _lastPattern;
+        public int NeedleCount => _comp.Phase == ApocryphaPhase.Asphodel ? AsphodelNeedleCount : Props.queenNeedleCount;
+        public int LastStickTick => _lastStickTick;
+        public int TicksUntilShakeOff => StuckNeedleCount > 0 ? Mathf.Max(0, _lastStickTick + Props.needleShakeOffTicks - GenTicks.TicksGame) : -1;
 
         public int StuckNeedleCount
         {
@@ -57,12 +56,8 @@ namespace VVRace
         public void ExposeData()
         {
             Scribe_Values.Look(ref _readyTick, "readyTick", 0);
-            Scribe_Values.Look(ref _stunned, "stunned", false);
-            Scribe_Values.Look(ref _breachTarget, "breachTarget", IntVec3.Invalid);
-            Scribe_Values.Look(ref _breachStandCell, "breachStandCell", IntVec3.Invalid);
-            Scribe_Values.Look(ref _breachBlockedCell, "breachBlockedCell", IntVec3.Invalid);
-            Scribe_Values.Look(ref _breachDeadlineTick, "breachDeadlineTick", -1);
-            Scribe_Values.Look(ref _breachUntilTick, "breachUntilTick", -1);
+            Scribe_Values.Look(ref _lastStickTick, "lastStickTick", -1);
+            Scribe_Values.Look(ref _lastPattern, "lastPattern", -1);
 
             if (Scribe.mode == LoadSaveMode.Saving)
             {
@@ -82,15 +77,8 @@ namespace VVRace
             _readyTick = tick;
         }
 
-        public void ClearStun()
+        public void TickAsphodel(int now, bool stunned)
         {
-            _stunned = false;
-        }
-
-        public void TickBound(int now, bool stunned)
-        {
-            if (Props.needleCount <= 0) { return; }
-
             if (Pawn.IsHashIntervalTick(SpawnCheckInterval))
             {
                 EnsureNeedles();
@@ -108,34 +96,69 @@ namespace VVRace
             if (now < _readyTick || _comp.Channel.IsChanneling || _comp.Channel.PendingSteal) { return; }
 
             var idle = _needles.Where(v => v.Spawned && v.IsIdle).ToList();
-            if (idle.Count > 0 && TryGetBreachAim(now, out var breachCell))
-            {
-                AimVolley(idle, breachCell, idle.Count, breach: true);
-                _readyTick = now + Props.needleCastIntervalTicks.RandomInRange;
-                return;
-            }
-
-            if (idle.Count == 0 || !_comp.Targeting.TryFindTargetCell(Props.needleTargetRange, IsInAimedLane, null, out var cell))
+            if (idle.Count < AsphodelNeedleCount || !_comp.Targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second))
             {
                 _readyTick = now + TargetScanInterval;
                 return;
             }
 
             idle.Shuffle();
-            AimVolley(idle, cell, Mathf.Clamp(Props.needleVolleyCount.RandomInRange, 1, idle.Count), breach: false);
+            FirePattern(PickPattern(), idle, first, second);
             _readyTick = now + Props.needleCastIntervalTicks.RandomInRange;
         }
 
-        public void TickUnbound(bool stunned)
+        public void FirePattern(int pattern, List<ApocryphaNeedle> idle, IntVec3 first, IntVec3 second)
+        {
+            var startAngle = Rand.Range(0f, 360f);
+            switch (pattern)
+            {
+                case 0:
+                    AimFixed(idle, 6, startAngle);
+                    break;
+
+                case 1:
+                    AimFixed(idle, 4, startAngle);
+                    if (second.IsValid)
+                    {
+                        idle[4].StartAim(first, Props.needleAimTicks);
+                        idle[5].StartAim(second, Props.needleAimTicks);
+                    }
+                    else
+                    {
+                        AimVolley(idle.GetRange(4, 2), first, 2);
+                    }
+                    break;
+
+                default:
+                    AimVolley(idle.GetRange(0, 3), first, 3);
+                    if (second.IsValid)
+                    {
+                        AimVolley(idle.GetRange(3, 3), second, 3);
+                    }
+                    break;
+            }
+
+            _lastPattern = pattern;
+        }
+
+        private int PickPattern()
+        {
+            return Enumerable.Range(0, PatternCount).RandomElementByWeight(v => v == _lastPattern ? RepeatedPatternWeight : 1f);
+        }
+
+        private void AimFixed(List<ApocryphaNeedle> idle, int count, float startAngle)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                idle[i].StartAimDirection(Quaternion.AngleAxis(startAngle + 360f / count * i, Vector3.up) * Vector3.forward, Props.needleAimTicks);
+            }
+        }
+
+        public void TickQueen(int now, bool stunned)
         {
             if (Pawn.IsHashIntervalTick(StuckSyncInterval))
             {
                 SyncStuckNeedleHediff();
-            }
-
-            if (_stunned && !stunned)
-            {
-                PullOutNeedles();
             }
 
             if (!_comp.IsQuestBossFight)
@@ -144,7 +167,20 @@ namespace VVRace
                 return;
             }
 
-            if (Props.unboundNeedleCount <= 0 || !Pawn.IsHashIntervalTick(SpawnCheckInterval)) { return; }
+            if (Props.queenNeedleCount <= 0) { return; }
+
+            if (_lastStickTick < 0)
+            {
+                AttachInitialNeedles(now);
+                return;
+            }
+
+            if (!stunned && StuckNeedleCount > 0 && now - _lastStickTick >= Props.needleShakeOffTicks)
+            {
+                ShakeOff(now);
+            }
+
+            if (!Pawn.IsHashIntervalTick(SpawnCheckInterval)) { return; }
 
             EnsureNeedles();
 
@@ -155,122 +191,25 @@ namespace VVRace
             }
         }
 
-        public bool TryStartBreach(Thing target, float maxDistance, out IntVec3 standCell)
+        public void Notify_NeedleStuck()
         {
-            standCell = IntVec3.Invalid;
-            EndBreach();
-            if (_comp.Phase != ApocryphaPhase.Bound || target == null || !target.Spawned || target.Map != Pawn.Map) { return false; }
-            if (Pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly)) { return false; }
+            if (_comp.Phase != ApocryphaPhase.Queen || !Pawn.Spawned) { return; }
 
-            var map = Pawn.Map;
-            var origin = Pawn.Position;
-            var targetRect = target.OccupiedRect();
-            var blocked = IntVec3.Invalid;
-            standCell = origin;
-            foreach (var c in GenSight.PointsOnLineOfSight(origin, target.Position))
-            {
-                if (c == origin) { continue; }
-                if (targetRect.Contains(c)) { break; }
-                if (maxDistance > 0f && !origin.InHorDistOf(c, maxDistance)) { break; }
-                if (!ApocryphaUtility.IsBreachableCell(map, c)) { return false; }
-
-                var edifice = c.GetEdifice(map);
-                if (edifice != null && ApocryphaUtility.BlocksPath(edifice))
-                {
-                    blocked = c;
-                    break;
-                }
-
-                if (!c.Standable(map)) { continue; }
-
-                if (!Pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly))
-                {
-                    blocked = c;
-                    break;
-                }
-
-                standCell = c;
-            }
-
-            if (!blocked.IsValid) { return false; }
-
-            _breachTarget = target.Position;
-            _breachStandCell = standCell;
-            _breachBlockedCell = blocked;
-            _breachDeadlineTick = GenTicks.TicksGame + BreachDeadlineTicks;
-            _breachUntilTick = -1;
-            return true;
-        }
-
-        public bool TryContinueBreach(out IntVec3 standCell)
-        {
-            standCell = _breachStandCell;
-            if (!BreachInProgress) { return false; }
-
-            var now = GenTicks.TicksGame;
-            if (ShouldEndBreach(now))
-            {
-                EndBreach();
-                return false;
-            }
-
-            if (_breachUntilTick < 0 && Pawn.Position.InHorDistOf(_breachStandCell, BreachStandRadius))
-            {
-                _breachUntilTick = now + BreachHoldTicks;
-            }
-
-            return true;
-        }
-
-        private bool ShouldEndBreach(int now)
-        {
-            return _comp.Phase != ApocryphaPhase.Bound
-                || now > _breachDeadlineTick
-                || (_breachUntilTick >= 0 && now > _breachUntilTick)
-                || Pawn.CanReach(_breachBlockedCell, PathEndMode.OnCell, Danger.Deadly);
-        }
-
-        public void EndBreach()
-        {
-            _breachTarget = IntVec3.Invalid;
-            _breachStandCell = IntVec3.Invalid;
-            _breachBlockedCell = IntVec3.Invalid;
-            _breachDeadlineTick = -1;
-            _breachUntilTick = -1;
-        }
-
-        public void Notify_NeedleStuck(ApocryphaNeedle needle)
-        {
-            if (_comp.Phase != ApocryphaPhase.Unbound || !Pawn.Spawned) { return; }
-
+            _lastStickTick = GenTicks.TicksGame;
             SyncStuckNeedleHediff();
             _comp.TakeVitalityDamage(_comp.MaxVitality * Props.needleStickVitalityDamage);
 
-            var allStuck = StuckNeedleCount >= Props.unboundNeedleCount && !_stunned;
-            if (allStuck)
-            {
-                _stunned = true;
-            }
-
-            _comp.GimmickStun(allStuck ? Props.allNeedlesStuckStunTicks : Props.needleStickStunTicks, null);
+            _comp.GimmickStun(Props.needleStickStunTicks, null);
             _comp.Channel.Interrupt();
             _comp.Breath.Cancel();
+            _comp.EscortSummon.Cancel();
 
-            if (allStuck)
-            {
-                _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaStaggered, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
-                ApocryphaUtility.ShakeCamera(Pawn.Map, 1.5f);
-                Messages.Message(LocalizeString_Message.VV_Message_ApocryphaAllNeedlesStuck.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
-            }
-            else
-            {
-                Messages.Message(LocalizeString_Message.VV_Message_ApocryphaNeedleStuck.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
-            }
+            Messages.Message(LocalizeString_Message.VV_Message_ApocryphaNeedleStuck.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
         }
 
         public void SyncStuckNeedleHediff()
         {
-            var count = _comp.Phase == ApocryphaPhase.Unbound ? StuckNeedleCount : 0;
+            var count = _comp.Phase == ApocryphaPhase.Queen ? StuckNeedleCount : 0;
             var hediff = Pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ApocryphaStuckNeedle);
             if (count <= 0)
             {
@@ -292,10 +231,61 @@ namespace VVRace
             }
         }
 
-        public void ScatterAll()
+        public void ShakeOff(int now)
+        {
+            var map = Pawn.Map;
+            var chosen = new List<IntVec3>();
+            for (int i = 0; i < _needles.Count; i++)
+            {
+                var needle = _needles[i];
+                if (needle == null || needle.Destroyed || !needle.IsStuck) { continue; }
+
+                var cell = FindPlantCell(map, Pawn.Position, chosen);
+                chosen.Add(cell);
+                needle.PullOut(cell);
+            }
+
+            _lastStickTick = now;
+            SyncStuckNeedleHediff();
+
+            HornetManifestation.SummonAround(Pawn, _comp.ScaledHornetCount(Props.shakeOffHornetCount), HornetSummonRole.Assault);
+            _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaStaggered, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
+            ApocryphaUtility.ShakeCamera(map, 1.2f);
+            Messages.Message(LocalizeString_Message.VV_Message_ApocryphaNeedlesShakenOff.Translate(), Pawn, MessageTypeDefOf.ThreatSmall);
+        }
+
+        public void DropAll()
         {
             _needles.RemoveAll(v => v == null || v.Destroyed);
-            Scatter(_needles.ToList());
+
+            var map = Pawn.Map;
+            var center = Pawn.Position;
+            var chosen = new List<IntVec3>();
+            for (int i = 0; i < _needles.Count; i++)
+            {
+                var needle = _needles[i];
+                if (!needle.Spawned || needle.IsPlanted || needle.IsScattering) { continue; }
+
+                var cell = FindPlantCell(map, center, chosen);
+                chosen.Add(cell);
+                if (!needle.PullOut(cell))
+                {
+                    needle.ScatterTo(cell, EndingVfxUtility.SafeNormalizeHorizontal(cell.ToVector3Shifted() - needle.DrawPos, Vector3.forward));
+                }
+            }
+
+            SyncStuckNeedleHediff();
+        }
+
+        public void RecallAll()
+        {
+            _needles.RemoveAll(v => v == null || v.Destroyed);
+            for (int i = 0; i < _needles.Count; i++)
+            {
+                _needles[i].Recall();
+            }
+
+            EnsureNeedles();
         }
 
         public bool CancelAims()
@@ -329,7 +319,7 @@ namespace VVRace
 
         public void DebugStickNeedle()
         {
-            if (_comp.Phase != ApocryphaPhase.Unbound) { return; }
+            if (_comp.Phase != ApocryphaPhase.Queen) { return; }
 
             for (int i = 0; i < _needles.Count; i++)
             {
@@ -341,27 +331,34 @@ namespace VVRace
             }
         }
 
-        private void AimVolley(List<ApocryphaNeedle> idle, IntVec3 cell, int count, bool breach)
+        public void DebugShakeOffNow()
         {
-            if (!cell.InHorDistOf(Pawn.Position, Props.needleFanMinTargetDistance))
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    idle[i].StartAim(cell, Props.needleAimTicks, FanAngle(i, count), breach);
-                }
-            }
-            else
-            {
-                idle[0].StartAim(cell, Props.needleAimTicks, breach: breach);
-            }
+            if (_comp.Phase != ApocryphaPhase.Queen || StuckNeedleCount <= 0) { return; }
+
+            ShakeOff(GenTicks.TicksGame);
         }
 
-        private bool TryGetBreachAim(int now, out IntVec3 cell)
+        private void AttachInitialNeedles(int now)
         {
-            cell = _breachTarget;
-            if (_comp.Phase != ApocryphaPhase.Bound || !BreachInProgress || _breachUntilTick < 0 || now > _breachUntilTick) { return false; }
+            EnsureNeedles();
 
-            return Pawn.Position.InHorDistOf(_breachStandCell, BreachStandRadius);
+            var baseAngle = Rand.Range(0f, 360f);
+            for (int i = 0; i < _needles.Count; i++)
+            {
+                var angle = baseAngle + _needles[i].Slot * 360f / Mathf.Max(1, _needles.Count) + Rand.Range(-25f, 25f);
+                _needles[i].AttachStuck(Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward);
+            }
+
+            _lastStickTick = now;
+            SyncStuckNeedleHediff();
+        }
+
+        private void AimVolley(List<ApocryphaNeedle> idle, IntVec3 cell, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                idle[i].StartAim(cell, Props.needleAimTicks, FanAngle(i, count));
+            }
         }
 
         private float? FanAngle(int index, int count)
@@ -392,7 +389,7 @@ namespace VVRace
 
         private IntVec3 FindPlantCell(Map map, IntVec3 center, List<IntVec3> chosen)
         {
-            var radius = Props.unboundNeedlePlantRadius;
+            var radius = Props.needlePlantRadius;
             bool Valid(IntVec3 c, bool spaced)
             {
                 if (!c.InBounds(map) || !c.Standable(map) || c.Fogged(map)) { return false; }
@@ -411,45 +408,6 @@ namespace VVRace
 
             cell = CellFinder.StandableCellNear(center, map, radius.max + 5f, c => c.InBounds(map) && !c.Fogged(map));
             return cell.IsValid ? cell : center;
-        }
-
-        private void PullOutNeedles()
-        {
-            _stunned = false;
-
-            var map = Pawn.Map;
-            var chosen = new List<IntVec3>();
-            var pulled = false;
-            for (int i = 0; i < _needles.Count; i++)
-            {
-                var needle = _needles[i];
-                if (needle == null || needle.Destroyed || !needle.IsStuck) { continue; }
-
-                var cell = FindPlantCell(map, Pawn.Position, chosen);
-                chosen.Add(cell);
-                if (needle.PullOut(cell))
-                {
-                    pulled = true;
-                }
-            }
-
-            if (pulled)
-            {
-                ApocryphaUtility.ShakeCamera(Pawn.Map, 0.8f);
-                Messages.Message(LocalizeString_Message.VV_Message_ApocryphaNeedlesPulled.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
-            }
-
-            SyncStuckNeedleHediff();
-        }
-
-        private bool IsInAimedLane(IntVec3 cell)
-        {
-            for (int i = 0; i < _needles.Count; i++)
-            {
-                if (_needles[i].IsAiming && _needles[i].LaneContains(cell.ToVector3Shifted())) { return true; }
-            }
-
-            return false;
         }
 
         private void EnsureNeedles()

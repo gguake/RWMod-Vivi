@@ -8,6 +8,37 @@ namespace VVRace
 {
     internal static class EndingVfxUtility
     {
+        public const int ShockWaveAgeLeadTicks = 1;
+
+        private const float ShockWaveFrontStart = 0.02f;
+        private const float ShockWaveFrontReach = 0.96f;
+        private const float ShockWaveCoverMargin = 1.05f;
+
+        public static float ShockWaveHalfSize(float reach)
+        {
+            return reach * ShockWaveCoverMargin / ShockWaveFrontReach;
+        }
+
+        public static void SpawnShockWave(Map map, Vector3 origin, FleckDef fleckDef, float halfSize)
+        {
+            var data = FleckMaker.GetDataStatic(origin, map, fleckDef, halfSize * 2f / fleckDef.graphicData.drawSize.x);
+            data.rotation = Rand.Range(0f, 360f);
+            map.flecks.CreateFleck(data);
+        }
+
+        public static float ShockWaveFrontAt(float halfSize, float secs, float durationSecs)
+        {
+            var t = Mathf.Clamp01(secs / durationSecs);
+            return halfSize * Mathf.Lerp(ShockWaveFrontStart, ShockWaveFrontReach, 1f - Mathf.Pow(1f - t, 3f));
+        }
+
+        public static int ShockWaveArrivalTicks(float distance, float halfSize, float durationSecs)
+        {
+            var u = Mathf.Clamp01((distance / halfSize - ShockWaveFrontStart) / (ShockWaveFrontReach - ShockWaveFrontStart));
+            var t = 1f - Mathf.Pow(1f - u, 1f / 3f);
+            return Mathf.CeilToInt(t * durationSecs * 60f) - ShockWaveAgeLeadTicks;
+        }
+
         public static Vector3 HorizontalPerpendicular(Vector3 dir)
         {
             return new Vector3(dir.z, 0f, -dir.x);

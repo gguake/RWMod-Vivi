@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-  <!-- 요정 간섭 -->
+  <!-- 요정 교화 -->
   <HediffDef>
-    <defName>VV_FairyInterference</defName>
-    <label>fairy interference</label>
-    <description>Can interfere with the bonds between Asphodel and the fairy vivis, severing them to set the fairy vivis free.</description>
-    <hediffClass>VVRace.Hediff_FairyInterference</hediffClass>
+    <defName>VV_FairyAttunement</defName>
+    <label>fairy attunement</label>
+    <description>In resonance with a fairy bloom's mana. Forms golden links with other attuned pawns nearby; where those links touch Asphodel, the bond of the fairy vivis around her comes undone.</description>
+    <hediffClass>VVRace.Hediff_FairyAttunement</hediffClass>
     <defaultLabelColor>(1, 0.9, 0.55)</defaultLabelColor>
     <isBad>false</isBad>
     <priceImpact>false</priceImpact>
@@ -16,9 +16,9 @@
     <maxSeverity>1</maxSeverity>
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>15000~15000</disappearsAfterTicks>
-        <showRemainingTime>false</showRemainingTime>
-        <messageOnDisappear>{PAWN_labelShort}'s fairy interference has faded.</messageOnDisappear>
+        <disappearsAfterTicks>30000~30000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+        <messageOnDisappear>{PAWN_labelShort}'s fairy attunement has faded.</messageOnDisappear>
       </li>
     </comps>
   </HediffDef>

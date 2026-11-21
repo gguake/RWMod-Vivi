@@ -126,7 +126,12 @@
     </race>
 
     <comps>
-      <li><compClass>VVRace.CompHornet</compClass></li>
+      <li Class="VVRace.CompProperties_Hornet">
+        <killedLeavingsChance>0.5</killedLeavingsChance>
+        <killedLeavingsRanges>
+          <VV_TitanicHornetWing>1~2</VV_TitanicHornetWing>
+        </killedLeavingsRanges>
+      </li>
     </comps>
 
     <ingredient>
@@ -137,10 +142,5 @@
 
     <tradeTags>
     </tradeTags>
-
-    <killedLeavingsChance>0.5</killedLeavingsChance>
-    <killedLeavingsRanges>
-      <VV_TitanicHornetWing>1~2</VV_TitanicHornetWing>
-    </killedLeavingsRanges>
   </ThingDef>
 </Defs>
