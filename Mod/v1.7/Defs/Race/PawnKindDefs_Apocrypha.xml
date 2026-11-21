@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 아스포델 폰 종류 -->
-  <PawnKindDef ParentName="AnimalKindBase">
+  <PawnKindDef>
     <defName>VV_Apocrypha</defName>
     <label>Asphodel</label>
     <race>VV_Apocrypha</race>
@@ -9,6 +9,7 @@
     <canArriveManhunter>false</canArriveManhunter>
     <ecoSystemWeight>0</ecoSystemWeight>
     <isBoss>true</isBoss>
+    <canBeScattered>false</canBeScattered>
     <skipResistant>true</skipResistant>
     <immuneToTraps>true</immuneToTraps>
     <ignoresPainShock>true</ignoresPainShock>

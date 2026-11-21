@@ -204,7 +204,8 @@ namespace VVRace
                 ResolveBossFaction(),
                 PawnGenerationContext.NonPlayer,
                 map.Tile,
-                forceGenerateNewPawn: true));
+                forceGenerateNewPawn: true,
+                forceNoGear: true));
 
             boss.ageTracker.LockCurrentLifeStageIndex(0);
             return boss;

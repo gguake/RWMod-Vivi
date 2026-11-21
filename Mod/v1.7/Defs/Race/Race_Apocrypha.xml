@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 아스포델 -->
-  <ThingDef ParentName="AnimalThingBase">
+  <ThingDef ParentName="BasePawn">
     <defName>VV_Apocrypha</defName>
     <label>Asphodel</label>
     <description>Asphodel, the last empress of the old vivi empire.\n\nUnable to sleep for long ages, she wandered in search of the flower's shade in her memory, until the altar's waves drew her here. Around her twisted form linger countless little lights, layer upon layer, that remember the empress's last kindness.</description>
     <drawOffscreen>true</drawOffscreen>
-    <thingCategories Inherit="False" />
     <statBases>
       <MoveSpeed>1.5</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
@@ -21,10 +20,13 @@
       <PainShockThreshold>1</PainShockThreshold>
       <MarketValue>0</MarketValue>
       <LeatherAmount>0</LeatherAmount>
-      <Wildness>1</Wildness>
-      <MinimumHandlingSkill>99</MinimumHandlingSkill>
     </statBases>
     <uiIconScale>1</uiIconScale>
+    <tradeability>None</tradeability>
+    <inspectorTabs Inherit="False">
+      <li>ITab_Pawn_Health</li>
+      <li>ITab_Pawn_Log</li>
+    </inspectorTabs>
 
     <tools>
       <li>
@@ -63,6 +65,8 @@
     </tools>
 
     <race>
+      <intelligence>ToolUser</intelligence>
+      <disableIgniteVerb>true</disableIgniteVerb>
       <body>VV_TitanicHornet</body>
       <thinkTreeMain>VV_Apocrypha</thinkTreeMain>
       <thinkTreeConstant>VV_ApocryphaConstant</thinkTreeConstant>
@@ -91,6 +95,7 @@
       <hideTrainingTab>true</hideTrainingTab>
       <petness>0</petness>
       <bloodDef>Filth_BloodInsect</bloodDef>
+      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
       <lifeExpectancy>1000</lifeExpectancy>
 
       <lifeStageAges>
@@ -114,8 +119,6 @@
       <soundMeleeHitPawn>Pawn_Melee_BigBash_HitPawn</soundMeleeHitPawn>
       <soundMeleeHitBuilding>Pawn_Melee_BigBash_HitBuilding</soundMeleeHitBuilding>
       <soundMeleeMiss>Pawn_Melee_BigBash_Miss</soundMeleeMiss>
-
-      <hediffGiverSets Inherit="False" />
     </race>
 
     <comps>

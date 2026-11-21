@@ -19,7 +19,6 @@ namespace VVRace
             PatchGroup(harmony, nameof(GatherPatch), GatherPatch.Patch);
             PatchGroup(harmony, nameof(BackCompatibilityPatch), BackCompatibilityPatch.Patch);
             PatchGroup(harmony, nameof(EndingCorePatch), EndingCorePatch.Patch);
-            PatchGroup(harmony, nameof(ApocryphaPatch), ApocryphaPatch.Patch);
             PatchGroup(harmony, "attribute patches", h => h.PatchAll(typeof(ViviHarmonyPatcher).Assembly));
         }
 
