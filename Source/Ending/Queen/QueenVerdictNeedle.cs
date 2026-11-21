@@ -213,6 +213,7 @@ namespace VVRace
             {
                 _state = VerdictState.End;
                 _stateStartTick = now;
+                Trail?.FinishTrail();
                 var laneEnd = _laneStart + _laneDir * _laneLength;
                 PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, laneEnd);
             }

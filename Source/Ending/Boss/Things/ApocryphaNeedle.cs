@@ -56,8 +56,13 @@ namespace VVRace
         private const int LodgedTicks = 16;
 
         private const float ReturnSpeed = 0.9f;
-        private const float ReturnOutWeight = 7f;
+        private const float ReturnOutWeight = 6f;
         private const float ReturnInWeight = 4f;
+        private const float ReturnArcFactor = 0.45f;
+        private const float ReturnArcMin = 5f;
+        private const float ReturnArcMax = 14f;
+        private const float ReturnStartSideRatio = 0.45f;
+        private const float ReturnStartBlendEnd = 0.16f;
         private const float ReturnBlendStart = 0.75f;
 
         private const int AimPetalInterval = 4;
@@ -90,7 +95,7 @@ namespace VVRace
         private Vector3 _laneDir;
         private float _laneLength;
         private int _aimTicks;
-        private int _fireTick;
+        private int _fireTick = -1;
         private float _travelled;
         private bool _breach;
         private Vector3 _breachOrigin;
@@ -98,6 +103,7 @@ namespace VVRace
         private float _returnLength;
         private float _returnProgress;
         private Vector3 _returnOutDir;
+        private float _returnSide = 1f;
         private List<int> _hitIds = new List<int>();
         private float _stickAlong = -1f;
         private Vector3 _stuckOffset;
@@ -223,7 +229,7 @@ namespace VVRace
             Scribe_Values.Look(ref _laneDir, "laneDir");
             Scribe_Values.Look(ref _laneLength, "laneLength", 0f);
             Scribe_Values.Look(ref _aimTicks, "aimTicks", 0);
-            Scribe_Values.Look(ref _fireTick, "fireTick", 0);
+            Scribe_Values.Look(ref _fireTick, "fireTick", -1);
             Scribe_Values.Look(ref _travelled, "travelled", 0f);
             Scribe_Values.Look(ref _breach, "breach", false);
             Scribe_Values.Look(ref _breachOrigin, "breachOrigin");
@@ -231,6 +237,7 @@ namespace VVRace
             Scribe_Values.Look(ref _returnLength, "returnLength", 0f);
             Scribe_Values.Look(ref _returnProgress, "returnProgress", 0f);
             Scribe_Values.Look(ref _returnOutDir, "returnOutDir");
+            Scribe_Values.Look(ref _returnSide, "returnSide", 1f);
             Scribe_Collections.Look(ref _hitIds, "hitIds", LookMode.Value);
             Scribe_Values.Look(ref _stickAlong, "stickAlong", -1f);
             Scribe_Values.Look(ref _stuckOffset, "stuckOffset");
@@ -573,6 +580,7 @@ namespace VVRace
             {
                 _state = NeedleState.Lodged;
                 _stateStartTick = now;
+                Trail?.FinishTrail();
                 PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, PointOnLane(_laneLength));
             }
         }
@@ -753,12 +761,16 @@ namespace VVRace
             _stateStartTick = now;
             _returnFrom = from;
             _returnOutDir = outDir;
+            _returnSide = ResolveReturnSide(from, outDir, SlotPos(now));
             _returnProgress = 0f;
 
             GetReturnCurve(now, out var p0, out var c1, out var c2, out var p3);
             var chord = Vector3.Distance(p0, p3);
             var polygon = Vector3.Distance(p0, c1) + Vector3.Distance(c1, c2) + Vector3.Distance(c2, p3);
             _returnLength = Mathf.Max(1f, (chord + polygon) * 0.5f);
+
+            Trail?.FinishTrail();
+            RegisterTrail(from);
         }
 
         private void TickReturning(int now)
@@ -766,7 +778,7 @@ namespace VVRace
             _returnProgress = Mathf.Min(1f, _returnProgress + ReturnSpeed / Mathf.Max(1f, _returnLength));
 
             GetReturnCurve(now, out var p0, out var c1, out var c2, out var p3);
-            UpdateBezierFlight(p0, c1, c2, p3, _returnProgress, _returnProgress, ReturnBlendStart, SlotAngle(now));
+            UpdateBezierFlight(p0, c1, c2, p3, _returnProgress, _returnProgress, ReturnBlendStart, SlotAngle(now), startAngle: LaneAngle, startBlendEnd: ReturnStartBlendEnd);
 
             if (_returnProgress >= 1f)
             {
@@ -776,16 +788,40 @@ namespace VVRace
             }
         }
 
-        private void UpdateBezierFlight(Vector3 p0, Vector3 c1, Vector3 c2, Vector3 p3, float curveT, float blendT, float blendStart, float targetAngle)
+        private void UpdateBezierFlight(Vector3 p0, Vector3 c1, Vector3 c2, Vector3 p3, float curveT, float blendT, float blendStart, float targetAngle, float? startAngle = null, float startBlendEnd = 0f)
         {
             _pos = Bezier(p0, c1, c2, p3, curveT);
 
             var travel = BezierDerivative(p0, c1, c2, p3, curveT).Yto0();
             var travelAngle = travel.sqrMagnitude > 0.0001f ? travel.AngleFlat() : _angle;
+            if (startAngle.HasValue && startBlendEnd > 0f && blendT < startBlendEnd)
+            {
+                var startBlend = Mathf.SmoothStep(0f, 1f, blendT / startBlendEnd);
+                travelAngle = LerpAngle(startAngle.Value, travelAngle, startBlend);
+            }
+
             var angleBlend = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(blendStart, 1f, blendT));
             _angle = LerpAngle(travelAngle, targetAngle, angleBlend);
 
             RegisterTrail(_pos);
+        }
+
+        private float ResolveReturnSide(Vector3 from, Vector3 outDir, Vector3 slotPos)
+        {
+            var perp = EndingVfxUtility.HorizontalPerpendicular(outDir);
+            var startCross = Vector3.Dot((_laneStart - BodyCenter).Yto0(), perp);
+            if (Mathf.Abs(startCross) > 0.5f)
+            {
+                return -Mathf.Sign(startCross);
+            }
+
+            var slotCross = Vector3.Dot((slotPos - from).Yto0(), perp);
+            if (Mathf.Abs(slotCross) > 0.5f)
+            {
+                return Mathf.Sign(slotCross);
+            }
+
+            return _slot % 2 == 0 ? 1f : -1f;
         }
 
         private void GetReturnCurve(int now, out Vector3 p0, out Vector3 c1, out Vector3 c2, out Vector3 p3)
@@ -793,9 +829,15 @@ namespace VVRace
             p0 = _returnFrom;
             p3 = SlotPos(now);
 
+            var chord = (p3 - p0).MagnitudeHorizontal();
+            var perp = EndingVfxUtility.HorizontalPerpendicular(_returnOutDir);
+            var side = _returnSide < 0f ? -1f : 1f;
+            var outWeight = Mathf.Min(ReturnOutWeight, Mathf.Max(3.5f, chord * 0.3f));
+            var arc = Mathf.Clamp(chord * ReturnArcFactor, ReturnArcMin, ReturnArcMax);
             var outward = EndingVfxUtility.SafeNormalizeHorizontal(p3 - BodyCenter, Vector3.forward, minSqrMagnitude: 0.0001f);
-            c1 = p0 + _returnOutDir * ReturnOutWeight;
-            c2 = p3 + outward * ReturnInWeight;
+
+            c1 = p0 + _returnOutDir * outWeight + perp * (side * arc * ReturnStartSideRatio);
+            c2 = Vector3.Lerp(p0, p3, 0.6f) + perp * (side * arc) + outward * ReturnInWeight;
         }
         #endregion
 
@@ -862,7 +904,7 @@ namespace VVRace
             }
 
             var warpAge = now - _fireTick;
-            if ((IsFlying || IsStuck) && warpAge >= 0 && warpAge < WarpTicks)
+            if (_fireTick >= 0 && (IsFlying || IsStuck || IsPlanted) && warpAge >= 0 && warpAge < WarpTicks)
             {
                 ApocryphaNeedleRenderer.DrawWarp(_laneStart, _laneDir, _laneLength, Mathf.Max(0f, _travelled), warpAge / 60f, alpha);
             }
