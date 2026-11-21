@@ -4,7 +4,7 @@
     {
         None = 0,
         Tales = 1,
-        Missive = 2,
+        Resonance = 2,
         Ruins = 3,
         AltarUnlocked = 4,
         Siege = 5,

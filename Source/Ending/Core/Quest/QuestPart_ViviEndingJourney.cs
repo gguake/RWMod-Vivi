@@ -81,16 +81,14 @@ namespace VVRace
             {
                 case ViviEndingStage.Tales:
                     var talesText = ending.Tales.AllDelivered
-                        ? LocalizeString_Etc.VV_Quest_EndingStageMissiveWait.Translate().Resolve()
+                        ? LocalizeString_Etc.VV_Quest_EndingStageInquiry.Translate().Resolve()
                         : LocalizeString_Etc.VV_Quest_EndingStageTales.Translate(ending.Tales.Delivered, ViviEndingTales.VolumeCount).Resolve();
                     sb.Append(talesText);
                     AppendHostility(sb);
                     break;
 
-                case ViviEndingStage.Missive:
-                    sb.Append(LocalizeString_Etc.VV_Quest_EndingStageCoordinates.Translate().Resolve());
-                    sb.Append("\n\n").Append(ViviEndingRequirements.ConditionsText());
-                    AppendHostility(sb);
+                case ViviEndingStage.Resonance:
+                    sb.Append(LocalizeString_Etc.VV_Quest_EndingStageResonance.Translate().Resolve());
                     break;
 
                 case ViviEndingStage.Ruins:

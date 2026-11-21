@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 연방의 옛 동화책 -->
+  <ThingDef ParentName="BookBase">
+    <defName>VV_FairyTaleBook</defName>
+    <label>flowershade fairy tale</label>
+    <description>An old fairy tale book passed down by the vivi federation.</description>
+    <graphicData>
+      <texPath>Things/Item/Book/Novel/Novel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <uiIconPath>Things/Item/Book/Novel/Novel</uiIconPath>
+    <statBases>
+      <MarketValue>160</MarketValue>
+    </statBases>
+    <thingSetMakerTags Inherit="False" />
+    <tradeTags Inherit="False" />
+    <comps>
+      <li Class="CompProperties_Book">
+        <nameMaker>Namer_Novel</nameMaker>
+        <descriptionMaker>Description_Novel</descriptionMaker>
+        <pickWeight>0</pickWeight>
+        <ageYearsRange>100~200</ageYearsRange>
+        <openGraphic>
+          <texPath>Things/Item/Book/Novel/Novel_Open</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>0.7</drawSize>
+        </openGraphic>
+        <verticalGraphic>
+          <texPath>Things/Item/Book/Novel/Novel_Vertical</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <addTopAltitudeBias>true</addTopAltitudeBias>
+        </verticalGraphic>
+        <doers>
+          <li Class="BookOutcomeProperties_JoyFactorModifier" />
+          <li Class="VVRace.BookOutcomeProperties_FairyTale" />
+        </doers>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

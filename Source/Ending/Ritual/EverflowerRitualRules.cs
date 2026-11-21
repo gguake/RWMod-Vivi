@@ -67,7 +67,7 @@ namespace VVRace
             {
                 case ViviEndingStage.None:
                 case ViviEndingStage.Tales:
-                case ViviEndingStage.Missive:
+                case ViviEndingStage.Resonance:
                 case ViviEndingStage.Ruins:
                     return LocalizeString_Etc.VV_FailReason_GrandAttunementLocked.Translate();
 

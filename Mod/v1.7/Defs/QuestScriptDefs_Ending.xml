@@ -5,7 +5,7 @@
     <defName>VV_EndGame_ViviEnding</defName>
     <isRootSpecial>true</isRootSpecial>
     <autoAccept>true</autoAccept>
-    <sendAvailableLetter>false</sendAvailableLetter>
+    <questAvailableLetterTextIsDescription>true</questAvailableLetterTextIsDescription>
     <endOnColonyMove>false</endOnColonyMove>
     <defaultChallengeRating>4</defaultChallengeRating>
     <root Class="VVRace.QuestNode_Root_ViviEnding" />

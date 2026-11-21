@@ -30,10 +30,8 @@
         public const string VV_Letter_EndingTale3 = nameof(VV_Letter_EndingTale3);
         public const string VV_Letter_EndingTale4 = nameof(VV_Letter_EndingTale4);
 
-        public const string VV_Letter_EndingFederationMissiveLabel = nameof(VV_Letter_EndingFederationMissiveLabel);
-        public const string VV_Letter_EndingFederationMissive = nameof(VV_Letter_EndingFederationMissive);
-
-        public const string VV_Letter_EndingFederationMissiveConditions = nameof(VV_Letter_EndingFederationMissiveConditions);
+        public const string VV_Letter_EndingRuinsDetectedLabel = nameof(VV_Letter_EndingRuinsDetectedLabel);
+        public const string VV_Letter_EndingRuinsDetected = nameof(VV_Letter_EndingRuinsDetected);
 
         public const string VV_Letter_EverflowerEcho5Label = nameof(VV_Letter_EverflowerEcho5Label);
         public const string VV_Letter_EverflowerEcho5 = nameof(VV_Letter_EverflowerEcho5);

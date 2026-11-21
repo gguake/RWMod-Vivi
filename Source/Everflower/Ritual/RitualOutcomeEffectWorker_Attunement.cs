@@ -25,7 +25,9 @@ namespace VVRace
                 def.effecter.Spawn(everflower, map, everflower.EverflowerComp.RitualEffecterOffset).Cleanup();
 
                 everflower.Notify_RitualComplete(quality);
-                ViviEndingQuest.Current?.Notify_AttunementRitualCompleted(everflower);
+                var ending = ViviEndingQuest.Current;
+                ending?.Notify_AttunementRitualCompleted(everflower);
+                ending?.Notify_EverflowerRitualCompleted(everflower, attuner);
             }
         }
 

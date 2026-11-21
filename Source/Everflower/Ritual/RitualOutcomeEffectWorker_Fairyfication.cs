@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -26,6 +26,7 @@ namespace VVRace
             }
 
             everflower.Notify_RitualComplete(quality);
+            ViviEndingQuest.Current?.Notify_EverflowerRitualCompleted(everflower, resonator);
         }
     }
 }

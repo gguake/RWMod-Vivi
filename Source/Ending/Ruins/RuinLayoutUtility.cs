@@ -30,34 +30,8 @@ namespace VVRace
             new IntVec2(-14, 0),
         };
 
-        // 제2구간(북쪽 장대 복도, dz: +46 -> +26) 숨겨진 안전 경로 템플릿 4종
-        private static readonly IntVec2[][] HiddenPathTemplates =
-        {
-            new[]
-            {
-                new IntVec2(0, 46), new IntVec2(0, 43), new IntVec2(-4, 43), new IntVec2(-4, 38),
-                new IntVec2(4, 38), new IntVec2(4, 34), new IntVec2(-3, 34), new IntVec2(-3, 29),
-                new IntVec2(2, 29), new IntVec2(2, 26), new IntVec2(0, 26),
-            },
-            new[]
-            {
-                new IntVec2(0, 46), new IntVec2(0, 43), new IntVec2(4, 43), new IntVec2(4, 39),
-                new IntVec2(-4, 39), new IntVec2(-4, 34), new IntVec2(3, 34), new IntVec2(3, 30),
-                new IntVec2(-2, 30), new IntVec2(-2, 26), new IntVec2(0, 26),
-            },
-            new[]
-            {
-                new IntVec2(0, 46), new IntVec2(-3, 46), new IntVec2(-3, 41), new IntVec2(5, 41),
-                new IntVec2(5, 36), new IntVec2(-4, 36), new IntVec2(-4, 31), new IntVec2(3, 31),
-                new IntVec2(3, 26), new IntVec2(0, 26),
-            },
-            new[]
-            {
-                new IntVec2(0, 46), new IntVec2(3, 46), new IntVec2(3, 41), new IntVec2(-5, 41),
-                new IntVec2(-5, 36), new IntVec2(4, 36), new IntVec2(4, 31), new IntVec2(-3, 31),
-                new IntVec2(-3, 26), new IntVec2(0, 26),
-            },
-        };
+        // 제2구간(시련 복도) 좌·우 대칭 황금 열주(lx = ±6)의 로컬 Z 좌표
+        public static readonly int[] CorridorPillarZ = { 26, 30, 34, 38, 42, 46 };
 
         public static int RotationFromSeed(int seed)
         {
@@ -209,12 +183,74 @@ namespace VVRace
 
         public static List<IntVec3> GenerateHiddenPath(IntVec3 origin, int seed, int rotation = 0)
         {
-            var template = HiddenPathTemplates[Mathf.Abs(seed) % HiddenPathTemplates.Length];
-            var path = new List<IntVec3>(64);
+            var rng = new System.Random(Gen.HashCombineInt(seed, 83417));
+            var waypoints = new List<IntVec2>(16);
 
-            for (int i = 0; i < template.Length; i++)
+            const int startZ = 46;
+            const int endZ = 26;
+            const int minX = -5;
+            const int maxX = 5;
+
+            int curX = 0;
+            int curZ = startZ;
+            waypoints.Add(new IntVec2(curX, curZ));
+
+            int firstDrop = rng.Next(0, 4);
+            if (firstDrop == 1) { firstDrop = 2; }
+            int nextZ = startZ - firstDrop;
+
+            // 좌·우 방향을 번갈아 가며 3~5칸 간격으로 꺾이는 시드 기반 랜덤 안전 경로를 생성한다.
+            int dirSign = rng.Next(2) == 0 ? -1 : 1;
+            while (nextZ > endZ)
             {
-                var target = LocalToWorld(origin, template[i].x, template[i].z, rotation);
+                if (nextZ != curZ)
+                {
+                    curZ = nextZ;
+                    waypoints.Add(new IntVec2(curX, curZ));
+                }
+
+                int targetX;
+                if (dirSign < 0)
+                {
+                    int hi = Math.Min(-1, curX - 3);
+                    targetX = hi >= minX ? rng.Next(minX, hi + 1) : minX;
+                }
+                else
+                {
+                    int lo = Math.Max(1, curX + 3);
+                    targetX = lo <= maxX ? rng.Next(lo, maxX + 1) : maxX;
+                }
+
+                if (targetX != curX)
+                {
+                    curX = targetX;
+                    waypoints.Add(new IntVec2(curX, curZ));
+                    dirSign = -dirSign;
+                }
+
+                int stepZ = rng.Next(3, 6);
+                int candidateZ = curZ - stepZ;
+                if (candidateZ < endZ + 3)
+                {
+                    break;
+                }
+                nextZ = candidateZ;
+            }
+
+            if (curZ != endZ)
+            {
+                curZ = endZ;
+                waypoints.Add(new IntVec2(curX, curZ));
+            }
+            if (curX != 0)
+            {
+                waypoints.Add(new IntVec2(0, endZ));
+            }
+
+            var path = new List<IntVec3>(64);
+            for (int i = 0; i < waypoints.Count; i++)
+            {
+                var target = LocalToWorld(origin, waypoints[i].x, waypoints[i].z, rotation);
                 if (path.Count == 0)
                 {
                     path.Add(target);
@@ -907,7 +943,10 @@ namespace VVRace
                     bool isSouthGate = dz <= -56 && Mathf.Abs(dx) <= 1;
                     if (!isSouthGate)
                     {
-                        SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinWall, cell);
+                        var wallDef = IsMazeExteriorPerimeter(map, cell, origin, rotation)
+                            ? VVThingDefOf.VV_AncientRuinWall
+                            : VVThingDefOf.VV_AncientSanctumWall;
+                        SpawnBuildingClean(map, wallDef, cell);
                     }
                 }
             }
@@ -972,21 +1011,28 @@ namespace VVRace
                 }
             }
 
-            // 5) 모든 미로 통로(3칸 폭 × 1칸 두께)를 연쇄 붕괴 유적 크림벽(VV_RuinCreamWall)으로 봉쇄해 방 단위 안개 시야를 유지한다.
+            // 5) 일부 미로 방(5x5 칸 전체)을 유적 전용 연쇄 붕괴 크림벽으로 채울 구역 선정 후,
+            //    첫 입장 시작 방의 모든 출구와 출구 성소 입구를 막고 나머지 통로는 2~5블럭 구역마다 얇은 크림벽으로 봉쇄한다.
+            var sortedNodes = connected.OrderBy(n => n.z).ThenBy(n => n.x).ToList();
+            var creamFilledRooms = SelectCreamFilledMazeRooms(sortedNodes, startNode, goalNode, rng);
+            AssignMazeCreamWallPassages(connected, passages, startNode, goalNode, creamFilledRooms, rng);
+
             foreach (var kv in passages)
             {
                 var (a, b) = kv.Key;
+                bool isCream = kv.Value;
                 foreach (var cell in GetMazeDoorCells(origin, a, b, rotation))
                 {
                     if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
                     DestroyEdifice(map, cell);
-                    SpawnBuildingClean(map, creamWallDef, cell);
+                    if (isCream)
+                    {
+                        SpawnBuildingClean(map, creamWallDef, cell);
+                    }
                 }
             }
 
-            // 6) 일부 미로 방(5x5 칸 전체)을 유적 전용 연쇄 붕괴 크림벽으로 가득 채워 막는다.
-            var sortedNodes = connected.OrderBy(n => n.z).ThenBy(n => n.x).ToList();
-            var creamFilledRooms = SelectCreamFilledMazeRooms(sortedNodes, startNode, goalNode, rng);
+            // 6) 선정된 크림 밀집 방(5x5 칸 전체)을 유적 전용 연쇄 붕괴 크림벽으로 가득 채워 막는다.
             foreach (var node in creamFilledRooms)
             {
                 var center = MazeRoomCenter(origin, node.x, node.z, rotation);
@@ -1051,8 +1097,8 @@ namespace VVRace
             {
                 var n = sortedNodes[i];
                 if (n == startNode || n == goalNode) { continue; }
-                // 시작 방 바로 인접한 구역과 북단 출구 양옆은 열어 두어 입·출구 가독성을 확보한다.
-                if (Math.Abs(n.x - startNode.x) + Math.Abs(n.z - startNode.z) <= 1) { continue; }
+                // 시작 방 인근(거리 2 이내)과 북단 출구 양옆은 열어 두어 초반 2~5블럭 탐색과 출구 가독성을 확보한다.
+                if (Math.Abs(n.x - startNode.x) + Math.Abs(n.z - startNode.z) <= 2) { continue; }
                 if (Math.Abs(n.x - goalNode.x) + Math.Abs(n.z - goalNode.z) <= 1) { continue; }
                 candidates.Add(n);
             }
@@ -1189,18 +1235,15 @@ namespace VVRace
         {
             var burnedCarpet = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedCarpet");
             var burnedStraw = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedStrawMatting");
-            var burnedWood = DefDatabase<TerrainDef>.GetNamedSilentFail("BurnedWoodPlankFloor");
 
             var burnedTerrains = new List<TerrainDef>();
             if (burnedCarpet != null) { burnedTerrains.Add(burnedCarpet); }
             if (burnedStraw != null) { burnedTerrains.Add(burnedStraw); }
-            if (burnedWood != null) { burnedTerrains.Add(burnedWood); }
 
             var goalRect = CellRect.CenteredOn(MazeRoomCenter(origin, goalNode.x, goalNode.z, rotation), 5, 5);
             var exposedSoilCells = new List<IntVec3>();
             var burnedCells = new HashSet<IntVec3>();
             var skeletonCandidates = new List<(IntVec3 cell, float ruin)>();
-            var skullCandidates = new List<(IntVec3 cell, float ruin)>();
 
             int burnSeed = Gen.HashCombineInt(seed, 41203);
             int gapSeed = Gen.HashCombineInt(seed, 90749);
@@ -1279,7 +1322,7 @@ namespace VVRace
                 }
             }
 
-            // C) 해골(백골화 고대 시체) 및 두개골 배치 후보 수집 (앞쪽·중간쪽 비크림 방 내부, 통로/화분/꽃 제외)
+            // C) 백골화 고대 시체 배치 후보 수집 (앞쪽·중간쪽 비크림 방 내부, 통로/화분/꽃 제외; 두개골 아이템은 생성하지 않음)
             for (int i = 0; i < sortedNodes.Count; i++)
             {
                 var node = sortedNodes[i];
@@ -1303,53 +1346,29 @@ namespace VVRace
                         if (!cell.InBounds(map) || GetSealStage(cell, origin, rotation) != 1) { continue; }
                         if (cell.GetEdifice(map) != null || cell.GetPlant(map) != null || HasSpecialMazeProp(map, cell)) { continue; }
 
-                        if (rng.NextDouble() < 0.35 * ruin)
+                        if (rng.NextDouble() < 0.40 * ruin)
                         {
                             skeletonCandidates.Add((cell, ruin));
-                        }
-                        if (localCenterZ <= -4 && rng.NextDouble() < 0.30 * ruin)
-                        {
-                            skullCandidates.Add((cell, ruin));
                         }
                     }
                 }
             }
 
             ShuffleDeterministic(skeletonCandidates, rng);
-            ShuffleDeterministic(skullCandidates, rng);
 
             var placedRemains = new List<IntVec3>();
-            const int maxSkeletons = 10;
+            const int maxSkeletons = 16;
             int skeletonCount = 0;
             for (int i = 0; i < skeletonCandidates.Count && skeletonCount < maxSkeletons; i++)
             {
                 var (cell, ruin) = skeletonCandidates[i];
-                if (rng.NextDouble() > ruin + 0.15f) { continue; }
-                if (IsNearAny(cell, placedRemains, 7)) { continue; }
+                if (rng.NextDouble() > ruin + 0.18f) { continue; }
+                if (IsNearAny(cell, placedRemains, 6)) { continue; }
 
                 if (TrySpawnAncientSkeleton(map, cell, useVivi: (skeletonCount % 2 == 0), rng))
                 {
                     placedRemains.Add(cell);
                     skeletonCount++;
-                }
-            }
-
-            if (ThingDefOf.Skull != null)
-            {
-                const int maxSkulls = 8;
-                int skullCount = 0;
-                for (int i = 0; i < skullCandidates.Count && skullCount < maxSkulls; i++)
-                {
-                    var (cell, ruin) = skullCandidates[i];
-                    if (rng.NextDouble() > ruin + 0.1f) { continue; }
-                    if (IsNearAny(cell, placedRemains, 6)) { continue; }
-
-                    var skull = ThingMaker.MakeThing(ThingDefOf.Skull);
-                    skull.stackCount = 1;
-                    GenSpawn.Spawn(skull, cell, map, WipeMode.Vanish);
-                    skull.SetForbidden(true, warnOnFail: false);
-                    placedRemains.Add(cell);
-                    skullCount++;
                 }
             }
         }
@@ -1675,14 +1694,170 @@ namespace VVRace
                 }
             }
 
-            // 모든 미로 통과 구역을 얇은 크림벽(1칸 두께)으로 봉쇄해 지붕 안개 아래 방 단위로 시야가 열리게 한다.
-            var keys = passages.Keys.ToList();
-            for (int i = 0; i < keys.Count; i++)
+            // 통로별 얇은 크림벽 배치는 크림 밀집 방 선정 이후 AssignMazeCreamWallPassages에서 2~5블럭 구역 단위로 결정한다.
+            return passages;
+        }
+
+        private static void AssignMazeCreamWallPassages(
+            HashSet<IntVec2> connected,
+            Dictionary<(IntVec2, IntVec2), bool> passages,
+            IntVec2 startNode,
+            IntVec2 goalNode,
+            HashSet<IntVec2> creamFilledRooms,
+            System.Random rng)
+        {
+            var adj = new Dictionary<IntVec2, List<IntVec2>>(connected.Count);
+            foreach (var n in connected)
             {
-                passages[keys[i]] = true;
+                adj[n] = new List<IntVec2>(4);
             }
 
-            return passages;
+            var edgeKeys = passages.Keys.ToList();
+            for (int i = 0; i < edgeKeys.Count; i++)
+            {
+                var (a, b) = edgeKeys[i];
+                if (adj.TryGetValue(a, out var la)) { la.Add(b); }
+                if (adj.TryGetValue(b, out var lb)) { lb.Add(a); }
+            }
+
+            // 첫 입장 시작 방(0)과 북단 출구 방(1)은 단독 구역으로 분리해 인접 통로가 모두 얇은 크림벽으로 막히게 한다.
+            var clusterId = new Dictionary<IntVec2, int>(connected.Count)
+            {
+                [startNode] = 0,
+                [goalNode] = 1,
+            };
+            var clusterSizes = new Dictionary<int, int>
+            {
+                [0] = 1,
+                [1] = 1,
+            };
+            int nextClusterId = 2;
+
+            bool IsGroupable(IntVec2 n) =>
+                n != startNode && n != goalNode && !creamFilledRooms.Contains(n);
+
+            var seedQueue = new Queue<IntVec2>();
+            if (adj.TryGetValue(startNode, out var startNeighbors))
+            {
+                var copy = new List<IntVec2>(startNeighbors);
+                ShuffleDeterministic(copy, rng);
+                for (int i = 0; i < copy.Count; i++)
+                {
+                    if (IsGroupable(copy[i])) { seedQueue.Enqueue(copy[i]); }
+                }
+            }
+
+            var remaining = connected.Where(IsGroupable).OrderBy(n => n.z).ThenBy(n => n.x).ToList();
+            ShuffleDeterministic(remaining, rng);
+            for (int i = 0; i < remaining.Count; i++)
+            {
+                seedQueue.Enqueue(remaining[i]);
+            }
+
+            while (seedQueue.Count > 0)
+            {
+                var seedNode = seedQueue.Dequeue();
+                if (clusterId.ContainsKey(seedNode) || !IsGroupable(seedNode)) { continue; }
+
+                int cid = nextClusterId++;
+                int targetSize = rng.Next(2, 6); // 2~5개 블럭 단위로 개방 구역 묶기
+                var members = new List<IntVec2>(targetSize) { seedNode };
+                var frontier = new List<IntVec2>(targetSize) { seedNode };
+                clusterId[seedNode] = cid;
+
+                while (members.Count < targetSize && frontier.Count > 0)
+                {
+                    int fi = rng.Next(frontier.Count);
+                    var cur = frontier[fi];
+                    var candidates = new List<IntVec2>(4);
+                    if (adj.TryGetValue(cur, out var nbrs))
+                    {
+                        for (int k = 0; k < nbrs.Count; k++)
+                        {
+                            var nb = nbrs[k];
+                            if (IsGroupable(nb) && !clusterId.ContainsKey(nb))
+                            {
+                                candidates.Add(nb);
+                            }
+                        }
+                    }
+
+                    if (candidates.Count == 0)
+                    {
+                        frontier.RemoveAt(fi);
+                        continue;
+                    }
+
+                    var pick = candidates[rng.Next(candidates.Count)];
+                    clusterId[pick] = cid;
+                    members.Add(pick);
+                    frontier.Add(pick);
+                }
+
+                clusterSizes[cid] = members.Count;
+
+                // 방금 만든 구역과 맞닿은 미할당 방을 다음 구역 시드로 우선 등록
+                var border = new List<IntVec2>();
+                for (int m = 0; m < members.Count; m++)
+                {
+                    if (!adj.TryGetValue(members[m], out var nbrs)) { continue; }
+                    for (int k = 0; k < nbrs.Count; k++)
+                    {
+                        var nb = nbrs[k];
+                        if (IsGroupable(nb) && !clusterId.ContainsKey(nb))
+                        {
+                            border.Add(nb);
+                        }
+                    }
+                }
+                ShuffleDeterministic(border, rng);
+                for (int b = 0; b < border.Count; b++)
+                {
+                    seedQueue.Enqueue(border[b]);
+                }
+            }
+
+            // 잔여 1칸짜리 구역은 크기 5 미만인 인접 개방 구역에 병합해 2~5블럭 분포를 깔끔하게 유지한다.
+            for (int i = 0; i < remaining.Count; i++)
+            {
+                var node = remaining[i];
+                if (!clusterId.TryGetValue(node, out var cid) || cid < 2 || clusterSizes[cid] != 1) { continue; }
+
+                int bestNeighborCid = -1;
+                int bestSize = int.MaxValue;
+                if (adj.TryGetValue(node, out var nbrs))
+                {
+                    for (int k = 0; k < nbrs.Count; k++)
+                    {
+                        if (clusterId.TryGetValue(nbrs[k], out var ncid) && ncid >= 2 && ncid != cid
+                            && clusterSizes[ncid] < 5 && clusterSizes[ncid] < bestSize)
+                        {
+                            bestNeighborCid = ncid;
+                            bestSize = clusterSizes[ncid];
+                        }
+                    }
+                }
+
+                if (bestNeighborCid >= 2)
+                {
+                    clusterId[node] = bestNeighborCid;
+                    clusterSizes[bestNeighborCid]++;
+                    clusterSizes[cid] = 0;
+                }
+            }
+
+            // 같은 개방 구역 내부 통로는 열고, 구역 경계·시작 방·출구 방·크림 밀집 방 통로는 얇은 크림벽으로 막는다.
+            for (int i = 0; i < edgeKeys.Count; i++)
+            {
+                var edge = edgeKeys[i];
+                var a = edge.Item1;
+                var b = edge.Item2;
+                bool sameOpenCluster = clusterId.TryGetValue(a, out var ca)
+                    && clusterId.TryGetValue(b, out var cb)
+                    && ca == cb
+                    && ca >= 2;
+                passages[edge] = !sameOpenCluster;
+            }
         }
 
         private static IEnumerable<IntVec3> GetMazeDoorCells(IntVec3 origin, IntVec2 a, IntVec2 b, int rotation)
@@ -1754,10 +1929,9 @@ namespace VVRace
             }
 
             // 좌·우 대칭 황금 열주(lx = ±6, 4칸 간격: 최대 지붕 거리 6.32 < 6.9로 지붕 붕괴 0) + 측면 성소 등불
-            int[] pillarZ = { 26, 30, 34, 38, 42, 46 };
-            for (int i = 0; i < pillarZ.Length; i++)
+            for (int i = 0; i < CorridorPillarZ.Length; i++)
             {
-                var pz = pillarZ[i];
+                var pz = CorridorPillarZ[i];
                 SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, LocalToWorld(origin, -6, pz, rotation));
                 SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, LocalToWorld(origin, 6, pz, rotation));
 

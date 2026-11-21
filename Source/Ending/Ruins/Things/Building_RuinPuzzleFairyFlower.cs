@@ -55,11 +55,7 @@ namespace VVRace
             {
                 if (sb.Length > 0) { sb.AppendLine(); }
 
-                if (ruinsComp.IsHexagonSolved)
-                {
-                    sb.Append(LocalizeString_Inspector.VV_Inspector_RuinPuzzleFlowerAligned.Translate());
-                }
-                else
+                if (!ruinsComp.IsHexagonSolved)
                 {
                     var tethered = ruinsComp.GetTetheredPawnFor(this);
                     if (tethered != null)

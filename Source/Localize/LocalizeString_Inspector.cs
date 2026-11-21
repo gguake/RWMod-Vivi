@@ -52,6 +52,5 @@
         public const string VV_Inspector_RuinDoomFlowerHint = nameof(VV_Inspector_RuinDoomFlowerHint);
         public const string VV_Inspector_RuinPuzzleFlowerHint = nameof(VV_Inspector_RuinPuzzleFlowerHint);
         public const string VV_Inspector_RuinPuzzleFlowerTethered = nameof(VV_Inspector_RuinPuzzleFlowerTethered);
-        public const string VV_Inspector_RuinPuzzleFlowerAligned = nameof(VV_Inspector_RuinPuzzleFlowerAligned);
     }
 }

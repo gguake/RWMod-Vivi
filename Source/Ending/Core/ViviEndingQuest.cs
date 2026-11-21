@@ -86,7 +86,7 @@ namespace VVRace
             {
                 if (_ruins.CoreExtracted) { return ViviEndingStage.AltarUnlocked; }
                 if (_ruins.HasCoordinates) { return ViviEndingStage.Ruins; }
-                if (_ruins.MissiveReceived) { return ViviEndingStage.Missive; }
+                if (_ruins.TraditionInquired) { return ViviEndingStage.Resonance; }
                 return ViviEndingStage.Tales;
             }
         }
@@ -260,10 +260,6 @@ namespace VVRace
 
                 switch (Stage)
                 {
-                    case ViviEndingStage.Tales:
-                        _ruins.TickMissive(now);
-                        break;
-
                     case ViviEndingStage.Ruins:
                         _ruins.TickSite();
                         break;
@@ -299,6 +295,15 @@ namespace VVRace
             if (_quest == null && !CreateQuest()) { return; }
 
             _tales.DeliverNext(everflower, federation);
+        }
+
+        // 관례 문의 이후 영원꽃 의식을 마칠 때마다 숨겨진 마나의 파장(고대 유적) 포착을 판정한다.
+        public bool Notify_EverflowerRitualCompleted(ArcanePlant_Everflower everflower, Pawn resonator)
+        {
+            if (everflower == null || everflower.Destroyed || everflower.Faction != Faction.OfPlayer) { return false; }
+            if (Stage != ViviEndingStage.Resonance) { return false; }
+
+            return _ruins.TryDetectOnRitual(everflower, resonator);
         }
 
         public bool Notify_GrandAttunementCompleted(ArcanePlant_Everflower everflower, float quality)
@@ -441,7 +446,7 @@ namespace VVRace
                 MessageTypeDefOf.NegativeEvent);
         }
 
-        private bool CreateQuest()
+        private bool CreateQuest(bool sendLetter = true)
         {
             var slate = new Slate();
             var map = Find.AnyPlayerHomeMap;
@@ -452,6 +457,12 @@ namespace VVRace
 
             _quest = quest;
             Find.QuestManager.Add(quest);
+
+            if (sendLetter && !quest.hidden && quest.root.sendAvailableLetter)
+            {
+                QuestUtility.SendLetterQuestAvailable(quest);
+            }
+
             return true;
         }
 
@@ -462,7 +473,7 @@ namespace VVRace
             if (ended == null || !ended.Historical || ended.State == QuestState.EndedSuccess) { return; }
 
             _quest = null;
-            if (!CreateQuest())
+            if (!CreateQuest(sendLetter: false))
             {
                 _quest = ended;
                 return;

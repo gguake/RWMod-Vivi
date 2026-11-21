@@ -5,7 +5,7 @@
   <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_GrandAttunement</defName>
     <label>everflower full bloom ritual</label>
-    <description>Awakens the altar's mana circuits to begin the final bloom of the enshrined everflower. While the bloom condenses, the resonator is fully assimilated with the everflower and cannot act.</description>
+    <description>Awakens the altar's mana circuits to begin the final bloom of the enshrined everflower. Only vivis may attend, and at least 10 vivi participants besides the resonator are required. While the bloom condenses, the resonator is fully assimilated with the everflower and cannot act.</description>
     <ritualPatternBase>VV_GrandAttunement</ritualPatternBase>
     <iconPath>UI/Commands/VV_GrandAttunement</iconPath>
     <displayOrderInImpact>1001</displayOrderInImpact>
@@ -26,6 +26,9 @@
     <defName>VV_GrandAttunement</defName>
     <durationTicks>2500</durationTicks>
     <workerClass>VVRace.RitualBehaviorWorker_GrandAttunement</workerClass>
+    <spectatorFilter Class="VVRace.RitualSpectatorFilter_Vivi">
+      <description>Spectators must be vivis.</description>
+    </spectatorFilter>
   </RitualBehaviorDef>
 
   <!-- 영원꽃 만개 의식 결과 -->

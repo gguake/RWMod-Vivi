@@ -8,10 +8,8 @@
         public const string VV_DialogChangeWeatherMustSelect = nameof(VV_DialogChangeWeatherMustSelect);
 
         public const string VV_Comms_FederationHostile = nameof(VV_Comms_FederationHostile);
-        public const string VV_Comms_RuinsCoordinatesRequest = nameof(VV_Comms_RuinsCoordinatesRequest);
-        public const string VV_Comms_RuinsCoordinatesConditions = nameof(VV_Comms_RuinsCoordinatesConditions);
-        public const string VV_Comms_RuinsCoordinatesNoTile = nameof(VV_Comms_RuinsCoordinatesNoTile);
-        public const string VV_Comms_RuinsCoordinatesResult = nameof(VV_Comms_RuinsCoordinatesResult);
+        public const string VV_Comms_TraditionInquiry = nameof(VV_Comms_TraditionInquiry);
+        public const string VV_Comms_TraditionInquiryResult = nameof(VV_Comms_TraditionInquiryResult);
         public const string VV_Comms_TaleRepurchase = nameof(VV_Comms_TaleRepurchase);
         public const string VV_Comms_TaleRepurchaseIntro = nameof(VV_Comms_TaleRepurchaseIntro);
         public const string VV_Comms_TaleRepurchaseOption = nameof(VV_Comms_TaleRepurchaseOption);

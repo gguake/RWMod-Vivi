@@ -12,13 +12,14 @@
 <VV_Letter_RuinEcho3>At the touch of the third fairy bloom, a ringing filled {PAWN_labelShort}'s head, and with it a memory older still.\n\nGolden petals trembled faintly above a vast altar. Beneath the flower's shade, everything was covered in thick green toxic clouds and flames. Terrified vivis fled past amid gunfire and explosions.\n\n"...The shade... is burning..."\n"...On the dais... I am all alone... at this rate, everyone..."\n\nOnly a few little lights remained beside the shadow standing on the burning dais. {PAWN_labelShort} came to in a cold sweat.\n\nThe fairy bloom scattered, opening the way into the circular gallery surrounding the sanctum.</VV_Letter_RuinEcho3>
 
 <VV_Letter_RuinEcho4Label>The golden flowershade</VV_Letter_RuinEcho4Label>
-<VV_Letter_RuinEcho4>At the touch of the last fairy bloom before the altar, the oldest memory left in this place unfolded before {PAWN_labelShort}'s eyes.\n\nA radiant golden flower bloomed atop a vast altar. Beneath its shade, where warm pollen drifted, countless vivis wore peaceful faces free of worry, as if they had forgotten the cold outside.\n\n"...In this warm shade... never withering..."\n"...Don't worry... your spring... I will, to the very end..."\n\nBeyond the gentle whispers, a name rang out. The crowd that filled the shade looked up to the crowned mother on the dais and called it as one.\n\n"Asphodel."\n\nThe cheers sank into distant static, and the last fairy bloom scattered. The ancient amber core can now be extracted from the central altar.</VV_Letter_RuinEcho4>
+<VV_Letter_RuinEcho4>At the touch of the last fairy bloom before the altar, the oldest memory left in this place unfolded before {PAWN_labelShort}'s eyes.\n\nA radiant golden flower bloomed atop a vast altar. Beneath its shade, where warm pollen drifted, countless vivis wore peaceful faces free of worry, as if they had forgotten the cold outside.\n\n"...In this warm shade... never withering..."\n"...Don't worry... your spring... I will, to the very end..."\n\nBeyond the gentle whispers, a name rang out. The crowd that filled the shade looked up to the crowned mother on the dais and called out as one.\n\n"...Blessings upon our empress, Asphodel..."\n\nThe cheers sank into distant static, and the last fairy bloom scattered. The ancient amber core can now be extracted from the central altar.</VV_Letter_RuinEcho4>
 
 <!-- 메시지 -->
 <VV_Message_RuinCoreExtracted>{PAWN_labelShort} has extracted the ancient amber core from the central altar.</VV_Message_RuinCoreExtracted>
 <VV_Message_RuinZoneUnsealed>The spatial distortion lifted, unsealing the inner sanctum zone.</VV_Message_RuinZoneUnsealed>
 <VV_Message_RuinPathGuideSpawned>A lingering wisp from the shattered doom bloom drifts along the unseen path.</VV_Message_RuinPathGuideSpawned>
 <VV_Message_RuinTrialTriggered>A wrong step triggered the doom bloom's lingering backlash, afflicting the expedition with {BLIGHT} and sending the trespasser back before the doom bloom!</VV_Message_RuinTrialTriggered>
+<VV_Message_RuinCorridorSweepHit>Swept up by a spatial pulse from the corridor pillars and returned to the start of the silent hall!</VV_Message_RuinCorridorSweepHit>
 <VV_Message_RuinGalleryAlarm>The circular gallery's ancient security alarm has sounded! Telegraphed mana blasts will strike targets in the gallery until the seal is completely lifted!</VV_Message_RuinGalleryAlarm>
 <VV_Message_RuinPuzzleTethered>{PAWN_labelShort} is now linked by a resonance thread. Touch another resonating bloom to swap their positions.</VV_Message_RuinPuzzleTethered>
 <VV_Message_RuinPuzzleUntethered>The resonance thread link with the fairy bloom ended.</VV_Message_RuinPuzzleUntethered>
@@ -33,7 +34,6 @@
 <VV_Inspector_RuinDoomFlowerHint>Each time it is destroyed, it sends a wisp along the hidden path before regrowing.</VV_Inspector_RuinDoomFlowerHint>
 <VV_Inspector_RuinPuzzleFlowerHint>A vivi can touch two blooms in sequence to swap their pots and realign them into a hexagon.</VV_Inspector_RuinPuzzleFlowerHint>
 <VV_Inspector_RuinPuzzleFlowerTethered>Resonance link: {PAWN_labelShort}</VV_Inspector_RuinPuzzleFlowerTethered>
-<VV_Inspector_RuinPuzzleFlowerAligned>Hexagonal resonance aligned</VV_Inspector_RuinPuzzleFlowerAligned>
 
 <!-- 거부 사유 -->
 <VV_FailReason_RuinNotQualified>only a royal vivi linked to an everflower of attunement level {0} or higher can do this</VV_FailReason_RuinNotQualified>

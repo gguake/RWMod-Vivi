@@ -89,8 +89,8 @@
         public const string VV_Quest_EndingName = nameof(VV_Quest_EndingName);
         public const string VV_Quest_EndingDesc = nameof(VV_Quest_EndingDesc);
         public const string VV_Quest_EndingStageTales = nameof(VV_Quest_EndingStageTales);
-        public const string VV_Quest_EndingStageMissiveWait = nameof(VV_Quest_EndingStageMissiveWait);
-        public const string VV_Quest_EndingStageCoordinates = nameof(VV_Quest_EndingStageCoordinates);
+        public const string VV_Quest_EndingStageInquiry = nameof(VV_Quest_EndingStageInquiry);
+        public const string VV_Quest_EndingStageResonance = nameof(VV_Quest_EndingStageResonance);
         public const string VV_Quest_EndingStageRuins = nameof(VV_Quest_EndingStageRuins);
         public const string VV_Quest_EndingStageRuinsExtract = nameof(VV_Quest_EndingStageRuinsExtract);
         public const string VV_Quest_EndingStageAltar = nameof(VV_Quest_EndingStageAltar);
@@ -99,11 +99,9 @@
         public const string VV_Quest_EndingStageHostile = nameof(VV_Quest_EndingStageHostile);
         public const string VV_Quest_EndingTruthLog = nameof(VV_Quest_EndingTruthLog);
 
-        public const string VV_Quest_EndingConditionsHeader = nameof(VV_Quest_EndingConditionsHeader);
-        public const string VV_Quest_EndingConditionVivi = nameof(VV_Quest_EndingConditionVivi);
-        public const string VV_Quest_EndingConditionWealth = nameof(VV_Quest_EndingConditionWealth);
         public const string VV_Quest_EndingStepAltar = nameof(VV_Quest_EndingStepAltar);
         public const string VV_Quest_EndingStepEnshrine = nameof(VV_Quest_EndingStepEnshrine);
+        public const string VV_Quest_EndingStepParticipants = nameof(VV_Quest_EndingStepParticipants);
 
         public const string VV_EndingCredits = nameof(VV_EndingCredits);
         public const string VV_EndingCreditsNoQueen = nameof(VV_EndingCreditsNoQueen);
@@ -159,6 +157,7 @@
         public const string VV_FailReason_EndingInProgress = nameof(VV_FailReason_EndingInProgress);
         public const string VV_FailReason_RequiresEverflowerAltar = nameof(VV_FailReason_RequiresEverflowerAltar);
         public const string VV_FailReason_GrandAttunementLocked = nameof(VV_FailReason_GrandAttunementLocked);
+        public const string VV_FailReason_GrandAttunementMinVivis = nameof(VV_FailReason_GrandAttunementMinVivis);
         public const string VV_FailReason_GrandAttunementInProgress = nameof(VV_FailReason_GrandAttunementInProgress);
         public const string VV_FailReason_GrandAttunementCompleted = nameof(VV_FailReason_GrandAttunementCompleted);
         public const string VV_FailReason_GrandAttunementFailed = nameof(VV_FailReason_GrandAttunementFailed);

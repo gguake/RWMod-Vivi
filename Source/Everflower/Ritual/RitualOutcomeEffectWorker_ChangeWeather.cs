@@ -38,7 +38,7 @@ namespace VVRace
                 }
             }
 
-            FinishRitual(everflower, map, quality);
+            FinishRitual(everflower, map, quality, jobRitual.PawnWithRole("resonator"));
         }
 
         private static GameCondition MakeWeatherCondition(ArcanePlant_Everflower everflower, Map map, EverflowerWeatherChoice? selectedWeather)
@@ -64,11 +64,12 @@ namespace VVRace
             return gameCond;
         }
 
-        private void FinishRitual(ArcanePlant_Everflower everflower, Map map, float quality)
+        private void FinishRitual(ArcanePlant_Everflower everflower, Map map, float quality, Pawn resonator)
         {
             def.effecter.Spawn(everflower, map, everflower.EverflowerComp.RitualEffecterOffset).Cleanup();
 
             everflower.Notify_RitualComplete(quality);
+            ViviEndingQuest.Current?.Notify_EverflowerRitualCompleted(everflower, resonator);
         }
     }
 }

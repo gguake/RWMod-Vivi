@@ -61,6 +61,39 @@ namespace VVRace
         }
     }
 
+    public class RuinCorridorSweep : IExposable
+    {
+        public int pillarIndex;
+        public int side = -1;
+        public int startTick = -1;
+        public int fireTick = -1;
+        public bool fired;
+        public int seed;
+
+        public RuinCorridorSweep()
+        {
+        }
+
+        public RuinCorridorSweep(int pillarIndex, int side, int startTick, int fireTick, int seed)
+        {
+            this.pillarIndex = pillarIndex;
+            this.side = side;
+            this.startTick = startTick;
+            this.fireTick = fireTick;
+            this.seed = seed;
+        }
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref pillarIndex, "pillarIndex", 0);
+            Scribe_Values.Look(ref side, "side", -1);
+            Scribe_Values.Look(ref startTick, "startTick", -1);
+            Scribe_Values.Look(ref fireTick, "fireTick", -1);
+            Scribe_Values.Look(ref fired, "fired", false);
+            Scribe_Values.Look(ref seed, "seed", 0);
+        }
+    }
+
     public class MapComponent_ViviAncientRuins : MapComponent
     {
         public const int DoomRespawnDelayTicks = 90;
@@ -68,6 +101,14 @@ namespace VVRace
         public const int UnsealFadeDurationTicks = 90;
         public const int ResealDurationTicks = 180;
         public const int TrialBlightDurationTicks = GenDate.TicksPerDay;
+        public const int CorridorSweepAimTicks = 150;
+        public const int CorridorSweepWarpTicks = 33;
+        public const float CorridorSweepWidth = 5.0f;
+        public const float CorridorSweepHalfWidth = 2.5f;
+        public const float CorridorSweepLength = 12.0f;
+        private const int MaxConcurrentCorridorSweeps = 2;
+        private const int CorridorSweepPetalInterval = 4;
+        private static readonly IntRange CorridorSweepIntervalTicks = new IntRange(100, 150);
         public const int GalleryBlastAimTicks = 240;
         private const int MaxConcurrentGalleryBlasts = 12;
         private const float GalleryBlastMinSpacing = 2.8f;
@@ -98,6 +139,10 @@ namespace VVRace
         private List<IntVec3> _safePath = new List<IntVec3>();
         private List<int> _guideStartTicks = new List<int>();
         private List<int> _guideLastStepIndices = new List<int>();
+        private List<RuinCorridorSweep> _corridorSweeps = new List<RuinCorridorSweep>();
+        private List<int> _corridorSweepOrder = new List<int>();
+        private int _nextCorridorSweepTick = -1;
+        private int _lastCorridorSweepPillar = -1;
 
         private List<Building_RuinPuzzleFairyFlower> _puzzleFlowers = new List<Building_RuinPuzzleFairyFlower>();
         private Building_RuinPuzzleFairyFlower _selectedFlower;
@@ -126,6 +171,8 @@ namespace VVRace
         public Building_RuinPuzzleFairyFlower SelectedFlower => _selectedFlower;
         public Pawn TetheredPawn => _tetheredPawn;
         public int ActiveGuideCount => _guideStartTicks.Count;
+        public int ActiveCorridorSweepCount => _corridorSweeps.Count;
+        public IReadOnlyList<RuinCorridorSweep> CorridorSweeps => _corridorSweeps;
 
         public MapComponent_ViviAncientRuins(Map map) : base(map)
         {
@@ -163,10 +210,15 @@ namespace VVRace
             _resealStartTick = -1;
             _guideStartTicks.Clear();
             _guideLastStepIndices.Clear();
+            _corridorSweeps.Clear();
+            _corridorSweepOrder.Clear();
+            _nextCorridorSweepTick = -1;
+            _lastCorridorSweepPillar = -1;
             _puzzleFlowers.Clear();
             ClearPuzzleTether(notify: false);
             _galleryAlarmActive = false;
             _nextGalleryBlastTick = -1;
+            _corridorSweeps.Clear();
             CancelGallerySecurityAims();
 
             _safePath = RuinLayoutUtility.GenerateHiddenPath(origin, seed, _rotation);
@@ -293,6 +345,10 @@ namespace VVRace
             _doomRespawnTick = -1;
             _guideStartTicks.Clear();
             _guideLastStepIndices.Clear();
+            _corridorSweeps.Clear();
+            _corridorSweepOrder.Clear();
+            _nextCorridorSweepTick = -1;
+            _lastCorridorSweepPillar = -1;
 
             var doomFlowers = map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinDoomFlower).ToList();
             for (int i = 0; i < doomFlowers.Count; i++)
@@ -379,6 +435,7 @@ namespace VVRace
             }
 
             TickPathGuides(now);
+            TickCorridorSweeps(now);
 
             if (now < _trapCooldownUntilTick) { return; }
 
@@ -493,6 +550,18 @@ namespace VVRace
             var blightDef = DoomBlightUtility.ApplyTimedDoomBlight(map, TrialBlightDurationTicks);
 
             // 잘못된 칸을 밟은 대상만 멸망꽃 앞으로 강제 이동 (안전 경로 위 인원은 유지)
+            ReturnPawnsToTrialStart(violators, trialRect, returnAnchor, skipSafePath: true);
+
+            var blightLabel = blightDef != null ? blightDef.label : string.Empty;
+            Messages.Message(
+                LocalizeString_Message.VV_Message_RuinTrialTriggered.Translate(blightLabel.Named("BLIGHT")),
+                new LookTargets(returnAnchor, map),
+                MessageTypeDefOf.NegativeEvent,
+                historical: false);
+        }
+
+        private void ReturnPawnsToTrialStart(List<Pawn> pawnsToReturn, CellRect trialRect, IntVec3 returnAnchor, bool skipSafePath)
+        {
             int offsetIdx = 0;
             IntVec2[] returnOffsets =
             {
@@ -501,11 +570,12 @@ namespace VVRace
                 new IntVec2(-1, -1), new IntVec2(1, -1),
             };
 
-            for (int i = 0; i < violators.Count; i++)
+            for (int i = 0; i < pawnsToReturn.Count; i++)
             {
-                var pawn = violators[i];
+                var pawn = pawnsToReturn[i];
                 if (pawn == null || pawn.Dead || !pawn.Spawned) { continue; }
-                if (!trialRect.Contains(pawn.Position) || _safePathSet.Contains(pawn.Position)) { continue; }
+                if (!trialRect.Contains(pawn.Position)) { continue; }
+                if (skipSafePath && _safePathSet.Contains(pawn.Position)) { continue; }
 
                 var oldPos = pawn.Position;
                 var dest = returnAnchor;
@@ -536,13 +606,227 @@ namespace VVRace
                 pawn.Position = dest;
                 pawn.Notify_Teleported(endCurrentJob: false, resetTweenedPos: true);
             }
+        }
 
-            var blightLabel = blightDef != null ? blightDef.label : string.Empty;
-            Messages.Message(
-                LocalizeString_Message.VV_Message_RuinTrialTriggered.Translate(blightLabel.Named("BLIGHT")),
-                new LookTargets(returnAnchor, map),
-                MessageTypeDefOf.NegativeEvent,
-                historical: false);
+        private void GetCorridorSweepGeometry(RuinCorridorSweep sweep, out Vector3 start, out Vector3 dir, out int pillarZ)
+        {
+            var pillars = RuinLayoutUtility.CorridorPillarZ;
+            int idx = Mathf.Clamp(sweep.pillarIndex, 0, pillars.Length - 1);
+            pillarZ = pillars[idx];
+            int side = sweep.side >= 0 ? 1 : -1;
+
+            start = RuinLayoutUtility.LocalToWorld(_origin, side * 6, pillarZ, _rotation).ToVector3Shifted().Yto0();
+            var dirOff = RuinLayoutUtility.LocalOffsetToWorld(-side, 0, _rotation);
+            dir = new Vector3(dirOff.x, 0f, dirOff.z).normalized;
+        }
+
+        private void TickCorridorSweeps(int now)
+        {
+            if (!IsStageUnsealed(2) || _trialCleared || IsResealing)
+            {
+                if (_corridorSweeps.Count > 0)
+                {
+                    _corridorSweeps.Clear();
+                }
+                return;
+            }
+
+            for (int i = _corridorSweeps.Count - 1; i >= 0; i--)
+            {
+                var sweep = _corridorSweeps[i];
+                if (!sweep.fired)
+                {
+                    if (now >= sweep.fireTick)
+                    {
+                        FireCorridorSweep(sweep);
+                    }
+                    else if ((now - sweep.startTick) % CorridorSweepPetalInterval == 0)
+                    {
+                        GetCorridorSweepGeometry(sweep, out var start, out var dir, out _);
+                        var progress = Mathf.Clamp01((now - sweep.startTick) / (float)Mathf.Max(1, sweep.fireTick - sweep.startTick));
+                        ApocryphaNeedleLane.ThrowAimPetals(map, start, dir, CorridorSweepLength, CorridorSweepHalfWidth, progress);
+                    }
+                }
+                else if (now - sweep.fireTick >= CorridorSweepWarpTicks)
+                {
+                    _corridorSweeps.RemoveAt(i);
+                }
+            }
+
+            if (_nextCorridorSweepTick < 0)
+            {
+                _nextCorridorSweepTick = now + 60;
+            }
+
+            int aimingCount = 0;
+            for (int i = 0; i < _corridorSweeps.Count; i++)
+            {
+                if (!_corridorSweeps[i].fired) { aimingCount++; }
+            }
+
+            if (aimingCount < MaxConcurrentCorridorSweeps && now >= _nextCorridorSweepTick)
+            {
+                if (TrySpawnCorridorSweep(now))
+                {
+                    _nextCorridorSweepTick = now + CorridorSweepIntervalTicks.RandomInRange;
+                }
+                else
+                {
+                    _nextCorridorSweepTick = now + 30;
+                }
+            }
+        }
+
+        private bool TrySpawnCorridorSweep(int now)
+        {
+            int pillarCount = RuinLayoutUtility.CorridorPillarZ.Length;
+            if (pillarCount == 0) { return false; }
+
+            if (_corridorSweepOrder.Count == 0)
+            {
+                for (int i = 0; i < pillarCount; i++)
+                {
+                    _corridorSweepOrder.Add(i);
+                }
+                _corridorSweepOrder.Shuffle();
+                if (_corridorSweepOrder.Count > 1 && _corridorSweepOrder[0] == _lastCorridorSweepPillar)
+                {
+                    var tmp = _corridorSweepOrder[0];
+                    _corridorSweepOrder[0] = _corridorSweepOrder[_corridorSweepOrder.Count - 1];
+                    _corridorSweepOrder[_corridorSweepOrder.Count - 1] = tmp;
+                }
+            }
+
+            int chosenIdx = -1;
+            int orderPos = -1;
+            for (int i = 0; i < _corridorSweepOrder.Count; i++)
+            {
+                int cand = _corridorSweepOrder[i];
+                bool alreadyActive = false;
+                for (int j = 0; j < _corridorSweeps.Count; j++)
+                {
+                    if (!_corridorSweeps[j].fired && _corridorSweeps[j].pillarIndex == cand)
+                    {
+                        alreadyActive = true;
+                        break;
+                    }
+                }
+                if (!alreadyActive)
+                {
+                    chosenIdx = cand;
+                    orderPos = i;
+                    break;
+                }
+            }
+
+            if (chosenIdx < 0) { return false; }
+
+            _corridorSweepOrder.RemoveAt(orderPos);
+            _lastCorridorSweepPillar = chosenIdx;
+
+            int side = Rand.Bool ? -1 : 1;
+            var sweep = new RuinCorridorSweep(chosenIdx, side, now, now + CorridorSweepAimTicks, Rand.Int);
+            _corridorSweeps.Add(sweep);
+
+            GetCorridorSweepGeometry(sweep, out var start, out _, out _);
+            EndingVfxUtility.PlayEffectAt(map, VVEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, start);
+            return true;
+        }
+
+        private void FireCorridorSweep(RuinCorridorSweep sweep)
+        {
+            sweep.fired = true;
+            GetCorridorSweepGeometry(sweep, out var start, out var dir, out var pillarZ);
+
+            var trialRect = RuinLayoutUtility.TrialRect(_origin, _rotation);
+            var returnAnchor = RuinLayoutUtility.RuinDoomReturnCell(_origin, _rotation);
+            var midCell = RuinLayoutUtility.LocalToWorld(_origin, 0, pillarZ, _rotation);
+
+            if (midCell.InBounds(map))
+            {
+                VVSoundDefOf.VV_FairyTeleport?.PlayOneShot(new TargetInfo(midCell, map));
+            }
+
+            List<Pawn> hitPawns = null;
+            var pawns = map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                var p = pawns[i];
+                if (p == null || p.Dead || !p.Spawned) { continue; }
+                if (!trialRect.Contains(p.Position)) { continue; }
+
+                RuinLayoutUtility.WorldToLocal(p.Position, _origin, _rotation, out int lx, out int lz);
+                if (Mathf.Abs(lz - pillarZ) <= 2 && lx >= -6 && lx <= 6)
+                {
+                    if (hitPawns == null) { hitPawns = new List<Pawn>(); }
+                    hitPawns.Add(p);
+                }
+            }
+
+            if (hitPawns != null && hitPawns.Count > 0)
+            {
+                ReturnPawnsToTrialStart(hitPawns, trialRect, returnAnchor, skipSafePath: false);
+                ApocryphaUtility.ShakeCamera(map, 0.35f);
+
+                bool hitColony = false;
+                for (int i = 0; i < hitPawns.Count; i++)
+                {
+                    if (hitPawns[i].Faction == Faction.OfPlayer || hitPawns[i].IsPrisonerOfColony)
+                    {
+                        hitColony = true;
+                        break;
+                    }
+                }
+
+                if (hitColony)
+                {
+                    Messages.Message(
+                        LocalizeString_Message.VV_Message_RuinCorridorSweepHit.Translate(),
+                        new LookTargets(returnAnchor, map),
+                        MessageTypeDefOf.NeutralEvent,
+                        historical: false);
+                }
+            }
+        }
+
+        private void DrawCorridorSweeps()
+        {
+            if (!IsStageUnsealed(2) || _trialCleared || IsResealing || _corridorSweeps.Count == 0) { return; }
+
+            var now = Find.TickManager.TicksGame;
+            for (int i = 0; i < _corridorSweeps.Count; i++)
+            {
+                var sweep = _corridorSweeps[i];
+                GetCorridorSweepGeometry(sweep, out var start, out var dir, out _);
+
+                if (!sweep.fired)
+                {
+                    var totalTicks = Mathf.Max(1, sweep.fireTick - sweep.startTick);
+                    var elapsed = Mathf.Max(0, now - sweep.startTick);
+                    var progress = Mathf.Clamp01(elapsed / (float)totalTicks);
+                    ApocryphaNeedleRenderer.DrawLane(
+                        start: start,
+                        direction: dir,
+                        length: CorridorSweepLength,
+                        width: CorridorSweepWidth,
+                        progress: progress,
+                        alpha: 1f,
+                        bossInside: false,
+                        breach: false,
+                        aimSecs: elapsed / 60f,
+                        aimDuration: totalTicks / 60f,
+                        seed: sweep.seed);
+                }
+                else
+                {
+                    var warpAge = now - sweep.fireTick;
+                    if (warpAge >= 0 && warpAge < CorridorSweepWarpTicks)
+                    {
+                        var front = Mathf.Min(CorridorSweepLength, Mathf.Max(1f, (warpAge + 1) * 4f));
+                        ApocryphaNeedleRenderer.DrawWarp(start, dir, CorridorSweepLength, front, warpAge / 60f, 1f);
+                    }
+                }
+            }
         }
 
         #endregion
@@ -699,6 +983,7 @@ namespace VVRace
             _hexagonSolved = true;
             _galleryAlarmActive = false;
             _nextGalleryBlastTick = -1;
+            _corridorSweeps.Clear();
             CancelGallerySecurityAims();
             ClearPuzzleTether(notify: false);
             ViviEndingQuest.Current?.Ruins.Notify_HexagonSolved();
@@ -1054,6 +1339,7 @@ namespace VVRace
             _resealStartTick = Find.TickManager.TicksGame;
             _galleryAlarmActive = false;
             _nextGalleryBlastTick = -1;
+            _corridorSweeps.Clear();
             CancelGallerySecurityAims();
             ClearPuzzleTether(notify: false);
 
@@ -1319,6 +1605,7 @@ namespace VVRace
             if (!_active || Find.CurrentMap != map || WorldRendererUtility.WorldSelected) { return; }
 
             DrawDistortionSeals();
+            DrawCorridorSweeps();
             DrawHexagonPuzzleLinks();
         }
 
@@ -1451,6 +1738,10 @@ namespace VVRace
             Scribe_Values.Look(ref _resealStartTick, "resealStartTick", -1);
             Scribe_Collections.Look(ref _safePath, "safePath", LookMode.Value);
             Scribe_Collections.Look(ref _guideStartTicks, "guideStartTicks", LookMode.Value);
+            Scribe_Collections.Look(ref _corridorSweeps, "corridorSweeps", LookMode.Deep);
+            Scribe_Collections.Look(ref _corridorSweepOrder, "corridorSweepOrder", LookMode.Value);
+            Scribe_Values.Look(ref _nextCorridorSweepTick, "nextCorridorSweepTick", -1);
+            Scribe_Values.Look(ref _lastCorridorSweepPillar, "lastCorridorSweepPillar", -1);
             Scribe_Collections.Look(ref _puzzleFlowers, "puzzleFlowers", LookMode.Reference);
             Scribe_References.Look(ref _selectedFlower, "selectedFlower");
             Scribe_References.Look(ref _tetheredPawn, "tetheredPawn");
@@ -1463,8 +1754,11 @@ namespace VVRace
             {
                 if (_safePath == null) { _safePath = new List<IntVec3>(); }
                 if (_guideStartTicks == null) { _guideStartTicks = new List<int>(); }
+                if (_corridorSweeps == null) { _corridorSweeps = new List<RuinCorridorSweep>(); }
+                if (_corridorSweepOrder == null) { _corridorSweepOrder = new List<int>(); }
                 if (_puzzleFlowers == null) { _puzzleFlowers = new List<Building_RuinPuzzleFairyFlower>(); }
                 if (_galleryAims == null) { _galleryAims = new List<RuinGalleryBlastAim>(); }
+                _corridorSweeps.RemoveAll(s => s == null);
                 _puzzleFlowers.RemoveAll(f => f == null);
                 _galleryAims.RemoveAll(a => a == null || !a.cell.IsValid);
                 _guideLastStepIndices.Clear();

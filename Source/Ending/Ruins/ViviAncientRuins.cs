@@ -12,12 +12,17 @@ namespace VVRace
         public const int EchoCount = 4;
         public const int RequiredAttunementLevel = 4;
 
+        public const float DetectionBaseChance = 0.20f;
+        public const float DetectionReadingMaxBonus = 0.40f;
+        public const float DetectionManaMaxBonus = 0.10f;
+        public const float DetectionFailureBonusStep = 0.10f;
+        public const float DetectionMapManaForMaxBonus = 200000f;
+
         private const int MinSiteDistance = 6;
         private const int MaxSiteDistance = 14;
         private const int ExpandedMaxSiteDistance = 24;
         private const int FallbackMinSiteDistance = 4;
         private const int FallbackMaxSiteDistance = 28;
-        private static readonly IntRange MissiveDelayTicks = new IntRange(60000, 120000);
 
         private static readonly string[] EchoLabelKeys =
         {
@@ -37,15 +42,16 @@ namespace VVRace
 
         private readonly ViviEndingQuest _ending;
 
-        private int _missiveDueTick = -1;
-        private bool _missiveReceived;
+        private bool _traditionInquired;
+        private int _detectionFailures;
         private PlanetTile _tile = PlanetTile.Invalid;
         private Site _site;
         private int _investigated;
         private bool _hexagonSolved;
         private bool _coreExtracted;
 
-        public bool MissiveReceived => _missiveReceived;
+        public bool TraditionInquired => _traditionInquired;
+        public int DetectionFailures => _detectionFailures;
         public bool HasCoordinates => _tile.Valid;
         public PlanetTile Tile => _tile;
         public Site Site => _site != null && !_site.Destroyed ? _site : null;
@@ -60,8 +66,18 @@ namespace VVRace
 
         public void ExposeData()
         {
-            Scribe_Values.Look(ref _missiveDueTick, "missiveDueTick", -1);
-            Scribe_Values.Look(ref _missiveReceived, "missiveReceived", false);
+            Scribe_Values.Look(ref _traditionInquired, "traditionInquired", false);
+            if (Scribe.mode == LoadSaveMode.LoadingVars && !_traditionInquired)
+            {
+                bool legacyMissive = false;
+                Scribe_Values.Look(ref legacyMissive, "missiveReceived", false);
+                if (legacyMissive)
+                {
+                    _traditionInquired = true;
+                }
+            }
+
+            Scribe_Values.Look(ref _detectionFailures, "detectionFailures", 0);
             Scribe_Values.Look(ref _tile, "tile", PlanetTile.Invalid);
             Scribe_References.Look(ref _site, "site");
             Scribe_Values.Look(ref _investigated, "investigated", 0);
@@ -77,53 +93,44 @@ namespace VVRace
             return everflower != null && !everflower.Destroyed && everflower.AttunementLevel >= RequiredAttunementLevel;
         }
 
-        #region 밀서·좌표
-        public void Notify_TalesCompleted()
+        #region 관례 문의·유적 포착
+        public bool CanInquireTradition()
         {
-            if (_missiveReceived || _missiveDueTick >= 0) { return; }
-
-            _missiveDueTick = Find.TickManager.TicksGame + MissiveDelayTicks.RandomInRange;
+            return _ending.Tales.AllDelivered && !_traditionInquired && !HasCoordinates && !_coreExtracted;
         }
 
-        public void TickMissive(int now)
+        public void CompleteTraditionInquiry()
         {
-            if (_missiveReceived || _missiveDueTick < 0 || now < _missiveDueTick) { return; }
-
-            var federation = ViviEndingUtility.FindFederation(requireNonHostile: true);
-            if (federation == null) { return; }
-
-            SendMissive(federation);
+            _traditionInquired = true;
         }
 
-        public void SendMissive(Faction federation)
+        public float GetDetectionChance(Map map)
         {
-            if (_missiveReceived) { return; }
-
-            _missiveReceived = true;
-
-            var text = LocalizeString_Letter.VV_Letter_EndingFederationMissive.Translate().Resolve()
-                + "\n\n" + LocalizeString_Letter.VV_Letter_EndingFederationMissiveConditions.Translate().Resolve();
-
-            Find.LetterStack.ReceiveLetter(
-                LocalizeString_Letter.VV_Letter_EndingFederationMissiveLabel.Translate(),
-                text,
-                LetterDefOf.PositiveEvent,
-                LookTargets.Invalid,
-                federation,
-                _ending.Quest);
+            var readingBonus = _ending.Tales.ReadingProgress * DetectionReadingMaxBonus;
+            var mapMana = map?.GetManaComponent()?.TotalMapMana() ?? 0f;
+            var manaBonus = Mathf.Clamp01(mapMana / DetectionMapManaForMaxBonus) * DetectionManaMaxBonus;
+            var failureBonus = _detectionFailures * DetectionFailureBonusStep;
+            return Mathf.Clamp01(DetectionBaseChance + readingBonus + manaBonus + failureBonus);
         }
 
-        public AcceptanceReport CanRequestCoordinates()
+        public bool TryDetectOnRitual(ArcanePlant_Everflower everflower, Pawn resonator)
         {
-            if (!_missiveReceived || HasCoordinates) { return false; }
+            if (!_traditionInquired || HasCoordinates || _coreExtracted) { return false; }
+            if (everflower == null || everflower.Destroyed || everflower.Faction != Faction.OfPlayer) { return false; }
+            if (everflower.AttunementLevel < RequiredAttunementLevel) { return false; }
 
-            var unmet = ViviEndingRequirements.GetUnmetReason();
-            if (unmet != null) { return unmet; }
+            var chance = GetDetectionChance(everflower.MapHeld);
+            if (!Rand.Chance(chance))
+            {
+                ++_detectionFailures;
+                return false;
+            }
 
-            return true;
+            var discoverer = resonator ?? ViviEndingUtility.ResonatorOf(everflower);
+            return RevealRuins(discoverer);
         }
 
-        public bool RevealRuins()
+        public bool RevealRuins(Pawn discoverer = null, bool sendLetter = true)
         {
             if (HasCoordinates) { return Site != null; }
             if (!TryFindSiteTile(out var tile)) { return false; }
@@ -131,7 +138,17 @@ namespace VVRace
             _tile = tile;
             if (!SpawnSite()) { return false; }
 
-            Messages.Message(LocalizeString_Message.VV_Message_EndingRuinsRevealed.Translate(), _site, MessageTypeDefOf.PositiveEvent);
+            if (sendLetter)
+            {
+                Find.LetterStack.ReceiveLetter(
+                    LocalizeString_Letter.VV_Letter_EndingRuinsDetectedLabel.Translate(),
+                    ViviEndingUtility.TranslateWithResonator(LocalizeString_Letter.VV_Letter_EndingRuinsDetected, discoverer),
+                    LetterDefOf.PositiveEvent,
+                    new LookTargets(_site),
+                    null,
+                    _ending.Quest);
+            }
+
             return true;
         }
 
@@ -449,7 +466,7 @@ namespace VVRace
 
         public void DebugComplete()
         {
-            _missiveReceived = true;
+            _traditionInquired = true;
             _investigated = EchoCount;
             _hexagonSolved = true;
             _coreExtracted = true;

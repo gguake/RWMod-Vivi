@@ -186,6 +186,8 @@ namespace VVRace
         public static ThingDef VV_TitanicHornetWing;
 
         public static ThingDef VV_Mote_EverflowerCircle;
+
+        public static ThingDef VV_FairyTaleBook;
     }
 
     [DefOf]

@@ -8,6 +8,7 @@ namespace VVRace
     public class ViviEndingTales : IExposable
     {
         public const int VolumeCount = 4;
+        public const float MaxReadingPoints = 25000f;
 
         private const int RepurchaseBaseCost = 200;
         private const int RepurchaseCostStep = 100;
@@ -24,12 +25,6 @@ namespace VVRace
 
         private static readonly MethodInfo GenerateFullDescriptionMethod =
             AccessTools.Method(typeof(Book), "GenerateFullDescription");
-
-        private static readonly AccessTools.FieldRef<BookOutcomeDoer_GiveQuest, bool> GiveQuestHasQuestRef =
-            AccessTools.FieldRefAccess<BookOutcomeDoer_GiveQuest, bool>("hasQuest");
-
-        private static readonly AccessTools.FieldRef<BookOutcomeDoer_GiveQuest, QuestScriptDef> GiveQuestDefRef =
-            AccessTools.FieldRefAccess<BookOutcomeDoer_GiveQuest, QuestScriptDef>("questDef");
 
         private static readonly string[] VolumeLabelKeys =
         {
@@ -67,10 +62,13 @@ namespace VVRace
 
         private int _delivered;
         private int _repurchases;
+        private float _readingPoints;
 
         public int Delivered => _delivered;
         public bool AllDelivered => _delivered >= VolumeCount;
         public int RepurchaseCost => RepurchaseBaseCost + RepurchaseCostStep * _repurchases;
+        public float ReadingPoints => _readingPoints;
+        public float ReadingProgress => Mathf.Clamp01(_readingPoints / MaxReadingPoints);
 
         public ViviEndingTales(ViviEndingQuest ending)
         {
@@ -81,6 +79,14 @@ namespace VVRace
         {
             Scribe_Values.Look(ref _delivered, "delivered", 0);
             Scribe_Values.Look(ref _repurchases, "repurchases", 0);
+            Scribe_Values.Look(ref _readingPoints, "readingPoints", 0f);
+        }
+
+        public void AddReadingProgress(float amount)
+        {
+            if (amount <= 0f || _readingPoints >= MaxReadingPoints) { return; }
+
+            _readingPoints = Mathf.Min(MaxReadingPoints, _readingPoints + amount);
         }
 
         public static string VolumeLabel(int volume)
@@ -124,11 +130,6 @@ namespace VVRace
                 federation,
                 _ending.Quest);
 
-            if (AllDelivered)
-            {
-                _ending.Ruins.Notify_TalesCompleted();
-            }
-
             return true;
         }
 
@@ -164,22 +165,10 @@ namespace VVRace
         {
             if (volume < 1 || volume > VolumeCount) { return null; }
 
-            var book = ThingMaker.MakeThing(ThingDefOf.Novel) as Book;
+            var book = ThingMaker.MakeThing(VVThingDefOf.VV_FairyTaleBook) as Book;
             if (book == null) { return null; }
 
             book.TryGetComp<CompQuality>()?.SetQuality(BookQuality, ArtGenerationContext.Outsider);
-
-            if (book.BookComp != null)
-            {
-                foreach (var doer in book.BookComp.Doers)
-                {
-                    if (doer is BookOutcomeDoer_GiveQuest giveQuest)
-                    {
-                        GiveQuestHasQuestRef(giveQuest) = false;
-                        GiveQuestDefRef(giveQuest) = null;
-                    }
-                }
-            }
 
             BookTitleRef(book) = VolumeTitle(volume);
             BookDescriptionFlavorRef(book) = VolumeDesc(volume);
@@ -199,7 +188,12 @@ namespace VVRace
 
         public void DebugSetDelivered(int delivered)
         {
-            _delivered = UnityEngine.Mathf.Clamp(delivered, 0, VolumeCount);
+            _delivered = Mathf.Clamp(delivered, 0, VolumeCount);
+        }
+
+        public void DebugSetReadingPoints(float points)
+        {
+            _readingPoints = Mathf.Clamp(points, 0f, MaxReadingPoints);
         }
     }
 }

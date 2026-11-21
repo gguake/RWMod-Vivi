@@ -18,12 +18,12 @@
 
         public const string VV_Message_EndingApocryphaLanded = nameof(VV_Message_EndingApocryphaLanded);
         public const string VV_Message_EndingPawnReturned = nameof(VV_Message_EndingPawnReturned);
-        public const string VV_Message_EndingRuinsRevealed = nameof(VV_Message_EndingRuinsRevealed);
         public const string VV_Message_EndingTaleRedelivered = nameof(VV_Message_EndingTaleRedelivered);
         public const string VV_Message_RuinCoreExtracted = nameof(VV_Message_RuinCoreExtracted);
         public const string VV_Message_RuinZoneUnsealed = nameof(VV_Message_RuinZoneUnsealed);
         public const string VV_Message_RuinPathGuideSpawned = nameof(VV_Message_RuinPathGuideSpawned);
         public const string VV_Message_RuinTrialTriggered = nameof(VV_Message_RuinTrialTriggered);
+        public const string VV_Message_RuinCorridorSweepHit = nameof(VV_Message_RuinCorridorSweepHit);
         public const string VV_Message_RuinGalleryAlarm = nameof(VV_Message_RuinGalleryAlarm);
         public const string VV_Message_RuinPuzzleTethered = nameof(VV_Message_RuinPuzzleTethered);
         public const string VV_Message_RuinPuzzleUntethered = nameof(VV_Message_RuinPuzzleUntethered);

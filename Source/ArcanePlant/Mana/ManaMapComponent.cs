@@ -64,6 +64,17 @@ namespace VVRace
             return sum;
         }
 
+        public float TotalMapMana()
+        {
+            var sum = 0f;
+            for (int i = 0; i < _manaGrid.Length; ++i)
+            {
+                sum += Mathf.Clamp(_manaReserveGrid[i] + _manaGrid[i], 0f, EnvironmentManaMax);
+            }
+
+            return sum;
+        }
+
         public ManaMapComponent(Map map) : base(map)
         {
             _manaReserveGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);

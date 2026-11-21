@@ -109,6 +109,7 @@
     <Compile Include="Ending\Boss\Things\HornetManifestation.cs" />
     <Compile Include="Ending\Boss\UI\Alert_ApocryphaChanneling.cs" />
     <Compile Include="Ending\Core\AmberCoreUtility.cs" />
+    <Compile Include="Ending\Core\BookOutcomeDoer_FairyTale.cs" />
     <Compile Include="Ending\Core\DissolveRenderer.cs" />
     <Compile Include="Ending\Core\EndingVfxUtility.cs" />
     <Compile Include="Ending\Core\GameCondition_GoldenBloom.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_QueensCoronation.cs" />
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_ReturnOfLife.cs" />
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_SkyShield.cs" />
+    <Compile Include="Ending\Ritual\RitualSpectatorFilter_Vivi.cs" />
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_WindOfRest.cs" />
     <Compile Include="Ending\Ritual\WindOfRest.cs" />
     <Compile Include="Ending\Vivi\EverflowerBlessingUtility.cs" />

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -34,6 +34,7 @@ namespace VVRace
             def.effecter.Spawn(everflower, map).Cleanup();
 
             everflower.Notify_RitualComplete(quality);
+            ViviEndingQuest.Current?.Notify_EverflowerRitualCompleted(everflower, resonator);
         }
     }
 }

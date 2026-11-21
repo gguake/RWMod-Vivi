@@ -472,6 +472,7 @@
       <shaderType>Transparent</shaderType>
       <drawSize>(1.85, 1.85)</drawSize>
       <drawOffset>(0, 0, 0.30)</drawOffset>
+      <renderQueue>2902</renderQueue>
     </graphicData>
     <drawerType>RealtimeOnly</drawerType>
     <drawOffscreen>true</drawOffscreen>

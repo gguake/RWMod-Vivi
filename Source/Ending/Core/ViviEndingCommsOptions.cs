@@ -5,7 +5,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 비비 연방 통신 선택지: 옛 제단 좌표 요청, 동화책 재구매, 대체 호박 코어 복구.
+    // 비비 연방 통신 선택지: 동화책·영원꽃 관례 문의, 동화책 재구매, 대체 호박 코어 복구.
     public static class ViviEndingCommsOptions
     {
         public static IEnumerable<DiaOption> Make(Pawn negotiator, Faction faction)
@@ -18,9 +18,9 @@ namespace VVRace
 
             var hostile = faction.HostileTo(Faction.OfPlayer);
 
-            if (ending.Ruins.MissiveReceived && !ending.Ruins.HasCoordinates)
+            if (ending.Ruins.CanInquireTradition())
             {
-                yield return MakeCoordinatesOption(ending, negotiator, faction, hostile);
+                yield return MakeTraditionInquiryOption(ending, negotiator, faction, hostile);
             }
 
             if (ending.Tales.Delivered > 0)
@@ -34,23 +34,15 @@ namespace VVRace
             }
         }
 
-        private static DiaOption MakeCoordinatesOption(ViviEndingQuest ending, Pawn negotiator, Faction faction, bool hostile)
+        private static DiaOption MakeTraditionInquiryOption(ViviEndingQuest ending, Pawn negotiator, Faction faction, bool hostile)
         {
-            var option = new DiaOption(LocalizeString_Dialog.VV_Comms_RuinsCoordinatesRequest.Translate());
+            var option = new DiaOption(LocalizeString_Dialog.VV_Comms_TraditionInquiry.Translate());
             if (TryDisable(option, negotiator, hostile)) { return option; }
-
-            var report = ending.Ruins.CanRequestCoordinates();
-            if (!report.Accepted)
-            {
-                option.Disable(report.Reason);
-                return option;
-            }
 
             option.linkLateBind = () =>
             {
-                var text = ending.Ruins.RevealRuins()
-                    ? LocalizeString_Dialog.VV_Comms_RuinsCoordinatesResult.Translate(LeaderName(faction).Named("LEADER")).Resolve()
-                    : LocalizeString_Dialog.VV_Comms_RuinsCoordinatesNoTile.Translate().Resolve();
+                ending.Ruins.CompleteTraditionInquiry();
+                var text = LocalizeString_Dialog.VV_Comms_TraditionInquiryResult.Translate(LeaderName(faction).Named("LEADER")).Resolve();
                 return ResultNode(text, negotiator, faction);
             };
             return option;

@@ -88,7 +88,7 @@ namespace VVRace
         public void DebugUnlockAltar()
         {
             if (Stage >= ViviEndingStage.AltarUnlocked) { return; }
-            if (_quest == null && !CreateQuest()) { return; }
+            if (_quest == null && !CreateQuest(sendLetter: false)) { return; }
 
             _tales.DebugSetDelivered(ViviEndingTales.VolumeCount);
             _ruins.DebugComplete();
@@ -214,11 +214,11 @@ namespace VVRace
                         if (_tales.Delivered == delivered) { return false; }
                     }
 
-                    _ruins.SendMissive(ViviEndingUtility.FindFederation(requireNonHostile: false));
+                    _ruins.CompleteTraditionInquiry();
                     return Stage != ViviEndingStage.Tales;
 
-                case ViviEndingStage.Missive:
-                    return _ruins.RevealRuins();
+                case ViviEndingStage.Resonance:
+                    return _ruins.RevealRuins(ViviEndingUtility.ResonatorOf(ResolveDebugEverflower(context)));
 
                 case ViviEndingStage.Ruins:
                     _ruins.DebugComplete();
