@@ -5,7 +5,7 @@
   <HediffDef>
     <defName>VV_FairyAttunement</defName>
     <label>fairy attunement</label>
-    <description>In resonance with a fairy bloom's mana. Wounds close the moment it takes hold. Forms golden links with other attuned pawns nearby—and a glowing field when three or more gather, turning white and far stronger once six form a hexagon; where this light touches Asphodel, the bond of the fairy vivis around her comes undone.</description>
+    <description>In resonance with a fairy bloom's mana. Can synchronize with nearby mana from the same fairy bloom to form a fairy interference field. While Asphodel is within a fairy interference field, her fairy bond weakens; damaging her in this state disrupts her concentration and frees additional fairy vivis.</description>
     <hediffClass>VVRace.Hediff_FairyAttunement</hediffClass>
     <defaultLabelColor>(1, 0.9, 0.55)</defaultLabelColor>
     <isBad>false</isBad>
@@ -14,6 +14,23 @@
     <everCurableByItem>false</everCurableByItem>
     <initialSeverity>1</initialSeverity>
     <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <statOffsets>
+          <PainShockThreshold>0.15</PainShockThreshold>
+          <MentalBreakThreshold>-0.15</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <setMax>0.5</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>10000~10000</disappearsAfterTicks>

@@ -4,7 +4,7 @@
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
     <label>fairy vivi bond</label>
-    <description>Countless fairy vivis wrap layer upon layer around Asphodel, protecting her body from all damage. Their bond unravels only where the links of fairy attunement touch her. Once the bond grows weak enough, the remaining fairy vivis begin to drift away on their own.</description>
+    <description>Countless fairy vivis wrap layer upon layer around Asphodel, blocking all attacks.</description>
     <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
     <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
     <isBad>false</isBad>
@@ -26,7 +26,7 @@
   <HediffDef>
     <defName>VV_ApocryphaStuckNeedle</defName>
     <label>ancient eltex needle</label>
-    <description>An ancient eltex needle lodged deep in the carapace. Each lodged needle greatly increases the damage taken. If no new needle is driven in for a while, all lodged needles are shaken off.</description>
+    <description>An ancient eltex needle lodged deep in the carapace. The more needles are lodged, the more vulnerable the target becomes, greatly increasing damage taken.</description>
     <hediffClass>VVRace.Hediff_ApocryphaStuckNeedle</hediffClass>
     <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>
     <isBad>true</isBad>
@@ -42,7 +42,7 @@
   <HediffDef>
     <defName>VV_DoomPhantasm</defName>
     <label>doom bloom phantasm</label>
-    <description>A phantasm conjured from the memories within a doom bloom. It feels no pain, hunger, heat, or cold and cannot burn, but takes greater damage than a living body. Upon death, it crumbles into ash and leaves nothing behind.</description>
+    <description>A phantasm conjured from the memories within a doom bloom.</description>
     <hediffClass>VVRace.Hediff_DoomPhantasm</hediffClass>
     <defaultLabelColor>(0.85, 0.35, 0.75)</defaultLabelColor>
     <isBad>false</isBad>
