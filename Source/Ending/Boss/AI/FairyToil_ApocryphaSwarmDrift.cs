@@ -27,6 +27,14 @@ namespace VVRace
             var boss = job?.Owner;
             if (fairy.State != FairyState.Idle || boss == null || !boss.Spawned || boss.Map != fairy.Map || delta <= 0) { return FairyToilStatus.Running; }
 
+            var current = fairy.RealPosition;
+            if (boss.TryGetComp<CompApocrypha>() is CompApocrypha comp && comp.Embrace.TryGetFairyGoal(fairy, out var sigilGoal))
+            {
+                var toward = Vector3.Lerp(current, sigilGoal, Mathf.Clamp01(Follow * delta));
+                fairy.SetToilPosition(toward, toward - current, AltitudeLayer.MoteOverhead.AltitudeFor());
+                return FairyToilStatus.Running;
+            }
+
             var ticks = GenTicks.TicksGame;
             var motion = ticks * (double)AngularSpeed * fairy.OrbitSpeedFactor * fairy.OrbitDirection + fairy.OrbitPhaseOffset;
             var angle = (float)(motion % (System.Math.PI * 2.0));
@@ -39,7 +47,6 @@ namespace VVRace
                 0f,
                 sin * (RadiusZ * fairy.OrbitRadiusZFactor + wobble) + Lift);
 
-            var current = fairy.RealPosition;
             var next = Vector3.Lerp(current, goal, Mathf.Clamp01(Follow * delta));
             var altitude = sin > BehindThreshold ? boss.DrawPos.y - BehindAltitude : AltitudeLayer.MoteOverhead.AltitudeFor();
             fairy.SetToilPosition(next, next - current, altitude);

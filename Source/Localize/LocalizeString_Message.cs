@@ -39,6 +39,7 @@
         public const string VV_Message_AnchorEverflowerLeftAltar = nameof(VV_Message_AnchorEverflowerLeftAltar);
 
         public const string VV_Message_ApocryphaChannelInterrupted = nameof(VV_Message_ApocryphaChannelInterrupted);
+        public const string VV_Message_ApocryphaEmbraceInterrupted = nameof(VV_Message_ApocryphaEmbraceInterrupted);
         public const string VV_Message_ApocryphaEscapedRoofCollapse = nameof(VV_Message_ApocryphaEscapedRoofCollapse);
         public const string VV_Message_ApocryphaShieldBroken = nameof(VV_Message_ApocryphaShieldBroken);
         public const string VV_Message_ApocryphaShieldRestored = nameof(VV_Message_ApocryphaShieldRestored);

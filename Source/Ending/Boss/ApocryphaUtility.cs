@@ -4,6 +4,7 @@ using System.Linq;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
+using Verse.Sound;
 
 namespace VVRace
 {
@@ -418,6 +419,41 @@ namespace VVRace
                 LocalizeString_Letter.VV_Letter_AsphodelReleased.Translate(released.Select(v => v.LabelShortCap).ToLineList("  - ").Named("PAWNS")),
                 LetterDefOf.PositiveEvent,
                 new LookTargets(released));
+        }
+
+        public static bool HealNonPermanentInjuries(Pawn pawn)
+        {
+            if (pawn?.health == null || pawn.Dead) { return false; }
+
+            var injuries = new List<Hediff_Injury>();
+            pawn.health.hediffSet.GetHediffs(ref injuries, v => !v.IsPermanent());
+            for (int i = 0; i < injuries.Count; i++)
+            {
+                pawn.health.RemoveHediff(injuries[i]);
+            }
+
+            if (injuries.Count > 0 && pawn.Spawned)
+            {
+                FleckMaker.ThrowMetaIcon(pawn.Position, pawn.Map, FleckDefOf.HealingCross);
+            }
+
+            return injuries.Count > 0;
+        }
+
+        public static void BindToAsphodel(List<Pawn> vivis, Map map, IntVec3 soundCell)
+        {
+            if (vivis.Count == 0) { return; }
+
+            VVSoundDefOf.VV_Fairyfication.PlayOneShot(new TargetInfo(soundCell, map));
+            var mana = GameComponent_Mana.Of(Current.Game);
+            foreach (var vivi in vivis)
+            {
+                if (vivi.Spawned)
+                {
+                    VVEffecterDefOf.VV_Effecter_FairyPhase.Spawn(vivi.Position, vivi.Map).Cleanup();
+                }
+                mana.BindToAsphodel(vivi);
+            }
         }
 
         public static void DissolvePhantasms(Map map)

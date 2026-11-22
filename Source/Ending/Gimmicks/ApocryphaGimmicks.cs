@@ -12,6 +12,9 @@ namespace VVRace
 
         private const int BloomCellFallbackRadius = 4;
 
+        private const float DoomBloomEverflowerClearance = 15f;
+        private const int DoomBloomEdgeMargin = 5;
+
         private static readonly Vector3 QueenBodyOffset = new Vector3(0f, 0f, 1.5f);
         private static readonly Vector3 AsphodelBodyOffset = new Vector3(0f, 0f, 0.28f);
 
@@ -116,18 +119,21 @@ namespace VVRace
             return ignored;
         }
 
-        internal static bool TryFindBloomCellNear(IntVec3 cell, Map map, out IntVec3 result)
+        internal static bool TryFindDoomBloomCellNear(IntVec3 cell, Map map, out IntVec3 result)
         {
             var altar = Building_EverflowerAltar.FindOnMap(map);
             var altarRect = GetAltarRect(altar);
             var colonyAnchor = GetColonyAnchor(map, altar);
-            if (IsValidBloomCell(cell, map, altarRect, colonyAnchor))
+            var everflowerCell = GetEverflowerCell(map, altar);
+            bool Valid(IntVec3 c) => IsValidDoomBloomCell(c, map, everflowerCell) && IsValidBloomCell(c, map, altarRect, colonyAnchor);
+
+            if (Valid(cell))
             {
                 result = cell;
                 return true;
             }
 
-            return CellFinder.TryFindRandomCellNear(cell, map, BloomCellFallbackRadius, c => IsValidBloomCell(c, map, altarRect, colonyAnchor), out result);
+            return CellFinder.TryFindRandomCellNear(cell, map, BloomCellFallbackRadius, Valid, out result);
         }
 
         internal static bool TryGetEverflowerBudPos(Map map, out Vector3 pos)
@@ -211,6 +217,54 @@ namespace VVRace
             }
 
             return result;
+        }
+
+        internal static List<IntVec3> FindDoomBloomCells(Map map, int count, List<IntVec3> reserved)
+        {
+            var result = new List<IntVec3>();
+            if (count <= 0) { return result; }
+
+            var altar = Building_EverflowerAltar.FindOnMap(map);
+            var altarRect = GetAltarRect(altar);
+            var colonyAnchor = GetColonyAnchor(map, altar);
+            var everflowerCell = GetEverflowerCell(map, altar);
+            var flowers = map.listerThings.ThingsOfDef(VVThingDefOf.VV_DoomFlower);
+
+            bool Valid(IntVec3 c)
+            {
+                if (!IsValidDoomBloomCell(c, map, everflowerCell) || IsNearAny(result, c, MinBloomSpacing) || IsNearAny(reserved, c, MinBloomSpacing)) { return false; }
+
+                for (int i = 0; i < flowers.Count; i++)
+                {
+                    if (flowers[i].Position.InHorDistOf(c, MinBloomSpacing)) { return false; }
+                }
+
+                return IsValidBloomCell(c, map, altarRect, colonyAnchor);
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!CellFinder.TryFindRandomCell(map, Valid, out var cell)) { break; }
+
+                result.Add(cell);
+            }
+
+            return result;
+        }
+
+        private static bool IsValidDoomBloomCell(IntVec3 cell, Map map, IntVec3 everflowerCell)
+        {
+            if (!cell.InBounds(map) || cell.CloseToEdge(map, DoomBloomEdgeMargin)) { return false; }
+
+            return !everflowerCell.IsValid || !cell.InHorDistOf(everflowerCell, DoomBloomEverflowerClearance);
+        }
+
+        private static IntVec3 GetEverflowerCell(Map map, Building altar)
+        {
+            var everflower = ViviEndingQuest.Current?.AnchorEverflower;
+            if (everflower != null && everflower.Spawned && everflower.Map == map) { return everflower.Position; }
+
+            return altar != null && altar.Spawned ? altar.Position : IntVec3.Invalid;
         }
 
         private static bool IsNearAny(List<IntVec3> cells, IntVec3 cell, float radius)

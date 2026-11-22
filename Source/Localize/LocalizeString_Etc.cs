@@ -143,6 +143,7 @@
         public const string VV_TextMote_ApocryphaStunImmune = nameof(VV_TextMote_ApocryphaStunImmune);
         public const string VV_Speech_AsphodelRebirth1 = nameof(VV_Speech_AsphodelRebirth1);
         public const string VV_Speech_AsphodelRebirth2 = nameof(VV_Speech_AsphodelRebirth2);
+        public const string VV_Speech_AsphodelEmbrace = nameof(VV_Speech_AsphodelEmbrace);
         public const string VV_Speech_AsphodelDeath = nameof(VV_Speech_AsphodelDeath);
 
         public const string VV_FloatMenu_ResonateFairyFlower = nameof(VV_FloatMenu_ResonateFairyFlower);

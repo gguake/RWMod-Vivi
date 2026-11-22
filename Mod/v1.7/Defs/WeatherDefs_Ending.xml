@@ -4,7 +4,7 @@
   <WeatherDef>
     <defName>VV_GoldenBloomMist</defName>
     <label>golden pollen mist</label>
-    <description>A mist of drifting golden pollen and everflower petals. Ranged accuracy is slightly reduced, and all arcane plants gain unlimited mana.</description>
+    <description>A mist of drifting golden pollen and everflower petals. Fire cannot spread, ranged accuracy is slightly reduced, and all arcane plants gain unlimited mana.</description>
     <isBad>false</isBad>
     <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
     <repeatable>true</repeatable>

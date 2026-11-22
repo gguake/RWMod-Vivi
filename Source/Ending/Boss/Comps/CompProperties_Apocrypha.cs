@@ -18,11 +18,10 @@ namespace VVRace
         public int doomWaveBloomStart = 3;
         public int doomWaveBloomGrowthEvery = 2;
         public int doomWaveBloomMax = 10;
-        public FloatRange doomWaveBloomDistance = new FloatRange(8f, 40f);
         public int maxDoomFlowers = 30;
 
         public float manaShieldMax = 1500f;
-        public int shieldBreakStunTicks = 540;
+        public int shieldBreakStunTicks = 2500;
         public int shieldRestoreTicks = 5000;
         public int fairyFlowerCount = 3;
         public FloatRange fairyFlowerDistance = new FloatRange(6f, 12f);
@@ -30,7 +29,14 @@ namespace VVRace
         public int swarmFairyCount = 8;
         public float swarmAttackRadius = 7f;
         public int swarmStaggerTicks = 95;
-        public IntRange swarmAttackCooldownTicks = new IntRange(500, 500);
+        public IntRange swarmAttackCooldownTicks = new IntRange(100, 100);
+
+        public float embraceRadius = 11.4f;
+        public int embraceCastTicks = 900;
+        public int embraceCooldownTicks = 3000;
+        public int embraceFirstDelayTicks = 900;
+        public int embraceInterruptRecoverTicks = 600;
+        public float embraceBondRecoverPerVivi = 0.04f;
 
         public float asphodelBodyRadius = 1.2f;
         public float fairyBondInitial = 100000f;

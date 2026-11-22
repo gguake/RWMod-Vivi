@@ -22,7 +22,7 @@
 <VV_AncientRuinAltar.comps.CompUsable.useLabel>고대 호박 코어 추출</VV_AncientRuinAltar.comps.CompUsable.useLabel>
 
 <VV_RuinSpatialBarrier.label>공간 왜곡 결계</VV_RuinSpatialBarrier.label>
-<VV_RuinSpatialBarrier.description>강력한 고대 초정신 마나장이 공간 자체를 일그러뜨려 그 너머의 구조물을 감추고 모든 접근을 가로막고 있습니다. 앞선 구역의 고대 요정꽃에 손을 대어 기억과 공명하면 결계가 걷힙니다.</VV_RuinSpatialBarrier.description>
+<VV_RuinSpatialBarrier.description>강력한 고대 초정신 마나장이 공간 자체를 일그러뜨려 그 너머의 구조물을 감추고 모든 접근을 가로막고 있습니다. 앞선 구역의 고대 요정꽃과 공명하거나 공명 회로를 완성하면 결계가 걷힙니다.</VV_RuinSpatialBarrier.description>
 
 <VV_AncientRuinWall.label>고대 벌집 벽</VV_AncientRuinWall.label>
 <VV_AncientRuinWall.description>오랜 세월 굳어진 마나로 단단히 결정화되어 일반적인 공격으로는 부술 수 없는 옛 비비 제국의 벌집 벽입니다.</VV_AncientRuinWall.description>
@@ -37,7 +37,7 @@
 <VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 따스한 금빛을 비추는 옛 비비 제국의 성소 등불입니다.</VV_AncientSanctumLamp.description>
 
 <VV_RuinDoomFlower.label>잔향의 멸망꽃</VV_RuinDoomFlower.label>
-<VV_RuinDoomFlower.description>고요한 회랑 입구에 뿌리내린 멸망꽃입니다. 엔딩의 멸망꽃과 달리 저주를 내리지 않으며, 파괴할 때마다 보이지 않는 안전한 길을 따라 흐르는 작은 잔향을 남긴 뒤 다시 피어납니다.</VV_RuinDoomFlower.description>
+<VV_RuinDoomFlower.description>시련 복도 입구에 뿌리내린 멸망꽃입니다. 스스로 만개하지는 않지만 그릇된 길을 밟으면 잔향이 원정대에게 저주를 퍼뜨리며, 파괴할 때마다 보이지 않는 안전한 길을 따라 흐르는 작은 잔향을 남긴 뒤 다시 피어납니다.</VV_RuinDoomFlower.description>
 
 <VV_RuinPuzzlePot.label>고대 공명 화분</VV_RuinPuzzlePot.label>
 <VV_RuinPuzzlePot.description>중심 성소 둘레에 육각형으로 배치되어 공명 요정꽃을 담고 있는 고대 화분입니다.</VV_RuinPuzzlePot.description>

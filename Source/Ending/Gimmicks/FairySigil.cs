@@ -13,8 +13,10 @@ namespace VVRace
         private const float Tau = Mathf.PI * 2f;
 
         private static Dictionary<SkillDef, FairySigil> _cache;
+        private static FairySigil _everflower;
 
         public readonly SkillDef skill;
+        public readonly string name;
 
         private readonly List<SigilStroke> _strokes;
         private readonly float[] _strokeStarts;
@@ -23,9 +25,14 @@ namespace VVRace
         public IReadOnlyList<SigilStroke> Strokes => _strokes;
         public float TotalLength { get; }
 
-        private FairySigil(SkillDef skill, List<SigilStroke> emblem)
+        private FairySigil(SkillDef skill, List<SigilStroke> emblem) : this(skill.defName, emblem)
         {
             this.skill = skill;
+        }
+
+        private FairySigil(string name, List<SigilStroke> emblem)
+        {
+            this.name = name;
 
             var all = Frame();
             all.AddRange(emblem);
@@ -56,6 +63,8 @@ namespace VVRace
                 return _cache.Keys;
             }
         }
+
+        public static FairySigil Everflower => _everflower ??= new FairySigil("Everflower", EverflowerEmblem());
 
         public static FairySigil For(SkillDef skill)
         {
@@ -241,6 +250,25 @@ namespace VVRace
                 new SigilStroke(Regular(Vector2.zero, 0.68f, 3, -HalfPi), true, SigilStrokeKind.Emblem),
                 new SigilStroke(Circle(Vector2.zero, 0.13f, 30), true, SigilStrokeKind.Emblem),
             };
+        }
+
+        private static List<SigilStroke> EverflowerEmblem()
+        {
+            const int petals = 6;
+            var strokes = new List<SigilStroke>();
+            for (int k = 0; k < petals; k++)
+            {
+                var angle = HalfPi + k * Tau / petals;
+                strokes.Add(new SigilStroke(Leaf(Polar(0.15f, angle), Polar(0.7f, angle), 0.26f), true, SigilStrokeKind.Emblem));
+            }
+            for (int k = 0; k < petals; k++)
+            {
+                var angle = HalfPi + (k + 0.5f) * Tau / petals;
+                strokes.Add(Emblem(false, Polar(0.2f, angle), Polar(0.42f, angle)));
+                strokes.Add(new SigilStroke(Circle(Polar(0.47f, angle), 0.05f, 12), true, SigilStrokeKind.Emblem));
+            }
+            strokes.Add(new SigilStroke(Circle(Vector2.zero, 0.11f, 24), true, SigilStrokeKind.Emblem));
+            return strokes;
         }
 
         private static SigilStroke Emblem(bool closed, params Vector2[] points)

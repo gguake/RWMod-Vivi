@@ -16,7 +16,7 @@
 <VV_Quest_EndingStepAltar>영원꽃 제단 건설</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>조율 {0}단계 영원꽃을 제단 중앙에 안치</VV_Quest_EndingStepEnshrine>
 <VV_Quest_EndingStepParticipants>만개 의식에 참여할 비비 (공명자 제외): {0} / {1}명</VV_Quest_EndingStepParticipants>
-<VV_Quest_EndingTruthLog>불타는 꽃그늘 아래 홀로 남은 옛 여제 아스포델은 자신이 낳은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 감싸 안아 지키는 수호자이자 괴수화를 붙드는 봉인이 되어 긴 세월을 버텨 왔습니다. 마침내 결속이 풀리고 여제가 잠들자, 놓여난 빛들은 제단의 영원꽃 품에 머물며 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
+<VV_Quest_EndingTruthLog>불타는 꽃그늘 아래 홀로 남은 옛 여제 아스포델은 자신이 낳은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 긴 세월 곁을 지키며 그녀를 감싸 안아 왔습니다. 뒤틀린 껍질이 무너진 뒤에도 다시 모여들어 여제를 지켜 내던 빛들은, 마침내 결속이 풀리고 여제가 잠들자 제단의 영원꽃 품으로 돌아와 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
 
 <!-- 연방의 옛 동화책 -->
 <VV_FairyTale1_Label>꽃그늘 동화 1권</VV_FairyTale1_Label>
@@ -57,20 +57,20 @@
 <VV_Letter_EverflowerEcho5>영원꽃에서 마나 파동이 퍼지자 {PAWN_labelShort}의 초정신 회로에 잡음이 흘러들었습니다. 이번에는 과거의 기억이 아니었습니다.\n\n수많은 이들의 속삭임과 뼈가 뒤틀리는 소리. 무언가가 마나의 흐름을 따라 다가오고 있었습니다.\n\n"......그리운...... 따스한......"\n"다시...... 그 꽃그늘로......"\n\n연결이 끊어졌습니다.</VV_Letter_EverflowerEcho5>
 
 <VV_Letter_EndingSiegeLabel>맥동하는 영원꽃</VV_Letter_EndingSiegeLabel>
-<VV_Letter_EndingSiege>제단의 마나 회로가 깨어나며 영원꽃이 다섯 번째 개화에 들어섰습니다. 정착지에 금빛 꽃가루 안개가 내려앉고 공명자의 영원꽃 공명이 V단계로 깊어집니다.\n\n그러나 제단에서 멀리 퍼져 나간 마나 파동에 이끌려 외지인들과 거대 말벌 무리가 정착지로 몰려들고 있습니다. 응축이 끝날 때까지 제단과 동화 중인 공명자를 지켜야 합니다.</VV_Letter_EndingSiege>
+<VV_Letter_EndingSiege>제단의 마나 회로가 깨어나며 영원꽃이 다섯 번째 개화에 들어섰습니다. 영원꽃이 마지막 개화에 필요한 마나를 응축하기 시작하며, 공명자의 영원꽃 공명이 V단계로 깊어집니다.\n\n그러나 제단에서 멀리 퍼져 나간 마나 파동에 이끌려 외지인들과 거대 말벌 무리가 정착지로 몰려들고 있습니다. 응축이 끝날 때까지 제단과 동화 중인 공명자를 지켜야 합니다.</VV_Letter_EndingSiege>
 <VV_Letter_EndingSiegeFederation>개화의 파동을 감지한 비비 연방이 동맹을 맺었습니다. 적이 쳐들어오면 연방이 지원군을 보내 함께 싸울 것입니다.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>비비 연방 지원군</VV_Letter_EndingFederationAidLabel>
 <VV_Letter_EndingFederationAid>비비 연방이 다시 피어나는 꽃그늘을 지키기 위해 지원군을 파견했습니다. 이들은 한동안 함께 싸운 뒤 돌아갈 것입니다.</VV_Letter_EndingFederationAid>
 
 <VV_Letter_EndingCalmLabel>고요함</VV_Letter_EndingCalmLabel>
-<VV_Letter_EndingCalm>영원꽃이 만개 직전에 이르렀을 때, 낯선 초정신 파장에 막혀 꽃잎의 움직임이 멈추었습니다. 몰려들던 적들도 불길한 기척에 물러나고 정착지에는 정적만이 감돕니다.\n\n{PAWN_labelShort}(은)는 공명 너머에서 수많은 작은 빛들이 일렁이는 것을 느꼈습니다. 다가오는 그림자 곁에서 작은 빛 하나가 떨리는 목소리로 이름을 불렀습니다.\n\n"......아스포델...... 이제 그만......"</VV_Letter_EndingCalm>
+<VV_Letter_EndingCalm>영원꽃이 만개 직전에 이르러 정착지에 금빛 꽃가루 안개가 내려앉았을 때, 낯선 초정신 파장에 막혀 꽃잎의 움직임이 멈추었습니다. 몰려들던 적들도 불길한 기척에 물러나고 정착지에는 정적만이 감돕니다.\n\n{PAWN_labelShort}(은)는 공명 너머에서 수많은 작은 빛들이 일렁이는 것을 느꼈습니다. 다가오는 그림자 곁에서 작은 빛 하나가 떨리는 목소리로 이름을 불렀습니다.\n\n"......아스포델...... 이제 그만......"</VV_Letter_EndingCalm>
 
 <VV_Letter_EndingApocryphaLabel>바스러진 여제</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여들더니, 유적의 기억 속에 있던 옛 여제 아스포델이 모습을 드러냈습니다. 오염된 마나에 이끌린 거대 말벌 무리가 그 뒤를 따릅니다.\n\n"......이 그늘만 있으면...... 울음소리가...... 내 아이들을......"\n\n꽃봉오리가 터뜨린 파동에 외곽으로 밀려나고도, 잠들지 못한 여제는 제단의 꽃을 자기 기억 속으로 거두려 다가옵니다. 그 몸은 마지막 다정함을 잊지 않은 수많은 작은 빛들이 겹겹이 감싸고 있습니다.\n\n결속된 요정 비비들이 모든 공격을 대신 받아내고 있습니다. 여제를 멈추려면 먼저 마나 보호장을 부순 뒤, 주변에 피어나는 요정꽃으로 결속에 간섭해 요정들을 놓아주어야 합니다.</VV_Letter_EndingApocrypha>
+<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여들더니, 유적의 기억 속에 있던 옛 여제 아스포델이 거대한 말벌 여왕의 형상으로 일그러져 모습을 드러냈습니다. 오염된 마나에 이끌린 거대 말벌 무리가 그 뒤를 따릅니다.\n\n"......이 그늘만 있으면...... 울음소리가...... 내 아이들을......"\n\n꽃봉오리가 터뜨린 파동에 외곽으로 밀려나고도, 잠들지 못한 여제는 제단의 꽃을 자기 기억 속으로 거두려 다가옵니다.\n\n그 단단한 외피에는 고대 엘텍스 바늘이 깊숙이 박혀 있습니다. 바늘이 꽂혀 있을수록 더 큰 피해를 입으며, 여제가 바늘을 떨쳐내 바닥에 꽂히더라도 다시 활성화해 되돌려 꽂을 수 있습니다.</VV_Letter_EndingApocrypha>
 
 <VV_Letter_EndingCoronationLabel>대관식</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>뒤틀렸던 형체가 금빛 불티와 잿가루가 되어 흩어집니다. 재가 내려앉은 자리에서 끝까지 곁에 남아 있던 작은 빛들이, 제단 위 영원꽃과 동화 중인 {PAWN_labelShort}에게로 조용히 스며들었습니다.\n\n"......따스한 그늘 아래...... 내 아이들은, 이제......"\n\n짧은 속삭임을 끝으로 길었던 불면이 멎고, 멈춰 있던 영원꽃이 다시 맥동합니다.\n\n이제 제단에서 {PAWN_labelShort}의 〈대관식〉을 치러 마지막 개화를 완성할 수 있습니다.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>금빛 꽃잎으로 흩어진 아스포델의 여운과 함께, 끝까지 곁에 남아 있던 작은 빛들이 제단 위 영원꽃과 동화 중인 {PAWN_labelShort}에게로 조용히 스며들었습니다.\n\n길었던 불면이 마침내 멎고, 멈춰 있던 영원꽃이 다시 맥동합니다.\n\n이제 제단에서 {PAWN_labelShort}의 〈대관식〉을 치러 마지막 개화를 완성할 수 있습니다.</VV_Letter_EndingCoronation>
 
 <VV_Letter_EndingVictoryLabel>시들지 않는 봄</VV_Letter_EndingVictoryLabel>
 <VV_Letter_EndingVictoryContinue>이후에도 정착지에서 계속 플레이할 수 있습니다. 공명자의 영원꽃 공명이 VI단계에 이르러 요정 결속의 피로와 이동 속도 저하가 사라지며, 정착지 성체 비비의 노화가 크게 느려집니다.\n\n이제 만개한 영원꽃에서 〈생명의 회귀〉, 〈안식의 바람〉, 〈하늘 방패〉, 〈꽃의 대지〉 의식을 치를 수 있습니다.</VV_Letter_EndingVictoryContinue>
@@ -107,9 +107,9 @@
 
 <VV_Ending_ResonatorFallback>공명자</VV_Ending_ResonatorFallback>
 
-<!-- 황금빛 꽃안개 -->
-<VV_Inspector_PlantManaUnlimited>황금빛 꽃안개: 마나 무제한</VV_Inspector_PlantManaUnlimited>
-<VV_DialogChangeWeatherGoldenBloomDesc>황금빛 안개와 꽃잎이 지역을 뒤덮습니다. 원거리 명중률이 낮아지며, 모든 마법 식물의 마나가 무제한이 됩니다.</VV_DialogChangeWeatherGoldenBloomDesc>
+<!-- 금빛 꽃가루 안개 -->
+<VV_Inspector_PlantManaUnlimited>금빛 꽃가루 안개: 마나 무제한</VV_Inspector_PlantManaUnlimited>
+<VV_DialogChangeWeatherGoldenBloomDesc>금빛 꽃가루와 꽃잎이 흩날리는 안개가 지역을 뒤덮습니다. 불이 번지지 않으며 원거리 명중률이 소폭 낮아지고, 모든 마법 식물의 마나가 무제한이 됩니다.</VV_DialogChangeWeatherGoldenBloomDesc>
 <VV_FailReason_GoldenBloomHoldsWeather>개화 중인 영원꽃이 꽃안개를 유지하고 있어 날씨를 바꿀 수 없습니다</VV_FailReason_GoldenBloomHoldsWeather>
 
 </LanguageData>

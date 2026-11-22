@@ -6,6 +6,7 @@
 <VV_Inspector_ApocryphaShield>Fairy barrier: {0} / {1}</VV_Inspector_ApocryphaShield>
 <VV_Inspector_ApocryphaShieldBroken>Fairy barrier: scattered (restores in {0})</VV_Inspector_ApocryphaShieldBroken>
 <VV_Inspector_ApocryphaChanneling>Usurping the everflower: {0} ({1} left)</VV_Inspector_ApocryphaChanneling>
+<VV_Inspector_ApocryphaEmbrace>Resurrection embrace: {0} ({1} left)</VV_Inspector_ApocryphaEmbrace>
 
 <!-- 헤디프 -->
 <VV_Hediff_ApocryphaStuckNeedleTip>Lodged needles: {0} / {1}\nDamage taken: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
@@ -16,12 +17,13 @@
 
 <!-- 편지 -->
 <VV_Letter_ApocryphaRebirthLabel>Asphodel</VV_Letter_ApocryphaRebirthLabel>
-<VV_Letter_ApocryphaRebirth>The light left behind by the fallen queen has taken shape once more. Countless fairy vivis drawn from the everflower now wrap layer upon layer around Asphodel, the last empress.\n\nThe ancient needles have returned to hover behind her back.</VV_Letter_ApocryphaRebirth>
+<VV_Letter_ApocryphaRebirth>The light left behind by the fallen giant hornet queen's shell has taken shape once more. Countless fairy vivis drawn from the everflower now wrap layer upon layer around Asphodel, the old empress, and the ancient eltex needles have returned to hover behind her back.\n\nThe bound fairy vivis are taking every attack in her place. To stop the empress, first shatter her fairy barrier, then have your vivis resonate with the fairy blooms that sprout nearby and bring the golden links of fairy attunement across Asphodel to unravel the bond.</VV_Letter_ApocryphaRebirth>
 
 <!-- 메시지 -->
 <VV_Message_ApocryphaChannelInterrupted>Asphodel's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
+<VV_Message_ApocryphaEmbraceInterrupted>Asphodel's resurrection embrace was interrupted.</VV_Message_ApocryphaEmbraceInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>Asphodel teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
-<VV_Message_ApocryphaShieldBroken>Asphodel's fairy barrier has scattered, briefly stunning her as fairy blooms sprout nearby.</VV_Message_ApocryphaShieldBroken>
+<VV_Message_ApocryphaShieldBroken>Asphodel's fairy barrier has scattered, stunning her as fairy blooms sprout nearby.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>The fairy vivis have gathered once more, restoring Asphodel's fairy barrier.</VV_Message_ApocryphaShieldRestored>
 <VV_Message_ApocryphaNeedleStuck>An ancient needle lodged in Asphodel's carapace, briefly stunning her.</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaNeedlesShakenOff>Asphodel has shaken off the lodged needles, drawing a swarm of titanic hornets toward the colony.</VV_Message_ApocryphaNeedlesShakenOff>
@@ -39,12 +41,15 @@
 <VV_Inspector_ApocryphaFairyBond>Fairy bond: {0}</VV_Inspector_ApocryphaFairyBond>
 <VV_Speech_AsphodelRebirth1>...No... not alone... I'll crumble, just like that day...</VV_Speech_AsphodelRebirth1>
 <VV_Speech_AsphodelRebirth2>...Before they're hurt... all of them... into my embrace...</VV_Speech_AsphodelRebirth2>
+<VV_Speech_AsphodelEmbrace>...All of you... into my embrace...</VV_Speech_AsphodelEmbrace>
 <VV_Speech_AsphodelDeath>...The weight... into flowers... within this shade... my children, now...</VV_Speech_AsphodelDeath>
 <VV_Letter_AsphodelFallenLabel>Scattered into petals</VV_Letter_AsphodelFallenLabel>
 <VV_Letter_AsphodelFallen>"{QUOTE}"\n\nAs the fairy vivis around her came unbound, Asphodel's form dissolved into golden petals and drifted toward the everflower.</VV_Letter_AsphodelFallen>
 <VV_Letter_AsphodelReleasedLabel>Fairies unbound</VV_Letter_AsphodelReleasedLabel>
 <VV_Letter_FairyFlowerBoundLabel>Vivis bound to Asphodel</VV_Letter_FairyFlowerBoundLabel>
 <VV_Letter_FairyFlowerBound>The fairy bloom burst, turning nearby vivis into fairies and drawing them into Asphodel's embrace.\n\n{PAWNS}</VV_Letter_FairyFlowerBound>
+<VV_Letter_ApocryphaEmbraceLabel>Fallen vivis embraced</VV_Letter_ApocryphaEmbraceLabel>
+<VV_Letter_ApocryphaEmbrace>Asphodel's sigil has completed. The fallen vivis within it rose again, only to become fairies and be drawn into her embrace.\n\n{PAWNS}</VV_Letter_ApocryphaEmbrace>
 <VV_Letter_AsphodelReleased>Freed from Asphodel's embrace, the bound vivis have returned to their true forms before the everflower.\n\n{PAWNS}</VV_Letter_AsphodelReleased>
 
 </LanguageData>

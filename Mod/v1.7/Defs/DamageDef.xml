@@ -158,11 +158,11 @@
 
 
 
-  <!-- 요정 비비 사출탄 폭발 피해 -->
+  <!-- 요정 마나 폭발 피해 -->
   <DamageDef ParentName="Bomb">
     <defName>VV_FairyBlast</defName>
     <label>fairy blast</label>
-    <deathMessage>{0} was caught in the blast of a hurled fairy vivi.</deathMessage>
+    <deathMessage>{0} was caught in a fairy mana blast.</deathMessage>
     <defaultDamage>24</defaultDamage>
     <defaultArmorPenetration>0.15</defaultArmorPenetration>
     <buildingDamageFactor>0.5</buildingDamageFactor>

@@ -72,6 +72,7 @@ namespace VVRace
                 yield return EndingVfxUtility.DevAction("DEV: Fairy barrier -25%", () => DebugDamageShield(0.25f));
                 yield return EndingVfxUtility.DevAction("DEV: Restore barrier now", () => _shieldRestoreTick = GenTicks.TicksGame);
                 yield return EndingVfxUtility.DevAction("DEV: Fairy bond -10%", () => DrainBond(_bond.Max * 0.1f));
+                yield return EndingVfxUtility.DevAction("DEV: Start resurrection embrace", _embrace.DebugStart);
             }
         }
 

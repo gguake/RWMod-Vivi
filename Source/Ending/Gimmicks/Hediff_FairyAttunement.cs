@@ -20,6 +20,12 @@ namespace VVRace
 
         public override bool ShouldRemove => _phaseEnded || base.ShouldRemove;
 
+        public override void PostAdd(DamageInfo? dinfo)
+        {
+            base.PostAdd(dinfo);
+            ApocryphaUtility.HealNonPermanentInjuries(pawn);
+        }
+
         public override void Tick()
         {
             base.Tick();

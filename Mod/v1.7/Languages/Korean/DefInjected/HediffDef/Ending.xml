@@ -11,7 +11,7 @@
 <VV_DoomPhantasm.description>멸망꽃에 서린 기억에서 불려 나온 환영입니다. 고통과 허기, 더위와 추위를 느끼지 않고 불에 타지도 않지만, 살아 있는 몸보다 더 큰 피해를 받습니다. 쓰러지면 잿가루로 흩어져 아무것도 남기지 않습니다.</VV_DoomPhantasm.description>
 
 <VV_FairyAttunement.label>요정 교화</VV_FairyAttunement.label>
-<VV_FairyAttunement.description>요정꽃의 마나와 공명한 상태입니다. 가까이 있는 다른 교화된 이들과 금빛 선으로 이어지며, 이 빛이 아스포델에게 닿으면 그녀를 감싼 요정 비비들의 결속이 풀려납니다.</VV_FairyAttunement.description>
+<VV_FairyAttunement.description>요정꽃의 마나와 공명한 상태입니다. 공명하는 순간 상처가 아뭅니다. 가까이 있는 다른 교화된 이들과 금빛 선으로 이어지고 세 명이 모이면 삼각형의 빛의 장을 이루며, 이 빛이 아스포델에게 닿으면 그녀를 감싼 요정 비비들의 결속이 풀려납니다.</VV_FairyAttunement.description>
 <VV_FairyAttunement.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 교화가 사라졌습니다.</VV_FairyAttunement.comps.0.messageOnDisappear>
 
 <VV_DoomBlight_Fear.label>멸망의 공포</VV_DoomBlight_Fear.label>

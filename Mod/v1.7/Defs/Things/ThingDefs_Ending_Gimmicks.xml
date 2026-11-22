@@ -61,7 +61,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower born from the spreading mana of the fairy vivis wrapped around Asphodel. A vivi who resonates with it gains fairy attunement. Left alone, its sigil completes and bursts, binding nearby vivis to Asphodel as fairies and severely burning everyone else.</description>
+    <description>A flower born from the spreading mana of the fairy vivis wrapped around Asphodel. A vivi who resonates with it gains fairy attunement. Left alone, its sigil completes and bursts, restoring part of Asphodel's fairy bond, binding nearby non-royal vivis to her as fairies, and mending the wounds of everyone else.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

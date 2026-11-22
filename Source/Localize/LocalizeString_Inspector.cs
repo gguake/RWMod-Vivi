@@ -34,6 +34,7 @@
         public const string VV_Inspector_ApocryphaShieldBroken = nameof(VV_Inspector_ApocryphaShieldBroken);
         public const string VV_Inspector_ApocryphaFairyBond = nameof(VV_Inspector_ApocryphaFairyBond);
         public const string VV_Inspector_ApocryphaChanneling = nameof(VV_Inspector_ApocryphaChanneling);
+        public const string VV_Inspector_ApocryphaEmbrace = nameof(VV_Inspector_ApocryphaEmbrace);
 
         public const string VV_Inspector_DoomFlowerBloomIn = nameof(VV_Inspector_DoomFlowerBloomIn);
         public const string VV_Inspector_DoomFlowerHint = nameof(VV_Inspector_DoomFlowerHint);

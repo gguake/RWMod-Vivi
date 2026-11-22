@@ -140,7 +140,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinSpatialBarrier</defName>
     <label>spatial distortion barrier</label>
-    <description>An ancient psychic mana field warps space itself, hiding whatever structure lies beyond and blocking all passage. Touching the ancient fairy bloom in the preceding zone will lift this seal.</description>
+    <description>An ancient psychic mana field warps space itself, hiding whatever structure lies beyond and blocking all passage. Resonating with the ancient fairy bloom in the preceding zone—or completing its resonance circuit—will lift this seal.</description>
     <thingClass>VVRace.Building_RuinSpatialBarrier</thingClass>
     <graphicData>
       <texPath>VFX/VV_FairyPhaseRing</texPath>
@@ -369,11 +369,11 @@
     </comps>
   </ThingDef>
 
-  <!-- 유적 시련의 방 입구 멸망꽃 (저주 없음 · 파괴 시 길 안내 잔향 생성 및 재생성) -->
+  <!-- 유적 시련 복도 입구 멸망꽃 (스스로 만개하지 않음 · 파괴 시 길 안내 잔향 생성 및 재생성) -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinDoomFlower</defName>
     <label>echoing doom bloom</label>
-    <description>A lingering doom bloom rooted at the threshold of the silent hall. Unlike the cursed blooms of a rampaging empress, it casts no curse; each time it is destroyed, a faint wisp of memory drifts along the unseen safe path before the flower regrows.</description>
+    <description>A lingering doom bloom rooted at the threshold of the trial corridor. While it does not bloom on its own, stepping off the safe path triggers its lingering curse upon the expedition; each time it is destroyed, a faint wisp of memory drifts along the unseen safe path before the flower regrows.</description>
     <thingClass>VVRace.Building_RuinDoomFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_DoomFlower</texPath>

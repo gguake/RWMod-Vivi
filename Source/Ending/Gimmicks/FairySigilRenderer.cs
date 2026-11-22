@@ -132,7 +132,7 @@ namespace VVRace
                 }
             }
 
-            mesh = new Mesh { name = "VV_FairySigil_" + lanes.sigil.skill.defName + "_" + lanes.Count };
+            mesh = new Mesh { name = "VV_FairySigil_" + lanes.sigil.name + "_" + lanes.Count };
             mesh.SetVertices(Vertices);
             mesh.SetUVs(0, Uvs);
             mesh.SetColors(Colors);

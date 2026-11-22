@@ -865,6 +865,7 @@ namespace VVRace
 
         private bool CanPierce(Thing thing)
         {
+            if (!(thing is Pawn)) { return false; }
             if (_boss != null && thing.Faction != null && thing.Faction == _boss.Faction) { return false; }
 
             return !_ignored.Contains(thing);

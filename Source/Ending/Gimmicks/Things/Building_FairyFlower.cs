@@ -5,7 +5,6 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.AI;
-using Verse.Sound;
 
 namespace VVRace
 {
@@ -17,8 +16,6 @@ namespace VVRace
         private const int BurstTicks = 50;
         private const int ResonatedTicks = 45;
         private const float VividFrom = 0.85f;
-        private const float BurnDamage = 35f;
-        private const int BurnHits = 2;
         private const float BondRecoverFraction = 0.06f;
         private const int ResonanceLightCount = 28;
 
@@ -160,24 +157,12 @@ namespace VVRace
                     continue;
                 }
 
-                for (int i = 0; i < BurnHits && !pawn.Dead; i++)
-                {
-                    pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, BurnDamage, instigator: boss));
-                }
+                ApocryphaUtility.HealNonPermanentInjuries(pawn);
             }
 
             if (bound.Count > 0)
             {
-                VVSoundDefOf.VV_Fairyfication.PlayOneShot(new TargetInfo(Position, map));
-                var mana = GameComponent_Mana.Of(Current.Game);
-                foreach (var vivi in bound)
-                {
-                    if (vivi.Spawned)
-                    {
-                        VVEffecterDefOf.VV_Effecter_FairyPhase.Spawn(vivi.Position, map).Cleanup();
-                    }
-                    mana.BindToAsphodel(vivi);
-                }
+                ApocryphaUtility.BindToAsphodel(bound, map, Position);
 
                 Find.LetterStack.ReceiveLetter(
                     LocalizeString_Letter.VV_Letter_FairyFlowerBoundLabel.Translate(),

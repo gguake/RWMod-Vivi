@@ -68,11 +68,12 @@ namespace VVRace
             var boss = _comp.Pawn;
             var map = boss.Map;
             var room = Props.maxDoomFlowers - map.listerThings.ThingsOfDef(VVThingDefOf.VV_DoomFlower).Count - _pendingCells.Count;
-            var cells = ApocryphaGimmicks.FindBloomCells(boss, Mathf.Min(BloomCount, room), Props.doomWaveBloomDistance);
+            var cells = ApocryphaGimmicks.FindDoomBloomCells(map, Mathf.Min(BloomCount, room), _pendingCells);
             if (cells.Count == 0) { return false; }
 
-            var waveHalfSize = EndingVfxUtility.ShockWaveHalfSize(Props.doomWaveBloomDistance.max);
-            EndingVfxUtility.SpawnShockWave(map, boss.Position.ToVector3Shifted(), VVFleckDefOf.VV_Fleck_GimmickDoomBloomWave, waveHalfSize);
+            var origin = boss.Position.ToVector3Shifted();
+            var waveHalfSize = EndingVfxUtility.ShockWaveHalfSize(EndingVfxUtility.MaxDistanceToMapCorner(map, origin));
+            EndingVfxUtility.SpawnShockWave(map, origin, VVFleckDefOf.VV_Fleck_GimmickDoomBloomWave, waveHalfSize);
 
             _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_DoomWaveCast, ApocryphaGimmicks.GetBossBodyOffset(boss));
             ApocryphaUtility.ShakeCamera(map, 0.8f);
@@ -97,7 +98,7 @@ namespace VVRace
             {
                 if (now < _pendingTicks[i]) { continue; }
 
-                if (ApocryphaGimmicks.TryFindBloomCellNear(_pendingCells[i], map, out var cell))
+                if (ApocryphaGimmicks.TryFindDoomBloomCellNear(_pendingCells[i], map, out var cell))
                 {
                     ApocryphaGimmicks.SpawnFlower(ThingMaker.MakeThing(VVThingDefOf.VV_DoomFlower), cell, map, boss);
                 }

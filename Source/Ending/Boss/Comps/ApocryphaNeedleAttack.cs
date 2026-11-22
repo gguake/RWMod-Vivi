@@ -93,7 +93,7 @@ namespace VVRace
                 return;
             }
 
-            if (now < _readyTick || _comp.Channel.IsChanneling || _comp.Channel.PendingSteal) { return; }
+            if (now < _readyTick || _comp.Channel.IsChanneling || _comp.Channel.PendingSteal || _comp.Embrace.IsCasting) { return; }
 
             var idle = _needles.Where(v => v.Spawned && v.IsIdle).ToList();
             if (idle.Count < AsphodelNeedleCount || !_comp.Targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second))

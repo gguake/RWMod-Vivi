@@ -20,8 +20,13 @@ namespace VVRace
         protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Queen;
     }
 
+    public class MusicTransition_ApocryphaRebirth : MusicTransition_Apocrypha
+    {
+        protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Rebirth;
+    }
+
     public class MusicTransition_ApocryphaAsphodel : MusicTransition_Apocrypha
     {
-        protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Rebirth || phase == ApocryphaPhase.Asphodel;
+        protected override bool PlaysInPhase(ApocryphaPhase phase) => phase == ApocryphaPhase.Asphodel;
     }
 }

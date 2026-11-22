@@ -82,6 +82,8 @@
         public const string VV_Letter_AsphodelReleased = nameof(VV_Letter_AsphodelReleased);
         public const string VV_Letter_FairyFlowerBoundLabel = nameof(VV_Letter_FairyFlowerBoundLabel);
         public const string VV_Letter_FairyFlowerBound = nameof(VV_Letter_FairyFlowerBound);
+        public const string VV_Letter_ApocryphaEmbraceLabel = nameof(VV_Letter_ApocryphaEmbraceLabel);
+        public const string VV_Letter_ApocryphaEmbrace = nameof(VV_Letter_ApocryphaEmbrace);
 
         public const string VV_Letter_QueenLifeResonanceLabel = nameof(VV_Letter_QueenLifeResonanceLabel);
         public const string VV_Letter_QueenLifeResonance = nameof(VV_Letter_QueenLifeResonance);

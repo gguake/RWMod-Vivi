@@ -55,6 +55,7 @@ namespace VVRace
         private ApocryphaFairyBond _bond;
         private ApocryphaFairySwarm _swarm;
         private ApocryphaAttunementLinks _attunement;
+        private ApocryphaResurrectionEmbrace _embrace;
 
         private int _lastBlockedTextTick = -99999;
         private float _pendingDamageText;
@@ -95,6 +96,7 @@ namespace VVRace
         public ApocryphaFairyBond Bond => _bond;
         public ApocryphaFairySwarm Swarm => _swarm;
         public ApocryphaAttunementLinks Attunement => _attunement;
+        public ApocryphaResurrectionEmbrace Embrace => _embrace;
 
         public float BondFraction => _bond.Fraction;
         public bool IsAsphodelActive => _phase == ApocryphaPhase.Asphodel && parent.Spawned;
@@ -160,6 +162,7 @@ namespace VVRace
             _bond = new ApocryphaFairyBond(this);
             _swarm = new ApocryphaFairySwarm(this);
             _attunement = new ApocryphaAttunementLinks(this);
+            _embrace = new ApocryphaResurrectionEmbrace(this);
         }
 
         #region 초기화/저장
@@ -249,6 +252,7 @@ namespace VVRace
             Scribe_Deep.Look(ref _blastBreach, "blastBreach", this);
             Scribe_Deep.Look(ref _bond, "bond", this);
             Scribe_Deep.Look(ref _swarm, "swarm", this);
+            Scribe_Deep.Look(ref _embrace, "embrace", this);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -365,6 +369,7 @@ namespace VVRace
             {
                 _needleAttack.DestroyAll();
                 _blastBreach.Cancel();
+                _embrace.Cancel();
                 _swarm.Disperse();
                 _attunement.Clear();
                 return;
@@ -380,6 +385,7 @@ namespace VVRace
                 _targeting.TickEnemyDetection();
             }
 
+            _embrace.Tick(now, stunned);
             _needleAttack.TickAsphodel(now, stunned);
             _blastBreach.Tick(now, stunned);
             _bond.Tick(now);
@@ -454,6 +460,7 @@ namespace VVRace
             {
                 GimmickStun(stunTicks, dinfo.Instigator);
                 _channel.Interrupt();
+                _embrace.Interrupt();
             }
             else
             {
@@ -490,6 +497,7 @@ namespace VVRace
 
             _needleAttack.CancelAims();
             _channel.Interrupt();
+            _embrace.Interrupt();
             _swarm.Disperse();
             GimmickStun(Props.shieldBreakStunTicks, null);
 
@@ -730,12 +738,7 @@ namespace VVRace
             GenSpawn.Spawn(rebirth, cell, map, WipeMode.Vanish);
             rebirth.Hold(Pawn);
 
-            var music = Find.MusicManagerPlay;
-            if (music != null && !music.disabled)
-            {
-                music.CheckTransitions();
-            }
-
+            CheckMusicTransitions();
             Find.TickManager.slower.SignalForceNormalSpeedShort();
         }
 
@@ -753,6 +756,8 @@ namespace VVRace
             _approachRadius = -1f;
             _nextApproachTick = now + Props.approachIntervalTicks.RandomInRange;
             _needleAttack.SetReadyTick(now + Props.needleFirstDelayTicks);
+            _embrace.Cancel();
+            _embrace.SetReadyTick(now + Props.embraceFirstDelayTicks);
             _bond.Reset();
             RefillFairyFlowerSkills();
             if (_channel.TryGetStealTarget(out var stealTarget, out _, out _))
@@ -771,6 +776,7 @@ namespace VVRace
 
             SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaTransform, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             ApocryphaUtility.ShakeCamera(parent.Map, 1.5f);
+            CheckMusicTransitions();
 
             Find.LetterStack.ReceiveLetter(
                 LocalizeString_Letter.VV_Letter_ApocryphaRebirthLabel.Translate(),
@@ -876,6 +882,7 @@ namespace VVRace
             {
                 ApocryphaShroudGlow.Draw(Pawn);
                 _attunement.Draw();
+                _embrace.Draw();
             }
 
             _channel.Draw();
@@ -915,6 +922,13 @@ namespace VVRace
                     _channel.TicksLeft.ToStringTicksToPeriod()));
             }
 
+            if (_embrace.IsCasting)
+            {
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaEmbrace.Translate(
+                    _embrace.Progress.ToStringPercent(),
+                    _embrace.TicksLeft.ToStringTicksToPeriod()));
+            }
+
             return sb.ToString();
         }
 
@@ -930,7 +944,17 @@ namespace VVRace
             _doomWave.Clear();
             _needleAttack.DestroyAll();
             _blastBreach.Cancel();
+            _embrace.Cancel();
             _swarm.Disperse();
+        }
+
+        private static void CheckMusicTransitions()
+        {
+            var music = Find.MusicManagerPlay;
+            if (music != null && !music.disabled)
+            {
+                music.CheckTransitions();
+            }
         }
 
         internal void InterruptCurrentJob()

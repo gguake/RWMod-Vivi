@@ -78,7 +78,7 @@ namespace VVRace
         public void TickContactCheck()
         {
             if (!Pawn.IsHashIntervalTick(ContactCheckInterval)) { return; }
-            if (IsChanneling || _comp.Breath.IsBreathing || _comp.EscortSummon.IsCasting || _pendingSteal) { return; }
+            if (IsChanneling || _comp.Breath.IsBreathing || _comp.EscortSummon.IsCasting || _comp.Embrace.IsCasting || _pendingSteal) { return; }
             if (Pawn.stances.stunner.Stunned) { return; }
             if (!InStealRange()) { return; }
 

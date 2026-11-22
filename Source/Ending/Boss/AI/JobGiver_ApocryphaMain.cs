@@ -51,6 +51,11 @@ namespace VVRace
                 return WaitJob(Mathf.Max(15, comp.EscortSummon.CastTicksLeft + 1));
             }
 
+            if (comp.Embrace.IsCasting)
+            {
+                return WaitJob(Mathf.Max(15, comp.Embrace.TicksLeft + 1));
+            }
+
             comp.Channel.TryGetStealTarget(out var target, out var range, out var everflower);
             if (target != null && comp.Channel.InStealRange())
             {

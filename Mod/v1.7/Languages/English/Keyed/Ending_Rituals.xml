@@ -7,7 +7,7 @@
 <VV_FailReason_GrandAttunementMinVivis>At least {0} vivi participants besides the resonator are required.</VV_FailReason_GrandAttunementMinVivis>
 <VV_FailReason_GrandAttunementInProgress>The final bloom is already underway.</VV_FailReason_GrandAttunementInProgress>
 <VV_FailReason_GrandAttunementCompleted>The final bloom is already complete.</VV_FailReason_GrandAttunementCompleted>
-<VV_FailReason_GrandAttunementFailed>The final bloom has failed and cannot continue.</VV_FailReason_GrandAttunementFailed>
+<VV_FailReason_GrandAttunementFailed>The final bloom has been interrupted.</VV_FailReason_GrandAttunementFailed>
 <VV_FailReason_CoronationNotAnchor>Requires the everflower awakened by the full bloom ritual.</VV_FailReason_CoronationNotAnchor>
 <VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
 

@@ -4,14 +4,14 @@
   <SongDef>
     <defName>VV_TheFallenQueen</defName>
     <clipPath>Songs/VV_TheFallenQueen</clipPath>
-    <volume>1.25</volume>
+    <volume>1</volume>
     <commonality>0</commonality>
   </SongDef>
 
   <SongDef>
     <defName>VV_TheFallenQueen_Phase2</defName>
     <clipPath>Songs/VV_TheFallenQueen_Phase2</clipPath>
-    <volume>1.25</volume>
+    <volume>1</volume>
     <commonality>0</commonality>
   </SongDef>
 
@@ -70,12 +70,21 @@
     <priority>1100</priority>
   </MusicTransitionDef>
 
+  <!-- 재탄생 정적 -->
+  <MusicTransitionDef>
+    <defName>VV_ApocryphaRebirth</defName>
+    <workerType>VVRace.MusicTransition_ApocryphaRebirth</workerType>
+    <sequence>VV_OminousSilence</sequence>
+    <overridesInterruptions>true</overridesInterruptions>
+    <priority>1101</priority>
+  </MusicTransitionDef>
+
   <!-- 아스포델 음악 전환 -->
   <MusicTransitionDef>
     <defName>VV_ApocryphaAsphodel</defName>
     <workerType>VVRace.MusicTransition_ApocryphaAsphodel</workerType>
     <sequence>VV_ApocryphaAsphodel</sequence>
     <overridesInterruptions>true</overridesInterruptions>
-    <priority>1101</priority>
+    <priority>1102</priority>
   </MusicTransitionDef>
 </Defs>

@@ -7,6 +7,7 @@
 <VV_Inspector_ApocryphaShield>요정 차단막: {0} / {1}</VV_Inspector_ApocryphaShield>
 <VV_Inspector_ApocryphaShieldBroken>요정 차단막: 흩어짐 (복구까지 {0})</VV_Inspector_ApocryphaShieldBroken>
 <VV_Inspector_ApocryphaChanneling>영원꽃 찬탈 중: {0} (남은 시간 {1})</VV_Inspector_ApocryphaChanneling>
+<VV_Inspector_ApocryphaEmbrace>부활의 품: {0} (남은 시간 {1})</VV_Inspector_ApocryphaEmbrace>
 
 <!-- 헤디프 -->
 <VV_Hediff_ApocryphaStuckNeedleTip>꽂힌 바늘: {0} / {1}\n받는 피해: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
@@ -17,12 +18,13 @@
 
 <!-- 편지 -->
 <VV_Letter_ApocryphaRebirthLabel>아스포델</VV_Letter_ApocryphaRebirthLabel>
-<VV_Letter_ApocryphaRebirth>쓰러진 여왕이 남긴 빛이 다시 형체를 이루었습니다. 영원꽃에서 흘러든 수많은 요정 비비가 옛 여제 아스포델을 겹겹이 감싸고 있습니다.\n\n땅에 박혀 있던 고대 바늘들이 그녀의 등 뒤로 돌아왔습니다.</VV_Letter_ApocryphaRebirth>
+<VV_Letter_ApocryphaRebirth>무너진 거대 말벌 여왕의 껍질이 남긴 빛이 다시 형체를 이루었습니다. 영원꽃에서 흘러든 수많은 요정 비비가 옛 여제 아스포델을 겹겹이 감싸고 있으며, 땅에 박혀 있던 고대 엘텍스 바늘들도 그녀의 등 뒤로 돌아왔습니다.\n\n결속된 요정 비비들이 모든 공격을 대신 받아내고 있습니다. 여제를 멈추려면 먼저 요정 차단막을 깨뜨린 뒤, 주변에 피어나는 요정꽃과 비비들이 공명해 〈요정 교화〉의 빛으로 아스포델을 이어 결속을 풀어 주어야 합니다.</VV_Letter_ApocryphaRebirth>
 
 <!-- 메시지 -->
 <VV_Message_ApocryphaChannelInterrupted>아스포델의 영원꽃 찬탈이 중단되었습니다.</VV_Message_ApocryphaChannelInterrupted>
+<VV_Message_ApocryphaEmbraceInterrupted>아스포델의 부활의 품이 중단되었습니다.</VV_Message_ApocryphaEmbraceInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>아스포델이 붕괴를 피해 순간이동했습니다.</VV_Message_ApocryphaEscapedRoofCollapse>
-<VV_Message_ApocryphaShieldBroken>요정 차단막이 흩어져 아스포델이 잠시 기절하고 주변에 요정꽃이 피어났습니다.</VV_Message_ApocryphaShieldBroken>
+<VV_Message_ApocryphaShieldBroken>요정 차단막이 흩어져 아스포델이 기절하고 주변에 요정꽃이 피어났습니다.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>요정 비비들이 다시 모여들어 아스포델의 요정 차단막이 복구되었습니다.</VV_Message_ApocryphaShieldRestored>
 <VV_Message_ApocryphaNeedleStuck>고대 바늘이 아스포델의 외피에 꽂혀 아스포델이 잠시 기절했습니다.</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaNeedlesShakenOff>아스포델이 몸에 꽂힌 바늘을 모두 떨쳐내자, 거대 말벌 무리가 정착지로 몰려듭니다.</VV_Message_ApocryphaNeedlesShakenOff>
@@ -40,12 +42,15 @@
 <VV_Inspector_ApocryphaFairyBond>요정 결속: {0}</VV_Inspector_ApocryphaFairyBond>
 <VV_Speech_AsphodelRebirth1>……안 돼…… 혼자서는…… 그날처럼 무너져……</VV_Speech_AsphodelRebirth1>
 <VV_Speech_AsphodelRebirth2>……다치기 전에…… 전부…… 내 품으로……</VV_Speech_AsphodelRebirth2>
+<VV_Speech_AsphodelEmbrace>……모두…… 내 품 안으로……</VV_Speech_AsphodelEmbrace>
 <VV_Speech_AsphodelDeath>……무게가…… 꽃으로…… 이 그늘 안이라면…… 내 아이들은, 이제……</VV_Speech_AsphodelDeath>
 <VV_Letter_AsphodelFallenLabel>꽃잎이 된 아스포델</VV_Letter_AsphodelFallenLabel>
 <VV_Letter_AsphodelFallen>"{QUOTE}"\n\n감싸고 있던 요정 비비들이 풀려나자, 아스포델의 형체가 금빛 꽃잎으로 흩어지며 영원꽃을 향해 날려 갔습니다.</VV_Letter_AsphodelFallen>
 <VV_Letter_AsphodelReleasedLabel>요정화 해제</VV_Letter_AsphodelReleasedLabel>
 <VV_Letter_FairyFlowerBoundLabel>아스포델에 묶인 비비</VV_Letter_FairyFlowerBoundLabel>
 <VV_Letter_FairyFlowerBound>요정꽃이 터지며 주변의 비비들이 요정이 되어 아스포델의 품으로 끌려갔습니다.\n\n{PAWNS}</VV_Letter_FairyFlowerBound>
+<VV_Letter_ApocryphaEmbraceLabel>품에 안긴 비비</VV_Letter_ApocryphaEmbraceLabel>
+<VV_Letter_ApocryphaEmbrace>아스포델의 문양이 완성되었습니다. 문양 안에 쓰러져 있던 비비들이 다시 일어났지만, 곧 요정이 되어 그녀의 품으로 끌려갔습니다.\n\n{PAWNS}</VV_Letter_ApocryphaEmbrace>
 <VV_Letter_AsphodelReleased>아스포델의 품에 묶여 있던 비비들이 결속에서 풀려나, 영원꽃 앞에서 본래의 모습으로 돌아왔습니다.\n\n{PAWNS}</VV_Letter_AsphodelReleased>
 
 </LanguageData>
