@@ -3,6 +3,9 @@
 <VV_ToxicStab.label>찔림</VV_ToxicStab.label>
 <VV_ToxicStab.deathMessage>{0}(이)가 찔려 죽었습니다.</VV_ToxicStab.deathMessage>
 
+<VV_PeaPoke.label>맞음</VV_PeaPoke.label>
+<VV_PeaPoke.deathMessage>{0}(이)가 맞아 죽었습니다.</VV_PeaPoke.deathMessage>
+
 <VV_RangedToxicStab.label>찔림</VV_RangedToxicStab.label>
 <VV_RangedToxicStab.deathMessage>{0}(이)가 찔려 죽었습니다.</VV_RangedToxicStab.deathMessage>
 

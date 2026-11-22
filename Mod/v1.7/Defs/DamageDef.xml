@@ -41,6 +41,14 @@
     </additionalHediffs>
   </DamageDef>
 
+  <!-- 콩뿌리개 일반 콩: 바닐라 Poke와 같되 원거리 판정(보호막 벨트에 막힘) -->
+  <DamageDef ParentName="BluntBase">
+    <defName>VV_PeaPoke</defName>
+    <workerClass>DamageWorker_Stab</workerClass>
+    <stabChanceOfForcedInternal>0.4</stabChanceOfForcedInternal>
+    <isRanged>true</isRanged>
+  </DamageDef>
+
   <DamageDef>
     <defName>VV_RangedToxicStab</defName>
     <label>stab</label>

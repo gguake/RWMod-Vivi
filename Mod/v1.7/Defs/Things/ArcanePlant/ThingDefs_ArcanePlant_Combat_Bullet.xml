@@ -11,7 +11,7 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
-      <damageDef>Poke</damageDef>
+      <damageDef>VV_PeaPoke</damageDef>
       <damageAmountBase>5</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>0.5</stoppingPower>
