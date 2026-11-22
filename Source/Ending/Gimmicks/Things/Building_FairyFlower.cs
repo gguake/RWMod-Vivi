@@ -229,7 +229,7 @@ namespace VVRace
                 yield break;
             }
 
-            var label = LocalizeString_Etc.VV_FloatMenu_ResonateFairyFlower.Translate() + $" ({skill?.LabelCap} {ResonanceChance(selPawn).ToStringPercent()})";
+            var label = LocalizeString_Etc.VV_FloatMenu_ResonateFairyFlower.Translate();
             if (!selPawn.CanReach(this, PathEndMode.Touch, Danger.Deadly))
             {
                 yield return new FloatMenuOption($"{label} ({"NoPath".Translate()})", null);
@@ -248,14 +248,6 @@ namespace VVRace
                 new FloatMenuOption(label, () => selPawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(VVJobDefOf.VV_ResonateFairyFlower, this), JobTag.Misc)),
                 selPawn,
                 this);
-        }
-
-        public override string GetInspectString()
-        {
-            var sb = new StringBuilder(base.GetInspectString());
-            sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_FairyFlowerSkill.Translate(skill?.LabelCap ?? "-"));
-            sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_FairyFlowerBurstIn.Translate(TicksUntilExpire.ToStringTicksToPeriod()));
-            return sb.ToString();
         }
 
         public override IEnumerable<Gizmo> GetGizmos()

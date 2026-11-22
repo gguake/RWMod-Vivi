@@ -16,7 +16,7 @@
     <maxSeverity>1</maxSeverity>
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>7500~7500</disappearsAfterTicks>
+        <disappearsAfterTicks>10000~10000</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
         <messageOnDisappear>{PAWN_labelShort}'s fairy attunement has faded.</messageOnDisappear>
       </li>

@@ -3,7 +3,7 @@
   <!-- 연방의 옛 동화책 -->
   <ThingDef ParentName="BookBase">
     <defName>VV_FairyTaleBook</defName>
-    <label>flowershade fairy tale</label>
+    <label>vivi fairy tale book</label>
     <description>An old fairy tale book passed down by the vivi federation.</description>
     <graphicData>
       <texPath>Things/Item/Book/Novel/Novel</texPath>

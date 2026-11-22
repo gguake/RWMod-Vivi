@@ -20,7 +20,5 @@
 <!-- 정보창 -->
 <VV_Inspector_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspector_DoomFlowerBloomIn>
 <VV_Inspector_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspector_DoomFlowerHint>
-<VV_Inspector_FairyFlowerSkill>Resonance skill: {0}</VV_Inspector_FairyFlowerSkill>
-<VV_Inspector_FairyFlowerBurstIn>Bursts in: {0}</VV_Inspector_FairyFlowerBurstIn>
 
 </LanguageData>

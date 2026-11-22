@@ -3,15 +3,15 @@
 
 <!-- 엔딩 퀘스트 -->
 <VV_Quest_EndingName>만개하는 여명</VV_Quest_EndingName>
-<VV_Quest_EndingDesc>비비 연방이 영원꽃과 공명하는 새 둥지에 오랜 관례에 따라 옛 동화책을 보내오기 시작했습니다.</VV_Quest_EndingDesc>
-<VV_Quest_EndingStageTales>영원꽃의 조율 단계가 오른 뒤 〈영원꽃 조율 의식〉을 치를 때마다 비비 연방이 옛 동화책을 한 권씩 보내옵니다.\n\n받은 동화책: {0} / {1}권</VV_Quest_EndingStageTales>
+<VV_Quest_EndingDesc>비비 연방이 영원꽃과 공명하는 새 둥지에 오랜 관례에 따라 옛 동화책을 보내오기 시작했습니다.\n\n먼 옛날의 전설처럼 영원꽃이 완전히 만개하는 모습을 볼 수 있을지는 당신에게 달려있습니다.</VV_Quest_EndingDesc>
+<VV_Quest_EndingStageTales>영원꽃이 충분히 조율된 상태에서 영원꽃 조율 의식을 치르면 비비 연방이 그 파동을 감지해 동화책을 한 권씩 보내옵니다.\n\n받은 동화책: {0} / {1}권</VV_Quest_EndingStageTales>
 <VV_Quest_EndingStageInquiry>옛 동화책을 모두 받았습니다. 통신기로 비비 연방에 연락해 동화책과 영원꽃에 얽힌 관례에 대해 물어보십시오.</VV_Quest_EndingStageInquiry>
-<VV_Quest_EndingStageResonance>비비 연방에서도 관례의 본래 이유까지는 알지 못했지만, 먼 옛날 지금보다 훨씬 거대한 영원꽃이 있었다는 전설을 들었습니다.\n\n영원꽃 의식을 치르며 공명을 이어가다 보면 숨겨진 무언가를 포착할 수 있을지도 모릅니다.</VV_Quest_EndingStageResonance>
-<VV_Quest_EndingStageRuins>월드 지도에 표시된 고대 유적을 찾아가십시오. 조율 {0}단계 이상의 영원꽃과 연결된 로열 비비가 유적의 요정꽃을 차례로 조사하면 중심 제단에서 고대 호박 코어를 추출할 수 있습니다.\n\n조사한 요정꽃: {1} / {2}</VV_Quest_EndingStageRuins>
-<VV_Quest_EndingStageRuinsExtract>중심 제단에서 고대 호박 코어를 추출하십시오.</VV_Quest_EndingStageRuinsExtract>
-<VV_Quest_EndingStageAltar>고대 호박 코어로 영원꽃 제단을 건설하고 조율 {0}단계 영원꽃을 안치한 뒤 〈영원꽃 만개 의식〉을 치르십시오.</VV_Quest_EndingStageAltar>
-<VV_Quest_EndingStageAltarCoreLost>고대 호박 코어와 제단을 모두 잃었다면 통신기로 비비 연방에 연락해 대체 코어를 복구할 수 있습니다.</VV_Quest_EndingStageAltarCoreLost>
-<VV_Quest_EndingStageBloom>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤, 공명자에게 〈대관식〉을 치르게 하십시오. 제단이나 영원꽃, 공명자를 잃으면 개화가 중단됩니다.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageResonance>비비 연방에서도 관례의 본래 이유까지는 알지 못했지만, 먼 옛날 지금보다 훨씬 거대한 영원꽃이 있었다는 전설을 들었습니다.\n\n영원꽃 의식을 치르며 공명을 이어가다 보면 숨겨진 무언가를 포착할 수 있을지도 모릅니다. 어쩌면 동화책에 단서가 있을지도..</VV_Quest_EndingStageResonance>
+<VV_Quest_EndingStageRuins>고대 유적이 있는것으로 추정되는 위치를 찾아가십시오. 거대한 영원꽃과 공명중인 로열 비비가 찾아가면 무언가를 발견할 수 있을지도 모릅니다.\n\n???: {1} / {2}</VV_Quest_EndingStageRuins>
+<VV_Quest_EndingStageRuinsExtract>중심 제단에서 비비 초월공학 코어를 추출하십시오.</VV_Quest_EndingStageRuinsExtract>
+<VV_Quest_EndingStageAltar>비비 초월공학 코어로 영원꽃 제단을 건설하고 영원꽃을 안치한 뒤 만개 의식을 치르십시오.</VV_Quest_EndingStageAltar>
+<VV_Quest_EndingStageAltarCoreLost>비비 초월공학 코어와 제단을 모두 잃었다면 통신기로 비비 연방에 연락해 분실물 회수를 의뢰할 수 있습니다.</VV_Quest_EndingStageAltarCoreLost>
+<VV_Quest_EndingStageBloom>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤, 공명자에게 대관식을 치르게 하십시오. 제단이나 영원꽃, 공명자를 잃으면 개화가 중단됩니다.</VV_Quest_EndingStageBloom>
 <VV_Quest_EndingStageHostile>비비 연방과 적대 중이라 진행이 멈추었습니다. 관계를 회복하면 멈춘 곳부터 이어집니다.</VV_Quest_EndingStageHostile>
 <VV_Quest_EndingStepAltar>영원꽃 제단 건설</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>조율 {0}단계 영원꽃을 제단 중앙에 안치</VV_Quest_EndingStepEnshrine>
@@ -24,10 +24,10 @@
 <VV_FairyTale1_Desc>아주 먼 옛날, 시린 들판 한복판에 커다란 황금빛 꽃이 홀로 피어 있었답니다. 꽃잎이 드리운 따스한 그늘 아래 수많은 둥지가 모여 작은 세상을 이루었지요.\n\n여린 생을 타고난 날개들이었지만, 꽃그늘 안에서는 누구도 시드는 법을 몰랐답니다. 바깥에 찬 바람이 부는지도 잊은 채 모두 영원할 듯한 봄날에 기대어 살았지요.</VV_FairyTale1_Desc>
 <VV_FairyTale2_Label>꽃그늘 동화 2권</VV_FairyTale2_Label>
 <VV_FairyTale2_Title>꽃그늘 동화 2권: 모든 둥지의 어머니</VV_FairyTale2_Title>
-<VV_FairyTale2_Desc>꽃그늘 한가운데 솟은 높은 단에는 찬란한 왕관을 쓴 이가 살고 있었답니다. 다정한 눈길로 크고 작은 둥지를 보살피던 그이를 모두들 세상 모든 둥지의 어머니라 부르며 따랐지요.\n\n낮이면 단 아래로 내려와 여린 날개들을 쓰다듬어 주었고, 밤이면 홀로 단 위에 남아 꽃그늘 너머 어두운 지평선을 바라보았답니다. 밤새 바깥을 지켜 주는 어머니 덕분에 아이들은 아무 걱정 없이 고이 잠들었지요.</VV_FairyTale2_Desc>
+<VV_FairyTale2_Desc>꽃그늘 한가운데 솟은 높은 단에는 찬란한 왕관을 쓴 이가 살고 있었답니다. 다정한 눈길로 크고 작은 둥지를 보살피던 그이를 모두들 세상 모든 둥지의 어머니라 부르며 따랐지요.\n\n낮이면 단 아래로 내려와 여린 날개들을 쓰다듬어 주었고, 밤이면 홀로 단 위에 남아 둥지 너머 어두운 지평선을 바라보았답니다. 밤새 바깥을 지켜 주는 어머니 덕분에 아이들은 아무 걱정 없이 고이 잠들었지요.</VV_FairyTale2_Desc>
 <VV_FairyTale3_Label>꽃그늘 동화 3권</VV_FairyTale3_Label>
 <VV_FairyTale3_Title>꽃그늘 동화 3권: 여왕과 작은 빛들</VV_FairyTale3_Title>
-<VV_FairyTale3_Desc>여왕이 꽃그늘을 거닐 때면 반딧불이 같은 작은 빛들이 늘 곁을 맴돌았답니다. 은은히 반짝이는 그 빛무리를 보며 어린 날개들은 다정한 친구를 만난 듯 마음을 놓았지요.\n\n어느 해부터 그늘 끝에 찬 기운이 스며들어 황금빛 꽃잎이 가늘게 떨리기 시작했답니다. 여왕은 작은 빛들과 함께 여린 어깨로 바람을 막아 서며, 변함없이 따스한 미소로 흔들리는 꽃그늘을 지켜 주었지요.</VV_FairyTale3_Desc>
+<VV_FairyTale3_Desc>여왕이 꽃그늘을 거닐 때면 반딧불이 같은 작은 빛들이 늘 곁을 맴돌았답니다. 은은히 반짝이는 그 빛무리를 보며 어린 날개들은 다정한 친구를 만난 듯 마음을 놓았지요.\n\n어느 해부터 그늘 끝에 찬 기운이 스며들어 황금빛 꽃잎이 가늘게 떨리기 시작했답니다. 여왕은 작은 빛들과 함께 여린 어깨로 바람을 막아 서며, 변함없이 따스한 미소로 흔들리는 둥지를 지켜 주었지요.</VV_FairyTale3_Desc>
 <VV_FairyTale4_Label>꽃그늘 동화 4권</VV_FairyTale4_Label>
 <VV_FairyTale4_Title>꽃그늘 동화 4권: 영원히 행복한 꿈</VV_FairyTale4_Title>
 <VV_FairyTale4_Desc>마침내 바깥의 거센 어둠이 꽃그늘을 덮치던 날, 다정한 여왕은 단 한 명도 다치지 않도록 그늘 아래 아이들을 모두 작은 빛으로 바꾸었답니다.\n\n여왕은 너무 많은 빛을 품어 몹시 고단해졌고, 작은 빛들이 여왕을 포근히 감싸 먼 곳으로 데려가 재워 주었지요. 시린 바람도 닿지 않는 따스한 꿈속에서 여왕과 아이들은 다시는 헤어지지 않고 영원히 행복하게 살았답니다.</VV_FairyTale4_Desc>
@@ -35,7 +35,8 @@
 <VV_Letter_EndingTale1>비비 연방에서 조율 의식을 마친 새 둥지에 오랜 관례에 따라 옛 동화책 첫 권을 보내왔습니다. 먼 옛날 아무도 시드는 법을 몰랐다는 거대한 꽃그늘을 그린 이야기입니다.</VV_Letter_EndingTale1>
 <VV_Letter_EndingTale2>비비 연방에서 관례에 따라 옛 동화책 두 번째 권을 보내왔습니다. 꽃그늘 아래 모든 둥지의 어머니라 불리던 왕관 쓴 지배자를 추억하는 이야기입니다.</VV_Letter_EndingTale2>
 <VV_Letter_EndingTale3>비비 연방에서 옛 동화책 세 번째 권을 보내왔습니다. 작은 빛들을 거느린 채 흔들리는 꽃그늘을 지키던 옛 여왕의 모습이 전해집니다.</VV_Letter_EndingTale3>
-<VV_Letter_EndingTale4>비비 연방에서 옛 동화책의 마지막 권을 보내왔습니다. 어둠이 덮친 날 여왕이 그늘 아래 아이들을 작은 빛으로 품고 먼 곳으로 떠나 영원히 행복하게 살았다는 결말이 담겨 있습니다.</VV_Letter_EndingTale4>
+<VV_Letter_EndingTale4>비비 연방에서 옛 동화책의 마지막 권을 보내왔습니다. 어둠이 덮친 날 여왕이 그늘 아래 아이들을 작은 빛으로 품고 먼 곳으로 떠나 영원히 행복하게 살았다는 결말이 담겨 있습니다.
+\n영원꽃은 더이상 자라지 않는것으로 보입니다만 동화책의 내용에는 더 거대한 영원꽃이 있었던것처럼 묘사됩니다. 방법을 찾기위해 언제부터, 어째서 동화책을 보내는지 연방에 물어볼 수 있습니다.</VV_Letter_EndingTale4>
 
 <!-- 숨겨진 마나의 파장 포착 -->
 <VV_Letter_EndingRuinsDetectedLabel>숨겨진 마나의 파장</VV_Letter_EndingRuinsDetectedLabel>
@@ -67,7 +68,7 @@
 <VV_Letter_EndingCalm>영원꽃이 만개 직전에 이르러 정착지에 금빛 꽃가루 안개가 내려앉았을 때, 낯선 초정신 파장에 막혀 꽃잎의 움직임이 멈추었습니다. 몰려들던 적들도 불길한 기척에 물러나고 정착지에는 정적만이 감돕니다.\n\n{PAWN_labelShort}(은)는 공명 너머에서 수많은 작은 빛들이 일렁이는 것을 느꼈습니다. 다가오는 그림자 곁에서 작은 빛 하나가 떨리는 목소리로 이름을 불렀습니다.\n\n"......아스포델...... 이제 그만......"</VV_Letter_EndingCalm>
 
 <VV_Letter_EndingApocryphaLabel>바스러진 여제</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여들더니, 유적의 기억 속에 있던 옛 여제 아스포델이 거대한 말벌 여왕의 형상으로 일그러져 모습을 드러냈습니다. 오염된 마나에 이끌린 거대 말벌 무리가 그 뒤를 따릅니다.\n\n"......이 그늘만 있으면...... 울음소리가...... 내 아이들을......"\n\n꽃봉오리가 터뜨린 파동에 외곽으로 밀려나고도, 잠들지 못한 여제는 제단의 꽃을 자기 기억 속으로 거두려 다가옵니다.\n\n그 단단한 외피에는 고대 엘텍스 바늘이 깊숙이 박혀 있습니다. 바늘이 꽂혀 있을수록 더 큰 피해를 입으며, 여제가 바늘을 떨쳐내 바닥에 꽂히더라도 다시 활성화해 되돌려 꽂을 수 있습니다.</VV_Letter_EndingApocrypha>
+<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여들더니, 유적의 기억 속에 있던 옛 여제 아스포델이 거대한 말벌 여왕의 형상으로 일그러져 모습을 드러냈습니다. 오염된 마나에 이끌린 거대 말벌 무리가 그 뒤를 따릅니다.\n\n"......이 그늘만 있으면...... 울음소리가...... 내 아이들을......"\n\n그 단단한 외피에는 고대 엘텍스 바늘이 깊숙이 박혀 있습니다. 어쩌면 이를 활용해야 할지도 모릅니다.</VV_Letter_EndingApocrypha>
 
 <VV_Letter_EndingCoronationLabel>대관식</VV_Letter_EndingCoronationLabel>
 <VV_Letter_EndingCoronation>금빛 꽃잎으로 흩어진 아스포델의 여운과 함께, 끝까지 곁에 남아 있던 작은 빛들이 제단 위 영원꽃과 동화 중인 {PAWN_labelShort}에게로 조용히 스며들었습니다.\n\n길었던 불면이 마침내 멎고, 멈춰 있던 영원꽃이 다시 맥동합니다.\n\n이제 제단에서 {PAWN_labelShort}의 〈대관식〉을 치러 마지막 개화를 완성할 수 있습니다.</VV_Letter_EndingCoronation>
@@ -82,11 +83,11 @@
 
 <!-- 엔딩 실패 -->
 <VV_Letter_EndingFailureLabel>영원꽃 찬탈</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>제단의 영원꽃이 꽃잎으로 흩어져 아스포델에게 빨려 들어갔습니다. 꽃그늘을 거두어 안은 여제는 꽃잎 바람 너머 어둠 속으로 다시 사라졌습니다.\n\n영원꽃을 잃어 마지막 개화가 중단되었습니다. 제단과 영원꽃을 다시 갖추면 〈영원꽃 만개 의식〉을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>제단의 영원꽃이 꽃잎으로 흩어져 아스포델에게 빨려 들어갔습니다. 영원꽃을 거두어 안은 여제는 꽃잎 바람 너머 어둠 속으로 다시 사라졌습니다.\n\n영원꽃을 잃어 마지막 개화가 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다..</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>영원꽃 소실</VV_Letter_EndingFailureLostLabel>
-<VV_Letter_EndingFailureLost>제단이나 영원꽃을 잃어 마지막 개화가 중단되었습니다. 제단과 영원꽃을 다시 갖추면 〈영원꽃 만개 의식〉을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureLost>
+<VV_Letter_EndingFailureLost>제단이나 영원꽃을 잃어 마지막 개화가 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다..</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>끊어진 공명</VV_Letter_EndingFailureResonatorLabel>
-<VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화가 중단되었습니다.\n\n공명자를 다시 갖추면 제단에서 〈영원꽃 만개 의식〉을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureResonator>
+<VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화가 중단되었습니다.\n\n새로운 공명자가 나타나면 다시금 제단에서 만개 의식을 시작할 수 있습니다.</VV_Letter_EndingFailureResonator>
 
 <!-- 후일담 -->
 <VV_Letter_AncientWitnessLabel>깨어난 옛 날개의 기억</VV_Letter_AncientWitnessLabel>

@@ -2,7 +2,7 @@
 <LanguageData>
 
 <VV_Apocrypha.label>아스포델</VV_Apocrypha.label>
-<VV_Apocrypha.description>옛 비비 제국의 마지막 여제, 아스포델입니다.\n\n긴 세월 잠들지 못한 채 기억 속의 꽃그늘을 찾아 헤매다, 거대한 말벌 여왕의 형상으로 일그러져 제단의 파동을 따라 나타났습니다. 뒤틀린 껍질이 무너져 내리면 영원꽃에서 모여든 수많은 작은 빛들이 본래의 여제를 다시 감싸 안습니다.</VV_Apocrypha.description>
+<VV_Apocrypha.description>옛 비비 제국의 마지막 여제, 아스포델입니다.</VV_Apocrypha.description>
 <VV_Apocrypha.tools.left_claw.label>왼쪽 발톱</VV_Apocrypha.tools.left_claw.label>
 <VV_Apocrypha.tools.right_claw.label>오른쪽 발톱</VV_Apocrypha.tools.right_claw.label>
 <VV_Apocrypha.tools.jaw.label>턱</VV_Apocrypha.tools.jaw.label>
@@ -15,16 +15,17 @@
 
 
 <VV_DoomFlower.label>멸망꽃</VV_DoomFlower.label>
-<VV_DoomFlower.description>아스포델의 일그러진 기억과 마나가 피워낸 저주받은 꽃입니다. 만개하기 전에 파괴하지 않으면 옛 재앙의 환영이 퍼져 지역 내 모든 정착민에게 치명적인 저주를 내립니다.</VV_DoomFlower.description>
+<VV_DoomFlower.description>고대 비비 여왕의 일그러진 기억과 마나가 피워낸 저주받은 꽃입니다. 만개하기 전에 파괴하지 않으면 옛 재앙의 환영이 퍼져 지역 내 모든 정착민에게 치명적인 저주를 내립니다.</VV_DoomFlower.description>
 
 <VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
-<VV_FairyFlower.description>아스포델을 감싼 요정 비비들의 마나가 번져 피어난 꽃입니다. 비비가 공명하면 〈요정 교화〉를 얻습니다. 내버려 두면 문양이 완성되며 터져 아스포델의 요정 결속을 일부 회복시키고, 주변의 일반 비비는 요정이 되어 아스포델에게 묶이며 그 밖의 이들은 상처가 아뭅니다.</VV_FairyFlower.description>
+<VV_FairyFlower.description>아스포델을 감싼 요정 비비들의 마나가 번져 피어난 꽃입니다. 요정꽃은 요정 비비들의 변덕에 따라 적합자가 다르며, 적합한 비비가 공명하면 요정 비비들을 해방할 수 있는 힘을 얻습니다.
+\n문양이 완성되면 주변의 모든 생명체를 회복시키지만, 영향을 받은 비비들은 요정화가 되어 아스포델에게 묶입니다.</VV_FairyFlower.description>
 
 <VV_EverflowerAltar.label>영원꽃 제단</VV_EverflowerAltar.label>
-<VV_EverflowerAltar.description>고대 호박 코어의 마나 회로를 바탕으로 복원한 제단입니다. 땅의 마나를 모아 영원꽃이 마지막 개화에 이를 수 있도록 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 제단이 피해를 받지 않고 해체할 수 없으며, 영원꽃도 옮길 수 없습니다. 지붕 아래에는 건설할 수 없으며 지역마다 하나만 건설할 수 있습니다.</VV_EverflowerAltar.description>
+<VV_EverflowerAltar.description>비비 초월공학 코어의 마나 회로를 바탕으로 복원한 제단입니다. 대지 깊은 곳의 마나를 모아 영원꽃이 마지막 개화에 이를 수 있도록 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 공간이 격리되어 제단이 피해를 받지 않고 해체할 수도 없으며, 영원꽃도 옮길 수 없습니다.</VV_EverflowerAltar.description>
 
-<VV_AncientAmberCore.label>고대 호박 코어</VV_AncientAmberCore.label>
-<VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 호박 결정입니다. 호박 속에 고대 마나 회로 무늬가 굳어 있습니다.\n\n고대 유적의 중심 제단에서 추출할 수 있으며, 영원꽃 제단을 복원하는 데 사용됩니다.</VV_AncientAmberCore.description>
+<VV_AncientAmberCore.label>비비 초월공학 코어</VV_AncientAmberCore.label>
+<VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 특이하게 생긴 코어입니다. 원리는 알 수 없지만 그 자체로 대지 깊은 곳의 마나를 끌어내는것으로 보이며 영원꽃을 행성 깊은곳과 연결하는 장치인것 같습니다.</VV_AncientAmberCore.description>
 
 <VV_QueenVerdictNeedle.label>선고의 바늘</VV_QueenVerdictNeedle.label>
 <VV_SkyShield.label>하늘 방패</VV_SkyShield.label>
@@ -33,7 +34,7 @@
 
 <VV_DissolvingHornet.label>거대 말벌</VV_DissolvingHornet.label>
 
-<VV_FairyTaleBook.label>꽃그늘 동화책</VV_FairyTaleBook.label>
+<VV_FairyTaleBook.label>비비 동화책</VV_FairyTaleBook.label>
 <VV_FairyTaleBook.description>비비 연방에서 전해 내려오는 옛 동화책입니다.</VV_FairyTaleBook.description>
 
 </LanguageData>

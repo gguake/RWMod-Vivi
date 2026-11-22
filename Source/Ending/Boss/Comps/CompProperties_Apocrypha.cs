@@ -20,7 +20,7 @@ namespace VVRace
         public int doomWaveBloomMax = 10;
         public int maxDoomFlowers = 30;
 
-        public float manaShieldMax = 1500f;
+        public float manaShieldMax = 2500f;
         public int shieldBreakStunTicks = 1500;
         public int shieldRestoreTicks = 5000;
         public IntRange fairyFlowerCount = new IntRange(3, 5);
@@ -33,7 +33,7 @@ namespace VVRace
 
         public float embraceRadius = 11.4f;
         public int embraceCastTicks = 600;
-        public int embraceCooldownTicks = 2000;
+        public int embraceCooldownTicks = 1000;
         public int embraceFirstDelayTicks = 900;
         public int embraceInterruptRecoverTicks = 600;
         public float embraceBondRecoverPerVivi = 0.04f;
@@ -62,13 +62,13 @@ namespace VVRace
         public float needleTargetRange = 14f;
         public float needleRange = 19f;
         public float needleHalfWidth = 1.5f;
-        public float needleDamage = 45f;
-        public float needleArmorPenetration = 0.8f;
+        public float needleDamage = 50f;
+        public float needleArmorPenetration = 1.0f;
 
-        public IntRange approachIntervalTicks = new IntRange(9000, 13500);
+        public IntRange approachIntervalTicks = new IntRange(4000, 7500);
         public float approachDistance = 9f;
         public float approachRingHalfWidth = 5f;
-        public float wanderRadius = 10f;
+        public float wanderRadius = 6f;
         public IntRange wanderWaitTicks = new IntRange(600, 1200);
 
         public float escortGuardRadius = 10f;

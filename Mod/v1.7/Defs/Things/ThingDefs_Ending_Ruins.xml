@@ -2,8 +2,8 @@
 <Defs>
   <!-- 고대 유적 요정꽃: 번호(index) 순서대로만 조사할 수 있다 -->
   <ThingDef Name="VV_AncientRuinFairyFlowerBase" ParentName="BuildingBase" Abstract="True">
-    <label>ancient fairy bloom</label>
-    <description>A fairy bloom flowering amid the ruins. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
+    <label>fairy bloom</label>
+    <description>A mysterious arcane flower blooming amid the ruins. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
     <thingClass>Building</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>
@@ -71,6 +71,7 @@
 
   <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
     <defName>VV_AncientRuinFairyFlowerIII</defName>
+    <description>A mysterious arcane flower blooming within the sanctum. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
     <comps>
       <li Class="VVRace.CompProperties_UseEffectRuinEcho">
         <index>3</index>
@@ -80,6 +81,7 @@
 
   <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
     <defName>VV_AncientRuinFairyFlowerIV</defName>
+    <description>A mysterious arcane flower blooming before the central altar. The oldest memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
     <comps>
       <li Class="VVRace.CompProperties_UseEffectRuinEcho">
         <index>4</index>
@@ -90,8 +92,8 @@
   <!-- 고대 유적 중심 제단: 마지막 요정꽃을 조사한 뒤 고대 호박 코어를 한 번 추출할 수 있다 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AncientRuinAltar</defName>
-    <label>ruined central altar</label>
-    <description>The central altar of the old vivi empire, preserved inside the inner sanctum. An ancient amber core is still set within it.</description>
+    <label>ancient everflower altar</label>
+    <description>The central altar of the old vivi empire, preserved intact within the barrier. It operates through an archotech relic pulsing with mysterious power.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_AncientAmberCore</ThingDef>
     </descriptionHyperlinks>
@@ -127,7 +129,7 @@
     <comps>
       <li Class="CompProperties_Usable">
         <useJob>UseItem</useJob>
-        <useLabel>Extract the ancient amber core</useLabel>
+        <useLabel>Extract the relic</useLabel>
         <useDuration>600</useDuration>
       </li>
       <li Class="CompProperties_UseEffect">
@@ -140,7 +142,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinSpatialBarrier</defName>
     <label>spatial distortion barrier</label>
-    <description>An ancient psychic mana field warps space itself, hiding whatever structure lies beyond and blocking all passage. Resonating with the ancient fairy bloom in the preceding zone—or completing its resonance circuit—will lift this seal.</description>
+    <description>Powerful mana warps space itself, hiding whatever structure lies beyond and blocking all approach. Resonating with the fairy bloom in the preceding zone will lift this barrier.</description>
     <thingClass>VVRace.Building_RuinSpatialBarrier</thingClass>
     <graphicData>
       <texPath>VFX/VV_FairyPhaseRing</texPath>
@@ -324,8 +326,8 @@
   <!-- 고대 성소 등불 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AncientSanctumLamp</defName>
-    <label>ancient mana lamp</label>
-    <description>A self-sustaining mana brazier from the old vivi empire that still radiates warm golden light without fuel.</description>
+    <label>ancient mana emitter</label>
+    <description>A mysterious relic of the old vivi empire that absorbs and emits residual mana from the earth without fuel. Now, however, its power is nearly spent, leaving it only able to cast light.</description>
     <thingClass>Building</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_ManaEmitter</texPath>
@@ -372,7 +374,7 @@
   <!-- 유적 시련 복도 입구 멸망꽃 (스스로 만개하지 않음 · 파괴 시 길 안내 잔향 생성 및 재생성) -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinDoomFlower</defName>
-    <label>echoing doom bloom</label>
+    <label>doom bloom</label>
     <description>A lingering doom bloom rooted at the threshold of the trial corridor. While it does not bloom on its own, stepping off the safe path triggers its lingering curse upon the expedition; each time it is destroyed, a faint wisp of memory drifts along the unseen safe path before the flower regrows.</description>
     <thingClass>VVRace.Building_RuinDoomFlower</thingClass>
     <graphicData>
@@ -417,8 +419,8 @@
   <!-- 마지막 구간 육각형 공명 화분 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinPuzzlePot</defName>
-    <label>ancient resonance pot</label>
-    <description>An ornate ivory-and-gold planter arranged in a hexagonal ring around the central sanctum to hold a resonating fairy bloom.</description>
+    <label>ancient vivi pot</label>
+    <description>A sturdy ancient vivi plant pot. Surprisingly, its appearance looks no different from a modern vivi plant pot.</description>
     <thingClass>Building</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_ArcanePlantPot</texPath>
@@ -462,8 +464,8 @@
   <!-- 마지막 구간 육각형 재정렬 퍼즐용 공명 요정꽃 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinPuzzleFairyFlower</defName>
-    <label>resonating fairy bloom</label>
-    <description>A fairy bloom linked by threads of light to two neighboring blooms. When a vivi touches one bloom, a temporary resonance thread links to that vivi; touching another bloom swaps their positions. Aligning the linked blooms into a hexagon around the central sanctum lifts the altar's seal.</description>
+    <label>fairy bloom</label>
+    <description>A mysterious arcane flower blooming amid the ruins. Treated with a special arcane process to conceal the central space, the linked fairy blooms appear able to swap places with one another. Arranging them into a certain shape seems like it would lift the seal.</description>
     <thingClass>VVRace.Building_RuinPuzzleFairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

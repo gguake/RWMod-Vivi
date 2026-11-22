@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_EverflowerAltar</defName>
     <label>everflower altar</label>
-    <description>An altar restored from the mana circuits of an ancient amber core. It gathers the land's mana to help the everflower reach its final bloom.\n\nAn everflower of attunement level 4 or higher can be enshrined here. While the everflower is blooming or a ritual is underway, the altar cannot be damaged or deconstructed and the everflower cannot be moved. It cannot be built under a roof, and only one can be built per map.</description>
+    <description>An altar restored from the mana circuits of a vivi archotech core. It gathers mana from deep within the earth to help the everflower reach its final bloom.\n\nAn everflower of attunement level 4 or higher can be enshrined here. While the everflower is blooming or a ritual is underway, space around it is isolated so the altar cannot be damaged or deconstructed, and the everflower cannot be moved.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Everflower</ThingDef>
       <ThingDef>VV_AncientAmberCore</ThingDef>
@@ -72,11 +72,11 @@
     <designationCategory>VV_Bulidings</designationCategory>
   </ThingDef>
 
-  <!-- 고대 호박 코어 -->
+  <!-- 고대 초월공학 코어 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_AncientAmberCore</defName>
-    <label>ancient amber core</label>
-    <description>An amber crystal used in the everflower altars of the old vivi empire. The pattern of an ancient mana circuit is set within the amber.\n\nIt can be extracted from the central altar of the ancient ruins and is used to restore an everflower altar.</description>
+    <label>vivi archotech core</label>
+    <description>A peculiarly shaped core once used in the everflower altars of the old vivi empire. Though its principles are unknown, it appears to draw mana from deep within the earth on its own, acting as a device that links the everflower to the depths of the planet.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_EverflowerAltar</ThingDef>
     </descriptionHyperlinks>

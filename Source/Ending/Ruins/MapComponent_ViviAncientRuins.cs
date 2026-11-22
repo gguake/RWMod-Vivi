@@ -744,15 +744,6 @@ namespace VVRace
                         break;
                     }
                 }
-
-                if (hitColony)
-                {
-                    Messages.Message(
-                        LocalizeString_Message.VV_Message_RuinCorridorSweepHit.Translate(),
-                        new LookTargets(returnAnchor, map),
-                        MessageTypeDefOf.NeutralEvent,
-                        historical: false);
-                }
             }
         }
 

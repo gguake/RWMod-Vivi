@@ -9,10 +9,10 @@
 <VV_FailReason_FairyFlowerResonanceFailed>이미 공명에 실패함</VV_FailReason_FairyFlowerResonanceFailed>
 
 <!-- 메시지 -->
-<VV_Message_FairyFlowerResonated>{PAWN_labelShort}(이)가 요정꽃과 공명해 〈요정 교화〉를 얻었습니다.</VV_Message_FairyFlowerResonated>
+<VV_Message_FairyFlowerResonated>{PAWN_labelShort}(이)가 요정꽃과 공명해 요정 교화를 얻었습니다.</VV_Message_FairyFlowerResonated>
 <VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort}(이)가 요정꽃과 공명하지 못했습니다.</VV_Message_FairyFlowerResonanceFailed>
 <VV_Message_FairyFlowerBurst>요정꽃의 문양이 완성되어 터졌습니다.</VV_Message_FairyFlowerBurst>
-<VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 〈{BLIGHT}〉 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
+<VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 {BLIGHT} 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->
 <VV_Hediff_DoomBlightLevel>저주 단계: {0} / {1}</VV_Hediff_DoomBlightLevel>
@@ -20,7 +20,5 @@
 <!-- 정보창 -->
 <VV_Inspector_DoomFlowerBloomIn>만개까지: {0}</VV_Inspector_DoomFlowerBloomIn>
 <VV_Inspector_DoomFlowerHint>만개하면 저주를 내립니다.</VV_Inspector_DoomFlowerHint>
-<VV_Inspector_FairyFlowerSkill>공명 기술: {0}</VV_Inspector_FairyFlowerSkill>
-<VV_Inspector_FairyFlowerBurstIn>터지기까지: {0}</VV_Inspector_FairyFlowerBurstIn>
 
 </LanguageData>
