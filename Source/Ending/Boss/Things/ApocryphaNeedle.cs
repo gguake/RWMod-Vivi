@@ -336,7 +336,7 @@ namespace VVRace
 
             var now = GenTicks.TicksGame;
 
-            _lockTarget = activator;
+            _lockTarget = _boss;
             _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, _plantTip);
             _laneDir = EndingVfxUtility.SafeNormalizeHorizontal(_plantTip - _pos, Vector3.forward);
             UpdateLockDirection();
@@ -487,6 +487,11 @@ namespace VVRace
 
         private void TickAiming(int now)
         {
+            if (IsQueen && _lockTarget != null)
+            {
+                UpdateLockDirection();
+            }
+
             var elapsed = now - _stateStartTick;
             var detach = ApocryphaUtility.EaseInOut(Mathf.Clamp01(elapsed / (float)DetachTicks));
             var windup = WindupDistance * Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.55f, 1f, AimProgress));
@@ -704,13 +709,19 @@ namespace VVRace
 
         private void UpdateLockDirection()
         {
+            var range = BossComp?.Props.needleRange ?? 19f;
             var target = _lockTarget;
             if (target != null && target.Spawned && target.Map == Map)
             {
-                var toTarget = (target.DrawPos - _laneStart).Yto0();
+                var toTarget = ((target == _boss ? BodyCenter : target.DrawPos) - _laneStart).Yto0();
                 if (toTarget.sqrMagnitude > 0.04f)
                 {
                     _laneDir = toTarget.normalized;
+                }
+
+                if (target == _boss)
+                {
+                    range = Mathf.Max(range, toTarget.magnitude + BossHitRadius * 2f);
                 }
             }
 
@@ -719,7 +730,7 @@ namespace VVRace
                 _laneDir = Vector3.forward;
             }
 
-            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, _laneDir, BossComp?.Props.needleRange ?? 19f);
+            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, _laneDir, range);
         }
 
         private void Stick(int now)

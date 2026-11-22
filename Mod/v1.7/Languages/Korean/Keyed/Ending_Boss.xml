@@ -28,7 +28,7 @@
 <VV_Message_ApocryphaShieldRestored>요정 비비들이 다시 모여들어 아스포델의 요정 차단막이 복구되었습니다.</VV_Message_ApocryphaShieldRestored>
 <VV_Message_ApocryphaNeedleStuck>고대 바늘이 아스포델의 외피에 꽂혀 아스포델이 잠시 기절했습니다.</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaNeedlesShakenOff>아스포델이 몸에 꽂힌 바늘을 모두 떨쳐내자, 거대 말벌 무리가 정착지로 몰려듭니다.</VV_Message_ApocryphaNeedlesShakenOff>
-<VV_Message_ApocryphaNeedleActivated>고대 바늘이 활성화되어 {PAWN_labelShort}(을)를 겨눕니다.</VV_Message_ApocryphaNeedleActivated>
+<VV_Message_ApocryphaNeedleActivated>{PAWN_labelShort}(이)가 깨운 고대 바늘이 활성화되어 거대 말벌 여왕을 겨눕니다.</VV_Message_ApocryphaNeedleActivated>
 
 <!-- 우클릭 메뉴 -->
 <VV_FloatMenu_ActivateApocryphaNeedle>고대 엘텍스 바늘 활성화</VV_FloatMenu_ActivateApocryphaNeedle>

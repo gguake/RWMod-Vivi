@@ -27,7 +27,7 @@
 <VV_Message_ApocryphaShieldRestored>The fairy vivis have gathered once more, restoring Asphodel's fairy barrier.</VV_Message_ApocryphaShieldRestored>
 <VV_Message_ApocryphaNeedleStuck>An ancient needle lodged in Asphodel's carapace, briefly stunning her.</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaNeedlesShakenOff>Asphodel has shaken off the lodged needles, drawing a swarm of titanic hornets toward the colony.</VV_Message_ApocryphaNeedlesShakenOff>
-<VV_Message_ApocryphaNeedleActivated>An ancient needle activates and aims at {PAWN_labelShort}.</VV_Message_ApocryphaNeedleActivated>
+<VV_Message_ApocryphaNeedleActivated>Awakened by {PAWN_labelShort}, the ancient needle takes aim at the giant hornet queen.</VV_Message_ApocryphaNeedleActivated>
 
 <!-- 우클릭 메뉴 -->
 <VV_FloatMenu_ActivateApocryphaNeedle>Activate ancient eltex needle</VV_FloatMenu_ActivateApocryphaNeedle>
