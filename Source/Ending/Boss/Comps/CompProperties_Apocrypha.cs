@@ -98,7 +98,7 @@ namespace VVRace
         public int needleShakeOffTicks = 7500;
         public int shakeOffHornetCount = 6;
 
-        public int rebirthTicks = 540;
+        public int rebirthTicks = 1320;
 
         public int breathCooldownTicks = 1200;
         public int breathWarmupTicks = 90;

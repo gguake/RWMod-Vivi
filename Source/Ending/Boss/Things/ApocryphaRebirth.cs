@@ -8,14 +8,14 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class ApocryphaRebirth : ThingWithComps, IThingHolder
     {
-        public const int BurnTicks = 180;
-        public const int GrowStartTick = 120;
-        public const int MorphStartTick = 360;
-        public const int FirstQuoteTick = 130;
-        public const int SecondQuoteTick = 245;
+        public const int BurnTicks = 300;
+        public const int GrowStartTick = 300;
+        public const int MorphStartTick = 960;
+        public const int FirstQuoteTick = 360;
+        public const int SecondQuoteTick = 660;
 
         private const float BurnDelaySecs = 0.15f;
-        private const float BurnDurationSecs = 2.6f;
+        private const float BurnDurationSecs = 4.4f;
         private const int AshInterval = 1;
         private const int EmberInterval = 2;
         private const int GlintInterval = 4;
@@ -33,8 +33,8 @@ namespace VVRace
         private const float StreamFadeInSecs = 0.4f;
         private const float FirstQuoteHeight = 2.7f;
         private const float SecondQuoteHeight = 2.1f;
-        private const float FirstQuoteSecs = 1.5f;
-        private const float SecondQuoteSecs = 2.6f;
+        private const float FirstQuoteSecs = 4f;
+        private const float SecondQuoteSecs = 4.5f;
         private const float AsphodelCoreLift = 0.28f;
 
         private static readonly FloatRange AshScale = new FloatRange(1f, 2f);
@@ -65,7 +65,7 @@ namespace VVRace
 
         public int Age => _startTick < 0 ? 0 : Mathf.Max(0, Find.TickManager.TicksGame - _startTick);
 
-        public int DurationTicks => Boss?.TryGetComp<CompApocrypha>()?.Props.rebirthTicks ?? 540;
+        public int DurationTicks => Boss?.TryGetComp<CompApocrypha>()?.Props.rebirthTicks ?? 1320;
 
         public int TicksLeft => Mathf.Max(0, DurationTicks - Age);
 
@@ -143,6 +143,8 @@ namespace VVRace
         {
             base.Tick();
             if (!Spawned) { return; }
+
+            Find.TickManager.slower.SignalForceNormalSpeedShort();
 
             var age = Age;
             if (age >= DurationTicks)
