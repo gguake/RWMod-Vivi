@@ -1558,7 +1558,7 @@
     <drawOffscreen>true</drawOffscreen>
     <seeThroughFog>true</seeThroughFog>
     <altitudeLayer>Pawn</altitudeLayer>
-    <selectable>true</selectable>
+    <selectable>false</selectable>
   </ThingDef>
 
   <!-- 출현하는 아스포델 -->

@@ -68,6 +68,7 @@
     <!-- 엔딩 퀘스트 〈만개하는 여명〉 -->
     <Compile Include="Ending\Altar\Building_EverflowerAltar.cs" />
     <Compile Include="Ending\Altar\PlaceWorker_EverflowerAltar.cs" />
+    <Compile Include="Ending\Boss\Pawn_Apocrypha.cs" />
     <Compile Include="Ending\Boss\AI\FloatMenuOptionProvider_ActivateApocryphaNeedle.cs" />
     <Compile Include="Ending\Boss\AI\JobDriver_ActivateApocryphaNeedle.cs" />
     <Compile Include="Ending\Boss\AI\JobDriver_ApocryphaBreath.cs" />

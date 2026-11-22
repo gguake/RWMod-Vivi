@@ -207,6 +207,7 @@ namespace VVRace
         public static PawnKindDef VV_TitanicHornet;
 
         public static PawnKindDef VV_Apocrypha;
+        public static PawnKindDef VV_ApocryphaAsphodel;
     }
 
     [DefOf]

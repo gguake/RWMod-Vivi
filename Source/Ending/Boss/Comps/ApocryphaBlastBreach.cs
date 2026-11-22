@@ -18,6 +18,8 @@ namespace VVRace
         private IntVec3 _blockedCell = IntVec3.Invalid;
         private int _deadlineTick = -1;
         private FairyBlastAim _aim;
+        private IntVec3 _pathBlockedCell = IntVec3.Invalid;
+        private bool _aimAtPathBlock;
 
         private Effecter _castEffecter;
 
@@ -27,6 +29,8 @@ namespace VVRace
         public bool InProgress => _blockedCell.IsValid;
         public IntVec3 BlockedCell => _blockedCell;
         public FairyBlastAim Aim => _aim;
+        public bool ClearingPathBlock => _pathBlockedCell.IsValid || _aimAtPathBlock;
+        public int PathBlockTicksLeft => _aimAtPathBlock ? _aim.detonateTick - GenTicks.TicksGame : FairyBlastAim.AimTicks;
 
         public ApocryphaBlastBreach(CompApocrypha comp)
         {
@@ -41,12 +45,24 @@ namespace VVRace
             Scribe_Values.Look(ref _blockedCell, "blockedCell", IntVec3.Invalid);
             Scribe_Values.Look(ref _deadlineTick, "deadlineTick", -1);
             Scribe_Deep.Look(ref _aim, "aim");
+            Scribe_Values.Look(ref _pathBlockedCell, "pathBlockedCell", IntVec3.Invalid);
+            Scribe_Values.Look(ref _aimAtPathBlock, "aimAtPathBlock", false);
+        }
+
+        public void NotePathBlocked(IntVec3 cell)
+        {
+            if (!ClearingPathBlock)
+            {
+                _pathBlockedCell = cell;
+            }
         }
 
         public bool TryStart(Thing target, float maxDistance, out IntVec3 standCell)
         {
-            Cancel();
             standCell = IntVec3.Invalid;
+            if (ClearingPathBlock) { return false; }
+
+            Cancel();
             if (_comp.Phase != ApocryphaPhase.Asphodel || target == null || !target.Spawned || target.Map != Pawn.Map) { return false; }
             if (Pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly)) { return false; }
             if (!TryFindBlockedCell(target, maxDistance, out standCell, out var blocked)) { return false; }
@@ -66,7 +82,7 @@ namespace VVRace
 
             if (_comp.Phase != ApocryphaPhase.Asphodel || GenTicks.TicksGame > _deadlineTick || _target == null || !_target.Spawned || _target.Map != Pawn.Map)
             {
-                Cancel();
+                CancelBreach();
                 return false;
             }
 
@@ -80,6 +96,7 @@ namespace VVRace
             {
                 var aim = _aim;
                 _aim = null;
+                _aimAtPathBlock = false;
                 aim.Detonate(map, Props.blastBreachRadius, ApocryphaGimmicks.GetBlastIgnoredThings(map, Pawn), Pawn, ScreenShake);
                 DamageBlockers(map, aim.cell);
                 if (InProgress)
@@ -100,7 +117,15 @@ namespace VVRace
                 EndingVfxUtility.MaintainEffecter(ref _castEffecter, VVEffecterDefOf.VV_Effecter_ApocryphaAimSustain, source, source);
             }
 
-            if (InProgress && _aim == null && !stunned && Pawn.Position.InHorDistOf(_standCell, StandRadius))
+            if (_aim != null || stunned) { return; }
+
+            if (_pathBlockedCell.IsValid)
+            {
+                _aim = new FairyBlastAim(_pathBlockedCell, now + FairyBlastAim.AimTicks);
+                _aimAtPathBlock = true;
+                _pathBlockedCell = IntVec3.Invalid;
+            }
+            else if (InProgress && Pawn.Position.InHorDistOf(_standCell, StandRadius))
             {
                 _aim = new FairyBlastAim(_blockedCell, now + FairyBlastAim.AimTicks);
             }
@@ -108,9 +133,20 @@ namespace VVRace
 
         public void Cancel()
         {
-            _aim?.CleanupVisuals();
-            _aim = null;
-            EndingVfxUtility.CleanupEffecter(ref _castEffecter);
+            _pathBlockedCell = IntVec3.Invalid;
+            _aimAtPathBlock = false;
+            CancelBreach();
+        }
+
+        private void CancelBreach()
+        {
+            if (!_aimAtPathBlock)
+            {
+                _aim?.CleanupVisuals();
+                _aim = null;
+                EndingVfxUtility.CleanupEffecter(ref _castEffecter);
+            }
+
             _target = null;
             _standCell = IntVec3.Invalid;
             _blockedCell = IntVec3.Invalid;
@@ -122,7 +158,7 @@ namespace VVRace
             if (_target == null || !_target.Spawned || Pawn.CanReach(_target, PathEndMode.Touch, Danger.Deadly)
                 || !TryFindBlockedCell(_target, _maxDistance, out var standCell, out var blocked))
             {
-                Cancel();
+                CancelBreach();
                 return;
             }
 

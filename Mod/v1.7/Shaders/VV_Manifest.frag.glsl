@@ -18,6 +18,7 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _Reveal;        // @default = 0.0
     float _EdgeWidth;     // @default = 0.08
     float _GhostAlpha;    // @default = 0.22
+    float _Soft;          // @default = 0.0
 } u;
 
 layout(set = 2, binding = 1) uniform sampler2D _MainTex;
@@ -66,7 +67,8 @@ void main()
     float radial = clamp(length((vUv - vec2(0.5, 0.52)) * vec2(1.25, 1.0)) * 1.75, 0.0, 1.0);
     float n = texture(_DissolveTex, uv).r;
     float grain = vnoise(vUv * 70.0);
-    float order = radial * 0.55 + n * 0.3 + grain * 0.15;
+    float soft = clamp(u._Soft, 0.0, 1.0);
+    float order = radial * 0.55 + n * 0.3 + grain * 0.15 * (1.0 - soft);
 
     float p = clamp(u._Progress, 0.0, 1.0);
     float w = u._EdgeWidth;
@@ -78,9 +80,11 @@ void main()
     if (d < 0.0)
     {
         float ghost = u._GhostAlpha * smoothstep(0.0, 0.2, p) * (0.4 + 0.6 * (1.0 - smoothstep(0.0, 0.35, -d))) * (1.0 - p * p);
-        if (ghost <= 0.004)
+        float front = soft * smoothstep(-0.24, 0.0, d);
+        float cover = max(ghost, front);
+        if (cover <= 0.004)
             discard;
-        outColor = vec4(dark, tex.a * ghost * u._Color.a);
+        outColor = vec4(mix(dark, clamp(u._EdgeColor.rgb * 1.5, 0.0, 1.0), front), tex.a * cover * u._Color.a);
         return;
     }
 

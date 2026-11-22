@@ -24,7 +24,8 @@ namespace VVRace
         public int shieldBreakStunTicks = 1500;
         public int shieldRestoreTicks = 5000;
         public IntRange fairyFlowerCount = new IntRange(3, 5);
-        public FloatRange fairyFlowerDistance = new FloatRange(6f, 12f);
+        public int fairyFlowerCountGrowthMax = 3;
+        public FloatRange fairyFlowerDistance = new FloatRange(6f, 18f);
 
         public int swarmFairyCount = 8;
         public float swarmAttackRadius = 7f;
@@ -49,6 +50,7 @@ namespace VVRace
         public float contactFieldDrainPerHour = 0.075f;
         public float contactLineDamageBondLoss = 1f;
         public float contactFieldDamageBondLoss = 2.5f;
+        public float contactHexagonFactor = 3f;
 
         public float blastBreachRadius = 2.4f;
         public float blastBreachBuildingDamage = 600f;

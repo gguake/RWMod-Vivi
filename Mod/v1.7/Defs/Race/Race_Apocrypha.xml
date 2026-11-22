@@ -5,6 +5,7 @@
     <defName>VV_Apocrypha</defName>
     <label>Asphodel</label>
     <description>Asphodel, the last empress of the old vivi empire.</description>
+    <thingClass>VVRace.Pawn_Apocrypha</thingClass>
     <drawOffscreen>true</drawOffscreen>
     <statBases>
       <MoveSpeed>0.5</MoveSpeed>

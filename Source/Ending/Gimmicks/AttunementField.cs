@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -7,6 +8,7 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public static class AttunementField
     {
+        public const int MaxVertices = 6;
         public const float EdgeMargin = 0.7f;
 
         public static readonly Color DefaultColor = new Color(1f, 0.82f, 0.4f, 1f);
@@ -18,23 +20,43 @@ namespace VVRace
         private static readonly int SizeYId = Shader.PropertyToID("_SizeY");
         private static readonly int OriginXId = Shader.PropertyToID("_OriginX");
         private static readonly int OriginYId = Shader.PropertyToID("_OriginY");
-        private static readonly int AxId = Shader.PropertyToID("_AX");
-        private static readonly int AyId = Shader.PropertyToID("_AY");
-        private static readonly int BxId = Shader.PropertyToID("_BX");
-        private static readonly int ById = Shader.PropertyToID("_BY");
-        private static readonly int CxId = Shader.PropertyToID("_CX");
-        private static readonly int CyId = Shader.PropertyToID("_CY");
+        private static readonly int CountId = Shader.PropertyToID("_Count");
+        private static readonly int WhitenId = Shader.PropertyToID("_Whiten");
+        private static readonly int[] PointXIds = new int[MaxVertices];
+        private static readonly int[] PointYIds = new int[MaxVertices];
 
-        public static void Draw(Vector3 a, Vector3 b, Vector3 c, float alpha = 1f, Color? color = null)
+        static AttunementField()
         {
-            if (alpha <= 0f) { return; }
+            for (int i = 0; i < MaxVertices; i++)
+            {
+                PointXIds[i] = Shader.PropertyToID("_P" + i + "X");
+                PointYIds[i] = Shader.PropertyToID("_P" + i + "Y");
+            }
+        }
 
-            var minX = Mathf.Min(a.x, Mathf.Min(b.x, c.x)) - EdgeMargin;
-            var minZ = Mathf.Min(a.z, Mathf.Min(b.z, c.z)) - EdgeMargin;
-            var sizeX = Mathf.Max(a.x, Mathf.Max(b.x, c.x)) + EdgeMargin - minX;
-            var sizeZ = Mathf.Max(a.z, Mathf.Max(b.z, c.z)) + EdgeMargin - minZ;
+        public static void Draw(List<Vector3> points, float alpha = 1f, float whiten = 0f)
+        {
+            var count = Mathf.Min(points.Count, MaxVertices);
+            if (alpha <= 0f || count < 3) { return; }
 
-            var tint = color ?? DefaultColor;
+            var minX = float.MaxValue;
+            var minZ = float.MaxValue;
+            var maxX = float.MinValue;
+            var maxZ = float.MinValue;
+            for (int i = 0; i < count; i++)
+            {
+                minX = Mathf.Min(minX, points[i].x);
+                minZ = Mathf.Min(minZ, points[i].z);
+                maxX = Mathf.Max(maxX, points[i].x);
+                maxZ = Mathf.Max(maxZ, points[i].z);
+            }
+
+            minX -= EdgeMargin;
+            minZ -= EdgeMargin;
+            var sizeX = maxX + EdgeMargin - minX;
+            var sizeZ = maxZ + EdgeMargin - minZ;
+
+            var tint = DefaultColor;
             tint.a *= alpha;
 
             PropertyBlock.Clear();
@@ -44,30 +66,41 @@ namespace VVRace
             PropertyBlock.SetFloat(SizeYId, sizeZ);
             PropertyBlock.SetFloat(OriginXId, minX);
             PropertyBlock.SetFloat(OriginYId, minZ);
-            PropertyBlock.SetFloat(AxId, a.x - minX);
-            PropertyBlock.SetFloat(AyId, a.z - minZ);
-            PropertyBlock.SetFloat(BxId, b.x - minX);
-            PropertyBlock.SetFloat(ById, b.z - minZ);
-            PropertyBlock.SetFloat(CxId, c.x - minX);
-            PropertyBlock.SetFloat(CyId, c.z - minZ);
+            PropertyBlock.SetFloat(CountId, count);
+            PropertyBlock.SetFloat(WhitenId, whiten);
+            for (int i = 0; i < count; i++)
+            {
+                PropertyBlock.SetFloat(PointXIds[i], points[i].x - minX);
+                PropertyBlock.SetFloat(PointYIds[i], points[i].z - minZ);
+            }
 
             var position = new Vector3(minX + sizeX * 0.5f, AltitudeLayer.MoteLow.AltitudeFor(), minZ + sizeZ * 0.5f);
             Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(position, Quaternion.identity, new Vector3(sizeX, 1f, sizeZ)), FieldMat, 0, null, 0, PropertyBlock);
         }
 
-        public static float TriangleArea(Vector3 a, Vector3 b, Vector3 c)
+        public static float PolygonArea(List<Vector3> points)
         {
-            return Mathf.Abs((b - a).ToVector2().Cross((c - a).ToVector2())) * 0.5f;
+            var sum = 0f;
+            for (int i = 0, j = points.Count - 1; i < points.Count; j = i, i++)
+            {
+                sum += points[j].ToVector2().Cross(points[i].ToVector2());
+            }
+            return Mathf.Abs(sum) * 0.5f;
         }
 
-        public static bool PointInTriangle(Vector3 p, Vector3 a, Vector3 b, Vector3 c)
+        public static bool PointInPolygon(Vector3 p, List<Vector3> points)
         {
-            var d1 = (b - a).ToVector2().Cross((p - a).ToVector2());
-            var d2 = (c - b).ToVector2().Cross((p - b).ToVector2());
-            var d3 = (a - c).ToVector2().Cross((p - c).ToVector2());
-            var hasNegative = d1 < 0f || d2 < 0f || d3 < 0f;
-            var hasPositive = d1 > 0f || d2 > 0f || d3 > 0f;
-            return !(hasNegative && hasPositive);
+            var inside = false;
+            for (int i = 0, j = points.Count - 1; i < points.Count; j = i, i++)
+            {
+                var a = points[i];
+                var b = points[j];
+                if ((a.z > p.z) != (b.z > p.z) && p.x < (b.x - a.x) * (p.z - a.z) / (b.z - a.z) + a.x)
+                {
+                    inside = !inside;
+                }
+            }
+            return inside;
         }
 
         public static bool CircleIntersectsSegment(Vector3 center, float radius, Vector3 a, Vector3 b)

@@ -12,12 +12,20 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _SizeY;         // @default = 1.0
     float _OriginX;       // @default = 0.0
     float _OriginY;       // @default = 0.0
-    float _AX;            // @default = 0.0
-    float _AY;            // @default = 0.0
-    float _BX;            // @default = 1.0
-    float _BY;            // @default = 0.0
-    float _CX;            // @default = 0.0
-    float _CY;            // @default = 1.0
+    float _Count;         // @default = 3.0
+    float _Whiten;        // @default = 0.0
+    float _P0X;           // @default = 0.0
+    float _P0Y;           // @default = 0.0
+    float _P1X;           // @default = 1.0
+    float _P1Y;           // @default = 0.0
+    float _P2X;           // @default = 0.0
+    float _P2Y;           // @default = 1.0
+    float _P3X;           // @default = 0.0
+    float _P3Y;           // @default = 0.0
+    float _P4X;           // @default = 0.0
+    float _P4Y;           // @default = 0.0
+    float _P5X;           // @default = 0.0
+    float _P5Y;           // @default = 0.0
 } u;
 
 uint hashU(ivec2 i)
@@ -31,22 +39,21 @@ float hashF(uint h, int shift)
     return float((h >> uint(shift)) & 1023u) / 1023.0;
 }
 
-float sdTriangle(vec2 p, vec2 p0, vec2 p1, vec2 p2)
+float sdPolygon(vec2 p, vec2 v[6], int n)
 {
-    vec2 e0 = p1 - p0;
-    vec2 e1 = p2 - p1;
-    vec2 e2 = p0 - p2;
-    vec2 v0 = p - p0;
-    vec2 v1 = p - p1;
-    vec2 v2 = p - p2;
-    vec2 pq0 = v0 - e0 * clamp(dot(v0, e0) / max(dot(e0, e0), 1e-6), 0.0, 1.0);
-    vec2 pq1 = v1 - e1 * clamp(dot(v1, e1) / max(dot(e1, e1), 1e-6), 0.0, 1.0);
-    vec2 pq2 = v2 - e2 * clamp(dot(v2, e2) / max(dot(e2, e2), 1e-6), 0.0, 1.0);
-    float s = sign(e0.x * e2.y - e0.y * e2.x);
-    vec2 d = min(min(vec2(dot(pq0, pq0), s * (v0.x * e0.y - v0.y * e0.x)),
-                     vec2(dot(pq1, pq1), s * (v1.x * e1.y - v1.y * e1.x))),
-                     vec2(dot(pq2, pq2), s * (v2.x * e2.y - v2.y * e2.x)));
-    return -sqrt(d.x) * sign(d.y);
+    float d = dot(p - v[0], p - v[0]);
+    float s = 1.0;
+    for (int i = 0, j = n - 1; i < n; j = i, i++)
+    {
+        vec2 e = v[j] - v[i];
+        vec2 w = p - v[i];
+        vec2 b = w - e * clamp(dot(w, e) / max(dot(e, e), 1e-6), 0.0, 1.0);
+        d = min(d, dot(b, b));
+        bvec3 c = bvec3(p.y >= v[i].y, p.y < v[j].y, e.x * w.y > e.y * w.x);
+        if (all(c) || all(not(c)))
+            s = -s;
+    }
+    return s * sqrt(d);
 }
 
 float sparkleLayer(vec2 pw, float scale, float t, int seed)
@@ -68,11 +75,15 @@ void main()
     vec2 pw = p + vec2(u._OriginX, u._OriginY);
     float t = u._AgeSecs;
 
-    float d = sdTriangle(p, vec2(u._AX, u._AY), vec2(u._BX, u._BY), vec2(u._CX, u._CY));
+    vec2 v[6] = vec2[6](
+        vec2(u._P0X, u._P0Y), vec2(u._P1X, u._P1Y), vec2(u._P2X, u._P2Y),
+        vec2(u._P3X, u._P3Y), vec2(u._P4X, u._P4Y), vec2(u._P5X, u._P5Y));
+    float d = sdPolygon(p, v, int(clamp(u._Count, 3.0, 6.0) + 0.5));
     float px = max(fwidth(d), 1e-4);
 
     float inside = 1.0 - smoothstep(-px, px, d);
     float depth = clamp(-d / 1.6, 0.0, 1.0);
+    float whiten = clamp(u._Whiten, 0.0, 1.0);
 
     float wave1 = sin(dot(pw, vec2(0.83, 0.56)) * 1.4 - t * 1.3);
     float wave2 = sin(dot(pw, vec2(-0.41, 0.91)) * 1.1 + t * 0.9);
@@ -86,13 +97,15 @@ void main()
     float rim = smoothstep(0.0, 0.45, -d) * (1.0 - smoothstep(0.45, 1.4, -d));
 
     float fill = inside * (0.34 + 0.2 * waves * (0.5 + 0.5 * depth) + 0.16 * rim);
+    fill = mix(fill, inside * (0.62 + 0.14 * waves + 0.1 * rim), whiten);
     float alpha = fill + inside * sparkles * 0.8 + edgeGlow * 0.45 + edgeCore * 0.6;
     alpha *= u._Color.a;
 
     vec3 gold = mix(u._Color.rgb, vec3(1.0, 0.95, 0.75), 0.15 + 0.3 * waves * inside);
     vec3 bright = vec3(1.0, 0.98, 0.9);
+    vec3 white = mix(vec3(1.0, 0.99, 0.95), vec3(1.0), waves);
     float whiteMix = clamp(edgeCore * 0.85 + sparkles * 0.9, 0.0, 1.0);
-    vec3 col = mix(gold, bright, whiteMix);
+    vec3 col = mix(mix(gold, white, whiten * inside), bright, whiteMix);
 
     outColor = vec4(col * (1.0 + 0.25 * inside), clamp(alpha, 0.0, 0.92));
 }

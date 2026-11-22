@@ -177,15 +177,16 @@ namespace VVRace
 
         private static void AddSiegeParts(Quest quest, ArcanePlant_Everflower anchor, float quality, in SignalSet signals)
         {
-            var siegeText = LocalizeString_Letter.VV_Letter_EndingSiege.Translate().Resolve();
             var federation = ViviEndingUtility.FindFederation(requireNonHostile: true);
             if (federation != null)
             {
-                siegeText += "\n\n" + LocalizeString_Letter.VV_Letter_EndingSiegeFederation.Translate().Resolve();
-
                 quest.AddPart(new QuestPart_ViviFederationAlliance()
                 {
                     inSignal = signals.BloomStarted,
+                    labelKey = LocalizeString_Letter.VV_Letter_EndingSiegeLabel,
+                    textKey = LocalizeString_Letter.VV_Letter_EndingSiege,
+                    letterDef = LetterDefOf.ThreatBig,
+                    anchor = anchor,
                     faction = federation,
                 });
 
@@ -197,8 +198,10 @@ namespace VVRace
                     faction2 = federation,
                 });
             }
-
-            AddStaticLetter(quest, signals.BloomStarted, LocalizeString_Letter.VV_Letter_EndingSiegeLabel, siegeText, LetterDefOf.ThreatBig, new LookTargets(anchor));
+            else
+            {
+                AddResonatorLetter(quest, signals.BloomStarted, LocalizeString_Letter.VV_Letter_EndingSiegeLabel, LocalizeString_Letter.VV_Letter_EndingSiege, LetterDefOf.ThreatBig, anchor);
+            }
 
             AddDelay(quest, signals.BloomStarted, signals.BloomFailed, BreathEchoDelayTicks.RandomInRange, signals.BreathEcho);
             AddResonatorLetter(quest, signals.BreathEcho, LocalizeString_Letter.VV_Letter_EverflowerEcho5Label, LocalizeString_Letter.VV_Letter_EverflowerEcho5, LetterDefOf.NeutralEvent, anchor);

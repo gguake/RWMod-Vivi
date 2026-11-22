@@ -24,8 +24,8 @@ namespace VVRace
         private const float BloomNight = 0.85f;
         private const float PulseAmount = 0.12f;
         private const float PulseSpeed = 1.3f;
-        private const float Spread = 0.05f;
-        private const float Expand = 1.12f;
+        public const float Spread = 0.05f;
+        public const float Expand = 1.12f;
 
         public static void Draw(Pawn pawn)
         {
@@ -36,26 +36,30 @@ namespace VVRace
             var texture = graphic.MatAt(rot)?.mainTexture;
             if (texture == null) { return; }
 
+            var dark = 1f - Mathf.Clamp01(pawn.Map.glowGrid.GroundGlowAt(pawn.Position));
+            var pulse = 1f + PulseAmount * Mathf.Sin(Find.TickManager.TicksGame / 60f * PulseSpeed);
+
+            Draw(texture, graphic.MeshAt(rot), pawn.DrawPos, 1f, Mathf.Lerp(CoreDay, CoreNight, dark) * pulse, Mathf.Lerp(BloomDay, BloomNight, dark) * pulse, Spread, Expand);
+        }
+
+        public static void Draw(Texture texture, Mesh mesh, Vector3 position, float scale, float core, float bloom, float spread, float expand)
+        {
             if (!GlowMaterials.TryGetValue(texture, out var material))
             {
                 material = MaterialPool.MatFrom(new MaterialRequest(texture, ShaderDatabase.LoadShader(ShaderPath), Color.white));
                 GlowMaterials[texture] = material;
             }
 
-            var dark = 1f - Mathf.Clamp01(pawn.Map.glowGrid.GroundGlowAt(pawn.Position));
-            var pulse = 1f + PulseAmount * Mathf.Sin(Find.TickManager.TicksGame / 60f * PulseSpeed);
-
             PropertyBlock.Clear();
             PropertyBlock.SetColor(ShaderPropertyIDs.Color, GlowColor);
-            PropertyBlock.SetFloat(CoreId, Mathf.Lerp(CoreDay, CoreNight, dark) * pulse);
-            PropertyBlock.SetFloat(BloomId, Mathf.Lerp(BloomDay, BloomNight, dark) * pulse);
-            PropertyBlock.SetFloat(SpreadId, Spread);
-            PropertyBlock.SetFloat(ExpandId, Expand);
+            PropertyBlock.SetFloat(CoreId, core);
+            PropertyBlock.SetFloat(BloomId, bloom);
+            PropertyBlock.SetFloat(SpreadId, spread);
+            PropertyBlock.SetFloat(ExpandId, expand);
 
-            var position = pawn.DrawPos;
             position.y += 0.02f;
-            var matrix = Matrix4x4.TRS(position, Quaternion.identity, new Vector3(Expand, 1f, Expand));
-            Graphics.DrawMesh(graphic.MeshAt(rot), matrix, material, 0, null, 0, PropertyBlock);
+            var matrix = Matrix4x4.TRS(position, Quaternion.identity, new Vector3(scale * expand, 1f, scale * expand));
+            Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
         }
     }
 }

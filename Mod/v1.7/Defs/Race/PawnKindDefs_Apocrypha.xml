@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 아스포델 폰 종류 -->
-  <PawnKindDef>
+  <PawnKindDef Name="VV_ApocryphaKind">
     <defName>VV_Apocrypha</defName>
     <label>Asphodel</label>
     <race>VV_Apocrypha</race>
@@ -42,5 +42,11 @@
         </bodyGraphicData>
       </li>
     </lifeStages>
+  </PawnKindDef>
+
+  <!-- 아스포델 폰 종류 (2페이즈, 근접 공격 없음) -->
+  <PawnKindDef ParentName="VV_ApocryphaKind">
+    <defName>VV_ApocryphaAsphodel</defName>
+    <canMeleeAttack>false</canMeleeAttack>
   </PawnKindDef>
 </Defs>

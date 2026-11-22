@@ -46,6 +46,16 @@ namespace VVRace
         private static readonly Color EmberColor = new Color(0.78f, 0.36f, 1f, 1f);
         private static readonly Color GlintColor = new Color(1f, 0.95f, 0.82f, 1f);
         private static readonly Color StreamColor = new Color(1f, 1f, 0.97f, 1f);
+        private static readonly Color MorphEdgeColor = new Color(1f, 0.97f, 0.86f, 1f);
+        private static readonly Color MorphBodyColor = new Color(1f, 0.92f, 0.72f, 1f);
+
+        private const float MorphGatherEnd = 0.6f;
+        private const float MorphGlowFadeIn = 0.1f;
+        private const float MorphCloudSpread = 0.3f;
+        private const float MorphCloudExpand = 1.9f;
+        private const float MorphCloudBloom = 1.6f;
+        private const float MorphFormedBloom = 0.6f;
+        private const float MorphFormedCore = 0.3f;
 
         private static readonly DissolveStyle BurnStyle = new DissolveStyle(BurnDelaySecs, BurnDurationSecs, new Color(0.72f, 0.3f, 1f, 1f), 0f, 1f);
         private static readonly Material CoreHaloMat = MaterialPool.MatFrom("VFX/VV_ScentAura", ShaderDatabase.MoteGlow, new Color(1f, 0.9f, 0.72f, 0.9f));
@@ -60,6 +70,7 @@ namespace VVRace
         private Vector3 _drawOffset;
         private Vector3 _bodyOffset;
         private int _startTick = -1;
+        private Texture2D _morphTexture;
 
         public Pawn Boss => _innerContainer.Count > 0 ? _innerContainer[0] : null;
 
@@ -256,7 +267,19 @@ namespace VVRace
                 var bodyPos = Position.ToVector3Shifted();
                 bodyPos.y = AltitudeLayer.Pawn.AltitudeFor();
                 ManifestationRenderer.Draw(_morphTexPath, Rot4.South, bodyPos, _morphDrawSize, ageSecs: (age - MorphStartTick) / 60f,
-                    progress: 1f - Mathf.Pow(1f - morph, 2.2f), reveal: Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.5f, 1f, morph)));
+                    progress: 1f - Mathf.Pow(1f - morph, 2.2f), reveal: Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.5f, 1f, morph)), MorphEdgeColor, MorphBodyColor, soft: 1f);
+
+                _morphTexture ??= ContentFinder<Texture2D>.Get(_morphTexPath + DissolveRenderer.RotationSuffix(Rot4.South), reportFailure: false);
+                if (_morphTexture != null)
+                {
+                    var gather = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0f, MorphGatherEnd, morph));
+                    var fadeIn = Mathf.InverseLerp(0f, MorphGlowFadeIn, morph);
+                    ApocryphaShroudGlow.Draw(_morphTexture, MeshPool.plane10, bodyPos, _morphDrawSize,
+                        core: MorphFormedCore * gather * fadeIn,
+                        bloom: Mathf.Lerp(MorphCloudBloom, MorphFormedBloom, gather) * fadeIn,
+                        spread: Mathf.Lerp(MorphCloudSpread, ApocryphaShroudGlow.Spread, gather),
+                        expand: Mathf.Lerp(MorphCloudExpand, ApocryphaShroudGlow.Expand, gather));
+                }
             }
 
             var burn = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(secs / (BurnTicks / 60f)));
@@ -276,19 +299,6 @@ namespace VVRace
 
             var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(size, 1f, size));
             Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
-        }
-
-        public override IEnumerable<Gizmo> GetGizmos()
-        {
-            foreach (var gizmo in base.GetGizmos())
-            {
-                yield return gizmo;
-            }
-
-            if (DebugSettings.godMode)
-            {
-                yield return EndingVfxUtility.DevAction("DEV: Finish rebirth now", Complete);
-            }
         }
     }
 }

@@ -44,6 +44,7 @@ namespace VVRace
         private bool _pendingShieldBreak;
         private int _shieldRestoreTick = -1;
         private List<SkillDef> _fairyFlowerSkills = new List<SkillDef>();
+        private int _fairyFlowerSummons;
 
         private int _nextStealTargetSkipCheckTick;
 
@@ -247,6 +248,7 @@ namespace VVRace
             Scribe_Values.Look(ref _pendingShieldBreak, "pendingShieldBreak", false);
             Scribe_Values.Look(ref _shieldRestoreTick, "shieldRestoreTick", -1);
             Scribe_Collections.Look(ref _fairyFlowerSkills, "fairyFlowerSkills", LookMode.Def);
+            Scribe_Values.Look(ref _fairyFlowerSummons, "fairyFlowerSummons", 0);
 
             Scribe_Deep.Look(ref _targeting, "targeting", this);
             Scribe_Deep.Look(ref _needleAttack, "needleAttack", this);
@@ -542,7 +544,10 @@ namespace VVRace
         private void SpawnFairyFlowers()
         {
             var map = parent.Map;
-            foreach (var cell in ApocryphaGimmicks.FindBloomCells(Pawn, Props.fairyFlowerCount.RandomInRange, Props.fairyFlowerDistance))
+            var count = Props.fairyFlowerCount.RandomInRange + Mathf.Min(_fairyFlowerSummons, Props.fairyFlowerCountGrowthMax);
+            _fairyFlowerSummons++;
+
+            foreach (var cell in ApocryphaGimmicks.FindBloomCells(Pawn, count, Props.fairyFlowerDistance))
             {
                 ApocryphaGimmicks.SpawnFlower(ThingMaker.MakeThing(VVThingDefOf.VV_FairyFlower), cell, map, Pawn);
             }
@@ -783,6 +788,7 @@ namespace VVRace
             _embrace.Cancel();
             _embrace.SetReadyTick(now + Props.embraceFirstDelayTicks);
             _bond.Reset();
+            _fairyFlowerSummons = 0;
             RefillFairyFlowerSkills();
             if (_channel.TryGetStealTarget(out var stealTarget, out _, out _))
             {
@@ -790,6 +796,7 @@ namespace VVRace
             }
 
             Pawn.stances.stunner.StopStun();
+            Pawn.ChangeKind(VVPawnKindDefOf.VV_ApocryphaAsphodel);
             SyncLifeStage();
             SyncPhaseHediffs();
             InterruptCurrentJob();

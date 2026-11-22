@@ -48,6 +48,7 @@
         public const string VV_Letter_EndingSiegeLabel = nameof(VV_Letter_EndingSiegeLabel);
         public const string VV_Letter_EndingSiege = nameof(VV_Letter_EndingSiege);
         public const string VV_Letter_EndingSiegeFederation = nameof(VV_Letter_EndingSiegeFederation);
+        public const string VV_Letter_EndingSiegeFederationSupport = nameof(VV_Letter_EndingSiegeFederationSupport);
 
         public const string VV_Letter_EndingFederationAidLabel = nameof(VV_Letter_EndingFederationAidLabel);
         public const string VV_Letter_EndingFederationAid = nameof(VV_Letter_EndingFederationAid);

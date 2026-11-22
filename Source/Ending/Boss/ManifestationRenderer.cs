@@ -12,10 +12,13 @@ namespace VVRace
 
         private static readonly int ProgressId = Shader.PropertyToID("_Progress");
         private static readonly int RevealId = Shader.PropertyToID("_Reveal");
+        private static readonly int EdgeColorId = Shader.PropertyToID("_EdgeColor");
+        private static readonly int DarkColorId = Shader.PropertyToID("_DarkColor");
+        private static readonly int SoftId = Shader.PropertyToID("_Soft");
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
         private static readonly Dictionary<string, Material> MaterialCache = new Dictionary<string, Material>();
 
-        public static void Draw(string texPath, Rot4 rotation, Vector3 pos, float scale, float ageSecs, float progress, float reveal)
+        public static void Draw(string texPath, Rot4 rotation, Vector3 pos, float scale, float ageSecs, float progress, float reveal, Color? edgeColor = null, Color? bodyColor = null, float soft = 0f)
         {
             var material = DissolveRenderer.GetNoiseMaterial(texPath + DissolveRenderer.RotationSuffix(rotation), ShaderPath, MaterialCache);
             if (material == null) { return; }
@@ -24,6 +27,15 @@ namespace VVRace
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, ageSecs);
             PropertyBlock.SetFloat(ProgressId, progress);
             PropertyBlock.SetFloat(RevealId, reveal);
+            PropertyBlock.SetFloat(SoftId, soft);
+            if (edgeColor.HasValue)
+            {
+                PropertyBlock.SetColor(EdgeColorId, edgeColor.Value);
+            }
+            if (bodyColor.HasValue)
+            {
+                PropertyBlock.SetColor(DarkColorId, bodyColor.Value);
+            }
 
             var mesh = rotation == Rot4.West ? MeshPool.plane10Flip : MeshPool.plane10;
             var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(scale, 1f, scale));

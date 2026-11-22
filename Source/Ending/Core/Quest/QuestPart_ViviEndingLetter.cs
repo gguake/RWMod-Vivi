@@ -12,12 +12,19 @@ namespace VVRace
         public LetterDef letterDef;
         public ArcanePlant_Everflower anchor;
 
+        protected virtual string ExtraText => null;
+
         public override void Notify_QuestSignalReceived(Signal signal)
         {
             base.Notify_QuestSignalReceived(signal);
             if (signal.tag != inSignal) { return; }
 
             var text = ViviEndingUtility.TranslateWithResonator(textKey, ViviEndingUtility.ResonatorOf(anchor)).Resolve();
+            var extra = ExtraText;
+            if (!extra.NullOrEmpty())
+            {
+                text += "\n\n" + extra;
+            }
 
             Find.LetterStack.ReceiveLetter(
                 labelKey.Translate(),

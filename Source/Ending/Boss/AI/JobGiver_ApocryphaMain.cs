@@ -56,6 +56,11 @@ namespace VVRace
                 return WaitJob(Mathf.Max(15, comp.Embrace.TicksLeft + 1));
             }
 
+            if (comp.BlastBreach.ClearingPathBlock)
+            {
+                return WaitJob(Mathf.Max(15, comp.BlastBreach.PathBlockTicksLeft + 1));
+            }
+
             comp.Channel.TryGetStealTarget(out var target, out var range, out var everflower);
             if (target != null && comp.Channel.InStealRange())
             {
