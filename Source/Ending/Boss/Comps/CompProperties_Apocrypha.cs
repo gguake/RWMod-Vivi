@@ -22,7 +22,7 @@ namespace VVRace
         public int maxDoomFlowers = 30;
 
         public float manaShieldMax = 1500f;
-        public int shieldBreakStunTicks = 180;
+        public int shieldBreakStunTicks = 540;
         public int shieldRestoreTicks = 5000;
         public int fairyFlowerCount = 3;
         public FloatRange fairyFlowerDistance = new FloatRange(6f, 12f);
@@ -30,10 +30,10 @@ namespace VVRace
         public int swarmFairyCount = 8;
         public float swarmAttackRadius = 7f;
         public int swarmStaggerTicks = 95;
-        public IntRange swarmAttackCooldownTicks = new IntRange(600, 900);
+        public IntRange swarmAttackCooldownTicks = new IntRange(500, 500);
 
         public float asphodelBodyRadius = 1.2f;
-        public float fairyBondInitial = 300000f;
+        public float fairyBondInitial = 100000f;
         public float fairyBondDecayStart = 0.25f;
         public float fairyBondClear = 0.05f;
         public FloatRange fairyBondDecayPerHour = new FloatRange(0.015f, 0.06f);
@@ -47,11 +47,12 @@ namespace VVRace
         public float needleFanRadius = 5f;
         public float needleFanHalfAngle2 = 50f;
         public float needleFanHalfAngle3 = 65f;
-        public int needleAimTicks = 150;
-        public float needleTargetRange = 24f;
-        public float needleRange = 32f;
+        public int needleAimTicks = 225;
+        public float needleTargetRange = 14f;
+        public float needleRange = 19f;
         public float needleHalfWidth = 1.5f;
-        public float needleDamage = 80f;
+        public float needleDamage = 45f;
+        public float needleDamageFactorVivi = 1f / 3f;
         public float needleArmorPenetration = 0.8f;
 
         public IntRange approachIntervalTicks = new IntRange(9000, 13500);
@@ -90,8 +91,8 @@ namespace VVRace
         public int queenNeedleCount = 3;
         public FloatRange needlePlantRadius = new FloatRange(5f, 10f);
         public int needleActivateTicks = 60;
-        public int needleLockOnTicks = 150;
-        public int needleLockedTicks = 75;
+        public int needleLockOnTicks = 225;
+        public int needleLockedTicks = 112;
         public float needleStickVitalityDamage = 0.1f;
         public int needleStickStunTicks = 420;
         public int needleShakeOffTicks = 7500;
@@ -118,6 +119,15 @@ namespace VVRace
             new CurvePoint(1f, 1f),
             new CurvePoint(1.55f, 1.3f),
             new CurvePoint(2.2f, 1.6f),
+        };
+        public SimpleCurve fairyBondFactorByThreatScale = new SimpleCurve
+        {
+            new CurvePoint(0.1f, 0.1f),
+            new CurvePoint(0.3f, 0.3f),
+            new CurvePoint(0.6f, 0.5f),
+            new CurvePoint(1f, 1f),
+            new CurvePoint(1.55f, 1.5f),
+            new CurvePoint(2.2f, 2f),
         };
         public SimpleCurve doomBloomTimeFactorByThreatScale = new SimpleCurve
         {

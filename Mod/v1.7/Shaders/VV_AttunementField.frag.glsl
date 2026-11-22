@@ -85,14 +85,14 @@ void main()
     float edgeGlow = exp(-abs(d) / 0.22);
     float rim = smoothstep(0.0, 0.45, -d) * (1.0 - smoothstep(0.45, 1.4, -d));
 
-    float fill = inside * (0.16 + 0.14 * waves * (0.5 + 0.5 * depth) + 0.08 * rim);
-    float alpha = fill + inside * sparkles * 0.6 + edgeGlow * 0.3 + edgeCore * 0.5;
+    float fill = inside * (0.34 + 0.2 * waves * (0.5 + 0.5 * depth) + 0.16 * rim);
+    float alpha = fill + inside * sparkles * 0.8 + edgeGlow * 0.45 + edgeCore * 0.6;
     alpha *= u._Color.a;
 
-    vec3 gold = mix(u._Color.rgb, vec3(1.0, 0.96, 0.82), 0.3 + 0.25 * waves * inside);
+    vec3 gold = mix(u._Color.rgb, vec3(1.0, 0.95, 0.75), 0.15 + 0.3 * waves * inside);
     vec3 bright = vec3(1.0, 0.98, 0.9);
     float whiteMix = clamp(edgeCore * 0.85 + sparkles * 0.9, 0.0, 1.0);
     vec3 col = mix(gold, bright, whiteMix);
 
-    outColor = vec4(col, clamp(alpha, 0.0, 0.9));
+    outColor = vec4(col * (1.0 + 0.25 * inside), clamp(alpha, 0.0, 0.92));
 }

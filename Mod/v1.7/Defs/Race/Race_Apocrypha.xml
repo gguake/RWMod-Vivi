@@ -7,7 +7,7 @@
     <description>Asphodel, the last empress of the old vivi empire.\n\nSleepless for long ages in search of the flower's shade in her memory, she has been drawn to the altar's waves in the twisted form of a giant hornet queen. When that monstrous shell falls, countless little lights gather from the everflower to wrap around the empress once more.</description>
     <drawOffscreen>true</drawOffscreen>
     <statBases>
-      <MoveSpeed>1.0</MoveSpeed>
+      <MoveSpeed>0.5</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
       <ArmorRating_Sharp>0</ArmorRating_Sharp>
       <ArmorRating_Blunt>0</ArmorRating_Blunt>

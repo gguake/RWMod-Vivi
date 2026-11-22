@@ -101,9 +101,10 @@ namespace VVRace
         public int ShieldRestoreTick => _shieldRestoreTick;
 
         public float ManaShield => _manaShield;
-        public float MaxManaShield => Props.manaShieldMax * HitPointsDifficultyFactor;
+        public float MaxManaShield => Props.manaShieldMax * FairyBondDifficultyFactor;
 
         public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(_threatScale) ?? 1f);
+        public float FairyBondDifficultyFactor => Mathf.Max(0.1f, Props.fairyBondFactorByThreatScale?.Evaluate(_threatScale) ?? 1f);
         public float DoomBloomTimeFactor => Mathf.Max(0.1f, Props.doomBloomTimeFactorByThreatScale?.Evaluate(_threatScale) ?? 1f);
 
         public int ArrivalHornetCount => ScaledHornetCount(Props.arrivalHornetCount);
@@ -883,7 +884,6 @@ namespace VVRace
         public override string CompInspectStringExtra()
         {
             var sb = new StringBuilder();
-            sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaPhase.Translate(PhaseLabel(_phase)));
 
             if (_phase == ApocryphaPhase.Asphodel)
             {
@@ -918,28 +918,7 @@ namespace VVRace
             return sb.ToString();
         }
 
-        public string BondLabel => LocalizeString_Inspector.VV_Inspector_ApocryphaFairyBond.Translate(
-            Mathf.CeilToInt(_bond.Value).ToString("N0"),
-            Mathf.CeilToInt(_bond.Max).ToString("N0"),
-            _bond.Fraction.ToStringPercent());
-
-        public static string PhaseLabel(ApocryphaPhase phase)
-        {
-            switch (phase)
-            {
-                case ApocryphaPhase.Rebirth:
-                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Rebirth.Translate();
-
-                case ApocryphaPhase.Asphodel:
-                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Asphodel.Translate();
-
-                case ApocryphaPhase.Dying:
-                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Dying.Translate();
-
-                default:
-                    return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Queen.Translate();
-            }
-        }
+        public string BondLabel => LocalizeString_Inspector.VV_Inspector_ApocryphaFairyBond.Translate(_bond.Fraction.ToStringPercent("0.0"));
         #endregion
 
         #region 내부 도우미

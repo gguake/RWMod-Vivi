@@ -9,6 +9,8 @@ namespace VVRace
 {
     public static class ApocryphaUtility
     {
+        private const float FarEntryDistanceFraction = 0.9f;
+
         public static bool IsApocrypha(Pawn pawn)
         {
             return pawn != null && pawn.def == VVThingDefOf.VV_Apocrypha;
@@ -20,18 +22,17 @@ namespace VVRace
             if (!CanEnterFromEdge(map)) { return false; }
 
             var reachParms = TraverseParms.For(TraverseMode.PassAllDestroyableThings);
-            bool CanReachTarget(IntVec3 c) => !target.IsValid || !target.InBounds(map) || map.reachability.CanReach(c, target, PathEndMode.Touch, reachParms);
+            var hasTarget = target.IsValid && target.InBounds(map);
+            var candidates = CellRect.WholeMap(map).EdgeCells
+                .Where(c => c.Standable(map) && !c.Roofed(map) && !c.Fogged(map)
+                    && (!hasTarget || map.reachability.CanReach(c, target, PathEndMode.Touch, reachParms)))
+                .ToList();
+            if (candidates.Count == 0) { return false; }
+            if (!hasTarget) { return candidates.TryRandomElement(out cell); }
 
-            if (RCellFinder.TryFindRandomPawnEntryCell(out cell, map, CellFinder.EdgeRoadChance_Hostile, allowFogged: false, extraValidator: CanReachTarget))
-            {
-                return true;
-            }
-
-            return CellFinder.TryFindRandomEdgeCellWith(
-                c => c.Standable(map) && !c.Roofed(map) && !c.Fogged(map) && CanReachTarget(c),
-                map,
-                CellFinder.EdgeRoadChance_Ignore,
-                out cell);
+            var farthest = candidates.Max(c => c.DistanceToSquared(target));
+            var minDistance = farthest * FarEntryDistanceFraction * FarEntryDistanceFraction;
+            return candidates.Where(c => c.DistanceToSquared(target) >= minDistance).TryRandomElement(out cell);
         }
 
         public static bool TryFindBreachEntryCell(Map map, Thing target, out IntVec3 cell)

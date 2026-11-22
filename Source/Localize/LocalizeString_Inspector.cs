@@ -29,11 +29,6 @@
         public const string VV_Inspector_EverflowerEnshrined = nameof(VV_Inspector_EverflowerEnshrined);
         public const string VV_Inspector_EverflowerAttunementLevelOnly = nameof(VV_Inspector_EverflowerAttunementLevelOnly);
 
-        public const string VV_Inspector_ApocryphaPhase = nameof(VV_Inspector_ApocryphaPhase);
-        public const string VV_Inspector_ApocryphaPhase_Queen = nameof(VV_Inspector_ApocryphaPhase_Queen);
-        public const string VV_Inspector_ApocryphaPhase_Rebirth = nameof(VV_Inspector_ApocryphaPhase_Rebirth);
-        public const string VV_Inspector_ApocryphaPhase_Asphodel = nameof(VV_Inspector_ApocryphaPhase_Asphodel);
-        public const string VV_Inspector_ApocryphaPhase_Dying = nameof(VV_Inspector_ApocryphaPhase_Dying);
         public const string VV_Inspector_ApocryphaVitality = nameof(VV_Inspector_ApocryphaVitality);
         public const string VV_Inspector_ApocryphaShield = nameof(VV_Inspector_ApocryphaShield);
         public const string VV_Inspector_ApocryphaShieldBroken = nameof(VV_Inspector_ApocryphaShieldBroken);

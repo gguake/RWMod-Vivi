@@ -11,7 +11,7 @@ namespace VVRace
 {
     public class Building_FairyFlower : Building_ApocryphaFlower
     {
-        public const int LifespanTicks = 5000;
+        public const int LifespanTicks = 1250;
 
         private const int FairyCount = 4;
         private const int BurstTicks = 50;

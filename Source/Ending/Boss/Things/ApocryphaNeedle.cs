@@ -275,7 +275,7 @@ namespace VVRace
             var now = GenTicks.TicksGame;
             _laneDir = direction;
             _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, start);
-            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, direction, BossComp?.Props.needleRange ?? 32f);
+            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, direction, BossComp?.Props.needleRange ?? 19f);
 
             _moveFrom = _pos;
             _moveFromAngle = _angle;
@@ -694,7 +694,7 @@ namespace VVRace
 
             _moveFrom = _pos;
             _moveFromAngle = _angle;
-            _aimTicks = Mathf.Max(1, BossComp?.Props.needleLockedTicks ?? 75);
+            _aimTicks = Mathf.Max(1, BossComp?.Props.needleLockedTicks ?? 112);
             _fireTick = now + _aimTicks;
             _state = NeedleState.Aiming;
             _stateStartTick = now;
@@ -719,7 +719,7 @@ namespace VVRace
                 _laneDir = Vector3.forward;
             }
 
-            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, _laneDir, BossComp?.Props.needleRange ?? 32f);
+            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, _laneDir, BossComp?.Props.needleRange ?? 19f);
         }
 
         private void Stick(int now)
@@ -872,7 +872,8 @@ namespace VVRace
 
         private void Pierce(Thing thing, CompApocrypha comp)
         {
-            ApocryphaNeedleLane.Pierce(thing, comp.Props.needleDamage, comp.Props.needleArmorPenetration, LaneAngle, _boss);
+            var damage = thing is Pawn pawn && pawn.IsVivi() ? comp.Props.needleDamage * comp.Props.needleDamageFactorVivi : comp.Props.needleDamage;
+            ApocryphaNeedleLane.Pierce(thing, damage, comp.Props.needleArmorPenetration, LaneAngle, _boss);
         }
         #endregion
 
@@ -924,7 +925,7 @@ namespace VVRace
                     ? 0.5f * Mathf.Clamp01((now - _activateTick) / (float)lockTicks)
                     : 0.5f + 0.5f * AimProgress;
                 aimSecs = (now - _activateTick) / 60f;
-                aimDuration = (lockTicks + (BossComp?.Props.needleLockedTicks ?? 75)) / 60f;
+                aimDuration = (lockTicks + (BossComp?.Props.needleLockedTicks ?? 112)) / 60f;
             }
             else
             {

@@ -57,7 +57,7 @@ namespace VVRace
 
             if (_drainPerHour > 0f)
             {
-                _comp.DrainBond(_comp.Bond.Max * _drainPerHour * RefreshInterval / GenDate.TicksPerHour);
+                _comp.DrainBond(_comp.Props.fairyBondInitial * _drainPerHour * RefreshInterval / GenDate.TicksPerHour);
             }
         }
 

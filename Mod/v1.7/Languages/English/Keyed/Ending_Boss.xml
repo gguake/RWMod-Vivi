@@ -2,11 +2,6 @@
 <LanguageData>
 
 <!-- 정보창 -->
-<VV_Inspector_ApocryphaPhase>State: {0}</VV_Inspector_ApocryphaPhase>
-<VV_Inspector_ApocryphaPhase_Queen>Rampage</VV_Inspector_ApocryphaPhase_Queen>
-<VV_Inspector_ApocryphaPhase_Rebirth>Rebirth</VV_Inspector_ApocryphaPhase_Rebirth>
-<VV_Inspector_ApocryphaPhase_Asphodel>Embrace</VV_Inspector_ApocryphaPhase_Asphodel>
-<VV_Inspector_ApocryphaPhase_Dying>Fading</VV_Inspector_ApocryphaPhase_Dying>
 <VV_Inspector_ApocryphaVitality>Vitality: {0} / {1}</VV_Inspector_ApocryphaVitality>
 <VV_Inspector_ApocryphaShield>Fairy barrier: {0} / {1}</VV_Inspector_ApocryphaShield>
 <VV_Inspector_ApocryphaShieldBroken>Fairy barrier: scattered (restores in {0})</VV_Inspector_ApocryphaShieldBroken>
@@ -41,7 +36,7 @@
 
 
 <!-- Step 2: Asphodel -->
-<VV_Inspector_ApocryphaFairyBond>Fairy bond: {0} / {1} ({2})</VV_Inspector_ApocryphaFairyBond>
+<VV_Inspector_ApocryphaFairyBond>Fairy bond: {0}</VV_Inspector_ApocryphaFairyBond>
 <VV_Speech_AsphodelRebirth1>...No... not alone... I'll crumble, just like that day...</VV_Speech_AsphodelRebirth1>
 <VV_Speech_AsphodelRebirth2>...Before they're hurt... all of them... into my embrace...</VV_Speech_AsphodelRebirth2>
 <VV_Speech_AsphodelDeath>...The weight... into flowers... within this shade... my children, now...</VV_Speech_AsphodelDeath>

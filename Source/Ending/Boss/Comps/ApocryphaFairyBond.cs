@@ -29,7 +29,7 @@ namespace VVRace
 
         private CompProperties_Apocrypha Props => _comp.Props;
 
-        public float Max => Props.fairyBondInitial;
+        public float Max => Props.fairyBondInitial * _comp.FairyBondDifficultyFactor;
         public float Value => Mathf.Max(0f, _bond);
         public float Fraction => Max > 0f ? Mathf.Clamp01(Value / Max) : 0f;
         public bool Draining => GenTicks.TicksGame - _lastDrainTick <= DrainStreamTicks;
@@ -42,7 +42,7 @@ namespace VVRace
                 if (fraction >= Props.fairyBondDecayStart) { return 0f; }
 
                 var t = Mathf.Clamp01((Props.fairyBondDecayStart - fraction) / Props.fairyBondDecayRampWidth);
-                return Max * Props.fairyBondDecayPerHour.LerpThroughRange(t);
+                return Props.fairyBondInitial * Props.fairyBondDecayPerHour.LerpThroughRange(t);
             }
         }
 
@@ -90,7 +90,7 @@ namespace VVRace
         {
             if (fraction <= 0f || _bond >= Max) { return; }
 
-            _bond = Mathf.Min(Max, _bond + Max * fraction);
+            _bond = Mathf.Min(Max, _bond + Props.fairyBondInitial * fraction);
             _recoverFlowUntilTick = GenTicks.TicksGame + RecoverFlowTicks;
         }
 

@@ -276,11 +276,6 @@ namespace VVRace
             Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
         }
 
-        public override string GetInspectString()
-        {
-            return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase.Translate(CompApocrypha.PhaseLabel(ApocryphaPhase.Rebirth));
-        }
-
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var gizmo in base.GetGizmos())

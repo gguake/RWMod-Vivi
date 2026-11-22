@@ -2,11 +2,6 @@
 <LanguageData>
 
 <!-- 정보창 -->
-<VV_Inspector_ApocryphaPhase>상태: {0}</VV_Inspector_ApocryphaPhase>
-<VV_Inspector_ApocryphaPhase_Queen>폭주</VV_Inspector_ApocryphaPhase_Queen>
-<VV_Inspector_ApocryphaPhase_Rebirth>재탄생</VV_Inspector_ApocryphaPhase_Rebirth>
-<VV_Inspector_ApocryphaPhase_Asphodel>품</VV_Inspector_ApocryphaPhase_Asphodel>
-<VV_Inspector_ApocryphaPhase_Dying>소멸</VV_Inspector_ApocryphaPhase_Dying>
 
 <VV_Inspector_ApocryphaVitality>생명력: {0} / {1}</VV_Inspector_ApocryphaVitality>
 <VV_Inspector_ApocryphaShield>요정 차단막: {0} / {1}</VV_Inspector_ApocryphaShield>
@@ -42,7 +37,7 @@
 
 
 <!-- 2단계: 아스포델 -->
-<VV_Inspector_ApocryphaFairyBond>요정 결속: {0} / {1} ({2})</VV_Inspector_ApocryphaFairyBond>
+<VV_Inspector_ApocryphaFairyBond>요정 결속: {0}</VV_Inspector_ApocryphaFairyBond>
 <VV_Speech_AsphodelRebirth1>……안 돼…… 혼자서는…… 그날처럼 무너져……</VV_Speech_AsphodelRebirth1>
 <VV_Speech_AsphodelRebirth2>……다치기 전에…… 전부…… 내 품으로……</VV_Speech_AsphodelRebirth2>
 <VV_Speech_AsphodelDeath>……무게가…… 꽃으로…… 이 그늘 안이라면…… 내 아이들은, 이제……</VV_Speech_AsphodelDeath>
