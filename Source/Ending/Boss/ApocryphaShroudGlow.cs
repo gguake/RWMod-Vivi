@@ -7,23 +7,25 @@ namespace VVRace
     [StaticConstructorOnStartup]
     internal static class ApocryphaShroudGlow
     {
+        private const string ShaderPath = "Map/VV_BodyGlow";
+
+        private static readonly int CoreId = Shader.PropertyToID("_Core");
+        private static readonly int BloomId = Shader.PropertyToID("_Bloom");
+        private static readonly int SpreadId = Shader.PropertyToID("_Spread");
+        private static readonly int ExpandId = Shader.PropertyToID("_Expand");
+
         private static readonly Dictionary<Texture, Material> GlowMaterials = new Dictionary<Texture, Material>();
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
-        private static readonly Color GlowColor = new Color(1f, 0.86f, 0.55f);
-        private static readonly Color HaloColor = new Color(1f, 0.87f, 0.58f);
-        private static readonly Material HaloMat = new Material(MaterialPool.MatFrom("VFX/VV_ScentAura", ShaderDatabase.MoteGlow, Color.white));
+        private static readonly Color GlowColor = new Color(1f, 0.88f, 0.62f);
 
-        private const float AlphaBase = 0.3f;
-        private const float AlphaPulse = 0.12f;
-        private const float PulseSpeed = 1.6f;
-        private const float DaylightAlphaFactor = 0.15f;
-
-        private const float HaloSize = 6f;
-        private const float HaloSizePulse = 0.15f;
-        private const float HaloAlpha = 0.65f;
-        private const float HaloAlphaPulse = 0.06f;
-        private const float HaloDaylightFactor = 1.5f;
-        private const float HaloBehindAltitude = 0.035f;
+        private const float CoreDay = 0.16f;
+        private const float CoreNight = 0.6f;
+        private const float BloomDay = 0.5f;
+        private const float BloomNight = 0.85f;
+        private const float PulseAmount = 0.12f;
+        private const float PulseSpeed = 1.3f;
+        private const float Spread = 0.05f;
+        private const float Expand = 1.12f;
 
         public static void Draw(Pawn pawn)
         {
@@ -31,49 +33,29 @@ namespace VVRace
             if (graphic == null) { return; }
 
             var rot = pawn.Rotation;
-            var bodyMat = graphic.MatAt(rot);
-            DrawHalo(pawn, bodyMat);
-
-            var texture = bodyMat?.mainTexture;
+            var texture = graphic.MatAt(rot)?.mainTexture;
             if (texture == null) { return; }
 
             if (!GlowMaterials.TryGetValue(texture, out var material))
             {
-                material = MaterialPool.MatFrom(new MaterialRequest(texture, ShaderDatabase.MoteGlow, Color.white));
+                material = MaterialPool.MatFrom(new MaterialRequest(texture, ShaderDatabase.LoadShader(ShaderPath), Color.white));
                 GlowMaterials[texture] = material;
             }
 
-            var color = GlowColor;
-            var light = pawn.Map.glowGrid.GroundGlowAt(pawn.Position);
-            color.a = (AlphaBase + AlphaPulse * Mathf.Sin(Find.TickManager.TicksGame / 60f * PulseSpeed)) * Mathf.Lerp(1f, DaylightAlphaFactor, light);
+            var dark = 1f - Mathf.Clamp01(pawn.Map.glowGrid.GroundGlowAt(pawn.Position));
+            var pulse = 1f + PulseAmount * Mathf.Sin(Find.TickManager.TicksGame / 60f * PulseSpeed);
 
             PropertyBlock.Clear();
-            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
+            PropertyBlock.SetColor(ShaderPropertyIDs.Color, GlowColor);
+            PropertyBlock.SetFloat(CoreId, Mathf.Lerp(CoreDay, CoreNight, dark) * pulse);
+            PropertyBlock.SetFloat(BloomId, Mathf.Lerp(BloomDay, BloomNight, dark) * pulse);
+            PropertyBlock.SetFloat(SpreadId, Spread);
+            PropertyBlock.SetFloat(ExpandId, Expand);
 
             var position = pawn.DrawPos;
             position.y += 0.02f;
-            Graphics.DrawMesh(graphic.MeshAt(rot), position, Quaternion.identity, material, 0, null, 0, PropertyBlock);
-        }
-
-        private static void DrawHalo(Pawn pawn, Material bodyMat)
-        {
-            if (bodyMat != null && HaloMat.renderQueue != bodyMat.renderQueue - 1)
-            {
-                HaloMat.renderQueue = bodyMat.renderQueue - 1;
-            }
-
-            var wave = Mathf.Sin(Find.TickManager.TicksGame / 60f * PulseSpeed * 0.5f);
-            var light = pawn.Map.glowGrid.GroundGlowAt(pawn.Position);
-            var color = HaloColor;
-            color.a = (HaloAlpha + HaloAlphaPulse * wave) * Mathf.Lerp(1f, HaloDaylightFactor, light);
-
-            var size = HaloSize * (1f + HaloSizePulse * 0.5f * wave);
-            var position = ApocryphaGimmicks.GetBossBodyPos(pawn);
-            position.y = pawn.DrawPos.y - HaloBehindAltitude;
-
-            PropertyBlock.Clear();
-            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
-            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(position, Quaternion.identity, new Vector3(size, 1f, size)), HaloMat, 0, null, 0, PropertyBlock);
+            var matrix = Matrix4x4.TRS(position, Quaternion.identity, new Vector3(Expand, 1f, Expand));
+            Graphics.DrawMesh(graphic.MeshAt(rot), matrix, material, 0, null, 0, PropertyBlock);
         }
     }
 }

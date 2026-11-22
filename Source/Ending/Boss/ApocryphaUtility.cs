@@ -440,6 +440,42 @@ namespace VVRace
             return injuries.Count > 0;
         }
 
+        public static bool HealAllInjuriesAndRestoreParts(Pawn pawn)
+        {
+            if (pawn?.health == null || pawn.Dead) { return false; }
+
+            var health = pawn.health;
+            var hediffSet = health.hediffSet;
+            var restored = 0;
+            while (true)
+            {
+                var missing = hediffSet.GetMissingPartsCommonAncestors().FirstOrDefault(v => !hediffSet.PartOrAnyAncestorHasDirectlyAddedParts(v.Part));
+                if (missing == null) { break; }
+
+                health.RestorePart(missing.Part, null, checkStateChange: false);
+                restored++;
+            }
+
+            var injuries = new List<Hediff_Injury>();
+            hediffSet.GetHediffs(ref injuries);
+            for (int i = 0; i < injuries.Count; i++)
+            {
+                health.RemoveHediff(injuries[i]);
+            }
+
+            if (restored + injuries.Count == 0) { return false; }
+
+            health.CheckForStateChange(null, null);
+            pawn.Drawer?.renderer?.SetAllGraphicsDirty();
+            PortraitsCache.SetDirty(pawn);
+            if (pawn.Spawned)
+            {
+                FleckMaker.ThrowMetaIcon(pawn.Position, pawn.Map, FleckDefOf.HealingCross);
+            }
+
+            return true;
+        }
+
         public static void BindToAsphodel(List<Pawn> vivis, Map map, IntVec3 soundCell)
         {
             if (vivis.Count == 0) { return; }

@@ -183,7 +183,7 @@ namespace VVRace
                 Find.Selector.Deselect(corpse);
                 if (!ResurrectionUtility.TryResurrect(pawn)) { continue; }
 
-                ApocryphaUtility.HealNonPermanentInjuries(pawn);
+                ApocryphaUtility.HealAllInjuriesAndRestoreParts(pawn);
                 revived.Add(pawn);
             }
 

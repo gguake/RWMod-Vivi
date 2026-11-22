@@ -24,6 +24,31 @@
     <shaderPath>Map/VV_ApocryphaAlpha</shaderPath>
   </ShaderTypeDef>
 
+  <!-- 아스포델 몸 발광 셰이더 -->
+  <ShaderDef>
+    <defName>VV_BodyGlow</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_BodyGlow.frag.glsl</fragmentShaderFileName>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3151</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Clamp</value>
+        </li>
+      </textureWrapOverrides>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 아스포델 몸 발광 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_BodyGlow</defName>
+    <shaderPath>Map/VV_BodyGlow</shaderPath>
+  </ShaderTypeDef>
+
   <!-- 아스포델 소멸 셰이더 -->
   <ShaderDef>
     <defName>VV_Dissolve</defName>

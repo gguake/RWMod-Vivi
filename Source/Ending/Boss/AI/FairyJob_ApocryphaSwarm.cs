@@ -32,13 +32,22 @@ namespace VVRace
 
         protected override void TickActiveBeforeToil(int delta)
         {
-            if (fairy == null || !(CurrentToil is FairyToil_ApocryphaSwarmDrift)) { return; }
+            if (fairy == null) { return; }
+
+            var comp = BossComp;
+            if (comp != null && comp.Embrace.IsCasting)
+            {
+                if (CurrentToil is FairyToil_Attack)
+                {
+                    ResetToils(MakeReturnToRestToils());
+                }
+                return;
+            }
+
+            if (comp == null || !(CurrentToil is FairyToil_ApocryphaSwarmDrift)) { return; }
 
             var now = GenTicks.TicksGame;
             if (now < _nextAttackTick || !fairy.IsHashIntervalTick(FairyJobUtility.TargetScanIntervalTicks, delta)) { return; }
-
-            var comp = BossComp;
-            if (comp == null || comp.Embrace.IsCasting) { return; }
 
             var props = comp.Props;
 

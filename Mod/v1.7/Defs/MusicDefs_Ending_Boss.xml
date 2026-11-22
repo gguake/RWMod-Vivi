@@ -70,11 +70,21 @@
     <priority>1100</priority>
   </MusicTransitionDef>
 
+  <MusicSequenceDef>
+    <defName>VV_ApocryphaRebirth</defName>
+    <song>VV_Silence</song>
+    <loop>true</loop>
+    <canBeInterrupted>false</canBeInterrupted>
+    <useTransitionForLifetime>true</useTransitionForLifetime>
+    <fadeoutLastSongDuration>0.3</fadeoutLastSongDuration>
+    <overrideFadeout>1</overrideFadeout>
+  </MusicSequenceDef>
+
   <!-- 재탄생 정적 -->
   <MusicTransitionDef>
     <defName>VV_ApocryphaRebirth</defName>
     <workerType>VVRace.MusicTransition_ApocryphaRebirth</workerType>
-    <sequence>VV_OminousSilence</sequence>
+    <sequence>VV_ApocryphaRebirth</sequence>
     <overridesInterruptions>true</overridesInterruptions>
     <priority>1101</priority>
   </MusicTransitionDef>
