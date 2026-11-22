@@ -36,8 +36,8 @@
           <shaderType>VV_ApocryphaAlpha</shaderType>
           <drawSize>3</drawSize>
           <shadowData>
-            <volume>(0.65, 0.46, 0.32)</volume>
-            <offset>(0, 0, -0.42)</offset>
+            <volume>(0.9, 0.2, 0.3)</volume>
+            <offset>(0, 0, -1.6)</offset>
           </shadowData>
         </bodyGraphicData>
       </li>
