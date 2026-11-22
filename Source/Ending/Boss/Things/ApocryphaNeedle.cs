@@ -44,6 +44,7 @@ namespace VVRace
         private const float LaunchOffset = 3.2f;
         private const float CloseTargetMargin = 2f;
         private const float CloseTargetFanAngle = 75f;
+        private const float ReachMargin = 2f;
         private const int DetachTicks = 24;
         private const float WindupDistance = 0.8f;
         private const int ShakeTicks = 24;
@@ -242,7 +243,7 @@ namespace VVRace
         }
 
         #region 보스가 부르는 API
-        public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null)
+        public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null, bool reachTarget = false)
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
@@ -259,7 +260,13 @@ namespace VVRace
                 direction = EndingVfxUtility.SafeNormalizeHorizontal(target - start, direction);
             }
 
-            BeginAim(start, direction, aimTicks);
+            var range = BossComp?.Props.needleRange ?? 19f;
+            if (reachTarget)
+            {
+                range = Mathf.Max(range, (target - start).MagnitudeHorizontal() + ReachMargin);
+            }
+
+            BeginAim(start, direction, aimTicks, range);
         }
 
         public void StartAimDirection(Vector3 direction, int aimTicks)
@@ -267,15 +274,15 @@ namespace VVRace
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
             direction = EndingVfxUtility.SafeNormalizeHorizontal(direction, Vector3.forward);
-            BeginAim(BodyCenter + direction * LaunchOffset, direction, aimTicks);
+            BeginAim(BodyCenter + direction * LaunchOffset, direction, aimTicks, BossComp?.Props.needleRange ?? 19f);
         }
 
-        private void BeginAim(Vector3 start, Vector3 direction, int aimTicks)
+        private void BeginAim(Vector3 start, Vector3 direction, int aimTicks, float range)
         {
             var now = GenTicks.TicksGame;
             _laneDir = direction;
             _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, start);
-            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, direction, BossComp?.Props.needleRange ?? 19f);
+            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, direction, range);
 
             _moveFrom = _pos;
             _moveFromAngle = _angle;
@@ -884,8 +891,7 @@ namespace VVRace
 
         private void Pierce(Thing thing, CompApocrypha comp)
         {
-            var damage = thing is Pawn pawn && pawn.IsVivi() ? comp.Props.needleDamage * comp.Props.needleDamageFactorVivi : comp.Props.needleDamage;
-            ApocryphaNeedleLane.Pierce(thing, damage, comp.Props.needleArmorPenetration, LaneAngle, _boss);
+            ApocryphaNeedleLane.Pierce(thing, comp.Props.needleDamage, comp.Props.needleArmorPenetration, LaneAngle, _boss);
         }
         #endregion
 

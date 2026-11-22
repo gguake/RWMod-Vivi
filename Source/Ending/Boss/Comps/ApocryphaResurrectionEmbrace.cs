@@ -9,8 +9,6 @@ namespace VVRace
     public class ApocryphaResurrectionEmbrace : IExposable
     {
         private const int FlashTicks = 60;
-        private const float QuoteHeight = 2.4f;
-        private const float QuoteSecs = 5f;
         private const float ReturnLightSpeed = 6f;
 
         private static readonly Color ReturnLightColor = new Color(1f, 0.95f, 0.8f, 1f);
@@ -62,7 +60,7 @@ namespace VVRace
             if (stunned || now < _readyTick || !Pawn.IsHashIntervalTick(Mathf.Max(1, Props.swarmAttackCooldownTicks.min))) { return; }
             if (_comp.ShieldBroken || !_comp.Swarm.Fairies.Any(v => v != null && v.Spawned)) { return; }
             if (_comp.Channel.IsChanneling || _comp.Channel.PendingSteal) { return; }
-            if (!FindCorpses(Pawn.Position).Any()) { return; }
+            if (!FindCorpses(Pawn.Position).Any() && !FindDowned(Pawn.Position).Any()) { return; }
 
             StartCast(now);
         }
@@ -78,7 +76,7 @@ namespace VVRace
             _comp.InterruptCurrentJob();
             _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_FairyFlowerResonated, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
 
-            MoteMaker.ThrowText(_comp.BodyCenter + new Vector3(0f, 0f, QuoteHeight), Pawn.Map, LocalizeString_Etc.VV_Speech_AsphodelEmbrace.Translate(), QuoteSecs);
+            _comp.ThrowQuote(LocalizeString_Etc.VV_Speech_AsphodelEmbrace.Translate());
         }
 
         public void Interrupt()
@@ -187,6 +185,12 @@ namespace VVRace
                 revived.Add(pawn);
             }
 
+            foreach (var pawn in FindDowned(center).ToList())
+            {
+                ApocryphaUtility.HealAllInjuriesAndRestoreParts(pawn);
+                revived.Add(pawn);
+            }
+
             if (revived.Count == 0) { return; }
 
             var body = _comp.BodyCenter.Yto0();
@@ -219,6 +223,26 @@ namespace VVRace
                     yield return corpse;
                 }
             }
+        }
+
+        private IEnumerable<Pawn> FindDowned(IntVec3 center)
+        {
+            var map = Pawn.Map;
+            var pawns = map.mapPawns.SpawnedDownedPawns;
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                if (IsEligible(pawns[i], center, map))
+                {
+                    yield return pawns[i];
+                }
+            }
+        }
+
+        private bool IsEligible(Pawn pawn, IntVec3 center, Map map)
+        {
+            if (!pawn.Spawned || pawn.Dead || !pawn.Downed || pawn.Map != map || !pawn.Position.InHorDistOf(center, Props.embraceRadius)) { return false; }
+
+            return pawn.Faction == Faction.OfPlayer && pawn.IsVivi() && !pawn.IsRoyalVivi();
         }
 
         private bool IsEligible(Corpse corpse, IntVec3 center, Map map)

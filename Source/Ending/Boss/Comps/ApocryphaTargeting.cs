@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 
 namespace VVRace
 {
@@ -11,6 +12,7 @@ namespace VVRace
         private const int EnemyDetectInterval = 30;
         private const int PursuitInterruptIntervalTicks = 300;
         private const float MinPursuitDistance = 3.9f;
+        private const int RaidSpeechGapTicks = 2500;
 
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
 
@@ -22,6 +24,7 @@ namespace VVRace
         private int _lastCombatTick = -99999;
         private bool _pendingPursuitCheck;
         private int _lastPursuitInterruptTick = -99999;
+        private int _lastRaidTargetTick = -99999;
 
         private Pawn Pawn => _comp.Pawn;
         private CompProperties_Apocrypha Props => _comp.Props;
@@ -55,6 +58,7 @@ namespace VVRace
             Scribe_Values.Look(ref _rangedAttackerUntilTick, "rangedAttackerUntilTick", -1);
             Scribe_References.Look(ref _engageTarget, "engageTarget");
             Scribe_Values.Look(ref _lastCombatTick, "lastCombatTick", -99999);
+            Scribe_Values.Look(ref _lastRaidTargetTick, "lastRaidTargetTick", -99999);
         }
 
         public void Tick(int now)
@@ -192,6 +196,58 @@ namespace VVRace
 
             _tmpTargets.Clear();
             return first.IsValid;
+        }
+
+        public bool TryFindRaidTargetCells(out IntVec3 first, out IntVec3 second)
+        {
+            first = IntVec3.Invalid;
+            second = IntVec3.Invalid;
+
+            var map = Pawn.Map;
+            var pawns = map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                if (IsRaidTarget(pawns[i]))
+                {
+                    _tmpTargets.Add(pawns[i]);
+                }
+            }
+
+            if (_tmpTargets.Count > 0)
+            {
+                var guard = ApocryphaGimmicks.TryGetEverflowerBudPos(map, out var bud) ? bud : Pawn.DrawPos;
+                _tmpTargets.SortBy(v => (v.DrawPos - guard).MagnitudeHorizontalSquared());
+                first = _tmpTargets[0].Position;
+                if (_tmpTargets.Count > 1)
+                {
+                    second = _tmpTargets[1].Position;
+                }
+            }
+
+            _tmpTargets.Clear();
+            return first.IsValid;
+        }
+
+        public void Notify_RaidTargeted(int now)
+        {
+            if (now - _lastRaidTargetTick > RaidSpeechGapTicks)
+            {
+                _comp.ThrowQuote(LocalizeString_Etc.VV_Speech_AsphodelGuardFlower.Translate());
+            }
+
+            _lastRaidTargetTick = now;
+            _lastCombatTick = now;
+        }
+
+        private bool IsRaidTarget(Pawn target)
+        {
+            if (target == Pawn || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
+
+            var faction = target.Faction;
+            if (faction == null || faction.IsPlayer || !faction.HostileTo(Faction.OfPlayer)) { return false; }
+            if (target.HostFaction != null || target.GetLord() == null || target.Position.Fogged(target.Map)) { return false; }
+
+            return Pawn.HostileTo(target);
         }
 
         private void InterruptIdleJobForPursuit(int now)

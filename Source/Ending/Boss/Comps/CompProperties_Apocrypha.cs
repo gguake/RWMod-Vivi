@@ -21,7 +21,7 @@ namespace VVRace
         public int maxDoomFlowers = 30;
 
         public float manaShieldMax = 1500f;
-        public int shieldBreakStunTicks = 2500;
+        public int shieldBreakStunTicks = 1500;
         public int shieldRestoreTicks = 5000;
         public int fairyFlowerCount = 3;
         public FloatRange fairyFlowerDistance = new FloatRange(6f, 12f);
@@ -45,6 +45,11 @@ namespace VVRace
         public FloatRange fairyBondDecayPerHour = new FloatRange(0.015f, 0.06f);
         public float fairyBondDecayRampWidth = 0.2f;
 
+        public float contactLineDrainPerHour = 0.03f;
+        public float contactFieldDrainPerHour = 0.075f;
+        public float contactLineDamageBondLoss = 1f;
+        public float contactFieldDamageBondLoss = 2.5f;
+
         public float blastBreachRadius = 2.4f;
         public float blastBreachBuildingDamage = 600f;
 
@@ -58,7 +63,6 @@ namespace VVRace
         public float needleRange = 19f;
         public float needleHalfWidth = 1.5f;
         public float needleDamage = 45f;
-        public float needleDamageFactorVivi = 1f / 3f;
         public float needleArmorPenetration = 0.8f;
 
         public IntRange approachIntervalTicks = new IntRange(9000, 13500);

@@ -109,6 +109,39 @@
     </graphicData>
   </FleckDef>
 
+  <!-- 결속 육각 방벽 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ApocryphaBondHex</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <fadeInTime>0.06</fadeInTime>
+    <solidTime>0.2</solidTime>
+    <fadeOutTime>0.14</fadeOutTime>
+    <growthRate>0.1</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_BondHexagon</texPath>
+      <shaderType>Mote</shaderType>
+      <renderQueue>3150</renderQueue>
+      <drawSize>(3.45, 3.45)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 결속 육각 방벽 파편 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_ApocryphaBondShard</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.3</solidTime>
+    <fadeOutTime>0.75</fadeOutTime>
+    <growthRate>-0.3</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_BondHexShard</texPath>
+      <shaderType>Mote</shaderType>
+      <renderQueue>3150</renderQueue>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
   <!-- 아스포델 금빛 불씨 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_ApocryphaEmber</defName>

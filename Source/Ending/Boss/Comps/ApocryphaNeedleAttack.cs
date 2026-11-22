@@ -15,6 +15,7 @@ namespace VVRace
         private const int StunRecoverTicks = 120;
         private const int PatternCount = 3;
         private const float RepeatedPatternWeight = 0.25f;
+        private const int RaidPattern = 2;
 
         public const int AsphodelNeedleCount = 6;
 
@@ -96,18 +97,34 @@ namespace VVRace
             if (now < _readyTick || _comp.Channel.IsChanneling || _comp.Channel.PendingSteal || _comp.Embrace.IsCasting) { return; }
 
             var idle = _needles.Where(v => v.Spawned && v.IsIdle).ToList();
-            if (idle.Count < AsphodelNeedleCount || !_comp.Targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second))
+            var targeting = _comp.Targeting;
+            if (idle.Count < AsphodelNeedleCount)
             {
                 _readyTick = now + TargetScanInterval;
                 return;
             }
 
-            idle.Shuffle();
-            FirePattern(PickPattern(), idle, first, second);
+            if (targeting.TryFindRaidTargetCells(out var first, out var second))
+            {
+                targeting.Notify_RaidTargeted(now);
+                idle.Shuffle();
+                FirePattern(RaidPattern, idle, first, second, true);
+            }
+            else if (targeting.TryFindTargetCells(Props.needleTargetRange, out first, out second))
+            {
+                idle.Shuffle();
+                FirePattern(PickPattern(), idle, first, second);
+            }
+            else
+            {
+                _readyTick = now + TargetScanInterval;
+                return;
+            }
+
             _readyTick = now + Props.needleCastIntervalTicks.RandomInRange;
         }
 
-        public void FirePattern(int pattern, List<ApocryphaNeedle> idle, IntVec3 first, IntVec3 second)
+        public void FirePattern(int pattern, List<ApocryphaNeedle> idle, IntVec3 first, IntVec3 second, bool reachTarget = false)
         {
             var startAngle = Rand.Range(0f, 360f);
             switch (pattern)
@@ -120,20 +137,20 @@ namespace VVRace
                     AimFixed(idle, 4, startAngle);
                     if (second.IsValid)
                     {
-                        idle[4].StartAim(first, Props.needleAimTicks);
-                        idle[5].StartAim(second, Props.needleAimTicks);
+                        idle[4].StartAim(first, Props.needleAimTicks, reachTarget: reachTarget);
+                        idle[5].StartAim(second, Props.needleAimTicks, reachTarget: reachTarget);
                     }
                     else
                     {
-                        AimVolley(idle.GetRange(4, 2), first, 2);
+                        AimVolley(idle.GetRange(4, 2), first, 2, reachTarget);
                     }
                     break;
 
                 default:
-                    AimVolley(idle.GetRange(0, 3), first, 3);
+                    AimVolley(idle.GetRange(0, 3), first, 3, reachTarget);
                     if (second.IsValid)
                     {
-                        AimVolley(idle.GetRange(3, 3), second, 3);
+                        AimVolley(idle.GetRange(3, 3), second, 3, reachTarget);
                     }
                     break;
             }
@@ -353,11 +370,11 @@ namespace VVRace
             SyncStuckNeedleHediff();
         }
 
-        private void AimVolley(List<ApocryphaNeedle> idle, IntVec3 cell, int count)
+        private void AimVolley(List<ApocryphaNeedle> idle, IntVec3 cell, int count, bool reachTarget = false)
         {
             for (int i = 0; i < count; i++)
             {
-                idle[i].StartAim(cell, Props.needleAimTicks, FanAngle(i, count));
+                idle[i].StartAim(cell, Props.needleAimTicks, FanAngle(i, count), reachTarget);
             }
         }
 

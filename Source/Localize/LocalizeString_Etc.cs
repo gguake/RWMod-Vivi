@@ -145,6 +145,7 @@
         public const string VV_Speech_AsphodelRebirth2 = nameof(VV_Speech_AsphodelRebirth2);
         public const string VV_Speech_AsphodelEmbrace = nameof(VV_Speech_AsphodelEmbrace);
         public const string VV_Speech_AsphodelDeath = nameof(VV_Speech_AsphodelDeath);
+        public const string VV_Speech_AsphodelGuardFlower = nameof(VV_Speech_AsphodelGuardFlower);
 
         public const string VV_FloatMenu_ResonateFairyFlower = nameof(VV_FloatMenu_ResonateFairyFlower);
         public const string VV_FailReason_FairyFlowerNotVivi = nameof(VV_FailReason_FairyFlowerNotVivi);

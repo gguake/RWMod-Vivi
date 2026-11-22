@@ -90,6 +90,7 @@
     <Compile Include="Ending\Boss\Comps\ApocryphaFairySwarm.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaResurrectionEmbrace.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaAttunementLinks.cs" />
+    <Compile Include="Ending\Boss\Comps\ApocryphaBondShatter.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaEscortSummon.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaNeedleAttack.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaTargeting.cs" />

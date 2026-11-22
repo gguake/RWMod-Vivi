@@ -433,6 +433,8 @@ namespace VVRace
         public static FleckDef VV_Fleck_ApocryphaRepelWave;
         public static FleckDef VV_Fleck_ApocryphaAimSpark;
         public static FleckDef VV_Fleck_ApocryphaAimTwinkle;
+        public static FleckDef VV_Fleck_ApocryphaBondHex;
+        public static FleckDef VV_Fleck_ApocryphaBondShard;
 
         public static FleckDef VV_Fleck_GimmickDoomBloomWave;
         public static FleckDef VV_Fleck_GimmickTwinkle;
@@ -490,6 +492,7 @@ namespace VVRace
         public static GameConditionDef VV_EverflowerWeatherControl;
 
         public static GameConditionDef VV_OminousSilence;
+        public static GameConditionDef VV_ApocryphaPresence;
 
         public static GameConditionDef VV_GoldenBloom;
     }

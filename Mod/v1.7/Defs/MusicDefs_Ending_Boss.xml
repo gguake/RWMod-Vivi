@@ -97,4 +97,23 @@
     <overridesInterruptions>true</overridesInterruptions>
     <priority>1102</priority>
   </MusicTransitionDef>
+
+  <MusicSequenceDef>
+    <defName>VV_ApocryphaDefeat</defName>
+    <song>VV_Silence</song>
+    <loop>true</loop>
+    <canBeInterrupted>false</canBeInterrupted>
+    <useTransitionForLifetime>true</useTransitionForLifetime>
+    <fadeoutLastSongDuration>8</fadeoutLastSongDuration>
+    <overrideFadeout>1</overrideFadeout>
+  </MusicSequenceDef>
+
+  <!-- 보스 퇴장 정적 -->
+  <MusicTransitionDef>
+    <defName>VV_ApocryphaDefeat</defName>
+    <workerType>VVRace.MusicTransition_ApocryphaDefeat</workerType>
+    <sequence>VV_ApocryphaDefeat</sequence>
+    <overridesInterruptions>true</overridesInterruptions>
+    <priority>1103</priority>
+  </MusicTransitionDef>
 </Defs>

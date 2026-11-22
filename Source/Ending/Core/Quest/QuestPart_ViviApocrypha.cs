@@ -137,6 +137,11 @@ namespace VVRace
             _deferred = false;
             ViviEndingUtility.EndOminousSilence();
 
+            if (map.gameConditionManager.GetActiveCondition(VVGameConditionDefOf.VV_ApocryphaPresence) == null)
+            {
+                map.gameConditionManager.RegisterCondition(GameConditionMaker.MakeConditionPermanent(VVGameConditionDefOf.VV_ApocryphaPresence));
+            }
+
             if (!skipIntro && anchor.Spawned && anchor.Map == map)
             {
                 _manifestation = ApocryphaManifestation.Begin(anchor, cell, ApocryphaUtility.EntryRotation(map, cell));
@@ -265,6 +270,7 @@ namespace VVRace
 
             ViviEndingUtility.RunStep("defeat: cleanup gimmicks", ViviEndingUtility.CleanupGimmicks);
             ViviEndingUtility.RunStep("defeat: end ominous silence", ViviEndingUtility.EndOminousSilence);
+            EndPresence();
 
             Complete();
         }
@@ -316,6 +322,7 @@ namespace VVRace
         {
             base.Cleanup();
             ClearManifestation();
+            EndPresence();
 
             if (quest.State == QuestState.EndedSuccess || !IsBossAlive) { return; }
 
@@ -325,6 +332,14 @@ namespace VVRace
             var boss = _boss;
             _boss = null;
             ViviEndingUtility.RunStep("cleanup: vanish boss", () => ViviEndingUtility.VanishBoss(boss));
+        }
+
+        private static void EndPresence()
+        {
+            foreach (var map in Find.Maps)
+            {
+                map.gameConditionManager.GetActiveCondition(VVGameConditionDefOf.VV_ApocryphaPresence)?.End();
+            }
         }
 
         public override void ExposeData()

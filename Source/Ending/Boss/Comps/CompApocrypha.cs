@@ -26,6 +26,8 @@ namespace VVRace
 
         private const int BlockedTextMoteInterval = 60;
         private const int DamageTextInterval = 30;
+        private const float QuoteHeight = 2.4f;
+        private const float QuoteSecs = 5f;
 
         private ApocryphaPhase _phase = ApocryphaPhase.Queen;
         private bool _initialized;
@@ -56,6 +58,7 @@ namespace VVRace
         private ApocryphaFairySwarm _swarm;
         private ApocryphaAttunementLinks _attunement;
         private ApocryphaResurrectionEmbrace _embrace;
+        private ApocryphaBondShatter _bondShatter;
 
         private int _lastBlockedTextTick = -99999;
         private float _pendingDamageText;
@@ -97,6 +100,7 @@ namespace VVRace
         public ApocryphaFairySwarm Swarm => _swarm;
         public ApocryphaAttunementLinks Attunement => _attunement;
         public ApocryphaResurrectionEmbrace Embrace => _embrace;
+        public ApocryphaBondShatter BondShatter => _bondShatter;
 
         public float BondFraction => _bond.Fraction;
         public bool IsAsphodelActive => _phase == ApocryphaPhase.Asphodel && parent.Spawned;
@@ -163,6 +167,7 @@ namespace VVRace
             _swarm = new ApocryphaFairySwarm(this);
             _attunement = new ApocryphaAttunementLinks(this);
             _embrace = new ApocryphaResurrectionEmbrace(this);
+            _bondShatter = new ApocryphaBondShatter(this);
         }
 
         #region 초기화/저장
@@ -390,6 +395,7 @@ namespace VVRace
             _blastBreach.Tick(now, stunned);
             _bond.Tick(now);
             _attunement.Tick();
+            _bondShatter.Tick(now);
 
             if (!ShieldBroken && Pawn.IsHashIntervalTick(SwarmCheckInterval))
             {
@@ -443,6 +449,7 @@ namespace VVRace
 
             if (_phase == ApocryphaPhase.Asphodel)
             {
+                ApplyContactBondLoss(dinfo);
                 ApplyShieldDamage(dinfo);
                 return;
             }
@@ -466,6 +473,15 @@ namespace VVRace
             {
                 Notify_StunBlocked();
             }
+        }
+
+        private void ApplyContactBondLoss(DamageInfo dinfo)
+        {
+            var factor = _attunement.DamageBondLossFactor;
+            if (factor <= 0f || dinfo.Amount <= 0f) { return; }
+
+            DrainBond(dinfo.Amount * factor);
+            _bondShatter.Trigger(dinfo.Angle);
         }
 
         private void ApplyShieldDamage(DamageInfo dinfo)
@@ -561,6 +577,13 @@ namespace VVRace
             if (!parent.Spawned) { return; }
 
             TryThrowStatusText(ref _lastStunImmuneTextTick, 1.4f, LocalizeString_Etc.VV_TextMote_ApocryphaStunImmune.Translate());
+        }
+
+        internal void ThrowQuote(string text)
+        {
+            if (!parent.Spawned) { return; }
+
+            MoteMaker.ThrowText(BodyCenter + new Vector3(0f, 0f, QuoteHeight), parent.Map, text, QuoteSecs);
         }
 
         private void TryThrowStatusText(ref int lastTick, float zOffset, string text)
@@ -704,6 +727,7 @@ namespace VVRace
             HornetManifestation.CancelAll(map);
             GenSpawn.Spawn(stolen, parent.Position, map);
             Pawn.Destroy(DestroyMode.Vanish);
+            CheckMusicTransitions();
         }
 
         private void StartRebirth()
@@ -804,6 +828,7 @@ namespace VVRace
 
             Find.TickManager.slower.SignalForceNormalSpeedShort();
             Pawn.Destroy(DestroyMode.Vanish);
+            CheckMusicTransitions();
         }
 
         public RoofCollapseResponse Notify_OnBeforeRoofCollapse()

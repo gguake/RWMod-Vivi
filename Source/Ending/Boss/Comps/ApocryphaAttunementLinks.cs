@@ -25,8 +25,6 @@ namespace VVRace
         private const int RefreshInterval = 15;
         private const float LinkRange = 12.9f;
         private const int MaxGroupSize = 3;
-        private const float LineDrainPerHour = 0.12f;
-        private const float FieldDrainPerHour = 0.3f;
         private const float BeamWidth = 0.45f;
         private const float PetalWidth = 0.75f;
         private const float IdleAlpha = 0.7f;
@@ -42,6 +40,9 @@ namespace VVRace
         private int[] _root = new int[0];
         private int[] _size = new int[0];
         private float _drainPerHour;
+        private float _damageBondLossFactor;
+
+        public float DamageBondLossFactor => _damageBondLossFactor;
 
         public ApocryphaAttunementLinks(CompApocrypha comp)
         {
@@ -67,6 +68,7 @@ namespace VVRace
             _links.Clear();
             _fields.Clear();
             _drainPerHour = 0f;
+            _damageBondLossFactor = 0f;
         }
 
         private void Rebuild()
@@ -168,8 +170,9 @@ namespace VVRace
 
         private void UpdateContact()
         {
+            var props = _comp.Props;
             var body = _comp.BodyCenter;
-            var radius = _comp.Props.asphodelBodyRadius;
+            var radius = props.asphodelBodyRadius;
 
             for (int i = 0; i < _fields.Count; i++)
             {
@@ -178,7 +181,8 @@ namespace VVRace
                 _fields[i] = field;
                 if (field.contact)
                 {
-                    _drainPerHour += FieldDrainPerHour;
+                    _drainPerHour += props.contactFieldDrainPerHour;
+                    _damageBondLossFactor += props.contactFieldDamageBondLoss;
                 }
             }
 
@@ -189,7 +193,8 @@ namespace VVRace
                 _links[i] = link;
                 if (link.contact && !InContactField(link))
                 {
-                    _drainPerHour += LineDrainPerHour;
+                    _drainPerHour += props.contactLineDrainPerHour;
+                    _damageBondLossFactor += props.contactLineDamageBondLoss;
                 }
             }
         }
