@@ -21,6 +21,7 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _EdgeWidth;         // @default = 0.07
     float _SweepWeight;       // @default = 0.0
     float _AshAmount;         // @default = 0.75
+    float _Flash;             // @default = 0.0
 } u;
 
 layout(set = 2, binding = 1) uniform sampler2D _MainTex;
@@ -46,5 +47,6 @@ void main()
     vec3 ash = tex.rgb * vec3(0.62, 0.58, 0.56);
     vec3 col = mix(tex.rgb, ash, clamp(t * 1.4, 0.0, u._AshAmount));
     col = mix(col, u._EdgeColor.rgb * 1.6, edge);
+    col = mix(col, u._EdgeColor.rgb * 1.3, clamp(u._Flash, 0.0, 1.0) * (0.35 + 0.65 * tex.a));
     outColor = vec4(clamp(col, 0.0, 1.0), tex.a);
 }

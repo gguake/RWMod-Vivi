@@ -27,6 +27,7 @@ namespace VVRace
     public static class DissolveRenderer
     {
         private const string ShaderPath = "Map/VV_Dissolve";
+        private const string GlowShaderPath = "Map/VV_DissolveGlow";
         private const string NoiseTexPath = "VFX/VV_DissolveNoise";
 
         private static readonly int SweepDirId = Shader.PropertyToID("_SweepDir");
@@ -35,8 +36,10 @@ namespace VVRace
         private static readonly int EdgeColorId = Shader.PropertyToID("_EdgeColor");
         private static readonly int DissolveDelayId = Shader.PropertyToID("_DissolveDelay");
         private static readonly int DissolveDurationId = Shader.PropertyToID("_DissolveDuration");
+        private static readonly int FlashId = Shader.PropertyToID("_Flash");
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
         private static readonly Dictionary<string, Material> MaterialCache = new Dictionary<string, Material>();
+        private static readonly Dictionary<string, Material> GlowMaterialCache = new Dictionary<string, Material>();
 
         public static Material GetMaterial(string texPath)
         {
@@ -46,6 +49,11 @@ namespace VVRace
         public static Material GetMaterial(string texPath, Rot4 rotation)
         {
             return GetMaterial(texPath + RotationSuffix(rotation));
+        }
+
+        public static Material GetGlowMaterial(string texPath, Rot4 rotation)
+        {
+            return GetNoiseMaterial(texPath + RotationSuffix(rotation), GlowShaderPath, GlowMaterialCache);
         }
 
         internal static string RotationSuffix(Rot4 rotation)
@@ -118,7 +126,7 @@ namespace VVRace
             }
         }
 
-        public static void Draw(Material material, Vector3 pos, Vector2 size, bool flip, float ageSecs, in DissolveStyle style, Vector2 sweepDir)
+        public static void Draw(Material material, Vector3 pos, Vector2 size, bool flip, float ageSecs, in DissolveStyle style, Vector2 sweepDir, float flash = 0f, Color? tint = null)
         {
             if (material == null) { return; }
 
@@ -130,6 +138,11 @@ namespace VVRace
             PropertyBlock.SetVector(SweepDirId, new Vector4(flip ? -sweepDir.x : sweepDir.x, sweepDir.y, 0f, 0f));
             PropertyBlock.SetFloat(SweepWeightId, style.sweepWeight);
             PropertyBlock.SetFloat(AshAmountId, style.ashAmount);
+            PropertyBlock.SetFloat(FlashId, flash);
+            if (tint.HasValue)
+            {
+                PropertyBlock.SetColor(ShaderPropertyIDs.Color, tint.Value);
+            }
 
             var mesh = flip ? MeshPool.plane10Flip : MeshPool.plane10;
             var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(size.x, 1f, size.y));

@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -11,19 +12,36 @@ namespace VVRace
         public const int StolenTicks = 340;
 
         private const int ShakeInterval = 60;
-        private const int BurstTicks = 40;
-        private const int BurstPerTick = 5;
-        private static readonly FloatRange BurstDistance = new FloatRange(4f, 9f);
-        private static readonly FloatRange BurstSpeed = new FloatRange(5f, 9f);
-        private static readonly FloatRange BurstScale = new FloatRange(0.6f, 1.1f);
+        private const int BurstTicks = 54;
+        private const float BurstPerTick = 6f;
+        private static readonly FloatRange BurstDistance = new FloatRange(2.5f, 7f);
+        private static readonly FloatRange BurstSpeed = new FloatRange(4f, 8f);
+        private static readonly FloatRange BurstScale = new FloatRange(0.5f, 0.95f);
         private static readonly Color BurstColor = new Color(1f, 0.96f, 0.84f, 1f);
+        private const float FlashDecay = 2.4f;
+        private const float GlowDay = 0.2f;
+        private const float GlowNight = 1f;
+        private static readonly Color GlowColor = new Color(1f, 0.88f, 0.62f);
+        private const float FlashPeak = 0.85f;
+
+        private const float PetalsPerTexel = 0.28f;
+        private const float SparksPerTexel = 0.12f;
+        private const float PetalTrail = 0.025f;
+        private const float PetalEdgeTint = 0.3f;
+        private static readonly FloatRange PetalSpeed = new FloatRange(1.4f, 3.4f);
+        private static readonly FloatRange PetalScale = new FloatRange(0.45f, 0.7f);
+        private static readonly FloatRange SparkSpeed = new FloatRange(0.6f, 1.6f);
+        private static readonly FloatRange SparkScale = new FloatRange(0.22f, 0.4f);
+        private const float PetalSpreadAngle = 18f;
+
+        private const float ReleaseWaveSecs = 2.8f;
 
         private const float FlowerDelaySecs = 0.15f;
         private const float FlowerDurationSecs = 2.2f;
         private const float StolenBossDelaySecs = 1.3f;
-        private const float StolenBossDurationSecs = 3.8f;
-        private const float DeathDelaySecs = 1.1f;
-        private const float DeathDurationSecs = 5.6f;
+        private const float StolenBossDurationSecs = 3.2f;
+        private const float DeathDelaySecs = 0.5f;
+        private const float DeathDurationSecs = 4.8f;
         private const float SweepWeight = 0.85f;
         private const float DriftRiseCells = 0.9f;
         private const float DeathQuoteHeight = 2.2f;
@@ -67,13 +85,58 @@ namespace VVRace
         private Vector3 _bodyOffset;
         private Vector3 _wind = Vector3.forward;
 
+        private int _waveTick = -1;
+        private Vector3 _waveOrigin;
+        private float _waveHalfSize;
+        private List<Pawn> _waveReached = new List<Pawn>();
+
+        private float _petalThreshold = -1f;
+        private float _petalBudget;
+        private float _sparkBudget;
+
         private float AgeSecs => Mathf.Max(0, Find.TickManager.TicksGame - _startTick) / 60f;
 
         private float FlowerProgress => Mathf.Clamp01((AgeSecs - FlowerDelaySecs) / FlowerDurationSecs);
 
         private DissolveStyle BossStyle => _stolen ? StolenBossStyle : DeathStyle;
 
+        private bool BossFlip => _rotation == Rot4.West;
+
+        private Vector2 BossUvSweep => new Vector2(BossFlip ? -_wind.x : _wind.x, _wind.z);
+
+        private DissolveMask BossMask => _texPath.NullOrEmpty() ? null : DissolveMask.Get(_texPath + DissolveRenderer.RotationSuffix(_rotation));
+
+        private float BossFlash => _stolen ? 0f : FlashPeak * Mathf.Exp(-AgeSecs * FlashDecay);
+
+        public bool ReleaseWaveActive => _waveTick >= 0;
+
+        public static float ReleaseWaveDurationSecs => ReleaseWaveSecs;
+
         private float BossProgress => Mathf.Clamp01((AgeSecs - BossStyle.delaySecs) / BossStyle.durationSecs);
+
+        private DissolveStyle ShaderStyle
+        {
+            get
+            {
+                var style = BossStyle;
+                var mask = BossMask;
+                if (mask == null || !mask.TryGetKeyRange(BossUvSweep, SweepWeight, out var min, out var max) || max - min < 0.05f) { return style; }
+
+                var scale = 1f + DissolveMask.EdgeWidth;
+                var duration = style.durationSecs * scale / (max - min);
+                var delay = style.delaySecs - min / scale * duration;
+                return new DissolveStyle(delay, duration, style.edgeColor, style.sweepWeight, style.ashAmount);
+            }
+        }
+
+        private float DissolveThreshold
+        {
+            get
+            {
+                var style = ShaderStyle;
+                return DissolveMask.Threshold(Mathf.Clamp01((AgeSecs - style.delaySecs) / style.durationSecs));
+            }
+        }
 
         private Vector3 Drift
         {
@@ -139,6 +202,7 @@ namespace VVRace
 
             VVEffecterDefOf.VV_Effecter_ApocryphaDeath.Spawn(Position, map, _drawOffset + _bodyOffset).Cleanup();
             ApocryphaUtility.ShakeCamera(map, 2f);
+            StartReleaseWave(map);
 
             if (!_questBoss) { return; }
 
@@ -169,6 +233,16 @@ namespace VVRace
             Scribe_Values.Look(ref _flowerBudPos, "flowerBudPos", Vector3.zero);
             Scribe_Values.Look(ref _bodyOffset, "bodyOffset", Vector3.zero);
             Scribe_Values.Look(ref _wind, "wind", Vector3.forward);
+            Scribe_Values.Look(ref _waveTick, "waveTick", -1);
+            Scribe_Values.Look(ref _waveOrigin, "waveOrigin", Vector3.zero);
+            Scribe_Values.Look(ref _waveHalfSize, "waveHalfSize", 0f);
+            Scribe_Collections.Look(ref _waveReached, "waveReached", LookMode.Reference);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                _waveReached ??= new List<Pawn>();
+                _waveReached.RemoveAll(v => v == null);
+            }
         }
 
         protected override void Tick()
@@ -176,7 +250,10 @@ namespace VVRace
             base.Tick();
             if (!Spawned) { return; }
 
-            var age = Find.TickManager.TicksGame - _startTick;
+            var now = Find.TickManager.TicksGame;
+            TickReleaseWave(now);
+
+            var age = now - _startTick;
             if (age >= (_stolen ? StolenTicks : DissolveTicks))
             {
                 Complete();
@@ -189,7 +266,7 @@ namespace VVRace
             }
             else if (age < BurstTicks)
             {
-                ThrowLightBurst();
+                ThrowLightBurst(age);
             }
 
             ThrowBossPetals(age);
@@ -205,18 +282,31 @@ namespace VVRace
             {
                 var pos = _flowerBudPos + new Vector3(Rand.Range(-1.6f, 1.6f), 0f, Rand.Range(-1.4f, 1.2f));
                 var toBoss = (bossCenter - pos).Yto0();
-                ThrowPetal(pos, toBoss.AngleFlat() + Rand.Range(-10f, 10f), toBoss.magnitude / Rand.Range(1f, 1.5f), Rand.Range(0.5f, 0.9f), FlowerPetalColors);
+                ThrowPetal(pos, toBoss.AngleFlat() + Rand.Range(-10f, 10f), toBoss.magnitude / Rand.Range(1f, 1.5f), Rand.Range(0.5f, 0.9f), FlowerPetalColors.RandomElement());
             }
         }
 
-        private void ThrowLightBurst()
+        private void ThrowLightBurst(int age)
         {
             var map = Map;
             var center = DrawPos + _drawOffset + _bodyOffset;
-            for (int i = 0; i < BurstPerTick; i++)
+            var bodyPos = DrawPos + _drawOffset + Drift;
+            var mask = BossMask;
+            var threshold = DissolveThreshold;
+            var count = GenMath.RoundRandom(BurstPerTick * (1f - age / (float)BurstTicks));
+            for (int i = 0; i < count; i++)
             {
-                var dir = Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward;
-                var from = center + dir * Rand.Range(0.2f, 0.8f);
+                Vector3 from;
+                if (mask != null && mask.TrySampleRemaining(threshold, BossUvSweep, SweepWeight, out var uv, out _))
+                {
+                    from = DissolveMask.ToWorld(uv, bodyPos, new Vector2(_drawSize, _drawSize), BossFlip);
+                }
+                else
+                {
+                    from = center + Gen.RandomHorizontalVector(0.8f);
+                }
+
+                var dir = EndingVfxUtility.SafeNormalizeHorizontal(from - center, Vector3Utility.FromAngleFlat(Rand.Range(0f, 360f)));
                 ApocryphaGimmicks.ThrowFairyLight(map, from, from + dir * BurstDistance.RandomInRange, BurstSpeed.RandomInRange, BurstScale.RandomInRange, BurstColor);
             }
         }
@@ -226,35 +316,148 @@ namespace VVRace
             var map = Map;
             var bossProgress = BossProgress;
             var center = DrawPos + _drawOffset + Drift;
-            if (bossProgress <= 0f || bossProgress >= 1f || !center.ShouldSpawnMotesAt(map)) { return; }
+            if (bossProgress <= 0f || !center.ShouldSpawnMotesAt(map))
+            {
+                _petalThreshold = -1f;
+                return;
+            }
+
+            var threshold = DissolveThreshold;
+            var from = _petalThreshold < 0f ? threshold - 0.004f : _petalThreshold;
+            _petalThreshold = threshold;
+            if (from >= 1f) { return; }
 
             if (age % ShakeInterval == 0)
             {
                 ApocryphaUtility.ShakeCamera(map, 0.2f);
             }
 
-            var front = _drawSize * 0.8f * (0.5f - bossProgress);
-            var side = EndingVfxUtility.HorizontalPerpendicular(_wind);
-            var halfWidth = _drawSize * 0.3f;
+            var colors = _stolen ? StolenPetalColors : FlowerPetalColors;
+            var mask = BossMask;
+            var size = new Vector2(_drawSize, _drawSize);
             var windAngle = _wind.AngleFlat();
-            var count = _stolen ? 2 : 3;
-            for (int i = 0; i < count; i++)
+            if (mask == null)
             {
-                var pos = center + _wind * (front + Rand.Range(-0.3f, 0.3f)) + side * Rand.Range(-halfWidth, halfWidth);
-                ThrowPetal(pos, windAngle + Rand.Range(-25f, 25f), _stolen ? Rand.Range(1.4f, 3.4f) : Rand.Range(2f, 4.6f), Rand.Range(0.45f, 0.85f), _stolen ? StolenPetalColors : FlowerPetalColors);
+                ThrowFrontPetals(center, bossProgress, windAngle, colors);
+            }
+            else
+            {
+                var sweep = BossUvSweep;
+                var crossed = mask.CountBetween(from, threshold, sweep, SweepWeight);
+                _petalBudget += crossed * PetalsPerTexel * (_stolen ? 0.7f : 1f);
+                _sparkBudget += crossed * SparksPerTexel;
+                var edgeColor = BossStyle.edgeColor;
+                while (_petalBudget >= 1f)
+                {
+                    _petalBudget -= 1f;
+                    if (!mask.TrySample(from - PetalTrail, threshold, sweep, SweepWeight, out var uv, out var texel)) { break; }
+
+                    var color = Color.Lerp(texel, Color.Lerp(edgeColor, colors.RandomElement(), 0.5f), PetalEdgeTint);
+                    color.a = Rand.Range(0.6f, 0.8f);
+                    var angle = windAngle + Rand.Range(-PetalSpreadAngle, PetalSpreadAngle);
+                    ThrowPetal(DissolveMask.ToWorld(uv, center, size, BossFlip), angle, PetalSpeed.RandomInRange * (_stolen ? 0.8f : 1f), PetalScale.RandomInRange, color, angle);
+                }
+
+                while (_sparkBudget >= 1f)
+                {
+                    _sparkBudget -= 1f;
+                    if (!mask.TrySample(threshold, threshold + DissolveMask.EdgeWidth, sweep, SweepWeight, out var uv, out _)) { break; }
+
+                    var data = FleckMaker.GetDataStatic(DissolveMask.ToWorld(uv, center, size, BossFlip), map, VVFleckDefOf.VV_Fleck_ApocryphaEmber, SparkScale.RandomInRange);
+                    data.velocityAngle = windAngle + Rand.Range(-30f, 30f);
+                    data.velocitySpeed = SparkSpeed.RandomInRange;
+                    data.instanceColor = edgeColor;
+                    map.flecks.CreateFleck(data);
+                }
             }
 
             var assimilation = Hediff_EverflowerAssimilation.Of(AbsorbingResonator);
             if (assimilation == null || age % SoulInterval != 0) { return; }
 
             var target = assimilation.BodyPoint;
-            var soulPos = center + _wind * front + side * Rand.Range(-halfWidth, halfWidth);
+            Vector3 soulPos;
+            if (mask != null && mask.TrySample(from - PetalTrail, threshold + DissolveMask.EdgeWidth, BossUvSweep, SweepWeight, out var soulUv, out _))
+            {
+                soulPos = DissolveMask.ToWorld(soulUv, center, size, BossFlip);
+            }
+            else
+            {
+                soulPos = center + _wind * (_drawSize * 0.8f * (0.5f - bossProgress)) + EndingVfxUtility.HorizontalPerpendicular(_wind) * Rand.Range(-_drawSize * 0.3f, _drawSize * 0.3f);
+            }
             ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_AssimilationSoul, soulPos, target, SoulLifeSecs, Rand.Range(0.45f, 0.8f), null, alignToVelocity: false);
 
             if (age % SoulAbsorbInterval == 0 && age >= SoulLifeSecs * 60f)
             {
                 map.flecks.CreateFleck(FleckMaker.GetDataStatic(target, map, VVFleckDefOf.VV_Fleck_AssimilationMote, Rand.Range(1.2f, 1.6f)));
             }
+        }
+
+        private void ThrowFrontPetals(Vector3 center, float progress, float windAngle, Color[] colors)
+        {
+            if (progress >= 1f) { return; }
+
+            var front = _drawSize * 0.8f * (0.5f - progress);
+            var side = EndingVfxUtility.HorizontalPerpendicular(_wind);
+            var halfWidth = _drawSize * 0.3f;
+            var count = _stolen ? 2 : 3;
+            for (int i = 0; i < count; i++)
+            {
+                var pos = center + _wind * (front + Rand.Range(-0.3f, 0.3f)) + side * Rand.Range(-halfWidth, halfWidth);
+                var angle = windAngle + Rand.Range(-25f, 25f);
+                ThrowPetal(pos, angle, PetalSpeed.RandomInRange, PetalScale.RandomInRange, colors.RandomElement(), angle);
+            }
+        }
+
+        private void StartReleaseWave(Map map)
+        {
+            _waveTick = _startTick;
+            _waveOrigin = (DrawPos + _drawOffset + _bodyOffset).Yto0();
+            _waveHalfSize = EndingVfxUtility.ShockWaveHalfSize(EndingVfxUtility.MaxDistanceToMapCorner(map, _waveOrigin));
+            _waveReached.Clear();
+            EndingVfxUtility.SpawnShockWave(map, _waveOrigin, VVFleckDefOf.VV_Fleck_ApocryphaReleaseWave, _waveHalfSize);
+        }
+
+        private void TickReleaseWave(int now)
+        {
+            if (_waveTick < 0) { return; }
+
+            var age = now - _waveTick;
+            var map = Map;
+            var pawns = map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                var pawn = pawns[i];
+                if (pawn.Dead || !pawn.IsVivi() || _waveReached.Contains(pawn)) { continue; }
+
+                var distance = (pawn.Position.ToVector3Shifted() - _waveOrigin).MagnitudeHorizontal();
+                if (age < EndingVfxUtility.ShockWaveArrivalTicks(distance, _waveHalfSize, ReleaseWaveSecs)) { continue; }
+
+                _waveReached.Add(pawn);
+                Refresh(pawn, map);
+            }
+
+            if (age >= Mathf.CeilToInt(ReleaseWaveSecs * 60f))
+            {
+                _waveTick = -1;
+                _waveReached.Clear();
+            }
+        }
+
+        private static void Refresh(Pawn pawn, Map map)
+        {
+            ApocryphaUtility.HealNonPermanentInjuries(pawn);
+
+            var needs = pawn.needs;
+            if (needs?.food != null)
+            {
+                needs.food.CurLevel = needs.food.MaxLevel;
+            }
+            if (needs?.rest != null)
+            {
+                needs.rest.CurLevel = needs.rest.MaxLevel;
+            }
+
+            EndingVfxUtility.PlayEffectAt(map, VVEffecterDefOf.VV_Effecter_ApocryphaReleaseRefresh, pawn.DrawPos);
         }
 
         private Pawn AbsorbingResonator
@@ -268,14 +471,14 @@ namespace VVRace
             }
         }
 
-        private void ThrowPetal(Vector3 pos, float angle, float speed, float scale, Color[] colors)
+        private void ThrowPetal(Vector3 pos, float angle, float speed, float scale, Color color, float? facing = null)
         {
             var data = FleckMaker.GetDataStatic(pos, Map, VVFleckDefOf.VV_Fleck_ApocryphaStealPetal, scale);
             data.velocityAngle = angle;
             data.velocitySpeed = speed;
-            data.rotation = Rand.Range(0f, 360f);
-            data.rotationRate = Rand.Range(-240f, 240f);
-            data.instanceColor = colors.RandomElement();
+            data.rotation = facing.HasValue ? facing.Value + Rand.Range(-25f, 25f) : Rand.Range(0f, 360f);
+            data.rotationRate = facing.HasValue ? Rand.Range(-70f, 70f) : Rand.Range(-240f, 240f);
+            data.instanceColor = color;
             Map.flecks.CreateFleck(data);
         }
 
@@ -329,7 +532,14 @@ namespace VVRace
             var pos = drawLoc + _drawOffset + Drift;
             pos.y = AltitudeLayer.Pawn.AltitudeFor();
 
-            DissolveRenderer.Draw(DissolveRenderer.GetMaterial(_texPath, _rotation), pos, new Vector2(_drawSize, _drawSize), _rotation == Rot4.West, AgeSecs, BossStyle, WindSweep);
+            var size = new Vector2(_drawSize, _drawSize);
+            var style = ShaderStyle;
+            DissolveRenderer.Draw(DissolveRenderer.GetMaterial(_texPath, _rotation), pos, size, BossFlip, AgeSecs, style, WindSweep, BossFlash);
+            if (_stolen) { return; }
+
+            var dark = 1f - Mathf.Clamp01(Map.glowGrid.GroundGlowAt(Position));
+            pos.y += 0.02f;
+            DissolveRenderer.Draw(DissolveRenderer.GetGlowMaterial(_texPath, _rotation), pos, size, BossFlip, AgeSecs, style, WindSweep, 0f, GlowColor * Mathf.Lerp(GlowDay, GlowNight, dark));
         }
 
         private void DrawStolenFlower()

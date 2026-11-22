@@ -23,7 +23,7 @@ namespace VVRace
         public float manaShieldMax = 1500f;
         public int shieldBreakStunTicks = 1500;
         public int shieldRestoreTicks = 5000;
-        public int fairyFlowerCount = 3;
+        public IntRange fairyFlowerCount = new IntRange(3, 5);
         public FloatRange fairyFlowerDistance = new FloatRange(6f, 12f);
 
         public int swarmFairyCount = 8;
@@ -32,8 +32,8 @@ namespace VVRace
         public IntRange swarmAttackCooldownTicks = new IntRange(100, 100);
 
         public float embraceRadius = 11.4f;
-        public int embraceCastTicks = 900;
-        public int embraceCooldownTicks = 3000;
+        public int embraceCastTicks = 600;
+        public int embraceCooldownTicks = 2000;
         public int embraceFirstDelayTicks = 900;
         public int embraceInterruptRecoverTicks = 600;
         public float embraceBondRecoverPerVivi = 0.04f;

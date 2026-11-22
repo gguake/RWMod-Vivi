@@ -352,6 +352,7 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaChannel;
         public static EffecterDef VV_Effecter_ApocryphaBreath;
         public static EffecterDef VV_Effecter_ApocryphaDeath;
+        public static EffecterDef VV_Effecter_ApocryphaReleaseRefresh;
         public static EffecterDef VV_Effecter_ApocryphaSteal;
         public static EffecterDef VV_Effecter_ApocryphaVanish;
         public static EffecterDef VV_Effecter_ApocryphaSmash;
@@ -435,6 +436,7 @@ namespace VVRace
         public static FleckDef VV_Fleck_ApocryphaAimTwinkle;
         public static FleckDef VV_Fleck_ApocryphaBondHex;
         public static FleckDef VV_Fleck_ApocryphaBondShard;
+        public static FleckDef VV_Fleck_ApocryphaReleaseWave;
 
         public static FleckDef VV_Fleck_GimmickDoomBloomWave;
         public static FleckDef VV_Fleck_GimmickTwinkle;

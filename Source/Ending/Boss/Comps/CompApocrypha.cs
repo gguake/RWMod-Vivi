@@ -542,7 +542,7 @@ namespace VVRace
         private void SpawnFairyFlowers()
         {
             var map = parent.Map;
-            foreach (var cell in ApocryphaGimmicks.FindBloomCells(Pawn, Props.fairyFlowerCount, Props.fairyFlowerDistance))
+            foreach (var cell in ApocryphaGimmicks.FindBloomCells(Pawn, Props.fairyFlowerCount.RandomInRange, Props.fairyFlowerDistance))
             {
                 ApocryphaGimmicks.SpawnFlower(ThingMaker.MakeThing(VVThingDefOf.VV_FairyFlower), cell, map, Pawn);
             }

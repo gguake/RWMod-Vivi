@@ -68,6 +68,25 @@
     <shaderPath>Map/VV_Dissolve</shaderPath>
   </ShaderTypeDef>
 
+  <!-- 아스포델 소멸 발광 셰이더 -->
+  <ShaderDef>
+    <defName>VV_DissolveGlow</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_Dissolve.frag.glsl</fragmentShaderFileName>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3001</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 아스포델 소멸 발광 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_DissolveGlow</defName>
+    <shaderPath>Map/VV_DissolveGlow</shaderPath>
+  </ShaderTypeDef>
+
   <!-- 아스포델 출현 셰이더 -->
   <ShaderDef>
     <defName>VV_Manifest</defName>
@@ -175,6 +194,26 @@
   <ShaderTypeDef>
     <defName>VV_ShockWave</defName>
     <shaderPath>Map/VV_ShockWave</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 결속 피격 방벽 셰이더 -->
+  <ShaderDef>
+    <defName>VV_BondImpact</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_BondImpact.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3150</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 결속 피격 방벽 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_BondImpact</defName>
+    <shaderPath>Map/VV_BondImpact</shaderPath>
   </ShaderTypeDef>
 
   <!-- 연꽃 마법진 셰이더 -->
