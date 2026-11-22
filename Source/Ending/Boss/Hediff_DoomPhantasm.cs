@@ -19,6 +19,27 @@ namespace VVRace
             pawn.Destroy(DestroyMode.Vanish);
         }
 
+        public override void PostAdd(DamageInfo? dinfo)
+        {
+            base.PostAdd(dinfo);
+            pawn.health.overrideDeathOnDownedChance = 1f;
+        }
+
+        public override void PostRemoved()
+        {
+            base.PostRemoved();
+            pawn.health.overrideDeathOnDownedChance = -1f;
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
+            if (pawn.Downed && !pawn.Dead)
+            {
+                pawn.Kill(null, this);
+            }
+        }
+
         public override void Notify_PawnKilled()
         {
             base.Notify_PawnKilled();

@@ -74,6 +74,7 @@
     <Compile Include="Ending\Boss\AI\JobDriver_ApocryphaChannel.cs" />
     <Compile Include="Ending\Boss\AI\JobDriver_ApocryphaSmash.cs" />
     <Compile Include="Ending\Boss\AI\JobDriver_ApocryphaWait.cs" />
+    <Compile Include="Ending\Boss\AI\JobGiver_ApocryphaEscortWander.cs" />
     <Compile Include="Ending\Boss\AI\JobGiver_ApocryphaMain.cs" />
     <Compile Include="Ending\Boss\AI\FairyJob_ApocryphaSwarm.cs" />
     <Compile Include="Ending\Boss\AI\FairyToil_ApocryphaSwarmDrift.cs" />

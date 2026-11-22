@@ -120,9 +120,8 @@
     <defName>VV_TitanicHornetEscort</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
-        <li Class="JobGiver_AIFollowEscortee" />
-        <li Class="JobGiver_WanderNearDutyLocation">
-          <wanderRadius>8</wanderRadius>
+        <li Class="VVRace.JobGiver_ApocryphaEscortWander">
+          <wanderRadius>7</wanderRadius>
         </li>
       </subNodes>
     </thinkNode>
