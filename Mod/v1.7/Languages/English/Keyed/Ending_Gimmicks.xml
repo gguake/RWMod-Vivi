@@ -10,8 +10,7 @@
 
 <!-- 메시지 -->
 <VV_Message_FairyFlowerResonated>{PAWN_labelShort} has resonated with the fairy bloom and gained fairy attunement.</VV_Message_FairyFlowerResonated>
-<VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort} failed to resonate with the fairy bloom.</VV_Message_FairyFlowerResonanceFailed>
-<VV_Message_FairyFlowerBurst>A fairy bloom's sigil has completed and burst.</VV_Message_FairyFlowerBurst>
+<VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort} lacked the qualifications and was rejected by the fairy bloom's fairy vivis.</VV_Message_FairyFlowerResonanceFailed>
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->

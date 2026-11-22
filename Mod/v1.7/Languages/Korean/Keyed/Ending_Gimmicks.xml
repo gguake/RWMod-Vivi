@@ -10,8 +10,7 @@
 
 <!-- 메시지 -->
 <VV_Message_FairyFlowerResonated>{PAWN_labelShort}(이)가 요정꽃과 공명해 요정 교화를 얻었습니다.</VV_Message_FairyFlowerResonated>
-<VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort}(이)가 요정꽃과 공명하지 못했습니다.</VV_Message_FairyFlowerResonanceFailed>
-<VV_Message_FairyFlowerBurst>요정꽃의 문양이 완성되어 터졌습니다.</VV_Message_FairyFlowerBurst>
+<VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort}(이)가 자격이 부족해 요정꽃의 요정 비비들에게 거부당했습니다.</VV_Message_FairyFlowerResonanceFailed>
 <VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 {BLIGHT} 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->

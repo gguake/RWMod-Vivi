@@ -170,10 +170,6 @@ namespace VVRace
                     LetterDefOf.NegativeEvent,
                     new LookTargets(new TargetInfo(Position, map)));
             }
-            else
-            {
-                Messages.Message(LocalizeString_Message.VV_Message_FairyFlowerBurst.Translate(), new TargetInfo(Position, map), MessageTypeDefOf.NegativeEvent);
-            }
 
             ViviEndingQuest.Current?.BossComp?.RecoverBond(BondRecoverFraction);
         }
