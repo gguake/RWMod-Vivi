@@ -7,6 +7,7 @@
     <description>Asphodel, the last empress of the old vivi empire.</description>
     <thingClass>VVRace.Pawn_Apocrypha</thingClass>
     <drawOffscreen>true</drawOffscreen>
+    <hideMainDesc>true</hideMainDesc>
     <statBases>
       <MoveSpeed>0.5</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
