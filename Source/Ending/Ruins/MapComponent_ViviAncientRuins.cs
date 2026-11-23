@@ -93,7 +93,11 @@ namespace VVRace
         private static readonly Color TangledLinkColor = new Color(0.56f, 0.85f, 1f, 0.78f);
         private static readonly Color SolvedLinkColor = new Color(1f, 0.92f, 0.56f, 0.95f);
         private static readonly Color TetherLinkColor = new Color(1f, 0.95f, 0.72f, 0.92f);
+        private static readonly Color TangledFieldColor = new Color(0.32f, 0.74f, 1f, 1f);
+        private static readonly Color AlignedFieldColor = new Color(1f, 0.84f, 0.40f, 1f);
+        private static readonly Color SolvedFieldColor = new Color(1f, 0.86f, 0.44f, 1f);
         private static readonly Vector3 PawnTetherOffset = new Vector3(0f, 0f, 0.35f);
+        private const int HexagonBurstDurationTicks = 150;
 
         private bool _active;
         private IntVec3 _origin = IntVec3.Invalid;
@@ -125,6 +129,8 @@ namespace VVRace
         private Effecter _galleryAimSustainer;
 
         private readonly int[] _unsealStartTicks = { -1, -1, -1, -1 };
+        private int _hexagonSolvedVisualTick = -1;
+        private readonly List<Vector3> _hexFieldPoints = new List<Vector3>(RuinHexFieldRenderer.MaxVertices);
         private HashSet<IntVec3> _safePathSet = new HashSet<IntVec3>();
         private Dictionary<IntVec3, int> _potIndexByCell = new Dictionary<IntVec3, int>();
 
@@ -178,6 +184,7 @@ namespace VVRace
             _doomRespawnTick = -1;
             _trapCooldownUntilTick = -1;
             _resealStartTick = -1;
+            _hexagonSolvedVisualTick = -1;
             _guideStartTicks.Clear();
             _guideLastStepIndices.Clear();
             _corridorSweeps.Clear();
@@ -956,6 +963,7 @@ namespace VVRace
 
             if (playEffects)
             {
+                _hexagonSolvedVisualTick = Find.TickManager.TicksGame;
                 var ringCenter = RuinLayoutUtility.RingCenter(_origin);
                 VVEffecterDefOf.VV_Effecter_EndingGoldenWave?.Spawn(ringCenter, map).Cleanup();
                 ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellImpact, ringCenter, map);
@@ -1443,6 +1451,7 @@ namespace VVRace
 
             _unsealedMask = 0;
             _trialCleared = false;
+            _hexagonSolvedVisualTick = -1;
             _puzzleFlowers.Clear();
             ClearPuzzleTether(notify: false);
 
@@ -1600,7 +1609,9 @@ namespace VVRace
         private void DrawHexagonPuzzleLinks()
         {
             if (!IsStageUnsealed(3)) { return; }
-            if (_resealStartTick >= 0 && Find.TickManager.TicksGame - _resealStartTick > 75) { return; }
+
+            var now = Find.TickManager.TicksGame;
+            if (_resealStartTick >= 0 && now - _resealStartTick > 75) { return; }
 
             RefreshPuzzleFlowerList();
             if (_puzzleFlowers.Count == 6)
@@ -1615,11 +1626,16 @@ namespace VVRace
                     }
                 }
 
+                _hexFieldPoints.Clear();
+                int alignedEdges = 0;
+
                 for (int i = 0; i < 6; i++)
                 {
                     var a = byNode[i];
                     var b = byNode[(i + 1) % 6];
                     if (a == null || b == null || !a.Spawned || !b.Spawned) { continue; }
+
+                    _hexFieldPoints.Add(a.LinkAnchor);
 
                     bool edgeAligned = _hexagonSolved;
                     if (!edgeAligned
@@ -1630,6 +1646,8 @@ namespace VVRace
                         edgeAligned = diff == 1 || diff == 5;
                     }
 
+                    if (edgeAligned) { alignedEdges++; }
+
                     var color = _hexagonSolved ? SolvedLinkColor : (edgeAligned ? AlignedLinkColor : TangledLinkColor);
                     float width = _hexagonSolved ? 0.65f : (edgeAligned ? 0.58f : 0.46f);
                     SoulLinkRenderer.Draw(a.LinkAnchor, b.LinkAnchor, width, color);
@@ -1637,6 +1655,11 @@ namespace VVRace
                     {
                         PetalLinkRenderer.Draw(a.LinkAnchor, b.LinkAnchor, 0.7f, color, i * 97 + 13);
                     }
+                }
+
+                if (_hexFieldPoints.Count == 6)
+                {
+                    DrawHexagonField(now, alignedEdges);
                 }
             }
 
@@ -1647,6 +1670,63 @@ namespace VVRace
                 SoulLinkRenderer.Draw(from, to, 0.45f, TetherLinkColor);
                 PetalLinkRenderer.Draw(from, to, 0.75f, TetherLinkColor, _tetheredPawn.thingIDNumber);
             }
+        }
+
+        private void DrawHexagonField(int now, int alignedEdges)
+        {
+            float fadeMask = 1f;
+            if (_unsealStartTicks[2] >= 0)
+            {
+                fadeMask *= SmoothStep01(0f, UnsealFadeDurationTicks, now - _unsealStartTicks[2]);
+            }
+            if (_resealStartTick >= 0)
+            {
+                fadeMask *= 1f - SmoothStep01(20f, 75f, now - _resealStartTick);
+            }
+            if (fadeMask <= 0.001f) { return; }
+
+            Color fieldColor;
+            float fieldAlpha;
+            float fieldWhiten;
+
+            if (!_hexagonSolved)
+            {
+                var alignRatio = Mathf.Clamp01(alignedEdges / 6f);
+                fieldColor = Color.Lerp(TangledFieldColor, AlignedFieldColor, alignRatio);
+                fieldAlpha = Mathf.Lerp(0.48f, 0.72f, alignRatio);
+                fieldWhiten = 0f;
+            }
+            else
+            {
+                fieldColor = SolvedFieldColor;
+                var steadyAlpha = 0.72f + 0.06f * Mathf.Sin(LinkRenderUtility.WrappedAgeSecs * 1.4f);
+                const float steadyWhiten = 0.42f;
+
+                if (_hexagonSolvedVisualTick >= 0)
+                {
+                    var elapsed = now - _hexagonSolvedVisualTick;
+                    if (elapsed >= 0 && elapsed < HexagonBurstDurationTicks)
+                    {
+                        var attack = SmoothStep01(0f, 16f, elapsed);
+                        var settle = SmoothStep01(30f, HexagonBurstDurationTicks, elapsed);
+                        fieldAlpha = Mathf.Lerp(Mathf.Lerp(0.64f, 1f, attack), steadyAlpha, settle);
+                        fieldWhiten = Mathf.Lerp(Mathf.Lerp(0f, 0.95f, attack), steadyWhiten, settle);
+                    }
+                    else
+                    {
+                        _hexagonSolvedVisualTick = -1;
+                        fieldAlpha = steadyAlpha;
+                        fieldWhiten = steadyWhiten;
+                    }
+                }
+                else
+                {
+                    fieldAlpha = steadyAlpha;
+                    fieldWhiten = steadyWhiten;
+                }
+            }
+
+            RuinHexFieldRenderer.Draw(_hexFieldPoints, fieldColor, fieldAlpha * fadeMask, fieldWhiten);
         }
 
         public override void MapRemoved()

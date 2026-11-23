@@ -348,4 +348,24 @@
     <defName>VV_RuinDistortion</defName>
     <shaderPath>Map/VV_RuinDistortion</shaderPath>
   </ShaderTypeDef>
+
+  <!-- 고대 유적 육각형 공명 필드 셰이더 -->
+  <ShaderDef>
+    <defName>VV_RuinHexField</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_RuinHexField.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3100</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 고대 유적 육각형 공명 필드 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_RuinHexField</defName>
+    <shaderPath>Map/VV_RuinHexField</shaderPath>
+  </ShaderTypeDef>
 </Defs>

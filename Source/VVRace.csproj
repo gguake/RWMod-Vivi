@@ -160,6 +160,7 @@
     <Compile Include="Ending\Ruins\MapComponent_ViviAncientRuins.cs" />
     <Compile Include="Ending\Ruins\MapGeneration\GenStep_ViviAncientRuins.cs" />
     <Compile Include="Ending\Ruins\RuinDistortionRenderer.cs" />
+    <Compile Include="Ending\Ruins\RuinHexFieldRenderer.cs" />
     <Compile Include="Ending\Ruins\RuinLayoutUtility.cs" />
     <Compile Include="Ending\Ruins\Things\Building_RuinDoomFlower.cs" />
     <Compile Include="Ending\Ruins\Things\Building_RuinPuzzleFairyFlower.cs" />
