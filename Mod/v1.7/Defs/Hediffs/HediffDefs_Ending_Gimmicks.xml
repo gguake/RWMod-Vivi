@@ -18,12 +18,12 @@
       <li>
         <statFactors>
           <PsychicSensitivity>0</PsychicSensitivity>
-          <IncomingDamageFactor>0.01</IncomingDamageFactor>
+          <IncomingDamageFactor>0.1</IncomingDamageFactor>
         </statFactors>
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <setMax>0.7</setMax>
+            <setMax>0.5</setMax>
           </li>
         </capMods>
       </li>
