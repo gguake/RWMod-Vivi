@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -12,10 +11,9 @@ namespace VVRace
         private const float HalfPi = Mathf.PI * 0.5f;
         private const float Tau = Mathf.PI * 2f;
 
-        private static Dictionary<SkillDef, FairySigil> _cache;
+        private static FairySigil _daffodil;
         private static FairySigil _everflower;
 
-        public readonly SkillDef skill;
         public readonly string name;
 
         private readonly List<SigilStroke> _strokes;
@@ -24,11 +22,6 @@ namespace VVRace
 
         public IReadOnlyList<SigilStroke> Strokes => _strokes;
         public float TotalLength { get; }
-
-        private FairySigil(SkillDef skill, List<SigilStroke> emblem) : this(skill.defName, emblem)
-        {
-            this.skill = skill;
-        }
 
         private FairySigil(string name, List<SigilStroke> emblem)
         {
@@ -55,23 +48,9 @@ namespace VVRace
             TotalLength = total;
         }
 
-        public static IEnumerable<SkillDef> SupportedSkills
-        {
-            get
-            {
-                EnsureCache();
-                return _cache.Keys;
-            }
-        }
+        public static FairySigil Daffodil => _daffodil ??= new FairySigil("Daffodil", DaffodilEmblem());
 
         public static FairySigil Everflower => _everflower ??= new FairySigil("Everflower", EverflowerEmblem());
-
-        public static FairySigil For(SkillDef skill)
-        {
-            if (skill == null) { return null; }
-            EnsureCache();
-            return _cache.TryGetValue(skill, out var sigil) ? sigil : null;
-        }
 
         public void Sample(float distance, out Vector2 position, out Vector2 tangent)
         {
@@ -97,21 +76,6 @@ namespace VVRace
             return new Vector3(center.x + local.x * radius, center.y, center.z + local.y * radius);
         }
 
-        private static void EnsureCache()
-        {
-            if (_cache != null) { return; }
-            _cache = new Dictionary<SkillDef, FairySigil>
-            {
-                { SkillDefOf.Melee, new FairySigil(SkillDefOf.Melee, Sword()) },
-                { SkillDefOf.Construction, new FairySigil(SkillDefOf.Construction, Honeycomb()) },
-                { SkillDefOf.Crafting, new FairySigil(SkillDefOf.Crafting, Gear()) },
-                { SkillDefOf.Plants, new FairySigil(SkillDefOf.Plants, Sprout()) },
-                { SkillDefOf.Social, new FairySigil(SkillDefOf.Social, SpeechBubble()) },
-                { SkillDefOf.Medicine, new FairySigil(SkillDefOf.Medicine, MedicalCross()) },
-                { SkillDefOf.Intellectual, new FairySigil(SkillDefOf.Intellectual, Hexagram()) },
-            };
-        }
-
         private static List<SigilStroke> Frame()
         {
             var strokes = new List<SigilStroke>
@@ -134,122 +98,58 @@ namespace VVRace
             return strokes;
         }
 
-        private static List<SigilStroke> Sword()
+        private static List<SigilStroke> DaffodilEmblem()
         {
-            return new List<SigilStroke>
-            {
-                Emblem(true, new Vector2(0f, 0.72f), new Vector2(0.1f, 0.56f), new Vector2(0.1f, -0.12f), new Vector2(-0.1f, -0.12f), new Vector2(-0.1f, 0.56f)),
-                Emblem(false, new Vector2(-0.32f, -0.04f), new Vector2(-0.25f, -0.14f), new Vector2(0.25f, -0.14f), new Vector2(0.32f, -0.04f)),
-                Emblem(false, new Vector2(0f, -0.14f), new Vector2(0f, -0.46f)),
-                new SigilStroke(Regular(new Vector2(0f, -0.55f), 0.09f, 4, HalfPi), true, SigilStrokeKind.Emblem),
-            };
-        }
+            const int petals = 6;
+            const float step = Tau / petals;
+            var strokes = new List<SigilStroke>();
 
-        private static List<SigilStroke> Honeycomb()
-        {
-            const float size = 0.33f;
-            const float step = Mathf.PI / 3f;
-            var outline = new List<Vector2>();
-            var strokes = new List<SigilStroke> { null };
-            for (int k = 0; k < 3; k++)
+            // 외곽 장식: 꽃잎 끝을 잇는 여섯 갈래 아치와 보조 꽃받침 잎맥
+            for (int k = 0; k < petals; k++)
             {
-                var angle = HalfPi + k * Tau / 3f;
-                var center = Polar(size, angle);
-                var origin = Mathf.RoundToInt((angle + Mathf.PI - step * 0.5f) / step);
-                for (int j = 1; j <= 4; j++)
-                {
-                    outline.Add(center + Polar(size, step * 0.5f + (origin + j) * step));
-                }
-                strokes.Add(Emblem(false, Vector2.zero, center + Polar(size, step * 0.5f + (origin + 1) * step)));
+                var a0 = HalfPi + k * step;
+                var a1 = HalfPi + (k + 1) * step;
+                var mid = a0 + step * 0.5f;
+
+                var p0 = Polar(0.82f, a0);
+                var p1 = Polar(0.82f, a1);
+                var c0 = Polar(0.68f, a0 + step * 0.25f);
+                var c1 = Polar(0.68f, a1 - step * 0.25f);
+                strokes.Add(new SigilStroke(Bezier(p0, c0, c1, p1, 14), false, SigilStrokeKind.InnerRing, 0.62f));
+
+                // 꽃잎 사이의 보조 화피와 작은 마름모 별장식
+                strokes.Add(new SigilStroke(Leaf(Polar(0.32f, mid), Polar(0.66f, mid), 0.16f), true, SigilStrokeKind.Emblem, 0.7f));
+                strokes.Add(new SigilStroke(Regular(Polar(0.75f, mid), 0.055f, 4, mid), true, SigilStrokeKind.Rune, 0.72f));
             }
-            strokes[0] = new SigilStroke(outline, true, SigilStrokeKind.Emblem);
+
+            // 수선화의 여섯 장 뾰족한 주 꽃잎(외곽·내부 이중 윤곽·중앙 잎맥)
+            for (int k = 0; k < petals; k++)
+            {
+                var angle = HalfPi + k * step;
+                strokes.Add(new SigilStroke(Leaf(Polar(0.27f, angle), Polar(0.82f, angle), 0.31f), true, SigilStrokeKind.Emblem, 0.95f));
+                strokes.Add(new SigilStroke(Leaf(Polar(0.32f, angle), Polar(0.69f, angle), 0.17f), true, SigilStrokeKind.Emblem, 0.65f));
+                strokes.Add(new SigilStroke(new[] { Polar(0.29f, angle), Polar(0.75f, angle) }, false, SigilStrokeKind.Emblem, 0.58f));
+
+                // 꽃잎 끝 바깥 작은 다이아몬드 점
+                strokes.Add(new SigilStroke(Circle(Polar(0.85f, angle), 0.028f, 10), true, SigilStrokeKind.Rune, 0.75f));
+            }
+
+            // 수선화 특유의 물결치는 부화관(나팔관) 외곽과 내부 물결 고리
+            strokes.Add(new SigilStroke(RuffledCircle(Vector2.zero, 0.265f, 0.042f, 12, 96, HalfPi), true, SigilStrokeKind.Emblem, 0.95f));
+            strokes.Add(new SigilStroke(RuffledCircle(Vector2.zero, 0.185f, 0.018f, 6, 60, HalfPi + step * 0.5f), true, SigilStrokeKind.Emblem, 0.72f));
+
+            // 부화관 주름선과 6개의 수술·중심 암술
+            for (int k = 0; k < petals; k++)
+            {
+                var angle = HalfPi + k * step;
+                var halfAngle = angle + step * 0.5f;
+                strokes.Add(new SigilStroke(new[] { Polar(0.19f, angle), Polar(0.30f, angle) }, false, SigilStrokeKind.Emblem, 0.6f));
+                strokes.Add(new SigilStroke(new[] { Polar(0.075f, halfAngle), Polar(0.155f, halfAngle) }, false, SigilStrokeKind.Emblem, 0.65f));
+                strokes.Add(new SigilStroke(Circle(Polar(0.17f, halfAngle), 0.022f, 8), true, SigilStrokeKind.Rune, 0.75f));
+            }
+
+            strokes.Add(new SigilStroke(Circle(Vector2.zero, 0.072f, 24), true, SigilStrokeKind.Emblem, 0.88f));
             return strokes;
-        }
-
-        private static List<SigilStroke> Gear()
-        {
-            const int teeth = 8;
-            const float outer = 0.64f;
-            const float root = 0.5f;
-            const float pitch = Tau / teeth;
-            var points = new List<Vector2>();
-            for (int k = 0; k < teeth; k++)
-            {
-                var angle = HalfPi + k * pitch;
-                points.Add(Polar(root, angle - pitch * 0.3f));
-                points.Add(Polar(outer, angle - pitch * 0.17f));
-                points.Add(Polar(outer, angle + pitch * 0.17f));
-                points.Add(Polar(root, angle + pitch * 0.3f));
-                var valley = Arc(Vector2.zero, root, angle + pitch * 0.3f, angle + pitch * 0.7f, 3);
-                for (int i = 1; i < valley.Count - 1; i++)
-                {
-                    points.Add(valley[i]);
-                }
-            }
-            return new List<SigilStroke>
-            {
-                new SigilStroke(points, true, SigilStrokeKind.Emblem),
-                new SigilStroke(Circle(Vector2.zero, 0.22f, 36), true, SigilStrokeKind.Emblem),
-            };
-        }
-
-        private static List<SigilStroke> Sprout()
-        {
-            var stemBase = new Vector2(0f, 0.06f);
-            return new List<SigilStroke>
-            {
-                new SigilStroke(Bezier(new Vector2(0f, -0.56f), new Vector2(0.07f, -0.36f), new Vector2(-0.07f, -0.14f), stemBase, 16), false, SigilStrokeKind.Emblem),
-                new SigilStroke(Leaf(stemBase, new Vector2(-0.54f, 0.4f), 0.3f), true, SigilStrokeKind.Emblem),
-                new SigilStroke(Leaf(stemBase, new Vector2(0.48f, 0.56f), 0.3f), true, SigilStrokeKind.Emblem),
-                new SigilStroke(Arc(new Vector2(0f, -1.25f), 0.7f, HalfPi + 0.44f, HalfPi - 0.44f, 14), false, SigilStrokeKind.Emblem),
-            };
-        }
-
-        private static List<SigilStroke> SpeechBubble()
-        {
-            const float left = -0.56f;
-            const float right = 0.56f;
-            const float bottom = -0.22f;
-            const float top = 0.44f;
-            const float corner = 0.16f;
-            var points = new List<Vector2>();
-            points.AddRange(Arc(new Vector2(right - corner, top - corner), corner, 0f, HalfPi, 6));
-            points.AddRange(Arc(new Vector2(left + corner, top - corner), corner, HalfPi, Mathf.PI, 6));
-            points.AddRange(Arc(new Vector2(left + corner, bottom + corner), corner, Mathf.PI, Mathf.PI * 1.5f, 6));
-            points.Add(new Vector2(-0.3f, bottom));
-            points.Add(new Vector2(-0.38f, -0.54f));
-            points.Add(new Vector2(-0.06f, bottom));
-            points.AddRange(Arc(new Vector2(right - corner, bottom + corner), corner, Mathf.PI * 1.5f, Tau, 6));
-
-            var strokes = new List<SigilStroke> { new SigilStroke(points, true, SigilStrokeKind.Emblem) };
-            for (int i = -1; i <= 1; i++)
-            {
-                strokes.Add(new SigilStroke(Circle(new Vector2(i * 0.26f, 0.11f), 0.065f, 16), true, SigilStrokeKind.Emblem));
-            }
-            return strokes;
-        }
-
-        private static List<SigilStroke> MedicalCross()
-        {
-            const float arm = 0.6f;
-            const float half = 0.19f;
-            return new List<SigilStroke>
-            {
-                Emblem(true,
-                    new Vector2(-half, arm), new Vector2(half, arm), new Vector2(half, half), new Vector2(arm, half),
-                    new Vector2(arm, -half), new Vector2(half, -half), new Vector2(half, -arm), new Vector2(-half, -arm),
-                    new Vector2(-half, -half), new Vector2(-arm, -half), new Vector2(-arm, half), new Vector2(-half, half)),
-            };
-        }
-
-        private static List<SigilStroke> Hexagram()
-        {
-            return new List<SigilStroke>
-            {
-                new SigilStroke(Regular(Vector2.zero, 0.68f, 3, HalfPi), true, SigilStrokeKind.Emblem),
-                new SigilStroke(Regular(Vector2.zero, 0.68f, 3, -HalfPi), true, SigilStrokeKind.Emblem),
-                new SigilStroke(Circle(Vector2.zero, 0.13f, 30), true, SigilStrokeKind.Emblem),
-            };
         }
 
         private static List<SigilStroke> EverflowerEmblem()
@@ -295,6 +195,19 @@ namespace VVRace
         {
             var points = Arc(center, radius, HalfPi, HalfPi + Tau, segments);
             points.RemoveAt(points.Count - 1);
+            return points;
+        }
+
+        private static List<Vector2> RuffledCircle(Vector2 center, float baseRadius, float amplitude, int lobes, int segments, float startAngle)
+        {
+            var points = new List<Vector2>(segments);
+            for (int i = 0; i < segments; i++)
+            {
+                var t = (float)i / segments;
+                var angle = startAngle + Tau * t;
+                var radius = baseRadius + amplitude * Mathf.Cos(lobes * Tau * t);
+                points.Add(center + Polar(radius, angle));
+            }
             return points;
         }
 

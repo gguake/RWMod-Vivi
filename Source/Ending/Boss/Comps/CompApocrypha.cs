@@ -43,8 +43,6 @@ namespace VVRace
         private bool _shieldBroken;
         private bool _pendingShieldBreak;
         private int _shieldRestoreTick = -1;
-        private List<SkillDef> _fairyFlowerSkills = new List<SkillDef>();
-        private int _fairyFlowerSummons;
 
         private int _nextStealTargetSkipCheckTick;
 
@@ -57,7 +55,7 @@ namespace VVRace
         private ApocryphaBlastBreach _blastBreach;
         private ApocryphaFairyBond _bond;
         private ApocryphaFairySwarm _swarm;
-        private ApocryphaAttunementLinks _attunement;
+        private ApocryphaFairyChains _fairyChains;
         private ApocryphaResurrectionEmbrace _embrace;
         private ApocryphaBondShatter _bondShatter;
 
@@ -99,13 +97,29 @@ namespace VVRace
         public ApocryphaBlastBreach BlastBreach => _blastBreach;
         public ApocryphaFairyBond Bond => _bond;
         public ApocryphaFairySwarm Swarm => _swarm;
-        public ApocryphaAttunementLinks Attunement => _attunement;
+        public ApocryphaFairyChains FairyChains => _fairyChains;
         public ApocryphaResurrectionEmbrace Embrace => _embrace;
         public ApocryphaBondShatter BondShatter => _bondShatter;
 
         public float BondFraction => _bond.Fraction;
         public bool IsAsphodelActive => _phase == ApocryphaPhase.Asphodel && parent.Spawned;
         public int ShieldRestoreTick => _shieldRestoreTick;
+
+        public int ResolveStacks
+        {
+            get
+            {
+                if (_phase != ApocryphaPhase.Asphodel) { return 0; }
+
+                var hediff = Pawn.health?.hediffSet?.GetFirstHediffOfDef(VVHediffDefOf.VV_ApocryphaResolve);
+                return hediff != null ? Mathf.Clamp(Mathf.RoundToInt(hediff.Severity), 0, Props.resolveMaxStacks) : 0;
+            }
+        }
+
+        public float ShieldIncomingDamageFactor => Mathf.Max(0.1f, Pawn.GetStatValue(StatDefOf.IncomingDamageFactor));
+        public float NeedleDamageFactor => 1f + ResolveStacks * Props.resolveNeedleDamagePerStack;
+        public float NeedleAimTimeFactor => Mathf.Max(0.25f, 1f - ResolveStacks * Props.resolveNeedleAimSpeedPerStack);
+        public int EffectiveNeedleAimTicks => Mathf.Max(15, Mathf.RoundToInt(Props.needleAimTicks * NeedleAimTimeFactor));
 
         public float ManaShield => _manaShield;
         public float MaxManaShield => Props.manaShieldMax * FairyBondDifficultyFactor;
@@ -166,7 +180,7 @@ namespace VVRace
             _blastBreach = new ApocryphaBlastBreach(this);
             _bond = new ApocryphaFairyBond(this);
             _swarm = new ApocryphaFairySwarm(this);
-            _attunement = new ApocryphaAttunementLinks(this);
+            _fairyChains = new ApocryphaFairyChains(this);
             _embrace = new ApocryphaResurrectionEmbrace(this);
             _bondShatter = new ApocryphaBondShatter(this);
         }
@@ -226,6 +240,15 @@ namespace VVRace
                 Pawn.health.RemoveHediff(hediff);
             }
 
+            if (!shouldHave)
+            {
+                var resolve = Pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ApocryphaResolve);
+                if (resolve != null)
+                {
+                    Pawn.health.RemoveHediff(resolve);
+                }
+            }
+
             _needleAttack.SyncStuckNeedleHediff();
         }
 
@@ -247,8 +270,6 @@ namespace VVRace
             Scribe_Values.Look(ref _shieldBroken, "shieldBroken", false);
             Scribe_Values.Look(ref _pendingShieldBreak, "pendingShieldBreak", false);
             Scribe_Values.Look(ref _shieldRestoreTick, "shieldRestoreTick", -1);
-            Scribe_Collections.Look(ref _fairyFlowerSkills, "fairyFlowerSkills", LookMode.Def);
-            Scribe_Values.Look(ref _fairyFlowerSummons, "fairyFlowerSummons", 0);
 
             Scribe_Deep.Look(ref _targeting, "targeting", this);
             Scribe_Deep.Look(ref _needleAttack, "needleAttack", this);
@@ -259,12 +280,12 @@ namespace VVRace
             Scribe_Deep.Look(ref _blastBreach, "blastBreach", this);
             Scribe_Deep.Look(ref _bond, "bond", this);
             Scribe_Deep.Look(ref _swarm, "swarm", this);
+            Scribe_Deep.Look(ref _fairyChains, "fairyChains", this);
             Scribe_Deep.Look(ref _embrace, "embrace", this);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                _fairyFlowerSkills ??= new List<SkillDef>();
-                _fairyFlowerSkills.RemoveAll(v => v == null);
+                _fairyChains ??= new ApocryphaFairyChains(this);
             }
         }
         #endregion
@@ -378,7 +399,7 @@ namespace VVRace
                 _blastBreach.Cancel();
                 _embrace.Cancel();
                 _swarm.Disperse();
-                _attunement.Clear();
+                _fairyChains.Clear();
                 return;
             }
 
@@ -396,7 +417,7 @@ namespace VVRace
             _needleAttack.TickAsphodel(now, stunned);
             _blastBreach.Tick(now, stunned);
             _bond.Tick(now);
-            _attunement.Tick();
+            _fairyChains.Tick(now);
             _bondShatter.Tick(now);
 
             if (!ShieldBroken && Pawn.IsHashIntervalTick(SwarmCheckInterval))
@@ -451,7 +472,6 @@ namespace VVRace
 
             if (_phase == ApocryphaPhase.Asphodel)
             {
-                ApplyContactBondLoss(dinfo);
                 ApplyShieldDamage(dinfo);
                 return;
             }
@@ -477,15 +497,6 @@ namespace VVRace
             }
         }
 
-        private void ApplyContactBondLoss(DamageInfo dinfo)
-        {
-            var factor = _attunement.DamageBondLossFactor;
-            if (factor <= 0f || dinfo.Amount <= 0f) { return; }
-
-            DrainBond(dinfo.Amount * factor);
-            _bondShatter.Trigger(dinfo.Angle);
-        }
-
         private void ApplyShieldDamage(DamageInfo dinfo)
         {
             if (ShieldBroken || _manaShield <= 0f)
@@ -494,11 +505,19 @@ namespace VVRace
                 return;
             }
 
-            var absorbedByShield = Mathf.Min(_manaShield, dinfo.Amount);
+            var effectiveDamage = dinfo.Amount * ShieldIncomingDamageFactor;
+            var absorbedByShield = Mathf.Min(_manaShield, effectiveDamage);
             if (absorbedByShield <= 0f) { return; }
 
             _manaShield -= absorbedByShield;
             _pendingDamageText += absorbedByShield;
+
+            var maxShield = MaxManaShield;
+            if (maxShield > 0f && Props.shieldDamageBondLoss > 0f)
+            {
+                DrainBondMaxFraction(absorbedByShield / maxShield * Props.shieldDamageBondLoss);
+                _bondShatter.Trigger(dinfo.Angle);
+            }
 
             if (_manaShield <= 0f)
             {
@@ -522,9 +541,19 @@ namespace VVRace
             SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaShieldBreak, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             ApocryphaUtility.ShakeCamera(parent.Map, 1.2f);
 
-            if (IsQuestBossFight)
+            if (Props.shieldBreakBondLoss > 0f)
             {
-                SpawnFairyFlowers();
+                DrainBondMaxFraction(Props.shieldBreakBondLoss);
+                _bondShatter.Trigger(Rand.Range(0f, 360f));
+            }
+
+            if (IsQuestBossFight && !_pendingDeath)
+            {
+                var emptySlots = Props.maxActiveFairyChains - _fairyChains.ActiveChainCount;
+                if (emptySlots > 0)
+                {
+                    SpawnFairyFlowers(emptySlots);
+                }
             }
 
             Messages.Message(LocalizeString_Message.VV_Message_ApocryphaShieldBroken.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
@@ -541,35 +570,36 @@ namespace VVRace
             Messages.Message(LocalizeString_Message.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
         }
 
-        private void SpawnFairyFlowers()
+        private void SpawnFairyFlowers(int count)
         {
-            var map = parent.Map;
-            var count = Props.fairyFlowerCount.RandomInRange + Mathf.Min(_fairyFlowerSummons, Props.fairyFlowerCountGrowthMax);
-            _fairyFlowerSummons++;
+            if (count <= 0) { return; }
 
+            var map = parent.Map;
             foreach (var cell in ApocryphaGimmicks.FindBloomCells(Pawn, count, Props.fairyFlowerDistance))
             {
-                ApocryphaGimmicks.SpawnFlower(ThingMaker.MakeThing(VVThingDefOf.VV_FairyFlower), cell, map, Pawn);
+                var flower = (Building_FairyFlower)ThingMaker.MakeThing(VVThingDefOf.VV_FairyFlower);
+                flower.SuppressAutoChain = true;
+                ApocryphaGimmicks.SpawnFlower(flower, cell, map, Pawn);
+                _fairyChains.CreateChain(flower);
             }
         }
 
-        public SkillDef NextFairyFlowerSkill()
+        public void AddResolveStack()
         {
-            if (_fairyFlowerSkills.Count == 0)
+            if (!IsAsphodelActive || _pendingDeath) { return; }
+
+            var hediff = Pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ApocryphaResolve);
+            if (hediff == null)
             {
-                RefillFairyFlowerSkills();
+                hediff = Pawn.health.AddHediff(VVHediffDefOf.VV_ApocryphaResolve);
+                hediff.Severity = 1f;
+            }
+            else
+            {
+                hediff.Severity = Mathf.Min(Props.resolveMaxStacks, Mathf.RoundToInt(hediff.Severity) + 1);
             }
 
-            var skill = _fairyFlowerSkills[0];
-            _fairyFlowerSkills.RemoveAt(0);
-            return skill;
-        }
-
-        private void RefillFairyFlowerSkills()
-        {
-            _fairyFlowerSkills.Clear();
-            _fairyFlowerSkills.AddRange(FairySigil.SupportedSkills);
-            _fairyFlowerSkills.Shuffle();
+            Messages.Message(LocalizeString_Message.VV_Message_ApocryphaResolveGained.Translate(Mathf.RoundToInt(hediff.Severity)), Pawn, MessageTypeDefOf.NegativeEvent);
         }
 
         internal void GimmickStun(int ticks, Thing instigator)
@@ -637,11 +667,25 @@ namespace VVRace
             _bond.Drain(amount);
         }
 
+        public void DrainBondMaxFraction(float fraction)
+        {
+            if (!IsAsphodelActive || _pendingDeath) { return; }
+
+            _bond.DrainMaxFraction(fraction);
+        }
+
         public void RecoverBond(float fraction)
         {
             if (!IsAsphodelActive || _pendingDeath) { return; }
 
             _bond.Recover(fraction);
+        }
+
+        public void RecoverBondMaxFraction(float fraction, bool showStream = true)
+        {
+            if (!IsAsphodelActive || _pendingDeath) { return; }
+
+            _bond.RecoverMaxFraction(fraction, showStream);
         }
 
         internal void Notify_BondExhausted()
@@ -788,8 +832,7 @@ namespace VVRace
             _embrace.Cancel();
             _embrace.SetReadyTick(now + Props.embraceFirstDelayTicks);
             _bond.Reset();
-            _fairyFlowerSummons = 0;
-            RefillFairyFlowerSkills();
+            _fairyChains.Clear();
             if (_channel.TryGetStealTarget(out var stealTarget, out _, out _))
             {
                 EnsureApproachRadius(stealTarget);
@@ -825,6 +868,7 @@ namespace VVRace
             dying.InitFrom(Pawn);
 
             _phase = ApocryphaPhase.Dying;
+            _fairyChains.SettlePendingDispelsBeforeCleanup();
             CancelAllAttacks();
             GenSpawn.Spawn(dying, parent.Position, map);
 
@@ -913,7 +957,7 @@ namespace VVRace
             if (_phase == ApocryphaPhase.Asphodel)
             {
                 ApocryphaShroudGlow.Draw(Pawn);
-                _attunement.Draw();
+                _fairyChains.Draw();
                 _embrace.Draw();
             }
 
@@ -978,6 +1022,7 @@ namespace VVRace
             _blastBreach.Cancel();
             _embrace.Cancel();
             _swarm.Disperse();
+            _fairyChains.Clear();
         }
 
         private static void CheckMusicTransitions()

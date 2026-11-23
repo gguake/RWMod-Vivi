@@ -28,7 +28,8 @@ namespace VVRace
             if (fairy.State != FairyState.Idle || boss == null || !boss.Spawned || boss.Map != fairy.Map || delta <= 0) { return FairyToilStatus.Running; }
 
             var current = fairy.RealPosition;
-            if (boss.TryGetComp<CompApocrypha>() is CompApocrypha comp && comp.Embrace.TryGetFairyGoal(fairy, out var sigilGoal))
+            var ward = (job as FairyJob_ApocryphaSwarm)?.Ward;
+            if (ward == null && boss.TryGetComp<CompApocrypha>() is CompApocrypha comp && comp.Embrace.TryGetFairyGoal(fairy, out var sigilGoal))
             {
                 var toward = Vector3.Lerp(current, sigilGoal, Mathf.Clamp01(Follow * delta));
                 fairy.SetToilPosition(toward, toward - current, AltitudeLayer.MoteOverhead.AltitudeFor());
@@ -41,14 +42,16 @@ namespace VVRace
             var wobble = Wobble * Mathf.Sin(ticks * 0.05f + fairy.OrbitPhaseOffset * 3f);
             var sin = Mathf.Sin(angle);
 
-            var center = ApocryphaGimmicks.GetBossBodyPos(boss).Yto0();
+            var center = ward != null ? ward.DrawPos.Yto0() : ApocryphaGimmicks.GetBossBodyPos(boss).Yto0();
+            var radiusX = ward != null ? FairySigilWard.OrbitRadius : RadiusX;
+            var radiusZ = ward != null ? FairySigilWard.OrbitRadius : RadiusZ;
             var goal = center + new Vector3(
-                Mathf.Cos(angle) * (RadiusX * fairy.OrbitRadiusXFactor + wobble),
+                Mathf.Cos(angle) * (radiusX * fairy.OrbitRadiusXFactor + wobble),
                 0f,
-                sin * (RadiusZ * fairy.OrbitRadiusZFactor + wobble) + Lift);
+                sin * (radiusZ * fairy.OrbitRadiusZFactor + wobble) + (ward != null ? 0f : Lift));
 
             var next = Vector3.Lerp(current, goal, Mathf.Clamp01(Follow * delta));
-            var altitude = sin > BehindThreshold ? boss.DrawPos.y - BehindAltitude : AltitudeLayer.MoteOverhead.AltitudeFor();
+            var altitude = ward == null && sin > BehindThreshold ? boss.DrawPos.y - BehindAltitude : AltitudeLayer.MoteOverhead.AltitudeFor();
             fairy.SetToilPosition(next, next - current, altitude);
             return FairyToilStatus.Running;
         }

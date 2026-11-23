@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-  <!-- 요정 교화 -->
+  <!-- 아스포델 결속 -->
   <HediffDef>
-    <defName>VV_FairyAttunement</defName>
-    <label>fairy attunement</label>
-    <description>In resonance with a fairy bloom's mana. Can synchronize with nearby mana from the same fairy bloom to form a fairy interference field. While Asphodel is within a fairy interference field, her fairy bond weakens; damaging her in this state disrupts her concentration and frees additional fairy vivis.</description>
-    <hediffClass>VVRace.Hediff_FairyAttunement</hediffClass>
-    <defaultLabelColor>(1, 0.9, 0.55)</defaultLabelColor>
+    <defName>VV_AsphodelBond</defName>
+    <label>Asphodel's bond</label>
+    <description>Tethered to a fairy bloom's energy line while fairy vivis close in around the body. When the ring closes completely or the bearer dies, she is temporarily turned into a fairy and bound to Asphodel, sprouting a new fairy bloom at that spot to extend the chain.\n\nIf she is near the everflower altar when transformation triggers, the golden link breaks the gimmick instead, weakening Asphodel's fairy bond and returning every vivi bound along the chain fully refreshed.</description>
+    <hediffClass>VVRace.Hediff_AsphodelBond</hediffClass>
+    <defaultLabelColor>(0.95, 0.98, 1)</defaultLabelColor>
     <isBad>false</isBad>
     <priceImpact>false</priceImpact>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -16,26 +16,22 @@
     <maxSeverity>1</maxSeverity>
     <stages>
       <li>
-        <statOffsets>
-          <PainShockThreshold>0.15</PainShockThreshold>
-          <MentalBreakThreshold>-0.15</MentalBreakThreshold>
-        </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+          <PsychicSensitivity>0</PsychicSensitivity>
+          <IncomingDamageFactor>0.01</IncomingDamageFactor>
         </statFactors>
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <setMax>0.5</setMax>
+            <setMax>0.7</setMax>
           </li>
         </capMods>
       </li>
     </stages>
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>10000~10000</disappearsAfterTicks>
+        <disappearsAfterTicks>1500~1500</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
-        <messageOnDisappear>{PAWN_labelShort}'s fairy attunement has faded.</messageOnDisappear>
       </li>
     </comps>
   </HediffDef>

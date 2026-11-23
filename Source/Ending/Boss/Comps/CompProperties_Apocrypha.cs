@@ -23,14 +23,28 @@ namespace VVRace
         public float manaShieldMax = 2500f;
         public int shieldBreakStunTicks = 1500;
         public int shieldRestoreTicks = 5000;
-        public IntRange fairyFlowerCount = new IntRange(3, 5);
-        public int fairyFlowerCountGrowthMax = 3;
+        public float shieldDamageBondLoss = 0.10f;
+        public float shieldBreakBondLoss = 0.15f;
+        public int maxActiveFairyChains = 3;
+        public float fairyFlowerExpireBondRecover = 0.10f;
+        public float fairyFlowerDispelBondDrain = 0.03f;
+        public float fairyChainAltarRadius = 6.5f;
+        public int asphodelBondDurationTicks = 1500;
         public FloatRange fairyFlowerDistance = new FloatRange(6f, 18f);
+
+        public int resolveMaxStacks = 5;
+        public float resolveDamageReductionPerStack = 0.10f;
+        public float resolveNeedleDamagePerStack = 0.50f;
+        public float resolveNeedleAimSpeedPerStack = 0.15f;
 
         public int swarmFairyCount = 8;
         public float swarmAttackRadius = 7f;
         public int swarmStaggerTicks = 95;
         public IntRange swarmAttackCooldownTicks = new IntRange(100, 100);
+
+        public int sigilWardFairyCount = 4;
+        public float sigilWardAttackRadius = 6.5f;
+        public int sigilWardDurationTicks = 7000;
 
         public float embraceRadius = 11.4f;
         public int embraceCastTicks = 600;
@@ -42,15 +56,9 @@ namespace VVRace
         public float asphodelBodyRadius = 1.2f;
         public float fairyBondInitial = 100000f;
         public float fairyBondDecayStart = 0.25f;
-        public float fairyBondClear = 0.05f;
+        public float fairyBondClear = 0.01f;
         public FloatRange fairyBondDecayPerHour = new FloatRange(0.015f, 0.06f);
         public float fairyBondDecayRampWidth = 0.2f;
-
-        public float contactLineDrainPerHour = 0.03f;
-        public float contactFieldDrainPerHour = 0.075f;
-        public float contactLineDamageBondLoss = 1f;
-        public float contactFieldDamageBondLoss = 2.5f;
-        public float contactHexagonFactor = 3f;
 
         public float blastBreachRadius = 2.4f;
         public float blastBreachBuildingDamage = 600f;
@@ -62,6 +70,7 @@ namespace VVRace
         public float needleFanHalfAngle3 = 65f;
         public int needleAimTicks = 225;
         public float needleTargetRange = 14f;
+        public float boundSnipeMinDistance = 14f;
         public float needleRange = 19f;
         public float needleHalfWidth = 1.5f;
         public float needleDamage = 50f;
@@ -78,12 +87,12 @@ namespace VVRace
         public float flowerGuardRadius = 6f;
         public float flowerGuardRetaliationRadius = 20f;
 
-        public int arrivalHornetCount = 9;
+        public int arrivalHornetCount = 6;
         public IntRange escortSummonIntervalTicks = new IntRange(12000, 15000);
-        public int escortSummonCount = 4;
+        public int escortSummonCount = 3;
         public float escortRecallRadius = 15f;
         public int escortRecallCastTicks = 240;
-        public int escortRecallCount = 4;
+        public int escortRecallCount = 3;
         public int escortRecallCooldownTicks = 3000;
         public int doomFlowerHornetIntervalTicks = 10000;
         public int doomFlowerHornetCount = 1;

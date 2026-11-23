@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -12,55 +11,74 @@ namespace VVRace
     {
         public const int LifespanTicks = 1250;
 
-        private const int FairyCount = 4;
-        private const int BurstTicks = 50;
-        private const int ResonatedTicks = 45;
+        public const int FairyCount = 4;
+        public const int BurstTicks = 50;
+        private const int RelayedSigilFadeTicks = 40;
         private const float VividFrom = 0.85f;
-        private const float BondRecoverFraction = 0.06f;
         private const int ResonanceLightCount = 28;
 
-        private static readonly Color ResonanceLightColor = new Color(1f, 0.9f, 0.6f, 1f);
-
-        public SkillDef skill;
+        private static readonly Color ResonanceLightColor = new Color(0.95f, 0.98f, 1f, 1f);
 
         private int _expireTick = -1;
         private int _endTick = -1;
-        private bool _resonated;
-        private List<Pawn> _failedPawns = new List<Pawn>();
+        private bool _relayed;
+        private int _relayedTick = -1;
+        private bool _chainCollapsing;
 
-        public FairySigil Sigil => FairySigil.For(skill);
+        [Unsaved]
+        internal bool SuppressAutoChain;
+
+        public FairySigil Sigil => FairySigil.Daffodil;
 
         public bool Ending => _endTick >= 0;
 
+        public bool Relayed => _relayed;
+
+        public bool ChainCollapsing => _chainCollapsing;
+
         public int TicksUntilExpire => _expireTick < 0 ? LifespanTicks : Mathf.Max(0, _expireTick - Find.TickManager.TicksGame);
 
-        public float Progress => 1f - TicksUntilExpire / (float)LifespanTicks;
+        public float Progress => _relayed ? 0f : 1f - TicksUntilExpire / (float)LifespanTicks;
 
         public override float LinkAlpha => Ending ? 0f : base.LinkAlpha;
 
-        public float ResonanceChance(Pawn pawn) => Mathf.Clamp01(0.2f + 0.1f * (pawn.skills?.GetSkill(skill)?.Level ?? 0));
-
         public AcceptanceReport CanResonate(Pawn pawn)
         {
-            if (Ending || pawn == null || pawn.Dead || pawn.Downed || pawn.Faction != Faction.OfPlayer) { return false; }
+            if (Ending || _relayed || _chainCollapsing || pawn == null || pawn.Dead || pawn.Downed || pawn.Faction != Faction.OfPlayer) { return false; }
+
+            var bossComp = Spawned ? ApocryphaGimmicks.FindBoss(Map)?.TryGetComp<CompApocrypha>() : null;
+            if (bossComp != null && bossComp.IsAsphodelActive && !bossComp.FairyChains.IsFlowerAwaitingInteraction(this))
+            {
+                return false;
+            }
 
             if (!pawn.IsVivi()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerNotVivi.Translate().Resolve(); }
+            if (pawn.IsRoyalVivi()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerRoyalVivi.Translate().Resolve(); }
             if (pawn.DevelopmentalStage.Baby()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerNotAdult.Translate().Resolve(); }
             if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving)) { return LocalizeString_Etc.VV_FailReason_CannotMove.Translate().Resolve(); }
-            if (_failedPawns.Contains(pawn)) { return LocalizeString_Etc.VV_FailReason_FairyFlowerResonanceFailed.Translate().Resolve(); }
+            if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_AsphodelBond)) { return LocalizeString_Etc.VV_FailReason_FairyFlowerAlreadyBound.Translate().Resolve(); }
 
             return true;
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
-            skill ??= ViviEndingQuest.Current?.BossComp?.NextFairyFlowerSkill() ?? FairySigil.SupportedSkills.RandomElement();
             base.SpawnSetup(map, respawningAfterLoad);
 
             if (_expireTick < 0)
             {
                 _expireTick = Find.TickManager.TicksGame + LifespanTicks;
             }
+
+            if (!respawningAfterLoad && !SuppressAutoChain)
+            {
+                var bossComp = ApocryphaGimmicks.FindBoss(map)?.TryGetComp<CompApocrypha>();
+                if (bossComp != null && bossComp.IsAsphodelActive && bossComp.IsQuestBossFight)
+                {
+                    bossComp.FairyChains.EnsureTracked(this);
+                }
+            }
+            SuppressAutoChain = false;
         }
 
         protected override void Tick()
@@ -76,33 +94,38 @@ namespace VVRace
                     Destroy(DestroyMode.Vanish);
                 }
             }
-            else if (now >= _expireTick)
+            else if (!_relayed && !_chainCollapsing && now >= _expireTick)
             {
                 Burst();
             }
         }
 
-        public void Notify_Resonated(Pawn pawn, bool success)
+        public void Notify_Interacted(Pawn pawn)
         {
-            if (!Spawned || Ending || pawn == null || pawn.Dead) { return; }
+            if (!Spawned || !CanResonate(pawn).Accepted) { return; }
 
-            if (!success)
+            var bossComp = ApocryphaGimmicks.FindBoss(Map)?.TryGetComp<CompApocrypha>();
+            if (bossComp != null && bossComp.IsAsphodelActive)
             {
-                _failedPawns.Add(pawn);
-                Messages.Message(LocalizeString_Message.VV_Message_FairyFlowerResonanceFailed.Translate(pawn.Named("PAWN")), new LookTargets(pawn, this), MessageTypeDefOf.NegativeEvent);
+                bossComp.FairyChains.Notify_FlowerInteracted(this, pawn);
                 return;
             }
 
-            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyAttunement);
-            if (hediff != null)
-            {
-                pawn.health.RemoveHediff(hediff);
-            }
-            pawn.health.AddHediff(VVHediffDefOf.VV_FairyAttunement);
+            MarkRelayed(pawn);
+            ApocryphaFairyChains.RemoveBondHediffSilently(pawn);
+            pawn.health.AddHediff(VVHediffDefOf.VV_AsphodelBond);
+            Messages.Message(LocalizeString_Message.VV_Message_FairyFlowerResonated.Translate(pawn.Named("PAWN")), pawn, MessageTypeDefOf.PositiveEvent);
+        }
 
-            _resonated = true;
-            _endTick = Find.TickManager.TicksGame + ResonatedTicks;
-            ApocryphaGimmicks.PlayEffect(Extension?.witherEffecter, Position, Map);
+        internal void MarkRelayed(Pawn pawn)
+        {
+            if (_relayed) { return; }
+
+            _relayed = true;
+            _relayedTick = Find.TickManager.TicksGame;
+
+            if (!Spawned || pawn == null) { return; }
+
             ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerResonated, pawn.Position, Map);
 
             var sigil = Sigil;
@@ -117,8 +140,24 @@ namespace VVRace
                     ApocryphaGimmicks.ThrowFairyLight(Map, from, target + Gen.RandomHorizontalVector(0.3f), Rand.Range(5f, 8f), Rand.Range(0.6f, 1f), ResonanceLightColor);
                 }
             }
+        }
 
-            Messages.Message(LocalizeString_Message.VV_Message_FairyFlowerResonated.Translate(pawn.Named("PAWN")), pawn, MessageTypeDefOf.PositiveEvent);
+        internal void MarkChainCollapsing()
+        {
+            _chainCollapsing = true;
+        }
+
+        internal void BeginChainVanish()
+        {
+            _chainCollapsing = true;
+            if (Destroyed) { return; }
+
+            if (Spawned)
+            {
+                ApocryphaGimmicks.PlayEffect(Extension?.witherEffecter, Position, Map);
+            }
+
+            Destroy(DestroyMode.Vanish);
         }
 
         public void Burst()
@@ -127,9 +166,10 @@ namespace VVRace
 
             var map = Map;
             var boss = ApocryphaGimmicks.FindBoss(map);
+            var bossComp = boss?.TryGetComp<CompApocrypha>();
 
-            _resonated = false;
             _endTick = Find.TickManager.TicksGame + BurstTicks;
+            _chainCollapsing = true;
             ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerBurst, Position, map);
             ApocryphaUtility.ShakeCamera(map, 0.8f);
 
@@ -171,7 +211,48 @@ namespace VVRace
                     new LookTargets(new TargetInfo(Position, map)));
             }
 
-            ViviEndingQuest.Current?.BossComp?.RecoverBond(BondRecoverFraction);
+            if (bossComp?.IsAsphodelActive == true)
+            {
+                var ward = (FairySigilWard)ThingMaker.MakeThing(VVThingDefOf.VV_FairySigilWard);
+                GenSpawn.Spawn(ward, Position, map);
+                bossComp.FairyChains.Notify_FlowerBurst(this);
+            }
+        }
+
+        public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            if (Ending || _chainCollapsing || IsBossAttack(dinfo))
+            {
+                absorbed = true;
+                return;
+            }
+
+            base.PreApplyDamage(ref dinfo, out absorbed);
+        }
+
+        public override void Kill(DamageInfo? dinfo = null, Hediff exactCulprit = null)
+        {
+            if (Spawned && !Ending && !_chainCollapsing)
+            {
+                _chainCollapsing = true;
+                var bossComp = ApocryphaGimmicks.FindBoss(Map)?.TryGetComp<CompApocrypha>();
+                if (bossComp != null && bossComp.IsAsphodelActive)
+                {
+                    bossComp.FairyChains.Notify_FlowerDestroyedByAttack(this);
+                }
+            }
+
+            base.Kill(dinfo, exactCulprit);
+        }
+
+        private static bool IsBossAttack(DamageInfo dinfo)
+        {
+            if (dinfo.Instigator is Pawn pawn && pawn.TryGetComp<CompApocrypha>() != null) { return true; }
+            if (dinfo.Instigator is ApocryphaNeedle) { return true; }
+            if (dinfo.Instigator is ViviFairy fairy && fairy.Owner?.TryGetComp<CompApocrypha>() != null) { return true; }
+            if (dinfo.Weapon == VVThingDefOf.VV_ApocryphaNeedle) { return true; }
+
+            return false;
         }
 
         protected override void DrawAt(Vector3 drawLoc, bool flip = false)
@@ -188,18 +269,23 @@ namespace VVRace
             var now = Find.TickManager.TicksGame;
             if (Ending)
             {
-                if (_resonated)
+                var t = 1f - Mathf.Clamp01((_endTick - now) / (float)BurstTicks);
+                FairySigilRenderer.Draw(center, sigil, FairyCount, 1f, 2.2f * (1f - t) * (1f - t), 1f - 0.4f * t);
+                return;
+            }
+
+            if (_relayed)
+            {
+                if (_relayedTick >= 0 && now - _relayedTick < RelayedSigilFadeTicks)
                 {
-                    var t = 1f - Mathf.Clamp01((_endTick - now) / (float)ResonatedTicks);
-                    FairySigilRenderer.Draw(center, sigil, FairyCount, Progress, 1.6f * (1f - t), 0.5f * (1f - t));
-                }
-                else
-                {
-                    var t = 1f - Mathf.Clamp01((_endTick - now) / (float)BurstTicks);
-                    FairySigilRenderer.Draw(center, sigil, FairyCount, 1f, 2.2f * (1f - t) * (1f - t), 1f - 0.4f * t);
+                    var t = Mathf.Clamp01((now - _relayedTick) / (float)RelayedSigilFadeTicks);
+                    var frozenProgress = 1f - TicksUntilExpire / (float)LifespanTicks;
+                    FairySigilRenderer.Draw(center, sigil, FairyCount, frozenProgress, 1.3f * (1f - t), 0.4f * (1f - t));
                 }
                 return;
             }
+
+            if (_chainCollapsing) { return; }
 
             var progress = Progress;
             var vivid = Mathf.InverseLerp(VividFrom, 1f, progress);
@@ -253,10 +339,10 @@ namespace VVRace
                 yield return gizmo;
             }
 
-            if (DebugSettings.godMode && !Ending)
+            if (DebugSettings.godMode && !Ending && !_relayed && !_chainCollapsing)
             {
                 var nearest = FindNearestResonator();
-                yield return EndingVfxUtility.DevAction("DEV: Resonate nearest vivi", () => Notify_Resonated(nearest, true), nearest != null ? null : "No player vivi can resonate.");
+                yield return EndingVfxUtility.DevAction("DEV: Resonate nearest vivi", () => Notify_Interacted(nearest), nearest != null ? null : "No player vivi can resonate.");
                 yield return EndingVfxUtility.DevAction("DEV: Burst now", Burst);
             }
         }
@@ -274,16 +360,15 @@ namespace VVRace
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Defs.Look(ref skill, "skill");
             Scribe_Values.Look(ref _expireTick, "expireTick", -1);
             Scribe_Values.Look(ref _endTick, "endTick", -1);
-            Scribe_Values.Look(ref _resonated, "resonated", false);
-            Scribe_Collections.Look(ref _failedPawns, "failedPawns", LookMode.Reference);
+            Scribe_Values.Look(ref _relayed, "relayed", false);
+            Scribe_Values.Look(ref _relayedTick, "relayedTick", -1);
+            Scribe_Values.Look(ref _chainCollapsing, "chainCollapsing", false);
 
-            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && HitPoints <= 0)
             {
-                _failedPawns ??= new List<Pawn>();
-                _failedPawns.RemoveAll(p => p == null);
+                HitPoints = MaxHitPoints;
             }
         }
     }

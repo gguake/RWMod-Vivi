@@ -26,15 +26,15 @@ namespace VVRace
             var bossPos = GetBossBodyPos(boss);
 
             DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_DoomFlower));
-            DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_FairyFlower));
         }
 
         public static void CleanupAll(Map map)
         {
             if (map == null) { return; }
 
+            FindBoss(map)?.TryGetComp<CompApocrypha>()?.FairyChains?.Clear();
             ClearGimmickThings(map);
-            RemoveFairyAttunement(map);
+            RemoveAsphodelBond(map);
             DoomBlightUtility.ClearDoomBlights(map);
         }
 
@@ -172,7 +172,7 @@ namespace VVRace
         internal static void SpawnFlower(Thing flower, IntVec3 cell, Map map, Pawn boss)
         {
             var plant = cell.GetPlant(map);
-            if (plant != null && !plant.Destroyed)
+            if (plant != null && !plant.Destroyed && plant.def != VVThingDefOf.VV_Everflower)
             {
                 plant.Destroy(DestroyMode.Vanish);
             }
@@ -183,6 +183,84 @@ namespace VVRace
             }
 
             GenSpawn.Spawn(flower, cell, map, WipeMode.Vanish);
+        }
+
+        internal static void SpawnRelayFlower(Building_FairyFlower flower, IntVec3 cell, Map map)
+        {
+            var plant = cell.GetPlant(map);
+            if (plant != null && !plant.Destroyed && plant.def != VVThingDefOf.VV_Everflower)
+            {
+                plant.Destroy(DestroyMode.Vanish);
+            }
+
+            GenSpawn.Spawn(flower, cell, map, WipeMode.VanishOrMoveAside);
+        }
+
+        internal static bool TryFindNearestRelayFlowerCell(IntVec3 origin, Map map, out IntVec3 result)
+        {
+            result = IntVec3.Invalid;
+            if (map == null) { return false; }
+
+            origin = origin.ClampInsideMap(map);
+            var altar = Building_EverflowerAltar.FindOnMap(map);
+            var altarRect = GetAltarRect(altar);
+
+            foreach (var cell in GenRadial.RadialCellsAround(origin, 25f, useCenter: true))
+            {
+                if (IsValidRelayFlowerCell(cell, map, altarRect, rejectWater: true))
+                {
+                    result = cell;
+                    return true;
+                }
+            }
+
+            foreach (var cell in GenRadial.RadialCellsAround(origin, 25f, useCenter: true))
+            {
+                if (IsValidRelayFlowerCell(cell, map, altarRect, rejectWater: false))
+                {
+                    result = cell;
+                    return true;
+                }
+            }
+
+            var best = IntVec3.Invalid;
+            var bestDistSq = int.MaxValue;
+            foreach (var cell in map.AllCells)
+            {
+                if (!IsValidRelayFlowerCell(cell, map, altarRect, rejectWater: false)) { continue; }
+
+                var distSq = cell.DistanceToSquared(origin);
+                if (distSq < bestDistSq)
+                {
+                    bestDistSq = distSq;
+                    best = cell;
+                }
+            }
+
+            if (best.IsValid)
+            {
+                result = best;
+                return true;
+            }
+
+            return false;
+        }
+
+        private static bool IsValidRelayFlowerCell(IntVec3 cell, Map map, CellRect altarRect, bool rejectWater)
+        {
+            if (!cell.InBounds(map) || !cell.Standable(map) || cell.Fogged(map)) { return false; }
+            if (altarRect.Area > 0 && altarRect.Contains(cell)) { return false; }
+            if (rejectWater && cell.GetTerrain(map).IsWater) { return false; }
+
+            var things = cell.GetThingList(map);
+            for (int i = 0; i < things.Count; i++)
+            {
+                var thing = things[i];
+                if (thing is Building || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
+                if (thing.def == VVThingDefOf.VV_Everflower) { return false; }
+            }
+
+            return true;
         }
 
         #endregion
@@ -199,21 +277,43 @@ namespace VVRace
             var altar = Building_EverflowerAltar.FindOnMap(map);
             var altarRect = GetAltarRect(altar);
             var colonyAnchor = GetColonyAnchor(map, altar);
+            var existingFlowers = map.listerThings.ThingsOfDef(VVThingDefOf.VV_FairyFlower);
             var minDistanceSquared = distance.min * distance.min;
             var maxDistanceSquared = distance.max * distance.max;
 
+            bool FarFromExisting(IntVec3 c)
+            {
+                for (int i = 0; i < existingFlowers.Count; i++)
+                {
+                    if (existingFlowers[i].Position.InHorDistOf(c, MinBloomSpacing)) { return false; }
+                }
+                return true;
+            }
+
             for (int i = 0; i < count; i++)
             {
-                if (!CellFinder.TryFindRandomCellNear(bossCell, map, Mathf.CeilToInt(distance.max), c =>
+                if (CellFinder.TryFindRandomCellNear(bossCell, map, Mathf.CeilToInt(distance.max), c =>
                     c.DistanceToSquared(bossCell) >= minDistanceSquared
                     && c.DistanceToSquared(bossCell) <= maxDistanceSquared
                     && !IsNearAny(result, c, MinBloomSpacing)
+                    && FarFromExisting(c)
                     && IsValidBloomCell(c, map, altarRect, colonyAnchor), out var cell))
                 {
-                    break;
+                    result.Add(cell);
+                    continue;
                 }
 
-                result.Add(cell);
+                if (CellFinder.TryFindRandomCellNear(bossCell, map, Mathf.CeilToInt(distance.max + 10f), c =>
+                    !IsNearAny(result, c, MinBloomSpacing)
+                    && FarFromExisting(c)
+                    && IsValidRelayFlowerCell(c, map, altarRect, rejectWater: true)
+                    && CanReachFromColony(c, map, colonyAnchor), out cell))
+                {
+                    result.Add(cell);
+                    continue;
+                }
+
+                break;
             }
 
             return result;
@@ -352,6 +452,7 @@ namespace VVRace
         private static void ClearGimmickThings(Map map)
         {
             WitherAll(map, VVThingDefOf.VV_FairyFlower);
+            WitherAll(map, VVThingDefOf.VV_FairySigilWard);
             WitherAll(map, VVThingDefOf.VV_DoomFlower);
         }
 
@@ -371,16 +472,12 @@ namespace VVRace
             }
         }
 
-        private static void RemoveFairyAttunement(Map map)
+        private static void RemoveAsphodelBond(Map map)
         {
             var pawns = new List<Pawn>(map.mapPawns.AllPawnsSpawned);
             for (int i = 0; i < pawns.Count; i++)
             {
-                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyAttunement);
-                if (hediff != null)
-                {
-                    pawns[i].health.RemoveHediff(hediff);
-                }
+                ApocryphaFairyChains.RemoveBondHediffSilently(pawns[i]);
             }
         }
 

@@ -10,6 +10,7 @@
 
 <!-- 헤디프 -->
 <VV_Hediff_ApocryphaStuckNeedleTip>Lodged needles: {0} / {1}\nDamage taken: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
+<VV_Hediff_ApocryphaResolveTip>Stacks: {0} / {1}\nNeedle damage: +{2}\nNeedle aim time: -{3}</VV_Hediff_ApocryphaResolveTip>
 
 <!-- 경고 -->
 <VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
@@ -17,7 +18,7 @@
 
 <!-- 편지 -->
 <VV_Letter_ApocryphaRebirthLabel>Asphodel</VV_Letter_ApocryphaRebirthLabel>
-<VV_Letter_ApocryphaRebirth>Though the giant hornet queen's form has collapsed and vanished, the cluster of lights left within has gathered to take shape once more. Countless fairy vivis wrap layer upon layer around Asphodel, the old empress; having temporarily regained a semblance of her past self, Asphodel will try to seize the everflower to carry out her own salvation.\n\nThe countless bound fairy vivis are taking every attack in her place. To stop the empress, first shatter her fairy veil, then have your vivis resonate with the fairy blooms that sprout nearby and use the power they gain to unravel the bond between Asphodel and the fairy vivis.</VV_Letter_ApocryphaRebirth>
+<VV_Letter_ApocryphaRebirth>Though the giant hornet queen's form has collapsed and vanished, the cluster of lights left within has gathered to take shape once more. Countless fairy vivis wrap layer upon layer around Asphodel, the old empress; having temporarily regained a semblance of her past self, Asphodel will try to seize the everflower to carry out her own salvation.\n\nThe countless bound fairy vivis are taking every attack in her place. To stop the empress, attack and shatter her fairy veil, then have normal vivis resonate with the fairy blooms that sprout nearby and carry the tethered chain to the everflower altar to sever her bond with the fairy vivis.</VV_Letter_ApocryphaRebirth>
 
 <!-- 메시지 -->
 <VV_Message_ApocryphaChannelInterrupted>Asphodel's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
@@ -25,6 +26,7 @@
 <VV_Message_ApocryphaEscapedRoofCollapse>Asphodel teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
 <VV_Message_ApocryphaShieldBroken>Asphodel's fairy veil has scattered, briefly stunning her as fairy blooms sprout nearby.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>The fairy vivis have gathered once more, restoring Asphodel's fairy veil.</VV_Message_ApocryphaShieldRestored>
+<VV_Message_ApocryphaResolveGained>A fairy bloom was destroyed by force, hardening Asphodel's resolve. ({0} stacks)</VV_Message_ApocryphaResolveGained>
 <VV_Message_ApocryphaNeedleStuck>An ancient eltex needle lodged in her carapace, briefly stunning the giant hornet queen.</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaNeedlesShakenOff>The giant hornet queen has shaken off all the lodged needles, drawing a swarm of titanic hornets toward the colony.</VV_Message_ApocryphaNeedlesShakenOff>
 <VV_Message_ApocryphaNeedleActivated>Awakened by {PAWN_labelShort}, the ancient needle takes aim at the giant hornet queen.</VV_Message_ApocryphaNeedleActivated>

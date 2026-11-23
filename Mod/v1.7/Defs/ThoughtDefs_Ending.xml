@@ -14,4 +14,19 @@
       </li>
     </stages>
   </ThoughtDef>
+
+  <!-- 구원받음 -->
+  <ThoughtDef>
+    <defName>VV_AsphodelSalvation</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.041667</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>saved</label>
+        <description>Returned before the everflower from Asphodel's embrace. Every ache and weariness has washed away in warm golden light.</description>
+        <baseMoodEffect>40</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>

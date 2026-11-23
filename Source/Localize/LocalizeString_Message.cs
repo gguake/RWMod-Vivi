@@ -42,12 +42,13 @@
         public const string VV_Message_ApocryphaEscapedRoofCollapse = nameof(VV_Message_ApocryphaEscapedRoofCollapse);
         public const string VV_Message_ApocryphaShieldBroken = nameof(VV_Message_ApocryphaShieldBroken);
         public const string VV_Message_ApocryphaShieldRestored = nameof(VV_Message_ApocryphaShieldRestored);
+        public const string VV_Message_ApocryphaResolveGained = nameof(VV_Message_ApocryphaResolveGained);
         public const string VV_Message_ApocryphaNeedleStuck = nameof(VV_Message_ApocryphaNeedleStuck);
         public const string VV_Message_ApocryphaNeedlesShakenOff = nameof(VV_Message_ApocryphaNeedlesShakenOff);
         public const string VV_Message_ApocryphaNeedleActivated = nameof(VV_Message_ApocryphaNeedleActivated);
 
         public const string VV_Message_FairyFlowerResonated = nameof(VV_Message_FairyFlowerResonated);
-        public const string VV_Message_FairyFlowerResonanceFailed = nameof(VV_Message_FairyFlowerResonanceFailed);
+        public const string VV_Message_FairyChainDispelled = nameof(VV_Message_FairyChainDispelled);
         public const string VV_Message_DoomFlowerBloomed = nameof(VV_Message_DoomFlowerBloomed);
 
         public const string VV_Message_SkyShieldRaised = nameof(VV_Message_SkyShieldRaised);

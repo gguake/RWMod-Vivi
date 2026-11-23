@@ -14,6 +14,7 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _ScrollSpeed;   // @default = 0.55
     float _Tiling;        // @default = 1.0
     float _PulseSpeed;    // @default = 3.0
+    float _Desaturate;    // @default = 0.0
 } u;
 
 layout(set = 2, binding = 1) uniform sampler2D _MainTex;
@@ -26,6 +27,9 @@ void main()
 
     float ends = smoothstep(0.0, 0.06, vUv.x) * smoothstep(0.0, 0.06, 1.0 - vUv.x);
     float pulse = 0.78 + 0.22 * sin(u._AgeSecs * u._PulseSpeed);
-    vec3 c = (c1 * 0.75 + c2 * 0.45) * u._Color.rgb * vColor.rgb * pulse * ends * u._Color.a;
+    vec3 raw = c1 * 0.75 + c2 * 0.45;
+    float luma = dot(raw, vec3(0.299, 0.587, 0.114));
+    vec3 base = mix(raw, vec3(luma), clamp(u._Desaturate, 0.0, 1.0));
+    vec3 c = base * u._Color.rgb * vColor.rgb * pulse * ends * u._Color.a;
     outColor = vec4(clamp(c, 0.0, 1.0), 1.0);
 }

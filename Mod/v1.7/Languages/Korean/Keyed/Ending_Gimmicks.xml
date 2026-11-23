@@ -4,13 +4,14 @@
 <!-- 요정꽃 우클릭 메뉴 -->
 <VV_FloatMenu_ResonateFairyFlower>요정꽃과 공명</VV_FloatMenu_ResonateFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>비비가 아님</VV_FailReason_FairyFlowerNotVivi>
+<VV_FailReason_FairyFlowerRoyalVivi>로열 비비는 공명할 수 없음</VV_FailReason_FairyFlowerRoyalVivi>
 <VV_FailReason_FairyFlowerNotAdult>아기는 공명할 수 없음</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>움직일 수 없음</VV_FailReason_CannotMove>
-<VV_FailReason_FairyFlowerResonanceFailed>이미 공명에 실패함</VV_FailReason_FairyFlowerResonanceFailed>
+<VV_FailReason_FairyFlowerAlreadyBound>이미 아스포델 결속 상태임</VV_FailReason_FairyFlowerAlreadyBound>
 
 <!-- 메시지 -->
-<VV_Message_FairyFlowerResonated>{PAWN_labelShort}(이)가 요정꽃과 공명해 요정 교화를 얻었습니다.</VV_Message_FairyFlowerResonated>
-<VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort}(이)가 자격이 부족해 요정꽃의 요정 비비들에게 거부당했습니다.</VV_Message_FairyFlowerResonanceFailed>
+<VV_Message_FairyFlowerResonated>{PAWN_labelShort}(이)가 요정꽃과 공명해 아스포델 결속을 얻었습니다.</VV_Message_FairyFlowerResonated>
+<VV_Message_FairyChainDispelled>황금빛 결속의 선이 영원꽃 제단에 닿아 아스포델의 결속을 흔들고 묶여 있던 비비들을 되돌려 놓았습니다.</VV_Message_FairyChainDispelled>
 <VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 {BLIGHT} 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->

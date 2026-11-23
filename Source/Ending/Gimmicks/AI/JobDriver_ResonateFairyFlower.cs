@@ -28,7 +28,7 @@ namespace VVRace
                 .WithProgressBarToilDelay(FlowerIndex)
                 .WithEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerResonance, FlowerIndex);
 
-            yield return Toils_General.DoAtomic(() => Flower?.Notify_Resonated(pawn, Rand.Chance(Flower.ResonanceChance(pawn))));
+            yield return Toils_General.DoAtomic(() => Flower?.Notify_Interacted(pawn));
         }
     }
 }

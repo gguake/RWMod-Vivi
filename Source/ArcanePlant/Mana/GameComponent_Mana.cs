@@ -163,6 +163,8 @@ namespace VVRace
         {
             if (vivi == null || vivi.Dead || vivi.Destroyed || _asphodelBound.Contains(vivi)) { return; }
 
+            ApocryphaFairyChains.RemoveBondHediffSilently(vivi);
+
             vivi.GetLord()?.Notify_PawnLost(vivi, PawnLostCondition.Vanished);
             if (vivi.Spawned)
             {

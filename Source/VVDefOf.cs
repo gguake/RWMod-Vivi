@@ -170,13 +170,14 @@ namespace VVRace
         public static ThingDef VV_Mote_ApocryphaAimTarget;
         public static ThingDef VV_Mote_ApocryphaDrainVortex;
         public static ThingDef VV_Mote_ApocryphaRepelCharge;
-        public static ThingDef VV_Mote_FairyAttunementShimmer;
+        public static ThingDef VV_Mote_AsphodelBondShimmer;
 
         public static ThingDef VV_ApocryphaNeedle;
 
 
         public static ThingDef VV_DoomFlower;
         public static ThingDef VV_FairyFlower;
+        public static ThingDef VV_FairySigilWard;
 
         public static ThingDef VV_SkyShield;
         public static ThingDef VV_WindOfRest;
@@ -245,6 +246,7 @@ namespace VVRace
         public static ThoughtDef VV_AtePollen;
 
         public static ThoughtDef VV_EverflowerFullBloom;
+        public static ThoughtDef VV_AsphodelSalvation;
     }
 
     [DefOf]
@@ -270,10 +272,11 @@ namespace VVRace
         public static HediffDef VV_ArchiteGermlineImprint;
 
         public static HediffDef VV_ApocryphaFairyBond;
+        public static HediffDef VV_ApocryphaResolve;
         public static HediffDef VV_ApocryphaStuckNeedle;
         public static HediffDef VV_DoomPhantasm;
 
-        public static HediffDef VV_FairyAttunement;
+        public static HediffDef VV_AsphodelBond;
         public static HediffDef VV_DoomBlight_Fear;
         public static HediffDef VV_DoomBlight_Hunger;
         public static HediffDef VV_DoomBlight_Plague;
@@ -380,7 +383,8 @@ namespace VVRace
         public static EffecterDef VV_Effecter_FairyFlowerResonance;
         public static EffecterDef VV_Effecter_FairyFlowerResonated;
         public static EffecterDef VV_Effecter_FairyFlowerBurst;
-        public static EffecterDef VV_Effecter_FairyAttunementAura;
+        public static EffecterDef VV_Effecter_FairyFlowerVanish;
+        public static EffecterDef VV_Effecter_AsphodelBondAura;
         public static EffecterDef VV_Effecter_FairyReturn;
 
         public static EffecterDef VV_Effecter_QueenCorpseBloom;

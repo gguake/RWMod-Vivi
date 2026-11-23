@@ -57,11 +57,23 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- 요정꽃 문양 잔존 -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_FairySigilWard</defName>
+    <label>fairy sigil</label>
+    <thingClass>VVRace.FairySigilWard</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <altitudeLayer>MoteLow</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
+
   <!-- 요정꽃 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower born from the spreading mana of the fairy vivis wrapped around Asphodel. Each fairy bloom favors a different candidate at the whim of the fairy vivis, and when a suitable vivi resonates with it, they gain the power to free the fairy vivis.\n\nWhen its sigil completes, it heals all nearby living beings, but any vivis caught in its effect are turned into fairies and bound to Asphodel.</description>
+    <description>A flower born from the spreading mana of the fairy vivis wrapped around Asphodel. When a normal vivi resonates with it, the flower connects to her with an energy tether and grants Asphodel's bond. If she carries the tether to the everflower altar before being pulled in, the chain breaks and frees all vivis bound along it while weakening Asphodel's fairy bond.\n\nIf the daffodil sigil completes before anyone resonates, it heals nearby living beings, turns nearby vivis into fairies bound to Asphodel, and collapses the entire chain to restore Asphodel's fairy bond. Destroying a fairy bloom by force collapses the chain without restoring her bond, but hardens Asphodel's resolve.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>
@@ -80,9 +92,9 @@
     <pathCost>0</pathCost>
     <fillPercent>0</fillPercent>
     <rotatable>false</rotatable>
-    <useHitPoints>false</useHitPoints>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <statBases>
+      <MaxHitPoints>2000</MaxHitPoints>
       <Flammability>0</Flammability>
       <Beauty>15</Beauty>
     </statBases>
@@ -90,8 +102,6 @@
       <deconstructible>false</deconstructible>
       <claimable>false</claimable>
       <repairable>false</repairable>
-      <isTargetable>false</isTargetable>
-      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
       <isInert>true</isInert>
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <ai_chillDestination>false</ai_chillDestination>

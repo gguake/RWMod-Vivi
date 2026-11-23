@@ -78,7 +78,9 @@
     <Compile Include="Ending\Boss\AI\JobGiver_ApocryphaEscortWander.cs" />
     <Compile Include="Ending\Boss\AI\JobGiver_ApocryphaMain.cs" />
     <Compile Include="Ending\Boss\AI\FairyJob_ApocryphaSwarm.cs" />
+    <Compile Include="Ending\Boss\AI\FairyJob_AsphodelBondOrbit.cs" />
     <Compile Include="Ending\Boss\AI\FairyToil_ApocryphaSwarmDrift.cs" />
+    <Compile Include="Ending\Boss\AI\FairyToil_AsphodelBondOrbit.cs" />
     <Compile Include="Ending\Boss\ApocryphaNeedleLane.cs" />
     <Compile Include="Ending\Boss\ApocryphaNeedleRenderer.cs" />
     <Compile Include="Ending\Boss\ApocryphaShroudGlow.cs" />
@@ -88,9 +90,9 @@
     <Compile Include="Ending\Boss\Comps\ApocryphaDoomWave.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaBlastBreach.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaFairyBond.cs" />
+    <Compile Include="Ending\Boss\Comps\ApocryphaFairyChains.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaFairySwarm.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaResurrectionEmbrace.cs" />
-    <Compile Include="Ending\Boss\Comps\ApocryphaAttunementLinks.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaBondShatter.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaEscortSummon.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaNeedleAttack.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Ending\Boss\Comps\CompApocrypha.Debug.cs" />
     <Compile Include="Ending\Boss\Comps\CompProperties_Apocrypha.cs" />
     <Compile Include="Ending\Boss\Hediff_ApocryphaFairyBond.cs" />
+    <Compile Include="Ending\Boss\Hediff_ApocryphaResolve.cs" />
     <Compile Include="Ending\Boss\Hediff_ApocryphaStuckNeedle.cs" />
     <Compile Include="Ending\Boss\Hediff_DoomPhantasm.cs" />
     <Compile Include="Ending\Boss\Lord\LordJob_ApocryphaEscort.cs" />
@@ -165,15 +168,14 @@
     <Compile Include="Ending\Ruins\ViviAncientRuins.cs" />
     <Compile Include="Ending\Gimmicks\AI\JobDriver_ResonateFairyFlower.cs" />
     <Compile Include="Ending\Gimmicks\ApocryphaGimmicks.cs" />
-    <Compile Include="Ending\Gimmicks\AttunementField.cs" />
     <Compile Include="Ending\Gimmicks\FairySigil.cs" />
     <Compile Include="Ending\Gimmicks\FairyBlastAim.cs" />
     <Compile Include="Ending\Gimmicks\FairySigilLanes.cs" />
     <Compile Include="Ending\Gimmicks\FairySigilRenderer.cs" />
     <Compile Include="Ending\Gimmicks\SigilStroke.cs" />
     <Compile Include="Ending\Gimmicks\DoomBlightUtility.cs" />
+    <Compile Include="Ending\Gimmicks\Hediff_AsphodelBond.cs" />
     <Compile Include="Ending\Gimmicks\Hediff_DoomBlight.cs" />
-    <Compile Include="Ending\Gimmicks\Hediff_FairyAttunement.cs" />
     <Compile Include="Ending\Gimmicks\LinkRenderUtility.cs" />
     <Compile Include="Ending\Gimmicks\ModExtension\ApocryphaFlowerExtension.cs" />
     <Compile Include="Ending\Gimmicks\PetalLinkRenderer.cs" />
@@ -181,6 +183,7 @@
     <Compile Include="Ending\Gimmicks\Things\Building_ApocryphaFlower.cs" />
     <Compile Include="Ending\Gimmicks\Things\Building_DoomFlower.cs" />
     <Compile Include="Ending\Gimmicks\Things\Building_FairyFlower.cs" />
+    <Compile Include="Ending\Gimmicks\Things\FairySigilWard.cs" />
     <Compile Include="Ending\Queen\Abilities\CompAbilityEffect_QueenManaBarrier.cs" />
     <Compile Include="Ending\Queen\Abilities\CompAbilityEffect_QueenVerdict.cs" />
     <Compile Include="Ending\Queen\Hediff_EverflowerQueen.cs" />

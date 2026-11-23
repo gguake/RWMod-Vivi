@@ -104,13 +104,30 @@ namespace VVRace
                 return;
             }
 
-            if (targeting.TryFindRaidTargetCells(out var first, out var second))
+            if (targeting.TryFindRaidTargets(out var raider, out var secondRaider))
             {
                 targeting.Notify_RaidTargeted(now);
                 idle.Shuffle();
-                FirePattern(RaidPattern, idle, first, second, true);
+                StrikeHoming(idle.GetRange(0, 3), raider, requireBond: false);
+                if (secondRaider != null)
+                {
+                    StrikeHoming(idle.GetRange(3, 3), secondRaider, requireBond: false);
+                }
+
+                _lastPattern = RaidPattern;
             }
-            else if (targeting.TryFindTargetCells(Props.needleTargetRange, out first, out second))
+            else if (targeting.TryFindBoundSnipeTargets(out var boundFirst, out var boundSecond))
+            {
+                idle.Shuffle();
+                StrikeHoming(idle.GetRange(0, 3), boundFirst, requireBond: true);
+                if (boundSecond != null)
+                {
+                    StrikeHoming(idle.GetRange(3, 3), boundSecond, requireBond: true);
+                }
+
+                _lastPattern = RaidPattern;
+            }
+            else if (targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second))
             {
                 idle.Shuffle();
                 FirePattern(PickPattern(), idle, first, second);
@@ -124,33 +141,45 @@ namespace VVRace
             _readyTick = now + Props.needleCastIntervalTicks.RandomInRange;
         }
 
-        public void FirePattern(int pattern, List<ApocryphaNeedle> idle, IntVec3 first, IntVec3 second, bool reachTarget = false)
+        private void StrikeHoming(List<ApocryphaNeedle> needles, Pawn target, bool requireBond)
+        {
+            var center = target.DrawPos.Yto0();
+            var offset = EndingVfxUtility.RandomRingOffset(Props.needleFanRadius);
+            var aimTicks = _comp.EffectiveNeedleAimTicks;
+            for (int i = 0; i < needles.Count; i++)
+            {
+                needles[i].StartHomingStrike(target, center + Quaternion.AngleAxis(360f / needles.Count * i, Vector3.up) * offset, aimTicks, requireBond);
+            }
+        }
+
+        public void FirePattern(int pattern, List<ApocryphaNeedle> idle, IntVec3 first, IntVec3 second)
         {
             var startAngle = Rand.Range(0f, 360f);
+            var aimTicks = _comp.EffectiveNeedleAimTicks;
             switch (pattern)
             {
                 case 0:
-                    AimFixed(idle, 6, startAngle);
+                    AimFixed(idle, 6, startAngle, aimTicks);
                     break;
 
                 case 1:
-                    AimFixed(idle, 4, startAngle);
+                    AimFixed(idle, 4, startAngle, aimTicks);
                     if (second.IsValid)
                     {
-                        idle[4].StartAim(first, Props.needleAimTicks, reachTarget: reachTarget);
-                        idle[5].StartAim(second, Props.needleAimTicks, reachTarget: reachTarget);
+                        idle[4].StartAim(first, aimTicks);
+                        idle[5].StartAim(second, aimTicks);
                     }
                     else
                     {
-                        AimVolley(idle.GetRange(4, 2), first, 2, reachTarget);
+                        AimVolley(idle.GetRange(4, 2), first, 2, aimTicks);
                     }
                     break;
 
                 default:
-                    AimVolley(idle.GetRange(0, 3), first, 3, reachTarget);
+                    AimVolley(idle.GetRange(0, 3), first, 3, aimTicks);
                     if (second.IsValid)
                     {
-                        AimVolley(idle.GetRange(3, 3), second, 3, reachTarget);
+                        AimVolley(idle.GetRange(3, 3), second, 3, aimTicks);
                     }
                     break;
             }
@@ -163,11 +192,11 @@ namespace VVRace
             return Enumerable.Range(0, PatternCount).RandomElementByWeight(v => v == _lastPattern ? RepeatedPatternWeight : 1f);
         }
 
-        private void AimFixed(List<ApocryphaNeedle> idle, int count, float startAngle)
+        private void AimFixed(List<ApocryphaNeedle> idle, int count, float startAngle, int aimTicks)
         {
             for (int i = 0; i < count; i++)
             {
-                idle[i].StartAimDirection(Quaternion.AngleAxis(startAngle + 360f / count * i, Vector3.up) * Vector3.forward, Props.needleAimTicks);
+                idle[i].StartAimDirection(Quaternion.AngleAxis(startAngle + 360f / count * i, Vector3.up) * Vector3.forward, aimTicks);
             }
         }
 
@@ -370,11 +399,11 @@ namespace VVRace
             SyncStuckNeedleHediff();
         }
 
-        private void AimVolley(List<ApocryphaNeedle> idle, IntVec3 cell, int count, bool reachTarget = false)
+        private void AimVolley(List<ApocryphaNeedle> idle, IntVec3 cell, int count, int aimTicks)
         {
             for (int i = 0; i < count; i++)
             {
-                idle[i].StartAim(cell, Props.needleAimTicks, FanAngle(i, count), reachTarget);
+                idle[i].StartAim(cell, aimTicks, FanAngle(i, count));
             }
         }
 

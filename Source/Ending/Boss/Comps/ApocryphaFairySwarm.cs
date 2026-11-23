@@ -42,20 +42,25 @@ namespace VVRace
             _fairies.RemoveAll(v => v == null || v.Destroyed || v.State == FairyState.Dematerializing);
             if (!Pawn.Spawned) { return; }
 
-            var map = Pawn.Map;
             for (int i = _fairies.Count; i < _comp.Props.swarmFairyCount; i++)
             {
-                var fairy = (ViviFairy)ThingMaker.MakeThing(VVThingDefOf.VV_ViviFairy);
-                fairy.Initialize(Pawn, LifespanTicks);
-                if (!CellFinder.TryFindRandomCellNear(Pawn.Position, map, SpawnRadius, c => c.Standable(map), out var cell))
-                {
-                    cell = Pawn.Position;
-                }
-
-                GenSpawn.Spawn(fairy, cell, map);
-                fairy.StartJob(new FairyJob_ApocryphaSwarm(Pawn));
-                _fairies.Add(fairy);
+                _fairies.Add(SpawnFairy(Pawn, Pawn.Position, Pawn));
             }
+        }
+
+        public static ViviFairy SpawnFairy(Pawn boss, IntVec3 center, Thing anchor)
+        {
+            var map = boss.Map;
+            var fairy = (ViviFairy)ThingMaker.MakeThing(VVThingDefOf.VV_ViviFairy);
+            fairy.Initialize(boss, LifespanTicks);
+            if (!CellFinder.TryFindRandomCellNear(center, map, SpawnRadius, c => c.Standable(map), out var cell))
+            {
+                cell = center;
+            }
+
+            GenSpawn.Spawn(fairy, cell, map);
+            fairy.StartJob(new FairyJob_ApocryphaSwarm(boss, anchor));
+            return fairy;
         }
 
         public void Disperse()

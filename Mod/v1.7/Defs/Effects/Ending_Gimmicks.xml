@@ -1181,9 +1181,9 @@
     </children>
   </EffecterDef>
 
-  <!-- 요정 교화 빛무리 -->
+  <!-- 아스포델 결속 빛무리 -->
   <ThingDef ParentName="MoteBase">
-    <defName>VV_Mote_FairyAttunementShimmer</defName>
+    <defName>VV_Mote_AsphodelBondShimmer</defName>
     <thingClass>MoteAttached</thingClass>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
     <mote>
@@ -1197,18 +1197,18 @@
       <texPath>Things/Mote/Black</texPath>
       <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
       <shaderType>VV_LightShimmer</shaderType>
-      <color>(1, 0.9, 0.6, 1)</color>
+      <color>(0.95, 0.98, 1, 1)</color>
       <shaderParameters>
-        <_CoreColor>(1, 0.97, 0.86, 1)</_CoreColor>
+        <_CoreColor>(1, 1, 1, 1)</_CoreColor>
         <_Brightness>1</_Brightness>
       </shaderParameters>
       <drawSize>(1.8, 1.8)</drawSize>
     </graphicData>
   </ThingDef>
 
-  <!-- 요정 교화 기운 효과 -->
+  <!-- 아스포델 결속 기운 효과 -->
   <EffecterDef>
-    <defName>VV_Effecter_FairyAttunementAura</defName>
+    <defName>VV_Effecter_AsphodelBondAura</defName>
     <offsetMode>Free</offsetMode>
     <children>
       <li>
@@ -1220,7 +1220,7 @@
         <positionRadiusMin>0.15</positionRadiusMin>
         <positionRadius>0.5</positionRadius>
         <scale>0.2~0.32</scale>
-        <color>(1, 0.95, 0.75, 0.85)</color>
+        <color>(0.95, 0.98, 1, 0.9)</color>
       </li>
     </children>
   </EffecterDef>

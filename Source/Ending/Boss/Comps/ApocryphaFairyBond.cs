@@ -86,6 +86,13 @@ namespace VVRace
             CheckExhausted();
         }
 
+        public void DrainMaxFraction(float fraction)
+        {
+            if (fraction <= 0f) { return; }
+
+            Drain(Max * fraction);
+        }
+
         public void Recover(float fraction)
         {
             if (fraction <= 0f || _bond >= Max) { return; }
@@ -94,9 +101,20 @@ namespace VVRace
             _recoverFlowUntilTick = GenTicks.TicksGame + RecoverFlowTicks;
         }
 
+        public void RecoverMaxFraction(float fraction, bool showStream = true)
+        {
+            if (fraction <= 0f || _bond >= Max) { return; }
+
+            _bond = Mathf.Min(Max, _bond + Max * fraction);
+            if (showStream)
+            {
+                _recoverFlowUntilTick = GenTicks.TicksGame + RecoverFlowTicks;
+            }
+        }
+
         private void CheckExhausted()
         {
-            if (Fraction < Props.fairyBondClear)
+            if (Fraction <= Props.fairyBondClear)
             {
                 _comp.Notify_BondExhausted();
             }

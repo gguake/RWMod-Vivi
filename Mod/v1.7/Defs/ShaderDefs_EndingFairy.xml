@@ -20,24 +20,4 @@
     <defName>VV_FairySigil</defName>
     <shaderPath>Map/VV_FairySigil</shaderPath>
   </ShaderTypeDef>
-
-  <!-- 요정 교화 황금 필드 셰이더 -->
-  <ShaderDef>
-    <defName>VV_AttunementField</defName>
-    <shaderProgram>
-      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
-      <fragmentShaderFileName>VV_AttunementField.frag.glsl</fragmentShaderFileName>
-      <flipTextureST>false</flipTextureST>
-      <transparent>true</transparent>
-      <depthWrite>false</depthWrite>
-      <cullMode>None</cullMode>
-      <renderQueue>3100</renderQueue>
-    </shaderProgram>
-  </ShaderDef>
-
-  <!-- 요정 교화 황금 필드 셰이더 유형 -->
-  <ShaderTypeDef>
-    <defName>VV_AttunementField</defName>
-    <shaderPath>Map/VV_AttunementField</shaderPath>
-  </ShaderTypeDef>
 </Defs>

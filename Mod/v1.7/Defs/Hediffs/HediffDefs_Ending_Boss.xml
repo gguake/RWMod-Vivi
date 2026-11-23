@@ -22,6 +22,54 @@
     </stages>
   </HediffDef>
 
+  <!-- 결의 -->
+  <HediffDef>
+    <defName>VV_ApocryphaResolve</defName>
+    <label>resolve</label>
+    <description>Destroying Asphodel's fairy blooms by force has hardened her resolve. Each stack reduces damage taken, increases her needle damage, and speeds up her needle aiming.</description>
+    <hediffClass>VVRace.Hediff_ApocryphaResolve</hediffClass>
+    <defaultLabelColor>(1, 0.72, 0.32)</defaultLabelColor>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <priceImpact>false</priceImpact>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>1</minSeverity>
+    <maxSeverity>5</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>0.8</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>0.7</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>0.6</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>5</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
   <!-- 고대 엘텍스 바늘 -->
   <HediffDef>
     <defName>VV_ApocryphaStuckNeedle</defName>

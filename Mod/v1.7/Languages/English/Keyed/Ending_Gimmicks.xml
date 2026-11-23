@@ -4,13 +4,14 @@
 <!-- 요정꽃 우클릭 메뉴 -->
 <VV_FloatMenu_ResonateFairyFlower>Resonate with fairy bloom</VV_FloatMenu_ResonateFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>not a vivi</VV_FailReason_FairyFlowerNotVivi>
+<VV_FailReason_FairyFlowerRoyalVivi>royal vivis cannot resonate</VV_FailReason_FairyFlowerRoyalVivi>
 <VV_FailReason_FairyFlowerNotAdult>babies cannot resonate</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>cannot move</VV_FailReason_CannotMove>
-<VV_FailReason_FairyFlowerResonanceFailed>already failed to resonate</VV_FailReason_FairyFlowerResonanceFailed>
+<VV_FailReason_FairyFlowerAlreadyBound>already bound to Asphodel</VV_FailReason_FairyFlowerAlreadyBound>
 
 <!-- 메시지 -->
-<VV_Message_FairyFlowerResonated>{PAWN_labelShort} has resonated with the fairy bloom and gained fairy attunement.</VV_Message_FairyFlowerResonated>
-<VV_Message_FairyFlowerResonanceFailed>{PAWN_labelShort} lacked the qualifications and was rejected by the fairy bloom's fairy vivis.</VV_Message_FairyFlowerResonanceFailed>
+<VV_Message_FairyFlowerResonated>{PAWN_labelShort} has resonated with the fairy bloom and gained Asphodel's bond.</VV_Message_FairyFlowerResonated>
+<VV_Message_FairyChainDispelled>The golden tether reached the everflower altar, weakening Asphodel's fairy bond and returning every vivi bound along the chain.</VV_Message_FairyChainDispelled>
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->

@@ -5,6 +5,9 @@ namespace VVRace
     public class FairyJob_ApocryphaSwarm : FairyJob
     {
         private int _nextAttackTick;
+        private Thing _anchor;
+
+        public FairySigilWard Ward => _anchor as FairySigilWard;
 
         public override FairyJobKind Kind => FairyJobKind.Guard;
 
@@ -16,7 +19,23 @@ namespace VVRace
 
         public FairyJob_ApocryphaSwarm() { }
 
-        public FairyJob_ApocryphaSwarm(Pawn owner) : base(0, owner) { }
+        public FairyJob_ApocryphaSwarm(Pawn owner, Thing anchor) : base(0, owner)
+        {
+            _anchor = anchor;
+        }
+
+        protected override bool TryGetInterruptReason(out FairyJobInterruptReason reason)
+        {
+            if (base.TryGetInterruptReason(out reason)) { return true; }
+
+            if (_anchor == null || !_anchor.Spawned || _anchor.Map != fairy.Map)
+            {
+                reason = FairyJobInterruptReason.TargetUnavailable;
+                return true;
+            }
+
+            return false;
+        }
 
         protected override void MakeToils()
         {
@@ -35,7 +54,7 @@ namespace VVRace
             if (fairy == null) { return; }
 
             var comp = BossComp;
-            if (comp != null && comp.Embrace.IsCasting)
+            if (comp != null && Ward == null && comp.Embrace.IsCasting)
             {
                 if (CurrentToil is FairyToil_Attack)
                 {
@@ -51,7 +70,9 @@ namespace VVRace
 
             var props = comp.Props;
 
-            var target = ViviFairyTargeting.FindGuardTargetNear(owner, owner.Position, props.swarmAttackRadius, owner.Position, owner.Position, excludeDowned: true);
+            var center = _anchor.Position;
+            var radius = Ward != null ? props.sigilWardAttackRadius : props.swarmAttackRadius;
+            var target = ViviFairyTargeting.FindGuardTargetNear(owner, center, radius, center, center, excludeDowned: true);
             if (TryStartAttackOrReturn(target, null))
             {
                 _nextAttackTick = now + props.swarmAttackCooldownTicks.RandomInRange;
@@ -64,7 +85,7 @@ namespace VVRace
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)
         {
-            if (reason == FairyJobInterruptReason.OwnerUnavailable)
+            if (reason == FairyJobInterruptReason.OwnerUnavailable || reason == FairyJobInterruptReason.TargetUnavailable)
             {
                 fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: false));
             }
@@ -74,6 +95,7 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Values.Look(ref _nextAttackTick, "nextAttackTick", 0);
+            Scribe_References.Look(ref _anchor, "anchor");
         }
     }
 }
