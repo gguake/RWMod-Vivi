@@ -67,7 +67,8 @@ namespace VVRace
             IntVec3 losFrom,
             IntVec3 priorityOrigin,
             bool excludeDowned,
-            Thing exclude = null)
+            Thing exclude = null,
+            bool pawnsOnly = false)
         {
             var searcherThing = searcher != null ? searcher.Thing : null;
             var map = searcherThing != null ? searcherThing.Map : null;
@@ -83,6 +84,7 @@ namespace VVRace
             {
                 var target = potentialTarget as Thing;
                 if (target == null || center.DistanceTo(target.Position) > radius) { continue; }
+                if (pawnsOnly && !(target is Pawn)) { continue; }
                 if (!IsValidHostileTarget(target, faction, map, losFrom, excludeDowned, exclude)) { continue; }
 
                 int distance = (int)priorityOrigin.DistanceTo(target.Position);

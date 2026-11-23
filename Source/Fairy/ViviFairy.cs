@@ -321,6 +321,13 @@ namespace VVRace
         {
             if (hitThing == null || !hitThing.Spawned || hitThing.Map != Map || hitThing == _owner) { return; }
 
+            if (CurrentJob?.ImpactHarmless ?? false)
+            {
+                // 피해 없이 저지만: 방어구·보호막과 무관하게 걸린다
+                (hitThing as Pawn)?.stances?.stagger?.StaggerFor(CurrentJob.ImpactStaggerTicks);
+                return;
+            }
+
             var psychicSensitivity = _owner != null ? Mathf.Clamp(_owner.GetStatValue(StatDefOf.PsychicSensitivity), 0.5f, 10f) : 1f;
             var damageBase = Mathf.Clamp(Mathf.Sqrt(psychicSensitivity), 1f, 4f);
             var actualDamage = (int)damageBase + (Rand.Chance(damageBase - (int)damageBase) ? 1 : 0);

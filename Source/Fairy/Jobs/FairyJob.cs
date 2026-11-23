@@ -46,6 +46,7 @@ namespace VVRace
         public abstract FairyJobKind Kind { get; }
         public virtual FairyRole Role => FairyRole.None;
         public virtual int ImpactStaggerTicks => 30;
+        public virtual bool ImpactHarmless => false;
 
         public FairyToil CurrentToil
         {

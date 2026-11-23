@@ -13,6 +13,8 @@ namespace VVRace
 
         public override int ImpactStaggerTicks => Props?.swarmStaggerTicks ?? base.ImpactStaggerTicks;
 
+        public override bool ImpactHarmless => true;
+
         private CompApocrypha BossComp => owner?.TryGetComp<CompApocrypha>();
 
         private CompProperties_Apocrypha Props => BossComp?.Props;
@@ -72,7 +74,7 @@ namespace VVRace
 
             var center = _anchor.Position;
             var radius = Ward != null ? props.sigilWardAttackRadius : props.swarmAttackRadius;
-            var target = ViviFairyTargeting.FindGuardTargetNear(owner, center, radius, center, center, excludeDowned: true);
+            var target = ViviFairyTargeting.FindGuardTargetNear(owner, center, radius, center, center, excludeDowned: true, pawnsOnly: true);
             if (TryStartAttackOrReturn(target, null))
             {
                 _nextAttackTick = now + props.swarmAttackCooldownTicks.RandomInRange;
