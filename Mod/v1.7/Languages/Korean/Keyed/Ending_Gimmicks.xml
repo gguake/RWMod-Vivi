@@ -12,6 +12,7 @@
 <!-- 메시지 -->
 <VV_Message_FairyFlowerResonated>{PAWN_labelShort}(이)가 요정꽃과 공명해 아스포델 결속을 얻었습니다.</VV_Message_FairyFlowerResonated>
 <VV_Message_FairyChainDispelled>황금빛 결속의 선이 영원꽃 제단에 닿아 아스포델의 결속을 흔들고 묶여 있던 비비들을 되돌려 놓았습니다.</VV_Message_FairyChainDispelled>
+<VV_Message_AsphodelBondBrokenByTeleport>{PAWN_labelShort}(이)가 순간이동하여 아스포델 결속이 끊어졌습니다.</VV_Message_AsphodelBondBrokenByTeleport>
 <VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 {BLIGHT} 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->

@@ -12,6 +12,7 @@
 <!-- 메시지 -->
 <VV_Message_FairyFlowerResonated>{PAWN_labelShort} has resonated with the fairy bloom and gained Asphodel's bond.</VV_Message_FairyFlowerResonated>
 <VV_Message_FairyChainDispelled>The golden tether reached the everflower altar, weakening Asphodel's fairy bond and returning every vivi bound along the chain.</VV_Message_FairyChainDispelled>
+<VV_Message_AsphodelBondBrokenByTeleport>{PAWN_labelShort} was teleported, breaking Asphodel's bond.</VV_Message_AsphodelBondBrokenByTeleport>
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
 
 <!-- 헤디프 -->

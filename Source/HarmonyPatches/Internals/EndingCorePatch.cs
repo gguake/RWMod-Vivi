@@ -63,6 +63,21 @@ namespace VVRace
             ViviHarmonyPatcher.TryPatch(harmony, "PawnRenderNodeWorker_Head.RotationFor (assimilated resonator head rotation)",
                 AccessTools.Method(typeof(PawnRenderNodeWorker_Head), nameof(PawnRenderNodeWorker_Head.RotationFor)),
                 postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(PawnRenderNodeWorker_RotationFor_Postfix)) { priority = Priority.Last });
+
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn.Notify_Teleported (asphodel bond breaks on teleport)",
+                AccessTools.Method(typeof(Pawn), nameof(Pawn.Notify_Teleported)),
+                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Pawn_Notify_Teleported_Postfix)));
+        }
+
+        private static void Pawn_Notify_Teleported_Postfix(Pawn __instance, bool resetTweenedPos)
+        {
+            // 걸을 수 없는 칸에서 옆 칸으로 밀려나는 위치 보정은 resetTweenedPos=false로 오므로 순간이동으로 보지 않는다.
+            if (!resetTweenedPos || !__instance.Spawned) { return; }
+            if (__instance.health?.hediffSet?.GetFirstHediffOfDef(VVHediffDefOf.VV_AsphodelBond) == null) { return; }
+
+            // 결속이 사라지면 체인 틱이 다음 틱에 실패 붕괴로 처리한다.
+            ApocryphaFairyChains.RemoveBondHediffSilently(__instance);
+            Messages.Message(LocalizeString_Message.VV_Message_AsphodelBondBrokenByTeleport.Translate(__instance.Named("PAWN")), __instance, MessageTypeDefOf.NegativeEvent);
         }
 
         private static float PawnRenderer_BodyAngle_Postfix(float __result, Pawn ___pawn)

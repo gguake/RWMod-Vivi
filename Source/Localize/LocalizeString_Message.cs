@@ -49,6 +49,7 @@
 
         public const string VV_Message_FairyFlowerResonated = nameof(VV_Message_FairyFlowerResonated);
         public const string VV_Message_FairyChainDispelled = nameof(VV_Message_FairyChainDispelled);
+        public const string VV_Message_AsphodelBondBrokenByTeleport = nameof(VV_Message_AsphodelBondBrokenByTeleport);
         public const string VV_Message_DoomFlowerBloomed = nameof(VV_Message_DoomFlowerBloomed);
 
         public const string VV_Message_SkyShieldRaised = nameof(VV_Message_SkyShieldRaised);
