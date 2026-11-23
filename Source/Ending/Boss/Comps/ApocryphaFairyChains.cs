@@ -85,20 +85,24 @@ namespace VVRace
         private const int OrbitFairyCount = 6;
         private const int OrbitFairyLifespanTicks = int.MaxValue / 2;
 
-        private const float FailOrbCellsPerTick = 0.30f;
-        private const int MinFailSegmentTicks = 12;
-        private const int MaxFailSegmentTicks = 45;
+        private const float FailOrbCellsPerTick = 0.24f;
+        private const int MinFailSegmentTicks = 18;
+        private const int MaxFailSegmentTicks = 65;
 
         private const int DestroyedStepTicks = 12;
 
-        private const float DispelOrbCellsPerTick = 0.65f;
-        private const int MinDispelSegmentTicks = 6;
-        private const int MaxDispelSegmentTicks = 18;
+        private const float DispelOrbCellsPerTick = 0.35f;
+        private const int MinDispelSegmentTicks = 16;
+        private const int MaxDispelSegmentTicks = 65;
 
         private const float ChainLinkWidth = 0.62f;
         private const float TetherLinkWidth = 0.72f;
         private const float GoldenLinkWidth = 0.88f;
         private const float GoldenPetalWidth = 1.05f;
+        private const float DispelWakeLength = 7.0f;
+        private const float DispelWakeOuterWidth = 1.65f;
+        private const float DispelWakeCoreWidth = 0.95f;
+        private const float FailWakeLength = 3.5f;
 
         private static readonly Color WhiteBeamColor = new Color(0.95f, 0.98f, 1f, 0.90f);
         private static readonly Color TetherBeamColor = new Color(0.97f, 0.99f, 1f, 0.98f);
@@ -106,9 +110,13 @@ namespace VVRace
         private static readonly Color GoldenPetalColor = new Color(1f, 0.88f, 0.38f, 0.85f);
         private static readonly Color FailOrbColor = new Color(1f, 0.95f, 0.78f, 1f);
         private static readonly Color DispelOrbColor = new Color(1f, 0.86f, 0.30f, 1f);
+        private static readonly Color DispelWakeOuterColor = new Color(1f, 0.90f, 0.42f, 0.98f);
+        private static readonly Color DispelWakeCoreColor = new Color(1f, 0.98f, 0.84f, 1f);
         private static readonly Color DestroyedLinkColor = new Color(0.8f, 0.82f, 0.88f, 0.45f);
 
         private static readonly Material OrbGlowMat = MaterialPool.MatFrom("VFX/VV_ScentAura", ShaderDatabase.MoteGlow, Color.white);
+        private static readonly Material OrbSwirlMat = MaterialPool.MatFrom("VFX/VV_ScentAura2", ShaderDatabase.MoteGlow, Color.white);
+        private static readonly Material OrbCoreMat = MaterialPool.MatFrom("Things/Mote/SparkFlash", ShaderDatabase.MoteGlow, Color.white);
         private static readonly Material OrbTwinkleMat = MaterialPool.MatFrom("VFX/VV_ScentTwinkle", ShaderDatabase.MoteGlow, Color.white);
         private static readonly MaterialPropertyBlock OrbPropertyBlock = new MaterialPropertyBlock();
 
@@ -528,17 +536,19 @@ namespace VVRace
                 return;
             }
 
-            var t = Mathf.Clamp01((now - chain.collapseSegmentStartTick) / (float)Mathf.Max(1, chain.collapseSegmentTicks));
+            var ticks = Mathf.Max(1, chain.collapseSegmentTicks);
+            var prevT = Mathf.Clamp01((now - 1 - chain.collapseSegmentStartTick) / (float)ticks);
+            var t = Mathf.Clamp01((now - chain.collapseSegmentStartTick) / (float)ticks);
             var from = chain.collapsePoints[chain.collapseSegmentIndex];
             var to = chain.collapseSegmentIndex > 0 ? chain.collapsePoints[chain.collapseSegmentIndex - 1] : _comp.BodyCenter.Yto0();
+            var prevOrbPos = Vector3.Lerp(from, to, prevT);
             var orbPos = Vector3.Lerp(from, to, t);
 
-            if (now % 2 == 0)
-            {
-                ThrowOrbTrail(map, orbPos, FailOrbColor, 0.55f);
-            }
+            ThrowOrbTrail(map, prevOrbPos, orbPos, (to - from).Yto0(), FailOrbColor, 0.95f, intense: false);
 
             if (now < chain.collapseSegmentStartTick + chain.collapseSegmentTicks) { return; }
+
+            ThrowOrbWaypointBurst(map, to, FailOrbColor, 1.25f, grandRing: false);
 
             chain.collapseSegmentIndex--;
             if (chain.collapseSegmentIndex >= 0)
@@ -640,6 +650,7 @@ namespace VVRace
             chain.state = FairyChainState.CollapsingDispel;
             chain.collapseSegmentIndex = 0;
             BeginDispelSegment(chain, map, GenTicks.TicksGame);
+            ThrowOrbWaypointBurst(map, _comp.BodyCenter.Yto0(), DispelOrbColor, 1.85f, grandRing: true);
         }
 
         private void BeginDispelSegment(FairyFlowerChain chain, Map map, int now)
@@ -662,15 +673,19 @@ namespace VVRace
             }
 
             var idx = chain.collapseSegmentIndex;
-            var t = Mathf.Clamp01((now - chain.collapseSegmentStartTick) / (float)Mathf.Max(1, chain.collapseSegmentTicks));
+            var ticks = Mathf.Max(1, chain.collapseSegmentTicks);
+            var prevT = Mathf.Clamp01((now - 1 - chain.collapseSegmentStartTick) / (float)ticks);
+            var t = Mathf.Clamp01((now - chain.collapseSegmentStartTick) / (float)ticks);
             var from = idx == 0 ? _comp.BodyCenter.Yto0() : chain.collapsePoints[idx - 1];
             var to = idx == chain.collapsePoints.Count - 1 ? GetAltarAnchorPos(map, chain.altarTarget) : chain.collapsePoints[idx];
+            var prevOrbPos = Vector3.Lerp(from, to, prevT);
             var orbPos = Vector3.Lerp(from, to, t);
 
-            ThrowOrbTrail(map, orbPos, DispelOrbColor, 0.72f);
+            ThrowOrbTrail(map, prevOrbPos, orbPos, (to - from).Yto0(), DispelOrbColor, 1.35f, intense: true);
 
             if (now < chain.collapseSegmentStartTick + chain.collapseSegmentTicks) { return; }
 
+            ThrowOrbWaypointBurst(map, to, DispelOrbColor, 2.0f, grandRing: false);
             if (idx < chain.flowers.Count && chain.flowers[idx] != null && chain.flowers[idx].Spawned)
             {
                 ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerResonated, chain.flowers[idx].Position, map);
@@ -691,11 +706,13 @@ namespace VVRace
             var altar = ResolveAltar(map, chain.altarTarget);
             var released = ReleaseChainSalvationVivis(chain, map, altar, out var effectCell);
 
+            var altarPos = GetAltarAnchorPos(map, altar);
+            ThrowOrbWaypointBurst(map, altarPos, DispelOrbColor, 2.25f, grandRing: true);
             ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_ApocryphaReleaseRefresh, effectCell, map);
             ApocryphaUtility.ShakeCamera(map, 0.9f);
 
             _comp.DrainBondMaxFraction(Props.fairyFlowerDispelBondDrain * chain.collapseFlowerCount);
-            var angle = (GetAltarAnchorPos(map, altar) - _comp.BodyCenter.Yto0()).AngleFlat();
+            var angle = (altarPos - _comp.BodyCenter.Yto0()).AngleFlat();
             _comp.BondShatter.Trigger(angle);
 
             var lookTarget = released.Count > 0 ? new LookTargets(released) : new LookTargets(new TargetInfo(effectCell, map));
@@ -940,7 +957,16 @@ namespace VVRace
             }
 
             SoulLinkRenderer.Draw(prev, orbPos, TetherLinkWidth, FailOrbColor, desaturate: 0.7f);
-            DrawLightOrb(orbPos, FailOrbColor, 1.35f, idx);
+
+            var back = from - orbPos;
+            var backLen = back.MagnitudeHorizontal();
+            if (backLen >= 0.05f)
+            {
+                var wakeEnd = orbPos + (back / backLen) * Mathf.Min(FailWakeLength, backLen);
+                SoulLinkRenderer.Draw(wakeEnd, orbPos, TetherLinkWidth * 1.35f, ScaleAlpha(FailOrbColor, 0.85f), desaturate: 0.85f);
+            }
+
+            DrawLightOrb(orbPos, (to - from).Yto0(), FailOrbColor, 1.45f, idx, intense: false);
         }
 
         private void DrawCollapsingDestroyed(FairyFlowerChain chain, Vector3 bossPos)
@@ -959,20 +985,54 @@ namespace VVRace
             var idx = chain.collapseSegmentIndex;
             if (idx < 0 || idx >= chain.collapsePoints.Count) { return; }
 
-            var prev = bossPos;
-            for (int i = 0; i < chain.collapsePoints.Count; i++)
+            var t = Mathf.Clamp01((now - chain.collapseSegmentStartTick) / (float)Mathf.Max(1, chain.collapseSegmentTicks));
+            var from = idx == 0 ? bossPos.Yto0() : chain.collapsePoints[idx - 1];
+            var to = idx == chain.collapsePoints.Count - 1 ? GetAltarAnchorPos(map, chain.altarTarget) : chain.collapsePoints[idx];
+            var orbPos = Vector3.Lerp(from, to, t);
+
+            // 빛무리 앞쪽의 남은 황금 체인만 유지해 에너지가 휩쓸려 이동하는 대비를 만든다.
+            if ((to - orbPos).MagnitudeHorizontal() >= 0.05f)
+            {
+                DrawGoldenSegment(orbPos, to, GoldenLinkWidth, GoldenPetalWidth, GoldenBeamColor, GoldenPetalColor, idx * 53);
+            }
+
+            var prev = to;
+            for (int i = idx + 1; i < chain.collapsePoints.Count; i++)
             {
                 var pt = i == chain.collapsePoints.Count - 1 ? GetAltarAnchorPos(map, chain.altarTarget) : chain.collapsePoints[i];
                 DrawGoldenSegment(prev, pt, GoldenLinkWidth, GoldenPetalWidth, GoldenBeamColor, GoldenPetalColor, i * 53);
                 prev = pt;
             }
 
-            var t = Mathf.Clamp01((now - chain.collapseSegmentStartTick) / (float)Mathf.Max(1, chain.collapseSegmentTicks));
-            var from = idx == 0 ? bossPos.Yto0() : chain.collapsePoints[idx - 1];
-            var to = idx == chain.collapsePoints.Count - 1 ? GetAltarAnchorPos(map, chain.altarTarget) : chain.collapsePoints[idx];
-            var orbPos = Vector3.Lerp(from, to, t);
+            DrawDispelWake(chain, bossPos, idx, orbPos);
+            DrawLightOrb(orbPos, (to - from).Yto0(), DispelOrbColor, 2.15f, idx + 17, intense: true);
+        }
 
-            DrawLightOrb(orbPos, DispelOrbColor, 1.85f, idx + 17);
+        private static void DrawDispelWake(FairyFlowerChain chain, Vector3 bossPos, int idx, Vector3 orbPos)
+        {
+            var remaining = DispelWakeLength;
+            var head = orbPos;
+            for (int seg = idx; seg >= 0 && remaining > 0.05f; seg--)
+            {
+                var segStart = seg == 0 ? bossPos.Yto0() : chain.collapsePoints[seg - 1];
+                var back = head - segStart;
+                var segLen = back.MagnitudeHorizontal();
+                if (segLen >= 0.05f)
+                {
+                    var take = Mathf.Min(remaining, segLen);
+                    var tail = head - (back / segLen) * take;
+                    var fade = Mathf.Clamp01(remaining / DispelWakeLength);
+                    var widthScale = 0.65f + 0.35f * fade;
+
+                    SoulLinkRenderer.Draw(tail, head, DispelWakeOuterWidth * widthScale, ScaleAlpha(DispelWakeOuterColor, fade), desaturate: 0.7f);
+                    SoulLinkRenderer.Draw(tail, head, DispelWakeCoreWidth * widthScale, ScaleAlpha(DispelWakeCoreColor, fade), desaturate: 0.9f);
+                    PetalLinkRenderer.Draw(tail, head, GoldenPetalWidth * 1.45f, ScaleAlpha(GoldenPetalColor, fade), seg * 53 + 7);
+
+                    remaining -= take;
+                }
+
+                head = segStart;
+            }
         }
 
         private static void DrawGoldenSegment(Vector3 a, Vector3 b, float beamWidth, float petalWidth, Color beamColor, Color petalColor, int seed)
@@ -981,20 +1041,53 @@ namespace VVRace
             PetalLinkRenderer.Draw(a, b, petalWidth, petalColor, seed);
         }
 
-        private static void DrawLightOrb(Vector3 pos, Color color, float scale, int seed)
+        private static void DrawLightOrb(Vector3 pos, Vector3 moveDir, Color color, float scale, int seed, bool intense)
         {
-            var drawPos = new Vector3(pos.x, AltitudeLayer.MoteOverhead.AltitudeFor() + 0.02f, pos.z);
-            var flicker = 0.88f + 0.12f * Mathf.Sin(LinkRenderUtility.WrappedAgeSecs * 12f + seed * 1.7f);
-            var glowScale = 1.6f * scale * flicker;
-            var coreScale = 0.9f * scale * flicker;
+            var age = LinkRenderUtility.WrappedAgeSecs;
+            var pulse = 0.90f + 0.12f * Mathf.Sin(age * 11f + seed * 1.7f);
+            var baseY = AltitudeLayer.MoteOverhead.AltitudeFor() + 0.03f;
+            var drawPos = new Vector3(pos.x, baseY, pos.z);
+
+            var glowScale = (intense ? 3.2f : 2.3f) * scale * pulse;
+            var swirlScale = (intense ? 1.85f : 1.35f) * scale * pulse;
+            var coreScale = (intense ? 1.55f : 1.10f) * scale * pulse;
+            var twinkleScale = (intense ? 2.10f : 1.40f) * scale * (1.06f - 0.10f * pulse);
 
             OrbPropertyBlock.Clear();
-            OrbPropertyBlock.SetColor(ShaderPropertyIDs.Color, new Color(color.r * 0.85f, color.g * 0.85f, color.b * 0.85f, 1f));
+            OrbPropertyBlock.SetColor(ShaderPropertyIDs.Color, new Color(color.r, color.g, color.b, 0.95f));
             Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(drawPos, Quaternion.identity, new Vector3(glowScale, 1f, glowScale)), OrbGlowMat, 0, null, 0, OrbPropertyBlock);
+
+            var swirlRot = Quaternion.AngleAxis((age * 140f + seed * 47f) % 360f, Vector3.up);
+            OrbPropertyBlock.Clear();
+            OrbPropertyBlock.SetColor(ShaderPropertyIDs.Color, Color.Lerp(color, Color.white, 0.35f));
+            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(drawPos + new Vector3(0f, 0.01f, 0f), swirlRot, new Vector3(swirlScale, 1f, swirlScale)), OrbSwirlMat, 0, null, 0, OrbPropertyBlock);
+
+            OrbPropertyBlock.Clear();
+            OrbPropertyBlock.SetColor(ShaderPropertyIDs.Color, Color.Lerp(color, Color.white, 0.55f));
+            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(drawPos + new Vector3(0f, 0.02f, 0f), Quaternion.identity, new Vector3(coreScale, 1f, coreScale)), OrbCoreMat, 0, null, 0, OrbPropertyBlock);
 
             OrbPropertyBlock.Clear();
             OrbPropertyBlock.SetColor(ShaderPropertyIDs.Color, Color.white);
-            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(drawPos + new Vector3(0f, 0.01f, 0f), Quaternion.identity, new Vector3(coreScale, 1f, coreScale)), OrbTwinkleMat, 0, null, 0, OrbPropertyBlock);
+            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(drawPos + new Vector3(0f, 0.03f, 0f), Quaternion.identity, new Vector3(twinkleScale, 1f, twinkleScale)), OrbTwinkleMat, 0, null, 0, OrbPropertyBlock);
+
+            // 중심 주위를 감도는 작은 빛 입자들(빛무리)
+            var dir = moveDir.sqrMagnitude > 0.0001f ? moveDir.normalized : Vector3.forward;
+            var wispCount = intense ? 4 : 2;
+            var wispBaseRadius = (intense ? 0.65f : 0.45f) * scale;
+            var wispSpeed = intense ? 9.5f : 6.5f;
+            var wispColor = Color.Lerp(color, Color.white, 0.65f);
+            for (int w = 0; w < wispCount; w++)
+            {
+                var angle = age * wispSpeed + w * (Mathf.PI * 2f / wispCount) + seed;
+                var radius = wispBaseRadius * (0.75f + 0.25f * Mathf.Sin(age * 13f + w * 2.3f));
+                var offset = new Vector3(Mathf.Cos(angle) * radius, 0f, Mathf.Sin(angle) * radius) - dir * (0.25f * scale);
+                var wispPos = new Vector3(pos.x + offset.x, baseY + 0.035f, pos.z + offset.z);
+                var wispScale = (intense ? 0.48f : 0.34f) * scale;
+
+                OrbPropertyBlock.Clear();
+                OrbPropertyBlock.SetColor(ShaderPropertyIDs.Color, wispColor);
+                Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(wispPos, Quaternion.identity, new Vector3(wispScale, 1f, wispScale)), OrbCoreMat, 0, null, 0, OrbPropertyBlock);
+            }
         }
 
         private static Color ScaleAlpha(Color color, float factor)
@@ -1097,15 +1190,72 @@ namespace VVRace
             return Vector3.zero;
         }
 
-        private static void ThrowOrbTrail(Map map, Vector3 pos, Color color, float scale)
+        private static void ThrowOrbTrail(Map map, Vector3 fromPos, Vector3 toPos, Vector3 moveDir, Color color, float scale, bool intense)
         {
-            if (map == null || !pos.ShouldSpawnMotesAt(map)) { return; }
+            if (map == null) { return; }
 
-            var data = FleckMaker.GetDataStatic(pos + Gen.RandomHorizontalVector(0.25f), map, VVFleckDefOf.VV_Fleck_ApocryphaFairyLight, scale * Rand.Range(0.75f, 1.25f));
-            data.velocityAngle = Rand.Range(0f, 360f);
-            data.velocitySpeed = Rand.Range(0.3f, 1.1f);
-            data.instanceColor = color;
-            map.flecks.CreateFleck(data);
+            var stepDist = (toPos - fromPos).MagnitudeHorizontal();
+            var samples = intense
+                ? Mathf.Clamp(Mathf.CeilToInt(stepDist / 0.45f), 2, 5)
+                : Mathf.Clamp(Mathf.CeilToInt(stepDist / 0.65f), 1, 3);
+            var baseAngle = moveDir.sqrMagnitude > 0.0001f ? moveDir.AngleFlat() : Rand.Range(0f, 360f);
+
+            for (int i = 0; i < samples; i++)
+            {
+                var frac = samples > 1 ? (i + 1f) / samples : 1f;
+                var pos = Vector3.Lerp(fromPos, toPos, frac) + Gen.RandomHorizontalVector(intense ? 0.45f : 0.28f);
+                if (!pos.ShouldSpawnMotesAt(map)) { continue; }
+
+                var comet = FleckMaker.GetDataStatic(pos, map, VVFleckDefOf.VV_Fleck_ApocryphaFairyLight, scale * Rand.Range(0.85f, 1.25f));
+                comet.velocityAngle = baseAngle + Rand.Range(-22f, 22f);
+                comet.velocitySpeed = intense ? Rand.Range(2.2f, 4.6f) : Rand.Range(1.0f, 2.2f);
+                comet.solidTimeOverride = intense ? Rand.Range(0.22f, 0.42f) : Rand.Range(0.18f, 0.32f);
+                comet.instanceColor = Color.Lerp(color, Color.white, Rand.Range(0.15f, 0.45f));
+                map.flecks.CreateFleck(comet);
+            }
+
+            if (!toPos.ShouldSpawnMotesAt(map)) { return; }
+
+            var emberCount = intense ? 2 : 1;
+            for (int i = 0; i < emberCount; i++)
+            {
+                var ember = FleckMaker.GetDataStatic(toPos + Gen.RandomHorizontalVector(intense ? 0.55f : 0.3f), map, VVFleckDefOf.VV_Fleck_ApocryphaEmber, intense ? Rand.Range(0.65f, 1.15f) : Rand.Range(0.4f, 0.7f));
+                ember.velocityAngle = Rand.Range(0f, 360f);
+                ember.velocitySpeed = intense ? Rand.Range(0.8f, 2.6f) : Rand.Range(0.4f, 1.3f);
+                ember.instanceColor = Color.Lerp(color, Color.white, Rand.Range(0.2f, 0.55f));
+                map.flecks.CreateFleck(ember);
+            }
+        }
+
+        private static void ThrowOrbWaypointBurst(Map map, Vector3 pos, Color color, float scale, bool grandRing)
+        {
+            if (map == null || !pos.InBounds(map)) { return; }
+
+            if (grandRing && VVFleckDefOf.VV_Fleck_GoldenWaveRing != null)
+            {
+                var wave = FleckMaker.GetDataStatic(pos.WithY(AltitudeLayer.MoteOverhead.AltitudeFor()), map, VVFleckDefOf.VV_Fleck_GoldenWaveRing, scale * 0.55f);
+                wave.rotation = Rand.Range(0f, 360f);
+                map.flecks.CreateFleck(wave);
+            }
+
+            if (!pos.ShouldSpawnMotesAt(map)) { return; }
+
+            if (VVFleckDefOf.VV_Fleck_GimmickPhaseRing != null)
+            {
+                var ring = FleckMaker.GetDataStatic(pos, map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, scale);
+                ring.instanceColor = Color.Lerp(color, Color.white, 0.25f);
+                map.flecks.CreateFleck(ring);
+            }
+
+            var emberCount = grandRing ? 12 : 7;
+            for (int i = 0; i < emberCount; i++)
+            {
+                var ember = FleckMaker.GetDataStatic(pos + Gen.RandomHorizontalVector(0.35f), map, VVFleckDefOf.VV_Fleck_ApocryphaEmber, Rand.Range(0.6f, 1.15f));
+                ember.velocityAngle = Rand.Range(0f, 360f);
+                ember.velocitySpeed = Rand.Range(2.0f, 5.5f);
+                ember.instanceColor = Color.Lerp(color, Color.white, Rand.Range(0.15f, 0.5f));
+                map.flecks.CreateFleck(ember);
+            }
         }
 
         internal static void RemoveBondHediffSilently(Pawn pawn)
