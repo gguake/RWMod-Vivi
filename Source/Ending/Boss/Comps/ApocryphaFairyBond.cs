@@ -33,6 +33,7 @@ namespace VVRace
         public float Value => Mathf.Max(0f, _bond);
         public float Fraction => Max > 0f ? Mathf.Clamp01(Value / Max) : 0f;
         public bool Draining => GenTicks.TicksGame - _lastDrainTick <= DrainStreamTicks;
+        public bool IsDecaying => DecayPerHour > 0f;
 
         public float DecayPerHour
         {
@@ -81,9 +82,15 @@ namespace VVRace
         {
             if (amount <= 0f) { return; }
 
+            var wasDecaying = IsDecaying;
             _bond = Mathf.Max(0f, _bond - amount);
             _lastDrainTick = GenTicks.TicksGame;
             CheckExhausted();
+
+            if (!wasDecaying && IsDecaying)
+            {
+                _comp.Notify_BondDecayStarted();
+            }
         }
 
         public void DrainMaxFraction(float fraction)
@@ -97,18 +104,30 @@ namespace VVRace
         {
             if (fraction <= 0f || _bond >= Max) { return; }
 
+            var wasDecaying = IsDecaying;
             _bond = Mathf.Min(Max, _bond + Props.fairyBondInitial * fraction);
             _recoverFlowUntilTick = GenTicks.TicksGame + RecoverFlowTicks;
+
+            if (wasDecaying && !IsDecaying)
+            {
+                _comp.Notify_Approached();
+            }
         }
 
         public void RecoverMaxFraction(float fraction, bool showStream = true)
         {
             if (fraction <= 0f || _bond >= Max) { return; }
 
+            var wasDecaying = IsDecaying;
             _bond = Mathf.Min(Max, _bond + Max * fraction);
             if (showStream)
             {
                 _recoverFlowUntilTick = GenTicks.TicksGame + RecoverFlowTicks;
+            }
+
+            if (wasDecaying && !IsDecaying)
+            {
+                _comp.Notify_Approached();
             }
         }
 

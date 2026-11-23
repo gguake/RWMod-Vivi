@@ -295,6 +295,7 @@ namespace VVRace
         private void InterruptIdleJobForPursuit(int now)
         {
             if (now - _lastPursuitInterruptTick < PursuitInterruptIntervalTicks || Pawn.stances.stunner.Stunned) { return; }
+            if (_comp.Bond.IsDecaying && _comp.Channel.TryGetStealTarget(out _, out _, out _)) { return; }
 
             var jobDef = Pawn.CurJobDef;
             if (jobDef != VVJobDefOf.VV_ApocryphaWait && jobDef != VVJobDefOf.VV_ApocryphaWander && jobDef != VVJobDefOf.VV_ApocryphaApproach) { return; }

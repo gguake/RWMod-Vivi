@@ -20,6 +20,7 @@ namespace VVRace
 
         private const int BreachRecheckTicks = 60;
         private const int SkipRecoverTicks = 120;
+        private const int UrgentApproachRepathTicks = 300;
         private const float BreachRangeBuffer = 2f;
         private const float ApproachGoalTolerance = 2f;
         private const float StealRangeMargin = 1.5f;
@@ -108,11 +109,23 @@ namespace VVRace
                 comp.EnsureApproachRadius(target);
             }
 
-            if (target != null && GenTicks.TicksGame >= comp.NextApproachTick && comp.TrySkipToStealTarget(target, range))
+            var urgentApproach = target != null && comp.Bond.IsDecaying;
+            if (target != null && (urgentApproach || GenTicks.TicksGame >= comp.NextApproachTick) && comp.TrySkipToStealTarget(target, range))
             {
                 comp.SyncApproachRadiusAfterSkip(target, range);
                 comp.Notify_Approached();
                 return WaitJob(SkipRecoverTicks);
+            }
+
+            if (urgentApproach)
+            {
+                comp.SyncApproachRadiusToCurrent(target);
+                if (comp.BlastBreach.InProgress && comp.BlastBreach.TryContinue(out var urgentStandCell))
+                {
+                    return BreachJob(pawn, urgentStandCell);
+                }
+
+                return DirectApproachJob(pawn, comp, target, range);
             }
 
             if (comp.Targeting.TryFindPursuitCell(out var pursuitCell))
@@ -172,6 +185,55 @@ namespace VVRace
             job.expiryInterval = expiryTicks;
             job.checkOverrideOnExpire = true;
             return job;
+        }
+
+        private static Job DirectApproachJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
+        {
+            var map = pawn.Map;
+            var origin = pawn.Position;
+            var distance = origin.DistanceTo(target.Position);
+            if (distance < 1f) { return null; }
+
+            bool Reachable(IntVec3 c) =>
+                c.InBounds(map)
+                && c != origin
+                && c.Standable(map)
+                && pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly);
+
+            var edge = EdgeCellToward(pawn, target, range);
+            var cell = Reachable(edge) && edge.InHorDistOf(target.Position, range)
+                ? edge
+                : CellFinder.StandableCellNear(edge, map, 3f, c => Reachable(c) && c.InHorDistOf(target.Position, range));
+            if (cell.IsValid)
+            {
+                return MakeMoveJob(VVJobDefOf.VV_ApocryphaApproach, cell, UrgentApproachRepathTicks);
+            }
+
+            if (comp.BlastBreach.TryStart(target, 0f, out var breachCell))
+            {
+                return BreachJob(pawn, breachCell);
+            }
+
+            var direction = (target.Position - origin).ToVector3();
+            direction.y = 0f;
+            direction.Normalize();
+
+            var maxStep = Mathf.Min(comp.Props.approachDistance, distance);
+            for (var step = maxStep; !cell.IsValid && step >= 3f; step -= 3f)
+            {
+                var point = (origin.ToVector3Shifted() + direction * step).ToIntVec3().ClampInsideMap(map);
+                cell = CellFinder.StandableCellNear(point, map, 4f, c => Reachable(c) && c.DistanceTo(target.Position) < distance - 1f);
+            }
+
+            if (!cell.IsValid && maxStep > 0f && maxStep < 3f)
+            {
+                var point = (origin.ToVector3Shifted() + direction * maxStep).ToIntVec3().ClampInsideMap(map);
+                cell = CellFinder.StandableCellNear(point, map, 4f, c => Reachable(c) && c.DistanceTo(target.Position) < distance - 1f);
+            }
+
+            return cell.IsValid
+                ? MakeMoveJob(VVJobDefOf.VV_ApocryphaApproach, cell, UrgentApproachRepathTicks)
+                : WaitJob(BreachRecheckTicks);
         }
 
         private static Job ApproachJob(Pawn pawn, CompApocrypha comp, Thing target, float range, bool requireGoalProgress)
@@ -279,7 +341,7 @@ namespace VVRace
             if (mindState.nextMoveOrderIsWait)
             {
                 mindState.nextMoveOrderIsWait = false;
-                return WaitJob(comp.Props.wanderWaitTicks.RandomInRange);
+                return WaitJob(GetWanderWaitTicks(comp, target));
             }
 
             mindState.nextMoveOrderIsWait = true;
@@ -290,10 +352,26 @@ namespace VVRace
 
             if (!dest.IsValid || dest == pawn.Position)
             {
-                return WaitJob(comp.Props.wanderWaitTicks.RandomInRange);
+                return WaitJob(GetWanderWaitTicks(comp, target));
             }
 
             return MakeMoveJob(VVJobDefOf.VV_ApocryphaWander, dest, 2500);
+        }
+
+        private static int GetWanderWaitTicks(CompApocrypha comp, Thing target)
+        {
+            var ticks = comp.Props.wanderWaitTicks.RandomInRange;
+            if (comp.Phase != ApocryphaPhase.Asphodel || target == null) { return ticks; }
+
+            var remaining = comp.NextApproachTick - GenTicks.TicksGame;
+            if (remaining <= 0) { return ticks; }
+
+            if (comp.IsIdleForApproach && comp.Props.idleApproachSpeedFactor > 1f)
+            {
+                remaining = Mathf.CeilToInt(remaining / comp.Props.idleApproachSpeedFactor);
+            }
+
+            return Mathf.Min(ticks, Mathf.Max(60, remaining));
         }
 
         private static IntVec3 FindDonutWanderDest(Pawn pawn, CompApocrypha comp, Thing target, float stealRange)

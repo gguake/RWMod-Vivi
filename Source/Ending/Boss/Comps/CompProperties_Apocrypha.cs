@@ -77,6 +77,7 @@ namespace VVRace
         public float needleArmorPenetration = 1.0f;
 
         public IntRange approachIntervalTicks = new IntRange(4000, 7500);
+        public float idleApproachSpeedFactor = 3f;
         public float approachDistance = 9f;
         public float approachRingHalfWidth = 5f;
         public float wanderRadius = 6f;

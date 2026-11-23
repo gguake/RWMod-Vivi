@@ -38,6 +38,7 @@ namespace VVRace
         private bool _pendingDeath;
         private int _nextApproachTick;
         private float _approachRadius = -1f;
+        private float _approachAccelRemainder;
         private int _nextMeleeTick;
         private float _manaShield;
         private bool _shieldBroken;
@@ -166,6 +167,17 @@ namespace VVRace
         }
         public int NextApproachTick => _nextApproachTick;
         public float ApproachRadius => _approachRadius;
+        public bool IsIdleForApproach =>
+            _phase == ApocryphaPhase.Asphodel
+            && parent.Spawned
+            && IsQuestBossFight
+            && !Pawn.stances.stunner.Stunned
+            && !_targeting.InCombat
+            && _targeting.RangedAttacker == null
+            && !_channel.IsChanneling
+            && !_embrace.IsCasting
+            && !_blastBreach.InProgress
+            && !_blastBreach.ClearingPathBlock;
 
         public Vector3 BodyCenter => ApocryphaGimmicks.GetBossBodyPos(Pawn);
 
@@ -419,10 +431,45 @@ namespace VVRace
             _bond.Tick(now);
             _fairyChains.Tick(now);
             _bondShatter.Tick(now);
+            TickAsphodelApproach(now, stunned);
 
             if (!ShieldBroken && Pawn.IsHashIntervalTick(SwarmCheckInterval))
             {
                 _swarm.EnsureSummoned();
+            }
+        }
+
+        private void TickAsphodelApproach(int now, bool stunned)
+        {
+            if (stunned || _channel.IsChanneling || _embrace.IsCasting || _blastBreach.ClearingPathBlock) { return; }
+
+            if (_bond.IsDecaying)
+            {
+                if (Pawn.CurJobDef == VVJobDefOf.VV_ApocryphaWander && _channel.TryGetStealTarget(out _, out _, out _))
+                {
+                    InterruptCurrentJob();
+                }
+                return;
+            }
+
+            if (_nextApproachTick > now && IsIdleForApproach)
+            {
+                var extra = Props.idleApproachSpeedFactor - 1f;
+                if (extra > 0f)
+                {
+                    _approachAccelRemainder += extra;
+                    var step = Mathf.FloorToInt(_approachAccelRemainder);
+                    if (step > 0)
+                    {
+                        _approachAccelRemainder -= step;
+                        _nextApproachTick = Mathf.Max(now, _nextApproachTick - step);
+                    }
+                }
+            }
+
+            if (now >= _nextApproachTick && !_targeting.InCombat && Pawn.CurJobDef == VVJobDefOf.VV_ApocryphaWander)
+            {
+                InterruptCurrentJob();
             }
         }
 
@@ -696,8 +743,21 @@ namespace VVRace
             }
         }
 
+        internal void Notify_BondDecayStarted()
+        {
+            if (!IsAsphodelActive || _pendingDeath || Pawn.stances.stunner.Stunned) { return; }
+            if (!_channel.TryGetStealTarget(out _, out _, out _)) { return; }
+
+            var jobDef = Pawn.CurJobDef;
+            if (jobDef == VVJobDefOf.VV_ApocryphaWait || jobDef == VVJobDefOf.VV_ApocryphaWander || jobDef == VVJobDefOf.VV_ApocryphaPursue)
+            {
+                InterruptCurrentJob();
+            }
+        }
+
         public void Notify_Approached()
         {
+            _approachAccelRemainder = 0f;
             _nextApproachTick = GenTicks.TicksGame + Props.approachIntervalTicks.RandomInRange;
         }
 
@@ -706,6 +766,14 @@ namespace VVRace
             if (_approachRadius >= 0f || target == null || !parent.Spawned) { return; }
 
             _approachRadius = parent.Position.DistanceTo(target.Position);
+        }
+
+        internal void SyncApproachRadiusToCurrent(Thing target)
+        {
+            if (target == null || !parent.Spawned) { return; }
+
+            var currentDistance = parent.Position.DistanceTo(target.Position);
+            _approachRadius = _approachRadius < 0f ? currentDistance : Mathf.Min(_approachRadius, currentDistance);
         }
 
         internal void AdvanceApproach(Thing target)
