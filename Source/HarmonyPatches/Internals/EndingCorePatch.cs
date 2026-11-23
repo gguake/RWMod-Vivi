@@ -205,10 +205,12 @@ namespace VVRace
         {
             if (!__result) { return; }
             if (!(parms?.target is Map map)) { return; }
-            if (!ViviEndingUtility.IsThreatCategory(__instance?.def?.category)) { return; }
 
             var quest = ViviEndingQuest.Current;
-            if (quest != null && quest.ShouldSuppressThreats(map))
+            if (quest == null) { return; }
+
+            if (quest.ShouldSuppressAllIncidents(map)
+                || (ViviEndingUtility.IsThreatCategory(__instance?.def?.category) && quest.ShouldSuppressThreats(map)))
             {
                 __result = false;
             }

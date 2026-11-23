@@ -157,6 +157,12 @@ namespace VVRace
             return stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss;
         }
 
+        // 보스전 동안은 바닐라 공허 각성처럼 위협 여부와 forced 여부를 가리지 않고 모든 사건을 막는다.
+        public bool ShouldSuppressAllIncidents(Map map)
+        {
+            return map != null && map == AnchorMap && !IsBossDeferred && Stage == ViviEndingStage.Boss;
+        }
+
         public bool IsRaidBeaconActive(Map map)
         {
             return map != null && map == AnchorMap && Stage.IsPreCoronationStage();
