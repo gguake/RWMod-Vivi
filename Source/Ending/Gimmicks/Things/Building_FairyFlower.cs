@@ -321,7 +321,8 @@ namespace VVRace
             if (!selPawn.CanReserve(this))
             {
                 var reserver = Map.reservationManager.FirstRespectedReserver(this, selPawn) ?? Map.physicalInteractionReservationManager.FirstReserverOf(this);
-                var reason = reserver != null ? "ReservedBy".Translate(reserver.LabelShort, reserver) : "Reserved".Translate();
+                // 문자열 보간은 TaggedString의 원문(RawText)을 그대로 넣어 이름 색 태그가 풀리지 않은 채 출력된다.
+                var reason = (reserver != null ? "ReservedBy".Translate(reserver.LabelShort, reserver) : "Reserved".Translate()).Resolve().StripTags();
                 yield return new FloatMenuOption($"{label} ({reason})", null);
                 yield break;
             }
