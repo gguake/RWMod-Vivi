@@ -9,6 +9,7 @@ namespace VVRace
     internal static class ManifestationRenderer
     {
         private const string ShaderPath = "Map/VV_Manifest";
+        private const string FbmNoiseTexPath = "VFX/VV_TileableFbmNoise";
 
         private static readonly int ProgressId = Shader.PropertyToID("_Progress");
         private static readonly int RevealId = Shader.PropertyToID("_Reveal");
@@ -17,11 +18,18 @@ namespace VVRace
         private static readonly int SoftId = Shader.PropertyToID("_Soft");
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
         private static readonly Dictionary<string, Material> MaterialCache = new Dictionary<string, Material>();
+        private static readonly Texture2D FbmNoiseTex = ContentFinder<Texture2D>.Get(FbmNoiseTexPath, reportFailure: false);
 
         public static void Draw(string texPath, Rot4 rotation, Vector3 pos, float scale, float ageSecs, float progress, float reveal, Color? edgeColor = null, Color? bodyColor = null, float soft = 0f)
         {
-            var material = DissolveRenderer.GetNoiseMaterial(texPath + DissolveRenderer.RotationSuffix(rotation), ShaderPath, MaterialCache);
+            var key = texPath + DissolveRenderer.RotationSuffix(rotation);
+            var hadCached = MaterialCache.ContainsKey(key);
+            var material = DissolveRenderer.GetNoiseMaterial(key, ShaderPath, MaterialCache);
             if (material == null) { return; }
+            if (!hadCached && FbmNoiseTex != null)
+            {
+                material.SetTexture("_NoiseTex", FbmNoiseTex);
+            }
 
             PropertyBlock.Clear();
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, ageSecs);

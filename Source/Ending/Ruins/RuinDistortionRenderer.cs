@@ -8,6 +8,9 @@ namespace VVRace
     {
         private const string ShaderPath = "Map/VV_RuinDistortion";
         private const string BaseTexPath = "VFX/VV_EverflowerPetal";
+        private const string NoiseTexPath = "VFX/VV_TileableFbmNoise";
+        private const string PollenTexPath = "VFX/VV_RuinPollen";
+        private const string LotusTexPath = "VFX/VV_RuinLotusSdf";
         private const float SymSizeX = 156f;
         private const float SymSizeZ = 140f;
 
@@ -25,6 +28,21 @@ namespace VVRace
             if (shader != null && tex != null)
             {
                 DistortionMat = MaterialPool.MatFrom(tex, shader, Color.white);
+                var noise = ContentFinder<Texture2D>.Get(NoiseTexPath, reportFailure: false);
+                if (noise != null)
+                {
+                    DistortionMat.SetTexture("_NoiseTex", noise);
+                }
+                var pollen = ContentFinder<Texture2D>.Get(PollenTexPath, reportFailure: false);
+                if (pollen != null)
+                {
+                    DistortionMat.SetTexture("_PollenTex", pollen);
+                }
+                var lotus = ContentFinder<Texture2D>.Get(LotusTexPath, reportFailure: false);
+                if (lotus != null)
+                {
+                    DistortionMat.SetTexture("_LotusTex", lotus);
+                }
             }
         }
 

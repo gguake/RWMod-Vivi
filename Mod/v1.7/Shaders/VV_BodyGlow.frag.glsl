@@ -1,5 +1,7 @@
 #version 450
 
+// _BlurTex: R(spread=0.05), G(spread=0.15), B(spread=0.30)에 사전 베이크한 블러 스칼라(expand=1.9 UV 기준).
+
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -15,6 +17,9 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
 } u;
 
 layout(set = 2, binding = 1) uniform sampler2D _MainTex;
+layout(set = 2, binding = 2) uniform sampler2D _BlurTex;
+
+const float BLUR_TEX_EXPAND = 1.9;
 
 vec4 tap(vec2 uv)
 {
@@ -29,25 +34,17 @@ void main()
     vec2 uv = (vUv - 0.5) * u._Expand + 0.5;
     vec4 c0 = tap(uv);
 
-    vec4 blur = vec4(0.0);
-    float weight = 0.0;
-    for (int ring = 1; ring <= 3; ring++)
-    {
-        float r = u._Spread * float(ring) / 3.0;
-        float w = 1.0 / float(ring);
-        for (int i = 0; i < 10; i++)
-        {
-            float a = (float(i) + 0.5 * float(ring)) * 0.6283185;
-            blur += tap(uv + vec2(cos(a), sin(a)) * r) * w;
-            weight += w;
-        }
-    }
-    blur /= weight;
+    vec2 blurUv = (uv - 0.5) / BLUR_TEX_EXPAND + 0.5;
+    vec3 b = (blurUv.x >= 0.0 && blurUv.y >= 0.0 && blurUv.x <= 1.0 && blurUv.y <= 1.0)
+        ? texture(_BlurTex, blurUv * u._MainTex_ST.zw + u._MainTex_ST.xy).rgb
+        : vec3(0.0);
+    float blurScalar = u._Spread <= 0.15
+        ? mix(b.r, b.g, clamp((u._Spread - 0.05) / 0.10, 0.0, 1.0))
+        : mix(b.g, b.b, clamp((u._Spread - 0.15) / 0.15, 0.0, 1.0));
 
     float lum = dot(c0.rgb, vec3(0.299, 0.587, 0.114));
     vec3 core = mix(c0.rgb, vec3(lum) * u._Color.rgb, 0.35) * u._Core;
-    float blurLum = dot(blur.rgb, vec3(0.299, 0.587, 0.114));
-    vec3 bloom = u._Color.rgb * mix(blur.a, blurLum, 0.5) * (1.0 - 0.6 * c0.a) * u._Bloom;
+    vec3 bloom = u._Color.rgb * blurScalar * (1.0 - 0.6 * c0.a) * u._Bloom;
 
     outColor = vec4(clamp((core + bloom) * u._Color.a, 0.0, 1.0), 1.0);
 }

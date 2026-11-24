@@ -3,6 +3,7 @@
 // 쿼드는 최종 크기로 고정하고 _AgeSecs로 파면만 넓혀 텍스처 확대·압축을 피한다.
 // 굴절 폭은 쿼드 크기에 비례하도록 화면 미분으로 픽셀 단위로 바꾼다.
 // 플렉의 경우 Graphic_FleckPulse가 _AgeSecs·_RandomPerObject를 넣어 주고, 플렉 색과 페이드 투명도는 _Color로 전달한다.
+// _MainTex는 공용 타일링 FBM 노이즈(VFX/VV_TileableFbmNoise, 기본 주기 16)다.
 
 layout(location = 1) in vec2 vUv;
 
@@ -24,39 +25,17 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _Darken;        // @default = 0.0
 } u;
 
-layout(set = 2, binding = 1) uniform sampler2D _GrabDistortionBackground;
+layout(set = 2, binding = 1) uniform sampler2D _MainTex;
+layout(set = 2, binding = 2) uniform sampler2D _GrabDistortionBackground;
 
-// 정수 격자 해시. 실수 fract 해시는 좌표가 커지면 정밀도가 떨어져 긴 직선 무늬가 생긴다.
+const float NOISE_INV_PERIOD = 0.0625;
+
+// 정수 격자 해시. _RandomPerObject를 0~64 범위 시드로 변환하는 데 사용한다.
 float hash(ivec2 i)
 {
     uvec2 q = uvec2(i) * uvec2(1597334673u, 3812015801u);
     uint n = (q.x ^ q.y) * 1597334673u;
     return float(n) * (1.0 / 4294967295.0);
-}
-
-float vnoise(vec2 p)
-{
-    ivec2 i = ivec2(floor(p));
-    vec2 f = fract(p);
-    vec2 w = f * f * (3.0 - 2.0 * f);
-    float a = hash(i);
-    float b = hash(i + ivec2(1, 0));
-    float c = hash(i + ivec2(0, 1));
-    float d = hash(i + ivec2(1, 1));
-    return mix(mix(a, b, w.x), mix(c, d, w.x), w.y);
-}
-
-float fbm(vec2 p)
-{
-    float sum = 0.0;
-    float amp = 0.5;
-    for (int k = 0; k < 4; k++)
-    {
-        sum += amp * vnoise(p);
-        p = p * 2.03 + vec2(17.1, 9.7);
-        amp *= 0.5;
-    }
-    return sum;
 }
 
 void main()
@@ -75,7 +54,8 @@ void main()
     float seed = hash(ivec2(floatBitsToInt(u._RandomPerObject), 0x5bd1e995)) * 64.0;
 
     vec2 dir = p / max(r, 1e-4);
-    float front = mix(0.02, 0.96, ease) * (1.0 + 0.03 * (vnoise(dir * 2.5 + seed) - 0.5));
+    float frontNoise = textureLod(_MainTex, (dir * 2.5 + seed) * NOISE_INV_PERIOD, 0.0).b;
+    float front = mix(0.02, 0.96, ease) * (1.0 + 0.03 * (frontNoise - 0.5));
     float w = u._Width * (0.7 + 1.3 * ease);
     float d = r - front;                               // > 0: 파면 앞, < 0: 지나간 뒤
     float wakeLen = w * 5.0 + 0.10 * ease;
@@ -89,12 +69,12 @@ void main()
     float wake = d < 0.0 ? exp(-(d * d) / (wakeLen * wakeLen)) : 0.0;
     float ahead = smoothstep(0.0, 3.0 * w, d) * halo;
 
-    float flicker = 0.75 + 0.5 * vnoise(dir * 7.0 + vec2(u._AgeSecs * 3.0, seed));
-    float n = fbm(dir * (8.0 + 0.5 * d / w) + vec2(seed, u._AgeSecs * 2.5));
+    float flicker = 0.75 + 0.5 * textureLod(_MainTex, (dir * 7.0 + vec2(u._AgeSecs * 3.0, seed)) * NOISE_INV_PERIOD, 0.0).b;
+    float n = textureLod(_MainTex, (dir * (8.0 + 0.5 * d / w) + vec2(seed, u._AgeSecs * 2.5)) * NOISE_INV_PERIOD, 0.0).r;
     float arcs = pow(1.0 - abs(2.0 * n - 1.0), 14.0) * exp(-(d * d) / (9.0 * w * w)) * u._ArcIntensity;
 
     // 어두운 파동(_Darken > 0): 파면 둘레와 지나간 자리를 연기처럼 얼룩진 그림자로 덮는다. 0이면 기존 파동과 같다.
-    float smoke = 0.55 + 0.45 * fbm(dir * 5.0 + vec2(seed + 3.7, u._AgeSecs * 1.2) + vec2(d * 6.0));
+    float smoke = 0.55 + 0.45 * textureLod(_MainTex, (dir * 5.0 + vec2(seed + 3.7, u._AgeSecs * 1.2) + vec2(d * 6.0)) * NOISE_INV_PERIOD, 0.0).g;
     float shade = clamp((wake * 1.3 + halo * 1.2 + ahead * 0.6) * smoke * fade * u._Darken, 0.0, 0.85);
 
     float bump = exp(-(d * d) / (4.0 * w * w)) + 0.35 * wake;

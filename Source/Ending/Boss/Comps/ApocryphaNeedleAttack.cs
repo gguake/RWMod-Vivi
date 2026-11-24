@@ -16,7 +16,6 @@ namespace VVRace
         private const int PatternCount = 3;
         private const float RepeatedPatternWeight = 0.25f;
         private const int RaidPattern = 2;
-        private const int BoundSnipePattern = 3;
 
         public const int AsphodelNeedleCount = 6;
 
@@ -109,33 +108,13 @@ namespace VVRace
             {
                 targeting.Notify_RaidTargeted(now);
                 idle.Shuffle();
-                StrikeHoming(idle.GetRange(0, 3), raider, requireBond: false);
+                StrikeHoming(idle.GetRange(0, 3), raider);
                 if (secondRaider != null)
                 {
-                    StrikeHoming(idle.GetRange(3, 3), secondRaider, requireBond: false);
+                    StrikeHoming(idle.GetRange(3, 3), secondRaider);
                 }
 
                 _lastPattern = RaidPattern;
-            }
-            else if (targeting.TryFindBoundSnipeTargets(out var boundFirst, out var boundSecond))
-            {
-                var hasNormal = targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second);
-                if (!hasNormal || ShouldUseBoundSnipe())
-                {
-                    idle.Shuffle();
-                    StrikeHoming(idle.GetRange(0, 3), boundFirst, requireBond: true);
-                    if (boundSecond != null)
-                    {
-                        StrikeHoming(idle.GetRange(3, 3), boundSecond, requireBond: true);
-                    }
-
-                    _lastPattern = BoundSnipePattern;
-                }
-                else
-                {
-                    idle.Shuffle();
-                    FirePattern(PickPattern(), idle, first, second);
-                }
             }
             else if (targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second))
             {
@@ -151,14 +130,14 @@ namespace VVRace
             _readyTick = now + Props.needleCastIntervalTicks.RandomInRange;
         }
 
-        private void StrikeHoming(List<ApocryphaNeedle> needles, Pawn target, bool requireBond)
+        private void StrikeHoming(List<ApocryphaNeedle> needles, Pawn target)
         {
             var center = target.DrawPos.Yto0();
             var offset = EndingVfxUtility.RandomRingOffset(Props.needleFanRadius);
             var aimTicks = _comp.EffectiveNeedleAimTicks;
             for (int i = 0; i < needles.Count; i++)
             {
-                needles[i].StartHomingStrike(target, center + Quaternion.AngleAxis(360f / needles.Count * i, Vector3.up) * offset, aimTicks, requireBond);
+                needles[i].StartHomingStrike(target, center + Quaternion.AngleAxis(360f / needles.Count * i, Vector3.up) * offset, aimTicks);
             }
         }
 
@@ -200,12 +179,6 @@ namespace VVRace
         private int PickPattern()
         {
             return Enumerable.Range(0, PatternCount).RandomElementByWeight(v => v == _lastPattern ? RepeatedPatternWeight : 1f);
-        }
-
-        private bool ShouldUseBoundSnipe()
-        {
-            var snipeWeight = _lastPattern == BoundSnipePattern ? RepeatedPatternWeight : 1f;
-            return Rand.Value < snipeWeight / (snipeWeight + 1f);
         }
 
         private void AimFixed(List<ApocryphaNeedle> idle, int count, float startAngle, int aimTicks)

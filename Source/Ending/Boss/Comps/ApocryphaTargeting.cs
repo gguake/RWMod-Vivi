@@ -228,48 +228,6 @@ namespace VVRace
             return first != null;
         }
 
-        public bool TryFindBoundSnipeTargets(out Pawn first, out Pawn second)
-        {
-            first = null;
-            second = null;
-
-            var map = Pawn.Map;
-            var origin = Pawn.Position;
-            var minDistSq = Props.boundSnipeMinDistance * Props.boundSnipeMinDistance;
-            var pawns = map.mapPawns.AllPawnsSpawned;
-            for (int i = 0; i < pawns.Count; i++)
-            {
-                if (IsBoundSnipeTarget(pawns[i], origin, minDistSq))
-                {
-                    _tmpTargets.Add(pawns[i]);
-                }
-            }
-
-            if (_tmpTargets.Count > 0)
-            {
-                var guard = ApocryphaGimmicks.TryGetEverflowerBudPos(map, out var bud) ? bud : Pawn.DrawPos;
-                _tmpTargets.SortBy(v => (v.DrawPos - guard).MagnitudeHorizontalSquared());
-                first = (Pawn)_tmpTargets[0];
-                if (_tmpTargets.Count > 1)
-                {
-                    second = (Pawn)_tmpTargets[1];
-                }
-            }
-
-            _tmpTargets.Clear();
-            return first != null;
-        }
-
-        private bool IsBoundSnipeTarget(Pawn target, IntVec3 origin, float minDistSq)
-        {
-            if (target == Pawn || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
-            if (target.Position.Fogged(target.Map)) { return false; }
-            if ((target.Position - origin).LengthHorizontalSquared < minDistSq) { return false; }
-            if (target.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) != true) { return false; }
-
-            return Pawn.HostileTo(target);
-        }
-
         public void Notify_RaidTargeted(int now)
         {
             if (now - _lastRaidTargetTick > RaidSpeechGapTicks)

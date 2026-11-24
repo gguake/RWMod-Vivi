@@ -104,7 +104,6 @@ namespace VVRace
         private Vector3 _stuckOffset;
         private float _stuckAngle;
         private Pawn _lockTarget;
-        private bool _lockRequiresBond;
         private int _activateTick;
         private int _lockEndTick;
         private IntVec3 _groundCell = IntVec3.Invalid;
@@ -232,7 +231,6 @@ namespace VVRace
             Scribe_Values.Look(ref _stuckOffset, "stuckOffset");
             Scribe_Values.Look(ref _stuckAngle, "stuckAngle", 0f);
             Scribe_References.Look(ref _lockTarget, "lockTarget");
-            Scribe_Values.Look(ref _lockRequiresBond, "lockRequiresBond", false);
             Scribe_Values.Look(ref _activateTick, "activateTick", 0);
             Scribe_Values.Look(ref _lockEndTick, "lockEndTick", 0);
             Scribe_Values.Look(ref _groundCell, "groundCell", IntVec3.Invalid);
@@ -265,7 +263,7 @@ namespace VVRace
             BeginAim(start, direction, aimTicks, BossComp?.Props.needleRange ?? 19f);
         }
 
-        public void StartHomingStrike(Pawn target, Vector3 start, int aimTicks, bool requireBond = false)
+        public void StartHomingStrike(Pawn target, Vector3 start, int aimTicks)
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
@@ -278,7 +276,7 @@ namespace VVRace
             _angle = direction.AngleFlat();
             Trail?.ResetTrail();
 
-            BeginAim(start, direction, aimTicks, toTarget.magnitude + ReachMargin, target, requireBond);
+            BeginAim(start, direction, aimTicks, toTarget.magnitude + ReachMargin, target);
             SyncPosition();
         }
 
@@ -290,11 +288,10 @@ namespace VVRace
             BeginAim(BodyCenter + direction * LaunchOffset, direction, aimTicks, BossComp?.Props.needleRange ?? 19f);
         }
 
-        private void BeginAim(Vector3 start, Vector3 direction, int aimTicks, float range, Pawn lockTarget = null, bool requireBond = false)
+        private void BeginAim(Vector3 start, Vector3 direction, int aimTicks, float range, Pawn lockTarget = null)
         {
             var now = GenTicks.TicksGame;
             _lockTarget = lockTarget;
-            _lockRequiresBond = requireBond;
             _laneDir = direction;
             _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, start);
             _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, direction, range);
@@ -316,13 +313,11 @@ namespace VVRace
             if (_lockTarget != null)
             {
                 _lockTarget = null;
-                _lockRequiresBond = false;
                 _fireTick = -1;
                 StartReturn(GenTicks.TicksGame, _pos, _laneDir);
                 return true;
             }
 
-            _lockRequiresBond = false;
             _state = NeedleState.Idle;
             _stateStartTick = GenTicks.TicksGame;
             return true;
@@ -521,16 +516,6 @@ namespace VVRace
         {
             if (_lockTarget != null)
             {
-                if (_lockRequiresBond && !IsQueen)
-                {
-                    if (_lockTarget.Destroyed || !_lockTarget.Spawned || _lockTarget.Dead || _lockTarget.Downed || _lockTarget.Map != Map
-                        || _lockTarget.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) != true)
-                    {
-                        CancelAim();
-                        return;
-                    }
-                }
-
                 if (IsQueen || (_lockTarget.Spawned && !_lockTarget.Dead && !_lockTarget.Downed && _lockTarget.Map == Map))
                 {
                     UpdateLockDirection();
@@ -579,7 +564,6 @@ namespace VVRace
             if (!IsQueen)
             {
                 _lockTarget = null;
-                _lockRequiresBond = false;
             }
 
             _pos = BodyOnLane(_travelled);

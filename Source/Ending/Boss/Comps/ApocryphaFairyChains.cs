@@ -82,7 +82,6 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class ApocryphaFairyChains : IExposable
     {
-        private const int OrbitFairyCount = 6;
         private const int OrbitFairyLifespanTicks = int.MaxValue / 2;
 
         private const float FailOrbCellsPerTick = 0.24f;
@@ -925,6 +924,11 @@ namespace VVRace
             if (chain.state == FairyChainState.TetheredToPawn && chain.tetheredPawn != null && chain.tetheredPawn.Spawned)
             {
                 var pawnPos = chain.tetheredPawn.DrawPos;
+                if (chain.tetheredPawn.health?.hediffSet?.GetFirstHediffOfDef(VVHediffDefOf.VV_AsphodelBond) is Hediff_AsphodelBond bond)
+                {
+                    AsphodelBondChainRenderer.Draw(chain.tetheredPawn, bond.Progress);
+                }
+
                 if (golden)
                 {
                     DrawGoldenSegment(prev, pawnPos, GoldenLinkWidth, GoldenPetalWidth, GoldenBeamColor, GoldenPetalColor, chain.tetheredPawn.thingIDNumber);
@@ -1105,17 +1109,18 @@ namespace VVRace
             var map = target.Map;
             if (map == null || !Boss.Spawned) { return; }
 
+            var count = Mathf.Max(1, Props.bondGuardFairyCount);
             var center = target.DrawPos.Yto0();
-            for (int slot = 0; slot < OrbitFairyCount; slot++)
+            for (int slot = 0; slot < count; slot++)
             {
-                var angle = slot * (Mathf.PI * 2f / OrbitFairyCount);
+                var angle = slot * (Mathf.PI * 2f / count);
                 var offset = new Vector3(Mathf.Cos(angle) * FairyToil_AsphodelBondOrbit.StartRadiusX, 0f, Mathf.Sin(angle) * FairyToil_AsphodelBondOrbit.StartRadiusZ);
                 var cell = (center + offset).ToIntVec3().ClampInsideMap(map);
 
                 var fairy = (ViviFairy)ThingMaker.MakeThing(VVThingDefOf.VV_ViviFairy);
                 fairy.Initialize(Boss, OrbitFairyLifespanTicks);
                 GenSpawn.Spawn(fairy, cell, map);
-                fairy.StartJob(new FairyJob_AsphodelBondOrbit(Boss, target, slot, OrbitFairyCount));
+                fairy.StartJob(new FairyJob_AsphodelBondOrbit(Boss, target, slot, count));
                 chain.orbitFairies.Add(fairy);
             }
         }

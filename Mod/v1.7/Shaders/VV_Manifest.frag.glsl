@@ -1,6 +1,7 @@
 #version 450
 
 // C#(ApocryphaManifestation)이 MaterialPropertyBlock으로 _AgeSecs·_Progress·_Reveal·_Color(투명도)를 매 프레임 넣는다.
+// _NoiseTex는 공용 타일링 FBM 노이즈(VFX/VV_TileableFbmNoise, 기본 주기 16)다.
 
 layout(location = 0) in vec4 vColor;
 layout(location = 1) in vec2 vUv;
@@ -23,39 +24,9 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
 
 layout(set = 2, binding = 1) uniform sampler2D _MainTex;
 layout(set = 2, binding = 2) uniform sampler2D _DissolveTex;
+layout(set = 2, binding = 3) uniform sampler2D _NoiseTex;
 
-// 정수 격자 해시. 실수 fract 해시는 좌표가 커지면 정밀도가 떨어져 긴 직선 무늬가 생긴다.
-float hash(ivec2 i)
-{
-    uvec2 q = uvec2(i) * uvec2(1597334673u, 3812015801u);
-    uint n = (q.x ^ q.y) * 1597334673u;
-    return float(n) * (1.0 / 4294967295.0);
-}
-
-float vnoise(vec2 p)
-{
-    ivec2 i = ivec2(floor(p));
-    vec2 f = fract(p);
-    vec2 w = f * f * (3.0 - 2.0 * f);
-    float a = hash(i);
-    float b = hash(i + ivec2(1, 0));
-    float c = hash(i + ivec2(0, 1));
-    float d = hash(i + ivec2(1, 1));
-    return mix(mix(a, b, w.x), mix(c, d, w.x), w.y);
-}
-
-float fbm(vec2 p)
-{
-    float sum = 0.0;
-    float amp = 0.5;
-    for (int k = 0; k < 4; k++)
-    {
-        sum += amp * vnoise(p);
-        p = p * 2.03 + vec2(17.1, 9.7);
-        amp *= 0.5;
-    }
-    return sum;
-}
+const float NOISE_INV_PERIOD = 0.0625;
 
 void main()
 {
@@ -66,7 +37,7 @@ void main()
 
     float radial = clamp(length((vUv - vec2(0.5, 0.52)) * vec2(1.25, 1.0)) * 1.75, 0.0, 1.0);
     float n = texture(_DissolveTex, uv).r;
-    float grain = vnoise(vUv * 70.0);
+    float grain = textureLod(_NoiseTex, vUv * (70.0 * NOISE_INV_PERIOD), 0.0).b;
     float soft = clamp(u._Soft, 0.0, 1.0);
     float order = radial * 0.55 + n * 0.3 + grain * 0.15 * (1.0 - soft);
 
@@ -90,7 +61,7 @@ void main()
 
     float edge = (1.0 - smoothstep(0.0, w, d)) * (1.0 - smoothstep(0.9, 1.0, p));
 
-    float flow = fbm(vUv * vec2(5.0, 6.5) + vec2(0.0, -u._AgeSecs * 0.35));
+    float flow = textureLod(_NoiseTex, (vUv * vec2(5.0, 6.5) + vec2(0.0, -u._AgeSecs * 0.35)) * NOISE_INV_PERIOD, 0.0).r;
     float veins = pow(clamp(1.0 - abs(flow - 0.5) * 9.0, 0.0, 1.0), 2.0);
     vec3 body = dark + u._EdgeColor.rgb * veins * 0.55;
 

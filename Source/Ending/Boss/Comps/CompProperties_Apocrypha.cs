@@ -46,6 +46,9 @@ namespace VVRace
         public float sigilWardAttackRadius = 6.5f;
         public int sigilWardDurationTicks = 7000;
 
+        public int bondGuardFairyCount = 6;
+        public float bondGuardAttackRadius = 6f;
+
         public float embraceRadius = 11.4f;
         public int embraceCastTicks = 600;
         public int embraceCooldownTicks = 1000;
@@ -70,7 +73,6 @@ namespace VVRace
         public float needleFanHalfAngle3 = 65f;
         public int needleAimTicks = 225;
         public float needleTargetRange = 14f;
-        public float boundSnipeMinDistance = 14f;
         public float needleRange = 19f;
         public float needleHalfWidth = 1.5f;
         public float needleDamage = 50f;

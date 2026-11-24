@@ -3,6 +3,7 @@
 // 결속 피격(가산 혼합): 몸을 감싼 방벽의 맞은 쪽 벌집 칸이 번쩍이고 금이 간다.
 // 쿼드 중심은 몸 중심, 쿼드 x축은 투사체 진행 방향(플렉 회전으로 맞춘다). 좌표는 쿼드 반지름을 1로 둔 값이다.
 // 플렉은 Graphic_FleckPulse가 _AgeSecs·_RandomPerObject를 넣어 주고, 플렉 색과 페이드 투명도는 _Color로 온다.
+// _MainTex는 2x2 균열 아틀라스(VFX/VV_BondImpactCracks: R=crack, G=crackGlow, B=진행도)다.
 
 layout(location = 1) in vec2 vUv;
 
@@ -23,9 +24,9 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _Brightness;      // @default = 1.0
 } u;
 
+layout(set = 2, binding = 1) uniform sampler2D _MainTex;
+
 const float TAU = 6.28318531;
-const int CRACKS = 4;
-const int CRACK_SEGMENTS = 3;
 
 uint hashU(ivec2 i)
 {
@@ -42,14 +43,6 @@ float hexDist(vec2 p)
 {
     p = abs(p);
     return max(dot(p, vec2(0.5, 0.8660254)), p.x);
-}
-
-float segDist(vec2 p, vec2 a, vec2 b)
-{
-    vec2 pa = p - a;
-    vec2 ba = b - a;
-    float h = clamp(dot(pa, ba) / max(dot(ba, ba), 1e-6), 0.0, 1.0);
-    return length(pa - ba * h);
 }
 
 void main()
@@ -100,36 +93,27 @@ void main()
     float rim = exp(-pow((r - R) / rimW, 2.0)) * exp(-pow(dAng / 0.55, 2.0)) * (1.0 - smoothstep(0.0, 0.7, t));
     float rimHalo = exp(-pow((r - R) / (rimW * 4.0), 2.0)) * exp(-pow(dAng / 0.7, 2.0)) * 0.35 * (1.0 - t);
 
-    // 금: 맞은 자리에서 안쪽으로 가늘게 뻗었다가 사라진다.
+    // 금: 사전 베이크한 2x2 균열 아틀라스(4종 × 상하 반전 = 8변형)에서 진행도 채널(B)로 뻗어나가게 한다.
     float grow = smoothstep(0.0, 0.22, t);
     float crackFade = 1.0 - smoothstep(0.35, 0.85, t);
     float crack = 0.0;
     float crackGlow = 0.0;
-    float cw = max(0.006, px * 0.75);
-    for (int k = 0; k < CRACKS; k++)
+    if (grow > 0.001 && crackFade > 0.001 && inside > 0.001)
     {
-        uint h = hashU(ivec2(k, seed * 31 + 17));
-        float dir = (float(k) - float(CRACKS - 1) * 0.5) / float(CRACKS - 1) * 1.5 + (hashF(h, 0) - 0.5) * 0.4;
-        float len = u._CrackLength * (0.55 + 0.6 * hashF(h, 10)) * grow;
-        vec2 a0 = hit;
-        float travelled = 0.0;
-        float heading = dir;
-        for (int s = 0; s < CRACK_SEGMENTS; s++)
+        vec2 dHit = (p - hit) * (0.34 / max(u._CrackLength, 0.01));
+        if (((seed >> 2) & 1) != 0) { dHit.y = -dHit.y; }
+        vec2 localUv = vec2((dHit.x + 0.06) / 0.52, (dHit.y + 0.36) / 0.72);
+        if (localUv.x > 0.01 && localUv.x < 0.99 && localUv.y > 0.01 && localUv.y < 0.99)
         {
-            uint hs = hashU(ivec2(k * 13 + s, seed * 57 + 3));
-            float segLen = len / float(CRACK_SEGMENTS) * (0.7 + 0.6 * hashF(hs, 0));
-            heading += (hashF(hs, 10) - 0.5) * 1.2;
-            vec2 a1 = a0 + vec2(cos(heading), sin(heading)) * segLen;
-            float d = segDist(p, a0, a1);
-            float taper = 1.0 - (travelled + segLen * 0.5) / max(len * 1.2, 1e-4);
-            crack = max(crack, (1.0 - smoothstep(cw * 0.5, cw * 1.5, d)) * taper);
-            crackGlow = max(crackGlow, exp(-d / (cw * 4.0)) * taper);
-            travelled += segLen;
-            a0 = a1;
+            vec2 tile = vec2(float(seed & 1), float((seed >> 1) & 1));
+            vec2 atlasUv = (tile + localUv) * 0.5;
+            vec3 ck = textureLod(_MainTex, atlasUv, 0.0).rgb;
+            float gProg = grow * 1.05;
+            float reveal = smoothstep(gProg, gProg - 0.06, ck.b);
+            crack = ck.r * reveal * crackFade * inside;
+            crackGlow = ck.g * reveal * crackFade * inside;
         }
     }
-    crack *= crackFade * inside;
-    crackGlow *= crackFade * inside;
 
     // 맞은 자리 섬광
     vec2 dh = p - hit;

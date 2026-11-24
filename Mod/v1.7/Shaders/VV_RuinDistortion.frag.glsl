@@ -1,8 +1,7 @@
 #version 450
 
 // 거대 육각형 고대 유적 공간 왜곡 결계 셰이더 (비비 풍: 은은하고 흐릿한 고대 영원꽃 신기루 결계)
-// - 기존 B안의 고대 영원꽃(연꽃) 문양·햇살 물결빛(caustics)·꿀빛 아지랑이 경계·흩날리는 꽃잎/꽃가루 감성을 유지하되,
-//   전체 농도와 경계 광휘를 절반 이하로 부드럽게 낮춰 지형 위로 아련하게 스며들도록 조율했다.
+// - 타일링 FBM 노이즈(_NoiseTex), 꽃가루(_PollenTex), 연꽃 SDF(_LotusTex) 텍스처로 절차적 루프·노이즈를 대체해 최적화했다.
 
 layout(location = 1) in vec2 vUv;
 
@@ -22,9 +21,13 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
 
 layout(set = 2, binding = 1) uniform sampler2D _MainTex;
 layout(set = 2, binding = 2) uniform sampler2D _GrabDistortionBackground;
+layout(set = 2, binding = 3) uniform sampler2D _NoiseTex;
+layout(set = 2, binding = 4) uniform sampler2D _PollenTex;
+layout(set = 2, binding = 5) uniform sampler2D _LotusTex;
 
 const float PI = 3.14159265;
 const float TAU = 6.28318531;
+const float NOISE_INV_PERIOD = 0.0625; // VV_TileableFbmNoise 기본 주기 = 16셀
 
 uint hashU(ivec2 i)
 {
@@ -35,36 +38,6 @@ uint hashU(ivec2 i)
 float hashF(uint h, int shift)
 {
     return float((h >> uint(shift)) & 1023u) / 1023.0;
-}
-
-float hash(ivec2 i)
-{
-    return float(hashU(i) >> 8) * (1.0 / 16777215.0);
-}
-
-float vnoise(vec2 p)
-{
-    ivec2 i = ivec2(floor(p));
-    vec2 f = fract(p);
-    vec2 w = f * f * (3.0 - 2.0 * f);
-    float a = hash(i);
-    float b = hash(i + ivec2(1, 0));
-    float c = hash(i + ivec2(0, 1));
-    float d = hash(i + ivec2(1, 1));
-    return mix(mix(a, b, w.x), mix(c, d, w.x), w.y);
-}
-
-float fbm(vec2 p)
-{
-    float sum = 0.0;
-    float amp = 0.52;
-    for (int k = 0; k < 4; k++)
-    {
-        sum += amp * vnoise(p);
-        p = p * 2.03 + vec2(13.7, 7.9);
-        amp *= 0.48;
-    }
-    return sum;
 }
 
 float sdBox(vec2 p, vec2 b)
@@ -82,34 +55,6 @@ float sdFlatHexagon(vec2 p, float r)
     return length(p) * sign(p.y);
 }
 
-// 연꽃/영원꽃 꽃잎 거리장 (VV_MagicCircle 문법 통일)
-float sdVesica(vec2 p, float r, float d)
-{
-    p = abs(p);
-    float b = sqrt(max(r * r - d * d, 1e-6));
-    return ((p.y - b) * d > p.x * b) ? length(p - vec2(0.0, b)) : length(p - vec2(-d, 0.0)) - r;
-}
-
-float sdPetals(vec2 p, float count, float angle, float r0, float r1, float w)
-{
-    float h = (r1 - r0) * 0.5;
-    float vr = (h * h / w + w) * 0.5;
-    float vd = (h * h / w - w) * 0.5;
-    float sector = TAU / count;
-    float rr = length(p);
-    float a = atan(p.y, p.x) - angle;
-    a = mod(a + sector * 0.5, sector) - sector * 0.5;
-
-    float d = 1e3;
-    for (int k = -1; k <= 1; k++)
-    {
-        float ak = a + float(k) * sector;
-        vec2 q = vec2(rr * sin(ak), rr * cos(ak) - (r0 + h));
-        d = min(d, sdVesica(q, vr, vd));
-    }
-    return d;
-}
-
 // 중첩 SDF: 상위 봉인이 닫혀 있으면 하위 경계선이 내부에 드러나지 않는다.
 float sdStage4(vec2 rel) { return length(rel) - 8.65; }
 float sdStage3(vec2 rel) { return length(rel) - 22.7; }
@@ -122,6 +67,18 @@ float stageSoftMask(float sd, float state, float wobble, float feather)
     float shrink = (1.0 - state) * 16.0;
     float d = sd + shrink + wobble;
     return smoothstep(feather, -feather * 0.85, d) * smoothstep(0.0, 0.16, state);
+}
+
+vec2 rotNeg(vec2 v, float angle)
+{
+    float c = cos(angle);
+    float s = sin(angle);
+    return vec2(v.x * c + v.y * s, -v.x * s + v.y * c);
+}
+
+float decodeLotusSdf(float enc)
+{
+    return (enc - 128.0 / 255.0) * (255.0 / 127.0) * 0.25;
 }
 
 // 봄바람에 흩날리는 영원꽃 꽃잎 레이어 (_MainTex = VFX/VV_EverflowerPetal)
@@ -175,39 +132,24 @@ vec3 sampleDriftingPetals(vec2 rel, float t, float cellSize, float density, floa
     return acc;
 }
 
-// 햇살 속 반딧불이처럼 은은히 반짝이는 황금 꽃가루 알갱이
-vec3 samplePollenSpecks(vec2 rel, float t, float cellSize, float density, float radiusCells, int layerSeed)
+// 햇살 속 반딧불이처럼 은은히 반짝이는 황금 꽃가루 알갱이 (_PollenTex = 3채널 위상 분리 타일링)
+vec3 samplePollenLayer(vec2 rel, float t, float tileCells, vec2 phaseScale, float rot90, vec2 dRelDx, vec2 dRelDy)
 {
     vec2 drift = vec2(-0.22, 0.36) * t;
-    vec2 p = rel - drift;
-    ivec2 cell = ivec2(floor(p / cellSize));
-    vec3 acc = vec3(0.0);
+    vec2 sway = vec2(sin(t * 0.65 + rot90 * 2.1) * 0.45, cos(t * 0.55 + rot90 * 1.7) * 0.45);
+    vec2 p = rel - drift - sway;
+    vec2 uv = (rot90 > 0.5 ? vec2(p.y, -p.x) : p) / tileCells;
+    vec2 duvx = (rot90 > 0.5 ? vec2(dRelDx.y, -dRelDx.x) : dRelDx) / tileCells;
+    vec2 duvy = (rot90 > 0.5 ? vec2(dRelDy.y, -dRelDy.x) : dRelDy) / tileCells;
+    vec3 sp = textureGrad(_PollenTex, uv, duvx, duvy).rgb * 1.35;
 
-    for (int oy = -1; oy <= 1; oy++)
-    {
-        for (int ox = -1; ox <= 1; ox++)
-        {
-            ivec2 id = cell + ivec2(ox, oy);
-            uint h = hashU(id + ivec2(layerSeed * 521, layerSeed * 173));
-            if (hashF(h, 0) > density) { continue; }
+    float twR = pow(0.5 + 0.5 * sin(t * 1.65 + dot(rel, phaseScale)), 1.8);
+    float twG = pow(0.5 + 0.5 * sin(t * 2.05 + dot(rel, vec2(-phaseScale.y, phaseScale.x)) + 2.1), 1.8);
+    float twB = pow(0.5 + 0.5 * sin(t * 1.45 + dot(rel, phaseScale * 0.8) + 4.2), 1.8);
 
-            float jx = hashF(h, 10);
-            float jy = hashF(h, 20);
-            float phase = hashF(hashU(id + ivec2(19, 83)), 0) * TAU;
-            float pink = hashF(hashU(id + ivec2(41, 13)), 10);
-
-            vec2 center = (vec2(id) + vec2(0.15 + 0.70 * jx, 0.15 + 0.70 * jy)) * cellSize;
-            center += vec2(sin(t * 0.65 + phase) * 0.55, cos(t * 0.55 + phase * 1.4) * 0.55);
-
-            float d = length(p - center);
-            float core = exp(-(d * d) / (radiusCells * radiusCells));
-            float halo = exp(-(d * d) / (radiusCells * radiusCells * 7.5)) * 0.35;
-            float twinkle = pow(0.5 + 0.5 * sin(t * (1.35 + 0.9 * jx) + phase), 1.8);
-            vec3 col = mix(u._CreamColor.rgb, mix(u._WarmColor.rgb, u._BlossomColor.rgb, step(0.72, pink)), 0.65);
-            acc += col * (core + halo) * twinkle;
-        }
-    }
-    return acc;
+    vec3 colWarm = mix(u._CreamColor.rgb, u._WarmColor.rgb, 0.65);
+    vec3 colPink = mix(u._CreamColor.rgb, u._BlossomColor.rgb, 0.65);
+    return colWarm * (sp.r * twR + sp.g * twG) + colPink * (sp.b * twB);
 }
 
 void main()
@@ -221,11 +163,11 @@ void main()
 
     float t = u._AgeSecs;
 
-    // 유기적인 아지랑이 흐름 노이즈 (B안 원본 기반)
+    // 유기적인 아지랑이 흐름 노이즈 (_NoiseTex 타일링 FBM)
     vec2 mistFlow1 = vec2(t * 0.16, -t * 0.12);
     vec2 mistFlow2 = vec2(-t * 0.13, t * 0.15);
-    float mSlow = fbm(rel * 0.055 + mistFlow1);
-    float mFine = fbm(rel * 0.145 + mistFlow2 + vec2(mSlow * 1.2, -mSlow * 0.9));
+    float mSlow = texture(_NoiseTex, (rel * 0.055 + mistFlow1) * NOISE_INV_PERIOD).r;
+    float mFine = texture(_NoiseTex, (rel * 0.145 + mistFlow2 + vec2(mSlow * 1.2, -mSlow * 0.9)) * NOISE_INV_PERIOD).g;
 
     float edgeNoise = (mSlow - 0.5) * 3.8 + (mFine - 0.5) * 1.71;
     const float feather = 3.6;
@@ -258,9 +200,9 @@ void main()
     float wideEdgeBand = exp(-(warpedSd * warpedSd) / 36.0) * outerPresence;
     float surge = clamp((u._Distortion - 13.5) / 14.0, 0.0, 1.0);
 
-    // 1) 봄날 아지랑이 굴절 + 부드러운 몽환 블러 (원본 B안보다 맑게 절제)
-    float h1 = fbm(rel * 0.13 + vec2(t * 0.18, -t * 0.28));
-    float h2 = fbm(rel * 0.13 + vec2(-t * 0.15 + 23.1, -t * 0.24 + 9.4));
+    // 1) 봄날 아지랑이 굴절 + 부드러운 몽환 블러
+    float h1 = textureLod(_NoiseTex, (rel * 0.13 + vec2(t * 0.18, -t * 0.28)) * NOISE_INV_PERIOD, 0.0).r;
+    float h2 = textureLod(_NoiseTex, (rel * 0.13 + vec2(-t * 0.15 + 23.1, -t * 0.24 + 9.4)) * NOISE_INV_PERIOD, 0.0).g;
     vec2 shimmerVec = vec2(h1 - 0.5, h2 - 0.5) * 2.0 + vec2(0.0, sin(rel.x * 0.35 + rel.y * 0.22 - t * 1.4) * 0.22);
 
     float distWeight = (mask * 0.72 + edgeBand * 0.50) * 0.92;
@@ -283,20 +225,22 @@ void main()
     // 2) 꽃잎·황금 꽃가루 레이어
     vec3 petalsFar = sampleDriftingPetals(rel, t, 6.4, 0.34, 1.85, vec2(0.55, 0.32), 1, dRelDx, dRelDy);
     vec3 petalsEdge = sampleDriftingPetals(rel, t, 4.2, 0.44, 1.55, vec2(-0.35, 0.52), 2, dRelDx, dRelDy);
-    vec3 pollen1 = samplePollenSpecks(rel, t, 4.4, 0.44, 0.21, 3);
-    vec3 pollen2 = samplePollenSpecks(rel, t, 7.6, 0.48, 0.32, 4);
+    vec3 pollen1 = samplePollenLayer(rel, t, 35.2, vec2(0.27, 0.19), 0.0, dRelDx, dRelDy);
+    vec3 pollen2 = samplePollenLayer(rel, t, 60.8, vec2(0.16, -0.23), 1.0, dRelDx, dRelDy);
 
-    // 3) 유기적 햇살 물결빛(caustics) — 원본 B안의 감성을 절반 이하로 부드럽게
+    // 3) 유기적 햇살 물결빛(caustics)
     vec2 cWarp = rel + vec2(mSlow - 0.5, mFine - 0.5) * 9.5;
     float ca1 = sin(cWarp.x * 0.21 + sin(cWarp.y * 0.16 + t * 0.85) * 1.9 + t * 0.52);
     float ca2 = sin(cWarp.y * 0.19 - t * 0.68 + sin(cWarp.x * 0.14 - t * 0.45) * 1.7);
     float caustics = pow(max(0.0, 1.0 - abs(ca1 * 0.5 + ca2 * 0.5)), 5.5);
 
-    // 4) 원본 B안 영원꽃(연꽃) 문양 — 선을 더 넓고 아련하게 풀어 신기루처럼 흐릿하게 비치도록
+    // 4) 영원꽃(연꽃) 문양 — _LotusTex (R=12잎 외곽 SDF, G=6잎 내부 SDF, 범위 [-1.25, 1.25])
     float rCenter = length(rel);
     float slowRot = t * 0.035;
-    float lotusOuter = sdPetals(rel / 54.0, 12.0, slowRot, 0.24, 0.96, 0.16) * 54.0;
-    float lotusInner = sdPetals(rel / 34.0, 6.0, -slowRot * 1.3 + PI / 6.0, 0.18, 0.92, 0.19) * 34.0;
+    vec2 qOuter = rotNeg(rel / 54.0, slowRot);
+    vec2 qInner = rotNeg(rel / 34.0, -slowRot * 1.3 + PI / 6.0);
+    float lotusOuter = decodeLotusSdf(textureLod(_LotusTex, qOuter * 0.4 + 0.5, 0.0).r) * 54.0;
+    float lotusInner = decodeLotusSdf(textureLod(_LotusTex, qInner * 0.4 + 0.5, 0.0).g) * 34.0;
 
     float petalLineOuter = exp(-(lotusOuter * lotusOuter) / 3.4);
     float petalLineInner = exp(-(lotusInner * lotusInner) / 2.5);
@@ -304,8 +248,8 @@ void main()
     float breathWave = smoothstep(0.18, 0.92, sin(rCenter * 0.13 - t * 0.75 + mSlow * 3.2) * 0.5 + 0.5);
     float motif = clamp((petalLineOuter * 0.82 + petalLineInner * 0.92 + petalFill * 0.14) * (0.36 + 0.64 * breathWave), 0.0, 1.0) * mask;
 
-    // 경계 꿀빛 아지랑이 빛자락 (원본 B안의 ~42% 강도)
-    float tongue = smoothstep(0.32, 0.78, fbm(vec2(rel.x * 0.15 + mSlow * 1.4, rel.y * 0.09 - t * 0.45)));
+    // 경계 꿀빛 아지랑이 빛자락
+    float tongue = smoothstep(0.32, 0.78, textureLod(_NoiseTex, vec2(rel.x * 0.15 + mSlow * 1.4, rel.y * 0.09 - t * 0.45) * NOISE_INV_PERIOD, 0.0).r);
     float rimGlow = exp(-(warpedSd * warpedSd) / 6.5) * (0.45 + 0.55 * tongue) * outerPresence;
 
     float warmWash = (0.036 + 0.045 * mSlow + 0.16 * surge) * mask;

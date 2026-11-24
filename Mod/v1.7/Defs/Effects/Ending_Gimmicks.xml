@@ -160,7 +160,7 @@
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
       <graphicClass>Graphic_FleckPulse</graphicClass>
-      <texPath>Things/Mote/Black</texPath>
+      <texPath>VFX/VV_TileableFbmNoise</texPath>
       <shaderType>VV_ShockWave</shaderType>
       <renderInstanced>false</renderInstanced>
       <drawSize>(20, 20)</drawSize>
@@ -187,7 +187,7 @@
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
       <graphicClass>Graphic_FleckPulse</graphicClass>
-      <texPath>Things/Mote/Black</texPath>
+      <texPath>VFX/VV_TileableFbmNoise</texPath>
       <shaderType>VV_ShockWave</shaderType>
       <renderInstanced>false</renderInstanced>
       <drawSize>(90, 90)</drawSize>
@@ -214,7 +214,7 @@
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
       <graphicClass>Graphic_FleckPulse</graphicClass>
-      <texPath>Things/Mote/Black</texPath>
+      <texPath>VFX/VV_TileableFbmNoise</texPath>
       <shaderType>VV_ShockWave</shaderType>
       <renderInstanced>false</renderInstanced>
       <drawSize>(60, 60)</drawSize>
@@ -259,7 +259,7 @@
       <growthRate>0.9</growthRate>
     </mote>
     <graphicData>
-      <texPath>Things/Mote/Black</texPath>
+      <texPath>VFX/VV_MagicCircleLotusSdf</texPath>
       <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
       <shaderType>VV_MagicCircle</shaderType>
       <color>(1, 0.84, 0.45, 1)</color>
@@ -1194,7 +1194,7 @@
       <fadeOutUnmaintained>true</fadeOutUnmaintained>
     </mote>
     <graphicData>
-      <texPath>Things/Mote/Black</texPath>
+      <texPath>VFX/VV_TileableFbmNoise</texPath>
       <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
       <shaderType>VV_LightShimmer</shaderType>
       <color>(0.95, 0.98, 1, 1)</color>

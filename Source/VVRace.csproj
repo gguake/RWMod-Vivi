@@ -169,6 +169,7 @@
     <Compile Include="Ending\Ruins\ViviAncientRuins.cs" />
     <Compile Include="Ending\Gimmicks\AI\JobDriver_ResonateFairyFlower.cs" />
     <Compile Include="Ending\Gimmicks\ApocryphaGimmicks.cs" />
+    <Compile Include="Ending\Gimmicks\AsphodelBondChainRenderer.cs" />
     <Compile Include="Ending\Gimmicks\FairySigil.cs" />
     <Compile Include="Ending\Gimmicks\FairyBlastAim.cs" />
     <Compile Include="Ending\Gimmicks\FairySigilLanes.cs" />

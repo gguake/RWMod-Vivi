@@ -39,6 +39,10 @@
           <key>_MainTex</key>
           <value>Clamp</value>
         </li>
+        <li>
+          <key>_BlurTex</key>
+          <value>Clamp</value>
+        </li>
       </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
@@ -97,6 +101,12 @@
       <depthWrite>false</depthWrite>
       <cullMode>None</cullMode>
       <renderQueue>3000</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_NoiseTex</key>
+          <value>Repeat</value>
+        </li>
+      </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
 
@@ -163,6 +173,12 @@
       <depthWrite>false</depthWrite>
       <cullMode>None</cullMode>
       <renderQueue>3150</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Repeat</value>
+        </li>
+      </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
 
@@ -187,6 +203,12 @@
         <name>DistortionBackground</name>
         <queue>3151</queue>
       </sceneGrab>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Repeat</value>
+        </li>
+      </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
 
@@ -207,6 +229,12 @@
       <depthWrite>false</depthWrite>
       <cullMode>None</cullMode>
       <renderQueue>3150</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Clamp</value>
+        </li>
+      </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
 
@@ -227,6 +255,12 @@
       <depthWrite>false</depthWrite>
       <cullMode>None</cullMode>
       <renderQueue>3150</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Clamp</value>
+        </li>
+      </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
 
@@ -340,6 +374,20 @@
         <name>DistortionBackground</name>
         <queue>3151</queue>
       </sceneGrab>
+      <textureWrapOverrides>
+        <li>
+          <key>_NoiseTex</key>
+          <value>Repeat</value>
+        </li>
+        <li>
+          <key>_PollenTex</key>
+          <value>Repeat</value>
+        </li>
+        <li>
+          <key>_LotusTex</key>
+          <value>Clamp</value>
+        </li>
+      </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
 
@@ -367,5 +415,31 @@
   <ShaderTypeDef>
     <defName>VV_RuinHexField</defName>
     <shaderPath>Map/VV_RuinHexField</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 아스포델 결속 축소 사슬 고리 셰이더 -->
+  <ShaderDef>
+    <defName>VV_AsphodelBondChain</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_AsphodelBondChain.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>2950</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Repeat</value>
+        </li>
+      </textureWrapOverrides>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 아스포델 결속 축소 사슬 고리 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_AsphodelBondChain</defName>
+    <shaderPath>Map/VV_AsphodelBondChain</shaderPath>
   </ShaderTypeDef>
 </Defs>

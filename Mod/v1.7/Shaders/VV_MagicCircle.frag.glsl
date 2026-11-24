@@ -3,6 +3,7 @@
 // 바닐라 예고 연출처럼 굵은 선 몇 개로만 그려 멀리서도 읽히게 한다(가는 장식은 기본 줌에서 1px 아래로 뭉개진다).
 // 모트는 Graphic_MoteWithAgeSecs가 _AgeSecs·_RandomPerObjectOffsetRandom을 넣어 주고, 모트 색과 페이드 투명도는 _Color로 온다.
 // (_RandomPerObject는 모트 위치가 섞여 있어 움직이는 모트에서 매 틱 바뀌므로 꽃 방향 시드로 쓰지 않는다)
+// _MainTex는 8잎 연꽃 2채널 SDF 텍스처(VFX/VV_MagicCircleLotusSdf: R=외곽, G=내부, 범위 [-1.15, 1.15], D_MAX=0.30)다.
 
 layout(location = 1) in vec2 vUv;
 
@@ -24,8 +25,12 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _Brightness;    // @default = 1.0
 } u;
 
+layout(set = 2, binding = 1) uniform sampler2D _MainTex;
+
 const float PI = 3.14159265;
 const float TAU = 6.28318531;
+const float SDF_INV_SPAN = 1.0 / 2.3; // 범위 [-1.15, +1.15] -> 스팬 2.3
+const float SDF_DMAX = 0.30;
 
 // 정수 격자 해시. 실수 fract 해시는 좌표가 커지면 정밀도가 떨어져 무늬가 뭉개진다.
 uint hashU(ivec2 i)
@@ -34,41 +39,21 @@ uint hashU(ivec2 i)
     return (q.x ^ q.y) * 1597334673u;
 }
 
-// 세로 방향 렌즈(양 끝이 뾰족한 꽃잎) 거리장. 반지름 r인 두 원이 중심 간격 2d로 겹친 모양(iq sdVesica).
-float sdVesica(vec2 p, float r, float d)
+float decodeSdf(float enc)
 {
-    p = abs(p);
-    float b = sqrt(r * r - d * d);
-    return ((p.y - b) * d > p.x * b) ? length(p - vec2(0.0, b)) : length(p - vec2(-d, 0.0)) - r;
+    return (enc - 128.0 / 255.0) * (255.0 / 127.0) * SDF_DMAX;
 }
 
-// 중심에서 뻗는 꽃잎 count장의 합집합 거리장. 꽃잎 하나는 반지름 r0~r1, 반폭 w.
-// 가장 가까운 꽃잎과 양옆 꽃잎만 보면 겹치는 부분까지 정확하다.
-float sdPetals(vec2 p, float count, float angle, float r0, float r1, float w)
+void lotus(vec2 p, float s, float angle, out float outer, out float inner)
 {
-    float h = (r1 - r0) * 0.5;
-    float vr = (h * h / w + w) * 0.5;
-    float vd = (h * h / w - w) * 0.5;
-    float sector = TAU / count;
-    float rr = length(p);
-    float a = atan(p.y, p.x) - angle;
-    a = mod(a + sector * 0.5, sector) - sector * 0.5;
-
-    float d = 1e3;
-    for (int k = -1; k <= 1; k++)
-    {
-        float ak = a + float(k) * sector;
-        vec2 q = vec2(rr * sin(ak), rr * cos(ak) - (r0 + h));
-        d = min(d, sdVesica(q, vr, vd));
-    }
-    return d;
-}
-
-void lotus(vec2 p, float s, float count, float angle, out float outer, out float inner)
-{
-    vec2 q = p / s;
-    outer = sdPetals(q, count, angle, 0.10, 0.86, 0.15) * s;
-    inner = sdPetals(q, count, angle + PI / count, 0.08, 0.56, 0.11) * s;
+    vec2 q0 = p / s;
+    float c = cos(angle);
+    float sn = sin(angle);
+    vec2 q = vec2(q0.x * c + q0.y * sn, -q0.x * sn + q0.y * c);
+    float rq = length(q);
+    vec2 enc = textureLod(_MainTex, q * SDF_INV_SPAN + 0.5, 0.0).rg;
+    outer = max(decodeSdf(enc.r), rq - 0.86) * s;
+    inner = max(decodeSdf(enc.g), rq - 0.56) * s;
 }
 
 float lineCore(float d, float halfWidth, float px)
@@ -107,16 +92,19 @@ void main()
     glow += 0.045 * smoothstep(0.96, 0.9, r) * u._RingAlpha * fadeIn;
 
     // 흐린 윤곽: 다 핀 꽃(발사 시점의 모양). 안쪽 겹에 가려진 바깥 꽃잎 선은 그리지 않는다.
-    float gOuter, gInner;
-    lotus(p, 1.0, count, angle, gOuter, gInner);
-    float guide = lineCore(abs(gOuter), 0.011 * lw, px) * step(0.0, gInner) + lineCore(abs(gInner), 0.011 * lw, px);
-    core += guide * 0.32 * u._GuideAlpha * fadeIn;
+    if (u._GuideAlpha > 0.001)
+    {
+        float gOuter, gInner;
+        lotus(p, 1.0, angle, gOuter, gInner);
+        float guide = lineCore(abs(gOuter), 0.011 * lw, px) * step(0.0, gInner) + lineCore(abs(gInner), 0.011 * lw, px);
+        core += guide * 0.32 * u._GuideAlpha * fadeIn;
+    }
 
     float bloom = smoothstep(0.0, 1.0, t);
     float s = mix(0.12, 1.0, bloom);
     float twist = (1.0 - bloom) * (PI / count) * 0.6;
     float bOuter, bInner;
-    lotus(p, s, count, angle + twist, bOuter, bInner);
+    lotus(p, s, angle + twist, bOuter, bInner);
     float bloomAlpha = (0.55 + 0.45 * t) * fadeIn;
     float petalLine = lineCore(abs(bOuter), 0.016 * lw, px) * step(0.0, bInner) + lineCore(abs(bInner), 0.016 * lw, px);
     core += petalLine * 0.9 * bloomAlpha;

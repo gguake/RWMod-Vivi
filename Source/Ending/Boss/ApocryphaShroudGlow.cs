@@ -47,6 +47,11 @@ namespace VVRace
             if (!GlowMaterials.TryGetValue(texture, out var material))
             {
                 material = MaterialPool.MatFrom(new MaterialRequest(texture, ShaderDatabase.LoadShader(ShaderPath), Color.white));
+                var texName = texture.name ?? string.Empty;
+                var slash = texName.LastIndexOf('/');
+                if (slash >= 0) { texName = texName.Substring(slash + 1); }
+                var blurTex = ContentFinder<Texture2D>.Get("VFX/" + texName + "_glow", reportFailure: false) ?? BaseContent.BlackTex;
+                material.SetTexture("_BlurTex", blurTex);
                 GlowMaterials[texture] = material;
             }
 
