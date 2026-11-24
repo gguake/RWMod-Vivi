@@ -147,15 +147,23 @@ namespace VVRace
             }
         }
 
-        private readonly List<Building_GatherWorkTable> _tmpUnresolvedDirtyWorkTables = new List<Building_GatherWorkTable>();
+        private readonly List<Building_GatherWorkTable> _tmpRefreshingWorkTables = new List<Building_GatherWorkTable>();
         private void RefreshCacheForGatherWorkTable()
         {
             if (_dirtyGatherWorkTables.Count == 0) { return; }
 
-            _tmpUnresolvedDirtyWorkTables.Clear();
-            foreach (var building in _dirtyGatherWorkTables)
+            // 아래 지역 조회가 지역 재구축을 일으키면 Notify_CellRegionRebuilded가 dirty 집합에 작업대를 추가하므로, 집합을 직접 순회하지 않고 복사본을 돈다.
+            // 처리가 끝난 작업대만 집합에서 빼므로, 지역을 못 찾았거나 순회 중 추가된 작업대는 dirty로 남아 다음 호출에서 다시 처리된다.
+            _tmpRefreshingWorkTables.Clear();
+            _tmpRefreshingWorkTables.AddRange(_dirtyGatherWorkTables);
+            for (int i = 0; i < _tmpRefreshingWorkTables.Count; i++)
             {
-                if (building == null || !building.Spawned || building.Destroyed) { continue; }
+                var building = _tmpRefreshingWorkTables[i];
+                if (building == null || !building.Spawned || building.Destroyed)
+                {
+                    _dirtyGatherWorkTables.Remove(building);
+                    continue;
+                }
 
                 var position = building.Position;
                 var radius = building.GatherRadius;
@@ -184,46 +192,38 @@ namespace VVRace
                 };
 
                 var buildingRegion = position.GetRegion(map);
-                if (buildingRegion != null)
+                if (buildingRegion == null) { continue; }
+
+                if (!_cacheByGatherWorkTables.TryGetValue(building, out var cacheSet))
                 {
-                    if (!_cacheByGatherWorkTables.TryGetValue(building, out var cacheSet))
-                    {
-                        cacheSet = new HashSet<GatheringCellCache>();
-                        _cacheByGatherWorkTables.Add(building, cacheSet);
-                    }
+                    cacheSet = new HashSet<GatheringCellCache>();
+                    _cacheByGatherWorkTables.Add(building, cacheSet);
+                }
 
-                    RegionTraverser.BreadthFirstTraverse(buildingRegion, regionEntryPredicate, (r) =>
+                RegionTraverser.BreadthFirstTraverse(buildingRegion, regionEntryPredicate, (r) =>
+                {
+                    foreach (var cell in r.Cells)
                     {
-                        foreach (var cell in r.Cells)
+                        if (cell.DistanceToSquared(position) > radiusSqr) { continue; }
+
+                        var cache = this[cell];
+                        cache.gatherableWorkTables.Add(building);
+                        if (cache.gatherables.Count > 0)
                         {
-                            if (cell.DistanceToSquared(position) > radiusSqr) { continue; }
-
-                            var cache = this[cell];
-                            cache.gatherableWorkTables.Add(building);
-                            if (cache.gatherables.Count > 0)
-                            {
-                                gatherableList.AddRange(cache.gatherables);
-                            }
-
-                            cacheSet.Add(cache);
+                            gatherableList.AddRange(cache.gatherables);
                         }
 
-                        return false;
+                        cacheSet.Add(cache);
+                    }
 
-                    }, maxRegions: 30);
-                }
-                else
-                {
-                    _tmpUnresolvedDirtyWorkTables.Add(building);
-                }
+                    return false;
+
+                }, maxRegions: 30);
+
+                _dirtyGatherWorkTables.Remove(building);
             }
 
-            _dirtyGatherWorkTables.Clear();
-            for (int i = 0; i < _tmpUnresolvedDirtyWorkTables.Count; i++)
-            {
-                _dirtyGatherWorkTables.Add(_tmpUnresolvedDirtyWorkTables[i]);
-            }
-            _tmpUnresolvedDirtyWorkTables.Clear();
+            _tmpRefreshingWorkTables.Clear();
         }
 
         private void RemoveCacheForGatherWorkTable(Building_GatherWorkTable building)

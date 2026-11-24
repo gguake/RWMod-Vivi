@@ -39,7 +39,12 @@ namespace VVRace
                 if (Severity >= 1f)
                 {
                     pawn.Kill(null, this);
-                    pawn.GenerateHornetFromGeneticDeath();
+
+                    // 여왕의 안치처럼 죽음이 다른 처리로 대체되면 폰이 살아 있으므로 말벌을 만들지 않는다.
+                    if (pawn.Dead)
+                    {
+                        pawn.GenerateHornetFromGeneticDeath();
+                    }
                 }
             }
         }
