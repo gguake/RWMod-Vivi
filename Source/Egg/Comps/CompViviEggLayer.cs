@@ -57,49 +57,52 @@ namespace VVRace
             Scribe_Values.Look(ref canLayEgg, "canLayEgg", defaultValue: true, forceSave: true);
         }
 
-        public override void CompTick()
+        public override void CompTickInterval(int delta)
         {
-            if (parent.IsHashIntervalTick(2000))
+            if (CompVivi?.isRoyal == true && parent.IsHashIntervalTick(2000, delta))
             {
-                if (CompVivi.isRoyal)
+                if (eggProgress < 1f)
                 {
-                    if (eggProgress < 1f)
-                    {
-                        eggProgress = Mathf.Clamp01(eggProgress + (EggProgressPerDays / 60000f * 2000));
-                    }
+                    eggProgress = Mathf.Clamp01(eggProgress + (EggProgressPerDays / 60000f * 2000));
                 }
             }
         }
 
         private static readonly Texture2D ToggleLayEggTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_LayEgg");
+
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (parent.Spawned && parent is Pawn pawn && pawn.IsColonistPlayerControlled && CompVivi.isRoyal)
+            if (!parent.Spawned || !(parent is Pawn pawn) || !pawn.IsColonistPlayerControlled || CompVivi?.isRoyal != true)
             {
-                yield return new EggProgressGizmo((Pawn)parent);
+                return Enumerable.Empty<Gizmo>();
+            }
 
-                var command_toggleLayEgg = new Command_Toggle();
-                command_toggleLayEgg.icon = ToggleLayEggTex;
-                command_toggleLayEgg.defaultLabel = LocalizeString_Command.VV_Command_ToggleLayEgg.Translate();
-                command_toggleLayEgg.defaultDesc = LocalizeString_Command.VV_Command_ToggleLayEggDesc.Translate();
-                command_toggleLayEgg.isActive = () => canLayEgg;
-                command_toggleLayEgg.toggleAction = () =>
-                {
-                    canLayEgg = !canLayEgg;
-                };
-                yield return command_toggleLayEgg;
+            return CompGetGizmosExtraIterator(pawn);
+        }
 
-                if (DebugSettings.godMode)
+        private IEnumerable<Gizmo> CompGetGizmosExtraIterator(Pawn pawn)
+        {
+            yield return new EggProgressGizmo(pawn);
+
+            yield return new Command_Toggle
+            {
+                icon = ToggleLayEggTex,
+                defaultLabel = LocalizeString_Command.VV_Command_ToggleLayEgg.Translate(),
+                defaultDesc = LocalizeString_Command.VV_Command_ToggleLayEggDesc.Translate(),
+                isActive = () => canLayEgg,
+                toggleAction = () => { canLayEgg = !canLayEgg; }
+            };
+
+            if (DebugSettings.godMode)
+            {
+                yield return new Command_Action
                 {
-                    Command_Action command_addEggProgress = new Command_Action();
-                    command_addEggProgress.defaultLabel = "DEV: Add Egg Progress 10%";
-                    command_addEggProgress.action = () =>
+                    defaultLabel = "DEV: Add Egg Progress 10%",
+                    action = () =>
                     {
                         eggProgress = Mathf.Clamp01(eggProgress + 0.1f);
-                    };
-
-                    yield return command_addEggProgress;
-                }
+                    }
+                };
             }
         }
 

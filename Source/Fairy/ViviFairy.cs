@@ -93,7 +93,24 @@ namespace VVRace
         public bool IsAvailable => _state == FairyState.Idle && (CurrentJob == null || CurrentJob.Kind == FairyJobKind.Idle);
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
 
-        public CompViviHolder Controller => _owner != null ? _owner.GetComp<CompViviHolder>() : null;
+        [Unsaved]
+        private CompViviHolder _cachedController;
+        [Unsaved]
+        private Pawn _cachedControllerOwner;
+
+        public CompViviHolder Controller
+        {
+            get
+            {
+                if (_owner == null) { return null; }
+                if (_cachedController == null || !ReferenceEquals(_cachedControllerOwner, _owner) || _cachedController.parent != _owner)
+                {
+                    _cachedControllerOwner = _owner;
+                    _cachedController = _owner.GetComp<CompViviHolder>();
+                }
+                return _cachedController;
+            }
+        }
         public FairyJob CurrentJob => _job != null && !_job.Ended ? _job : null;
 
         public override int UpdateRateTicks => 1;

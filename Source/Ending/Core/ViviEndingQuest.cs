@@ -45,8 +45,6 @@ namespace VVRace
             _ruins = new ViviAncientRuins(this);
             _epilogue = new ViviEndingEpilogue(this);
             _ambience = new ViviEndingAmbience(this);
-
-            Hediff_EverflowerAssimilation.ResetRegistry();
         }
 
         public Quest Quest => _quest;

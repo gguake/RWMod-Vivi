@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Security.Cryptography;
 using Verse;
 
@@ -20,7 +20,7 @@ namespace VVRace
 
         public HediffComp_ChangeRoyalJellyNeed()
         {
-            _modSettingCache = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+            _modSettingCache = VVRaceMod.Settings;
         }
 
         private Need _needCached;
@@ -39,12 +39,12 @@ namespace VVRace
 
         public HediffCompProperties_ChangeRoyalJellyNeed Props => (HediffCompProperties_ChangeRoyalJellyNeed)props;
 
-        public override void CompPostTick(ref float severityAdjustment)
+        public override void CompPostTickInterval(ref float severityAdjustment, int delta)
         {
             var need = Need;
             if (need != null)
             {
-                need.CurLevelPercentage += Props.percentPerDay / 60000f * (Pawn.ageTracker.BiologicalTicksPerTick) * _modSettingCache.royalJellyMultiplier;
+                need.CurLevelPercentage += Props.percentPerDay / 60000f * (Pawn.ageTracker.BiologicalTicksPerTick) * _modSettingCache.royalJellyMultiplier * delta;
             }
         }
     }

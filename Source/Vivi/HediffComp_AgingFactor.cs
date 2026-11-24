@@ -16,7 +16,7 @@ namespace VVRace
 
     public class HediffComp_AgingFactor : HediffComp
     {
-        private static readonly Dictionary<int, bool> _cache = new Dictionary<int, bool>();
+        private static readonly Dictionary<int, float> _cache = new Dictionary<int, float>();
         private static Game _cachedGame;
 
         public HediffCompProperties_AgingFactor Props => (HediffCompProperties_AgingFactor)props;
@@ -45,10 +45,15 @@ namespace VVRace
 
         private void InvalidateCache()
         {
+            InvalidateCache(Pawn);
+        }
+
+        public static void InvalidateCache(Pawn pawn)
+        {
             EnsureCachedGame();
-            if (Pawn != null)
+            if (pawn != null)
             {
-                _cache.Remove(Pawn.thingIDNumber);
+                _cache.Remove(pawn.thingIDNumber);
             }
         }
 
@@ -67,13 +72,12 @@ namespace VVRace
             if (pawn == null) { return factor; }
 
             EnsureCachedGame();
-            if (_cache.TryGetValue(pawn.thingIDNumber, out var hasAgingFactor) && !hasAgingFactor)
+            if (_cache.TryGetValue(pawn.thingIDNumber, out var cachedFactor))
             {
-                return factor;
+                return factor * cachedFactor;
             }
 
             // 불러올 때는 CompPostPostAdd가 호출되지 않으므로 해당 폰의 캐시 항목이 없어도 헤디프를 직접 확인한다.
-            hasAgingFactor = false;
             var hediffFactor = 1f;
             var hediffs = pawn.health?.hediffSet?.hediffs;
             if (hediffs != null)
@@ -87,7 +91,6 @@ namespace VVRace
                         {
                             if (comps[j] is HediffComp_AgingFactor agingFactorComp)
                             {
-                                hasAgingFactor = true;
                                 hediffFactor *= agingFactorComp.Props.factor;
                             }
                         }
@@ -95,7 +98,10 @@ namespace VVRace
                 }
             }
 
-            _cache[pawn.thingIDNumber] = hasAgingFactor;
+            if (Scribe.mode == LoadSaveMode.Inactive)
+            {
+                _cache[pawn.thingIDNumber] = hediffFactor;
+            }
             return factor * hediffFactor;
         }
     }

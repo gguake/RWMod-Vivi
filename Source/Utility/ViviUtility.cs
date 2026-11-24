@@ -10,11 +10,54 @@ namespace VVRace
 {
     public static class ViviUtility
     {
-        public static bool IsVivi(this Pawn pawn) => pawn.TryGetComp<CompVivi>() != null;
-        public static CompVivi GetCompVivi(this Pawn pawn) => pawn.TryGetComp<CompVivi>();
-        public static CompViviEggLayer GetCompViviEggLayer(this Pawn pawn) => pawn.TryGetComp<CompViviEggLayer>();
+        private static volatile bool _viviDefsInitialized;
+        private static volatile HashSet<ThingDef> _extraViviDefs;
 
-        public static bool IsRoyalVivi(this Pawn pawn) => pawn.TryGetComp<CompVivi>()?.isRoyal ?? false;
+        [StaticConstructorOnStartup]
+        private static class ViviDefCacheInitializer
+        {
+            static ViviDefCacheInitializer()
+            {
+                HashSet<ThingDef> extras = null;
+                var allDefs = DefDatabase<ThingDef>.AllDefsListForReading;
+                for (int i = 0; i < allDefs.Count; i++)
+                {
+                    var candidate = allDefs[i];
+                    if (candidate == VVThingDefOf.VV_Vivi || candidate.comps == null) { continue; }
+                    for (int j = 0; j < candidate.comps.Count; j++)
+                    {
+                        var compClass = candidate.comps[j].compClass;
+                        if (compClass != null && (compClass == typeof(CompVivi) || typeof(CompVivi).IsAssignableFrom(compClass)))
+                        {
+                            if (extras == null) { extras = new HashSet<ThingDef>(); }
+                            extras.Add(candidate);
+                            break;
+                        }
+                    }
+                }
+
+                _extraViviDefs = extras;
+                _viviDefsInitialized = true;
+            }
+        }
+
+        // StaticConstructorOnStartup 시점의 DefDatabase를 기준으로 CompVivi 보유 가능 ThingDef를 캐시한다.
+        // 시작 이후 런타임에 다른 ThingDef에 CompVivi를 동적 주입하는 케이스는 지원하지 않는다.
+        private static bool CanHaveCompVivi(ThingDef def)
+        {
+            if (def == null) { return false; }
+            if (def == VVThingDefOf.VV_Vivi) { return true; }
+            if (!_viviDefsInitialized) { return true; }
+
+            var extras = _extraViviDefs;
+            return extras != null && extras.Contains(def);
+        }
+
+        public static bool IsVivi(this Pawn pawn) => GetCompVivi(pawn) != null;
+        public static CompVivi GetCompVivi(this Pawn pawn) => pawn != null && CanHaveCompVivi(pawn.def) ? pawn.TryGetComp<CompVivi>() : null;
+        public static CompViviEggLayer GetCompViviEggLayer(this Pawn pawn) => pawn?.TryGetComp<CompViviEggLayer>();
+
+        public static bool IsRoyalVivi(this Pawn pawn) => GetCompVivi(pawn)?.isRoyal ?? false;
 
         // 비비 종족의 제약(VV_PawnConstraint의 GeneConstraint)을 따른다. 유전자 추가 자체는 RPEF가 같은 제약으로 막는다.
         public static bool IsCompatibleWithVivi(GeneDef def) => def.CheckAllConstraints(VVThingDefOf.VV_Vivi, out _);

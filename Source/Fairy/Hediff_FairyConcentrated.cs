@@ -7,6 +7,59 @@ namespace VVRace
 
     public class Hediff_FairyConcentrated : HediffWithComps
     {
+        private static readonly List<Hediff_FairyConcentrated> _activeMarkers = new List<Hediff_FairyConcentrated>();
+        private static Game _cachedGame;
+
+        private static void EnsureCachedGame()
+        {
+            if (_cachedGame != Current.Game)
+            {
+                _activeMarkers.Clear();
+                _cachedGame = Current.Game;
+            }
+        }
+
+        internal static List<Hediff_FairyConcentrated> ActiveMarkers
+        {
+            get
+            {
+                EnsureCachedGame();
+                return _activeMarkers;
+            }
+        }
+
+        private void RegisterMarker()
+        {
+            EnsureCachedGame();
+            if (!_activeMarkers.Contains(this))
+            {
+                _activeMarkers.Add(this);
+            }
+        }
+
+        private void UnregisterMarker()
+        {
+            EnsureCachedGame();
+            _activeMarkers.Remove(this);
+        }
+
+        internal static void Notify_HediffSetDirty(Pawn pawn)
+        {
+            if (pawn == null || _activeMarkers.Count == 0) { return; }
+            EnsureCachedGame();
+
+            var hediffs = pawn.health?.hediffSet?.hediffs;
+            for (int i = _activeMarkers.Count - 1; i >= 0; i--)
+            {
+                var marker = _activeMarkers[i];
+                if (marker.pawn != pawn) { continue; }
+                if (hediffs == null || !hediffs.Contains(marker))
+                {
+                    _activeMarkers.RemoveAt(i);
+                }
+            }
+        }
+
         public Pawn ownerVivi;
         [Unsaved]
         private Effecter _targetMarkerEffecter;
@@ -91,6 +144,12 @@ namespace VVRace
             return owner != null && ownerVivi == owner && !ShouldRemove;
         }
 
+        public override void PostAdd(DamageInfo? dinfo)
+        {
+            base.PostAdd(dinfo);
+            RegisterMarker();
+        }
+
         public override void Tick()
         {
             base.Tick();
@@ -99,6 +158,7 @@ namespace VVRace
 
         public override void PostRemoved()
         {
+            UnregisterMarker();
             EndTargetMarkerEffect();
             base.PostRemoved();
         }
@@ -107,6 +167,7 @@ namespace VVRace
         {
             base.Notify_PawnDied(dinfo, culprit);
 
+            UnregisterMarker();
             EndTargetMarkerEffect();
 
             // 죽은 폰은 헤디프가 틱되지 않아 ShouldRemove로 정리되지 않으므로 여기서 지운다.
@@ -142,6 +203,11 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_References.Look(ref ownerVivi, "ownerVivi");
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                RegisterMarker();
+            }
         }
     }
 }

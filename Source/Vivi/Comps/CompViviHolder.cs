@@ -30,7 +30,7 @@ namespace VVRace
         public bool CanJoin => FairyficatedPawnCount < Props.maxCount;
 
         public IEnumerable<Pawn> FairyficatedPawns => GameComponent_Mana.Of(Current.Game).GetFairyficatedPawns((Pawn)parent);
-        public int FairyficatedPawnCount => FairyficatedPawns.Count();
+        public int FairyficatedPawnCount => GameComponent_Mana.Of(Current.Game)?.GetFairyficatedPawnCount((Pawn)parent) ?? 0;
         public Pawn Royal => (Pawn)parent;
 
         private List<ViviFairy> _activeFairies = new List<ViviFairy>();
@@ -88,7 +88,20 @@ namespace VVRace
             TickQueuedMaterialize(delta);
         }
 
+        [Unsaved]
+        private Gizmo_ViviFairyStatus _cachedFairyStatusGizmo;
+
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (MaterializedCount == 0 && !DebugSettings.godMode)
+            {
+                return base.CompGetGizmosExtra();
+            }
+
+            return CompGetGizmosExtraIterator();
+        }
+
+        private IEnumerable<Gizmo> CompGetGizmosExtraIterator()
         {
             foreach (var gizmo in base.CompGetGizmosExtra())
             {
@@ -97,7 +110,11 @@ namespace VVRace
 
             if (MaterializedCount > 0)
             {
-                yield return new Gizmo_ViviFairyStatus(this);
+                if (_cachedFairyStatusGizmo == null)
+                {
+                    _cachedFairyStatusGizmo = new Gizmo_ViviFairyStatus(this);
+                }
+                yield return _cachedFairyStatusGizmo;
             }
 
             if (!DebugSettings.godMode || !(parent is Pawn pawn) || !pawn.IsRoyalVivi())

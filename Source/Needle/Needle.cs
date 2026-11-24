@@ -289,14 +289,42 @@ namespace VVRace
 
         private void SetTarget(Thing thing)
         {
-            var nearEdges = thing.OccupiedRect().ExpandedBy(1).EdgeCellsNoCorners.Where(v => v.InBounds(Map));
-            
+            var map = Map;
+            var expanded = thing.OccupiedRect().ExpandedBy(1);
+            int validEdgeCount = 0;
+            foreach (var cell in expanded.EdgeCellsNoCorners)
+            {
+                if (cell.InBounds(map))
+                {
+                    validEdgeCount++;
+                }
+            }
+
+            IntVec3 chosenEdge = default;
+            if (validEdgeCount > 0)
+            {
+                int chosenIndex = Rand.Range(0, validEdgeCount);
+                int idx = 0;
+                foreach (var cell in expanded.EdgeCellsNoCorners)
+                {
+                    if (cell.InBounds(map))
+                    {
+                        if (idx == chosenIndex)
+                        {
+                            chosenEdge = cell;
+                            break;
+                        }
+                        idx++;
+                    }
+                }
+            }
+
             _curTargetThing = thing;
             _moveStartPosition = _realPosition;
             _moveEndPosition = thing.TrueCenter().Yto0();
 
             _curDirectionOutVector = _realDirection;
-            _curDirectionInVector = (thing.TrueCenter() - nearEdges.RandomElement().ToVector3()).Yto0();
+            _curDirectionInVector = (thing.TrueCenter() - chosenEdge.ToVector3()).Yto0();
             _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight);
             _curMoveDistance = 0f;
         }
@@ -304,34 +332,50 @@ namespace VVRace
         private void SearchNewTarget(Thing previousTarget, Vector3 targetSearchPosition)
         {
             var caster = launcher as IAttackTargetSearcher;
+            var map = Map;
             var cellPosition = targetSearchPosition.ToIntVec3();
 
-            var potentialTargets = Map.attackTargetsCache.GetPotentialTargetsFor(caster);
-
+            var potentialTargets = map.attackTargetsCache.GetPotentialTargetsFor(caster);
+            var radius = NeedleProperties.targettingRadius;
+            var radiusSq = radius * radius;
             var tmp = (_initialTargettingPosition - targetSearchPosition).sqrMagnitude;
-            var target = GenClosest.ClosestThing_Global(
-                cellPosition,
-                potentialTargets,
-                maxDistance: NeedleProperties.targettingRadius,
-                validator: (Thing t) =>
+            var launcherFaction = launcher.Faction;
+            var launcherPos = launcher.Position;
+            var launcherPosHeld = launcher.PositionHeld;
+
+            Thing target = null;
+            float bestPriority = float.MinValue;
+            float bestDistSq = float.MaxValue;
+
+            if (potentialTargets != null)
+            {
+                for (int i = 0; i < potentialTargets.Count; i++)
                 {
-                    if (t == previousTarget) { return false; }
+                    var attackTarget = potentialTargets[i];
+                    var t = attackTarget as Thing;
+                    if (t == null || t == previousTarget) { continue; }
+                    if (!t.Spawned || t.Fogged()) { continue; }
+                    int distSq = cellPosition.DistanceToSquared(t.Position);
+                    if (distSq > radiusSq) { continue; }
+                    if (!t.HostileTo(launcherFaction)) { continue; }
+                    if (!GenSight.LineOfSightToThing(launcherPosHeld, t, map, true)) { continue; }
 
-                    var attackTarget = t as IAttackTarget;
-                    if (attackTarget == null) { return false; }
+                    float priority =
+                        (GenHostility.IsActiveThreatTo(attackTarget, launcherFaction) ? 10000 : 0) +
+                        (_attackedCounter.TryGetValue(t.thingIDNumber, out var attackedCount) ? attackedCount * -12 : 0) +
+                        Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)) -
+                        launcherPos.DistanceToSquared(t.Position);
 
-                    if (!t.Spawned) { return false; }
-                    if (t.Fogged()) { return false; }
-                    if (t.HostileTo(launcher.Faction) == false) { return false; }
-                    if (GenSight.LineOfSightToThing(launcher.PositionHeld, t, Map, true) == false) { return false; }
-                    
-                    return true;
-                },
-                priorityGetter: (Thing t) => 
-                    (t is IAttackTarget at && GenHostility.IsActiveThreatTo(at, launcher.Faction) ? 10000 : 0) + 
-                    (_attackedCounter.TryGetValue(t.thingIDNumber, out var attackedCount) ? attackedCount * -12 : 0) + 
-                    Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)) - 
-                    launcher.Position.DistanceToSquared(t.Position));
+                    if (target != null && (priority < bestPriority || (Mathf.Approximately(priority, bestPriority) && distSq >= bestDistSq)))
+                    {
+                        continue;
+                    }
+
+                    target = t;
+                    bestPriority = priority;
+                    bestDistSq = distSq;
+                }
+            }
 
             if (target != null)
             {
@@ -341,10 +385,10 @@ namespace VVRace
             {
                 if (previousTarget != null &&
                     previousTarget.Spawned &&
-                    previousTarget is IAttackTarget previousAttackTarget &&
-                    previousTarget.Fogged() == false &&
-                    previousTarget.Position.DistanceTo(cellPosition) < NeedleProperties.targettingRadius &&
-                    GenSight.LineOfSightToThing(launcher.PositionHeld, previousTarget, Map, true))
+                    previousTarget is IAttackTarget &&
+                    !previousTarget.Fogged() &&
+                    previousTarget.Position.DistanceTo(cellPosition) < radius &&
+                    GenSight.LineOfSightToThing(launcherPosHeld, previousTarget, map, true))
                 {
                     SetTarget(previousTarget);
                 }
@@ -391,7 +435,7 @@ namespace VVRace
             var c2 = p2 - w2 / 3f;
 
             // p1/p2: 시작/끝 위치, w1/w2: 각 끝점의 미분값, t: [0, 1].
-            return Mathf.Pow(tInv, 3) * p1 +
+            return tInv * tInv * tInv * p1 +
                 3 * tInv * tInv * t * c1 +
                 3 * tInv * t * t * c2 +
                 t * t * t * p2;

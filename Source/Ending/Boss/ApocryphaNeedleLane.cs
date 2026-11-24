@@ -88,29 +88,39 @@ namespace VVRace
             var cellExtent = 0.5f * (Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
             var rect = BoundsRect(map, start + direction * from, start + direction * to, halfWidth + 2f);
 
-            foreach (var cell in rect)
+            var buffer = SimplePool<List<Thing>>.Get();
+            try
             {
-                _tmpCellThings.Clear();
-                _tmpCellThings.AddRange(cell.GetThingList(map));
-                for (int i = 0; i < _tmpCellThings.Count; i++)
+                foreach (var cell in rect)
                 {
-                    var thing = _tmpCellThings[i];
-                    if (hitIds.Contains(thing.thingIDNumber) || !IsPierceable(thing) || !canPierce(thing)) { continue; }
+                    var cellThings = cell.GetThingList(map);
+                    if (cellThings.Count == 0) { continue; }
 
-                    var hit = thing is Pawn pawn
-                        ? Overlaps(start, direction, length, halfWidth, GroundPos(pawn), PawnHitRadius, PawnHitRadius, from, to)
-                        : Overlaps(start, direction, length, halfWidth, cell.ToVector3Shifted(), cellExtent, cellExtent, from, to);
-                    if (!hit) { continue; }
+                    buffer.Clear();
+                    buffer.AddRange(cellThings);
+                    for (int i = 0; i < buffer.Count; i++)
+                    {
+                        var thing = buffer[i];
+                        if (hitIds.Contains(thing.thingIDNumber) || !IsPierceable(thing) || !canPierce(thing)) { continue; }
 
-                    hitIds.Add(thing.thingIDNumber);
-                    pierce(thing);
+                        var hit = thing is Pawn pawn
+                            ? Overlaps(start, direction, length, halfWidth, GroundPos(pawn), PawnHitRadius, PawnHitRadius, from, to)
+                            : Overlaps(start, direction, length, halfWidth, cell.ToVector3Shifted(), cellExtent, cellExtent, from, to);
+                        if (!hit) { continue; }
+
+                        hitIds.Add(thing.thingIDNumber);
+                        pierce(thing);
+                        if (needle.Destroyed) { break; }
+                    }
+
                     if (needle.Destroyed) { break; }
                 }
-
-                if (needle.Destroyed) { break; }
             }
-
-            _tmpCellThings.Clear();
+            finally
+            {
+                buffer.Clear();
+                SimplePool<List<Thing>>.Return(buffer);
+            }
         }
 
         private static Vector3 GroundPos(Pawn pawn)

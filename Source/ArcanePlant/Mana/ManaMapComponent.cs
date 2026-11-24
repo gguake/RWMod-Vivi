@@ -10,7 +10,31 @@ namespace VVRace
 {
     public class ManaMapComponent : MapComponent, ICellBoolGiver, IDisposable
     {
-        private VVRaceModSettings _modSettingCache = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+        private VVRaceModSettings _modSettingCache = VVRaceMod.Settings;
+
+        private static int _cachedComponentIndex = -1;
+        public static ManaMapComponent Of(Map map)
+        {
+            if (map == null) { return null; }
+
+            var components = map.components;
+            var index = _cachedComponentIndex;
+            if ((uint)index < (uint)components.Count && components[index] is ManaMapComponent cached)
+            {
+                return cached;
+            }
+
+            for (int i = 0; i < components.Count; ++i)
+            {
+                if (components[i] is ManaMapComponent found)
+                {
+                    _cachedComponentIndex = i;
+                    return found;
+                }
+            }
+
+            return null;
+        }
 
         public const float ViviFlowerChance = 0.04f;
         public const float EnvironmentManaMax = 1000f;
@@ -43,6 +67,8 @@ namespace VVRace
         {
             get
             {
+                if (!_manaGrid.IsCreated || !_manaReserveGrid.IsCreated) { return 0f; }
+
                 var idx = map.cellIndices.CellToIndex(cell);
                 return Mathf.Clamp(_manaReserveGrid[idx] + _manaGrid[idx], 0f, EnvironmentManaMax);
             }
@@ -142,7 +168,10 @@ namespace VVRace
             }
         }
 
-        private List<(int idx, float mana)> _tmpFlowerCellCandidates = new List<(int idx, float mana)>();
+        private readonly List<(int idx, float mana)> _tmpFlowerCellCandidates = new List<(int idx, float mana)>();
+        private static readonly Comparison<(int idx, float mana)> FlowerManaDescComparison =
+            (x, y) => Mathf.Min(y.mana, 500f).CompareTo(Mathf.Min(x.mana, 500f));
+
         public override void MapComponentTick()
         {
             if (_diffusionJobStart)
@@ -161,15 +190,13 @@ namespace VVRace
                         if (v >= 100f) { _tmpFlowerCellCandidates.Add((i, v)); }
                     }
 
-                    _tmpFlowerCellCandidates.Sort((x, y) => Mathf.Min(y.mana, 500f).CompareTo(Mathf.Min(x.mana, 500f)));
+                    _tmpFlowerCellCandidates.Sort(FlowerManaDescComparison);
 
                     var thingDef = ArcanePlantUtility.ViviFlowerDefs.RandomElement();
                     int flowerCount = (int)Mathf.Clamp(sum / 50000f, 1, 20) + Rand.Range(1, 5);
-                    foreach (var (cellIndex, _) in _tmpFlowerCellCandidates)
+                    for (int i = 0; i < _tmpFlowerCellCandidates.Count && flowerCount > 0; ++i)
                     {
-                        if (flowerCount <= 0) { break; }
-
-                        var c = map.cellIndices.IndexToCell(cellIndex);
+                        var c = map.cellIndices.IndexToCell(_tmpFlowerCellCandidates[i].idx);
                         if (ArcanePlantUtility.TrySpawnViviFlower(map, c, out _, flowerDef: thingDef))
                         {
                             flowerCount--;
@@ -177,6 +204,7 @@ namespace VVRace
                         }
                     }
 
+                    _tmpFlowerCellCandidates.Clear();
                     _checkFlowerCells = false;
                 }
             }
@@ -188,7 +216,7 @@ namespace VVRace
                 var gameComponentMana = GameComponent_Mana.Of(Current.Game);
                 if (gameComponentMana != null)
                 {
-                    foreach (var comp in gameComponentMana.GetManaCompsOn(map))
+                    foreach (var comp in gameComponentMana.GetManaCompsOnInternal(map))
                     {
                         var root = comp.parent.SpawnedParentOrMe;
                         if (root != null && root.Map == map)
@@ -301,7 +329,7 @@ namespace VVRace
                 outputGrid = _tmpGrid,
             };
 
-            _diffusionJobHandle = WaylithJobRuntime.ScheduleFor(job, map.Size.z, 1);
+            _diffusionJobHandle = WaylithJobRuntime.ScheduleFor(job, map.Size.z, 16);
             _diffusionJobStart = true;
         }
 

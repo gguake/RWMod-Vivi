@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 
@@ -16,6 +17,38 @@ namespace VVRace
         private static readonly FieldInfo PreRenderResultsBodyAngleField = PawnRendererResultsField != null
             ? AccessTools.Field(PawnRendererResultsField.FieldType, "bodyAngle")
             : null;
+        private static readonly bool HasValidPreRenderBodyAngleField =
+            PawnRendererResultsField != null &&
+            PreRenderResultsBodyAngleField != null &&
+            PreRenderResultsBodyAngleField.FieldType == typeof(float);
+        private static readonly Action<PawnRenderer> ResetPreRenderBodyAngle = BuildResetPreRenderBodyAngle();
+
+        private static Action<PawnRenderer> BuildResetPreRenderBodyAngle()
+        {
+            if (!HasValidPreRenderBodyAngleField) { return null; }
+            if (!PawnRendererResultsField.FieldType.IsValueType) { return null; }
+
+            try
+            {
+                var dm = new DynamicMethod(
+                    "VV_ResetPreRenderBodyAngle",
+                    typeof(void),
+                    new[] { typeof(PawnRenderer) },
+                    typeof(PawnRenderer),
+                    skipVisibility: true);
+                var il = dm.GetILGenerator();
+                il.Emit(OpCodes.Ldarg_0);
+                il.Emit(OpCodes.Ldflda, PawnRendererResultsField);
+                il.Emit(OpCodes.Ldc_R4, 0f);
+                il.Emit(OpCodes.Stfld, PreRenderResultsBodyAngleField);
+                il.Emit(OpCodes.Ret);
+                return (Action<PawnRenderer>)dm.CreateDelegate(typeof(Action<PawnRenderer>));
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         internal static void Patch(Harmony harmony)
         {
@@ -108,9 +141,15 @@ namespace VVRace
 
         private static void PawnRenderer_ParallelPreRenderPawnAt_Postfix(PawnRenderer __instance, Pawn ___pawn)
         {
-            if (PawnRendererResultsField == null || PreRenderResultsBodyAngleField == null) { return; }
             if (!Hediff_EverflowerAssimilation.IsAssimilated(___pawn)) { return; }
 
+            if (ResetPreRenderBodyAngle != null)
+            {
+                ResetPreRenderBodyAngle(__instance);
+                return;
+            }
+
+            if (!HasValidPreRenderBodyAngleField) { return; }
             var boxed = PawnRendererResultsField.GetValue(__instance);
             if (boxed != null && (float)PreRenderResultsBodyAngleField.GetValue(boxed) != 0f)
             {
@@ -204,6 +243,7 @@ namespace VVRace
 
         private static bool HediffGiver_BrainInjury_OnHediffAdded_Prefix(Pawn pawn, Hediff hediff, ref bool __result)
         {
+            if (!Hediff_EverflowerQueen.HasAnyQueen) { return true; }
             if (pawn?.health == null || hediff == null || pawn.health.hediffSet.hediffs.Contains(hediff)) { return true; }
             if (!Hediff_EverflowerQueen.IsAwaitingEnshrinement(pawn)) { return true; }
 

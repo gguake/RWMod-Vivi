@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -74,13 +74,20 @@ namespace VVRace
         public bool HasAnyBulletOverrides => _hasAnyBulletOverrides;
         protected bool _hasAnyBulletOverrides;
 
+        public bool HasBulletReplacers => _bulletReplacers.Count > 0;
+        public int BulletReplacersVersion => _bulletReplacersVersion;
+        public Dictionary<Thing, BulletReplacer>.ValueCollection BulletReplacerValues => _bulletReplacers.Values;
         public IEnumerable<BulletReplacer> BulletReplacers => _bulletReplacers.Values;
         public IEnumerable<KeyValuePair<Thing, BulletReplacer>> BulletReplacerPairs => _bulletReplacers;
         protected Dictionary<Thing, BulletReplacer> _bulletReplacers = new Dictionary<Thing, BulletReplacer>();
+        private int _bulletReplacersVersion;
 
         public IEnumerable<BulletModifier> BulletModifiers => _bulletModifiers.Values;
         public IEnumerable<KeyValuePair<Thing, BulletModifier>> BulletModifierPairs => _bulletModifiers;
         protected Dictionary<Thing, BulletModifier> _bulletModifiers = new Dictionary<Thing, BulletModifier>();
+
+        private readonly System.Predicate<Thing> _isValidTargetDelegate;
+        private readonly List<Building> _tmpHostileBuildingTargets = new List<Building>();
 
         public virtual bool Active
         {
@@ -108,6 +115,7 @@ namespace VVRace
         public ArcanePlant_Turret()
         {
             _turretTop = new ArcanePlantTurretTop(this);
+            _isValidTargetDelegate = IsValidTarget;
         }
 
         public virtual bool ThreatDisabled(IAttackTargetSearcher disabledFor) => !Active || (!AttackVerb.Available() && -ManaComp.ManaExternalChangeByDay < 30);
@@ -179,7 +187,11 @@ namespace VVRace
             base.DeSpawn(mode);
             ResetCurrentTarget();
 
-            _bulletReplacers.Clear();
+            if (_bulletReplacers.Count > 0)
+            {
+                _bulletReplacers.Clear();
+                _bulletReplacersVersion++;
+            }
             _bulletModifiers.Clear();
             _hasAnyBulletOverrides = false;
         }
@@ -261,6 +273,7 @@ namespace VVRace
             if (!_bulletReplacers.ContainsKey(thing))
             {
                 _bulletReplacers.Add(thing, replacer);
+                _bulletReplacersVersion++;
                 _hasAnyBulletOverrides = true;
             }
         }
@@ -276,7 +289,10 @@ namespace VVRace
 
         public void RemoveBulletOverrideData(Thing thing)
         {
-            _bulletReplacers.Remove(thing);
+            if (_bulletReplacers.Remove(thing))
+            {
+                _bulletReplacersVersion++;
+            }
             _bulletModifiers.Remove(thing);
 
             _hasAnyBulletOverrides = _bulletReplacers.Count > 0 || _bulletModifiers.Count > 0;
@@ -322,32 +338,46 @@ namespace VVRace
         protected LocalTargetInfo TryFindNewTarget()
         {
             var faction = Faction;
-            var range = AttackVerb.verbProps.range;
+            var attackVerb = AttackVerb;
+            var range = attackVerb.verbProps.range;
 
-            if (Rand.Value < 0.5f && AttackVerb.ProjectileFliesOverhead() && faction.HostileTo(Faction.OfPlayerSilentFail) && Map.listerBuildings.allBuildingsColonist.Where(building =>
+            if (Rand.Value < 0.5f && attackVerb.ProjectileFliesOverhead() && faction.HostileTo(Faction.OfPlayerSilentFail))
             {
-                var verbRange = AttackVerb.verbProps.EffectiveMinRange(building, this);
-                var distance = building.Position.DistanceToSquared(Position);
-                return verbRange * verbRange < distance && distance < range * range;
+                var rangeSq = range * range;
+                var allBuildings = Map.listerBuildings.allBuildingsColonist;
+                _tmpHostileBuildingTargets.Clear();
+                for (int i = 0; i < allBuildings.Count; i++)
+                {
+                    var building = allBuildings[i];
+                    var verbRange = attackVerb.verbProps.EffectiveMinRange(building, this);
+                    var distance = building.Position.DistanceToSquared(Position);
+                    if (verbRange * verbRange < distance && distance < rangeSq)
+                    {
+                        _tmpHostileBuildingTargets.Add(building);
+                    }
+                }
 
-            }).TryRandomElement(out var result))
-            {
-                return result;
+                if (_tmpHostileBuildingTargets.TryRandomElement(out var result))
+                {
+                    _tmpHostileBuildingTargets.Clear();
+                    return result;
+                }
+                _tmpHostileBuildingTargets.Clear();
             }
 
             var targetScanFlags = TargetScanFlags.NeedThreat | TargetScanFlags.NeedAutoTargetable;
-            if (!AttackVerb.ProjectileFliesOverhead())
+            if (!attackVerb.ProjectileFliesOverhead())
             {
                 targetScanFlags |= TargetScanFlags.NeedLOSToAll;
                 targetScanFlags |= TargetScanFlags.LOSBlockableByGas;
             }
 
-            if (AttackVerb.IsIncendiary_Ranged())
+            if (attackVerb.IsIncendiary_Ranged())
             {
                 targetScanFlags |= TargetScanFlags.NeedNonBurning;
             }
 
-            return (Thing)AttackTargetFinder.BestShootTargetFromCurrentPosition(this, targetScanFlags, IsValidTarget);
+            return (Thing)AttackTargetFinder.BestShootTargetFromCurrentPosition(this, targetScanFlags, _isValidTargetDelegate);
         }
 
         protected virtual bool IsValidTarget(Thing thing)

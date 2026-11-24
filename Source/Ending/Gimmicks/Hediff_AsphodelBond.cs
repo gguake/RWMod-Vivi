@@ -15,8 +15,12 @@ namespace VVRace
         private Effecter _auraEffecter;
         [Unsaved]
         private Mote _shimmerMote;
+        [Unsaved]
+        private HediffComp_Disappears _disappearsComp;
 
-        public int TicksLeft => this.TryGetComp<HediffComp_Disappears>()?.ticksToDisappear ?? 0;
+        private HediffComp_Disappears DisappearsComp => _disappearsComp ?? (_disappearsComp = this.TryGetComp<HediffComp_Disappears>());
+
+        public int TicksLeft => DisappearsComp?.ticksToDisappear ?? 0;
 
         public float Progress => 1f - Mathf.Clamp01(TicksLeft / (float)Mathf.Max(1, _totalDurationTicks));
 

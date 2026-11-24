@@ -53,8 +53,10 @@ namespace VVRace
 
             if (fairy == null) { return; }
 
-            Vector3 restPos = FairyJobUtility.OrbitPositionAround(fairy, ally, 0, 1);
-            move?.ConfigureStepTarget(restPos);
+            if (move != null)
+            {
+                move.ConfigureStepTarget(FairyJobUtility.OrbitPositionAround(fairy, ally, 0, 1));
+            }
 
             if (fairy.IsHashIntervalTick(FairyJobUtility.TargetScanIntervalTicks, delta))
             {

@@ -21,11 +21,20 @@ namespace VVRace
     {
         public List<CompMana> GetManaCompsOn(Map map)
         {
+            var internalList = GetManaCompsOnInternal(map);
+            return internalList.Count > 0 ? new List<CompMana>(internalList) : new List<CompMana>();
+        }
+
+        internal List<CompMana> GetManaCompsOnInternal(Map map)
+        {
             var ticksGame = GenTicks.TicksGame;
             if (_manaCompsByMapTick != ticksGame)
             {
                 _manaCompsByMapTick = ticksGame;
-                _manaCompsByMap.Clear();
+                foreach (var list in _manaCompsByMap.Values)
+                {
+                    list.Clear();
+                }
 
                 _manaComps.RemoveWhere(v => v.parent == null || v.parent.Destroyed);
 
@@ -42,12 +51,31 @@ namespace VVRace
 
                     comps.Add(comp);
                 }
+
+                if (_manaCompsByMap.Count > 0 && Current.Game != null)
+                {
+                    _tmpStaleMaps.Clear();
+                    var activeMaps = Current.Game.Maps;
+                    foreach (var kv in _manaCompsByMap)
+                    {
+                        if (!activeMaps.Contains(kv.Key))
+                        {
+                            _tmpStaleMaps.Add(kv.Key);
+                        }
+                    }
+                    for (int i = 0; i < _tmpStaleMaps.Count; i++)
+                    {
+                        _manaCompsByMap.Remove(_tmpStaleMaps[i]);
+                    }
+                    _tmpStaleMaps.Clear();
+                }
             }
 
             return _manaCompsByMap.TryGetValue(map, out var result) ? result : EmptyManaComps;
         }
 
         private static readonly List<CompMana> EmptyManaComps = new List<CompMana>();
+        private readonly List<Map> _tmpStaleMaps = new List<Map>();
 
         private Game _game;
 
@@ -56,6 +84,18 @@ namespace VVRace
         private int _manaCompsByMapTick = -1;
 
         public IEnumerable<Pawn> GetFairyficatedPawns(Pawn pawn) => _fairyficated.Where(v => v.linker == pawn).Select(v => v.fairy);
+        public int GetFairyficatedPawnCount(Pawn pawn)
+        {
+            int count = 0;
+            for (int i = 0; i < _fairyficated.Count; i++)
+            {
+                if (_fairyficated[i].linker == pawn)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
         private List<FairyficatedPawn> _fairyficated = new List<FairyficatedPawn>();
 
         public IReadOnlyList<Pawn> AsphodelBoundVivis => _asphodelBound;
@@ -93,6 +133,8 @@ namespace VVRace
         {
             _game = game;
             _fairyficated = new List<FairyficatedPawn>();
+            Hediff_EverflowerAssimilation.ResetRegistry();
+            Hediff_EverflowerQueen.ResetRegistry();
         }
 
         public override void ExposeData()

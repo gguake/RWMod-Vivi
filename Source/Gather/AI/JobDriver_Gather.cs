@@ -66,15 +66,26 @@ namespace VVRace
                 .FailOn(() => IsBillDisabled);
 
             var gatherWorkAmount = GatheringRecipeDef.GatheringTicks(pawn);
+            bool gatherInitChecked = false;
             yield return Toils_General.Wait(gatherWorkAmount, GatherTargetIdx)
                 .FailOnDespawnedNullOrForbidden(GatherTargetIdx)
                 .FailOnBurningImmobile(GatherTargetIdx)
                 .FailOn(() => IsBillDisabled)
                 .WithInitAction(() =>
                 {
+                    gatherInitChecked = false;
                     job.bill.Notify_BillWorkStarted(pawn);
                 })
-                .WithFailCondition(() => !GatherTargetInfo.Thing.CanGatherable(GatheringRecipeDef.targetYieldStat, GatheringRecipeDef.targetCooldownStat))
+                .WithFailCondition(() =>
+                {
+                    if (!gatherInitChecked)
+                    {
+                        gatherInitChecked = true;
+                        return !GatherTargetInfo.Thing.CanGatherable(GatheringRecipeDef.targetYieldStat, GatheringRecipeDef.targetCooldownStat);
+                    }
+                    if (!pawn.IsHashIntervalTick(30)) { return false; }
+                    return !GatherTargetInfo.Thing.CanGatherable(GatheringRecipeDef.targetYieldStat, GatheringRecipeDef.targetCooldownStat);
+                })
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
                 .WithActiveSkill(() => job.bill.recipe.workSkill)
                 .WithProgressBarToilDelay(GatherTargetIdx);
@@ -83,6 +94,12 @@ namespace VVRace
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
                 {
+                    if (!GatherTargetInfo.Thing.CanGatherable(GatheringRecipeDef.targetYieldStat, GatheringRecipeDef.targetCooldownStat))
+                    {
+                        EndJobWith(JobCondition.Incompletable);
+                        return;
+                    }
+
                     GatheringRecipeDef.gatherWorker.Notify_Gathered(pawn, BillGiver, GatherTargetInfo.Thing, GatheringRecipeDef);
 
                     if (GatheringRecipeDef.targetYieldStat != null)

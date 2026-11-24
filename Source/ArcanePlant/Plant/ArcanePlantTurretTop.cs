@@ -142,7 +142,7 @@ namespace VVRace
             else
             {
                 matrix.SetTRS(parent.DrawPos + Altitudes.AltIncVect * 2f + offset, (angle + 90f).ToQuat(), new Vector3(turretTopDrawSize, 1f, turretTopDrawSize));
-                Graphics.DrawMesh(MeshPool.GridPlaneFlip(new Vector2(1f, 1f)), matrix, gun.Graphic.MatSingleFor(gun), 0);
+                Graphics.DrawMesh(MeshPool.plane10Flip, matrix, gun.Graphic.MatSingleFor(gun), 0);
             }
         }
     }

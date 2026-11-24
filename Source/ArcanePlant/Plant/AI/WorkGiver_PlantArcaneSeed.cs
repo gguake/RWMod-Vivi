@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -14,12 +14,13 @@ namespace VVRace
         {
             if (!VVResearchProjectDefOf.VV_ArcanePlantSowing.IsFinished) { return true; }
 
-            return !pawn.MapHeld?.GetComponent<ArcanePlantMapComponent>()?.ArcaneSeeds.Any() ?? true;
+            var comp = ArcanePlantMapComponent.Of(pawn.MapHeld);
+            return comp == null || !comp.HasArcaneSeeds;
         }
 
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
-            return pawn.MapHeld?.GetComponent<ArcanePlantMapComponent>()?.ArcaneSeeds ?? Enumerable.Empty<Thing>();
+            return ArcanePlantMapComponent.Of(pawn.MapHeld)?.ArcaneSeeds ?? Enumerable.Empty<Thing>();
         }
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -71,8 +71,9 @@ namespace VVRace
             get => _growth;
             set
             {
+                bool wasMatureVisual = _growth >= 0.45f;
                 _growth = Mathf.Clamp01(value);
-                if (Spawned)
+                if (Spawned && wasMatureVisual != (_growth >= 0.45f))
                 {
                     DirtyMapMesh(Map);
                 }

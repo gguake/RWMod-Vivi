@@ -1,4 +1,4 @@
-using Verse;
+﻿using Verse;
 
 namespace VVRace
 {
@@ -12,11 +12,24 @@ namespace VVRace
 
     public class HediffComp_GrowthBoost : HediffComp
     {
+        [Unsaved]
+        private CompVivi _compVivi;
+        [Unsaved]
+        private bool _compViviChecked;
+
         public override bool CompShouldRemove
         {
             get
             {
-                return Pawn.GetCompVivi() == null || Pawn.DevelopmentalStage.Adult();
+                if (Pawn.DevelopmentalStage.Adult()) { return true; }
+
+                if (!_compViviChecked)
+                {
+                    _compViviChecked = true;
+                    _compVivi = Pawn.GetCompVivi();
+                }
+
+                return _compVivi == null;
             }
         }
     }

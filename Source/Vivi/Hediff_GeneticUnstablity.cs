@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -21,12 +22,17 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Values.Look(ref _intervalFactor, "intervalFactor", 0f);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && !(_intervalFactor >= 0.25f))
+            {
+                _intervalFactor = Rand.Range(0.25f, 2f);
+            }
         }
 
-        public override void Tick()
+        public override void TickInterval(int delta)
         {
-            base.Tick();
-            if (pawn.IsHashIntervalTick((int)(SeverityChangeInterval * _intervalFactor)))
+            base.TickInterval(delta);
+            int interval = Mathf.Max(1, (int)(SeverityChangeInterval * _intervalFactor));
+            if (pawn.IsHashIntervalTick(interval, delta))
             {
                 Severity += Rand.Range(-0.25f, 0.25f);
 

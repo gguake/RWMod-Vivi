@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -18,16 +18,10 @@ namespace VVRace
             var props = node.Props as PawnRenderNodeProperties_ViviCustomDrawSize;
             if (props == null) { return scale; }
 
-            if (parms.pawn.IsVivi())
+            var compVivi = parms.pawn.GetCompVivi();
+            if (compVivi != null)
             {
-                if (parms.pawn.IsRoyalVivi())
-                {
-                    scale *= props.royalViviDrawSize;
-                }
-                else
-                {
-                    scale *= props.normalViviDrawSize;
-                }
+                scale *= compVivi.isRoyal ? props.royalViviDrawSize : props.normalViviDrawSize;
             }
 
             return scale;

@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -70,13 +70,30 @@ namespace VVRace
             var ctrl = fairy?.Controller;
             if (ctrl == null) { return; }
 
-            var idleFairies = ctrl.ActiveFairies
-                .Where(f => f != null && !f.Destroyed && f.Spawned && f.CurrentJob?.Kind == FairyJobKind.Idle)
-                .OrderBy(f => f.thingIDNumber)
-                .ToList();
-            cachedCount = Mathf.Max(1, idleFairies.Count);
-            int index = idleFairies.IndexOf(fairy);
-            cachedSlot = index >= 0 ? index : 0;
+            var activeFairies = ctrl.ActiveFairies;
+            int myId = fairy.thingIDNumber;
+            int count = 0;
+            int slot = 0;
+            bool foundSelf = false;
+            for (int i = 0; i < activeFairies.Count; i++)
+            {
+                var f = activeFairies[i];
+                if (f != null && !f.Destroyed && f.Spawned && f.CurrentJob?.Kind == FairyJobKind.Idle)
+                {
+                    count++;
+                    if (f == fairy)
+                    {
+                        foundSelf = true;
+                    }
+                    else if (f.thingIDNumber < myId)
+                    {
+                        slot++;
+                    }
+                }
+            }
+
+            cachedCount = Mathf.Max(1, count);
+            cachedSlot = foundSelf ? slot : 0;
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)

@@ -15,7 +15,19 @@ namespace VVRace
 
         public override bool ImpactHarmless => true;
 
-        private CompApocrypha BossComp => owner?.TryGetComp<CompApocrypha>();
+        [Unsaved]
+        private CompApocrypha _cachedBossComp;
+        internal CompApocrypha BossComp
+        {
+            get
+            {
+                if (_cachedBossComp == null || _cachedBossComp.parent != owner)
+                {
+                    _cachedBossComp = owner?.TryGetComp<CompApocrypha>();
+                }
+                return _cachedBossComp;
+            }
+        }
 
         private CompProperties_Apocrypha Props => BossComp?.Props;
 

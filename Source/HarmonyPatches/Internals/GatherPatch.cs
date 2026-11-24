@@ -16,9 +16,14 @@ namespace VVRace
 
         private static bool RegionDirtyer_SetAllClean_Prefix(Map ___map, HashSet<IntVec3> ___dirtyCells)
         {
+            if (___dirtyCells == null || ___dirtyCells.Count == 0 || ___map == null) { return true; }
+
+            var comp = ___map.GetComponent<GatheringMapComponent>();
+            if (comp == null || !comp.HasWorkTables) { return true; }
+
             foreach (var cell in ___dirtyCells)
             {
-                ___map.GetComponent<GatheringMapComponent>().Notify_CellRegionRebuilded(cell);
+                comp.Notify_CellRegionRebuilded(cell);
             }
 
             return true;

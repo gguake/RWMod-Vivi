@@ -6,12 +6,64 @@ namespace VVRace
 {
     public class ArcanePlantMapComponent : MapComponent
     {
+        private static int _cachedComponentIndex = -1;
+        public static ArcanePlantMapComponent Of(Map map)
+        {
+            if (map == null) { return null; }
+
+            var components = map.components;
+            var index = _cachedComponentIndex;
+            if ((uint)index < (uint)components.Count && components[index] is ArcanePlantMapComponent cached)
+            {
+                return cached;
+            }
+
+            for (int i = 0; i < components.Count; ++i)
+            {
+                if (components[i] is ArcanePlantMapComponent found)
+                {
+                    _cachedComponentIndex = i;
+                    return found;
+                }
+            }
+
+            return null;
+        }
+
         public IEnumerable<ThingWithComps> ArcaneSeeds
         {
             get
             {
-                _arcaneSeeds.RemoveWhere(v => v == null || v.Destroyed || v.MapHeld != map);
+                PruneArcaneSeeds();
                 return _arcaneSeeds;
+            }
+        }
+        internal List<ThingWithComps> ArcaneSeedsList
+        {
+            get
+            {
+                PruneArcaneSeeds();
+                return _arcaneSeeds;
+            }
+        }
+        public bool HasArcaneSeeds
+        {
+            get
+            {
+                if (_arcaneSeeds.Count == 0) { return false; }
+                PruneArcaneSeeds();
+                return _arcaneSeeds.Count > 0;
+            }
+        }
+        private void PruneArcaneSeeds()
+        {
+            for (int i = _arcaneSeeds.Count - 1; i >= 0; --i)
+            {
+                var v = _arcaneSeeds[i];
+                if (v == null || v.Destroyed || v.MapHeld != map)
+                {
+                    _arcaneSeeds.RemoveAt(i);
+                }
             }
         }
         private List<ThingWithComps> _arcaneSeeds;
@@ -56,6 +108,9 @@ namespace VVRace
 
         private Dictionary<Room, ThingDef> _scentRooms;
         private bool _scentRoomsDirty;
+        private long _nextScentTick = long.MinValue;
+        private int _lastScentTick = -1;
+        private readonly Dictionary<ArcanePlantPot, CellRect> _potRegisteredRects = new Dictionary<ArcanePlantPot, CellRect>();
 
         public bool HasAnyArcanePlant => _arcanePlants.Count > 0;
 
@@ -75,14 +130,24 @@ namespace VVRace
 
             map.events.TerrainChanged += (cell) =>
             {
-                var arcaneSeeds = ArcaneSeeds;
-                if (arcaneSeeds.Any(v => v.GetComp<CompArcaneSeed>().SeedlingCells.Contains(cell)))
+                if (HasArcaneSeeds)
                 {
-                    if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, VVThingDefOf.VV_ArcanePlantSeedling))
+                    bool anyContains = false;
+                    for (int i = 0; i < _arcaneSeeds.Count; i++)
                     {
-                        foreach (var seed in _arcaneSeeds)
+                        var compSeed = _arcaneSeeds[i].GetComp<CompArcaneSeed>();
+                        if (compSeed != null && compSeed.SeedlingCells.Contains(cell))
                         {
-                            seed.GetComp<CompArcaneSeed>().SeedlingCells.Remove(cell);
+                            anyContains = true;
+                            break;
+                        }
+                    }
+
+                    if (anyContains && !ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, VVThingDefOf.VV_ArcanePlantSeedling))
+                    {
+                        for (int i = 0; i < _arcaneSeeds.Count; i++)
+                        {
+                            _arcaneSeeds[i].GetComp<CompArcaneSeed>()?.SeedlingCells.Remove(cell);
                         }
                     }
                 }
@@ -115,19 +180,43 @@ namespace VVRace
             if (_scentRoomsDirty)
             {
                 RebuildScentRooms();
+                _nextScentTick = long.MinValue;
             }
 
             if (_scentRooms.Count == 0) { return; }
 
             var ticks = GenTicks.TicksGame;
+            if (ticks < _lastScentTick)
+            {
+                _nextScentTick = long.MinValue;
+            }
+            _lastScentTick = ticks;
+            if (_nextScentTick > ticks) { return; }
+
+            // int.MaxValue 경계에서의 int 오버플로를 피하기 위해 long으로 다음 확산 틱을 계산한다.
+            long interval = ScentUtility.DiffusionIntervalTicks;
+            long nextMin = long.MaxValue;
             foreach (var kv in _scentRooms)
             {
-                if ((ticks + kv.Key.ID) % ScentUtility.DiffusionIntervalTicks != 0) { continue; }
-
-                if (kv.Key.Vacuum >= 0.5f) { continue; }
-
-                ScentUtility.ApplyScentToRoom(kv.Key, kv.Value);
+                long rem = ((long)ticks + kv.Key.ID) % interval;
+                if (rem < 0) { rem += interval; }
+                if (rem == 0)
+                {
+                    if (kv.Key.Vacuum < 0.5f)
+                    {
+                        ScentUtility.ApplyScentToRoom(kv.Key, kv.Value);
+                    }
+                    long candidate = ticks + interval;
+                    if (candidate < nextMin) { nextMin = candidate; }
+                }
+                else
+                {
+                    long candidate = ticks + (interval - rem);
+                    if (candidate < nextMin) { nextMin = candidate; }
+                }
             }
+
+            _nextScentTick = nextMin;
         }
 
         private void RebuildScentRooms()
@@ -242,7 +331,9 @@ namespace VVRace
 
         public void Notify_ArcanePlantPotSpawned(ArcanePlantPot pot)
         {
-            foreach (var cell in pot.OccupiedRect())
+            var rect = pot.OccupiedRect();
+            _potRegisteredRects[pot] = rect;
+            foreach (var cell in rect)
             {
                 _arcanePlantPots.Add(cell, pot);
             }
@@ -250,7 +341,22 @@ namespace VVRace
 
         public void Notify_ArcanePlantPotDespawned(ArcanePlantPot pot)
         {
-            _arcanePlantPots.RemoveAll(kv => kv.Value == pot);
+            if (!_potRegisteredRects.TryGetValue(pot, out var rect))
+            {
+                rect = pot.OccupiedRect();
+            }
+            else
+            {
+                _potRegisteredRects.Remove(pot);
+            }
+
+            foreach (var cell in rect)
+            {
+                if (_arcanePlantPots.TryGetValue(cell, out var existing) && existing == pot)
+                {
+                    _arcanePlantPots.Remove(cell);
+                }
+            }
         }
     }
 }

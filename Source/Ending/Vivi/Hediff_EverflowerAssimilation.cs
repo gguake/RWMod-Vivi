@@ -26,6 +26,20 @@ namespace VVRace
         internal const float DrawAltitudeOffset = 0.05f;
 
         private static readonly HashSet<Pawn> _assimilated = new HashSet<Pawn>();
+        private static volatile Pawn[] _assimilatedSnapshot = System.Array.Empty<Pawn>();
+
+        private static void RebuildAssimilatedSnapshot()
+        {
+            if (_assimilated.Count == 0)
+            {
+                _assimilatedSnapshot = System.Array.Empty<Pawn>();
+                return;
+            }
+
+            var arr = new Pawn[_assimilated.Count];
+            _assimilated.CopyTo(arr);
+            _assimilatedSnapshot = arr;
+        }
 
         public ArcanePlant_Everflower everflower;
 
@@ -38,12 +52,42 @@ namespace VVRace
 
         public static bool IsAssimilated(Pawn pawn)
         {
-            return pawn != null && _assimilated.Count > 0 && _assimilated.Contains(pawn);
+            var snap = _assimilatedSnapshot;
+            if (snap.Length == 0 || pawn == null) { return false; }
+
+            for (int i = 0; i < snap.Length; i++)
+            {
+                if (snap[i] == pawn) { return true; }
+            }
+            return false;
         }
 
         public static void ResetRegistry()
         {
             _assimilated.Clear();
+            _assimilatedSnapshot = System.Array.Empty<Pawn>();
+        }
+
+        internal static void Notify_HediffSetDirty(Pawn pawn)
+        {
+            if (pawn == null || _assimilated.Count == 0 || !_assimilated.Contains(pawn)) { return; }
+
+            var hediffs = pawn.health?.hediffSet?.hediffs;
+            if (hediffs != null)
+            {
+                for (int i = 0; i < hediffs.Count; i++)
+                {
+                    if (hediffs[i] is Hediff_EverflowerAssimilation)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            if (_assimilated.Remove(pawn))
+            {
+                RebuildAssimilatedSnapshot();
+            }
         }
 
         public static Hediff_EverflowerAssimilation Of(Pawn pawn)
@@ -143,7 +187,10 @@ namespace VVRace
         {
             base.PostAdd(dinfo);
 
-            _assimilated.Add(pawn);
+            if (_assimilated.Add(pawn))
+            {
+                RebuildAssimilatedSnapshot();
+            }
             _startTick = Find.TickManager.TicksGame;
         }
 
@@ -151,7 +198,10 @@ namespace VVRace
         {
             base.PostRemoved();
 
-            _assimilated.Remove(pawn);
+            if (_assimilated.Remove(pawn))
+            {
+                RebuildAssimilatedSnapshot();
+            }
             ViviEndingQuest.Current?.Notify_AssimilationEnded(pawn);
 
             if (!_broken && pawn.Spawned && !pawn.Dead)
@@ -274,7 +324,10 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit && pawn != null)
             {
-                _assimilated.Add(pawn);
+                if (_assimilated.Add(pawn))
+                {
+                    RebuildAssimilatedSnapshot();
+                }
             }
         }
     }

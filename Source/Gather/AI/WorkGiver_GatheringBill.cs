@@ -41,17 +41,12 @@ namespace VVRace
                     continue;
                 }
 
-                recipeGathering.gatherWorker.FilterGatherableTarget(thing, bill, candidates).Where(v => !v.IsBurning()).CopyToList(_tmpGatheringBillTargetList);
-                if (_tmpGatheringBillTargetList.Count == 0)
+                bool anyNonBurning = false;
+                foreach (var target in recipeGathering.gatherWorker.FilterGatherableTarget(thing, bill, candidates))
                 {
-                    bill.nextTickToSearchForIngredients = Find.TickManager.TicksGame + 600;
+                    if (target.IsBurning()) { continue; }
+                    anyNonBurning = true;
 
-                    JobFailReason.Is(recipeGathering.gatherWorker.JobFailReasonIfNoHarvestable);
-                    continue;
-                }
-
-                foreach (var target in _tmpGatheringBillTargetList)
-                {
                     if (target.IsForbidden(pawn)) { continue; }
 
                     if (target is IGatherableTarget gatherableTarget && !gatherableTarget.CanGatherByPawn(pawn, recipeGathering)) { continue; }
@@ -59,6 +54,14 @@ namespace VVRace
                     if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
 
                     return recipeGathering.gatherWorker.MakeJob(pawn, thing, target, bill);
+                }
+
+                if (!anyNonBurning)
+                {
+                    bill.nextTickToSearchForIngredients = Find.TickManager.TicksGame + 600;
+
+                    JobFailReason.Is(recipeGathering.gatherWorker.JobFailReasonIfNoHarvestable);
+                    continue;
                 }
             }
 

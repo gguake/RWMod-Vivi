@@ -1,4 +1,4 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using RPEF;
 using System;
@@ -50,44 +50,102 @@ namespace VVRace
 
         [Unsaved]
         private Dictionary<ThingDef, float> _tmpProjectileSelector = new Dictionary<ThingDef, float>();
+        [Unsaved]
+        private ThingDef _cachedSingleProjectile;
+        [Unsaved]
+        private bool _hasCachedSingleProjectile;
+        [Unsaved]
+        private ArcanePlant_Turret _cachedTurret;
+        [Unsaved]
+        private int _cachedReplacersVersion = -1;
         public override ThingDef Projectile
         {
             get
             {
                 if (caster is ArcanePlant_Turret turret)
                 {
+                    var version = turret.BulletReplacersVersion;
+                    if (!ReferenceEquals(_cachedTurret, turret) || _cachedReplacersVersion != version)
+                    {
+                        _cachedTurret = turret;
+                        _cachedReplacersVersion = version;
+                        _tmpProjectileSelector.Clear();
+                        _cachedSingleProjectile = null;
+                        _hasCachedSingleProjectile = false;
+                    }
+
+                    if (!turret.HasBulletReplacers)
+                    {
+                        if (!_hasCachedSingleProjectile)
+                        {
+                            _cachedSingleProjectile = base.Projectile;
+                            _hasCachedSingleProjectile = true;
+                        }
+                        return _cachedSingleProjectile;
+                    }
+
+                    if (_hasCachedSingleProjectile)
+                    {
+                        return _cachedSingleProjectile;
+                    }
+
                     if (_tmpProjectileSelector.Count == 0)
                     {
-                        var bulletReplacers = turret.BulletReplacers;
-                        if (bulletReplacers.Any())
+                        double totalReplacerChance = 0.0;
+                        foreach (var replacer in turret.BulletReplacerValues)
                         {
-                            var baseProjectileProb = 1f - bulletReplacers.Sum(v => v.chance);
-                            if (baseProjectileProb > 0f) { _tmpProjectileSelector.Add(base.Projectile, baseProjectileProb); }
-
-                            foreach (var replacer in turret.BulletReplacers)
-                            {
-                                if (!_tmpProjectileSelector.TryGetValue(replacer.bulletDef, out var value))
-                                {
-                                    value = 0f;
-                                }
-
-                                _tmpProjectileSelector[replacer.bulletDef] = value + replacer.chance;
-                            }
+                            totalReplacerChance += replacer.chance;
                         }
-                        else
+
+                        var baseProjectileProb = 1f - (float)totalReplacerChance;
+                        if (baseProjectileProb > 0f)
                         {
-                            _tmpProjectileSelector.Add(base.Projectile, 1f);
+                            _tmpProjectileSelector.Add(base.Projectile, baseProjectileProb);
+                        }
+
+                        foreach (var replacer in turret.BulletReplacerValues)
+                        {
+                            if (!_tmpProjectileSelector.TryGetValue(replacer.bulletDef, out var value))
+                            {
+                                value = 0f;
+                            }
+
+                            _tmpProjectileSelector[replacer.bulletDef] = value + replacer.chance;
+                        }
+
+                        if (_tmpProjectileSelector.Count == 1)
+                        {
+                            foreach (var kv in _tmpProjectileSelector)
+                            {
+                                _cachedSingleProjectile = kv.Key;
+                                _hasCachedSingleProjectile = true;
+                                break;
+                            }
+                            return _cachedSingleProjectile;
                         }
                     }
-                    
+
                     if (_tmpProjectileSelector.Count == 1)
                     {
-                        return _tmpProjectileSelector.FirstOrDefault().Key;
+                        foreach (var kv in _tmpProjectileSelector)
+                        {
+                            _cachedSingleProjectile = kv.Key;
+                            _hasCachedSingleProjectile = true;
+                            return kv.Key;
+                        }
                     }
-                    else
+                    else if (_tmpProjectileSelector.Count > 1)
                     {
                         return _tmpProjectileSelector.RandomElementByWeight(kv => kv.Value).Key;
                     }
+                }
+                else if (_cachedTurret != null)
+                {
+                    _cachedTurret = null;
+                    _cachedReplacersVersion = -1;
+                    _tmpProjectileSelector.Clear();
+                    _cachedSingleProjectile = null;
+                    _hasCachedSingleProjectile = false;
                 }
 
                 return base.Projectile;
@@ -132,6 +190,8 @@ namespace VVRace
                 compMana.Stored -= manaPerShoot;
 
                 _tmpProjectileSelector.Clear();
+                _cachedSingleProjectile = null;
+                _hasCachedSingleProjectile = false;
                 return true;
             }
 

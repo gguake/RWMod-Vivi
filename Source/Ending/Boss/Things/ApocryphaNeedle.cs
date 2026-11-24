@@ -118,6 +118,9 @@ namespace VVRace
         private CompApocrypha _bossComp;
         private CompTrailRenderer _trail;
         private List<Thing> _ignored;
+        private System.Predicate<Thing> _canPierceDelegate;
+        private System.Action<Thing> _pierceDelegate;
+        private CompApocrypha _activePierceComp;
 
         public int Slot => _slot;
         public bool IsIdle => _state == NeedleState.Idle;
@@ -904,7 +907,26 @@ namespace VVRace
             if (map == null || comp == null || to <= from) { return; }
 
             EnsureIgnoredThings(map);
-            ApocryphaNeedleLane.PierceAlong(this, _laneStart, _laneDir, _laneLength, comp.Props.needleHalfWidth, from, to, _hitIds, CanPierce, thing => Pierce(thing, comp));
+            _canPierceDelegate ??= CanPierce;
+            _pierceDelegate ??= PierceCached;
+            var prevPierceComp = _activePierceComp;
+            _activePierceComp = comp;
+            try
+            {
+                ApocryphaNeedleLane.PierceAlong(this, _laneStart, _laneDir, _laneLength, comp.Props.needleHalfWidth, from, to, _hitIds, _canPierceDelegate, _pierceDelegate);
+            }
+            finally
+            {
+                _activePierceComp = prevPierceComp;
+            }
+        }
+
+        private void PierceCached(Thing thing)
+        {
+            if (_activePierceComp != null)
+            {
+                Pierce(thing, _activePierceComp);
+            }
         }
 
         private void EnsureIgnoredThings(Map map)

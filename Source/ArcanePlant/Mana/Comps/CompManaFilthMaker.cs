@@ -1,6 +1,5 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -65,7 +64,7 @@ namespace VVRace
             }
         }
 
-        private List<IntVec3> _tmpCellCandidates = new List<IntVec3>();
+        private readonly List<IntVec3> _tmpCellCandidates = new List<IntVec3>();
         public override void CompTick()
         {
             if (GenTicks.TicksGame >= _nextRefreshTick)
@@ -74,17 +73,28 @@ namespace VVRace
                 {
                     try
                     {
-                        _tmpCellCandidates.AddRange(GenRadial.RadialCellsAround(parent.Position, Props.radius, !Props.exceptCenter).Where(c => c.InBounds(parent.Map) && c.Walkable(parent.Map)));
+                        var map = parent.Map;
+                        var center = parent.Position;
+                        int start = Props.exceptCenter ? 1 : 0;
+                        int count = GenRadial.NumCellsInRadius(Props.radius);
+                        for (int i = start; i < count; i++)
+                        {
+                            var c = center + GenRadial.RadialPattern[i];
+                            if (c.InBounds(map) && c.Walkable(map))
+                            {
+                                _tmpCellCandidates.Add(c);
+                            }
+                        }
+
                         if (_tmpCellCandidates.Count > 0)
                         {
                             var cell = _tmpCellCandidates.RandomElement();
                             if (cell.IsValid)
                             {
                                 SpawnEffect();
-                                FilthMaker.TryMakeFilth(cell, parent.Map, Props.filthDef, parent.LabelShort);
+                                FilthMaker.TryMakeFilth(cell, map, Props.filthDef, parent.LabelShort);
                             }
                         }
-
                     }
                     finally
                     {

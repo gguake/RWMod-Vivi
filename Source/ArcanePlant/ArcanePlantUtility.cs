@@ -28,9 +28,7 @@ namespace VVRace
 
         public static ManaMapComponent GetManaComponent(this Map map)
         {
-            if (map == null) { return null; }
-
-            return map.GetComponent<ManaMapComponent>();
+            return ManaMapComponent.Of(map);
         }
 
         public static AcceptanceReport CanPlaceArcanePlantToCell(Map map, IntVec3 cell, ThingDef def, Thing currentThing = null)
@@ -47,7 +45,7 @@ namespace VVRace
                 return new AcceptanceReport("CannotPlaceInUndiscovered".Translate());
             }
 
-            var arcanePlantPot = map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(cell);
+            var arcanePlantPot = ArcanePlantMapComponent.Of(map)?.GetArcanePlantPot(cell);
 
             if (arcanePlantPot is Building_EverflowerAltar altar)
             {

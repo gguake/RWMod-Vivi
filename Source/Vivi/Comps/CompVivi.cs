@@ -25,7 +25,9 @@ namespace VVRace
 
         public ArcanePlant_Everflower LinkedEverflower => _linkedEverflower;
         private ArcanePlant_Everflower _linkedEverflower;
-        private CompViviHolder ViviHolder => parent.GetComp<CompViviHolder>();
+        private CompViviHolder ViviHolder => _viviHolder ?? (_viviHolder = parent.GetComp<CompViviHolder>());
+        [Unsaved]
+        private CompViviHolder _viviHolder;
 
         public bool ShouldBeRoyalIfMature
         {
@@ -56,9 +58,11 @@ namespace VVRace
                     return 1f;
                 }
 
+                var genes = pawn.genes.GenesListForReading;
                 var metabolism = 0;
-                foreach (var gene in pawn.genes.GenesListForReading)
+                for (int i = 0; i < genes.Count; i++)
                 {
+                    var gene = genes[i];
                     if (!gene.Overridden)
                     {
                         metabolism += gene.def.biostatMet;
@@ -211,14 +215,19 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
+            if (!DebugSettings.godMode || !(parent is Pawn pawn) || !pawn.Spawned)
+            {
+                return base.CompGetGizmosExtra();
+            }
+
+            return CompGetGizmosExtraDebug(pawn);
+        }
+
+        private IEnumerable<Gizmo> CompGetGizmosExtraDebug(Pawn pawn)
+        {
             foreach (var gizmo in base.CompGetGizmosExtra())
             {
                 yield return gizmo;
-            }
-
-            if (!DebugSettings.godMode || !(parent is Pawn pawn) || !pawn.Spawned)
-            {
-                yield break;
             }
 
             yield return new Command_Action

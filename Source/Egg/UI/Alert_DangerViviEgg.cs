@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -17,34 +17,38 @@ namespace VVRace
                 var map = Find.CurrentMap;
                 if (map != null)
                 {
-                    foreach (var egg in map.listerThings.ThingsOfDef(VVThingDefOf.VV_ViviEgg))
+                    var eggs = map.listerThings.ThingsOfDef(VVThingDefOf.VV_ViviEgg);
+                    for (int i = 0; i < eggs.Count; i++)
                     {
+                        var egg = eggs[i];
                         var compTemperature = egg.TryGetComp<CompTemperatureRuinable>();
                         if (compTemperature == null) { continue; }
 
-                        if (egg.AmbientTemperature > compTemperature.Props.maxSafeTemperature ||
-                            egg.AmbientTemperature < compTemperature.Props.minSafeTemperature)
+                        var temp = egg.AmbientTemperature;
+                        if (temp > compTemperature.Props.maxSafeTemperature ||
+                            temp < compTemperature.Props.minSafeTemperature)
                         {
                             dangerTargets.Add(egg);
                         }
                     }
 
-                    foreach (var building in map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviHatchery))
+                    var hatcheries = map.listerThings.ThingsOfDef(VVThingDefOf.VV_ViviHatchery);
+                    for (int i = 0; i < hatcheries.Count; i++)
                     {
-                        var hatchery = building as ViviEggHatchery;
-                        if (hatchery != null && hatchery.ViviEgg != null)
+                        var hatchery = hatcheries[i] as ViviEggHatchery;
+                        if (hatchery != null && hatchery.Faction == Faction.OfPlayer && hatchery.ViviEgg != null)
                         {
                             var egg = hatchery.ViviEgg;
                             var compTemperature = egg.TryGetComp<CompTemperatureRuinable>();
                             if (compTemperature == null) { continue; }
 
-                            if (egg.AmbientTemperature > compTemperature.Props.maxSafeTemperature ||
-                                egg.AmbientTemperature < compTemperature.Props.minSafeTemperature)
+                            var temp = egg.AmbientTemperature;
+                            if (temp > compTemperature.Props.maxSafeTemperature ||
+                                temp < compTemperature.Props.minSafeTemperature)
                             {
                                 dangerTargets.Add(hatchery);
                             }
                         }
-
                     }
                 }
 

@@ -114,6 +114,14 @@ namespace VVRace
             Scribe_Values.Look(ref _lastDamagedTick, "lastDamagedTick");
         }
 
+        private static readonly Color32[] PrintColors = new Color32[4]
+        {
+            new Color32(0, 0, 0, 0),
+            new Color32(0, 0, 0, 25),
+            new Color32(0, 0, 0, 25),
+            new Color32(0, 0, 0, 0)
+        };
+
         public override void Print(SectionLayer layer)
         {
             try
@@ -140,10 +148,6 @@ namespace VVRace
                 var material = Graphic.MatSingleFor(this);
                 Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
 
-                var colors = new Color32[4];
-                colors[1].a = (colors[2].a = 25);
-                colors[0].a = (colors[3].a = 0);
-
                 Printer_Plane.PrintPlane(
                     size: drawSize,
                     layer: layer,
@@ -152,7 +156,7 @@ namespace VVRace
                     rot: 0f,
                     flipUv: isFlipUV,
                     uvs: uvs,
-                    colors: colors,
+                    colors: PrintColors,
                     uvzPayload: this.HashOffset() % 1024);
 
                 if (def.graphicData.shadowData != null)

@@ -115,6 +115,8 @@ namespace VVRace
 
         private static void GenSpawn_SpawningWipes_Postfix(ref bool __result, BuildableDef newEntDef, BuildableDef oldEntDef)
         {
+            if (!__result) { return; }
+
             var newThingDef = newEntDef as ThingDef;
             var oldThingDef = oldEntDef as ThingDef;
 
@@ -399,15 +401,24 @@ namespace VVRace
             }
         }
 
+        private static LoadedLanguage _cachedManaTooltipLang;
+        private static string _cachedManaOverlayTooltip;
+
         private static void PlaySettings_DoMapControls_Postfix(WidgetRow row)
         {
-            var manaGrid = Find.CurrentMap.GetManaComponent();
+            var manaGrid = ManaMapComponent.Of(Find.CurrentMap);
             if (manaGrid != null && VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished)
             {
+                if (_cachedManaOverlayTooltip == null || _cachedManaTooltipLang != LanguageDatabase.activeLanguage)
+                {
+                    _cachedManaTooltipLang = LanguageDatabase.activeLanguage;
+                    _cachedManaOverlayTooltip = LocalizeString_Etc.VV_ShowManaOverlayTooltip.Translate();
+                }
+
                 row.ToggleableIcon(
                     ref manaGrid.manaOverlaySetting,
-                    ArcanePlantPatchTextures.ToggleManaGrid, 
-                    LocalizeString_Etc.VV_ShowManaOverlayTooltip.Translate());
+                    ArcanePlantPatchTextures.ToggleManaGrid,
+                    _cachedManaOverlayTooltip);
             }
         }
 
@@ -470,13 +481,10 @@ namespace VVRace
         {
             if (!__result) { return; }
 
-            var comp = map.GetComponent<ArcanePlantMapComponent>();
-            if (comp != null)
+            var comp = ArcanePlantMapComponent.Of(map);
+            if (comp != null && comp.CheckVaccumResistance(cell))
             {
-                if (comp.CheckVaccumResistance(cell))
-                {
-                    __result = false;
-                }
+                __result = false;
             }
         }
 

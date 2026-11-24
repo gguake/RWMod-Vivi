@@ -15,9 +15,31 @@ namespace VVRace.HarmonyPatches
 {
     internal class ViviRacePatch
     {
+        private static bool _mealFinalizerBindingsInitialized;
+        private static AccessTools.FieldRef<JobDriver, Func<JobCondition, Job>> _jobDriverFinalizerJobFactoryRef;
+        private static Action<JobDriver, Func<JobCondition, Job>> _jobDriverSetFinalizerJob;
         private static readonly FieldInfo JobDriverFinalizerJobFactoryField = AccessTools.Field(typeof(JobDriver), "finalizerJobFactory");
         private static readonly MethodInfo JobDriverSetFinalizerJobMethod = AccessTools.Method(typeof(JobDriver), "SetFinalizerJob");
         private static readonly ViviFoodContinuationJobGiver ViviFoodJobGiver = new ViviFoodContinuationJobGiver();
+
+        private static void EnsureMealFinalizerBindings()
+        {
+            if (_mealFinalizerBindingsInitialized) { return; }
+            _mealFinalizerBindingsInitialized = true;
+            try
+            {
+                _jobDriverFinalizerJobFactoryRef = AccessTools.FieldRefAccess<JobDriver, Func<JobCondition, Job>>("finalizerJobFactory");
+                if (JobDriverSetFinalizerJobMethod != null)
+                {
+                    _jobDriverSetFinalizerJob = AccessTools.MethodDelegate<Action<JobDriver, Func<JobCondition, Job>>>(JobDriverSetFinalizerJobMethod);
+                }
+            }
+            catch
+            {
+                _jobDriverFinalizerJobFactoryRef = null;
+                _jobDriverSetFinalizerJob = null;
+            }
+        }
 
         internal static void Patch(Harmony harmony)
         {
@@ -48,6 +70,10 @@ namespace VVRace.HarmonyPatches
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn_GeneTracker.BiologicalAgeTickFactor (aging factor hediff)",
                 AccessTools.PropertyGetter(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.BiologicalAgeTickFactor)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_get_BiologicalAgeTickFactor_Transpiler)));
+
+            ViviHarmonyPatcher.TryPatch(harmony, "HediffSet.DirtyCache (aging factor cache invalidation)",
+                AccessTools.Method(typeof(HediffSet), nameof(HediffSet.DirtyCache)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(HediffSet_DirtyCache_Postfix)));
 
             ViviHarmonyPatcher.TryPatch(harmony, "MentalStateWorker.StateCanOccur (hornet berserk manhunter exclusion)",
                 AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
@@ -135,8 +161,20 @@ namespace VVRace.HarmonyPatches
             Log.Message("!! [ViViRace] race patch complete");
         }
 
+        private static void HediffSet_DirtyCache_Postfix(HediffSet __instance)
+        {
+            var pawn = __instance?.pawn;
+            HediffComp_AgingFactor.InvalidateCache(pawn);
+            Hediff_EverflowerQueen.Notify_HediffSetDirty(pawn);
+            Hediff_EverflowerAssimilation.Notify_HediffSetDirty(pawn);
+            Hediff_FairyConcentrated.Notify_HediffSetDirty(pawn);
+        }
+
         private static void JobDriver_Ingest_MakeNewToils_Postfix(JobDriver_Ingest __instance, ref IEnumerable<Toil> __result)
         {
+            var pawn = __instance?.pawn;
+            if (pawn == null || !pawn.IsVivi()) { return; }
+
             __result = InstallViviMealFinalizerAfterToils(__instance, __result);
         }
 
@@ -147,7 +185,16 @@ namespace VVRace.HarmonyPatches
                 yield return toil;
             }
 
-            var previousFinalizer = (Func<JobCondition, Job>)JobDriverFinalizerJobFactoryField.GetValue(driver);
+            EnsureMealFinalizerBindings();
+            if ((_jobDriverFinalizerJobFactoryRef == null && JobDriverFinalizerJobFactoryField == null) ||
+                (_jobDriverSetFinalizerJob == null && JobDriverSetFinalizerJobMethod == null))
+            {
+                yield break;
+            }
+
+            var previousFinalizer = _jobDriverFinalizerJobFactoryRef != null
+                ? _jobDriverFinalizerJobFactoryRef(driver)
+                : (Func<JobCondition, Job>)JobDriverFinalizerJobFactoryField.GetValue(driver);
             Func<JobCondition, Job> finalizer = condition =>
             {
                 var previousJob = previousFinalizer?.Invoke(condition);
@@ -199,7 +246,14 @@ namespace VVRace.HarmonyPatches
                 return ViviFoodJobGiver.TryGiveContinuationJob(pawn);
             };
 
-            JobDriverSetFinalizerJobMethod.Invoke(driver, new object[] { finalizer });
+            if (_jobDriverSetFinalizerJob != null)
+            {
+                _jobDriverSetFinalizerJob(driver, finalizer);
+            }
+            else
+            {
+                JobDriverSetFinalizerJobMethod?.Invoke(driver, new object[] { finalizer });
+            }
         }
 
         private sealed class ViviFoodContinuationJobGiver : JobGiver_GetFood

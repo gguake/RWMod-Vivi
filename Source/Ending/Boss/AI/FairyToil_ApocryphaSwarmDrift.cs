@@ -28,12 +28,17 @@ namespace VVRace
             if (fairy.State != FairyState.Idle || boss == null || !boss.Spawned || boss.Map != fairy.Map || delta <= 0) { return FairyToilStatus.Running; }
 
             var current = fairy.RealPosition;
-            var ward = (job as FairyJob_ApocryphaSwarm)?.Ward;
-            if (ward == null && boss.TryGetComp<CompApocrypha>() is CompApocrypha comp && comp.Embrace.TryGetFairyGoal(fairy, out var sigilGoal))
+            var swarmJob = job as FairyJob_ApocryphaSwarm;
+            var ward = swarmJob?.Ward;
+            if (ward == null)
             {
-                var toward = Vector3.Lerp(current, sigilGoal, Mathf.Clamp01(Follow * delta));
-                fairy.SetToilPosition(toward, toward - current, AltitudeLayer.MoteOverhead.AltitudeFor());
-                return FairyToilStatus.Running;
+                var comp = swarmJob != null ? swarmJob.BossComp : boss.TryGetComp<CompApocrypha>();
+                if (comp != null && comp.Embrace.TryGetFairyGoal(fairy, out var sigilGoal))
+                {
+                    var toward = Vector3.Lerp(current, sigilGoal, Mathf.Clamp01(Follow * delta));
+                    fairy.SetToilPosition(toward, toward - current, AltitudeLayer.MoteOverhead.AltitudeFor());
+                    return FairyToilStatus.Running;
+                }
             }
 
             var ticks = GenTicks.TicksGame;

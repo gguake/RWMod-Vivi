@@ -39,6 +39,8 @@ namespace VVRace
         protected List<FairyToil> toils = new List<FairyToil>();
         private int toilIndex;
         protected bool ended;
+        [Unsaved]
+        private bool _toilsAttached;
 
         public ViviFairy Fairy => fairy;
         public Pawn Owner => owner;
@@ -172,7 +174,26 @@ namespace VVRace
         {
             CancelToils();
 
-            toils = newToils != null ? newToils.Where(t => t != null).ToList() : new List<FairyToil>();
+            if (toils == null)
+            {
+                toils = new List<FairyToil>();
+            }
+            else
+            {
+                toils.Clear();
+            }
+
+            if (newToils != null)
+            {
+                for (int i = 0; i < newToils.Length; i++)
+                {
+                    if (newToils[i] != null)
+                    {
+                        toils.Add(newToils[i]);
+                    }
+                }
+            }
+
             toilIndex = 0;
             AttachToils();
 
@@ -225,8 +246,15 @@ namespace VVRace
 
         private FairyToil[] MakeAttackThenReturnToRestToils(Thing target)
         {
-            var returnToils = MakeReturnToRestToils() ?? new FairyToil[0];
-            return new FairyToil[] { new FairyToil_Attack(target) }.Concat(returnToils).ToArray();
+            var returnToils = MakeReturnToRestToils();
+            int returnLen = returnToils != null ? returnToils.Length : 0;
+            var result = new FairyToil[1 + returnLen];
+            result[0] = new FairyToil_Attack(target);
+            for (int i = 0; i < returnLen; i++)
+            {
+                result[1 + i] = returnToils[i];
+            }
+            return result;
         }
 
         public virtual void End()
@@ -262,29 +290,36 @@ namespace VVRace
             if (toils == null)
             {
                 toils = new List<FairyToil>();
+                _toilsAttached = false;
             }
             if (toils.Count == 0)
             {
+                _toilsAttached = false;
                 MakeToils();
             }
-            AttachToils();
+            if (!_toilsAttached)
+            {
+                AttachToils();
+            }
         }
 
         private void AttachToils()
         {
             if (toils == null) { return; }
-            foreach (var toil in toils)
+            for (int i = 0; i < toils.Count; i++)
             {
-                toil?.Attach(this);
+                toils[i]?.Attach(this);
             }
+            _toilsAttached = true;
         }
 
         private void CancelToils()
         {
+            _toilsAttached = false;
             if (toils == null) { return; }
-            foreach (var toil in toils)
+            for (int i = 0; i < toils.Count; i++)
             {
-                toil?.Cancel();
+                toils[i]?.Cancel();
             }
         }
 
