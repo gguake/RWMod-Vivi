@@ -39,8 +39,6 @@
         public const string VV_Inspector_DoomFlowerBloomIn = nameof(VV_Inspector_DoomFlowerBloomIn);
         public const string VV_Inspector_DoomFlowerHint = nameof(VV_Inspector_DoomFlowerHint);
 
-        public const string VV_Inspector_SkyShieldRemaining = nameof(VV_Inspector_SkyShieldRemaining);
-
         public const string VV_Inspector_QueenRebirth = nameof(VV_Inspector_QueenRebirth);
 
         public const string VV_Inspector_RuinDoomFlowerHint = nameof(VV_Inspector_RuinDoomFlowerHint);

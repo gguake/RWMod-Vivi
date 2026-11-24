@@ -41,9 +41,9 @@
     <defName>VV_ApocryphaPresence</defName>
     <conditionClass>GameCondition</conditionClass>
     <label>Asphodel's presence</label>
-    <description>Asphodel's overwhelming psychic wave presses down upon the land where the everflower blooms. While she is here, no other raids or random events will occur in this area.</description>
+    <description>Asphodel's psychic wave suppresses the area around the everflower.</description>
     <natural>false</natural>
-    <displayOnUI>true</displayOnUI>
+    <displayOnUI>false</displayOnUI>
     <preventIncidents>true</preventIncidents>
     <canBePermanent>true</canBePermanent>
     <showPermanentInTooltip>false</showPermanentInTooltip>

@@ -19,6 +19,7 @@ namespace VVRace
         private int _readyTick;
         private int _flashTick = -1;
         private IntVec3 _center = IntVec3.Invalid;
+        private bool _pendingAfterShieldRestore;
 
         private Pawn Pawn => _comp.Pawn;
         private CompProperties_Apocrypha Props => _comp.Props;
@@ -26,6 +27,7 @@ namespace VVRace
         public bool IsCasting => _castStartTick >= 0;
         public int ReadyTick => _readyTick;
         public IntVec3 Center => _center;
+        public bool PendingAfterShieldRestore => _pendingAfterShieldRestore;
         public float Progress => IsCasting ? Mathf.Clamp01((GenTicks.TicksGame - _castStartTick) / (float)Mathf.Max(1, Props.embraceCastTicks)) : 0f;
         public int TicksLeft => IsCasting ? Mathf.Max(0, _castStartTick + Props.embraceCastTicks - GenTicks.TicksGame) : 0;
 
@@ -42,11 +44,17 @@ namespace VVRace
             Scribe_Values.Look(ref _readyTick, "readyTick", 0);
             Scribe_Values.Look(ref _flashTick, "flashTick", -1);
             Scribe_Values.Look(ref _center, "center", IntVec3.Invalid);
+            Scribe_Values.Look(ref _pendingAfterShieldRestore, "pendingAfterShieldRestore", false);
         }
 
         public void SetReadyTick(int tick)
         {
             _readyTick = tick;
+        }
+
+        public void QueueCastAfterShieldRestore()
+        {
+            _pendingAfterShieldRestore = true;
         }
 
         public void Tick(int now, bool stunned)
@@ -57,10 +65,18 @@ namespace VVRace
                 return;
             }
 
-            if (stunned || now < _readyTick || !Pawn.IsHashIntervalTick(Mathf.Max(1, Props.swarmAttackCooldownTicks.min))) { return; }
-            if (_comp.ShieldBroken || !_comp.Swarm.Fairies.Any(v => v != null && v.Spawned)) { return; }
+            if (stunned || _comp.ShieldBroken || !_comp.Swarm.Fairies.Any(v => v != null && v.Spawned)) { return; }
             if (_comp.Channel.IsChanneling || _comp.Channel.PendingSteal) { return; }
-            if (!FindCorpses(Pawn.Position).Any() && !FindDowned(Pawn.Position).Any()) { return; }
+
+            if (_pendingAfterShieldRestore)
+            {
+                _pendingAfterShieldRestore = false;
+                StartCast(now);
+                return;
+            }
+
+            if (now < _readyTick || !Pawn.IsHashIntervalTick(Mathf.Max(1, Props.swarmAttackCooldownTicks.min))) { return; }
+            if (!FindCorpses(Pawn.Position).Any() && !FindLivingVivis(Pawn.Position).Any()) { return; }
 
             StartCast(now);
         }
@@ -94,6 +110,7 @@ namespace VVRace
         public void Cancel()
         {
             _castStartTick = -1;
+            _pendingAfterShieldRestore = false;
         }
 
         public bool TryGetFairyGoal(ViviFairy fairy, out Vector3 goal)
@@ -185,8 +202,10 @@ namespace VVRace
                 revived.Add(pawn);
             }
 
-            foreach (var pawn in FindDowned(center).ToList())
+            foreach (var pawn in FindLivingVivis(center).ToList())
             {
+                if (revived.Contains(pawn)) { continue; }
+
                 ApocryphaUtility.HealAllInjuriesAndRestoreParts(pawn);
                 revived.Add(pawn);
             }
@@ -225,24 +244,33 @@ namespace VVRace
             }
         }
 
-        private IEnumerable<Pawn> FindDowned(IntVec3 center)
+        private IEnumerable<Pawn> FindLivingVivis(IntVec3 center)
         {
             var map = Pawn.Map;
-            var pawns = map.mapPawns.SpawnedDownedPawns;
+            var pawns = map.mapPawns.AllPawnsSpawned;
             for (int i = 0; i < pawns.Count; i++)
             {
-                if (IsEligible(pawns[i], center, map))
+                var p = pawns[i];
+                if (!p.Spawned || p.Map != map || !p.Position.InHorDistOf(center, Props.embraceRadius)) { continue; }
+
+                if (IsEligibleLivingVivi(p))
                 {
-                    yield return pawns[i];
+                    yield return p;
+                }
+
+                if (p.carryTracker?.CarriedThing is Pawn carried && IsEligibleLivingVivi(carried))
+                {
+                    yield return carried;
                 }
             }
         }
 
-        private bool IsEligible(Pawn pawn, IntVec3 center, Map map)
+        private bool IsEligibleLivingVivi(Pawn pawn)
         {
-            if (!pawn.Spawned || pawn.Dead || !pawn.Downed || pawn.Map != map || !pawn.Position.InHorDistOf(center, Props.embraceRadius)) { return false; }
+            if (pawn == null || pawn.Dead || pawn == Pawn || pawn.TryGetComp<CompApocrypha>() != null) { return false; }
+            if (pawn.Faction != Faction.OfPlayer || !pawn.IsVivi() || pawn.IsRoyalVivi()) { return false; }
 
-            return pawn.Faction == Faction.OfPlayer && pawn.IsVivi() && !pawn.IsRoyalVivi();
+            return pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) != true;
         }
 
         private bool IsEligible(Corpse corpse, IntVec3 center, Map map)
@@ -251,6 +279,7 @@ namespace VVRace
 
             var pawn = corpse.InnerPawn;
             if (pawn == null || pawn.Discarded || pawn.Faction != Faction.OfPlayer || !pawn.IsVivi() || pawn.IsRoyalVivi()) { return false; }
+            if (pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) == true) { return false; }
 
             return corpse.GetRotStage() != RotStage.Dessicated;
         }

@@ -5,7 +5,7 @@
   <HediffDef>
     <defName>VV_AsphodelBond</defName>
     <label>Asphodel's bond</label>
-    <description>Tethered to a fairy bloom's energy line while fairy vivis close in around the body. When the ring closes completely or the bearer dies, she is temporarily turned into a fairy and bound to Asphodel, sprouting a new fairy bloom at that spot to extend the chain.\n\nIf she is near the everflower altar when transformation triggers, the golden link breaks the gimmick instead, weakening Asphodel's fairy bond and returning every vivi bound along the chain fully refreshed.</description>
+    <description>Fairy transformation is underway through Asphodel's power. Once complete, the bearer is temporarily turned into a fairy bound to Asphodel, and a new fairy bloom sprouts in her place.\n\nLinking the everflower altar to Asphodel frees all fairy-transformed vivis bound to her and also releases fairy vivis bound to Asphodel.</description>
     <hediffClass>VVRace.Hediff_AsphodelBond</hediffClass>
     <defaultLabelColor>(0.95, 0.98, 1)</defaultLabelColor>
     <isBad>false</isBad>

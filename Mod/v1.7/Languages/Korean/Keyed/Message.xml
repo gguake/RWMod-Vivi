@@ -14,4 +14,48 @@
 <VV_Message_PlantGrownAfterAttunement>영원꽃 조율 의식의 영향으로 주변에 식물이 자라났습니다.</VV_Message_PlantGrownAfterAttunement>
 
 <VV_Message_ManaNotEnough>마나가 부족합니다. (필요: {MANACOST})</VV_Message_ManaNotEnough>
+
+<!-- Ending -->
+<VV_Message_EverflowerEnshrined>영원꽃이 제단에 안치되었습니다.</VV_Message_EverflowerEnshrined>
+<VV_Message_EverflowerAltarRequiresLevel>조율 {LEVEL}단계 이상인 영원꽃만 제단에 안치할 수 있습니다.</VV_Message_EverflowerAltarRequiresLevel>
+<VV_Message_AnchorEverflowerLeftAltar>제단이 사라져 영원꽃이 밖으로 순간이동했습니다.</VV_Message_AnchorEverflowerLeftAltar>
+<VV_Message_ApocryphaChannelInterrupted>아스포델의 영원꽃 찬탈이 중단되었습니다.</VV_Message_ApocryphaChannelInterrupted>
+<VV_Message_ApocryphaEmbraceInterrupted>아스포델의 부활의 포옹이 중단되었습니다.</VV_Message_ApocryphaEmbraceInterrupted>
+<VV_Message_ApocryphaEscapedRoofCollapse>아스포델이 붕괴를 피해 순간이동했습니다.</VV_Message_ApocryphaEscapedRoofCollapse>
+<VV_Message_ApocryphaShieldBroken>요정 장막이 흩어져 아스포델이 잠시 기절하고 주변에 요정꽃이 피어났습니다.</VV_Message_ApocryphaShieldBroken>
+<VV_Message_ApocryphaShieldRestored>요정 비비들이 다시 모여들어 아스포델의 요정 장막이 복구되었습니다.</VV_Message_ApocryphaShieldRestored>
+<VV_Message_ApocryphaResolveGained>요정꽃이 공격으로 파괴되어 아스포델의 결의가 깊어졌습니다. ({0}중첩)</VV_Message_ApocryphaResolveGained>
+<VV_Message_ApocryphaNeedleStuck>고대 엘텍스 바늘이 외피에 꽂혀 거대 말벌 여왕이 잠시 기절했습니다.</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaNeedlesShakenOff>거대 말벌 여왕이 몸에 꽂힌 바늘을 모두 떨쳐내자 거대 말벌 무리가 정착지로 몰려듭니다.</VV_Message_ApocryphaNeedlesShakenOff>
+<VV_Message_ApocryphaNeedleActivated>{PAWN_labelShort}(이)가 깨운 고대 바늘이 활성화되어 거대 말벌 여왕을 겨눕니다.</VV_Message_ApocryphaNeedleActivated>
+<VV_Message_EndingApocryphaLanded>영원꽃의 파동에 밀려난 아스포델이 거대 말벌 무리를 이끌고 지역 외곽에 나타났습니다.</VV_Message_EndingApocryphaLanded>
+<VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
+<VV_Message_EndingTaleRedelivered>비비 연방이 다시 보낸 {0}(이)가 도착했습니다.</VV_Message_EndingTaleRedelivered>
+<VV_Message_FairyFlowerResonated>{PAWN_labelShort}(이)가 요정꽃과 공명해 아스포델 결속을 얻었습니다.</VV_Message_FairyFlowerResonated>
+<VV_Message_FairyChainDispelled>황금빛 결속의 선이 영원꽃 제단에 닿아 아스포델의 결속을 흔들고 묶여 있던 비비들을 되돌려 놓았습니다.</VV_Message_FairyChainDispelled>
+<VV_Message_AsphodelBondBrokenByTeleport>{PAWN_labelShort}(이)가 순간이동하여 아스포델 결속이 끊어졌습니다.</VV_Message_AsphodelBondBrokenByTeleport>
+<VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 {BLIGHT} 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
+<VV_Message_WindOfRestResult>정화의 바람이 지역을 지나갔습니다.</VV_Message_WindOfRestResult>
+<VV_Message_FlowerLandNoGround>이 범위에는 꽃밭으로 바꿀 땅이 없습니다.</VV_Message_FlowerLandNoGround>
+<VV_Message_FlowerLandBloomed>기름진 땅에 비비아 꽃 {COUNT}송이가 피어났습니다.</VV_Message_FlowerLandBloomed>
+<VV_Message_QueenReborn>{PAWN_labelShort}(이)가 영원꽃 앞에서 다시 깨어났습니다.</VV_Message_QueenReborn>
+<VV_Message_ManaBarrierNotEnoughMana>보호막 범위 안의 환경 마나가 부족합니다. ({0}/{1})</VV_Message_ManaBarrierNotEnoughMana>
+<VV_Message_AssimilationBegan>{PAWN_labelShort}(이)가 영원꽃과 완전히 동화되어 공중으로 떠올랐습니다.</VV_Message_AssimilationBegan>
+<VV_Message_AssimilationReleased>영원꽃과의 완전 동화가 풀려 {PAWN_labelShort}(이)가 땅으로 내려왔습니다.</VV_Message_AssimilationReleased>
+<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 동화가 끊어졌습니다. 〈만개 의식〉이 취소되었습니다.</VV_Message_AssimilationBrokenRitual>
+<VV_Message_RuinCoreExtracted>{PAWN_labelShort}(이)가 중심 제단에서 신비한 힘이 담긴 코어를 추출했습니다.</VV_Message_RuinCoreExtracted>
+<VV_Message_RuinZoneUnsealed>공간 왜곡이 걷히며 안쪽 구역의 봉인이 풀렸습니다.</VV_Message_RuinZoneUnsealed>
+<VV_Message_RuinPathGuideSpawned>부서진 멸망꽃에서 피어오른 잔향이 흐릅니다.</VV_Message_RuinPathGuideSpawned>
+<VV_Message_RuinTrialTriggered>그릇된 길을 밟아 멸망꽃의 잔향이 퍼집니다...</VV_Message_RuinTrialTriggered>
+<VV_Message_RuinGalleryAlarm>원형 회랑의 고대 보안 경보가 울립니다!</VV_Message_RuinGalleryAlarm>
+<VV_Message_RuinPuzzleTethered>{PAWN_labelShort}(이)가 요정꽃과 공명으로 이어졌습니다. 다른 요정꽃에 손대면 위치를 교체합니다.</VV_Message_RuinPuzzleTethered>
+<VV_Message_RuinPuzzleUntethered>요정꽃과의 공명선 연결이 해제되었습니다.</VV_Message_RuinPuzzleUntethered>
+<VV_Message_RuinPuzzleSwapped>두 요정꽃의 위치가 교체되었습니다.</VV_Message_RuinPuzzleSwapped>
+<VV_Message_RuinHexagonCompleted>공명 회로가 완성되어 중심 제단 구역의 봉인이 풀렸습니다!</VV_Message_RuinHexagonCompleted>
+<VV_Message_RuinResealing>고대 유적의 공간 왜곡이 다시 닫히기 시작합니다...</VV_Message_RuinResealing>
+<VV_Message_RuinResealedExpelled>고대 유적이 다시 공간 왜곡 너머로 봉인되며 전원이 바깥으로 밀려났습니다.</VV_Message_RuinResealedExpelled>
+<VV_Message_RuinResealedGravship>고대 유적이 다시 공간 왜곡 너머로 봉인되며 전원이 바깥으로 밀려났습니다.</VV_Message_RuinResealedGravship>
+<VV_Message_RuinCannotLandGravship>고대 유적의 공간 왜곡 때문에 중력선을 착륙시킬 수 없습니다.</VV_Message_RuinCannotLandGravship>
+<VV_Message_RequiemResult>진혼의 파동이 지나가며 방치된 시체 {COUNT}구를 소멸시켰습니다.</VV_Message_RequiemResult>
+<VV_Message_RequiemResultNone>진혼의 파동이 지역을 지나갔습니다.</VV_Message_RequiemResultNone>
 </LanguageData>

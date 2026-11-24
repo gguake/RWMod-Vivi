@@ -14,6 +14,7 @@
       <PreceptDef>VV_Fairyfication</PreceptDef>
       <PreceptDef>VV_Defairyfication</PreceptDef>
       <PreceptDef>VV_Manawave</PreceptDef>
+      <PreceptDef>VV_Requiem</PreceptDef>
       <PreceptDef>VV_GrandAttunement</PreceptDef>
       <PreceptDef>VV_ReturnOfLife</PreceptDef>
       <PreceptDef>VV_QueensCoronation</PreceptDef>
@@ -271,6 +272,16 @@
         <seedDef>VV_Seed_Everflower</seedDef>
       </li>
     </modExtensions>
+  </ThingDef>
+
+  <!-- 진혼 파동 -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_RequiemWave</defName>
+    <label>requiem wave</label>
+    <thingClass>VVRace.RequiemWave</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>None</drawerType>
+    <selectable>false</selectable>
   </ThingDef>
 
 </Defs>

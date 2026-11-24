@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
-  <!-- 비비 장비는 비비 연방이 주는 보상에서만 등장한다.
-       바닐라의 제국 전용 보상 분기와 같은 방식으로, 표준 보상 풀에 팩션 조건부 분기를 추가한다.
-       (비비 무기는 바닐라 RewardStandard* 태그 대신 VV_RewardEquipment* 태그를 쓴다) -->
+  <!-- 비비 장비는 비비 연방이 주는 보상에서만 등장 -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingSetMakerDef[defName="Reward_ItemsStandard"]/root/options/li[maxMarketValue]/thingSetMaker[@Class="ThingSetMaker_RandomOption"]/options</xpath>
     <value>
@@ -13,7 +11,7 @@
           <requireNonNull>true</requireNonNull>
           <thingSetMaker Class="ThingSetMaker_RandomOption">
             <options>
-              <!-- 일반 무기: 걸작/전설 품질 -->
+              
               <li>
                 <weight>3</weight>
                 <thingSetMaker Class="ThingSetMaker_MarketValue">
@@ -28,7 +26,7 @@
                   </fixedParams>
                 </thingSetMaker>
               </li>
-              <!-- 특수 무기: 보상 품질 -->
+              
               <li>
                 <weight>2</weight>
                 <thingSetMaker Class="ThingSetMaker_MarketValue">
@@ -43,7 +41,7 @@
                   </fixedParams>
                 </thingSetMaker>
               </li>
-              <!-- 비비 고유 자원 (거대 말벌 날개) -->
+              
               <li>
                 <weight>1</weight>
                 <thingSetMaker Class="ThingSetMaker_MarketValue">

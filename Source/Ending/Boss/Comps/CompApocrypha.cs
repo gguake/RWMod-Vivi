@@ -582,6 +582,7 @@ namespace VVRace
             _needleAttack.CancelAims();
             _channel.Interrupt();
             _embrace.Interrupt();
+            _embrace.Cancel();
             _swarm.Disperse();
             GimmickStun(Props.shieldBreakStunTicks, null);
 
@@ -612,6 +613,11 @@ namespace VVRace
             _shieldRestoreTick = -1;
             _manaShield = MaxManaShield;
             _swarm.EnsureSummoned();
+
+            if (IsQuestBossFight && !_pendingDeath)
+            {
+                _embrace.QueueCastAfterShieldRestore();
+            }
 
             SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaShieldRestore, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             Messages.Message(LocalizeString_Message.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);

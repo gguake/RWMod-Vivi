@@ -5,7 +5,7 @@
 <VV_ApocryphaFairyBond.description>수많은 요정 비비가 아스포델을 겹겹이 감싸 모든 공격을 막아내고 있습니다.</VV_ApocryphaFairyBond.description>
 
 <VV_ApocryphaResolve.label>결의</VV_ApocryphaResolve.label>
-<VV_ApocryphaResolve.description>요정꽃이 공격으로 파괴되어 아스포델의 결의가 굳어졌습니다. 중첩될수록 받는 피해가 줄어들고 바늘의 피해량이 늘어나며 조준 속도가 빨라집니다.</VV_ApocryphaResolve.description>
+<VV_ApocryphaResolve.description>모든 비비들의 구원을 향한 아스포델의 결의가 굳어졌습니다. 중첩될수록 받는 피해가 줄어들고 바늘의 피해량이 늘어나며 조준 속도가 빨라집니다.</VV_ApocryphaResolve.description>
 
 <VV_ApocryphaStuckNeedle.label>고대 엘텍스 바늘</VV_ApocryphaStuckNeedle.label>
 <VV_ApocryphaStuckNeedle.description>외피에 깊숙이 꽂힌 고대 엘텍스 바늘입니다. 꽂힌 바늘이 많을수록 취약해져 받는 피해가 크게 늘어납니다.</VV_ApocryphaStuckNeedle.description>
@@ -14,7 +14,7 @@
 <VV_DoomPhantasm.description>멸망꽃에 서린 기억에서 불려 나온 환영입니다.</VV_DoomPhantasm.description>
 
 <VV_AsphodelBond.label>아스포델 결속</VV_AsphodelBond.label>
-<VV_AsphodelBond.description>요정꽃과 하얀 에너지 선으로 연결되어 요정 비비들의 고리가 몸을 향해 서서히 좁혀 들고 있습니다. 고리가 완전히 좁혀지거나 사망하면 일시적으로 요정화되어 아스포델에게 귀속되고 그 자리에 새 요정꽃이 피어나 연결이 이어집니다.\n\n그 전에 영원꽃 제단 주변에 도달해 황금빛 선을 이은 상태에서 요정화가 발동되면 기믹이 파훼되어 아스포델의 요정 결속을 약화시키고, 해당 선 연결에서 요정화된 모든 비비가 제단 앞으로 되돌아옵니다.</VV_AsphodelBond.description>
+<VV_AsphodelBond.description>아스포델의 힘으로 요정화가 진행중입니다. 완료되면 일시적으로 요정화되어 아스포델에게 결속되고 그 자리에 새 요정꽃이 피어납니다.\n\n영원꽃 제단과 아스포델을 연결시키면 아스포델에게 결속된 모든 요정화된 비비를 해방시키고 아스포델에게 결속된 요정 비비 또한 해방시킬 수 있습니다.</VV_AsphodelBond.description>
 
 <VV_DoomBlight_Fear.label>멸망의 공포</VV_DoomBlight_Fear.label>
 <VV_DoomBlight_Fear.description>멸망꽃이 피워낸 환영 속에서 불타는 옛 둥지와 비명이 끊이지 않습니다. 고통에 쉽게 쓰러지고 정신이상에 빠지기 쉬워집니다.</VV_DoomBlight_Fear.description>

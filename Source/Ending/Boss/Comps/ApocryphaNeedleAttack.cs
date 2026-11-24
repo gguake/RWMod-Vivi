@@ -16,6 +16,7 @@ namespace VVRace
         private const int PatternCount = 3;
         private const float RepeatedPatternWeight = 0.25f;
         private const int RaidPattern = 2;
+        private const int BoundSnipePattern = 3;
 
         public const int AsphodelNeedleCount = 6;
 
@@ -118,14 +119,23 @@ namespace VVRace
             }
             else if (targeting.TryFindBoundSnipeTargets(out var boundFirst, out var boundSecond))
             {
-                idle.Shuffle();
-                StrikeHoming(idle.GetRange(0, 3), boundFirst, requireBond: true);
-                if (boundSecond != null)
+                var hasNormal = targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second);
+                if (!hasNormal || ShouldUseBoundSnipe())
                 {
-                    StrikeHoming(idle.GetRange(3, 3), boundSecond, requireBond: true);
-                }
+                    idle.Shuffle();
+                    StrikeHoming(idle.GetRange(0, 3), boundFirst, requireBond: true);
+                    if (boundSecond != null)
+                    {
+                        StrikeHoming(idle.GetRange(3, 3), boundSecond, requireBond: true);
+                    }
 
-                _lastPattern = RaidPattern;
+                    _lastPattern = BoundSnipePattern;
+                }
+                else
+                {
+                    idle.Shuffle();
+                    FirePattern(PickPattern(), idle, first, second);
+                }
             }
             else if (targeting.TryFindTargetCells(Props.needleTargetRange, out var first, out var second))
             {
@@ -190,6 +200,12 @@ namespace VVRace
         private int PickPattern()
         {
             return Enumerable.Range(0, PatternCount).RandomElementByWeight(v => v == _lastPattern ? RepeatedPatternWeight : 1f);
+        }
+
+        private bool ShouldUseBoundSnipe()
+        {
+            var snipeWeight = _lastPattern == BoundSnipePattern ? RepeatedPatternWeight : 1f;
+            return Rand.Value < snipeWeight / (snipeWeight + 1f);
         }
 
         private void AimFixed(List<ApocryphaNeedle> idle, int count, float startAngle, int aimTicks)

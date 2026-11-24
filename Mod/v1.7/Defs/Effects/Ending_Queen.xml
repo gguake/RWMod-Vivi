@@ -126,49 +126,6 @@
     </children>
   </EffecterDef>
 
-  <!-- 하늘 방패 완료 효과 -->
-  <EffecterDef>
-    <defName>VV_Effecter_SkyShieldComplete</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>VV_EverflowerRitualComplete</soundDef>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>MortarShieldGenerator_Reactivate</soundDef>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <moteDef>VV_Mote_FairyficationFlash</moteDef>
-        <burstCount>1</burstCount>
-        <spawnLocType>OnSource</spawnLocType>
-        <scale>1.6</scale>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>VV_Fleck_ResonanceWaveRing</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <burstCount>1</burstCount>
-        <absoluteAngle>true</absoluteAngle>
-        <rotation>0~360</rotation>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <burstCount>12~16</burstCount>
-        <positionRadius>1.2</positionRadius>
-        <speed>0.4~0.9</speed>
-        <rotation>-45</rotation>
-        <angle>0</angle>
-      </li>
-    </children>
-  </EffecterDef>
-
-
   <!-- 여제 시체 소멸 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_QueenCorpseBloom</defName>

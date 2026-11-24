@@ -1,6 +1,5 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -30,6 +29,11 @@ namespace VVRace
 
         private bool _anyEffect;
 
+        [Unsaved]
+        private List<IntVec3>[] _cellBuckets;
+        [Unsaved]
+        private int _nextBucket;
+
         public void Init(Vector3 center)
         {
             _center = center.Yto0();
@@ -38,27 +42,35 @@ namespace VVRace
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            if (respawningAfterLoad) { return; }
-
-            if (_center == Vector3.zero)
+            if (!respawningAfterLoad)
             {
-                _center = Position.ToVector3Shifted().Yto0();
-            }
-
-            _maxRadius = EndingVfxUtility.MaxDistanceToMapCorner(map, _center) + 1f;
-            _speed = Mathf.Max(MinSpeed, _maxRadius / SpreadTicks);
-            _radius = 0f;
-
-            var ringDef = VVFleckDefOf.VV_Fleck_GoldenWaveRing;
-            if (ringDef != null)
-            {
-                for (int i = 0; i < 2; i++)
+                if (_center == Vector3.zero)
                 {
-                    var data = FleckMaker.GetDataStatic(_center.WithY(AltitudeLayer.MoteOverhead.AltitudeFor()), map, ringDef, 1f + i * 0.6f);
-                    data.rotation = Rand.Range(0f, 360f);
-                    map.flecks.CreateFleck(data);
+                    _center = Position.ToVector3Shifted().Yto0();
+                }
+
+                _maxRadius = EndingVfxUtility.MaxDistanceToMapCorner(map, _center) + 1f;
+                _speed = Mathf.Max(MinSpeed, _maxRadius / SpreadTicks);
+                _radius = 0f;
+
+                if (WindOfRestUtility.EndToxicFallout(map))
+                {
+                    _anyEffect = true;
+                }
+
+                var ringDef = VVFleckDefOf.VV_Fleck_GoldenWaveRing;
+                if (ringDef != null)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        var data = FleckMaker.GetDataStatic(_center.WithY(AltitudeLayer.MoteOverhead.AltitudeFor()), map, ringDef, 1f + i * 0.6f);
+                        data.rotation = Rand.Range(0f, 360f);
+                        map.flecks.CreateFleck(data);
+                    }
                 }
             }
+
+            BuildEnvironmentBuckets(map);
         }
 
         public override void ExposeData()
@@ -70,6 +82,11 @@ namespace VVRace
             Scribe_Values.Look(ref _speed, "speed", MinSpeed);
             Scribe_Collections.Look(ref _processed, "processed", LookMode.Value);
             Scribe_Values.Look(ref _anyEffect, "anyEffect", false);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                _processed ??= new HashSet<int>();
+            }
         }
 
         protected override void Tick()
@@ -78,6 +95,7 @@ namespace VVRace
             if (!Spawned) { return; }
 
             _radius += _speed;
+            CleanseEnvironmentToRadius();
             ReachPawns();
             if (!Spawned) { return; }
 
@@ -89,17 +107,89 @@ namespace VVRace
             }
         }
 
+        private void BuildEnvironmentBuckets(Map map)
+        {
+            _cellBuckets = null;
+            _nextBucket = 0;
+            if (map == null || _maxRadius <= 0f) { return; }
+
+            var speed = Mathf.Max(MinSpeed, _speed);
+            var bucketCount = Mathf.Max(1, Mathf.CeilToInt(_maxRadius / speed) + 1);
+            var buckets = new List<IntVec3>[bucketCount];
+            var any = false;
+
+            foreach (var cell in map.AllCells)
+            {
+                if (!WindOfRestUtility.HasCleanableEnvironment(map, cell)) { continue; }
+
+                var dist = (cell.ToVector3Shifted().Yto0() - _center).MagnitudeHorizontal();
+                if (dist <= _radius)
+                {
+                    if (WindOfRestUtility.CleanseCell(map, cell))
+                    {
+                        _anyEffect = true;
+                    }
+                    continue;
+                }
+
+                var idx = Mathf.Clamp(Mathf.FloorToInt(dist / speed), 0, bucketCount - 1);
+                var list = buckets[idx];
+                if (list == null)
+                {
+                    list = new List<IntVec3>();
+                    buckets[idx] = list;
+                }
+                list.Add(cell);
+                any = true;
+            }
+
+            if (any)
+            {
+                _cellBuckets = buckets;
+                _nextBucket = Mathf.Clamp(Mathf.FloorToInt(_radius / speed), 0, bucketCount);
+            }
+        }
+
+        private void CleanseEnvironmentToRadius()
+        {
+            if (_cellBuckets == null) { return; }
+
+            var map = Map;
+            var speed = Mathf.Max(MinSpeed, _speed);
+            var targetBucket = Mathf.Min(_cellBuckets.Length - 1, Mathf.FloorToInt(_radius / speed));
+            while (_nextBucket <= targetBucket)
+            {
+                var list = _cellBuckets[_nextBucket];
+                if (list != null)
+                {
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (WindOfRestUtility.CleanseCell(map, list[i]))
+                        {
+                            _anyEffect = true;
+                        }
+                    }
+                    _cellBuckets[_nextBucket] = null;
+                }
+
+                _nextBucket++;
+            }
+        }
+
         private void ReachPawns()
         {
             var map = Map;
             var radiusSqr = _radius * _radius;
 
             _tmpPawns.Clear();
-            _tmpPawns.AddRange(map.mapPawns.AllPawnsSpawned);
+            _tmpPawns.AddRange(map.mapPawns.AllPawns);
             foreach (var pawn in _tmpPawns)
             {
-                if (pawn.Destroyed || !pawn.Spawned || _processed.Contains(pawn.thingIDNumber)) { continue; }
-                if ((pawn.DrawPos - _center).MagnitudeHorizontalSquared() > radiusSqr) { continue; }
+                if (pawn == null || pawn.Destroyed || pawn.Dead || pawn.MapHeld != map || _processed.Contains(pawn.thingIDNumber)) { continue; }
+                if (!pawn.PositionHeld.IsValid) { continue; }
+
+                var pos = pawn.Spawned ? pawn.DrawPos : pawn.PositionHeld.ToVector3Shifted();
+                if ((pos - _center).MagnitudeHorizontalSquared() > radiusSqr) { continue; }
 
                 _processed.Add(pawn.thingIDNumber);
                 try
@@ -108,7 +198,7 @@ namespace VVRace
                 }
                 catch (System.Exception ex)
                 {
-                    Log.Error($"[ViViRace] wind of rest failed on {pawn}: {ex}");
+                    Log.Error($"[ViViRace] area purification failed on {pawn}: {ex}");
                 }
             }
 
@@ -119,15 +209,21 @@ namespace VVRace
         {
             if (pawn.def == VVThingDefOf.VV_TitanicHornet)
             {
-                WindOfRestUtility.DissolveHornet(pawn, WindAt(pawn.DrawPos));
-                _anyEffect = true;
+                if (pawn.Spawned)
+                {
+                    WindOfRestUtility.DissolveHornet(pawn, WindAt(pawn.DrawPos));
+                    _anyEffect = true;
+                }
                 return;
             }
 
             if (WindOfRestUtility.Cleanse(pawn))
             {
                 _anyEffect = true;
-                VVEffecterDefOf.VV_Effecter_WindOfRestCleanse?.SpawnAttached(pawn, pawn.Map).Cleanup();
+                if (pawn.Spawned)
+                {
+                    VVEffecterDefOf.VV_Effecter_WindOfRestCleanse?.SpawnAttached(pawn, pawn.Map).Cleanup();
+                }
             }
         }
 
@@ -180,6 +276,17 @@ namespace VVRace
 
         private void Finish()
         {
+            var map = Map;
+            if (map != null)
+            {
+                if (WindOfRestUtility.CleanseRemainingEnvironment(map))
+                {
+                    _anyEffect = true;
+                }
+
+                map.gasGrid?.RecalculateEverHadGas();
+            }
+
             Messages.Message(
                 LocalizeString_Message.VV_Message_WindOfRestResult.Translate(),
                 _anyEffect ? MessageTypeDefOf.PositiveEvent : MessageTypeDefOf.NeutralEvent);
@@ -190,26 +297,172 @@ namespace VVRace
 
     public static class WindOfRestUtility
     {
-        public static bool Cleanse(Pawn pawn)
+        private static HashSet<HediffDef> _cleansableHediffs;
+
+        public static bool IsCleansableHediff(HediffDef def)
         {
-            var removedInstability = RemoveAll(pawn, VVHediffDefOf.VV_GeneticUnstability);
-            var removedScaria = RemoveAll(pawn, HediffDefOf.Scaria);
-            return removedInstability || removedScaria;
+            return def != null && GetCleansableHediffs().Contains(def);
         }
 
-        private static bool RemoveAll(Pawn pawn, HediffDef def)
+        private static HashSet<HediffDef> GetCleansableHediffs()
         {
-            var hediffs = pawn.health?.hediffSet?.hediffs;
-            if (def == null || hediffs == null) { return false; }
+            if (_cleansableHediffs != null) { return _cleansableHediffs; }
 
-            var removed = false;
-            foreach (var hediff in hediffs.Where(v => v.def == def).ToList())
+            var birthdayHediffs = new HashSet<HediffDef>();
+            var giverSets = DefDatabase<HediffGiverSetDef>.AllDefsListForReading;
+            for (int i = 0; i < giverSets.Count; i++)
             {
-                pawn.health.RemoveHediff(hediff);
-                removed = true;
+                var givers = giverSets[i].hediffGivers;
+                if (givers == null) { continue; }
+
+                for (int j = 0; j < givers.Count; j++)
+                {
+                    if (givers[j] is HediffGiver_Birthday birthday && birthday.hediff != null)
+                    {
+                        birthdayHediffs.Add(birthday.hediff);
+                    }
+                }
             }
 
-            return removed;
+            var set = new HashSet<HediffDef>();
+            AddIfNotNull(set, HediffDefOf.ToxicBuildup);
+            AddIfNotNull(set, HediffDefOf.ToxGasExposure);
+            AddIfNotNull(set, HediffDefOf.LungRotExposure);
+            AddIfNotNull(set, HediffDefOf.LungRot);
+            AddIfNotNull(set, HediffDefOf.Scaria);
+            AddIfNotNull(set, HediffDefOf.ScariaInfection);
+
+            var incidents = DefDatabase<IncidentDef>.AllDefsListForReading;
+            for (int i = 0; i < incidents.Count; i++)
+            {
+                var disease = incidents[i].diseaseIncident;
+                if (disease != null && !disease.chronic && !birthdayHediffs.Contains(disease))
+                {
+                    set.Add(disease);
+                }
+            }
+
+            _cleansableHediffs = set;
+            return _cleansableHediffs;
+        }
+
+        private static void AddIfNotNull(HashSet<HediffDef> set, HediffDef def)
+        {
+            if (def != null)
+            {
+                set.Add(def);
+            }
+        }
+
+        public static bool Cleanse(Pawn pawn)
+        {
+            var hediffs = pawn?.health?.hediffSet?.hediffs;
+            if (hediffs == null) { return false; }
+
+            var cleansable = GetCleansableHediffs();
+            List<Hediff> toRemove = null;
+            for (int i = 0; i < hediffs.Count; i++)
+            {
+                var hediff = hediffs[i];
+                if (hediff?.def != null && cleansable.Contains(hediff.def))
+                {
+                    toRemove ??= new List<Hediff>();
+                    toRemove.Add(hediff);
+                }
+            }
+
+            if (toRemove == null) { return false; }
+
+            for (int i = 0; i < toRemove.Count; i++)
+            {
+                pawn.health.RemoveHediff(toRemove[i]);
+            }
+
+            return true;
+        }
+
+        public static bool HasCleanableEnvironment(Map map, IntVec3 cell)
+        {
+            if (ModsConfig.BiotechActive && map.pollutionGrid != null && map.pollutionGrid.IsPolluted(cell))
+            {
+                return true;
+            }
+
+            var gasGrid = map.gasGrid;
+            if (gasGrid != null && (gasGrid.DensityAt(cell, GasType.ToxGas) > 0 || gasGrid.DensityAt(cell, GasType.RotStink) > 0))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool CleanseCell(Map map, IntVec3 cell)
+        {
+            var cleaned = false;
+            if (ModsConfig.BiotechActive && map.pollutionGrid != null && map.pollutionGrid.IsPolluted(cell))
+            {
+                cell.Unpollute(map);
+                cleaned = true;
+            }
+
+            var gasGrid = map.gasGrid;
+            if (gasGrid != null && (gasGrid.DensityAt(cell, GasType.ToxGas) > 0 || gasGrid.DensityAt(cell, GasType.RotStink) > 0))
+            {
+                var smoke = gasGrid.DensityAt(cell, GasType.BlindSmoke);
+                var deadlife = gasGrid.DensityAt(cell, GasType.DeadlifeDust);
+                gasGrid.SetDirect(cell, smoke, 0, 0, deadlife);
+                map.mapDrawer.MapMeshDirty(cell, MapMeshFlagDefOf.Gas);
+                cleaned = true;
+            }
+
+            return cleaned;
+        }
+
+        public static bool CleanseRemainingEnvironment(Map map)
+        {
+            var cleaned = false;
+            foreach (var cell in map.AllCells)
+            {
+                if (CleanseCell(map, cell))
+                {
+                    cleaned = true;
+                }
+            }
+
+            return cleaned;
+        }
+
+        public static bool EndToxicFallout(Map map)
+        {
+            if (GameConditionDefOf.ToxicFallout == null) { return false; }
+
+            var ended = EndToxicFalloutIn(map?.gameConditionManager);
+            if (EndToxicFalloutIn(Find.World?.gameConditionManager))
+            {
+                ended = true;
+            }
+
+            return ended;
+        }
+
+        private static bool EndToxicFalloutIn(GameConditionManager manager)
+        {
+            if (manager == null) { return false; }
+
+            var active = manager.ActiveConditions;
+            var ended = false;
+            for (int i = active.Count - 1; i >= 0; i--)
+            {
+                var cond = active[i];
+                if (cond != null && cond.def == GameConditionDefOf.ToxicFallout && !cond.Permanent && cond.conditionCauser == null)
+                {
+                    cond.End();
+                    ended = true;
+                }
+            }
+
+            return ended;
         }
 
         public static void DissolveHornet(Pawn hornet, Vector3 wind)

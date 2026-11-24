@@ -29,4 +29,25 @@
 
 <VV_Inspector_SeedlingOutOfFertilzier>양분 부족</VV_Inspector_SeedlingOutOfFertilzier>
 <VV_Inspector_SeedlingOutOfMana>마나 부족</VV_Inspector_SeedlingOutOfMana>
+
+<!-- Ending -->
+<VV_Inspector_AltarEnshrinedEverflower>안치된 영원꽃: 조율 {LEVEL}단계</VV_Inspector_AltarEnshrinedEverflower>
+<VV_Inspector_AltarNoEverflower>안치된 영원꽃 없음</VV_Inspector_AltarNoEverflower>
+<VV_Inspector_AltarHeldResonator>동화 중인 공명자: {PAWN_labelShort}</VV_Inspector_AltarHeldResonator>
+<VV_Inspector_EverflowerEnshrined>영원꽃 제단에 안치됨</VV_Inspector_EverflowerEnshrined>
+<VV_Inspector_EverflowerAttunementLevelOnly>조율: {LEVEL}단계</VV_Inspector_EverflowerAttunementLevelOnly>
+<VV_Inspector_ApocryphaVitality>생명력: {0} / {1}</VV_Inspector_ApocryphaVitality>
+<VV_Inspector_ApocryphaShield>요정 장막: {0} / {1}</VV_Inspector_ApocryphaShield>
+<VV_Inspector_ApocryphaShieldBroken>요정 장막: 흩어짐 (복구까지 {0})</VV_Inspector_ApocryphaShieldBroken>
+<VV_Inspector_ApocryphaChanneling>영원꽃 찬탈 중: {0} (남은 시간 {1})</VV_Inspector_ApocryphaChanneling>
+<VV_Inspector_ApocryphaEmbrace>구원: {0} (남은 시간 {1})</VV_Inspector_ApocryphaEmbrace>
+<VV_Inspector_ApocryphaFairyBond>요정 결속: {0}</VV_Inspector_ApocryphaFairyBond>
+<VV_Inspector_EndingBloom>개화 응축: {PERCENT}</VV_Inspector_EndingBloom>
+<VV_Inspector_PlantManaUnlimited>금빛 꽃가루 안개: 마나 무제한</VV_Inspector_PlantManaUnlimited>
+<VV_Inspector_DoomFlowerBloomIn>만개까지: {0}</VV_Inspector_DoomFlowerBloomIn>
+<VV_Inspector_DoomFlowerHint>만개하면 저주를 내립니다.</VV_Inspector_DoomFlowerHint>
+<VV_Inspector_QueenRebirth>{PAWN_labelShort} 깨어나기까지: {TIME}</VV_Inspector_QueenRebirth>
+<VV_Inspector_RuinDoomFlowerHint>파괴할 때마다 진실을 비추는 잔향을 남긴 뒤 다시 피어납니다.</VV_Inspector_RuinDoomFlowerHint>
+<VV_Inspector_RuinPuzzleFlowerHint>비비가 상호작용해 다른 화분의 요정꽃과 위치를 바꿀 수 있습니다.</VV_Inspector_RuinPuzzleFlowerHint>
+<VV_Inspector_RuinPuzzleFlowerTethered>공명 연결 중: {PAWN_labelShort}</VV_Inspector_RuinPuzzleFlowerTethered>
 </LanguageData>

@@ -375,7 +375,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinDoomFlower</defName>
     <label>doom bloom</label>
-    <description>A lingering doom bloom rooted at the threshold of the trial corridor. While it does not bloom on its own, stepping off the safe path triggers its lingering curse upon the expedition; each time it is destroyed, a faint wisp of memory drifts along the unseen safe path before the flower regrows.</description>
+    <description>A bizarre arcane flower that keeps regrowing for some unknown reason.</description>
     <thingClass>VVRace.Building_RuinDoomFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_DoomFlower</texPath>
@@ -465,7 +465,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinPuzzleFairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A mysterious arcane flower blooming amid the ruins. Treated with a special arcane process to conceal the central space, the linked fairy blooms appear able to swap places with one another. Arranging them into a certain shape seems like it would lift the seal.</description>
+    <description>A mysterious arcane flower blooming amid the ruins. Some of these fairy blooms are linked to others by unusual mana, and resonating with them seems to allow swapping their positions. They appear to have been arranged with a specific pattern in mind.</description>
     <thingClass>VVRace.Building_RuinPuzzleFairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

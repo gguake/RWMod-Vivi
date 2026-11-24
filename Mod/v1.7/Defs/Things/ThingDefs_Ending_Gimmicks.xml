@@ -73,7 +73,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower born from the spreading mana of the fairy vivis wrapped around Asphodel. When a normal vivi resonates with it, the flower connects to her with an energy tether and grants Asphodel's bond. If she carries the tether to the everflower altar before being pulled in, the chain breaks and frees all vivis bound along it while weakening Asphodel's fairy bond.\n\nIf the daffodil sigil completes before anyone resonates, it heals nearby living beings, turns nearby vivis into fairies bound to Asphodel, and collapses the entire chain to restore Asphodel's fairy bond. Destroying a fairy bloom by force collapses the chain without restoring her bond, but hardens Asphodel's resolve.</description>
+    <description>A flower born from the spreading mana of the fairy vivis wrapped around Asphodel. When a normal vivi resonates with it, she connects to the flower with an energy line and becomes bound to Asphodel.\n\nAsphodel can use psychic power channeled through fairy blooms to forcibly bind vivis to herself. Conversely, binding Asphodel to the everflower can free the fairy vivis bound to her.\n\nIt can also be destroyed by attacks, but doing so makes Asphodel's attacks fiercer.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

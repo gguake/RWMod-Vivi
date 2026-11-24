@@ -489,4 +489,74 @@
       </li>
     </children>
   </EffecterDef>
+
+  <!-- 진혼 의식 완료 효과 -->
+  <EffecterDef>
+    <defName>VV_Effecter_RequiemComplete</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.6</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceWaveRingSlow</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>20~28</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~3.2</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-220~220</rotationRate>
+        <scale>0.2~0.45</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 진혼 시체 소멸 효과 -->
+  <EffecterDef>
+    <defName>VV_Effecter_RequiemCorpse</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>6~10</burstCount>
+        <positionRadius>0.5</positionRadius>
+        <speed>0.25~0.6</speed>
+        <rotation>-45</rotation>
+        <angle>0</angle>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>5~8</burstCount>
+        <positionRadius>0.35</positionRadius>
+        <angle>-40~40</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~1.8</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-220~220</rotationRate>
+        <scale>0.18~0.35</scale>
+      </li>
+    </children>
+  </EffecterDef>
 </Defs>

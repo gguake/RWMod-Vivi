@@ -27,4 +27,7 @@
 <VV_Command_SetEjectHoneyThreshold>배출량 설정</VV_Command_SetEjectHoneyThreshold>
 <VV_Command_SetEjectHoneyThresholdDesc>정제된 꿀이 얼마나 쌓이면 한꺼번에 배출할지 설정합니다.\n\n현재 배출량: {0}개</VV_Command_SetEjectHoneyThresholdDesc>
 <VV_Command_SetEjectHoneyThresholdSlider>배출량: {0}개</VV_Command_SetEjectHoneyThresholdSlider>
+
+<!-- Ending -->
+<VV_Command_ReserveTeleportEverflowerAltarDesc>조율 {LEVEL}단계 이상의 영원꽃을 제단에 순간이동시켜 안치합니다.</VV_Command_ReserveTeleportEverflowerAltarDesc>
 </LanguageData>

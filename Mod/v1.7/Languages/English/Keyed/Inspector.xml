@@ -29,4 +29,25 @@
 
 <VV_Inspector_SeedlingOutOfFertilzier>Out of nutrition</VV_Inspector_SeedlingOutOfFertilzier>
 <VV_Inspector_SeedlingOutOfMana>Out of mana</VV_Inspector_SeedlingOutOfMana>
+
+<!-- Ending -->
+<VV_Inspector_AltarEnshrinedEverflower>Enshrined everflower: attunement level {LEVEL}</VV_Inspector_AltarEnshrinedEverflower>
+<VV_Inspector_AltarHeldResonator>Assimilated resonator: {PAWN_labelShort}</VV_Inspector_AltarHeldResonator>
+<VV_Inspector_AltarNoEverflower>No everflower enshrined</VV_Inspector_AltarNoEverflower>
+<VV_Inspector_EverflowerEnshrined>Enshrined on the everflower altar</VV_Inspector_EverflowerEnshrined>
+<VV_Inspector_EverflowerAttunementLevelOnly>Attunement: Level {LEVEL}</VV_Inspector_EverflowerAttunementLevelOnly>
+<VV_Inspector_ApocryphaVitality>Vitality: {0} / {1}</VV_Inspector_ApocryphaVitality>
+<VV_Inspector_ApocryphaShield>Fairy veil: {0} / {1}</VV_Inspector_ApocryphaShield>
+<VV_Inspector_ApocryphaShieldBroken>Fairy veil: scattered (restores in {0})</VV_Inspector_ApocryphaShieldBroken>
+<VV_Inspector_ApocryphaChanneling>Usurping the everflower: {0} ({1} left)</VV_Inspector_ApocryphaChanneling>
+<VV_Inspector_ApocryphaEmbrace>Salvation: {0} ({1} left)</VV_Inspector_ApocryphaEmbrace>
+<VV_Inspector_ApocryphaFairyBond>Fairy bond: {0}</VV_Inspector_ApocryphaFairyBond>
+<VV_Inspector_EndingBloom>Bloom condensation: {PERCENT}</VV_Inspector_EndingBloom>
+<VV_Inspector_PlantManaUnlimited>Golden pollen mist: unlimited mana</VV_Inspector_PlantManaUnlimited>
+<VV_Inspector_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspector_DoomFlowerBloomIn>
+<VV_Inspector_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspector_DoomFlowerHint>
+<VV_Inspector_QueenRebirth>{PAWN_labelShort} awakens in: {TIME}</VV_Inspector_QueenRebirth>
+<VV_Inspector_RuinDoomFlowerHint>Each time it is destroyed, it leaves a lingering wisp that illuminates the truth before regrowing.</VV_Inspector_RuinDoomFlowerHint>
+<VV_Inspector_RuinPuzzleFlowerHint>A vivi can interact with it to swap its position with a fairy bloom in another pot.</VV_Inspector_RuinPuzzleFlowerHint>
+<VV_Inspector_RuinPuzzleFlowerTethered>Resonance link: {PAWN_labelShort}</VV_Inspector_RuinPuzzleFlowerTethered>
 </LanguageData>

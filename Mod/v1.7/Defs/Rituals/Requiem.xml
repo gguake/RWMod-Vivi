@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 진혼 의식 -->
+  <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
+    <defName>VV_Requiem</defName>
+    <label>requiem ritual</label>
+    <description>Emits a serene wave from the everflower that dissolves all unattended humanlike corpses in the area. Colonist corpses and unnatural corpses are unaffected.</description>
+    <ritualPatternBase>VV_Requiem</ritualPatternBase>
+    <iconPath>UI/Commands/VV_Requiem</iconPath>
+    <displayOrderInImpact>992</displayOrderInImpact>
+    <displayOrderInIssue>992</displayOrderInIssue>
+  </PreceptDef>
+
+  <!-- 진혼 의식 구성 -->
+  <RitualPatternDef ParentName="VV_EverflowerRitualPatternBase">
+    <defName>VV_Requiem</defName>
+    <ritualBehavior>VV_Requiem</ritualBehavior>
+    <ritualOutcomeEffect>VV_Requiem</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_Requiem</ritualObligationTargetFilter>
+    <iconPathOverride>UI/Commands/VV_Requiem</iconPathOverride>
+  </RitualPatternDef>
+
+  <!-- 진혼 의식 진행 -->
+  <RitualBehaviorDef ParentName="VV_EverflowerRitualBehaviorBase">
+    <defName>VV_Requiem</defName>
+  </RitualBehaviorDef>
+
+  <!-- 진혼 의식 결과 -->
+  <RitualOutcomeEffectDef ParentName="VV_EverflowerRitualOutcomeBase">
+    <defName>VV_Requiem</defName>
+    <description>When the ritual completes, a wave sweeps across the area and dissolves all unattended humanlike corpses. Colonist corpses and unnatural corpses remain untouched.\n\nThe better the ritual's result, the shorter the cooldown on the next everflower ritual.\n\nAll everflower rituals share a cooldown.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_Requiem</workerClass>
+    <effecter>VV_Effecter_RequiemComplete</effecter>
+  </RitualOutcomeEffectDef>
+
+  <!-- 진혼 의식 대상 -->
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_Requiem</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>4</requiredAttunementLevel>
+  </RitualObligationTargetFilterDef>
+</Defs>

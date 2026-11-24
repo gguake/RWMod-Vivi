@@ -5,4 +5,7 @@
 <VV_Alert_ViviDangerousEggsDesc>The vivi eggs that are being neglected or in the incubator are being damaged due to inappropriate temperatures.
 \nIf the eggs are completely damaged, they will be destroyed, so please maintain the temperature where the eggs are stored between {MINTEMP} degrees and {MAXTEMP} degrees.</VV_Alert_ViviDangerousEggsDesc>
 
+<!-- Ending -->
+<VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
+<VV_Alert_ApocryphaChannelingDesc>Asphodel is drawing in the everflower's mana ({PROGRESS}, {TIMELEFT} remaining).\nIf the everflower is taken, the final bloom will be interrupted.</VV_Alert_ApocryphaChannelingDesc>
 </LanguageData>

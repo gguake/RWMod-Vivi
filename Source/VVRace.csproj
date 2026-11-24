@@ -203,7 +203,6 @@
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_GrandAttunement.cs" />
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_QueensCoronation.cs" />
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_ReturnOfLife.cs" />
-    <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_SkyShield.cs" />
     <Compile Include="Ending\Ritual\RitualSpectatorFilter_Vivi.cs" />
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_WindOfRest.cs" />
     <Compile Include="Ending\Ritual\WindOfRest.cs" />
@@ -312,6 +311,8 @@
     <Compile Include="Everflower\Ritual\RitualOutcomeEffectWorker_Attunement.cs" />
     <Compile Include="Everflower\Ritual\DamageWorker_ManawaveStun.cs" />
     <Compile Include="Everflower\Ritual\RitualOutcomeEffectWorker_Manawave.cs" />
+    <Compile Include="Everflower\Ritual\RequiemWave.cs" />
+    <Compile Include="Everflower\Ritual\RitualOutcomeEffectWorker_Requiem.cs" />
     <Compile Include="Everflower\Ritual\RitualRoleEverflowerResonator.cs" />
     <Compile Include="Everflower\Ritual\RitualRoleEverflowerAttuner.cs" />
     <Compile Include="Everflower\Ritual\RitualRoleFairyViviBringer.cs" />

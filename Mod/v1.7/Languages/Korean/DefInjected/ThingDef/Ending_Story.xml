@@ -37,12 +37,12 @@
 <VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 방출하는 옛 비비 제국의 신비한 유물입니다. 하지만 현재는 그 힘도 다해 빛을 비추는정도의 기능만 남아있습니다.</VV_AncientSanctumLamp.description>
 
 <VV_RuinDoomFlower.label>멸망꽃</VV_RuinDoomFlower.label>
-<VV_RuinDoomFlower.description>시련 복도 입구에 뿌리내린 멸망꽃입니다. 스스로 만개하지는 않지만 그릇된 길을 밟으면 잔향이 원정대에게 저주를 퍼뜨리며, 파괴할 때마다 보이지 않는 안전한 길을 따라 흐르는 작은 잔향을 남긴 뒤 다시 피어납니다.</VV_RuinDoomFlower.description>
+<VV_RuinDoomFlower.description>어떤 이유에서인지 계속 자라나는 기괴하게 생긴 마법 꽃입니다.</VV_RuinDoomFlower.description>
 
 <VV_RuinPuzzlePot.label>고대 비비 화분</VV_RuinPuzzlePot.label>
 <VV_RuinPuzzlePot.description>튼튼한 고대의 비비 화분입니다. 놀라울 정도로 현대의 비비 화분과 외관에 차이가 없습니다.</VV_RuinPuzzlePot.description>
 
 <VV_RuinPuzzleFairyFlower.label>요정꽃</VV_RuinPuzzleFairyFlower.label>
-<VV_RuinPuzzleFairyFlower.description>폐허에 피어난 신비한 마법 꽃입니다. 특수한 마법적 처리로 중앙의 공간을 숨기도록 되어있으며 연결된 요정꽃끼리는 서로 옮길수 있는것으로 보입니다. 어떠한 모양이 되도록 만들면 봉인이 해제될것 같습니다.</VV_RuinPuzzleFairyFlower.description>
+<VV_RuinPuzzleFairyFlower.description>폐허에 피어난 신비한 마법 꽃입니다. 일부 요정꽃끼리는 특이한 마나로 다른 요정꽃과 연결되있으며 요정꽃끼리 공명시켜 서로 위치를 옮길수 있는것으로 보입니다. 어떠한 모양이 되도록 의도한것처럼 보입니다.</VV_RuinPuzzleFairyFlower.description>
 <VV_RuinPuzzleFairyFlower.comps.CompUsable.useLabel>{0_label} 공명 교체</VV_RuinPuzzleFairyFlower.comps.CompUsable.useLabel>
 </LanguageData>

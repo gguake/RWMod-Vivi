@@ -191,7 +191,7 @@ namespace VVRace
                 if (pawn.Dead || pawn == boss || pawn.TryGetComp<CompApocrypha>() != null) { continue; }
                 if (pawn.kindDef == VVPawnKindDefOf.VV_TitanicHornet || pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_DoomPhantasm)) { continue; }
 
-                if (pawn.IsVivi() && !pawn.IsRoyalVivi())
+                if (pawn.IsVivi() && !pawn.IsRoyalVivi() && !pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_AsphodelBond))
                 {
                     bound.Add(pawn);
                     continue;

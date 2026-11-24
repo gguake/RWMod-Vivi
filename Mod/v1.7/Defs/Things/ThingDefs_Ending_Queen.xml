@@ -65,29 +65,6 @@
     </building>
   </ThingDef>
 
-  <!-- 하늘 방패 -->
-  <ThingDef ParentName="VV_ShieldDomeBase">
-    <defName>VV_SkyShield</defName>
-    <label>sky shield</label>
-    <comps>
-      <li Class="CompProperties_ProjectileInterceptor">
-        <radius>44.9</radius>
-        <interceptAirProjectiles>true</interceptAirProjectiles>
-        <color>(1, 0.82, 0.45)</color>
-        <activeSound>MortarShield_Ambience</activeSound>
-      </li>
-    </comps>
-    <modExtensions>
-      <li Class="VVRace.ShieldDomeExtension">
-        <color>(1, 0.84, 0.5)</color>
-        <idleAlpha>0.07</idleAlpha>
-        <pulseAlpha>0.03</pulseAlpha>
-        <pulseSpeed>0.8</pulseSpeed>
-        <fadeSecs>1.5</fadeSecs>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
   <!-- 마나 보호막 -->
   <ThingDef ParentName="VV_ShieldDomeBase">
     <defName>VV_QueenManaBarrierShield</defName>
@@ -112,10 +89,10 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- 안식의 바람 -->
+  <!-- 정화의 바람 -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_WindOfRest</defName>
-    <label>wind of rest</label>
+    <label>purifying wind</label>
     <thingClass>VVRace.WindOfRest</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>None</drawerType>

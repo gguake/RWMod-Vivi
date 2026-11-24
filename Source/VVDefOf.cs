@@ -179,8 +179,8 @@ namespace VVRace
         public static ThingDef VV_FairyFlower;
         public static ThingDef VV_FairySigilWard;
 
-        public static ThingDef VV_SkyShield;
         public static ThingDef VV_WindOfRest;
+        public static ThingDef VV_RequiemWave;
         public static ThingDef VV_DissolvingHornet;
         public static ThingDef VV_TitanicHornetWing;
 
@@ -392,6 +392,7 @@ namespace VVRace
         public static EffecterDef VV_Effecter_QueenVerdictSummon;
         public static EffecterDef VV_Effecter_QueenManaBarrier;
         public static EffecterDef VV_Effecter_WindOfRestCleanse;
+        public static EffecterDef VV_Effecter_RequiemCorpse;
         public static EffecterDef VV_Effecter_HornetDissolve;
         public static EffecterDef VV_Effecter_HornetAshen;
         public static EffecterDef VV_Effecter_HornetManifestBegin;

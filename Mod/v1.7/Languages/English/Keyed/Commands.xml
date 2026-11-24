@@ -27,4 +27,7 @@
 <VV_Command_SetEjectHoneyThreshold>Set eject amount</VV_Command_SetEjectHoneyThreshold>
 <VV_Command_SetEjectHoneyThresholdDesc>Set how much filtered honey to store before ejecting it all at once.\n\nCurrent eject amount: {0}</VV_Command_SetEjectHoneyThresholdDesc>
 <VV_Command_SetEjectHoneyThresholdSlider>Eject amount: {0}</VV_Command_SetEjectHoneyThresholdSlider>
+
+<!-- Ending -->
+<VV_Command_ReserveTeleportEverflowerAltarDesc>Teleports an everflower of attunement level {LEVEL} or higher onto the altar to enshrine it.</VV_Command_ReserveTeleportEverflowerAltarDesc>
 </LanguageData>

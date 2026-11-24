@@ -52,9 +52,9 @@
         public const string VV_Message_AsphodelBondBrokenByTeleport = nameof(VV_Message_AsphodelBondBrokenByTeleport);
         public const string VV_Message_DoomFlowerBloomed = nameof(VV_Message_DoomFlowerBloomed);
 
-        public const string VV_Message_SkyShieldRaised = nameof(VV_Message_SkyShieldRaised);
-
         public const string VV_Message_WindOfRestResult = nameof(VV_Message_WindOfRestResult);
+        public const string VV_Message_RequiemResult = nameof(VV_Message_RequiemResult);
+        public const string VV_Message_RequiemResultNone = nameof(VV_Message_RequiemResultNone);
 
         public const string VV_Message_QueenReborn = nameof(VV_Message_QueenReborn);
 

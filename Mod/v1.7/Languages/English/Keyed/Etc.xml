@@ -95,4 +95,80 @@
 <VV_RitualTarget_Everflower>Everflower</VV_RitualTarget_Everflower>
 
 <VV_Hediff_AgingFactor>  - Ages at a rate of {0}.</VV_Hediff_AgingFactor>
+
+<!-- Ending -->
+<VV_FailReason_AltarOnlyEverflowerCenter>Only an everflower can be enshrined at the center of the altar.</VV_FailReason_AltarOnlyEverflowerCenter>
+<VV_FailReason_AltarCenterOccupied>An everflower is already enshrined on this altar.</VV_FailReason_AltarCenterOccupied>
+<VV_FailReason_AltarOnePerMap>Only one everflower altar can be built on each map.</VV_FailReason_AltarOnePerMap>
+<VV_FailReason_AltarBlockedByArcanePlant>Cannot build over an arcane plant.</VV_FailReason_AltarBlockedByArcanePlant>
+<VV_FailReason_AltarNotHomeMap>An everflower altar can only be built in a settlement.</VV_FailReason_AltarNotHomeMap>
+<VV_FailReason_AltarOnSubstructure>An everflower altar cannot be built on a gravship.</VV_FailReason_AltarOnSubstructure>
+<VV_FailReason_AltarUnderConstruction>Cannot place on an everflower altar under construction.</VV_FailReason_AltarUnderConstruction>
+<VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while the everflower is blooming or a ritual is underway</VV_FailReason_AltarHasEnshrinedEverflower>
+<VV_Hediff_ApocryphaStuckNeedleTip>Lodged needles: {0} / {1}\nDamage taken: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
+<VV_Hediff_ApocryphaResolveTip>Stacks: {0} / {1}\nNeedle damage: +{2}\nNeedle aim time: -{3}</VV_Hediff_ApocryphaResolveTip>
+<VV_FloatMenu_ActivateApocryphaNeedle>Activate ancient eltex needle</VV_FloatMenu_ActivateApocryphaNeedle>
+<VV_FailReason_ApocryphaNeedleDormant>cannot be activated yet</VV_FailReason_ApocryphaNeedleDormant>
+<VV_TextMote_ApocryphaStunImmune>Stun immune</VV_TextMote_ApocryphaStunImmune>
+<VV_Speech_AsphodelRebirth1>...No... not alone... I'll crumble, just like that day...</VV_Speech_AsphodelRebirth1>
+<VV_Speech_AsphodelRebirth2>...Before they're hurt... all of them... into my embrace...</VV_Speech_AsphodelRebirth2>
+<VV_Speech_AsphodelEmbrace>...All of you... into my embrace...</VV_Speech_AsphodelEmbrace>
+<VV_Speech_AsphodelDeath>...The weight... into flowers... within this shade... my children, now...</VV_Speech_AsphodelDeath>
+<VV_Speech_AsphodelGuardFlower>...My flower... I must protect...</VV_Speech_AsphodelGuardFlower>
+<VV_Quest_EndingName>Dawn in full bloom</VV_Quest_EndingName>
+<VV_Quest_EndingDesc>By long-standing custom, the vivi federation has begun sending old fairy tale books to the new nest that resonates with an everflower.\n\nWhether you will witness the everflower come into full bloom as in legends of old depends on you.</VV_Quest_EndingDesc>
+<VV_Quest_EndingStageTales>When you perform the everflower attunement ritual while the everflower is sufficiently attuned, the vivi federation senses the wave and sends one volume of a fairy tale book.\n\nBooks received: {0} / {1}</VV_Quest_EndingStageTales>
+<VV_Quest_EndingStageInquiry>All the old fairy tale books have arrived. Contact the vivi federation via comms console to ask about the custom surrounding the fairy tale books and the everflower.</VV_Quest_EndingStageInquiry>
+<VV_Quest_EndingStageResonance>The vivi federation did not know the original reason behind the custom either, but they shared an old legend of a far larger everflower that once existed long ago.\n\nContinuing to resonate through everflower rituals may eventually let you sense something hidden. Perhaps there is a clue in the fairy tale books...</VV_Quest_EndingStageResonance>
+<VV_Quest_EndingStageRuins>Travel to the location believed to hold the ancient ruins. If a royal vivi resonating with a great everflower visits the site, they may be able to discover something.\n\n???: {1} / {2}</VV_Quest_EndingStageRuins>
+<VV_Quest_EndingStageRuinsExtract>Extract the vivi archotech core from the central altar.</VV_Quest_EndingStageRuinsExtract>
+<VV_Quest_EndingStageAltar>Build an everflower altar with the vivi archotech core, enshrine the everflower, and perform the full bloom ritual.</VV_Quest_EndingStageAltar>
+<VV_Quest_EndingStageAltarCoreLost>If both the vivi archotech core and the altar are lost, you can contact the vivi federation via comms console to request recovery of the lost core.</VV_Quest_EndingStageAltarCoreLost>
+<VV_Quest_EndingStageBloom>The everflower is condensing mana for its final bloom.\n\nDefend the altar until it is ready, then have the resonator perform the coronation. If the altar, everflower, or resonator is lost, the bloom is interrupted.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageHostile>Progress has stopped because you are hostile to the vivi federation. Once relations recover, it will resume where it left off.</VV_Quest_EndingStageHostile>
+<VV_Quest_EndingStepAltar>Build the everflower altar</VV_Quest_EndingStepAltar>
+<VV_Quest_EndingStepEnshrine>Enshrine an everflower of attunement level {0} at the center of the altar</VV_Quest_EndingStepEnshrine>
+<VV_Quest_EndingStepParticipants>Vivis to attend the full bloom ritual (excluding resonator): {0} / {1}</VV_Quest_EndingStepParticipants>
+<VV_Quest_EndingTruthLog>Left alone beneath the burning flower's shade, the old empress Asphodel opened her circuits beyond their limit so as not to lose a single one of the children she had borne, and took the countless vivis beneath the shade into herself as little lights. But one soul could not bear that weight. Her attunement and her self collapsed, and the shade was left empty.\n\nThe little lights remembered her last kindness. They did not leave the twisted empress, staying by her side and wrapping around her through the long ages. Even after her monstrous shell fell, they gathered once more to shield her—until at last the bond came undone, the empress fell asleep, and the freed lights returned to rest within the everflower on the altar, waiting for the spring when they will wake again.</VV_Quest_EndingTruthLog>
+<VV_FairyTale1_Label>flowershade tales I</VV_FairyTale1_Label>
+<VV_FairyTale1_Title>Flowershade Tales I: The Spring That Never Wilted</VV_FairyTale1_Title>
+<VV_FairyTale1_Desc>Long, long ago, in the middle of a frozen field, a great golden flower bloomed all alone. Beneath the warm shade of its petals, countless nests gathered and made a little world of their own.\n\nThey were born with fragile wings, yet beneath the flower's shade no one ever learned how to wither. Forgetting whether cold winds blew outside, they all lived leaning on a spring that seemed as if it would last forever.</VV_FairyTale1_Desc>
+<VV_FairyTale2_Label>flowershade tales II</VV_FairyTale2_Label>
+<VV_FairyTale2_Title>Flowershade Tales II: Mother of All Nests</VV_FairyTale2_Title>
+<VV_FairyTale2_Desc>High upon a dais at the heart of the flower's shade lived a gentle soul who wore a radiant crown. She watched over every nest, great and small, with tender eyes, and everyone followed her, calling her the mother of all nests.\n\nBy day she came down from the dais to stroke the fragile wings, and by night she stayed alone upon it, gazing out at the dark horizon beyond the nest. Thanks to the mother keeping watch all through the night, the children could fall fast asleep without a single worry.</VV_FairyTale2_Desc>
+<VV_FairyTale3_Label>flowershade tales III</VV_FairyTale3_Label>
+<VV_FairyTale3_Title>Flowershade Tales III: The Queen and the Little Lights</VV_FairyTale3_Title>
+<VV_FairyTale3_Desc>Whenever the queen walked beneath the flower's shade, little lights like fireflies always circled around her. Watching that soft glow, the young wings felt at ease, as though they had met a gentle friend.\n\nFrom a certain year, a chill crept into the edges of the shade and the golden petals began to tremble faintly. Standing with the little lights, the queen shielded them from the wind with her slender shoulders and guarded the trembling nest with the same warm smile as ever.</VV_FairyTale3_Desc>
+<VV_FairyTale4_Label>flowershade tales IV</VV_FairyTale4_Label>
+<VV_FairyTale4_Title>Flowershade Tales IV: A Dream Happy Forever</VV_FairyTale4_Title>
+<VV_FairyTale4_Desc>At last, on the day a fierce darkness from outside fell upon the flower's shade, the kind queen turned all the children beneath it into little lights, so that not a single one would be hurt.\n\nThe queen had taken in so many lights that she grew terribly weary, and the little lights wrapped her up warmly, carried her far away, and tucked her in to sleep. In a warm dream where no cold wind could reach, the queen and the children never parted again and lived happily ever after.</VV_FairyTale4_Desc>
+<VV_EndingCredits>{PAWN_nameDef} completes the coronation. Golden petals settle into a crown above {PAWN_possessive} head.\n\nThe great flower's shade, once found only in old fairy tales, has spread again after centuries. The weight of the bond now flows into the bloomed flower as well, and the little lights of a past age have found rest in its embrace. Beneath the warm shade, vivis will live longer lives.\n\n{PAWN_nameDef} has become queen of the vivis.</VV_EndingCredits>
+<VV_EndingCreditsNoQueen>The great flower's shade, once found only in old fairy tales, has spread again after centuries. The little lights of a past age have found rest in its embrace, and beneath the warm shade, vivis will live longer lives.</VV_EndingCreditsNoQueen>
+<VV_EndingCreditsExiled>The royal vivi who had to leave her home nest because of her small body has raised a fine new nest here.</VV_EndingCreditsExiled>
+<VV_EndingCreditsRefugee>The refugees who lost their home to the titanic hornets and fled before them now have the strength to defend their own nest.</VV_EndingCreditsRefugee>
+<VV_EndingCreditsOutro>The long season of sleeplessness has passed, and spring has come again to the cold fields. And beneath this flower's shade, your story continues...</VV_EndingCreditsOutro>
+<VV_Ending_ResonatorFallback>the resonator</VV_Ending_ResonatorFallback>
+<VV_FailReason_GoldenBloomHoldsWeather>The blooming everflower is sustaining the golden mist, preventing weather changes</VV_FailReason_GoldenBloomHoldsWeather>
+<VV_FloatMenu_ResonateFairyFlower>Resonate with fairy bloom</VV_FloatMenu_ResonateFairyFlower>
+<VV_FailReason_FairyFlowerNotVivi>not a vivi</VV_FailReason_FairyFlowerNotVivi>
+<VV_FailReason_FairyFlowerRoyalVivi>royal vivis cannot resonate</VV_FailReason_FairyFlowerRoyalVivi>
+<VV_FailReason_FairyFlowerNotAdult>babies cannot resonate</VV_FailReason_FairyFlowerNotAdult>
+<VV_FailReason_CannotMove>cannot move</VV_FailReason_CannotMove>
+<VV_FailReason_FairyFlowerAlreadyBound>already bound to Asphodel</VV_FailReason_FairyFlowerAlreadyBound>
+<VV_Hediff_DoomBlightLevel>Curse level: {0} / {1}</VV_Hediff_DoomBlightLevel>
+<VV_ManaBarrierTargetMana>Environment mana in radius: {0}/{1}</VV_ManaBarrierTargetMana>
+<VV_FailReason_EndingInProgress>No other rituals can be performed on this everflower while Dawn in full bloom is underway.</VV_FailReason_EndingInProgress>
+<VV_FailReason_RequiresEverflowerAltar>Must be enshrined on the everflower altar.</VV_FailReason_RequiresEverflowerAltar>
+<VV_FailReason_GrandAttunementLocked>Can only be performed after extracting the ancient amber core from the ancient ruins.</VV_FailReason_GrandAttunementLocked>
+<VV_FailReason_GrandAttunementMinVivis>At least {0} vivi participants besides the resonator are required.</VV_FailReason_GrandAttunementMinVivis>
+<VV_FailReason_GrandAttunementInProgress>The final bloom is already underway.</VV_FailReason_GrandAttunementInProgress>
+<VV_FailReason_GrandAttunementCompleted>The final bloom is already complete.</VV_FailReason_GrandAttunementCompleted>
+<VV_FailReason_GrandAttunementFailed>The final bloom has been interrupted.</VV_FailReason_GrandAttunementFailed>
+<VV_FailReason_CoronationNotAnchor>Requires the everflower awakened by the full bloom ritual.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
+<VV_FailReason_RuinNotQualified>only a royal vivi linked to an everflower of attunement level {0} or higher can do this</VV_FailReason_RuinNotQualified>
+<VV_FailReason_RuinPreviousFlower>the previous fairy bloom must be investigated first</VV_FailReason_RuinPreviousFlower>
+<VV_FailReason_RuinCoreLocked>the last fairy bloom must be investigated first</VV_FailReason_RuinCoreLocked>
+<VV_FailReason_RuinCoreExtracted>the core has already been extracted</VV_FailReason_RuinCoreExtracted>
+<VV_FailReason_RuinPuzzleSolved>the seal has already been lifted</VV_FailReason_RuinPuzzleSolved>
 </LanguageData>

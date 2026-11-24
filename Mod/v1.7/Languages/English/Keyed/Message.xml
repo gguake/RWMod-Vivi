@@ -14,4 +14,48 @@
 <VV_Message_PlantGrownAfterAttunement>Everflower attunement ritual has left the plants in the area flourishing.</VV_Message_PlantGrownAfterAttunement>
 
 <VV_Message_ManaNotEnough>Not enough mana. (requires {MANACOST})</VV_Message_ManaNotEnough>
+
+<!-- Ending -->
+<VV_Message_EverflowerEnshrined>The everflower has been enshrined on the altar.</VV_Message_EverflowerEnshrined>
+<VV_Message_EverflowerAltarRequiresLevel>Only an everflower of attunement level {LEVEL} or higher can be enshrined on the altar.</VV_Message_EverflowerAltarRequiresLevel>
+<VV_Message_AnchorEverflowerLeftAltar>The altar is gone, and the everflower has teleported off it.</VV_Message_AnchorEverflowerLeftAltar>
+<VV_Message_ApocryphaChannelInterrupted>Asphodel's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
+<VV_Message_ApocryphaEmbraceInterrupted>Asphodel's resurrection embrace was interrupted.</VV_Message_ApocryphaEmbraceInterrupted>
+<VV_Message_ApocryphaEscapedRoofCollapse>Asphodel teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
+<VV_Message_ApocryphaShieldBroken>Asphodel's fairy veil has scattered, briefly stunning her as fairy blooms sprout nearby.</VV_Message_ApocryphaShieldBroken>
+<VV_Message_ApocryphaShieldRestored>The fairy vivis have gathered once more, restoring Asphodel's fairy veil.</VV_Message_ApocryphaShieldRestored>
+<VV_Message_ApocryphaResolveGained>A fairy bloom was destroyed by force, hardening Asphodel's resolve. ({0} stacks)</VV_Message_ApocryphaResolveGained>
+<VV_Message_ApocryphaNeedleStuck>An ancient eltex needle lodged in her carapace, briefly stunning the giant hornet queen.</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaNeedlesShakenOff>The giant hornet queen has shaken off all the lodged needles, drawing a swarm of titanic hornets toward the colony.</VV_Message_ApocryphaNeedlesShakenOff>
+<VV_Message_ApocryphaNeedleActivated>Awakened by {PAWN_labelShort}, the ancient needle takes aim at the giant hornet queen.</VV_Message_ApocryphaNeedleActivated>
+<VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Asphodel has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
+<VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
+<VV_Message_EndingTaleRedelivered>The vivi federation's new copy of {0} has arrived.</VV_Message_EndingTaleRedelivered>
+<VV_Message_FairyFlowerResonated>{PAWN_labelShort} has resonated with the fairy bloom and gained Asphodel's bond.</VV_Message_FairyFlowerResonated>
+<VV_Message_FairyChainDispelled>The golden tether reached the everflower altar, weakening Asphodel's fairy bond and returning every vivi bound along the chain.</VV_Message_FairyChainDispelled>
+<VV_Message_AsphodelBondBrokenByTeleport>{PAWN_labelShort} was teleported, breaking Asphodel's bond.</VV_Message_AsphodelBondBrokenByTeleport>
+<VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
+<VV_Message_WindOfRestResult>A purifying wind has swept across the area.</VV_Message_WindOfRestResult>
+<VV_Message_FlowerLandNoGround>There is no ground here that can become a flower field.</VV_Message_FlowerLandNoGround>
+<VV_Message_FlowerLandBloomed>{COUNT} vivia flowers have bloomed on the enriched soil.</VV_Message_FlowerLandBloomed>
+<VV_Message_QueenReborn>{PAWN_labelShort} has awakened before the everflower.</VV_Message_QueenReborn>
+<VV_Message_ManaBarrierNotEnoughMana>Not enough environment mana within the shield's radius ({0}/{1}).</VV_Message_ManaBarrierNotEnoughMana>
+<VV_Message_AssimilationBegan>{PAWN_labelShort} has entered full assimilation with the everflower and risen into the air.</VV_Message_AssimilationBegan>
+<VV_Message_AssimilationReleased>The full assimilation with the everflower has ended, and {PAWN_labelShort} has descended to the ground.</VV_Message_AssimilationReleased>
+<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort} has collapsed and her assimilation with the everflower is broken. The full bloom ritual has been called off.</VV_Message_AssimilationBrokenRitual>
+<VV_Message_RuinCoreExtracted>{PAWN_labelShort} has extracted a core filled with mysterious power from the central altar.</VV_Message_RuinCoreExtracted>
+<VV_Message_RuinZoneUnsealed>The spatial distortion lifted, unsealing the inner sanctum zone.</VV_Message_RuinZoneUnsealed>
+<VV_Message_RuinPathGuideSpawned>A lingering wisp rises from the shattered doom bloom and drifts onward.</VV_Message_RuinPathGuideSpawned>
+<VV_Message_RuinTrialTriggered>A wrong step causes the doom bloom's lingering echo to spread...</VV_Message_RuinTrialTriggered>
+<VV_Message_RuinGalleryAlarm>The circular gallery's ancient security alarm has sounded!</VV_Message_RuinGalleryAlarm>
+<VV_Message_RuinPuzzleTethered>{PAWN_labelShort} is now linked in resonance with the fairy bloom. Touch another fairy bloom to swap their positions.</VV_Message_RuinPuzzleTethered>
+<VV_Message_RuinPuzzleUntethered>The resonance thread link with the fairy bloom ended.</VV_Message_RuinPuzzleUntethered>
+<VV_Message_RuinPuzzleSwapped>The two fairy blooms swapped positions.</VV_Message_RuinPuzzleSwapped>
+<VV_Message_RuinHexagonCompleted>The resonance circuit is complete, unsealing the central altar sanctum!</VV_Message_RuinHexagonCompleted>
+<VV_Message_RuinResealing>The ancient ruins' spatial distortion begins to close once more...</VV_Message_RuinResealing>
+<VV_Message_RuinResealedExpelled>The ancient ruins have sealed themselves behind the spatial distortion once more, expelling everyone outside.</VV_Message_RuinResealedExpelled>
+<VV_Message_RuinResealedGravship>The ancient ruins have sealed themselves behind the spatial distortion once more, expelling everyone outside.</VV_Message_RuinResealedGravship>
+<VV_Message_RuinCannotLandGravship>Cannot land a gravship here due to the ancient ruins' spatial distortion.</VV_Message_RuinCannotLandGravship>
+<VV_Message_RequiemResult>The requiem wave has passed, laying unattended corpses to rest ({COUNT}).</VV_Message_RequiemResult>
+<VV_Message_RequiemResultNone>The requiem wave has passed across the area.</VV_Message_RequiemResultNone>
 </LanguageData>
