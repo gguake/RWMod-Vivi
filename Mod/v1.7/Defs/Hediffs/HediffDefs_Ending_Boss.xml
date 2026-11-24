@@ -4,7 +4,7 @@
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
     <label>fairy vivi bond</label>
-    <description>Countless fairy vivis wrap layer upon layer around Asphodel, blocking all attacks.</description>
+    <description>Countless fairy vivis wrap layer upon layer around the empress of the nightshade, blocking all attacks.</description>
     <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
     <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
     <isBad>false</isBad>
@@ -26,7 +26,7 @@
   <HediffDef>
     <defName>VV_ApocryphaResolve</defName>
     <label>resolve</label>
-    <description>Asphodel's resolve toward the salvation of all vivis has hardened. Each stack reduces damage taken, increases her needle damage, and speeds up her needle aiming.</description>
+    <description>The empress's resolve toward the salvation of all vivis has hardened. Each stack reduces damage taken, increases her needle damage, and speeds up her needle aiming.</description>
     <hediffClass>VVRace.Hediff_ApocryphaResolve</hediffClass>
     <defaultLabelColor>(1, 0.72, 0.32)</defaultLabelColor>
     <isBad>false</isBad>

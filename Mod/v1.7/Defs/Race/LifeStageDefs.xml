@@ -87,7 +87,7 @@
   <!-- 아스포델 본모습 단계 -->
   <LifeStageDef>
     <defName>VV_ApocryphaAsphodel</defName>
-    <label>Asphodel</label>
+    <label>empress of the nightshade</label>
     <visible>false</visible>
     <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
     <bodySizeFactor>1</bodySizeFactor>

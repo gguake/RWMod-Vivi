@@ -410,6 +410,7 @@ namespace VVRace
                 _needleAttack.DestroyAll();
                 _blastBreach.Cancel();
                 _embrace.Cancel();
+                _bond.ClearVisuals();
                 _swarm.Disperse();
                 _fairyChains.Clear();
                 return;
@@ -843,6 +844,7 @@ namespace VVRace
             }
 
             _phase = ApocryphaPhase.Dying;
+            parent.TryGetComp<CompApocryphaBarrier>()?.SyncActive();
             ApocryphaGimmicks.CleanupAll(map);
 
             ApocryphaUtility.ReleaseEscorts(Pawn);
@@ -921,6 +923,7 @@ namespace VVRace
 
             _needleAttack.RecallAll();
             _swarm.EnsureSummoned();
+            parent.TryGetComp<CompApocryphaBarrier>()?.SyncActive();
 
             SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaTransform, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             ApocryphaUtility.ShakeCamera(parent.Map, 1.5f);
@@ -942,6 +945,7 @@ namespace VVRace
             dying.InitFrom(Pawn);
 
             _phase = ApocryphaPhase.Dying;
+            parent.TryGetComp<CompApocryphaBarrier>()?.SyncActive();
             _fairyChains.SettlePendingDispelsBeforeCleanup();
             CancelAllAttacks();
             GenSpawn.Spawn(dying, parent.Position, map);
@@ -1031,6 +1035,7 @@ namespace VVRace
             if (_phase == ApocryphaPhase.Asphodel)
             {
                 ApocryphaShroudGlow.Draw(Pawn);
+                _bond.Draw();
                 _fairyChains.Draw();
                 _embrace.Draw();
             }
@@ -1095,6 +1100,7 @@ namespace VVRace
             _needleAttack.DestroyAll();
             _blastBreach.Cancel();
             _embrace.Cancel();
+            _bond.ClearVisuals();
             _swarm.Disperse();
             _fairyChains.Clear();
         }

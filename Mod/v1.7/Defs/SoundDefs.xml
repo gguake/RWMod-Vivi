@@ -580,4 +580,100 @@
       </li>
     </subSounds>
   </SoundDef>
+
+  <!-- 요정꽃 문양 발동음 -->
+  <SoundDef>
+    <defName>VV_FairyFlowerBurst</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyFlowerBurst</clipPath>
+          </li>
+        </grains>
+        <volumeRange>85</volumeRange>
+        <pitchRange>0.96~1.04</pitchRange>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 아스포델 구원 발동음 -->
+  <SoundDef>
+    <defName>VV_ApocryphaEmbrace</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_ApocryphaEmbrace</clipPath>
+          </li>
+        </grains>
+        <volumeRange>95</volumeRange>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 아스포델 구원 시전 시작음 -->
+  <SoundDef>
+    <defName>VV_ApocryphaEmbraceStart</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_ApocryphaEmbraceStart</clipPath>
+          </li>
+        </grains>
+        <volumeRange>60</volumeRange>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 아스포델 구원 시전 지속음 -->
+  <SoundDef>
+    <defName>VV_ApocryphaEmbraceCast</defName>
+    <sustain>True</sustain>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <sustainFadeoutTime>0.45</sustainFadeoutTime>
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_ApocryphaEmbraceCast</clipPath>
+          </li>
+        </grains>
+        <volumeRange>12</volumeRange>
+        <sustainAttack>0.7</sustainAttack>
+        <sustainSkipFirstAttack>false</sustainSkipFirstAttack>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 요정 결속 제단 파훼·해방음 -->
+  <SoundDef>
+    <defName>VV_FairyChainDispel</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyChainDispel</clipPath>
+          </li>
+        </grains>
+        <volumeRange>95</volumeRange>
+        <pitchRange>0.96~1.04</pitchRange>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
 </Defs>

@@ -1022,7 +1022,7 @@
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>VV_ApocryphaFairyBlast</soundDef>
+        <soundDef>VV_FairyFlowerBurst</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>

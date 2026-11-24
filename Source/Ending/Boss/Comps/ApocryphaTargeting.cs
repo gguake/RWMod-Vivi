@@ -45,6 +45,8 @@ namespace VVRace
 
         public Pawn EngageTarget => IsTarget(_engageTarget, Props.engageRange) ? _engageTarget : null;
 
+        public float DetectionRange => _comp.Phase == ApocryphaPhase.Asphodel ? Props.asphodelEngageRange : Props.engageRange;
+
         public bool InCombat => GenTicks.TicksGame - _lastCombatTick <= Props.combatMemoryTicks;
 
         public ApocryphaTargeting(CompApocrypha comp)
@@ -76,9 +78,10 @@ namespace VVRace
         {
             if (!Pawn.IsHashIntervalTick(EnemyDetectInterval)) { return; }
 
+            var range = DetectionRange;
             var escortJob = ApocryphaUtility.FindEscortLord(Pawn)?.LordJob as LordJob_ApocryphaEscort;
             var target = escortJob?.FocusTarget;
-            if (target == null || !IsTarget(target, Props.engageRange) || (!(target is Pawn) && AnyTargetPawn(Props.engageRange)))
+            if (target == null || !IsTarget(target, range) || (!(target is Pawn) && AnyTargetPawn(range)))
             {
                 target = FindNearestTarget();
             }
@@ -145,7 +148,7 @@ namespace VVRace
 
             _lastCombatTick = GenTicks.TicksGame;
             if (_comp.Phase != ApocryphaPhase.Asphodel) { return; }
-            if (instigator != _rangedAttacker && IsTarget(instigator, Props.engageRange)) { return; }
+            if (instigator != _rangedAttacker && IsTarget(instigator, DetectionRange)) { return; }
 
             _rangedAttacker = instigator;
             _rangedAttackerUntilTick = GenTicks.TicksGame + Props.rangedAttackerMemoryTicks;
@@ -155,17 +158,18 @@ namespace VVRace
         public bool TryFindPursuitCell(out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
+            var range = DetectionRange;
             var attacker = RangedAttacker;
-            if (attacker == null || IsTarget(attacker, Props.engageRange)) { return false; }
+            if (attacker == null || IsTarget(attacker, range)) { return false; }
 
             var map = Pawn.Map;
             var origin = Pawn.Position;
             var toBoss = EndingVfxUtility.SafeNormalizeHorizontal((origin - attacker.Position).ToVector3(), Vector3.forward);
 
             bool Reachable(IntVec3 c) => c.InBounds(map) && c != origin && Pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly);
-            bool CanAttackFrom(IntVec3 c) => Reachable(c) && (attacker is Pawn p ? IsTargetPawn(p, Props.engageRange, c) : IsTargetTurret(attacker, Props.engageRange, c));
+            bool CanAttackFrom(IntVec3 c) => Reachable(c) && (attacker is Pawn p ? IsTargetPawn(p, range, c) : IsTargetTurret(attacker, range, c));
 
-            var maxDistance = Mathf.Min(Props.engageRange - 3f, origin.DistanceTo(attacker.Position));
+            var maxDistance = Mathf.Min(range - 3f, origin.DistanceTo(attacker.Position));
             for (var distance = maxDistance; distance >= MinPursuitDistance; distance -= 2f)
             {
                 var point = (attacker.Position.ToVector3Shifted() + toBoss * distance).ToIntVec3();
@@ -265,7 +269,7 @@ namespace VVRace
 
         private Thing FindNearestTarget()
         {
-            CollectTargets(_tmpTargets, Props.engageRange, Pawn.Position);
+            CollectTargets(_tmpTargets, DetectionRange, Pawn.Position);
 
             Thing best = null;
             var bestDistance = int.MaxValue;

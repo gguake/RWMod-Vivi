@@ -3,7 +3,7 @@
   <!-- 아스포델 폰 종류 -->
   <PawnKindDef Name="VV_ApocryphaKind">
     <defName>VV_Apocrypha</defName>
-    <label>Asphodel</label>
+    <label>empress of the nightshade</label>
     <race>VV_Apocrypha</race>
     <combatPower>3000</combatPower>
     <canArriveManhunter>false</canArriveManhunter>

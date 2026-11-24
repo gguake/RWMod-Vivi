@@ -128,7 +128,7 @@
 <VV_Quest_EndingStepAltar>영원꽃 제단 건설</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>조율 {0}단계 영원꽃을 제단 중앙에 안치</VV_Quest_EndingStepEnshrine>
 <VV_Quest_EndingStepParticipants>만개 의식에 참여할 비비 (공명자 제외): {0} / {1}명</VV_Quest_EndingStepParticipants>
-<VV_Quest_EndingTruthLog>불타는 꽃그늘 아래 홀로 남은 옛 여제 아스포델은 자신이 낳은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 긴 세월 곁을 지키며 그녀를 감싸 안아 왔습니다. 뒤틀린 껍질이 무너진 뒤에도 다시 모여들어 여제를 지켜 내던 빛들은, 마침내 결속이 풀리고 여제가 잠들자 제단의 영원꽃 품으로 돌아와 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
+<VV_Quest_EndingTruthLog>불타는 꽃그늘 아래 홀로 남은 옛 여제는 자신이 낳은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 긴 세월 곁을 지키며 그녀를 감싸 안아 왔습니다. 뒤틀린 껍질이 무너진 뒤에도 다시 모여들어 여제를 지켜 내던 빛들은, 마침내 결속이 풀리고 여제가 잠들자 제단의 영원꽃 품으로 돌아와 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
 <VV_FairyTale1_Label>꽃그늘 동화 1권</VV_FairyTale1_Label>
 <VV_FairyTale1_Title>꽃그늘 동화 1권: 시들지 않는 봄</VV_FairyTale1_Title>
 <VV_FairyTale1_Desc>아주 먼 옛날, 시린 들판 한복판에 커다란 황금빛 꽃이 홀로 피어 있었답니다. 꽃잎이 드리운 따스한 그늘 아래 수많은 둥지가 모여 작은 세상을 이루었지요.\n\n여린 생을 타고난 날개들이었지만, 꽃그늘 안에서는 누구도 시드는 법을 몰랐답니다. 바깥에 찬 바람이 부는지도 잊은 채 모두 영원할 듯한 봄날에 기대어 살았지요.</VV_FairyTale1_Desc>
@@ -153,7 +153,7 @@
 <VV_FailReason_FairyFlowerRoyalVivi>로열 비비는 공명할 수 없음</VV_FailReason_FairyFlowerRoyalVivi>
 <VV_FailReason_FairyFlowerNotAdult>아기는 공명할 수 없음</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>움직일 수 없음</VV_FailReason_CannotMove>
-<VV_FailReason_FairyFlowerAlreadyBound>이미 아스포델 결속 상태임</VV_FailReason_FairyFlowerAlreadyBound>
+<VV_FailReason_FairyFlowerAlreadyBound>이미 여제의 결속 상태임</VV_FailReason_FairyFlowerAlreadyBound>
 <VV_Hediff_DoomBlightLevel>저주 단계: {0} / {1}</VV_Hediff_DoomBlightLevel>
 <VV_ManaBarrierTargetMana>범위 안 환경 마나: {0}/{1}</VV_ManaBarrierTargetMana>
 <VV_FailReason_EndingInProgress>〈만개하는 여명〉이 진행되는 동안에는 이 영원꽃에서 다른 의식을 치를 수 없습니다.</VV_FailReason_EndingInProgress>

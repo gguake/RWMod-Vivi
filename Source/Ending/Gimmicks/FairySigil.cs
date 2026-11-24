@@ -12,7 +12,7 @@ namespace VVRace
         private const float Tau = Mathf.PI * 2f;
 
         private static FairySigil _daffodil;
-        private static FairySigil _everflower;
+        private static FairySigil _asphodel;
 
         public readonly string name;
 
@@ -23,11 +23,12 @@ namespace VVRace
         public IReadOnlyList<SigilStroke> Strokes => _strokes;
         public float TotalLength { get; }
 
-        private FairySigil(string name, List<SigilStroke> emblem)
+        private FairySigil(string name, List<SigilStroke> frame, List<SigilStroke> emblem)
         {
             this.name = name;
 
-            var all = Frame();
+            var all = new List<SigilStroke>(frame.Count + emblem.Count);
+            all.AddRange(frame);
             all.AddRange(emblem);
             _strokes = new List<SigilStroke>(all.Count);
             for (int kind = (int)SigilStrokeKind.Ring; kind <= (int)SigilStrokeKind.Rune; kind++)
@@ -48,9 +49,9 @@ namespace VVRace
             TotalLength = total;
         }
 
-        public static FairySigil Daffodil => _daffodil ??= new FairySigil("Daffodil", DaffodilEmblem());
+        public static FairySigil Daffodil => _daffodil ??= new FairySigil("Daffodil", Frame(), DaffodilEmblem());
 
-        public static FairySigil Everflower => _everflower ??= new FairySigil("Everflower", EverflowerEmblem());
+        public static FairySigil Asphodel => _asphodel ??= new FairySigil("Asphodel", AsphodelFrame(), AsphodelEmblem());
 
         public void Sample(float distance, out Vector2 position, out Vector2 tangent)
         {
@@ -158,28 +159,129 @@ namespace VVRace
             return strokes;
         }
 
-        private static List<SigilStroke> EverflowerEmblem()
+        private static List<SigilStroke> AsphodelFrame()
         {
             const int petals = 6;
-            var strokes = new List<SigilStroke>();
+            const float step = Tau / petals;
+            const float bandStep = Tau / 12f;
+
+            var strokes = new List<SigilStroke>
+            {
+                new SigilStroke(Circle(Vector2.zero, 1f, 144), true, SigilStrokeKind.Ring, 0.92f),
+                new SigilStroke(Circle(Vector2.zero, 0.968f, 144), true, SigilStrokeKind.Ring, 0.56f),
+                new SigilStroke(Circle(Vector2.zero, 0.862f, 128), true, SigilStrokeKind.InnerRing, 0.82f),
+                new SigilStroke(Circle(Vector2.zero, 0.832f, 120), true, SigilStrokeKind.InnerRing, 0.52f),
+            };
+
+            for (int k = 0; k < 12; k++)
+            {
+                var a0 = HalfPi + k * bandStep;
+                var a1 = HalfPi + (k + 1) * bandStep;
+                var s0 = a0 + bandStep * 0.17f;
+                var s1 = a1 - bandStep * 0.17f;
+                var mid = (a0 + a1) * 0.5f;
+                strokes.Add(new SigilStroke(BandLeaf(0.915f, 0.035f, s0, s1, 10), true, SigilStrokeKind.Rune, 0.6f));
+                strokes.Add(new SigilStroke(new[] { Polar(0.892f, mid), Polar(0.938f, mid) }, false, SigilStrokeKind.Rune, 0.54f));
+            }
+
             for (int k = 0; k < petals; k++)
             {
-                var angle = HalfPi + k * Tau / petals;
-                strokes.Add(new SigilStroke(Leaf(Polar(0.15f, angle), Polar(0.7f, angle), 0.26f), true, SigilStrokeKind.Emblem));
+                var angle = HalfPi + k * step;
+                var mid = angle + step * 0.5f;
+
+                strokes.Add(new SigilStroke(Regular(Polar(0.915f, angle), 0.039f, 4, angle), true, SigilStrokeKind.Rune, 0.88f));
+                strokes.Add(new SigilStroke(Circle(Polar(0.915f, angle), 0.014f, 10), true, SigilStrokeKind.Rune, 0.78f));
+
+                strokes.Add(new SigilStroke(Circle(Polar(0.915f, mid), 0.037f, 16), true, SigilStrokeKind.Rune, 0.84f));
+                strokes.Add(new SigilStroke(Circle(Polar(0.915f, mid), 0.016f, 10), true, SigilStrokeKind.Rune, 0.74f));
             }
-            for (int k = 0; k < petals; k++)
-            {
-                var angle = HalfPi + (k + 0.5f) * Tau / petals;
-                strokes.Add(Emblem(false, Polar(0.2f, angle), Polar(0.42f, angle)));
-                strokes.Add(new SigilStroke(Circle(Polar(0.47f, angle), 0.05f, 12), true, SigilStrokeKind.Emblem));
-            }
-            strokes.Add(new SigilStroke(Circle(Vector2.zero, 0.11f, 24), true, SigilStrokeKind.Emblem));
+
             return strokes;
         }
 
-        private static SigilStroke Emblem(bool closed, params Vector2[] points)
+        private static List<SigilStroke> AsphodelEmblem()
         {
-            return new SigilStroke(points, closed, SigilStrokeKind.Emblem);
+            const int petals = 6;
+            const float step = Tau / petals;
+            var strokes = new List<SigilStroke>();
+
+            var outerArch = new List<Vector2>(petals * 18);
+            var subArch = new List<Vector2>(petals * 12);
+            for (int k = 0; k < petals; k++)
+            {
+                var a0 = HalfPi + k * step;
+                var a1 = HalfPi + (k + 1) * step;
+                var mid = a0 + step * 0.5f;
+
+                var segA = Bezier(Polar(0.818f, a0), Polar(0.755f, a0 + step * 0.17f), Polar(0.765f, mid - step * 0.12f), Polar(0.718f, mid), 9);
+                for (int i = 0; i < segA.Count - 1; i++) { outerArch.Add(segA[i]); }
+                var segB = Bezier(Polar(0.718f, mid), Polar(0.765f, mid + step * 0.12f), Polar(0.755f, a1 - step * 0.17f), Polar(0.818f, a1), 9);
+                for (int i = 0; i < segB.Count - 1; i++) { outerArch.Add(segB[i]); }
+
+                var segSub = Bezier(Polar(0.818f, a0), Polar(0.675f, a0 + step * 0.24f), Polar(0.675f, a1 - step * 0.24f), Polar(0.818f, a1), 12);
+                for (int i = 0; i < segSub.Count - 1; i++) { subArch.Add(segSub[i]); }
+            }
+            strokes.Add(new SigilStroke(outerArch, true, SigilStrokeKind.InnerRing, 0.68f));
+            strokes.Add(new SigilStroke(subArch, true, SigilStrokeKind.InnerRing, 0.46f));
+
+            // 아스포델의 6장 뾰족한 별 모양 주 꽃잎(외곽·내부 윤곽·선명한 중앙 용골맥·대칭 측맥)
+            for (int k = 0; k < petals; k++)
+            {
+                var angle = HalfPi + k * step;
+                strokes.Add(new SigilStroke(AsphodelPetal(Polar(0.185f, angle), Polar(0.818f, angle), 0.265f, 16), true, SigilStrokeKind.Emblem, 1f));
+                strokes.Add(new SigilStroke(AsphodelPetal(Polar(0.245f, angle), Polar(0.690f, angle), 0.145f, 14), true, SigilStrokeKind.Emblem, 0.68f));
+                strokes.Add(new SigilStroke(new[] { Polar(0.195f, angle), Polar(0.790f, angle) }, false, SigilStrokeKind.Emblem, 0.88f));
+
+                for (int s = -1; s <= 1; s += 2)
+                {
+                    var vein = Bezier(
+                        Polar(0.29f, angle),
+                        Polar(0.41f, angle + s * 0.085f),
+                        Polar(0.52f, angle + s * 0.115f),
+                        Polar(0.60f, angle + s * 0.072f),
+                        8);
+                    strokes.Add(new SigilStroke(vein, false, SigilStrokeKind.Emblem, 0.52f));
+                }
+            }
+
+            // 꽃잎 사이로 뻗어나오는 아스포델의 긴 수술·곡선 부수술·길쭉한 꽃밥과 기저 꽃받침
+            for (int k = 0; k < petals; k++)
+            {
+                var mid = HalfPi + (k + 0.5f) * step;
+
+                strokes.Add(new SigilStroke(AsphodelPetal(Polar(0.195f, mid), Polar(0.435f, mid), 0.23f, 12), true, SigilStrokeKind.Emblem, 0.74f));
+                strokes.Add(new SigilStroke(new[] { Polar(0.21f, mid), Polar(0.385f, mid) }, false, SigilStrokeKind.Emblem, 0.50f));
+                strokes.Add(new SigilStroke(new[] { Polar(0.435f, mid), Polar(0.575f, mid) }, false, SigilStrokeKind.Emblem, 0.76f));
+
+                for (int s = -1; s <= 1; s += 2)
+                {
+                    var curl = Bezier(
+                        Polar(0.39f, mid + s * 0.04f),
+                        Polar(0.485f, mid + s * 0.155f),
+                        Polar(0.565f, mid + s * 0.165f),
+                        Polar(0.595f, mid + s * 0.095f),
+                        10);
+                    strokes.Add(new SigilStroke(curl, false, SigilStrokeKind.Emblem, 0.58f));
+                    strokes.Add(new SigilStroke(Circle(Polar(0.612f, mid + s * 0.095f), 0.016f, 10), true, SigilStrokeKind.Rune, 0.74f));
+                }
+
+                strokes.Add(new SigilStroke(Leaf(Polar(0.57f, mid), Polar(0.692f, mid), 0.36f, 10), true, SigilStrokeKind.Emblem, 0.92f));
+                strokes.Add(new SigilStroke(Regular(Polar(0.772f, mid), 0.036f, 4, mid), true, SigilStrokeKind.Rune, 0.82f));
+            }
+
+            // 중심 화심: 원형 화반·6엽 물결 고리·6각 별심
+            strokes.Add(new SigilStroke(Circle(Vector2.zero, 0.185f, 48), true, SigilStrokeKind.Emblem, 0.88f));
+            strokes.Add(new SigilStroke(RuffledCircle(Vector2.zero, 0.155f, 0.014f, 6, 48, HalfPi), true, SigilStrokeKind.Emblem, 0.66f));
+            var starPoints = new List<Vector2>(petals * 2);
+            for (int k = 0; k < petals; k++)
+            {
+                var a = HalfPi + k * step;
+                var m = a + step * 0.5f;
+                starPoints.Add(Polar(0.115f, a));
+                starPoints.Add(Polar(0.058f, m));
+            }
+            strokes.Add(new SigilStroke(starPoints, true, SigilStrokeKind.Emblem, 0.82f));
+            return strokes;
         }
 
         private static Vector2 Polar(float radius, float angle)
@@ -237,9 +339,8 @@ namespace VVRace
             return points;
         }
 
-        private static List<Vector2> Leaf(Vector2 stemBase, Vector2 tip, float bulge)
+        private static List<Vector2> Leaf(Vector2 stemBase, Vector2 tip, float bulge, int segments = 14)
         {
-            const int segments = 14;
             var direction = tip - stemBase;
             var normal = new Vector2(-direction.y, direction.x) * bulge;
             var near = Vector2.LerpUnclamped(stemBase, tip, 0.25f);
@@ -249,6 +350,41 @@ namespace VVRace
             for (int i = 1; i < back.Count - 1; i++)
             {
                 points.Add(back[i]);
+            }
+            return points;
+        }
+
+        private static List<Vector2> AsphodelPetal(Vector2 stemBase, Vector2 tip, float bulge, int segments = 16)
+        {
+            var direction = tip - stemBase;
+            var normal = new Vector2(-direction.y, direction.x) * bulge;
+            var near = Vector2.LerpUnclamped(stemBase, tip, 0.26f);
+            var far = Vector2.LerpUnclamped(stemBase, tip, 0.62f);
+            var points = Bezier(stemBase, near + normal, far + normal * 0.88f, tip, segments);
+            var back = Bezier(tip, far - normal * 0.88f, near - normal, stemBase, segments);
+            for (int i = 1; i < back.Count - 1; i++)
+            {
+                points.Add(back[i]);
+            }
+            return points;
+        }
+
+        private static List<Vector2> BandLeaf(float centerRadius, float halfThickness, float a0, float a1, int segments)
+        {
+            var points = new List<Vector2>(segments * 2);
+            for (int i = 0; i <= segments; i++)
+            {
+                var t = (float)i / segments;
+                var angle = a0 + (a1 - a0) * t;
+                var radius = centerRadius + halfThickness * Mathf.Sin(t * Mathf.PI);
+                points.Add(Polar(radius, angle));
+            }
+            for (int i = 1; i < segments; i++)
+            {
+                var t = 1f - (float)i / segments;
+                var angle = a0 + (a1 - a0) * t;
+                var radius = centerRadius - halfThickness * Mathf.Sin(t * Mathf.PI);
+                points.Add(Polar(radius, angle));
             }
             return points;
         }

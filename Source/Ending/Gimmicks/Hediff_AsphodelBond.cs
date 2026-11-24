@@ -8,7 +8,7 @@ namespace VVRace
     {
         private static readonly Vector3 ShimmerOffset = new Vector3(0f, 0f, 0.1f);
 
-        private int _totalDurationTicks = 1500;
+        private int _totalDurationTicks = 750;
         private bool _suppressedRemoval;
 
         [Unsaved]
@@ -94,7 +94,7 @@ namespace VVRace
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref _totalDurationTicks, "totalDurationTicks", 1500);
+            Scribe_Values.Look(ref _totalDurationTicks, "totalDurationTicks", 750);
         }
 
         private void CleanupEffects()

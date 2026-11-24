@@ -26,7 +26,7 @@
           </points>
         </widthCurve>
         <lineTextureMode>Stretch</lineTextureMode>
-        <maxTrailPoint>24</maxTrailPoint>
+        <maxTrailPoint>28</maxTrailPoint>
         <refreshIntervalTicks>0</refreshIntervalTicks>
         <fadeOutTicks>12</fadeOutTicks>
       </li>

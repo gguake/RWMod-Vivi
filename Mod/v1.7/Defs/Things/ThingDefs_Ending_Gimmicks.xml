@@ -73,7 +73,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower born from the spreading mana of the fairy vivis wrapped around Asphodel. When a normal vivi resonates with it, she connects to the flower with an energy line and becomes bound to Asphodel.\n\nAsphodel can use psychic power channeled through fairy blooms to forcibly bind vivis to herself. Conversely, binding Asphodel to the everflower can free the fairy vivis bound to her.\n\nIt can also be destroyed by attacks, but doing so makes Asphodel's attacks fiercer.</description>
+    <description>A flower born from the spreading mana of the fairy vivis wrapped around the empress of the nightshade. When a normal vivi resonates with it, she connects to the flower with an energy line and becomes bound to the empress.\n\nThe empress can use psychic power channeled through fairy blooms to forcibly bind vivis to herself. Conversely, binding the empress to the everflower can free the fairy vivis bound to her.\n\nIt can also be destroyed by attacks, but doing so makes the empress's attacks fiercer.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

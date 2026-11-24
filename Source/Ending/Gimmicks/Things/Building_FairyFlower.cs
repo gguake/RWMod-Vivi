@@ -24,6 +24,7 @@ namespace VVRace
         private bool _relayed;
         private int _relayedTick = -1;
         private bool _chainCollapsing;
+        private FairySigilWard _ward;
 
         [Unsaved]
         internal bool SuppressAutoChain;
@@ -35,6 +36,8 @@ namespace VVRace
         public bool Relayed => _relayed;
 
         public bool ChainCollapsing => _chainCollapsing;
+
+        public FairySigilWard Ward => _ward != null && !_ward.Destroyed ? _ward : null;
 
         public int TicksUntilExpire => _expireTick < 0 ? LifespanTicks : Mathf.Max(0, _expireTick - Find.TickManager.TicksGame);
 
@@ -126,7 +129,8 @@ namespace VVRace
 
             if (!Spawned || pawn == null) { return; }
 
-            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerResonated, pawn.Position, Map);
+            var map = Map;
+            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerResonated, pawn.Position, map);
 
             var sigil = Sigil;
             if (sigil != null)
@@ -137,7 +141,19 @@ namespace VVRace
                 {
                     sigil.Sample(sigil.TotalLength * (i + Rand.Value) / ResonanceLightCount, out var local, out _);
                     var from = FairySigil.ToWorld(center, local);
-                    ApocryphaGimmicks.ThrowFairyLight(Map, from, target + Gen.RandomHorizontalVector(0.3f), Rand.Range(5f, 8f), Rand.Range(0.6f, 1f), ResonanceLightColor);
+                    ApocryphaGimmicks.ThrowFairyLight(map, from, target + Gen.RandomHorizontalVector(0.3f), Rand.Range(5f, 8f), Rand.Range(0.6f, 1f), ResonanceLightColor);
+                }
+            }
+
+            if (_ward == null)
+            {
+                var bossComp = ApocryphaGimmicks.FindBoss(map)?.TryGetComp<CompApocrypha>();
+                if (bossComp?.IsAsphodelActive == true)
+                {
+                    var ward = (FairySigilWard)ThingMaker.MakeThing(VVThingDefOf.VV_FairySigilWard);
+                    ward.InitStartDelay(0);
+                    GenSpawn.Spawn(ward, Position, map);
+                    _ward = ward;
                 }
             }
         }
@@ -147,9 +163,14 @@ namespace VVRace
             _chainCollapsing = true;
         }
 
-        internal void BeginChainVanish()
+        internal void BeginChainVanish(bool dispelWard = false)
         {
             _chainCollapsing = true;
+            if (dispelWard)
+            {
+                DispelWard();
+            }
+
             if (Destroyed) { return; }
 
             if (Spawned)
@@ -158,6 +179,16 @@ namespace VVRace
             }
 
             Destroy(DestroyMode.Vanish);
+        }
+
+        internal void DispelWard()
+        {
+            if (_ward != null && !_ward.Destroyed)
+            {
+                _ward.Destroy(DestroyMode.Vanish);
+            }
+
+            _ward = null;
         }
 
         public void Burst()
@@ -202,6 +233,15 @@ namespace VVRace
 
             if (bound.Count > 0)
             {
+                if (bossComp?.IsAsphodelActive == true)
+                {
+                    for (int i = 0; i < bound.Count; i++)
+                    {
+                        var origin = bound[i].Spawned ? bound[i].DrawPos : (bound[i].SpawnedParentOrMe?.DrawPos ?? Position.ToVector3Shifted());
+                        bossComp.Bond.SpawnViviReturnBurst(origin);
+                    }
+                }
+
                 ApocryphaUtility.BindToAsphodel(bound, map, Position);
 
                 Find.LetterStack.ReceiveLetter(
@@ -213,8 +253,12 @@ namespace VVRace
 
             if (bossComp?.IsAsphodelActive == true)
             {
-                var ward = (FairySigilWard)ThingMaker.MakeThing(VVThingDefOf.VV_FairySigilWard);
-                GenSpawn.Spawn(ward, Position, map);
+                if (_ward == null || _ward.Destroyed)
+                {
+                    var ward = (FairySigilWard)ThingMaker.MakeThing(VVThingDefOf.VV_FairySigilWard);
+                    GenSpawn.Spawn(ward, Position, map);
+                    _ward = ward;
+                }
                 bossComp.FairyChains.Notify_FlowerBurst(this);
             }
         }
@@ -366,6 +410,7 @@ namespace VVRace
             Scribe_Values.Look(ref _relayed, "relayed", false);
             Scribe_Values.Look(ref _relayedTick, "relayedTick", -1);
             Scribe_Values.Look(ref _chainCollapsing, "chainCollapsing", false);
+            Scribe_References.Look(ref _ward, "ward");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit && HitPoints <= 0)
             {

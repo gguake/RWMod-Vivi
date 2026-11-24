@@ -40,8 +40,8 @@
   <GameConditionDef>
     <defName>VV_ApocryphaPresence</defName>
     <conditionClass>GameCondition</conditionClass>
-    <label>Asphodel's presence</label>
-    <description>Asphodel's psychic wave suppresses the area around the everflower.</description>
+    <label>empress's presence</label>
+    <description>The empress's psychic wave suppresses the area around the everflower.</description>
     <natural>false</natural>
     <displayOnUI>false</displayOnUI>
     <preventIncidents>true</preventIncidents>

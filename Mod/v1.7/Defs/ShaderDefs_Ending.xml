@@ -442,4 +442,24 @@
     <defName>VV_AsphodelBondChain</defName>
     <shaderPath>Map/VV_AsphodelBondChain</shaderPath>
   </ShaderTypeDef>
+
+  <!-- 아스포델 회전 황금 육각 결계 보호막 셰이더 -->
+  <ShaderDef>
+    <defName>VV_AsphodelBarrier</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_AsphodelBarrier.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3090</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 아스포델 회전 황금 육각 결계 보호막 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_AsphodelBarrier</defName>
+    <shaderPath>Map/VV_AsphodelBarrier</shaderPath>
+  </ShaderTypeDef>
 </Defs>

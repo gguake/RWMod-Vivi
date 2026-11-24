@@ -263,7 +263,7 @@ namespace VVRace
                 direction = EndingVfxUtility.SafeNormalizeHorizontal(target - start, direction);
             }
 
-            BeginAim(start, direction, aimTicks, BossComp?.Props.needleRange ?? 19f);
+            BeginAim(start, direction, aimTicks, BossComp?.Props.needleRange ?? 24f);
         }
 
         public void StartHomingStrike(Pawn target, Vector3 start, int aimTicks)
@@ -288,7 +288,7 @@ namespace VVRace
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
             direction = EndingVfxUtility.SafeNormalizeHorizontal(direction, Vector3.forward);
-            BeginAim(BodyCenter + direction * LaunchOffset, direction, aimTicks, BossComp?.Props.needleRange ?? 19f);
+            BeginAim(BodyCenter + direction * LaunchOffset, direction, aimTicks, BossComp?.Props.needleRange ?? 24f);
         }
 
         private void BeginAim(Vector3 start, Vector3 direction, int aimTicks, float range, Pawn lockTarget = null)
@@ -746,7 +746,7 @@ namespace VVRace
 
         private void UpdateLockDirection()
         {
-            var range = BossComp?.Props.needleRange ?? 19f;
+            var range = BossComp?.Props.needleRange ?? 24f;
             var target = _lockTarget;
             if (target != null && target.Spawned && target.Map == Map)
             {

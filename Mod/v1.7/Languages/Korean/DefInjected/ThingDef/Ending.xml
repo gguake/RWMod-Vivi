@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<VV_Apocrypha.label>아스포델</VV_Apocrypha.label>
-<VV_Apocrypha.description>옛 비비 제국의 마지막 여제, 아스포델입니다.</VV_Apocrypha.description>
+<VV_Apocrypha.label>밤그늘의 여제</VV_Apocrypha.label>
+<VV_Apocrypha.description>옛 비비 제국의 마지막 여제입니다.</VV_Apocrypha.description>
 <VV_Apocrypha.tools.left_claw.label>왼쪽 발톱</VV_Apocrypha.tools.left_claw.label>
 <VV_Apocrypha.tools.right_claw.label>오른쪽 발톱</VV_Apocrypha.tools.right_claw.label>
 <VV_Apocrypha.tools.jaw.label>턱</VV_Apocrypha.tools.jaw.label>
 
-<VV_DyingApocrypha.label>아스포델</VV_DyingApocrypha.label>
+<VV_DyingApocrypha.label>밤그늘의 여제</VV_DyingApocrypha.label>
 <VV_ApocryphaRebirth.label>빛 덩어리</VV_ApocryphaRebirth.label>
 <VV_ApocryphaManifestation.label>???</VV_ApocryphaManifestation.label>
 <VV_HornetManifestation.label>???</VV_HornetManifestation.label>
@@ -19,9 +19,9 @@
 
 <VV_FairySigilWard.label>요정 문양</VV_FairySigilWard.label>
 <VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
-<VV_FairyFlower.description>아스포델을 감싼 요정 비비들의 마나가 번져 피어난 꽃입니다. 일반 비비가 공명하면 꽃과 에너지 선으로 연결되어 아스포델과 결속됩니다.
-\n아스포델은 요정꽃을 매개로 한 초능력으로 비비들을 강제로 자신에게 결속시킬 수 있습니다. 하지만 반대로 아스포델을 영원꽃과 결속시킨다면 아스포델에게 결속되어있는 요정 비비들을 해방시킬수도 있습니다.
-\n공격으로 파괴할 수도 있지만 아스포델의 공격이 더 거세집니다.</VV_FairyFlower.description>
+<VV_FairyFlower.description>밤그늘의 여제를 감싼 요정 비비들의 마나가 번져 피어난 꽃입니다. 일반 비비가 공명하면 꽃과 에너지 선으로 연결되어 여제와 결속됩니다.
+\n여제는 요정꽃을 매개로 한 초능력으로 비비들을 강제로 자신에게 결속시킬 수 있습니다. 하지만 반대로 여제를 영원꽃과 결속시킨다면 여제에게 결속되어있는 요정 비비들을 해방시킬수도 있습니다.
+\n공격으로 파괴할 수도 있지만 여제의 공격이 더 거세집니다.</VV_FairyFlower.description>
 
 <VV_EverflowerAltar.label>영원꽃 제단</VV_EverflowerAltar.label>
 <VV_EverflowerAltar.description>비비 초월공학 코어의 마나 회로를 바탕으로 복원한 제단입니다. 대지 깊은 곳의 마나를 모아 영원꽃이 마지막 개화에 이를 수 있도록 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 공간이 격리되어 제단이 피해를 받지 않고 해체할 수도 없으며, 영원꽃도 옮길 수 없습니다.</VV_EverflowerAltar.description>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace VVRace
 {
@@ -233,6 +234,12 @@ namespace VVRace
         }
         #endregion
 
+        public int GetBondDurationTicks(FairyFlowerChain chain)
+        {
+            var relayStep = Mathf.Max(1, chain?.flowers.Count ?? 1);
+            return Props.asphodelBondDurationTicks * relayStep;
+        }
+
         #region 이벤트 처리
         public void Notify_FlowerInteracted(Building_FairyFlower flower, Pawn pawn)
         {
@@ -246,7 +253,7 @@ namespace VVRace
 
             RemoveBondHediffSilently(pawn);
             var bond = pawn.health.AddHediff(VVHediffDefOf.VV_AsphodelBond) as Hediff_AsphodelBond;
-            bond?.Configure(Props.asphodelBondDurationTicks);
+            bond?.Configure(GetBondDurationTicks(chain));
 
             chain.state = FairyChainState.TetheredToPawn;
             chain.tetheredPawn = pawn;
@@ -457,6 +464,10 @@ namespace VVRace
                 }
 
                 ApocryphaUtility.BindToAsphodel(new List<Pawn> { pawn }, map, triggerCell);
+                if (!nearAltar)
+                {
+                    _comp.Bond.SpawnViviReturnBurst(triggerPos);
+                }
             }
 
             if (nearAltar)
@@ -649,7 +660,9 @@ namespace VVRace
             chain.state = FairyChainState.CollapsingDispel;
             chain.collapseSegmentIndex = 0;
             BeginDispelSegment(chain, map, GenTicks.TicksGame);
-            ThrowOrbWaypointBurst(map, _comp.BodyCenter.Yto0(), DispelOrbColor, 1.85f, grandRing: true);
+            var origin = _comp.BodyCenter.Yto0();
+            ThrowOrbWaypointBurst(map, origin, DispelOrbColor, 1.85f, grandRing: true);
+            VVSoundDefOf.VV_FairyChainDispel.PlayOneShot(new TargetInfo(origin.ToIntVec3().ClampInsideMap(map), map));
         }
 
         private void BeginDispelSegment(FairyFlowerChain chain, Map map, int now)
@@ -741,7 +754,7 @@ namespace VVRace
             {
                 if (chain.flowers[i] != null && !chain.flowers[i].Destroyed)
                 {
-                    chain.flowers[i].BeginChainVanish();
+                    chain.flowers[i].BeginChainVanish(dispelWard: true);
                 }
             }
 

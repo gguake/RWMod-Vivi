@@ -9,9 +9,6 @@ namespace VVRace
     public class ApocryphaResurrectionEmbrace : IExposable
     {
         private const int FlashTicks = 60;
-        private const float ReturnLightSpeed = 6f;
-
-        private static readonly Color ReturnLightColor = new Color(1f, 0.95f, 0.8f, 1f);
 
         private readonly CompApocrypha _comp;
 
@@ -20,6 +17,7 @@ namespace VVRace
         private int _flashTick = -1;
         private IntVec3 _center = IntVec3.Invalid;
         private bool _pendingAfterShieldRestore;
+        private Effecter _castEffecter;
 
         private Pawn Pawn => _comp.Pawn;
         private CompProperties_Apocrypha Props => _comp.Props;
@@ -76,7 +74,7 @@ namespace VVRace
             }
 
             if (now < _readyTick || !Pawn.IsHashIntervalTick(Mathf.Max(1, Props.swarmAttackCooldownTicks.min))) { return; }
-            if (!FindCorpses(Pawn.Position).Any() && !FindLivingVivis(Pawn.Position).Any()) { return; }
+            if (!HasTriggerTarget(Pawn.Position)) { return; }
 
             StartCast(now);
         }
@@ -86,11 +84,13 @@ namespace VVRace
             _castStartTick = now;
             _flashTick = -1;
             _center = Pawn.Position;
+            EndingVfxUtility.CleanupEffecter(ref _castEffecter);
 
             _comp.NeedleAttack.CancelAims();
             _comp.BlastBreach.Cancel();
             _comp.InterruptCurrentJob();
-            _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_FairyFlowerResonated, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
+            _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaEmbraceStart, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
+            MaintainCastEffecter();
 
             _comp.ThrowQuote(LocalizeString_Etc.VV_Speech_AsphodelEmbrace.Translate());
         }
@@ -111,6 +111,7 @@ namespace VVRace
         {
             _castStartTick = -1;
             _pendingAfterShieldRestore = false;
+            EndingVfxUtility.CleanupEffecter(ref _castEffecter);
         }
 
         public bool TryGetFairyGoal(ViviFairy fairy, out Vector3 goal)
@@ -130,7 +131,7 @@ namespace VVRace
             }
             if (index < 0) { return false; }
 
-            FairySigil.Everflower.GetLanes(LaneCount).GetHead(index % LaneCount, Progress, out var local, out _, out _);
+            FairySigil.Asphodel.GetLanes(LaneCount).GetHead(index % LaneCount, Progress, out var local, out _, out _);
             goal = FairySigil.ToWorld(_center.ToVector3Shifted().Yto0(), local, Props.embraceRadius);
             return true;
         }
@@ -146,7 +147,7 @@ namespace VVRace
                 var progress = Progress;
                 var vivid = Mathf.InverseLerp(0.85f, 1f, progress);
                 var pulse = vivid * vivid * (0.5f + 0.5f * Mathf.Sin(now * (0.12f + 0.25f * vivid)));
-                FairySigilRenderer.Draw(center, FairySigil.Everflower, LaneCount, progress, Mathf.Lerp(0.95f, 1.6f, vivid) + 0.3f * pulse, 0.35f * pulse,
+                FairySigilRenderer.Draw(center, FairySigil.Asphodel, LaneCount, progress, Mathf.Lerp(0.95f, 1.6f, vivid) + 0.3f * pulse, 0.35f * pulse,
                     radius: Props.embraceRadius, faintAlpha: Mathf.Lerp(0.16f, 0.32f, vivid));
                 return;
             }
@@ -154,7 +155,7 @@ namespace VVRace
             if (_flashTick >= 0 && now - _flashTick < FlashTicks)
             {
                 var t = (now - _flashTick) / (float)FlashTicks;
-                FairySigilRenderer.Draw(center, FairySigil.Everflower, LaneCount, 1f, 2.2f * (1f - t) * (1f - t), 1f - 0.4f * t, radius: Props.embraceRadius);
+                FairySigilRenderer.Draw(center, FairySigil.Asphodel, LaneCount, 1f, 2.2f * (1f - t) * (1f - t), 1f - 0.4f * t, radius: Props.embraceRadius);
             }
         }
 
@@ -177,7 +178,18 @@ namespace VVRace
             if (now - _castStartTick >= Props.embraceCastTicks)
             {
                 Complete(now);
+                return;
             }
+
+            MaintainCastEffecter();
+        }
+
+        private void MaintainCastEffecter()
+        {
+            if (!_center.IsValid || Pawn.Map == null) { return; }
+
+            var source = new TargetInfo(_center, Pawn.Map);
+            EndingVfxUtility.MaintainEffecter(ref _castEffecter, VVEffecterDefOf.VV_Effecter_ApocryphaEmbraceCast, source, source);
         }
 
         private void Complete(int now)
@@ -187,38 +199,40 @@ namespace VVRace
             _castStartTick = -1;
             _flashTick = now;
             _readyTick = now + Props.embraceCooldownTicks;
+            EndingVfxUtility.CleanupEffecter(ref _castEffecter);
 
-            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyFlowerBurst, center, map, scale: Props.embraceRadius / FairySigil.WorldRadius);
+            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_ApocryphaEmbrace, center, map, scale: Props.embraceRadius / FairySigil.WorldRadius);
             ApocryphaUtility.ShakeCamera(map, 1f);
 
             var revived = new List<Pawn>();
+            var origins = new List<Vector3>();
             foreach (var corpse in FindCorpses(center).ToList())
             {
                 var pawn = corpse.InnerPawn;
+                var origin = corpse.DrawPos;
                 Find.Selector.Deselect(corpse);
                 if (!ResurrectionUtility.TryResurrect(pawn)) { continue; }
 
                 ApocryphaUtility.HealAllInjuriesAndRestoreParts(pawn);
                 revived.Add(pawn);
+                origins.Add(pawn.Spawned ? pawn.DrawPos : origin);
             }
 
-            foreach (var pawn in FindLivingVivis(center).ToList())
+            foreach (var pawn in FindLivingVivis(center, downedOnly: false).ToList())
             {
                 if (revived.Contains(pawn)) { continue; }
 
+                var origin = pawn.Spawned ? pawn.DrawPos : (pawn.SpawnedParentOrMe?.DrawPos ?? center.ToVector3Shifted());
                 ApocryphaUtility.HealAllInjuriesAndRestoreParts(pawn);
                 revived.Add(pawn);
+                origins.Add(origin);
             }
 
             if (revived.Count == 0) { return; }
 
-            var body = _comp.BodyCenter.Yto0();
-            foreach (var pawn in revived)
+            for (int i = 0; i < origins.Count; i++)
             {
-                if (pawn.Spawned)
-                {
-                    ApocryphaGimmicks.ThrowFairyLight(map, pawn.DrawPos, body + Gen.RandomHorizontalVector(0.6f), ReturnLightSpeed, 0.8f, ReturnLightColor);
-                }
+                _comp.Bond.SpawnViviReturnBurst(origins[i]);
             }
 
             ApocryphaUtility.BindToAsphodel(revived, map, center);
@@ -229,6 +243,11 @@ namespace VVRace
                 LocalizeString_Letter.VV_Letter_ApocryphaEmbrace.Translate(revived.Select(v => v.LabelShortCap).ToLineList("  - ").Named("PAWNS")),
                 LetterDefOf.NegativeEvent,
                 new LookTargets(Pawn));
+        }
+
+        private bool HasTriggerTarget(IntVec3 center)
+        {
+            return FindCorpses(center).Any() || FindLivingVivis(center, downedOnly: true).Any();
         }
 
         private IEnumerable<Corpse> FindCorpses(IntVec3 center)
@@ -244,7 +263,7 @@ namespace VVRace
             }
         }
 
-        private IEnumerable<Pawn> FindLivingVivis(IntVec3 center)
+        private IEnumerable<Pawn> FindLivingVivis(IntVec3 center, bool downedOnly)
         {
             var map = Pawn.Map;
             var pawns = map.mapPawns.AllPawnsSpawned;
@@ -253,21 +272,22 @@ namespace VVRace
                 var p = pawns[i];
                 if (!p.Spawned || p.Map != map || !p.Position.InHorDistOf(center, Props.embraceRadius)) { continue; }
 
-                if (IsEligibleLivingVivi(p))
+                if (IsEligibleLivingVivi(p, downedOnly))
                 {
                     yield return p;
                 }
 
-                if (p.carryTracker?.CarriedThing is Pawn carried && IsEligibleLivingVivi(carried))
+                if (p.carryTracker?.CarriedThing is Pawn carried && IsEligibleLivingVivi(carried, downedOnly))
                 {
                     yield return carried;
                 }
             }
         }
 
-        private bool IsEligibleLivingVivi(Pawn pawn)
+        private bool IsEligibleLivingVivi(Pawn pawn, bool downedOnly)
         {
             if (pawn == null || pawn.Dead || pawn == Pawn || pawn.TryGetComp<CompApocrypha>() != null) { return false; }
+            if (downedOnly && !pawn.Downed) { return false; }
             if (pawn.Faction != Faction.OfPlayer || !pawn.IsVivi() || pawn.IsRoyalVivi()) { return false; }
 
             return pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) != true;

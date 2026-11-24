@@ -99,6 +99,7 @@
     <Compile Include="Ending\Boss\Comps\ApocryphaTargeting.cs" />
     <Compile Include="Ending\Boss\Comps\CompApocrypha.cs" />
     <Compile Include="Ending\Boss\Comps\CompApocrypha.Debug.cs" />
+    <Compile Include="Ending\Boss\Comps\CompApocryphaBarrier.cs" />
     <Compile Include="Ending\Boss\Comps\CompProperties_Apocrypha.cs" />
     <Compile Include="Ending\Boss\Hediff_ApocryphaFairyBond.cs" />
     <Compile Include="Ending\Boss\Hediff_ApocryphaResolve.cs" />

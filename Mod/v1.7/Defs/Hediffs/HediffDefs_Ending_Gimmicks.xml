@@ -4,8 +4,8 @@
   <!-- 아스포델 결속 -->
   <HediffDef>
     <defName>VV_AsphodelBond</defName>
-    <label>Asphodel's bond</label>
-    <description>Fairy transformation is underway through Asphodel's power. Once complete, the bearer is temporarily turned into a fairy bound to Asphodel, and a new fairy bloom sprouts in her place.\n\nLinking the everflower altar to Asphodel frees all fairy-transformed vivis bound to her and also releases fairy vivis bound to Asphodel.</description>
+    <label>empress's bond</label>
+    <description>Fairy transformation is underway through the empress's power. Once complete, the bearer is temporarily turned into a fairy bound to the empress of the nightshade, and a new fairy bloom sprouts in her place.\n\nLinking the everflower altar to the empress frees all fairy-transformed vivis bound to her and also releases fairy vivis bound to her.</description>
     <hediffClass>VVRace.Hediff_AsphodelBond</hediffClass>
     <defaultLabelColor>(0.95, 0.98, 1)</defaultLabelColor>
     <isBad>false</isBad>
@@ -30,7 +30,7 @@
     </stages>
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>1500~1500</disappearsAfterTicks>
+        <disappearsAfterTicks>750~750</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>

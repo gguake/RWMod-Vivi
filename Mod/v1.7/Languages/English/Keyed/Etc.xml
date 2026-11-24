@@ -129,7 +129,7 @@
 <VV_Quest_EndingStepAltar>Build the everflower altar</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>Enshrine an everflower of attunement level {0} at the center of the altar</VV_Quest_EndingStepEnshrine>
 <VV_Quest_EndingStepParticipants>Vivis to attend the full bloom ritual (excluding resonator): {0} / {1}</VV_Quest_EndingStepParticipants>
-<VV_Quest_EndingTruthLog>Left alone beneath the burning flower's shade, the old empress Asphodel opened her circuits beyond their limit so as not to lose a single one of the children she had borne, and took the countless vivis beneath the shade into herself as little lights. But one soul could not bear that weight. Her attunement and her self collapsed, and the shade was left empty.\n\nThe little lights remembered her last kindness. They did not leave the twisted empress, staying by her side and wrapping around her through the long ages. Even after her monstrous shell fell, they gathered once more to shield her—until at last the bond came undone, the empress fell asleep, and the freed lights returned to rest within the everflower on the altar, waiting for the spring when they will wake again.</VV_Quest_EndingTruthLog>
+<VV_Quest_EndingTruthLog>Left alone beneath the burning flower's shade, the old empress opened her circuits beyond their limit so as not to lose a single one of the children she had borne, and took the countless vivis beneath the shade into herself as little lights. But one soul could not bear that weight. Her attunement and her self collapsed, and the shade was left empty.\n\nThe little lights remembered her last kindness. They did not leave the twisted empress, staying by her side and wrapping around her through the long ages. Even after her monstrous shell fell, they gathered once more to shield her—until at last the bond came undone, the empress fell asleep, and the freed lights returned to rest within the everflower on the altar, waiting for the spring when they will wake again.</VV_Quest_EndingTruthLog>
 <VV_FairyTale1_Label>flowershade tales I</VV_FairyTale1_Label>
 <VV_FairyTale1_Title>Flowershade Tales I: The Spring That Never Wilted</VV_FairyTale1_Title>
 <VV_FairyTale1_Desc>Long, long ago, in the middle of a frozen field, a great golden flower bloomed all alone. Beneath the warm shade of its petals, countless nests gathered and made a little world of their own.\n\nThey were born with fragile wings, yet beneath the flower's shade no one ever learned how to wither. Forgetting whether cold winds blew outside, they all lived leaning on a spring that seemed as if it would last forever.</VV_FairyTale1_Desc>
@@ -154,7 +154,7 @@
 <VV_FailReason_FairyFlowerRoyalVivi>royal vivis cannot resonate</VV_FailReason_FairyFlowerRoyalVivi>
 <VV_FailReason_FairyFlowerNotAdult>babies cannot resonate</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>cannot move</VV_FailReason_CannotMove>
-<VV_FailReason_FairyFlowerAlreadyBound>already bound to Asphodel</VV_FailReason_FairyFlowerAlreadyBound>
+<VV_FailReason_FairyFlowerAlreadyBound>already bound to the empress</VV_FailReason_FairyFlowerAlreadyBound>
 <VV_Hediff_DoomBlightLevel>Curse level: {0} / {1}</VV_Hediff_DoomBlightLevel>
 <VV_ManaBarrierTargetMana>Environment mana in radius: {0}/{1}</VV_ManaBarrierTargetMana>
 <VV_FailReason_EndingInProgress>No other rituals can be performed on this everflower while Dawn in full bloom is underway.</VV_FailReason_EndingInProgress>

@@ -6,6 +6,7 @@ namespace VVRace
     public class CompProperties_Apocrypha : CompProperties
     {
         public float engageRange = 20f;
+        public float asphodelEngageRange = 28f;
         public float queenEngageRadius = 13f;
         public int combatMemoryTicks = 600;
 
@@ -29,7 +30,7 @@ namespace VVRace
         public float fairyFlowerExpireBondRecover = 0.10f;
         public float fairyFlowerDispelBondDrain = 0.03f;
         public float fairyChainAltarRadius = 6.5f;
-        public int asphodelBondDurationTicks = 1500;
+        public int asphodelBondDurationTicks = 750;
         public FloatRange fairyFlowerDistance = new FloatRange(6f, 18f);
 
         public int resolveMaxStacks = 5;
@@ -72,8 +73,8 @@ namespace VVRace
         public float needleFanHalfAngle2 = 50f;
         public float needleFanHalfAngle3 = 65f;
         public int needleAimTicks = 225;
-        public float needleTargetRange = 14f;
-        public float needleRange = 19f;
+        public float needleTargetRange = 28f;
+        public float needleRange = 24f;
         public float needleHalfWidth = 1.5f;
         public float needleDamage = 50f;
         public float needleArmorPenetration = 1.0f;

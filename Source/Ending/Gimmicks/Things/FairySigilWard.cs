@@ -14,6 +14,13 @@ namespace VVRace
         private int _startTick = -1;
         private int _expireTick = -1;
         private List<ViviFairy> _fairies = new List<ViviFairy>();
+        [Unsaved]
+        private int _startDelayTicks = Building_FairyFlower.BurstTicks;
+
+        internal void InitStartDelay(int ticks)
+        {
+            _startDelayTicks = Mathf.Max(0, ticks);
+        }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -25,7 +32,7 @@ namespace VVRace
             if (props == null) { return; }
 
             var now = Find.TickManager.TicksGame;
-            _startTick = now + Building_FairyFlower.BurstTicks;
+            _startTick = now + _startDelayTicks;
             _expireTick = now + Mathf.Max(FadeTicks + 1, props.sigilWardDurationTicks);
 
             for (int i = 0; i < props.sigilWardFairyCount; i++)

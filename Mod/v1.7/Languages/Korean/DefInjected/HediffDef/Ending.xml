@@ -2,10 +2,10 @@
 <LanguageData>
 
 <VV_ApocryphaFairyBond.label>요정 비비 결속</VV_ApocryphaFairyBond.label>
-<VV_ApocryphaFairyBond.description>수많은 요정 비비가 아스포델을 겹겹이 감싸 모든 공격을 막아내고 있습니다.</VV_ApocryphaFairyBond.description>
+<VV_ApocryphaFairyBond.description>수많은 요정 비비가 밤그늘의 여제를 겹겹이 감싸 모든 공격을 막아내고 있습니다.</VV_ApocryphaFairyBond.description>
 
 <VV_ApocryphaResolve.label>결의</VV_ApocryphaResolve.label>
-<VV_ApocryphaResolve.description>모든 비비들의 구원을 향한 아스포델의 결의가 굳어졌습니다. 중첩될수록 받는 피해가 줄어들고 바늘의 피해량이 늘어나며 조준 속도가 빨라집니다.</VV_ApocryphaResolve.description>
+<VV_ApocryphaResolve.description>모든 비비들의 구원을 향한 여제의 결의가 굳어졌습니다. 중첩될수록 받는 피해가 줄어들고 바늘의 피해량이 늘어나며 조준 속도가 빨라집니다.</VV_ApocryphaResolve.description>
 
 <VV_ApocryphaStuckNeedle.label>고대 엘텍스 바늘</VV_ApocryphaStuckNeedle.label>
 <VV_ApocryphaStuckNeedle.description>외피에 깊숙이 꽂힌 고대 엘텍스 바늘입니다. 꽂힌 바늘이 많을수록 취약해져 받는 피해가 크게 늘어납니다.</VV_ApocryphaStuckNeedle.description>
@@ -13,8 +13,8 @@
 <VV_DoomPhantasm.label>멸망꽃 환영</VV_DoomPhantasm.label>
 <VV_DoomPhantasm.description>멸망꽃에 서린 기억에서 불려 나온 환영입니다.</VV_DoomPhantasm.description>
 
-<VV_AsphodelBond.label>아스포델 결속</VV_AsphodelBond.label>
-<VV_AsphodelBond.description>아스포델의 힘으로 요정화가 진행중입니다. 완료되면 일시적으로 요정화되어 아스포델에게 결속되고 그 자리에 새 요정꽃이 피어납니다.\n\n영원꽃 제단과 아스포델을 연결시키면 아스포델에게 결속된 모든 요정화된 비비를 해방시키고 아스포델에게 결속된 요정 비비 또한 해방시킬 수 있습니다.</VV_AsphodelBond.description>
+<VV_AsphodelBond.label>여제의 결속</VV_AsphodelBond.label>
+<VV_AsphodelBond.description>여제의 힘으로 요정화가 진행중입니다. 완료되면 일시적으로 요정화되어 밤그늘의 여제에게 결속되고 그 자리에 새 요정꽃이 피어납니다.\n\n영원꽃 제단과 여제를 연결시키면 여제에게 결속된 모든 요정화된 비비를 해방시키고 여제에게 결속된 요정 비비 또한 해방시킬 수 있습니다.</VV_AsphodelBond.description>
 
 <VV_DoomBlight_Fear.label>멸망의 공포</VV_DoomBlight_Fear.label>
 <VV_DoomBlight_Fear.description>멸망꽃이 피워낸 환영 속에서 불타는 옛 둥지와 비명이 끊이지 않습니다. 고통에 쉽게 쓰러지고 정신이상에 빠지기 쉬워집니다.</VV_DoomBlight_Fear.description>

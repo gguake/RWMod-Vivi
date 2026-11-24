@@ -363,6 +363,9 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaStaggered;
         public static EffecterDef VV_Effecter_ApocryphaShieldBreak;
         public static EffecterDef VV_Effecter_ApocryphaShieldRestore;
+        public static EffecterDef VV_Effecter_ApocryphaEmbraceStart;
+        public static EffecterDef VV_Effecter_ApocryphaEmbraceCast;
+        public static EffecterDef VV_Effecter_ApocryphaEmbrace;
         public static EffecterDef VV_Effecter_ApocryphaNeedleAim;
         public static EffecterDef VV_Effecter_ApocryphaNeedleFire;
         public static EffecterDef VV_Effecter_ApocryphaNeedleHit;
@@ -537,6 +540,7 @@ namespace VVRace
         public static SoundDef VV_FairyDematerialize;
         public static SoundDef VV_FairyTeleport;
         public static SoundDef VV_ApocryphaSummon;
+        public static SoundDef VV_FairyChainDispel;
     }
 
     [DefOf]
