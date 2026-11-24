@@ -207,6 +207,7 @@
     <Compile Include="Ending\Ritual\RitualSpectatorFilter_Vivi.cs" />
     <Compile Include="Ending\Ritual\RitualOutcomeEffectWorker_WindOfRest.cs" />
     <Compile Include="Ending\Ritual\WindOfRest.cs" />
+    <Compile Include="Ending\Vivi\AssimilatedResonatorRenderer.cs" />
     <Compile Include="Ending\Vivi\EverflowerBlessingUtility.cs" />
     <Compile Include="Ending\Vivi\Hediff_EverflowerAssimilation.cs" />
     <Compile Include="Ending\Vivi\Hediff_ViviFairyFollow.cs" />

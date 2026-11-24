@@ -4,52 +4,12 @@ using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
     internal static class EndingCorePatch
     {
-        private static readonly FieldInfo PawnRendererResultsField = AccessTools.Field(typeof(PawnRenderer), "results");
-        private static readonly FieldInfo PreRenderResultsBodyAngleField = PawnRendererResultsField != null
-            ? AccessTools.Field(PawnRendererResultsField.FieldType, "bodyAngle")
-            : null;
-        private static readonly bool HasValidPreRenderBodyAngleField =
-            PawnRendererResultsField != null &&
-            PreRenderResultsBodyAngleField != null &&
-            PreRenderResultsBodyAngleField.FieldType == typeof(float);
-        private static readonly Action<PawnRenderer> ResetPreRenderBodyAngle = BuildResetPreRenderBodyAngle();
-
-        private static Action<PawnRenderer> BuildResetPreRenderBodyAngle()
-        {
-            if (!HasValidPreRenderBodyAngleField) { return null; }
-            if (!PawnRendererResultsField.FieldType.IsValueType) { return null; }
-
-            try
-            {
-                var dm = new DynamicMethod(
-                    "VV_ResetPreRenderBodyAngle",
-                    typeof(void),
-                    new[] { typeof(PawnRenderer) },
-                    typeof(PawnRenderer),
-                    skipVisibility: true);
-                var il = dm.GetILGenerator();
-                il.Emit(OpCodes.Ldarg_0);
-                il.Emit(OpCodes.Ldflda, PawnRendererResultsField);
-                il.Emit(OpCodes.Ldc_R4, 0f);
-                il.Emit(OpCodes.Stfld, PreRenderResultsBodyAngleField);
-                il.Emit(OpCodes.Ret);
-                return (Action<PawnRenderer>)dm.CreateDelegate(typeof(Action<PawnRenderer>));
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         internal static void Patch(Harmony harmony)
         {
             ViviHarmonyPatcher.TryPatch(harmony, "FactionDialogMaker.FactionDialogFor (vivi federation comms options)",
@@ -76,27 +36,6 @@ namespace VVRace
                 AccessTools.Method(typeof(TilePicker), nameof(TilePicker.StartTargeting_NewTemp)),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(TilePicker_StartTargeting_Prefix)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "PawnRenderer.BodyAngle (assimilated resonator upright angle)",
-                AccessTools.Method(typeof(PawnRenderer), nameof(PawnRenderer.BodyAngle)),
-                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(PawnRenderer_BodyAngle_Postfix)) { priority = Priority.Last });
-
-            ViviHarmonyPatcher.TryPatch(harmony, "PawnRenderer.GetDrawParms (assimilated resonator upright matrix)",
-                AccessTools.Method(typeof(PawnRenderer), "GetDrawParms"),
-                prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(PawnRenderer_GetDrawParms_Prefix)) { priority = Priority.Last },
-                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(PawnRenderer_GetDrawParms_Postfix)) { priority = Priority.Last });
-
-            ViviHarmonyPatcher.TryPatch(harmony, "PawnRenderer.ParallelPreRenderPawnAt (assimilated resonator cached angle)",
-                AccessTools.Method(typeof(PawnRenderer), "ParallelPreRenderPawnAt"),
-                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(PawnRenderer_ParallelPreRenderPawnAt_Postfix)) { priority = Priority.Last });
-
-            ViviHarmonyPatcher.TryPatch(harmony, "PawnRenderNodeWorker.RotationFor (assimilated resonator node rotation)",
-                AccessTools.Method(typeof(PawnRenderNodeWorker), nameof(PawnRenderNodeWorker.RotationFor)),
-                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(PawnRenderNodeWorker_RotationFor_Postfix)) { priority = Priority.Last });
-
-            ViviHarmonyPatcher.TryPatch(harmony, "PawnRenderNodeWorker_Head.RotationFor (assimilated resonator head rotation)",
-                AccessTools.Method(typeof(PawnRenderNodeWorker_Head), nameof(PawnRenderNodeWorker_Head.RotationFor)),
-                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(PawnRenderNodeWorker_RotationFor_Postfix)) { priority = Priority.Last });
-
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn.Notify_Teleported (asphodel bond breaks on teleport)",
                 AccessTools.Method(typeof(Pawn), nameof(Pawn.Notify_Teleported)),
                 postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Pawn_Notify_Teleported_Postfix)));
@@ -111,67 +50,6 @@ namespace VVRace
             // 결속이 사라지면 체인 틱이 다음 틱에 실패 붕괴로 처리한다.
             ApocryphaFairyChains.RemoveBondHediffSilently(__instance);
             Messages.Message(LocalizeString_Message.VV_Message_AsphodelBondBrokenByTeleport.Translate(__instance.Named("PAWN")), __instance, MessageTypeDefOf.NegativeEvent);
-        }
-
-        private static float PawnRenderer_BodyAngle_Postfix(float __result, Pawn ___pawn)
-        {
-            return Hediff_EverflowerAssimilation.IsAssimilated(___pawn) ? 0f : __result;
-        }
-
-        private static void PawnRenderer_GetDrawParms_Prefix(Pawn ___pawn, ref float angle, ref Rot4 bodyFacing, PawnRenderFlags flags)
-        {
-            if (!flags.FlagSet(PawnRenderFlags.Portrait) && Hediff_EverflowerAssimilation.IsAssimilated(___pawn))
-            {
-                angle = 0f;
-                bodyFacing = Rot4.South;
-            }
-        }
-
-        private static PawnDrawParms PawnRenderer_GetDrawParms_Postfix(PawnDrawParms __result, Pawn ___pawn, Vector3 rootLoc, PawnRenderFlags flags)
-        {
-            if (!flags.FlagSet(PawnRenderFlags.Portrait) && Hediff_EverflowerAssimilation.IsAssimilated(___pawn))
-            {
-                __result.facing = Rot4.South;
-                __result.posture = PawnPosture.Standing;
-                __result.matrix = Matrix4x4.TRS(rootLoc + ___pawn.ageTracker.CurLifeStage.bodyDrawOffset, Quaternion.identity, Vector3.one);
-            }
-
-            return __result;
-        }
-
-        private static void PawnRenderer_ParallelPreRenderPawnAt_Postfix(PawnRenderer __instance, Pawn ___pawn)
-        {
-            if (!Hediff_EverflowerAssimilation.IsAssimilated(___pawn)) { return; }
-
-            if (ResetPreRenderBodyAngle != null)
-            {
-                ResetPreRenderBodyAngle(__instance);
-                return;
-            }
-
-            if (!HasValidPreRenderBodyAngleField) { return; }
-            var boxed = PawnRendererResultsField.GetValue(__instance);
-            if (boxed != null && (float)PreRenderResultsBodyAngleField.GetValue(boxed) != 0f)
-            {
-                PreRenderResultsBodyAngleField.SetValue(boxed, 0f);
-                PawnRendererResultsField.SetValue(__instance, boxed);
-            }
-        }
-
-        private static Quaternion PawnRenderNodeWorker_RotationFor_Postfix(Quaternion __result, PawnRenderNode node, PawnDrawParms parms)
-        {
-            if (parms.Portrait || !Hediff_EverflowerAssimilation.IsAssimilated(parms.pawn)) { return __result; }
-
-            var tag = node?.Props?.tagDef;
-            if (node == null || (node.parent != null && tag != PawnRenderNodeTagDefOf.Body && tag != PawnRenderNodeTagDefOf.Head)) { return __result; }
-
-            var staticAngle = node.Props.drawData?.RotationOffsetForRot(parms.facing) ?? 0f;
-            if (node.FlipGraphic(parms))
-            {
-                staticAngle = -staticAngle;
-            }
-
-            return staticAngle == 0f ? Quaternion.identity : Quaternion.AngleAxis(staticAngle, Vector3.up);
         }
 
         private static void TilePicker_StartTargeting_Prefix(ref Func<PlanetTile, bool> validator, bool hideFormCaravanGizmo)

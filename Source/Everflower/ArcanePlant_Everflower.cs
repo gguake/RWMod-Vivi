@@ -129,13 +129,10 @@ namespace VVRace
         {
             var resonator = EverflowerComp.EnshrinedAltar?.HeldResonator;
             var assimilation = Hediff_EverflowerAssimilation.Of(resonator);
-            if (assimilation != null && assimilation.everflower == this)
+            if (phase == DrawPhase.Draw && assimilation != null && assimilation.everflower == this)
             {
-                resonator.Drawer.renderer.DynamicDrawPhaseAt(phase, assimilation.PawnDrawPos, Rot4.South, neverAimWeapon: true);
-                if (phase == DrawPhase.Draw)
-                {
-                    assimilation.DrawLink();
-                }
+                AssimilatedResonatorRenderer.Draw(resonator, assimilation.PawnDrawPos);
+                assimilation.DrawLink();
             }
 
             base.DynamicDrawPhaseAt(phase, drawLoc, flip);
