@@ -31,8 +31,9 @@ float hashF(uint h, int shift)
 void main()
 {
     float key = vUv.x;
-    float across = abs(vUv.y * 2.0 - 1.0);
-    float d = across * u._HalfWidth;
+    // vUv.y: 중심선에서의 수직 거리(0~1 = 0~_HalfWidth), vColor.g: 열린 끝 캡에서의 연장 거리(0~1 = 0~_HalfWidth)
+    float d = length(vec2(abs(vUv.y), vColor.g)) * u._HalfWidth;
+    float across = clamp(d / max(u._HalfWidth, 1e-4), 0.0, 1.0);
     float px = max(fwidth(d), 1e-4);
     float along = key * u._LaneLength;
     float t = u._AgeSecs;

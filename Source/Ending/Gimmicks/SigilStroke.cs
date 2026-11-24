@@ -39,6 +39,8 @@ namespace VVRace
         private readonly Vector2[] _offsets;
 
         public float Length => _cumulative[_cumulative.Length - 1];
+        internal Vector2[] Path => _path;
+        internal float[] Cumulative => _cumulative;
 
         public SigilStroke(IList<Vector2> points, bool closed, SigilStrokeKind kind, float weight = 1f)
         {

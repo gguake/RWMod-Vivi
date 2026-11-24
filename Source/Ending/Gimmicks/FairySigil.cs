@@ -104,7 +104,8 @@ namespace VVRace
             const float step = Tau / petals;
             var strokes = new List<SigilStroke>();
 
-            // 외곽 장식: 꽃잎 끝을 잇는 여섯 갈래 아치와 보조 꽃받침 잎맥
+            // 외곽 장식: 꽃잎 끝을 잇는 여섯 갈래 아치(단일 닫힌 고리로 이어 끝점 캡 중첩을 방지)와 보조 꽃받침 잎맥
+            var archPoints = new List<Vector2>(petals * 14);
             for (int k = 0; k < petals; k++)
             {
                 var a0 = HalfPi + k * step;
@@ -115,12 +116,17 @@ namespace VVRace
                 var p1 = Polar(0.82f, a1);
                 var c0 = Polar(0.68f, a0 + step * 0.25f);
                 var c1 = Polar(0.68f, a1 - step * 0.25f);
-                strokes.Add(new SigilStroke(Bezier(p0, c0, c1, p1, 14), false, SigilStrokeKind.InnerRing, 0.62f));
+                var seg = Bezier(p0, c0, c1, p1, 14);
+                for (int i = 0; i < seg.Count - 1; i++)
+                {
+                    archPoints.Add(seg[i]);
+                }
 
                 // 꽃잎 사이의 보조 화피와 작은 마름모 별장식
                 strokes.Add(new SigilStroke(Leaf(Polar(0.32f, mid), Polar(0.66f, mid), 0.16f), true, SigilStrokeKind.Emblem, 0.7f));
                 strokes.Add(new SigilStroke(Regular(Polar(0.75f, mid), 0.055f, 4, mid), true, SigilStrokeKind.Rune, 0.72f));
             }
+            strokes.Add(new SigilStroke(archPoints, true, SigilStrokeKind.InnerRing, 0.62f));
 
             // 수선화의 여섯 장 뾰족한 주 꽃잎(외곽·내부 이중 윤곽·중앙 잎맥)
             for (int k = 0; k < petals; k++)
