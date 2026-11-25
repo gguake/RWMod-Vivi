@@ -9,7 +9,7 @@
     <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
     <repeatable>true</repeatable>
     <windSpeedFactor>0.7</windSpeedFactor>
-    <accuracyMultiplier>0.75</accuracyMultiplier>
+    <accuracyMultiplier>0.8</accuracyMultiplier>
     <favorability>Good</favorability>
     <perceivePriority>1</perceivePriority>
     <ambientSounds>

@@ -1,7 +1,5 @@
 #version 450
 
-// U는 길이 방향, V는 폭 방향이며 _Length·_Width는 칸 단위다.
-
 layout(location = 0) in vec4 vColor;
 layout(location = 1) in vec2 vUv;
 
@@ -17,7 +15,6 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _Width;         // @default = 3.0
 } u;
 
-// 세로 방향 렌즈(양 끝이 뾰족한 꽃잎) 거리장(iq sdVesica). VV_MagicCircle의 꽃잎과 같은 모양.
 float sdVesica(vec2 p, float r, float d)
 {
     p = abs(p);
@@ -25,7 +22,6 @@ float sdVesica(vec2 p, float r, float d)
     return ((p.y - b) * d > p.x * b) ? length(p - vec2(0.0, b)) : length(p - vec2(-d, 0.0)) - r;
 }
 
-// 길이 len, 반폭 w인 꽃잎(로컬 y축 방향)
 float sdPetal(vec2 p, float len, float w)
 {
     float h = len * 0.5;
@@ -62,7 +58,6 @@ void main()
     core += lineCore(dFront, 0.04, px) * charging * 0.8;
     glow += exp(-dFront / 0.45) * 0.55 * charging;
 
-    // 중심선 대칭이므로 위쪽 꽃잎 하나만 계산한다.
     float spacing = 2.2;
     float xs = x - u._AgeSecs * 2.6;
     float lx = xs - (floor(xs / spacing) + 0.5) * spacing;

@@ -1,7 +1,5 @@
 #version 450
 
-// _MainTex의 랩 모드는 ShaderDef에서 Repeat로 지정한다.
-
 layout(location = 0) in vec4 vColor;
 layout(location = 1) in vec2 vUv;
 

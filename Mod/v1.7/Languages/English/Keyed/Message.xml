@@ -37,7 +37,6 @@
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
 <VV_Message_WindOfRestResult>A purifying wind has swept across the area.</VV_Message_WindOfRestResult>
 <VV_Message_FlowerLandNoGround>There is no ground here that can become a flower field.</VV_Message_FlowerLandNoGround>
-<VV_Message_FlowerLandBloomed>{COUNT} vivia flowers have bloomed on the enriched soil.</VV_Message_FlowerLandBloomed>
 <VV_Message_QueenReborn>{PAWN_labelShort} has awakened before the everflower.</VV_Message_QueenReborn>
 <VV_Message_ManaBarrierNotEnoughMana>Not enough environment mana within the shield's radius ({0}/{1}).</VV_Message_ManaBarrierNotEnoughMana>
 <VV_Message_AssimilationBegan>{PAWN_labelShort} has entered full assimilation with the everflower and risen into the air.</VV_Message_AssimilationBegan>

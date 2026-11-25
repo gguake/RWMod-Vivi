@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
-  <!-- 비비 장비는 비비 연방이 주는 보상에서만 등장 -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingSetMakerDef[defName="Reward_ItemsStandard"]/root/options/li[maxMarketValue]/thingSetMaker[@Class="ThingSetMaker_RandomOption"]/options</xpath>
     <value>

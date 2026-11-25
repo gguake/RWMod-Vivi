@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-  <!-- 마법 식물 자생지: 군락 중심마다 영맥(마나가 영구 방출되는 보이지 않는 지점)을 둔다. -->
   <TileMutatorDef>
     <defName>VV_ArcanePlantHabitat</defName>
     <label>arcane plant habitat</label>
@@ -46,7 +45,6 @@
   <LandmarkDef>
     <defName>VV_ArcanePlantHabitat</defName>
     <label>arcane plant habitat</label>
-    <!-- 월드맵에 아이콘을 그리지 않도록 투명 텍스처를 쓴다. -->
     <iconTexturePath>World/Landmarks/VV_LandmarkHidden</iconTexturePath>
     <commonality>0.3</commonality>
     <nameMaker>VV_NamerLandmark_ArcanePlantHabitat</nameMaker>

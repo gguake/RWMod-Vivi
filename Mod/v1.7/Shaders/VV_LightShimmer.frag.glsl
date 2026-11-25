@@ -1,9 +1,5 @@
 #version 450
 
-// 요정 간섭 비비를 감싸 일렁이는 빛. 몸 윤곽을 따라 흔들리는 빛 테두리, 위로 피어오르는 빛 자락, 몸 위를 흐르는 물결 반짝임을 겹친다.
-// 모트는 Graphic_MoteWithAgeSecs가 _AgeSecs·_RandomPerObjectOffsetRandom을 넣어 주고, 모트 색과 페이드 투명도는 _Color로 온다.
-// _MainTex는 공용 타일링 FBM 노이즈(VFX/VV_TileableFbmNoise, 기본 주기 16)다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -27,24 +23,19 @@ void main()
     float t = u._AgeSecs;
     float seed = fract(abs(u._RandomPerObjectOffsetRandom) * 13.7) * 64.0;
 
-    // 아지랑이처럼 위로 흘러가는 노이즈로 좌표를 흔든다.
     vec2 warp = vec2(texture(_MainTex, vec2(p.x * 2.2 + seed, p.y * 2.0 - t * 0.9) * NOISE_INV_PERIOD).r,
                      texture(_MainTex, vec2(p.x * 2.2 + seed + 7.3, p.y * 2.0 - t * 1.1 + 3.1) * NOISE_INV_PERIOD).g) - 0.5;
 
-    // 몸을 감싸는 세로로 긴 타원(약간 위로 올림)
     vec2 q = vec2(p.x / 0.48, (p.y - 0.04) / 0.7);
     float e = length(q);
     float ew = length(q + warp * 0.6);
 
-    // 흔들리는 빛 테두리
     float rim = exp(-pow((ew - 0.92) / 0.24, 2.0));
 
-    // 위로 피어오르는 빛 자락: 세로로 늘인 노이즈를 위로 흘려 몸 둘레·위쪽에서만 보이게 한다.
     float tongue = texture(_MainTex, vec2(p.x * 4.5 + warp.x * 2.0 + seed, p.y * 1.4 - t * 1.5) * NOISE_INV_PERIOD).r;
     tongue = smoothstep(0.42, 0.8, tongue);
     float tongueMask = exp(-max(ew - 0.75, 0.0) * 2.6) * smoothstep(-0.8, 0.3, p.y) * smoothstep(0.35, 0.8, ew);
 
-    // 몸 위를 흐르는 물결 반짝임(물속 빛 무늬처럼 가는 밝은 선)
     float c1 = sin(p.x * 10.0 + sin(p.y * 7.0 + t * 2.3) * 1.6 + t * 1.4);
     float c2 = sin(p.y * 9.0 - t * 1.9 + sin(p.x * 6.0 - t * 1.2) * 1.4);
     float caustic = pow(1.0 - abs(c1 * 0.5 + c2 * 0.5), 6.0) * exp(-e * e * 1.4);

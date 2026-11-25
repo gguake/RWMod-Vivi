@@ -2,19 +2,19 @@
 <LanguageData>
 
 <VV_AncientRuinFairyFlowerI.label>요정꽃</VV_AncientRuinFairyFlowerI.label>
-<VV_AncientRuinFairyFlowerI.description>폐허에 피어난 신비한 마법 꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerI.description>
+<VV_AncientRuinFairyFlowerI.description>알려지지 않은 신비한 마법 꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerI.description>
 <VV_AncientRuinFairyFlowerI.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerI.comps.CompUsable.useLabel>
 
 <VV_AncientRuinFairyFlowerII.label>요정꽃</VV_AncientRuinFairyFlowerII.label>
-<VV_AncientRuinFairyFlowerII.description>폐허에 피어난 신비한 마법 꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerII.description>
+<VV_AncientRuinFairyFlowerII.description>알려지지 않은 신비한 마법 꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerII.description>
 <VV_AncientRuinFairyFlowerII.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerII.comps.CompUsable.useLabel>
 
 <VV_AncientRuinFairyFlowerIII.label>요정꽃</VV_AncientRuinFairyFlowerIII.label>
-<VV_AncientRuinFairyFlowerIII.description>성소 안에 피어난 신비한 마법 꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIII.description>
+<VV_AncientRuinFairyFlowerIII.description>알려지지 않은 신비한 마법 꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIII.description>
 <VV_AncientRuinFairyFlowerIII.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerIII.comps.CompUsable.useLabel>
 
 <VV_AncientRuinFairyFlowerIV.label>요정꽃</VV_AncientRuinFairyFlowerIV.label>
-<VV_AncientRuinFairyFlowerIV.description>중심 제단 앞에 피어난 신비한 마법 꽃입니다. 꽃 안에 가장 오래된 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIV.description>
+<VV_AncientRuinFairyFlowerIV.description>알려지지 않은 신비한 마법 꽃입니다. 꽃 안에 가장 오래된 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIV.description>
 <VV_AncientRuinFairyFlowerIV.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerIV.comps.CompUsable.useLabel>
 
 <VV_AncientRuinAltar.label>고대 영원꽃 제단</VV_AncientRuinAltar.label>
@@ -25,16 +25,16 @@
 <VV_RuinSpatialBarrier.description>강력한 마나가 공간 자체를 일그러뜨려 그 너머의 구조물을 감추고 모든 접근을 가로막고 있습니다. 앞선 구역의 요정꽃과 공명하면 결계가 걷힙니다.</VV_RuinSpatialBarrier.description>
 
 <VV_AncientRuinWall.label>고대 벌집 벽</VV_AncientRuinWall.label>
-<VV_AncientRuinWall.description>오랜 세월 굳어진 마나로 단단히 결정화되어 일반적인 공격으로는 부술 수 없는 옛 비비 제국의 벌집 벽입니다.</VV_AncientRuinWall.description>
+<VV_AncientRuinWall.description>오랜 세월 굳어진 마나로 단단히 결정화되어 일반적인 공격으로는 부술 수 없는 벌집 벽입니다.</VV_AncientRuinWall.description>
 
 <VV_AncientSanctumWall.label>고대 성소 벽</VV_AncientSanctumWall.label>
-<VV_AncientSanctumWall.description>공간 왜곡 결계 안에서 옛 비비 제국 전성기의 모습 그대로 온전히 보존된 강화 벌집 벽입니다.</VV_AncientSanctumWall.description>
+<VV_AncientSanctumWall.description>오랜 세월 굳어진 마나로 단단히 결정화되어 일반적인 공격으로는 부술 수 없는 벌집 벽입니다.</VV_AncientSanctumWall.description>
 
 <VV_RuinCreamWall.label>굳어진 크림 벽</VV_RuinCreamWall.label>
-<VV_RuinCreamWall.description>오랜 세월 유적 통로를 뒤덮고 굳어 버린 고대 비비 크림 덩어리입니다. 내부 결이 약해 한 부분을 부수면 연결된 주변 덩어리도 함께 무너져 내립니다.</VV_RuinCreamWall.description>
+<VV_RuinCreamWall.description>오래전 급하게 막아둔 비비 크림 벽이 그대로 방치되어 굳은듯한 벽입니다. 불안정한 구조로 인해 한 부분을 부수면 연결된 주변 덩어리도 함께 무너져 내립니다.</VV_RuinCreamWall.description>
 
 <VV_AncientSanctumLamp.label>고대 마나 방출기</VV_AncientSanctumLamp.label>
-<VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 방출하는 옛 비비 제국의 신비한 유물입니다. 하지만 현재는 그 힘도 다해 빛을 비추는정도의 기능만 남아있습니다.</VV_AncientSanctumLamp.description>
+<VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 방출하는 옛 비비 제국의 신비한 유물입니다. 하지만 현재는 그 힘도 다해 겨우 약한 빛을 비추는 정도의 기능만 남아있습니다.</VV_AncientSanctumLamp.description>
 
 <VV_RuinDoomFlower.label>멸망꽃</VV_RuinDoomFlower.label>
 <VV_RuinDoomFlower.description>어떤 이유에서인지 계속 자라나는 기괴하게 생긴 마법 꽃입니다.</VV_RuinDoomFlower.description>

@@ -12,13 +12,13 @@
 
 <!-- Ending -->
 <VV_Comms_FederationHostile>비비 연방과 적대 관계입니다</VV_Comms_FederationHostile>
-<VV_Comms_TraditionInquiry>동화책과 영원꽃의 관례에 대해 묻기</VV_Comms_TraditionInquiry>
+<VV_Comms_TraditionInquiry>동화책에 대해 묻기</VV_Comms_TraditionInquiry>
 <VV_Comms_TraditionInquiryResult>{LEADER}: "새 둥지에 영원꽃 씨앗을 내어주고 조율이 깊어질 때마다 옛 동화책을 보내는 것은 아주 오래전부터 이어져 온 전통일 뿐, 저희도 그 이상의 뜻은 알지 못합니다.\n\n다만 먼 옛날에는 지금의 영원꽃보다 훨씬 거대한 영원꽃이 피어 있었다는 전설만 전해 내려오고 있습니다."</VV_Comms_TraditionInquiryResult>
 <VV_Comms_TaleRepurchase>옛 동화책 다시 받기</VV_Comms_TaleRepurchase>
-<VV_Comms_TaleRepurchaseIntro>{LEADER}: "어느 권을 다시 보내 드릴까요? 책을 다시 엮을 때마다 드는 비용이 조금씩 늘어납니다."</VV_Comms_TaleRepurchaseIntro>
+<VV_Comms_TaleRepurchaseIntro>{LEADER}(이)가 다시 받을 동화책의 종류를 물어봅니다. 단, 추가 지급에는 비용이 필요하다고 합니다.</VV_Comms_TaleRepurchaseIntro>
 <VV_Comms_TaleRepurchaseOption>{0} (은 {1})</VV_Comms_TaleRepurchaseOption>
-<VV_Comms_TaleRepurchaseResult>{LEADER}: "{0}(을)를 다시 보내 드리겠습니다."</VV_Comms_TaleRepurchaseResult>
-<VV_Comms_ReplacementCore>대체 호박 코어 복구</VV_Comms_ReplacementCore>
-<VV_Comms_ReplacementCoreResult>첫 추출 때 확보한 회로 자료로 대체 코어를 복구했습니다.</VV_Comms_ReplacementCoreResult>
-<VV_DialogChangeWeatherGoldenBloomDesc>금빛 꽃가루와 꽃잎이 흩날리는 안개가 지역을 뒤덮습니다. 불이 번지지 않으며 원거리 명중률이 소폭 낮아지고, 모든 마법 식물의 마나가 무제한이 됩니다.</VV_DialogChangeWeatherGoldenBloomDesc>
+<VV_Comms_TaleRepurchaseResult>{LEADER}가 {0}(을)를 다시 보내겠다고 합니다.</VV_Comms_TaleRepurchaseResult>
+<VV_Comms_ReplacementCore>분실한 코어 되찾기</VV_Comms_ReplacementCore>
+<VV_Comms_ReplacementCoreResult>비비 연방이 분실한 초월공학 코어를 수색해 전달해주었습니다.</VV_Comms_ReplacementCoreResult>
+<VV_DialogChangeWeatherGoldenBloomDesc>금빛 꽃가루와 꽃잎이 흩날리는 안개가 지역을 뒤덮습니다. 불이 번지지 않으며 모든 마법 식물의 마나가 무제한이 됩니다.</VV_DialogChangeWeatherGoldenBloomDesc>
 </LanguageData>

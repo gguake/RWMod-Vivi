@@ -1,8 +1,5 @@
 #version 450
 
-// 거대 육각형 고대 유적 공간 왜곡 결계 셰이더 (비비 풍: 은은하고 흐릿한 고대 영원꽃 신기루 결계)
-// - 타일링 FBM 노이즈(_NoiseTex), 꽃가루(_PollenTex), 연꽃 SDF(_LotusTex) 텍스처로 절차적 루프·노이즈를 대체해 최적화했다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -55,7 +52,6 @@ float sdFlatHexagon(vec2 p, float r)
     return length(p) * sign(p.y);
 }
 
-// 중첩 SDF: 상위 봉인이 닫혀 있으면 하위 경계선이 내부에 드러나지 않는다.
 float sdStage4(vec2 rel) { return length(rel) - 8.65; }
 float sdStage3(vec2 rel) { return length(rel) - 22.7; }
 float sdStage2(vec2 rel) { return min(sdBox(rel - vec2(0.0, 35.7), vec2(10.4, 15.8)), length(rel) - 22.7); }
@@ -81,7 +77,6 @@ float decodeLotusSdf(float enc)
     return (enc - 128.0 / 255.0) * (255.0 / 127.0) * 0.25;
 }
 
-// 봄바람에 흩날리는 영원꽃 꽃잎 레이어 (_MainTex = VFX/VV_EverflowerPetal)
 vec3 sampleDriftingPetals(vec2 rel, float t, float cellSize, float density, float petalScale, vec2 wind, int layerSeed, vec2 dRelDx, vec2 dRelDy)
 {
     vec2 p = rel - wind * t;
@@ -132,7 +127,6 @@ vec3 sampleDriftingPetals(vec2 rel, float t, float cellSize, float density, floa
     return acc;
 }
 
-// 햇살 속 반딧불이처럼 은은히 반짝이는 황금 꽃가루 알갱이 (_PollenTex = 3채널 위상 분리 타일링)
 vec3 samplePollenLayer(vec2 rel, float t, float tileCells, vec2 phaseScale, float rot90, vec2 dRelDx, vec2 dRelDy)
 {
     vec2 drift = vec2(-0.22, 0.36) * t;
@@ -163,7 +157,6 @@ void main()
 
     float t = u._AgeSecs;
 
-    // 유기적인 아지랑이 흐름 노이즈 (_NoiseTex 타일링 FBM)
     vec2 mistFlow1 = vec2(t * 0.16, -t * 0.12);
     vec2 mistFlow2 = vec2(-t * 0.13, t * 0.15);
     float mSlow = texture(_NoiseTex, (rel * 0.055 + mistFlow1) * NOISE_INV_PERIOD).r;
@@ -200,7 +193,6 @@ void main()
     float wideEdgeBand = exp(-(warpedSd * warpedSd) / 36.0) * outerPresence;
     float surge = clamp((u._Distortion - 13.5) / 14.0, 0.0, 1.0);
 
-    // 1) 봄날 아지랑이 굴절 + 부드러운 몽환 블러
     float h1 = textureLod(_NoiseTex, (rel * 0.13 + vec2(t * 0.18, -t * 0.28)) * NOISE_INV_PERIOD, 0.0).r;
     float h2 = textureLod(_NoiseTex, (rel * 0.13 + vec2(-t * 0.15 + 23.1, -t * 0.24 + 9.4)) * NOISE_INV_PERIOD, 0.0).g;
     vec2 shimmerVec = vec2(h1 - 0.5, h2 - 0.5) * 2.0 + vec2(0.0, sin(rel.x * 0.35 + rel.y * 0.22 - t * 1.4) * 0.22);
@@ -222,19 +214,16 @@ void main()
     vec3 bgBlur = (bgC * 2.0 + bg1 + bg2 + bg3 + bg4) * (1.0 / 6.0);
     vec3 bg = mix(bgC, bgBlur, mask * 0.55);
 
-    // 2) 꽃잎·황금 꽃가루 레이어
     vec3 petalsFar = sampleDriftingPetals(rel, t, 6.4, 0.34, 1.85, vec2(0.55, 0.32), 1, dRelDx, dRelDy);
     vec3 petalsEdge = sampleDriftingPetals(rel, t, 4.2, 0.44, 1.55, vec2(-0.35, 0.52), 2, dRelDx, dRelDy);
     vec3 pollen1 = samplePollenLayer(rel, t, 35.2, vec2(0.27, 0.19), 0.0, dRelDx, dRelDy);
     vec3 pollen2 = samplePollenLayer(rel, t, 60.8, vec2(0.16, -0.23), 1.0, dRelDx, dRelDy);
 
-    // 3) 유기적 햇살 물결빛(caustics)
     vec2 cWarp = rel + vec2(mSlow - 0.5, mFine - 0.5) * 9.5;
     float ca1 = sin(cWarp.x * 0.21 + sin(cWarp.y * 0.16 + t * 0.85) * 1.9 + t * 0.52);
     float ca2 = sin(cWarp.y * 0.19 - t * 0.68 + sin(cWarp.x * 0.14 - t * 0.45) * 1.7);
     float caustics = pow(max(0.0, 1.0 - abs(ca1 * 0.5 + ca2 * 0.5)), 5.5);
 
-    // 4) 영원꽃(연꽃) 문양 — _LotusTex (R=12잎 외곽 SDF, G=6잎 내부 SDF, 범위 [-1.25, 1.25])
     float rCenter = length(rel);
     float slowRot = t * 0.035;
     vec2 qOuter = rotNeg(rel / 54.0, slowRot);
@@ -248,7 +237,6 @@ void main()
     float breathWave = smoothstep(0.18, 0.92, sin(rCenter * 0.13 - t * 0.75 + mSlow * 3.2) * 0.5 + 0.5);
     float motif = clamp((petalLineOuter * 0.82 + petalLineInner * 0.92 + petalFill * 0.14) * (0.36 + 0.64 * breathWave), 0.0, 1.0) * mask;
 
-    // 경계 꿀빛 아지랑이 빛자락
     float tongue = smoothstep(0.32, 0.78, textureLod(_NoiseTex, vec2(rel.x * 0.15 + mSlow * 1.4, rel.y * 0.09 - t * 0.45) * NOISE_INV_PERIOD, 0.0).r);
     float rimGlow = exp(-(warpedSd * warpedSd) / 6.5) * (0.45 + 0.55 * tongue) * outerPresence;
 

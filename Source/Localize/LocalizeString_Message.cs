@@ -59,7 +59,6 @@
         public const string VV_Message_QueenReborn = nameof(VV_Message_QueenReborn);
 
         public const string VV_Message_FlowerLandNoGround = nameof(VV_Message_FlowerLandNoGround);
-        public const string VV_Message_FlowerLandBloomed = nameof(VV_Message_FlowerLandBloomed);
 
         public const string VV_Message_ManaBarrierNotEnoughMana = nameof(VV_Message_ManaBarrierNotEnoughMana);
 

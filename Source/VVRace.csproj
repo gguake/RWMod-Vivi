@@ -65,7 +65,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <!-- 엔딩 퀘스트 〈만개하는 여명〉 -->
     <Compile Include="Ending\Altar\Building_EverflowerAltar.cs" />
     <Compile Include="Ending\Altar\PlaceWorker_EverflowerAltar.cs" />
     <Compile Include="Ending\Boss\Pawn_Apocrypha.cs" />

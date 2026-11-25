@@ -1,9 +1,5 @@
 #version 450
 
-// 아스포델 결속 축소 사슬 고리(반투명): 남은 시간에 비례해 줄어드는 하얗게 빛나는 사슬을 요정 아래 레이어에 그린다.
-// 좌표는 타원 중심 기준 월드 셀 단위다.
-// _MainTex는 사슬 1쌍(타원 고리+연결 막대) 스트립 텍스처(VFX/VV_BondChainStrip: R=core, G=glow, B=barHighlight)다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -84,16 +80,13 @@ void main()
     float chainGlow = ch.g;
     float barHighlight = ch.b;
 
-    // 궤도 전체를 부드럽게 이어 주는 하얀 잔광 띠
     float haloW = max(0.11 * scale, 0.045);
     float bandGlow = exp(-(v * v) / (haloW * haloW)) * (1.0 - smoothstep(bandLimit * 0.65, bandLimit, abs(v)));
 
-    // 사슬을 따라 흐르는 은은한 백광 물결과 미세 맥동
     float wave = 0.85 + 0.15 * sin(sAngle * 3.0 - u._AgeSecs * 3.2);
     float pulse = 0.90 + 0.10 * sin(u._AgeSecs * 4.5);
     float light = wave * pulse * mix(0.92, 1.12, progress);
 
-    // 요정(Additive)이 겹쳐도 선명히 드러나도록 과포화를 억제한 반투명 백광
     float alpha = (chainCore * 0.68 + chainGlow * 0.22 + bandGlow * 0.16) * light * fade;
     alpha = clamp(alpha, 0.0, 0.80);
 

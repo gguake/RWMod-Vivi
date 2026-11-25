@@ -1,10 +1,5 @@
 #version 450
 
-// 바닐라 예고 연출처럼 굵은 선 몇 개로만 그려 멀리서도 읽히게 한다(가는 장식은 기본 줌에서 1px 아래로 뭉개진다).
-// 모트는 Graphic_MoteWithAgeSecs가 _AgeSecs·_RandomPerObjectOffsetRandom을 넣어 주고, 모트 색과 페이드 투명도는 _Color로 온다.
-// (_RandomPerObject는 모트 위치가 섞여 있어 움직이는 모트에서 매 틱 바뀌므로 꽃 방향 시드로 쓰지 않는다)
-// _MainTex는 8잎 연꽃 2채널 SDF 텍스처(VFX/VV_MagicCircleLotusSdf: R=외곽, G=내부, 범위 [-1.15, 1.15], D_MAX=0.30)다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -85,13 +80,11 @@ void main()
     float core = 0.0;
     float glow = 0.0;
 
-    // 바깥 고리: 사출탄 폭발 범위
     float dRing = abs(r - 0.95);
     core += lineCore(dRing, 0.02 * lw, px) * u._RingAlpha * fadeIn;
     glow += lineGlow(dRing, 0.035 * lw) * 0.5 * u._RingAlpha * fadeIn;
     glow += 0.045 * smoothstep(0.96, 0.9, r) * u._RingAlpha * fadeIn;
 
-    // 흐린 윤곽: 다 핀 꽃(발사 시점의 모양). 안쪽 겹에 가려진 바깥 꽃잎 선은 그리지 않는다.
     if (u._GuideAlpha > 0.001)
     {
         float gOuter, gInner;

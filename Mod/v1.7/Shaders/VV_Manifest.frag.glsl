@@ -1,8 +1,5 @@
 #version 450
 
-// C#(ApocryphaManifestation)이 MaterialPropertyBlock으로 _AgeSecs·_Progress·_Reveal·_Color(투명도)를 매 프레임 넣는다.
-// _NoiseTex는 공용 타일링 FBM 노이즈(VFX/VV_TileableFbmNoise, 기본 주기 16)다.
-
 layout(location = 0) in vec4 vColor;
 layout(location = 1) in vec2 vUv;
 

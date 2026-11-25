@@ -34,52 +34,58 @@
 \n이들은 마나 파동에 이끌려 왔기에 강한 공격성을 띄고 있습니다. 일반적인 거대 말벌 무리와는 달리 보이는 모든 생물과 구조물을 파괴할때까지 공격할 것입니다.</VV_Letter_IncidentHornetAssaultArrived>
 
 <!-- Ending -->
-<VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 들어섰습니다.\n\n영원꽃의 마나 방출이 한층 강해지고 정착지 성체 일반 비비에게 영원꽃의 잔향이 유지되며, 공명자의 영원꽃 공명이 V단계로 깊어집니다.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 여섯 번째 개화를 이루며 완전히 만개했습니다. 공명자 홀로 버티던 결속의 무게가 꽃으로도 흐르기 시작했습니다.\n\n공명자의 영원꽃 공명이 VI단계로 깊어져 요정 비비 결속에 따른 피로와 이동 속도 저하가 사라지며, 정착지 성체 비비의 노화가 크게 느려집니다.</VV_Letter_EverflowerAttunementLevel6Preamble>
+<VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 들어섰습니다.</VV_Letter_EverflowerAttunementLevel5Preamble>
+<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 여섯 번째 개화를 이루며 완전히 만개했습니다. 공명자 홀로 버티던 결속의 무게가 꽃으로도 흐르기 시작했습니다.</VV_Letter_EverflowerAttunementLevel6Preamble>
+
 <VV_Letter_ApocryphaRebirthLabel>밤그늘의 여제</VV_Letter_ApocryphaRebirthLabel>
 <VV_Letter_ApocryphaRebirth>거대 말벌 여왕의 형체는 무너져 사라졌지만 그 안에 남아있던 빛무리가 모여 다시 형체를 이루었습니다. 수많은 요정 비비가 옛 여제를 겹겹이 감싸고 있으며, 과거의 모습을 일시적이나마 되찾은 밤그늘의 여제는 자신만의 구원을 집행하기 위해 영원꽃을 빼앗을것입니다.
-\n결속된 수많은 요정 비비들이 모든 공격을 대신 받아내고 있습니다. 여제를 멈추려면 먼저 요정 장막을 공격해 깨뜨린 뒤, 주변에 피어나는 요정꽃과 일반 비비가 공명해 이어진 결속의 선을 영원꽃 제단까지 이끌어 여제와 요정 비비들의 결속을 끊어 주어야 합니다.
-\n</VV_Letter_ApocryphaRebirth>
+\n결속된 수많은 요정 비비들이 모든 공격을 대신 받아내고 있습니다. 여제를 멈추려면 먼저 요정 장막을 공격해 깨뜨린 뒤, 주변에 피어나는 요정꽃과 일반 비비가 공명해 이어진 결속의 선을 영원꽃 제단까지 이끌어 여제와 요정 비비들의 결속을 끊어 주어야 합니다.</VV_Letter_ApocryphaRebirth>
+
 <VV_Letter_AsphodelFallenLabel>꽃잎이 된 여제</VV_Letter_AsphodelFallenLabel>
 <VV_Letter_AsphodelFallen>"{QUOTE}"\n\n감싸고 있던 요정 비비들이 풀려나자, 여제의 형체가 금빛 꽃잎으로 흩어지며 영원꽃을 향해 날려 갔습니다.</VV_Letter_AsphodelFallen>
-<VV_Letter_AsphodelReleasedLabel>강제 요정화 해제</VV_Letter_AsphodelReleasedLabel>
-<VV_Letter_FairyFlowerBoundLabel>강제 요정화</VV_Letter_FairyFlowerBoundLabel>
+
+<VV_Letter_AsphodelReleasedLabel>요정화 해제</VV_Letter_AsphodelReleasedLabel>
+<VV_Letter_FairyFlowerBoundLabel>요정화</VV_Letter_FairyFlowerBoundLabel>
 <VV_Letter_FairyFlowerBound>요정꽃의 주변의 비비들이 자아를 잃고 요정이 되어 여제의 품으로 끌려갔습니다.\n\n{PAWNS}</VV_Letter_FairyFlowerBound>
-<VV_Letter_ApocryphaEmbraceLabel>강제 요정화</VV_Letter_ApocryphaEmbraceLabel>
+
+<VV_Letter_ApocryphaEmbraceLabel>요정화</VV_Letter_ApocryphaEmbraceLabel>
 <VV_Letter_ApocryphaEmbrace>여제의 부활의 포옹에 휩싸인 비비들이 자아를 잃고 요정이 되어 여제의 품으로 끌려갔습니다.\n\n{PAWNS}</VV_Letter_ApocryphaEmbrace>
 <VV_Letter_AsphodelReleased>여제의 품에 묶여 있던 비비들이 요정화에서 풀려나 영원꽃 앞에서 본래의 모습으로 돌아왔습니다.\n\n{PAWNS}</VV_Letter_AsphodelReleased>
+
 <VV_Letter_EndingTaleLabel>연방의 옛 동화책 ({0}권)</VV_Letter_EndingTaleLabel>
 <VV_Letter_EndingTale1>비비 연방에서 조율 의식을 마친 새 둥지에 오랜 관례에 따라 옛 동화책 첫 권을 보내왔습니다. 먼 옛날 아무도 시드는 법을 몰랐다는 거대한 꽃그늘을 그린 이야기입니다.</VV_Letter_EndingTale1>
 <VV_Letter_EndingTale2>비비 연방에서 관례에 따라 옛 동화책 두 번째 권을 보내왔습니다. 꽃그늘 아래 모든 둥지의 어머니라 불리던 왕관 쓴 지배자를 추억하는 이야기입니다.</VV_Letter_EndingTale2>
 <VV_Letter_EndingTale3>비비 연방에서 옛 동화책 세 번째 권을 보내왔습니다. 작은 빛들을 거느린 채 흔들리는 꽃그늘을 지키던 옛 여왕의 모습이 전해집니다.</VV_Letter_EndingTale3>
 <VV_Letter_EndingTale4>비비 연방에서 옛 동화책의 마지막 권을 보내왔습니다. 어둠이 덮친 날 여왕이 그늘 아래 아이들을 작은 빛으로 품고 먼 곳으로 떠나 영원히 행복하게 살았다는 결말이 담겨 있습니다.
 \n영원꽃은 더이상 자라지 않는것으로 보입니다만 동화책의 내용에는 더 거대한 영원꽃이 있었던것처럼 묘사됩니다. 방법을 찾기위해 언제부터, 어째서 동화책을 보내는지 연방에 물어볼 수 있습니다.</VV_Letter_EndingTale4>
+
 <VV_Letter_EndingRuinsDetectedLabel>숨겨진 마나의 파장</VV_Letter_EndingRuinsDetectedLabel>
 <VV_Letter_EndingRuinsDetected>{PAWN_labelShort}(이)가 영원꽃과 공명한 순간, 멀지 않은 지역에서 순수하고도 강력한 마나의 파장이 짧게 느껴졌습니다.\n\n{PAWN_labelShort}(은)는 빠르게 그 위치를 지도에 표시했지만, 그곳은 평소 아무것도 없는 땅으로 알려져 있습니다. 하지만 영원꽃과 깊은 공명을 이루고 있는 로열 비비라면 이곳에서 무언가를 찾아낼 수 있을지도 모릅니다.</VV_Letter_EndingRuinsDetected>
-<VV_Letter_EverflowerEcho5Label>깨어나는 숨결</VV_Letter_EverflowerEcho5Label>
+<VV_Letter_EverflowerEcho5Label>겨울의 시작</VV_Letter_EverflowerEcho5Label>
 <VV_Letter_EverflowerEcho5>영원꽃에서 마나 파동이 퍼지자 {PAWN_labelShort}의 초정신 회로에 잡음이 흘러들었습니다. 이번에는 과거의 기억이 아니었습니다.\n\n수많은 이들의 속삭임과 뼈가 뒤틀리는 소리. 무언가가 마나의 흐름을 따라 다가오고 있었습니다.\n\n"......그리운...... 따스한......"\n"다시...... 그 꽃그늘로......"\n\n연결이 끊어졌습니다.</VV_Letter_EverflowerEcho5>
+
 <VV_Letter_EndingSiegeLabel>맥동하는 영원꽃</VV_Letter_EndingSiegeLabel>
-<VV_Letter_EndingSiege>제단의 마나 회로가 깨어나며 영원꽃이 다섯 번째 개화에 들어섰습니다. 영원꽃이 마지막 개화에 필요한 마나를 응축하기 시작하며, 공명자의 영원꽃 공명이 V단계로 깊어집니다.\n\n그러나 제단에서 멀리 퍼져 나간 마나 파동에 이끌려 외지인들과 거대 말벌 무리가 정착지로 몰려들고 있습니다. 응축이 끝날 때까지 제단과 동화 중인 공명자를 지켜야 합니다.</VV_Letter_EndingSiege>
-<VV_Letter_EndingSiegeFederation>개화의 파동을 감지한 비비 연방이 동맹을 맺었습니다. 적이 쳐들어오면 연방이 지원군을 보내 함께 싸울 것입니다.</VV_Letter_EndingSiegeFederation>
-<VV_Letter_EndingSiegeFederationSupport>개화의 파동을 감지한 비비 연방이 힘을 보태기로 했습니다. 적이 쳐들어오면 연방이 지원군을 보내 함께 싸울 것입니다.</VV_Letter_EndingSiegeFederationSupport>
+<VV_Letter_EndingSiege>제단의 마나 회로가 깨어나며 영원꽃이 다섯 번째 단계에 들어섰습니다. 영원꽃이 마지막 만개에 필요한 마나를 응축하기 시작하기 시작했습니다.\n\n그러나 제단에서 멀리 퍼져 나간 파동과 멀리서도 식별되는 거대한 황금빛 영원꽃에 이끌려 외지인들과 거대 말벌 무리가 정착지로 몰려들고 있습니다. 응축이 끝날 때까지 제단과 동화 중인 공명자를 지켜야 합니다.</VV_Letter_EndingSiege>
+<VV_Letter_EndingSiegeFederation>영원꽃의 파동을 감지한 비비 연방이 동맹을 맺었습니다. 적이 쳐들어오면 연방이 지원군을 보내 함께 싸울 것입니다.</VV_Letter_EndingSiegeFederation>
+<VV_Letter_EndingSiegeFederationSupport>영원꽃의 파동을 감지한 비비 연방이 힘을 보태기로 했습니다. 적이 쳐들어오면 연방이 지원군을 보내 함께 싸울 것입니다.</VV_Letter_EndingSiegeFederationSupport>
 <VV_Letter_EndingFederationAidLabel>비비 연방 지원군</VV_Letter_EndingFederationAidLabel>
-<VV_Letter_EndingFederationAid>비비 연방이 다시 피어나는 꽃그늘을 지키기 위해 지원군을 파견했습니다. 이들은 한동안 함께 싸운 뒤 돌아갈 것입니다.</VV_Letter_EndingFederationAid>
+<VV_Letter_EndingFederationAid>비비 연방이 다시 만개하는 영원꽃을 지키기 위해 지원군을 파견했습니다. 이들은 한동안 함께 싸운 뒤 돌아갈 것입니다.</VV_Letter_EndingFederationAid>
+
 <VV_Letter_EndingCalmLabel>고요함</VV_Letter_EndingCalmLabel>
-<VV_Letter_EndingCalm>영원꽃이 만개 직전에 이르러 정착지에 금빛 꽃가루 안개가 내려앉았을 때, 낯선 초정신 파장에 막혀 꽃잎의 움직임이 멈추었습니다. 몰려들던 적들도 불길한 기척에 물러나고 정착지에는 정적만이 감돕니다.\n\n{PAWN_labelShort}(은)는 공명 너머에서 수많은 작은 빛들이 일렁이는 것을 느꼈습니다. 다가오는 그림자 곁에서 작은 빛 하나가 떨리는 목소리로 이름을 불렀으나, 짙은 잡음에 짓눌려 흐릿하게 흩어졌습니다.\n\n"............ 이제 그만......"</VV_Letter_EndingCalm>
+<VV_Letter_EndingCalm>영원꽃이 만개 직전에 이르러 정착지에 금빛 꽃가루 안개가 내려앉았을 때, 낯선 초정신 파장에 막혀 꽃잎의 움직임이 멈추었습니다. 몰려들던 적들도 불길한 기척에 물러나고 정착지에는 정적만이 감돕니다.\n\n{PAWN_labelShort}(은)는 공명 너머에서 수많은 작은 빛들이 일렁이는 것을 느꼈습니다. 다가오는 그림자 곁에서 작은 빛 하나가 떨리는 목소리로 어떤 이름을 불렀으나, 짙은 잡음에 짓눌려 흐릿하게 흩어졌습니다.\n\n"...... 이제 그만......"</VV_Letter_EndingCalm>
+
 <VV_Letter_EndingApocryphaLabel>바스러진 여제</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여들더니, 유적의 기억 속에 있던 옛 여제가 거대한 말벌 여왕의 형상으로 일그러져 모습을 드러냈습니다. 오염된 마나에 이끌린 거대 말벌 무리가 그 뒤를 따릅니다.\n\n"......이 그늘만 있으면...... 울음소리가...... 내 아이들을......"\n\n그 단단한 외피에는 고대 엘텍스 바늘이 깊숙이 박혀 있습니다. 어쩌면 이를 활용해야 할지도 모릅니다.</VV_Letter_EndingApocrypha>
+<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여들더니, 유적의 기억 속에 있던 옛 여제가 거대한 말벌 여왕의 형상으로 일그러져 모습을 드러냈습니다. 오염된 마나에 이끌린 거대 말벌 무리가 그 뒤를 따릅니다.\n\n"......이 그늘만 있으면...... 울음소리가...... 내 아이들을......"\n\n그 단단한 외피에는 아마 원래 그녀의 것으로 보이는 고대 엘텍스 바늘이 깊숙이 박혀 있습니다. 어쩌면 이를 활용해야 할지도 모릅니다.</VV_Letter_EndingApocrypha>
 <VV_Letter_EndingCoronationLabel>대관식</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>금빛 꽃잎으로 흩어진 여제의 여운과 함께, 끝까지 곁에 남아 있던 작은 빛들이 제단 위 영원꽃과 동화 중인 {PAWN_labelShort}에게로 조용히 스며들었습니다.\n\n길었던 불면이 마침내 멎고, 멈춰 있던 영원꽃이 다시 맥동합니다.\n\n이제 제단에서 {PAWN_labelShort}의 〈대관식〉을 치러 마지막 개화를 완성할 수 있습니다.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>금빛 꽃잎으로 흩어진 여제의 여운과 함께, 끝까지 곁에 남아 있던 작은 빛들이 제단 위 영원꽃과 동화 중인 {PAWN_labelShort}에게로 조용히 스며들었습니다.\n\n길었던 싸움이 마침내 끝나고, 억눌려 멈춰 있던 영원꽃이 다시 맥동합니다.\n\n이제 제단에서 {PAWN_labelShort}의 대관식을 치러 마지막 개화를 완성할 수 있습니다.</VV_Letter_EndingCoronation>
 <VV_Letter_EndingVictoryLabel>시들지 않는 봄</VV_Letter_EndingVictoryLabel>
-<VV_Letter_EndingVictoryContinue>이후에도 정착지에서 계속 플레이할 수 있습니다. 공명자의 영원꽃 공명이 VI단계에 이르러 요정 결속의 피로와 이동 속도 저하가 사라지며, 정착지 성체 비비의 노화가 크게 느려집니다.\n\n이제 만개한 영원꽃에서 〈생명의 회귀〉, 〈지역 정화〉, 〈꽃의 대지〉 의식을 치를 수 있습니다.</VV_Letter_EndingVictoryContinue>
+<VV_Letter_EndingVictoryContinue>이후에도 정착지에서 계속 플레이할 수 있습니다. 만개한 영원꽃이 있는 정착지의 성체 비비의 노화가 크게 느려집니다.\n\n이제 만개한 영원꽃에서 생명의 회귀, 지역 정화, 꽃의 대지 의식을 치를 수 있습니다.</VV_Letter_EndingVictoryContinue>
 <VV_Letter_EndingFailureLabel>영원꽃 찬탈</VV_Letter_EndingFailureLabel>
 <VV_Letter_EndingFailureStolen>제단의 영원꽃이 꽃잎으로 흩어져 밤그늘의 여제에게 빨려 들어갔습니다. 영원꽃을 거두어 안은 여제는 꽃잎 바람 너머 어둠 속으로 다시 사라졌습니다.\n\n영원꽃을 잃어 마지막 개화가 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다..</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>영원꽃 소실</VV_Letter_EndingFailureLostLabel>
 <VV_Letter_EndingFailureLost>제단이나 영원꽃을 잃어 마지막 개화가 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다..</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>끊어진 공명</VV_Letter_EndingFailureResonatorLabel>
 <VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화가 중단되었습니다.\n\n새로운 공명자가 나타나면 다시금 제단에서 만개 의식을 시작할 수 있습니다.</VV_Letter_EndingFailureResonator>
-<VV_Letter_AncientWitnessLabel>깨어난 옛 날개의 기억</VV_Letter_AncientWitnessLabel>
-<VV_Letter_AncientWitness>오랜 세월 만에 육체를 되찾은 {PAWN_labelShort}(은)는 머리 위에 펼쳐진 황금빛 꽃그늘을 한동안 올려다보았습니다. 숨을 고른 {PAWN_labelShort}(이)가 자신이 기억하는 마지막 날을 조심스레 전했습니다.\n\n"매캐한 연기와 불길이 그늘 안까지 덮치던 날이었어요. 단 위에 홀로 서 계시던 여제님께서 울지 말라고, 작은 빛이 되면 아프지 않을 거라며 우리를 품어 주셨지요."\n\n"빛이 된 뒤로는 길고 어두운 꿈속에서 그치지 않는 울음소리를 들으며 그분을 꼭 끌어안고 있었던 것만 같아요. 놓아드리고 싶었는데...... 눈을 떠 보니 그분도 잠드시고, 정말로 다시 봄이 와 있네요."\n\n{PAWN_labelShort}(은)는 다시 얻은 이 꽃그늘에서 살아가겠다며 조용히 고개를 숙였습니다.</VV_Letter_AncientWitness>
 <VV_Letter_FederationReactionLabel>비비 연방의 전갈</VV_Letter_FederationReactionLabel>
 <VV_Letter_FederationReaction>정착지에서 피어오른 만개의 파동을 확인한 비비 연방에서 축하 전갈을 보내왔습니다.\n\n연방에서도 왜 새 둥지에 옛 동화책을 보내왔는지 본래 이유는 알지 못했으나, 수백 년 만에 전설 속 거대한 꽃그늘이 실제로 다시 피어난 광경을 보고 깊은 경외를 느꼈다고 전해 왔습니다.\n\n비비 연방은 새로운 여왕이 이끄는 정착지에 경의를 표하며 변함없는 우호를 약속했습니다.</VV_Letter_FederationReaction>
 <VV_Letter_QueenLifeResonanceLabel>생명 공명: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
@@ -94,5 +100,5 @@
 <VV_Letter_RuinEcho3Label>불타는 둥지의 기억</VV_Letter_RuinEcho3Label>
 <VV_Letter_RuinEcho3>세 번째 요정꽃에 손을 대자, 이명과 함께 한층 더 오래된 기억이 {PAWN_labelShort}의 머릿속에 울렸습니다.\n\n거대한 제단 위로 황금빛 꽃잎이 가늘게 떨리고 있었습니다. 꽃그늘 아래는 자욱한 녹색 독성 구름과 불길로 뒤덮여 있었고, 공포에 질린 비비들이 도망치는 모습과 함께 총성과 폭발음이 스쳐 지나갔습니다.\n\n"......꽃들이...... 타들어 가고......"\n"......단 위에는...... 나 혼자뿐인데...... 이대로는 모두......"\n\n불타는 단 위에 선 그림자 곁에는 몇 점의 작은 빛만이 남아 있었습니다. {PAWN_labelShort}(은)는 식은땀을 흘리며 정신을 차렸습니다.\n\n요정꽃이 흩어지며 중심부를 감싼 원형 회랑으로 향하는 길이 열렸습니다.</VV_Letter_RuinEcho3>
 <VV_Letter_RuinEcho4Label>황금빛 꽃그늘</VV_Letter_RuinEcho4Label>
-<VV_Letter_RuinEcho4>제단 앞에 피어난 마지막 요정꽃에 손을 대자, 이곳에 남아 있던 가장 오래된 기억이 {PAWN_labelShort}의 눈앞에 펼쳐졌습니다.\n\n거대한 제단 위로 찬란한 황금빛 꽃이 피어 있었습니다. 따스한 꽃가루가 흩날리는 그늘 아래에서, 수많은 비비들이 바깥의 추위도 잊은 듯 아무런 걱정도 없는 평화로운 표정을 짓고 있었습니다.\n\n"......이 따스한 그늘 안에서...... 시드는 일 없이......"\n"......걱정 마렴...... 너희의 봄은...... 내가 끝까지......"\n\n다정한 속삭임 너머로, 단 위의 왕관을 쓴 어머니를 우러르며 그늘을 메운 군중이 일제히 부르는 이름이 울려 퍼졌습니다.\n\n"...한 우리의 여제, ......에게 축복을..."\n\n가장 선명했어야 할 이름은 함성과 함께 아득한 잡음에 묻혔고, 마지막 요정꽃이 흩어졌습니다. 이제 중심 제단에서 고대 호박 코어를 추출할 수 있습니다.</VV_Letter_RuinEcho4>
+<VV_Letter_RuinEcho4>제단 앞에 피어난 마지막 요정꽃에 손을 대자, 이곳에 남아 있던 가장 오래된 기억이 {PAWN_labelShort}의 눈앞에 펼쳐졌습니다.\n\n거대한 제단 위로 찬란한 황금빛 꽃이 피어 있었습니다. 따스한 꽃가루가 흩날리는 그늘 아래에서, 수많은 비비들이 바깥의 추위도 잊은 듯 아무런 걱정도 없는 평화로운 표정을 짓고 있었습니다.\n\n"......이 따스한 그늘 안에서...... 시드는 일 없이......"\n"......걱정 마렴...... 너희의 봄은...... 내가 끝까지......"\n\n다정한 속삭임 너머로, 단 위의 왕관을 쓴 어머니를 우러르며 그늘을 메운 군중이 일제히 부르는 이름이 울려 퍼졌습니다.\n\n"...한 우리의 여제, ......에게 축복을..."\n\n가장 선명했어야 할 이름은 함성과 함께 아득한 잡음에 묻혔고, 마지막 요정꽃이 흩어졌습니다. 이제 중심 제단에서 중요한 유물을 추출할 수 있습니다.</VV_Letter_RuinEcho4>
 </LanguageData>

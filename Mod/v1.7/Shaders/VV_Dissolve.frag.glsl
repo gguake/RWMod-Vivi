@@ -1,8 +1,5 @@
 #version 450
 
-// 플렉/모트는 Graphic_FleckPulse·Graphic_MoteWithAgeSecs가 _AgeSecs를 넣어 주고,
-// C#에서 직접 그릴 때는 MaterialPropertyBlock으로 넣는다.
-
 layout(location = 0) in vec4 vColor;
 layout(location = 1) in vec2 vUv;
 

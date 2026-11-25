@@ -1,7 +1,5 @@
 #version 450
 
-// U는 발사 방향, V는 폭 방향이다. _Front는 시작점에서 바늘 촉까지의 거리(칸)다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -20,9 +18,9 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _LineAlpha;            // @default = 1.0
 } u;
 
-layout(set = 2, binding = 1) uniform sampler2D _MainTex;        // 바닐라 사이킥 선 그림(PsycastPsychicLine)
-layout(set = 2, binding = 2) uniform sampler2D _DistortionTex;  // 바닐라 사이킥 선 왜곡 마스크(PsycastPsychicLineMask)
-layout(set = 2, binding = 3) uniform sampler2D _NoiseTex;       // 바닐라 사이캐스트 노이즈(PsycastNoise)
+layout(set = 2, binding = 1) uniform sampler2D _MainTex;
+layout(set = 2, binding = 2) uniform sampler2D _DistortionTex;
+layout(set = 2, binding = 3) uniform sampler2D _NoiseTex;
 layout(set = 2, binding = 4) uniform sampler2D _GrabDistortionBackground;
 
 vec2 flipV(vec2 c) { return vec2(c.x, 1.0 - c.y); }

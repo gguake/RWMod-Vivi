@@ -1,10 +1,5 @@
 #version 450
 
-// 황금 파동 고리(가산 혼합): VV_GoldenWaveRing 그림을 키우던 플렉을 같은 모양으로 다시 그린다.
-// 쿼드는 최종 크기로 고정하고 _AgeSecs로 고리만 넓혀서, 커져도 선이 굵어지거나 뭉개지지 않는다.
-// 좌표는 쿼드 반지름을 1로 둔 값이다. 잎 그림은 _MainTex 한 장을 돌려 가며 작게 찍는다(확대하지 않는다).
-// 플렉은 Graphic_FleckPulse가 _AgeSecs·_RandomPerObject를 넣어 주고, 플렉 색과 페이드 투명도는 _Color로 온다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -51,7 +46,6 @@ void main()
     float px = max(max(length(dpdx), length(dpdy)), 1e-5);
 
     float t = clamp(u._AgeSecs / max(u._Duration, 0.001), 0.0, 1.0);
-    // 원본 플렉처럼 일정한 속도로 퍼진다.
     float front = mix(0.033, 0.89, t);
     float fade = u._Color.a * smoothstep(0.0, 0.03, t) * (1.0 - smoothstep(0.4, 1.0, t)) * (1.0 - smoothstep(0.94, 1.0, r));
     float band = max(u._LeafSize, 0.05);
@@ -61,13 +55,11 @@ void main()
     float theta = atan(p.y, p.x);
     float d = r - front;
 
-    // 고리: 가는 심선 + 금빛 빛무리. 심선은 화면에서 1픽셀 아래로 가늘어지지 않는다.
     float w = max(u._Width, px * 0.9);
     float core = exp(-(d * d) / (w * w));
     float win = 1.0 - smoothstep(band * 0.6, band, abs(d));
     float halo = (exp(-(d * d) / (16.0 * w * w)) * 0.6 + exp(-abs(d) / (10.0 * w)) * 0.25) * win;
 
-    // 불꽃 줄기: 고리를 따라 굽이치는 가는 선 두 가닥이 군데군데 끊겨 흐른다.
     float wisps = 0.0;
     for (int s = 0; s < 2; s++)
     {
@@ -80,7 +72,6 @@ void main()
     }
     wisps *= win;
 
-    // 잎: 고리를 따라 띄엄띄엄 붙어 고리 방향으로 누워 있다.
     vec3 leaves = vec3(0.0);
     float n = max(floor(u._LeafCount + 0.5), 3.0);
     float sector = TAU / n;
@@ -101,7 +92,7 @@ void main()
         float tilt = 0.5 + 0.4 * r1;
         vec2 axisL = tangent * cos(tilt) + radial * sin(tilt);
         vec2 axisW = vec2(-axisL.y, axisL.x);
-        // 원본 그림처럼 고리가 작을 땐 잎도 작다.
+        
         float size = u._LeafSize * (0.7 + 0.5 * r3) * mix(0.3, 1.0, smoothstep(0.03, 0.5, front));
         if (size <= 0.0) { continue; }
 
@@ -116,7 +107,6 @@ void main()
         leaves += mix(u._GlowColor.rgb, u._CoreColor.rgb, clamp(lum * lum * 1.4, 0.0, 1.0)) * lum * (1.0 + 0.5 * r2);
     }
 
-    // 불씨: 고리 둘레에 흩어진 작은 금빛 점이 깜빡인다.
     float embers = 0.0;
     float m = max(floor(u._EmberCount + 0.5), 3.0);
     float esector = TAU / m;

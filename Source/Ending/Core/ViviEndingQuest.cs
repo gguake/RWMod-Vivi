@@ -284,7 +284,6 @@ namespace VVRace
             _ambience.Update();
         }
 
-        // 〈영원꽃 조율 의식〉을 마칠 때마다 연방이 비적대이면 아직 받지 못한 다음 권을 한 권 보낸다.
         public void Notify_AttunementRitualCompleted(ArcanePlant_Everflower everflower)
         {
             if (everflower == null || everflower.Destroyed || everflower.Faction != Faction.OfPlayer) { return; }
@@ -301,7 +300,6 @@ namespace VVRace
             _tales.DeliverNext(everflower, federation);
         }
 
-        // 관례 문의 이후 영원꽃 의식을 마칠 때마다 숨겨진 마나의 파장(고대 유적) 포착을 판정한다.
         public bool Notify_EverflowerRitualCompleted(ArcanePlant_Everflower everflower, Pawn resonator)
         {
             if (everflower == null || everflower.Destroyed || everflower.Faction != Faction.OfPlayer) { return false; }

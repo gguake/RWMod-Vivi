@@ -93,8 +93,6 @@
         public const string VV_Letter_ReturnOfLife = nameof(VV_Letter_ReturnOfLife);
         public const string VV_Letter_ReturnOfLifeGenes = nameof(VV_Letter_ReturnOfLifeGenes);
 
-        public const string VV_Letter_AncientWitnessLabel = nameof(VV_Letter_AncientWitnessLabel);
-        public const string VV_Letter_AncientWitness = nameof(VV_Letter_AncientWitness);
         public const string VV_Letter_FederationReactionLabel = nameof(VV_Letter_FederationReactionLabel);
         public const string VV_Letter_FederationReaction = nameof(VV_Letter_FederationReaction);
     }

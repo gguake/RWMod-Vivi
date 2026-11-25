@@ -1,10 +1,5 @@
 #version 450
 
-// 결속 피격(가산 혼합): 몸을 감싼 방벽의 맞은 쪽 벌집 칸이 번쩍이고 금이 간다.
-// 쿼드 중심은 몸 중심, 쿼드 x축은 투사체 진행 방향(플렉 회전으로 맞춘다). 좌표는 쿼드 반지름을 1로 둔 값이다.
-// 플렉은 Graphic_FleckPulse가 _AgeSecs·_RandomPerObject를 넣어 주고, 플렉 색과 페이드 투명도는 _Color로 온다.
-// _MainTex는 2x2 균열 아틀라스(VFX/VV_BondImpactCracks: R=crack, G=crackGlow, B=진행도)다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -59,7 +54,6 @@ void main()
     float r = length(p);
     int seed = int(hashU(ivec2(floatBitsToInt(u._RandomPerObject), 0x5bd1e995)) & 4095u);
 
-    // 방벽 면: 가장자리로 갈수록 살짝 눌려 둥근 막처럼 보인다.
     float rn = clamp(r / R, 0.0, 1.0);
     vec2 g = p * (1.0 + 0.28 * rn * rn) / max(u._CellWidth, 0.01);
     vec2 cellSize = vec2(1.0, 1.7320508);
@@ -86,14 +80,12 @@ void main()
 
     float cells = lit * (line + 0.16 * (1.0 - line));
 
-    // 방벽 테: 맞은 자리 근처만 짧게 밝아진다.
     float ang = atan(p.y, p.x);
     float dAng = abs(mod(ang, TAU) - 3.14159265);
     float rimW = max(0.012, px * 1.2);
     float rim = exp(-pow((r - R) / rimW, 2.0)) * exp(-pow(dAng / 0.55, 2.0)) * (1.0 - smoothstep(0.0, 0.7, t));
     float rimHalo = exp(-pow((r - R) / (rimW * 4.0), 2.0)) * exp(-pow(dAng / 0.7, 2.0)) * 0.35 * (1.0 - t);
 
-    // 금: 사전 베이크한 2x2 균열 아틀라스(4종 × 상하 반전 = 8변형)에서 진행도 채널(B)로 뻗어나가게 한다.
     float grow = smoothstep(0.0, 0.22, t);
     float crackFade = 1.0 - smoothstep(0.35, 0.85, t);
     float crack = 0.0;
@@ -115,7 +107,6 @@ void main()
         }
     }
 
-    // 맞은 자리 섬광
     vec2 dh = p - hit;
     float dh2 = dot(dh, dh);
     float flash = exp(-dh2 / (0.012 + px * px * 4.0)) * exp(-t * 9.0) * 1.6

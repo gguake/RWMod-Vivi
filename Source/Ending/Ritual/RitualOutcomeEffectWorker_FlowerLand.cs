@@ -38,11 +38,6 @@ namespace VVRace
         {
             var flowers = FlowerLandUtility.Apply(map, cell, Def.radius, Def.terrain ?? TerrainDefOf.Soil);
             Def.areaEffecter?.Spawn(cell, map).Cleanup();
-
-            Messages.Message(
-                LocalizeString_Message.VV_Message_FlowerLandBloomed.Translate(flowers.Named("COUNT")),
-                new LookTargets(cell, map),
-                MessageTypeDefOf.PositiveEvent);
         }
     }
 }

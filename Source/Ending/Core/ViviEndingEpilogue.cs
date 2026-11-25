@@ -58,18 +58,5 @@ namespace VVRace
                 LookTargets.Invalid,
                 federation);
         }
-
-        public void Notify_AncientReturned(Pawn pawn)
-        {
-            if (_witnessSent || pawn == null) { return; }
-
-            _witnessSent = true;
-
-            Find.LetterStack.ReceiveLetter(
-                LocalizeString_Letter.VV_Letter_AncientWitnessLabel.Translate(),
-                LocalizeString_Letter.VV_Letter_AncientWitness.Translate(pawn.Named("PAWN")),
-                LetterDefOf.NeutralEvent,
-                pawn);
-        }
     }
 }

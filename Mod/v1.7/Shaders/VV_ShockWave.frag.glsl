@@ -1,10 +1,5 @@
 #version 450
 
-// 쿼드는 최종 크기로 고정하고 _AgeSecs로 파면만 넓혀 텍스처 확대·압축을 피한다.
-// 굴절 폭은 쿼드 크기에 비례하도록 화면 미분으로 픽셀 단위로 바꾼다.
-// 플렉의 경우 Graphic_FleckPulse가 _AgeSecs·_RandomPerObject를 넣어 주고, 플렉 색과 페이드 투명도는 _Color로 전달한다.
-// _MainTex는 공용 타일링 FBM 노이즈(VFX/VV_TileableFbmNoise, 기본 주기 16)다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -30,7 +25,6 @@ layout(set = 2, binding = 2) uniform sampler2D _GrabDistortionBackground;
 
 const float NOISE_INV_PERIOD = 0.0625;
 
-// 정수 격자 해시. _RandomPerObject를 0~64 범위 시드로 변환하는 데 사용한다.
 float hash(ivec2 i)
 {
     uvec2 q = uvec2(i) * uvec2(1597334673u, 3812015801u);

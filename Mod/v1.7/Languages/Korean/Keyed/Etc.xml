@@ -123,11 +123,11 @@
 <VV_Quest_EndingStageRuinsExtract>중심 제단에서 비비 초월공학 코어를 추출하십시오.</VV_Quest_EndingStageRuinsExtract>
 <VV_Quest_EndingStageAltar>비비 초월공학 코어로 영원꽃 제단을 건설하고 영원꽃을 안치한 뒤 만개 의식을 치르십시오.</VV_Quest_EndingStageAltar>
 <VV_Quest_EndingStageAltarCoreLost>비비 초월공학 코어와 제단을 모두 잃었다면 통신기로 비비 연방에 연락해 분실물 회수를 의뢰할 수 있습니다.</VV_Quest_EndingStageAltarCoreLost>
-<VV_Quest_EndingStageBloom>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤, 공명자에게 대관식을 치르게 하십시오. 제단이나 영원꽃, 공명자를 잃으면 개화가 중단됩니다.</VV_Quest_EndingStageBloom>
-<VV_Quest_EndingStageHostile>비비 연방과 적대 중이라 진행이 멈추었습니다. 관계를 회복하면 멈춘 곳부터 이어집니다.</VV_Quest_EndingStageHostile>
+<VV_Quest_EndingStageBloom>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤 대관식을 치르십시오. 제단이나 영원꽃을 잃으면 개화가 중단됩니다.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageHostile>비비 연방과 적대 중입니다.</VV_Quest_EndingStageHostile>
 <VV_Quest_EndingStepAltar>영원꽃 제단 건설</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>조율 {0}단계 영원꽃을 제단 중앙에 안치</VV_Quest_EndingStepEnshrine>
-<VV_Quest_EndingStepParticipants>만개 의식에 참여할 비비 (공명자 제외): {0} / {1}명</VV_Quest_EndingStepParticipants>
+<VV_Quest_EndingStepParticipants>만개 의식에 참여할 비비: {0} / {1}명</VV_Quest_EndingStepParticipants>
 <VV_Quest_EndingTruthLog>불타는 꽃그늘 아래 홀로 남은 옛 여제는 자신이 낳은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 긴 세월 곁을 지키며 그녀를 감싸 안아 왔습니다. 뒤틀린 껍질이 무너진 뒤에도 다시 모여들어 여제를 지켜 내던 빛들은, 마침내 결속이 풀리고 여제가 잠들자 제단의 영원꽃 품으로 돌아와 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
 <VV_FairyTale1_Label>꽃그늘 동화 1권</VV_FairyTale1_Label>
 <VV_FairyTale1_Title>꽃그늘 동화 1권: 시들지 않는 봄</VV_FairyTale1_Title>
@@ -141,11 +141,11 @@
 <VV_FairyTale4_Label>꽃그늘 동화 4권</VV_FairyTale4_Label>
 <VV_FairyTale4_Title>꽃그늘 동화 4권: 영원히 행복한 꿈</VV_FairyTale4_Title>
 <VV_FairyTale4_Desc>마침내 바깥의 거센 어둠이 꽃그늘을 덮치던 날, 다정한 여왕은 단 한 명도 다치지 않도록 그늘 아래 아이들을 모두 작은 빛으로 바꾸었답니다.\n\n여왕은 너무 많은 빛을 품어 몹시 고단해졌고, 작은 빛들이 여왕을 포근히 감싸 먼 곳으로 데려가 재워 주었지요. 시린 바람도 닿지 않는 따스한 꿈속에서 여왕과 아이들은 다시는 헤어지지 않고 영원히 행복하게 살았답니다.</VV_FairyTale4_Desc>
-<VV_EndingCredits>{PAWN_nameDef}(이)가 대관식을 마칩니다. 황금빛 꽃잎이 내려앉아 {PAWN_possessive} 머리 위에 왕관을 이룹니다.\n\n옛 동화 속에만 남아 있던 거대한 꽃그늘이 수백 년 만에 다시 펼쳐졌습니다. 결속의 무게가 만개한 꽃으로도 흐르기 시작하고, 지나간 시대의 작은 빛들도 이 품에서 안식을 찾았습니다. 따스한 그늘 아래 비비들은 더 긴 삶을 누릴 것입니다.\n\n{PAWN_nameDef}(은)는 비비들의 여왕이 되었습니다.</VV_EndingCredits>
-<VV_EndingCreditsNoQueen>옛 동화 속에만 남아 있던 거대한 꽃그늘이 수백 년 만에 다시 펼쳐졌습니다. 지나간 시대의 작은 빛들도 이 품에서 안식을 찾았고, 따스한 그늘 아래 비비들은 더 긴 삶을 누릴 것입니다.</VV_EndingCreditsNoQueen>
+<VV_EndingCredits>{PAWN_nameDef}(이)가 대관식을 마칩니다. 황금빛 꽃잎이 내려앉아 {PAWN_possessive} 머리 위에 왕관을 이룹니다.\n\n옛 동화 속에만 남아 있던 거대한 꽃그늘이 수백 년 만에 다시 펼쳐졌습니다. 과거의 여제가 혼자 감당하려 했던 짐은 이제 만개한 꽃과 수많은 비비들이 함께 나누기 시작했고, 지나간 시대의 작은 빛들도 이 품에서 안식을 찾았습니다. 따스한 그늘 아래 비비들은 더 긴 삶을 누릴 것입니다.</VV_EndingCredits>
+<VV_EndingCreditsNoQueen>옛 동화 속에만 남아 있던 거대한 꽃그늘이 수백 년 만에 다시 펼쳐졌습니다. 지나간 시대의 작은 빛들도 이 품에서 안식을 찾았고, 따스한 그늘 아래 비비들은 더 길고 평화로운 삶을 누릴 것입니다.</VV_EndingCreditsNoQueen>
 <VV_EndingCreditsExiled>왜소한 몸 때문에 고향 둥지를 떠나야 했던 로열 비비는 이곳에 어엿한 새 둥지를 일구었습니다.</VV_EndingCreditsExiled>
 <VV_EndingCreditsRefugee>거대 말벌에게 터전을 잃고 쫓기던 피난민들은 이제 스스로 둥지를 지켜 낼 힘을 갖추었습니다.</VV_EndingCreditsRefugee>
-<VV_EndingCreditsOutro>길었던 불면의 계절이 지나고, 시린 들판 위에 다시 봄이 찾아왔습니다. 그리고 이 꽃그늘 아래에서 당신의 이야기는 계속됩니다...</VV_EndingCreditsOutro>
+<VV_EndingCreditsOutro>길었던 겨울이 지나고 시린 들판 위에 다시 봄이 찾아왔습니다. 그리고 새로운 꽃그늘 아래에서 당신의 이야기는 계속됩니다...</VV_EndingCreditsOutro>
 <VV_Ending_ResonatorFallback>공명자</VV_Ending_ResonatorFallback>
 <VV_FailReason_GoldenBloomHoldsWeather>개화 중인 영원꽃이 꽃안개를 유지하고 있어 날씨를 바꿀 수 없습니다</VV_FailReason_GoldenBloomHoldsWeather>
 <VV_FloatMenu_ResonateFairyFlower>요정꽃과 공명</VV_FloatMenu_ResonateFairyFlower>
@@ -154,20 +154,20 @@
 <VV_FailReason_FairyFlowerNotAdult>아기는 공명할 수 없음</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>움직일 수 없음</VV_FailReason_CannotMove>
 <VV_FailReason_FairyFlowerAlreadyBound>이미 여제의 결속 상태임</VV_FailReason_FairyFlowerAlreadyBound>
-<VV_Hediff_DoomBlightLevel>저주 단계: {0} / {1}</VV_Hediff_DoomBlightLevel>
+<VV_Hediff_DoomBlightLevel>저주: {0} / {1}</VV_Hediff_DoomBlightLevel>
 <VV_ManaBarrierTargetMana>범위 안 환경 마나: {0}/{1}</VV_ManaBarrierTargetMana>
-<VV_FailReason_EndingInProgress>〈만개하는 여명〉이 진행되는 동안에는 이 영원꽃에서 다른 의식을 치를 수 없습니다.</VV_FailReason_EndingInProgress>
+<VV_FailReason_EndingInProgress>만개 의식이 진행되는 동안에는 이 영원꽃에서 다른 의식을 치를 수 없습니다.</VV_FailReason_EndingInProgress>
 <VV_FailReason_RequiresEverflowerAltar>영원꽃 제단에 안치되어 있어야 합니다.</VV_FailReason_RequiresEverflowerAltar>
-<VV_FailReason_GrandAttunementLocked>고대 유적에서 고대 호박 코어를 추출한 뒤에만 진행할 수 있습니다.</VV_FailReason_GrandAttunementLocked>
+<VV_FailReason_GrandAttunementLocked>고대 유적에서 비비 초월공학 코어를 추출한 뒤에만 진행할 수 있습니다.</VV_FailReason_GrandAttunementLocked>
 <VV_FailReason_GrandAttunementMinVivis>공명자 외에 비비 참여자가 최소 {0}명 필요합니다.</VV_FailReason_GrandAttunementMinVivis>
-<VV_FailReason_GrandAttunementInProgress>마지막 개화가 이미 진행 중입니다.</VV_FailReason_GrandAttunementInProgress>
-<VV_FailReason_GrandAttunementCompleted>마지막 개화가 이미 완료되었습니다.</VV_FailReason_GrandAttunementCompleted>
-<VV_FailReason_GrandAttunementFailed>마지막 개화가 중단되었습니다.</VV_FailReason_GrandAttunementFailed>
-<VV_FailReason_CoronationNotAnchor>만개 의식으로 개화를 시작한 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
-<VV_FailReason_CoronationLocked>개화 응축이 완료된 뒤에만 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
+<VV_FailReason_GrandAttunementInProgress>만개 의식이 이미 진행 중입니다.</VV_FailReason_GrandAttunementInProgress>
+<VV_FailReason_GrandAttunementCompleted>만개 의식이 이미 완료되었습니다.</VV_FailReason_GrandAttunementCompleted>
+<VV_FailReason_GrandAttunementFailed>만개 의식이 중단되었습니다.</VV_FailReason_GrandAttunementFailed>
+<VV_FailReason_CoronationNotAnchor>만개 의식으로 완료된 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_CoronationLocked>만개 의식이 완료된 뒤에 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
 <VV_FailReason_RuinNotQualified>조율 {0}단계 이상의 영원꽃과 연결된 로열 비비만 할 수 있습니다</VV_FailReason_RuinNotQualified>
 <VV_FailReason_RuinPreviousFlower>앞선 요정꽃을 먼저 조사해야 합니다</VV_FailReason_RuinPreviousFlower>
-<VV_FailReason_RuinCoreLocked>마지막 요정꽃을 먼저 조사해야 합니다</VV_FailReason_RuinCoreLocked>
+<VV_FailReason_RuinCoreLocked>요정꽃을 먼저 조사해야 합니다</VV_FailReason_RuinCoreLocked>
 <VV_FailReason_RuinCoreExtracted>이미 코어를 추출했습니다</VV_FailReason_RuinCoreExtracted>
 <VV_FailReason_RuinPuzzleSolved>이미 봉인이 해제되었습니다</VV_FailReason_RuinPuzzleSolved>
 </LanguageData>

@@ -1,8 +1,5 @@
 #version 450
 
-// 아스포델 28칸 결계 보호막 셰이더: 거의 투명한 황금빛 육각형 결계 격자가 천천히 회전하며,
-// 경계선(r = _Radius)은 또렷한 이중 금빛 고리와 회전 장식 마디로 읽히고 투사체 차단 시 피격 지점이 번쩍인다.
-
 layout(location = 1) in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -69,7 +66,6 @@ void main()
     float rimProx = smoothstep(R - 10.5, R, r);
     float outerRimProx = smoothstep(R - 3.2, R, r);
 
-    // 육각형 격자선 (내부는 아주 옅고 경계에 가까워질수록 자연스럽게 살아남)
     float hexW = max(0.052, px * 0.85);
     float hexLine = exp(-(edgeWorld * edgeWorld) / (hexW * hexW));
     float hexSoft = exp(-edgeWorld / 0.26);
@@ -82,19 +78,16 @@ void main()
         hexLine * (0.062 + 0.032 * wave + 0.155 * rimProx + 0.145 * outerRimProx)
         + hexSoft * (0.012 + 0.042 * outerRimProx));
 
-    // 경계선 (r = R): 또렷한 금빛 외곽선 + 옅은 내곽선 + 회전하는 6각/24분 마름모 마디
     float ringW = max(0.095, px * 1.2);
     float outerRing = exp(-(dRim * dRim) / (ringW * ringW));
     float outerHalo = exp(-abs(dRim) / 0.55) * (0.42 + 0.58 * inside);
     float innerW = max(0.052, px * 0.88);
     float innerRing = exp(-((r - (R - 0.72)) * (r - (R - 0.72))) / (innerW * innerW)) * inside;
 
-    // RimWorld AngleFlat 기준 (0 = +Z 북, pi/2 = +X 동)
     float theta = atan(w.x, w.y);
     float rotTheta = theta + rot;
     float crest6 = 0.5 + 0.5 * cos(rotTheta * 6.0);
 
-    // 24개 회전 마름모 마디(외곽선과 내곽선 사이)
     float step24 = TAU / 24.0;
     float localAng = mod(rotTheta + step24 * 0.5, step24) - step24 * 0.5;
     float arcDist = abs(localAng) * R;
@@ -107,7 +100,6 @@ void main()
         + innerRing * 0.26
         + node * (0.34 + 0.16 * crest6);
 
-    // 투사체 차단 시 피격 지점 금빛 파동 반짝임
     float impAlphaIn = clamp(u._ImpactAlpha, 0.0, 1.0);
     float impFlash = 0.0;
     if (impAlphaIn > 0.001)
