@@ -47,7 +47,8 @@ namespace VVRace
 
         public AcceptanceReport CanResonate(Pawn pawn)
         {
-            if (Ending || _relayed || _chainCollapsing || pawn == null || pawn.Dead || pawn.Downed || pawn.Faction != Faction.OfPlayer) { return false; }
+            if (Ending || _relayed || _chainCollapsing || pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed || pawn.Faction != Faction.OfPlayer) { return false; }
+            if (Hediff_EverflowerAssimilation.IsAssimilated(pawn) || Hediff_EverflowerQueen.IsAwaitingEnshrinement(pawn)) { return false; }
 
             var bossComp = Spawned ? ApocryphaGimmicks.FindBoss(Map)?.TryGetComp<CompApocrypha>() : null;
             if (bossComp != null && bossComp.IsAsphodelActive && !bossComp.FairyChains.IsFlowerAwaitingInteraction(this))
@@ -56,7 +57,6 @@ namespace VVRace
             }
 
             if (!pawn.IsVivi()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerNotVivi.Translate().Resolve(); }
-            if (pawn.IsRoyalVivi()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerRoyalVivi.Translate().Resolve(); }
             if (pawn.DevelopmentalStage.Baby()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerNotAdult.Translate().Resolve(); }
             if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving)) { return LocalizeString_Etc.VV_FailReason_CannotMove.Translate().Resolve(); }
             if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_AsphodelBond)) { return LocalizeString_Etc.VV_FailReason_FairyFlowerAlreadyBound.Translate().Resolve(); }
@@ -222,7 +222,7 @@ namespace VVRace
                 if (pawn.Dead || pawn == boss || pawn.TryGetComp<CompApocrypha>() != null) { continue; }
                 if (pawn.kindDef == VVPawnKindDefOf.VV_TitanicHornet || pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_DoomPhantasm)) { continue; }
 
-                if (pawn.IsVivi() && !pawn.IsRoyalVivi() && !pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_AsphodelBond))
+                if (ApocryphaUtility.CanFairyficateVivi(pawn))
                 {
                     bound.Add(pawn);
                     continue;

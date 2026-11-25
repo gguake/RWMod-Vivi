@@ -135,6 +135,12 @@ namespace VVRace
 
         public AcceptanceReport CanRepurchase(Map map)
         {
+            var federation = ViviEndingUtility.FindFederation(requireNonHostile: false);
+            if (federation != null && federation.HostileTo(Faction.OfPlayer))
+            {
+                return LocalizeString_Dialog.VV_Comms_FederationHostile.Translate().Resolve();
+            }
+
             if (map == null || !TradeUtility.ColonyHasEnoughSilver(map, RepurchaseCost))
             {
                 return "NeedSilverLaunchable".Translate(RepurchaseCost);

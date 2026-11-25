@@ -5,7 +5,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DoomFlower</defName>
     <label>doom bloom</label>
-    <description>A cursed flower grown from the ancient vivi queen's warped memories and mana. If it is not destroyed before it fully blooms, visions of the old catastrophe spread and lay a deadly curse on every colonist in the area.</description>
+    <description>A cursed flower grown from mana and terrible memories of the distant past. If it is not destroyed before it fully blooms, visions of the old catastrophe spread and lay a deadly curse on every colonist in the area.</description>
     <thingClass>VVRace.Building_DoomFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_DoomFlower</texPath>
@@ -73,7 +73,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower born from the spreading mana of the fairy vivis wrapped around the empress of the nightshade. When a normal vivi resonates with it, she connects to the flower with an energy line and becomes bound to the empress.\n\nThe empress can use psychic power channeled through fairy blooms to forcibly bind vivis to herself. Conversely, binding the empress to the everflower can free the fairy vivis bound to her.\n\nIt can also be destroyed by attacks, but doing so makes the empress's attacks fiercer.</description>
+    <description>A flower imbued with the mana of the fairy vivis wrapped around the empress of the nightshade. When a non-baby vivi resonates with it, she soon turns into a fairy bound to the empress, and if she does not reach the everflower altar, a new fairy bloom sprouts.\n\nThe empress can use psychic power channeled through fairy blooms to forcibly bind non-baby vivis near them to herself. Conversely, linking fairy blooms to connect the empress to the everflower altar weakens her bond and frees only the vivis bound to those fairy blooms.\n\nIt can also be destroyed by attacks, but doing so makes the empress's attacks fiercer.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

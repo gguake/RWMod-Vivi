@@ -4,7 +4,7 @@
   <WorldObjectDef ParentName="Site">
     <defName>VV_AncientRuins</defName>
     <label>ancient ruins</label>
-    <description>The ruins of an old vivi empire altar, located at the source of a powerful wave of mana sensed during everflower resonance.</description>
+    <description>The source of a powerful wave of mana sensed during everflower resonance. On the surface, the area is known to hold nothing remarkable.</description>
     <worldObjectClass>VVRace.Site_ViviAncientRuins</worldObjectClass>
     <!-- 철수·전멸 뒤 바로 재파견할 수 있도록 재진입 쿨다운(EnterCooldown)만 뺀다 -->
     <comps Inherit="False">
@@ -22,7 +22,7 @@
   <SitePartDef>
     <defName>VV_AncientRuins</defName>
     <label>ancient ruins</label>
-    <description>The ruins of an old vivi empire altar. Fairy blooms still flower within them.</description>
+    <description>The source of a powerful wave of mana sensed during everflower resonance. On the surface, the area is known to hold nothing remarkable.</description>
     <workerClass>SitePartWorker</workerClass>
     <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
     <expandingIconTexture>World/WorldObjects/Expanding/Sites/ItemStash</expandingIconTexture>

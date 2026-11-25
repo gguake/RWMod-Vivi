@@ -34,7 +34,7 @@
 <VV_RuinCreamWall.description>오래전 급하게 막아둔 비비 크림 벽이 그대로 방치되어 굳은듯한 벽입니다. 불안정한 구조로 인해 한 부분을 부수면 연결된 주변 덩어리도 함께 무너져 내립니다.</VV_RuinCreamWall.description>
 
 <VV_AncientSanctumLamp.label>고대 마나 방출기</VV_AncientSanctumLamp.label>
-<VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 방출하는 옛 비비 제국의 신비한 유물입니다. 하지만 현재는 그 힘도 다해 겨우 약한 빛을 비추는 정도의 기능만 남아있습니다.</VV_AncientSanctumLamp.description>
+<VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 방출하는 오래된 신비한 유물입니다. 하지만 현재는 그 힘도 다해 겨우 약한 빛을 비추는 정도의 기능만 남아있습니다.</VV_AncientSanctumLamp.description>
 
 <VV_RuinDoomFlower.label>멸망꽃</VV_RuinDoomFlower.label>
 <VV_RuinDoomFlower.description>어떤 이유에서인지 계속 자라나는 기괴하게 생긴 마법 꽃입니다.</VV_RuinDoomFlower.description>
@@ -43,6 +43,6 @@
 <VV_RuinPuzzlePot.description>튼튼한 고대의 비비 화분입니다. 놀라울 정도로 현대의 비비 화분과 외관에 차이가 없습니다.</VV_RuinPuzzlePot.description>
 
 <VV_RuinPuzzleFairyFlower.label>요정꽃</VV_RuinPuzzleFairyFlower.label>
-<VV_RuinPuzzleFairyFlower.description>폐허에 피어난 신비한 마법 꽃입니다. 일부 요정꽃끼리는 특이한 마나로 다른 요정꽃과 연결되있으며 요정꽃끼리 공명시켜 서로 위치를 옮길수 있는것으로 보입니다. 어떠한 모양이 되도록 의도한것처럼 보입니다.</VV_RuinPuzzleFairyFlower.description>
+<VV_RuinPuzzleFairyFlower.description>폐허에 피어난 신비한 마법 꽃입니다. 일부 요정꽃끼리는 특이한 마나로 다른 요정꽃과 연결되어 있으며 요정꽃끼리 공명시켜 서로 위치를 옮길수 있는것으로 보입니다. 어떠한 모양이 되도록 의도한것처럼 보입니다.</VV_RuinPuzzleFairyFlower.description>
 <VV_RuinPuzzleFairyFlower.comps.CompUsable.useLabel>{0_label} 공명 교체</VV_RuinPuzzleFairyFlower.comps.CompUsable.useLabel>
 </LanguageData>

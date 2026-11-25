@@ -96,12 +96,14 @@
         public const string VV_Quest_EndingStageAltar = nameof(VV_Quest_EndingStageAltar);
         public const string VV_Quest_EndingStageAltarCoreLost = nameof(VV_Quest_EndingStageAltarCoreLost);
         public const string VV_Quest_EndingStageBloom = nameof(VV_Quest_EndingStageBloom);
+        public const string VV_Quest_EndingStageCalm = nameof(VV_Quest_EndingStageCalm);
+        public const string VV_Quest_EndingStageBoss = nameof(VV_Quest_EndingStageBoss);
+        public const string VV_Quest_EndingStageCoronation = nameof(VV_Quest_EndingStageCoronation);
         public const string VV_Quest_EndingStageHostile = nameof(VV_Quest_EndingStageHostile);
         public const string VV_Quest_EndingTruthLog = nameof(VV_Quest_EndingTruthLog);
 
         public const string VV_Quest_EndingStepAltar = nameof(VV_Quest_EndingStepAltar);
         public const string VV_Quest_EndingStepEnshrine = nameof(VV_Quest_EndingStepEnshrine);
-        public const string VV_Quest_EndingStepParticipants = nameof(VV_Quest_EndingStepParticipants);
 
         public const string VV_EndingCredits = nameof(VV_EndingCredits);
         public const string VV_EndingCreditsNoQueen = nameof(VV_EndingCreditsNoQueen);
@@ -150,7 +152,6 @@
 
         public const string VV_FloatMenu_ResonateFairyFlower = nameof(VV_FloatMenu_ResonateFairyFlower);
         public const string VV_FailReason_FairyFlowerNotVivi = nameof(VV_FailReason_FairyFlowerNotVivi);
-        public const string VV_FailReason_FairyFlowerRoyalVivi = nameof(VV_FailReason_FairyFlowerRoyalVivi);
         public const string VV_FailReason_FairyFlowerNotAdult = nameof(VV_FailReason_FairyFlowerNotAdult);
         public const string VV_FailReason_CannotMove = nameof(VV_FailReason_CannotMove);
         public const string VV_FailReason_FairyFlowerAlreadyBound = nameof(VV_FailReason_FairyFlowerAlreadyBound);

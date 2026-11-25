@@ -4,7 +4,7 @@
   <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_Requiem</defName>
     <label>requiem ritual</label>
-    <description>Emits a serene wave from the everflower that dissolves all unattended humanlike corpses in the area. Colonist corpses and unnatural corpses are unaffected.</description>
+    <description>Emits a serene wave from the everflower that dissolves all corpses in the area. Colonist corpses are unaffected.</description>
     <ritualPatternBase>VV_Requiem</ritualPatternBase>
     <iconPath>UI/Commands/VV_Requiem</iconPath>
     <displayOrderInImpact>992</displayOrderInImpact>

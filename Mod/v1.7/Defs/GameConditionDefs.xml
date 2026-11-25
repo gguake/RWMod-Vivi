@@ -26,7 +26,7 @@
     <defName>VV_GoldenBloom</defName>
     <conditionClass>VVRace.GameCondition_GoldenBloom</conditionClass>
     <label>golden pollen mist</label>
-    <description>The everflower's golden pollen mist covers the area. Fire cannot spread, ranged accuracy is slightly reduced, and all arcane plants gain unlimited mana.</description>
+    <description>The everflower's golden pollen mist covers the area. Fire cannot spread, and all arcane plants gain unlimited mana.</description>
     <weatherDef>VV_GoldenBloomMist</weatherDef>
     <natural>false</natural>
     <displayOnUI>false</displayOnUI>

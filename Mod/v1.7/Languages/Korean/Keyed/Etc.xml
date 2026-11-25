@@ -68,7 +68,7 @@
 
 <VV_Thing_Seed>{0} 씨앗</VV_Thing_Seed>
 <VV_Thing_SeedDesc>{0}의 씨앗입니다. 땅이나 마법 식물 화분에 심으면 모종이 되며, 모종이 완전히 자라면 {0}이(가) 됩니다.\n마법 식물이 성장하려면 마나와 양분이 모두 공급되야 합니다.
-\n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
+\n마나는 환경 마나를 흡수하므로 주변에 마나 방출기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
 \n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마나 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_Thing_SeedDesc>
 
 <VV_Thing_Seedling>{0} 모종</VV_Thing_Seedling>
@@ -123,11 +123,13 @@
 <VV_Quest_EndingStageRuinsExtract>중심 제단에서 비비 초월공학 코어를 추출하십시오.</VV_Quest_EndingStageRuinsExtract>
 <VV_Quest_EndingStageAltar>비비 초월공학 코어로 영원꽃 제단을 건설하고 영원꽃을 안치한 뒤 만개 의식을 치르십시오.</VV_Quest_EndingStageAltar>
 <VV_Quest_EndingStageAltarCoreLost>비비 초월공학 코어와 제단을 모두 잃었다면 통신기로 비비 연방에 연락해 분실물 회수를 의뢰할 수 있습니다.</VV_Quest_EndingStageAltarCoreLost>
-<VV_Quest_EndingStageBloom>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤 대관식을 치르십시오. 제단이나 영원꽃을 잃으면 개화가 중단됩니다.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageBloom>영원꽃이 만개에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤 대관식을 치르십시오. 제단이나 영원꽃을 잃으면 만개 의식이 중단됩니다.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageCalm>낯선 초정신 파장에 막혀 영원꽃의 개화 응축이 멈추었습니다. 무언가가 마나의 흐름을 따라 다가오고 있습니다.</VV_Quest_EndingStageCalm>
+<VV_Quest_EndingStageBoss>밤그늘의 여제가 영원꽃을 빼앗으려 합니다. 제단의 영원꽃을 지키고 여제를 물리치십시오.</VV_Quest_EndingStageBoss>
+<VV_Quest_EndingStageCoronation>방해가 사라지고 영원꽃의 개화 응축이 끝났습니다. 제단에서 공명자의 대관식을 치러 만개 의식을 완성하십시오.</VV_Quest_EndingStageCoronation>
 <VV_Quest_EndingStageHostile>비비 연방과 적대 중입니다.</VV_Quest_EndingStageHostile>
 <VV_Quest_EndingStepAltar>영원꽃 제단 건설</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>조율 {0}단계 영원꽃을 제단 중앙에 안치</VV_Quest_EndingStepEnshrine>
-<VV_Quest_EndingStepParticipants>만개 의식에 참여할 비비: {0} / {1}명</VV_Quest_EndingStepParticipants>
 <VV_Quest_EndingTruthLog>불타는 꽃그늘 아래 홀로 남은 옛 여제는 자신이 낳은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 긴 세월 곁을 지키며 그녀를 감싸 안아 왔습니다. 뒤틀린 껍질이 무너진 뒤에도 다시 모여들어 여제를 지켜 내던 빛들은, 마침내 결속이 풀리고 여제가 잠들자 제단의 영원꽃 품으로 돌아와 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
 <VV_FairyTale1_Label>꽃그늘 동화 1권</VV_FairyTale1_Label>
 <VV_FairyTale1_Title>꽃그늘 동화 1권: 시들지 않는 봄</VV_FairyTale1_Title>
@@ -150,7 +152,6 @@
 <VV_FailReason_GoldenBloomHoldsWeather>개화 중인 영원꽃이 꽃안개를 유지하고 있어 날씨를 바꿀 수 없습니다</VV_FailReason_GoldenBloomHoldsWeather>
 <VV_FloatMenu_ResonateFairyFlower>요정꽃과 공명</VV_FloatMenu_ResonateFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>비비가 아님</VV_FailReason_FairyFlowerNotVivi>
-<VV_FailReason_FairyFlowerRoyalVivi>로열 비비는 공명할 수 없음</VV_FailReason_FairyFlowerRoyalVivi>
 <VV_FailReason_FairyFlowerNotAdult>아기는 공명할 수 없음</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>움직일 수 없음</VV_FailReason_CannotMove>
 <VV_FailReason_FairyFlowerAlreadyBound>이미 여제의 결속 상태임</VV_FailReason_FairyFlowerAlreadyBound>
@@ -163,8 +164,8 @@
 <VV_FailReason_GrandAttunementInProgress>만개 의식이 이미 진행 중입니다.</VV_FailReason_GrandAttunementInProgress>
 <VV_FailReason_GrandAttunementCompleted>만개 의식이 이미 완료되었습니다.</VV_FailReason_GrandAttunementCompleted>
 <VV_FailReason_GrandAttunementFailed>만개 의식이 중단되었습니다.</VV_FailReason_GrandAttunementFailed>
-<VV_FailReason_CoronationNotAnchor>만개 의식으로 완료된 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
-<VV_FailReason_CoronationLocked>만개 의식이 완료된 뒤에 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
+<VV_FailReason_CoronationNotAnchor>만개 의식이 진행 중인 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_CoronationLocked>개화 응축이 완료된 뒤에 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
 <VV_FailReason_RuinNotQualified>조율 {0}단계 이상의 영원꽃과 연결된 로열 비비만 할 수 있습니다</VV_FailReason_RuinNotQualified>
 <VV_FailReason_RuinPreviousFlower>앞선 요정꽃을 먼저 조사해야 합니다</VV_FailReason_RuinPreviousFlower>
 <VV_FailReason_RuinCoreLocked>요정꽃을 먼저 조사해야 합니다</VV_FailReason_RuinCoreLocked>

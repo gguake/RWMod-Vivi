@@ -476,6 +476,14 @@ namespace VVRace
             return true;
         }
 
+        public static bool CanFairyficateVivi(Pawn pawn)
+        {
+            if (pawn == null || pawn.Dead || pawn.Discarded || !pawn.IsVivi() || pawn.DevelopmentalStage.Baby()) { return false; }
+            if (Hediff_EverflowerAssimilation.IsAssimilated(pawn) || Hediff_EverflowerQueen.IsAwaitingEnshrinement(pawn)) { return false; }
+
+            return pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) != true;
+        }
+
         public static void BindToAsphodel(List<Pawn> vivis, Map map, IntVec3 soundCell)
         {
             if (vivis.Count == 0) { return; }

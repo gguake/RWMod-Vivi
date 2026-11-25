@@ -19,12 +19,12 @@
 
 <VV_FairySigilWard.label>요정 문양</VV_FairySigilWard.label>
 <VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
-<VV_FairyFlower.description>밤그늘의 여제를 감싼 요정 비비들의 마나가 깃든 꽃입니다. 비비가 공명하면 잠시 후 요정화되어 여제에게 결속되고 새로운 요정꽃이 피어납니다.
-\n여제는 요정꽃을 매개로 한 초능력으로 요정꽃 주변의 비비들을 강제로 자신에게 결속시킬 수 있습니다. 반대로 요정꽃을 연결해 여제를 영원꽃과 연결시킨다면 여제에게 결속되어있는 요정 비비들을 해방시킬수도 있습니다.
+<VV_FairyFlower.description>밤그늘의 여제를 감싼 요정 비비들의 마나가 깃든 꽃입니다. 아기가 아닌 비비가 공명하면 잠시 후 요정화되어 여제에게 결속되고, 영원꽃 제단에 닿지 못하면 새로운 요정꽃이 피어납니다.
+\n여제는 요정꽃을 매개로 한 초능력으로 요정꽃 주변의 아기가 아닌 비비들을 강제로 자신에게 결속시킬 수 있습니다. 반대로 요정꽃을 이어 여제를 영원꽃 제단과 연결하면 여제의 결속을 약화시키고 그 요정꽃에 묶인 비비들만 해방시킬 수 있습니다.
 \n공격으로 파괴할 수도 있지만 여제의 공격이 더 거세집니다.</VV_FairyFlower.description>
 
 <VV_EverflowerAltar.label>영원꽃 제단</VV_EverflowerAltar.label>
-<VV_EverflowerAltar.description>비비 초월공학 코어의 마나 회로를 바탕으로 복원한 제단입니다. 대지 깊은 곳의 마나를 모아 영원꽃이 마지막 개화에 이를 수 있도록 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 공간이 격리되어 제단이 피해를 받지 않고 해체할 수도 없으며, 영원꽃도 옮길 수 없습니다.</VV_EverflowerAltar.description>
+<VV_EverflowerAltar.description>비비 초월공학 코어의 마나 회로를 바탕으로 복원한 제단입니다. 대지 깊은 곳의 마나를 모아 영원꽃이 만개에 이를 수 있도록 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 공간이 격리되어 제단이 피해를 받지 않고 해체할 수도 없으며, 영원꽃도 옮길 수 없습니다.</VV_EverflowerAltar.description>
 
 <VV_AncientAmberCore.label>비비 초월공학 코어</VV_AncientAmberCore.label>
 <VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 특이하게 생긴 코어입니다. 원리는 알 수 없지만 그 자체로 대지 깊은 곳의 마나를 끌어내는 장치인것 같습니다.</VV_AncientAmberCore.description>

@@ -13,6 +13,8 @@ namespace VVRace
         public override AcceptanceReport CanBeSettled => false;
         public override bool GravShipCanLandOn => false;
 
+        public override string GetDescription() => def.description;
+
         public override void SpawnSetup()
         {
             base.SpawnSetup();

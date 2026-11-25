@@ -3,7 +3,7 @@
   <!-- 고대 유적 요정꽃: 번호(index) 순서대로만 조사할 수 있다 -->
   <ThingDef Name="VV_AncientRuinFairyFlowerBase" ParentName="BuildingBase" Abstract="True">
     <label>fairy bloom</label>
-    <description>A mysterious arcane flower blooming amid the ruins. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
+    <description>An unknown, mysterious arcane flower. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
     <thingClass>Building</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>
@@ -71,7 +71,6 @@
 
   <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
     <defName>VV_AncientRuinFairyFlowerIII</defName>
-    <description>A mysterious arcane flower blooming within the sanctum. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
     <comps>
       <li Class="VVRace.CompProperties_UseEffectRuinEcho">
         <index>3</index>
@@ -81,7 +80,7 @@
 
   <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
     <defName>VV_AncientRuinFairyFlowerIV</defName>
-    <description>A mysterious arcane flower blooming before the central altar. The oldest memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
+    <description>An unknown, mysterious arcane flower. The oldest memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
     <comps>
       <li Class="VVRace.CompProperties_UseEffectRuinEcho">
         <index>4</index>
@@ -184,7 +183,7 @@
   <ThingDef ParentName="Wall">
     <defName>VV_AncientRuinWall</defName>
     <label>ancient honeycomb wall</label>
-    <description>A weathered honeycomb wall from the old vivi empire, hardened by centuries of crystallized mana so that conventional weapons cannot breach it.</description>
+    <description>A honeycomb wall hardened by mana crystallized over the ages, impossible to breach with conventional attacks.</description>
     <graphicData>
       <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -221,7 +220,7 @@
   <ThingDef ParentName="Wall">
     <defName>VV_AncientSanctumWall</defName>
     <label>ancient sanctum wall</label>
-    <description>An immaculate reinforced honeycomb wall preserved untouched within the spatial seal since the height of the old vivi empire.</description>
+    <description>A honeycomb wall hardened by mana crystallized over the ages, impossible to breach with conventional attacks.</description>
     <graphicData>
       <texPath>Things/Building/Wall_Atlas_HardenHoneycombWall</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -259,7 +258,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinCreamWall</defName>
     <label>hardened cream wall</label>
-    <description>An overgrown mass of hardened ancient vivicream choking the ruin passages. Brittle along its fault lines, shattering one section causes nearby connected chunks to collapse with it.</description>
+    <description>A vivicream wall that seems to have been hastily put up long ago and left to harden. Because of its unstable structure, breaking one section causes nearby connected chunks to collapse with it.</description>
     <graphicData>
       <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -327,7 +326,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AncientSanctumLamp</defName>
     <label>ancient mana emitter</label>
-    <description>A mysterious relic of the old vivi empire that absorbs and emits residual mana from the earth without fuel. Now, however, its power is nearly spent, leaving it only able to cast light.</description>
+    <description>An ancient mysterious relic that absorbs and emits residual mana from the earth without fuel. Now, however, its power is spent, leaving it barely able to cast a faint light.</description>
     <thingClass>Building</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_ManaEmitter</texPath>

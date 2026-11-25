@@ -4,7 +4,7 @@
   <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_WindOfRest</defName>
     <label>area purification ritual</label>
-    <description>Calls up a purifying wind across the area, clearing tox gas, rot stink, and pollution, ending toxic fallout, curing toxic buildup, rot stink exposure, lung rot, scaria, and event diseases (excluding age-related conditions) on all creatures, and purifying titanic hornets.</description>
+    <description>Calls up a purifying wind that sweeps across the area, clearing all pollution.</description>
     <ritualPatternBase>VV_WindOfRest</ritualPatternBase>
     <iconPath>UI/Commands/VV_WindOfRest</iconPath>
     <displayOrderInImpact>993</displayOrderInImpact>
@@ -28,7 +28,7 @@
   <!-- 지역 정화 의식 결과 -->
   <RitualOutcomeEffectDef ParentName="VV_EverflowerRitualOutcomeBase">
     <defName>VV_WindOfRest</defName>
-    <description>When the ritual completes, a purifying wind sweeps across the area, clearing tox gas, rot stink, and pollution, ending toxic fallout, curing toxic buildup, rot stink exposure, lung rot, scaria, and event diseases (excluding age-related conditions), and purifying titanic hornets.\n\nThe better the ritual's result, the shorter the cooldown on the next everflower ritual.\n\nAll everflower rituals share a cooldown.</description>
+    <description>When the ritual completes, a purifying wind sweeps across the area, clearing all pollution.\n\nThe better the ritual's result, the shorter the cooldown on the next everflower ritual.\n\nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_WindOfRest</workerClass>
     <effecter>VV_Effecter_WindOfRestComplete</effecter>
   </RitualOutcomeEffectDef>

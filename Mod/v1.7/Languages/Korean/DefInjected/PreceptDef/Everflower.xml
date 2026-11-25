@@ -21,13 +21,13 @@
 <VV_Requiem.description>영원꽃에서 고요한 파동을 방출해 지역 내의 모든 시체를 소멸시킵니다. 정착민의 시체는 사라지지 않습니다.</VV_Requiem.description>
 
 <VV_GrandAttunement.label>영원꽃 만개 의식</VV_GrandAttunement.label>
-<VV_GrandAttunement.description>제단의 마나 회로를 깨워 안치된 영원꽃의 마지막 개화를 시작합니다. 의식에는 비비만 참여할 수 있으며 공명자 외에 최소 10명의 비비가 함께해야 합니다. 개화가 응축되는 동안 공명자는 영원꽃과 완전히 동화되어 행동할 수 없습니다.</VV_GrandAttunement.description>
+<VV_GrandAttunement.description>제단의 마나 회로를 깨워 안치된 영원꽃의 만개 의식을 시작합니다. 의식에는 비비만 참여할 수 있으며 공명자 외에 최소 10명의 비비가 함께해야 합니다. 개화가 응축되는 동안 공명자는 영원꽃과 완전히 동화되어 행동할 수 없습니다.</VV_GrandAttunement.description>
 
 <VV_ReturnOfLife.label>생명의 회귀</VV_ReturnOfLife.label>
 <VV_ReturnOfLife.description>오랜 결속에서 풀려나 영원꽃에 머물고 있는 고대 요정 비비에게 육체를 되돌려 줍니다.</VV_ReturnOfLife.description>
 
 <VV_QueensCoronation.label>대관식</VV_QueensCoronation.label>
-<VV_QueensCoronation.description>공명자가 여왕으로 즉위하며 영원꽃의 마지막 개화를 완성합니다.</VV_QueensCoronation.description>
+<VV_QueensCoronation.description>공명자가 여왕으로 즉위하며 영원꽃의 만개 의식을 완성합니다.</VV_QueensCoronation.description>
 
 <VV_WindOfRest.label>지역 정화 의식</VV_WindOfRest.label>
 <VV_WindOfRest.description>지역 전체를 휩쓰는 정화의 바람을 일으켜 모든 오염을 제거합니다.</VV_WindOfRest.description>

@@ -12,13 +12,13 @@
 
 <!-- Ending -->
 <VV_Comms_FederationHostile>hostile to the vivi federation</VV_Comms_FederationHostile>
-<VV_Comms_TraditionInquiry>Ask about the custom of the fairy tale books and everflower</VV_Comms_TraditionInquiry>
+<VV_Comms_TraditionInquiry>Ask about the fairy tale books</VV_Comms_TraditionInquiry>
 <VV_Comms_TraditionInquiryResult>{LEADER}: "Giving an everflower seed to a new nest and sending old fairy tale books as its attunement deepens is simply a tradition handed down from long ago. We do not know any deeper meaning behind it.\n\nAll that survives is an old legend saying that in the distant past, an everflower far larger than any today once bloomed."</VV_Comms_TraditionInquiryResult>
 <VV_Comms_TaleRepurchase>Request an old fairy tale book again</VV_Comms_TaleRepurchase>
-<VV_Comms_TaleRepurchaseIntro>{LEADER}: "Which volume should we send again? The cost rises a little each time we bind a book anew."</VV_Comms_TaleRepurchaseIntro>
+<VV_Comms_TaleRepurchaseIntro>{LEADER} asks which fairy tale book you would like sent again, noting that an additional copy comes at a cost.</VV_Comms_TaleRepurchaseIntro>
 <VV_Comms_TaleRepurchaseOption>{0} ({1} silver)</VV_Comms_TaleRepurchaseOption>
-<VV_Comms_TaleRepurchaseResult>{LEADER}: "We will send {0} again."</VV_Comms_TaleRepurchaseResult>
-<VV_Comms_ReplacementCore>Restore a replacement amber core</VV_Comms_ReplacementCore>
-<VV_Comms_ReplacementCoreResult>A replacement core has been restored from the circuit data secured during the first extraction.</VV_Comms_ReplacementCoreResult>
-<VV_DialogChangeWeatherGoldenBloomDesc>A mist of golden pollen and petals covers the area, preventing fire from spreading, slightly reducing ranged accuracy, and granting unlimited mana to all arcane plants.</VV_DialogChangeWeatherGoldenBloomDesc>
+<VV_Comms_TaleRepurchaseResult>{LEADER} says they will send {0} again.</VV_Comms_TaleRepurchaseResult>
+<VV_Comms_ReplacementCore>Recover the lost core</VV_Comms_ReplacementCore>
+<VV_Comms_ReplacementCoreResult>The vivi federation searched for the lost archotech core and delivered it to you.</VV_Comms_ReplacementCoreResult>
+<VV_DialogChangeWeatherGoldenBloomDesc>A mist of golden pollen and petals covers the area, preventing fire from spreading and granting unlimited mana to all arcane plants.</VV_DialogChangeWeatherGoldenBloomDesc>
 </LanguageData>

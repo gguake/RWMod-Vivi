@@ -26,15 +26,10 @@ namespace VVRace
             var sb = new StringBuilder();
             var everflower = ViviEndingUtility.FindEndingCandidate();
             var altar = ViviEndingUtility.AltarOf(everflower);
-            var resonator = ViviEndingUtility.ResonatorOf(everflower);
-            var participants = resonator != null ? CountPlayerVivi(resonator) : Mathf.Max(0, CountPlayerVivi() - 1);
-            var requiredParticipants = RitualOutcomeEffectWorker_GrandAttunement.MinViviParticipants;
 
             AppendLine(sb, altar != null, LocalizeString_Etc.VV_Quest_EndingStepAltar.Translate().Resolve());
             AppendLine(sb, everflower != null && everflower.EverflowerComp.IsEnshrined && everflower.AttunementLevel >= Building_EverflowerAltar.RequiredAttunementLevel,
                 LocalizeString_Etc.VV_Quest_EndingStepEnshrine.Translate(Building_EverflowerAltar.RequiredAttunementLevel).Resolve());
-            AppendLine(sb, participants >= requiredParticipants,
-                LocalizeString_Etc.VV_Quest_EndingStepParticipants.Translate(participants, requiredParticipants).Resolve());
 
             return sb.ToString();
         }

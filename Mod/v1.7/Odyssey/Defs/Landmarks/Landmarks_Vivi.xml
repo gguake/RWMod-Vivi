@@ -4,7 +4,7 @@
   <TileMutatorDef>
     <defName>VV_ArcanePlantHabitat</defName>
     <label>arcane plant habitat</label>
-    <description>Arcane plants such as {0} grow wild here, and environment mana wells up where they grow.</description>
+    <description>An area where arcane plants such as {0} grow wild.</description>
     <workerClass>VVRace.TileMutatorWorker_ArcanePlantHabitat</workerClass>
     <pollutionRange>0~0</pollutionRange>
     <extraGenSteps>

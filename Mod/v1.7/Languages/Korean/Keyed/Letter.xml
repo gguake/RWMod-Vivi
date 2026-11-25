@@ -18,7 +18,7 @@
 
 <VV_Letter_LinkEverflowerLabel>영원꽃 공명</VV_Letter_LinkEverflowerLabel>
 <VV_Letter_LinkEverflower>{PAWN_labelShort}이(가) 영원꽃과 공명해 정신이 연결되었습니다. 영원꽃의 조율 등급이 강해질수록 여러 이로운 효과와 영원꽃의 능력을 사용할 수 있습니다.
-\n영원꽃은 로열 비비를 통해 환경 마나를 흡수하며, 마나를 흡수하거나 공명 중인 로열 비비가 추가적인 공명 연결 의식을 수행하면 공명 연결이 강해집니다.</VV_Letter_LinkEverflower>
+\n영원꽃은 로열 비비를 통해 환경 마나를 흡수하며, 마나를 흡수하거나 공명 중인 로열 비비가 추가적인 영원꽃 조율 의식을 수행하면 공명 연결이 강해집니다.</VV_Letter_LinkEverflower>
 
 <VV_Letter_EverflowerAttumentLevelUpLabel>영원꽃 조율: {LEVEL}단계</VV_Letter_EverflowerAttumentLevelUpLabel>
 <VV_Letter_EverflowerAttumentLevelUp>영원꽃의 조율 상태가 높아졌습니다. 이제 다음과 같은 영원꽃 의식이 가능합니다.</VV_Letter_EverflowerAttumentLevelUp>
@@ -39,14 +39,14 @@
 
 <VV_Letter_ApocryphaRebirthLabel>밤그늘의 여제</VV_Letter_ApocryphaRebirthLabel>
 <VV_Letter_ApocryphaRebirth>거대 말벌 여왕의 형체는 무너져 사라졌지만 그 안에 남아있던 빛무리가 모여 다시 형체를 이루었습니다. 수많은 요정 비비가 옛 여제를 겹겹이 감싸고 있으며, 과거의 모습을 일시적이나마 되찾은 밤그늘의 여제는 자신만의 구원을 집행하기 위해 영원꽃을 빼앗을것입니다.
-\n결속된 수많은 요정 비비들이 모든 공격을 대신 받아내고 있습니다. 여제를 멈추려면 먼저 요정 장막을 공격해 깨뜨린 뒤, 주변에 피어나는 요정꽃과 일반 비비가 공명해 이어진 결속의 선을 영원꽃 제단까지 이끌어 여제와 요정 비비들의 결속을 끊어 주어야 합니다.</VV_Letter_ApocryphaRebirth>
+\n결속된 수많은 요정 비비들이 모든 공격을 대신 받아내고 있습니다. 여제를 멈추려면 먼저 요정 장막을 공격해 깨뜨린 뒤, 주변에 피어나는 요정꽃과 아기가 아닌 비비가 공명해 이어진 결속의 선을 영원꽃 제단까지 이끌어 여제와 요정 비비들의 결속을 끊어 주어야 합니다.</VV_Letter_ApocryphaRebirth>
 
 <VV_Letter_AsphodelFallenLabel>꽃잎이 된 여제</VV_Letter_AsphodelFallenLabel>
 <VV_Letter_AsphodelFallen>"{QUOTE}"\n\n감싸고 있던 요정 비비들이 풀려나자, 여제의 형체가 금빛 꽃잎으로 흩어지며 영원꽃을 향해 날려 갔습니다.</VV_Letter_AsphodelFallen>
 
 <VV_Letter_AsphodelReleasedLabel>요정화 해제</VV_Letter_AsphodelReleasedLabel>
 <VV_Letter_FairyFlowerBoundLabel>요정화</VV_Letter_FairyFlowerBoundLabel>
-<VV_Letter_FairyFlowerBound>요정꽃의 주변의 비비들이 자아를 잃고 요정이 되어 여제의 품으로 끌려갔습니다.\n\n{PAWNS}</VV_Letter_FairyFlowerBound>
+<VV_Letter_FairyFlowerBound>요정꽃 주변의 비비들이 자아를 잃고 요정이 되어 여제의 품으로 끌려갔습니다.\n\n{PAWNS}</VV_Letter_FairyFlowerBound>
 
 <VV_Letter_ApocryphaEmbraceLabel>요정화</VV_Letter_ApocryphaEmbraceLabel>
 <VV_Letter_ApocryphaEmbrace>여제의 부활의 포옹에 휩싸인 비비들이 자아를 잃고 요정이 되어 여제의 품으로 끌려갔습니다.\n\n{PAWNS}</VV_Letter_ApocryphaEmbrace>
@@ -65,7 +65,7 @@
 <VV_Letter_EverflowerEcho5>영원꽃에서 마나 파동이 퍼지자 {PAWN_labelShort}의 초정신 회로에 잡음이 흘러들었습니다. 이번에는 과거의 기억이 아니었습니다.\n\n수많은 이들의 속삭임과 뼈가 뒤틀리는 소리. 무언가가 마나의 흐름을 따라 다가오고 있었습니다.\n\n"......그리운...... 따스한......"\n"다시...... 그 꽃그늘로......"\n\n연결이 끊어졌습니다.</VV_Letter_EverflowerEcho5>
 
 <VV_Letter_EndingSiegeLabel>맥동하는 영원꽃</VV_Letter_EndingSiegeLabel>
-<VV_Letter_EndingSiege>제단의 마나 회로가 깨어나며 영원꽃이 다섯 번째 단계에 들어섰습니다. 영원꽃이 마지막 만개에 필요한 마나를 응축하기 시작하기 시작했습니다.\n\n그러나 제단에서 멀리 퍼져 나간 파동과 멀리서도 식별되는 거대한 황금빛 영원꽃에 이끌려 외지인들과 거대 말벌 무리가 정착지로 몰려들고 있습니다. 응축이 끝날 때까지 제단과 동화 중인 공명자를 지켜야 합니다.</VV_Letter_EndingSiege>
+<VV_Letter_EndingSiege>제단의 마나 회로가 깨어나며 영원꽃이 다섯 번째 단계에 들어섰습니다. 영원꽃이 만개에 필요한 마나를 응축하기 시작했습니다.\n\n그러나 제단에서 멀리 퍼져 나간 파동과 멀리서도 식별되는 거대한 황금빛 영원꽃에 이끌려 외지인들과 거대 말벌 무리가 정착지로 몰려들고 있습니다. 응축이 끝날 때까지 제단과 동화 중인 공명자를 지켜야 합니다.</VV_Letter_EndingSiege>
 <VV_Letter_EndingSiegeFederation>영원꽃의 파동을 감지한 비비 연방이 동맹을 맺었습니다. 적이 쳐들어오면 연방이 지원군을 보내 함께 싸울 것입니다.</VV_Letter_EndingSiegeFederation>
 <VV_Letter_EndingSiegeFederationSupport>영원꽃의 파동을 감지한 비비 연방이 힘을 보태기로 했습니다. 적이 쳐들어오면 연방이 지원군을 보내 함께 싸울 것입니다.</VV_Letter_EndingSiegeFederationSupport>
 <VV_Letter_EndingFederationAidLabel>비비 연방 지원군</VV_Letter_EndingFederationAidLabel>
@@ -77,15 +77,15 @@
 <VV_Letter_EndingApocryphaLabel>바스러진 여제</VV_Letter_EndingApocryphaLabel>
 <VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여들더니, 유적의 기억 속에 있던 옛 여제가 거대한 말벌 여왕의 형상으로 일그러져 모습을 드러냈습니다. 오염된 마나에 이끌린 거대 말벌 무리가 그 뒤를 따릅니다.\n\n"......이 그늘만 있으면...... 울음소리가...... 내 아이들을......"\n\n그 단단한 외피에는 아마 원래 그녀의 것으로 보이는 고대 엘텍스 바늘이 깊숙이 박혀 있습니다. 어쩌면 이를 활용해야 할지도 모릅니다.</VV_Letter_EndingApocrypha>
 <VV_Letter_EndingCoronationLabel>대관식</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>금빛 꽃잎으로 흩어진 여제의 여운과 함께, 끝까지 곁에 남아 있던 작은 빛들이 제단 위 영원꽃과 동화 중인 {PAWN_labelShort}에게로 조용히 스며들었습니다.\n\n길었던 싸움이 마침내 끝나고, 억눌려 멈춰 있던 영원꽃이 다시 맥동합니다.\n\n이제 제단에서 {PAWN_labelShort}의 대관식을 치러 마지막 개화를 완성할 수 있습니다.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>금빛 꽃잎으로 흩어진 여제의 여운과 함께, 끝까지 곁에 남아 있던 작은 빛들이 제단 위 영원꽃과 동화 중인 {PAWN_labelShort}에게로 조용히 스며들었습니다.\n\n길었던 싸움이 마침내 끝나고, 억눌려 멈춰 있던 영원꽃이 다시 맥동합니다.\n\n이제 제단에서 {PAWN_labelShort}의 대관식을 치러 만개 의식을 완성할 수 있습니다.</VV_Letter_EndingCoronation>
 <VV_Letter_EndingVictoryLabel>시들지 않는 봄</VV_Letter_EndingVictoryLabel>
 <VV_Letter_EndingVictoryContinue>이후에도 정착지에서 계속 플레이할 수 있습니다. 만개한 영원꽃이 있는 정착지의 성체 비비의 노화가 크게 느려집니다.\n\n이제 만개한 영원꽃에서 생명의 회귀, 지역 정화, 꽃의 대지 의식을 치를 수 있습니다.</VV_Letter_EndingVictoryContinue>
 <VV_Letter_EndingFailureLabel>영원꽃 찬탈</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>제단의 영원꽃이 꽃잎으로 흩어져 밤그늘의 여제에게 빨려 들어갔습니다. 영원꽃을 거두어 안은 여제는 꽃잎 바람 너머 어둠 속으로 다시 사라졌습니다.\n\n영원꽃을 잃어 마지막 개화가 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다..</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>제단의 영원꽃이 꽃잎으로 흩어져 밤그늘의 여제에게 빨려 들어갔습니다. 영원꽃을 거두어 안은 여제는 꽃잎 바람 너머 어둠 속으로 다시 사라졌습니다.\n\n영원꽃을 잃어 만개 의식이 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>영원꽃 소실</VV_Letter_EndingFailureLostLabel>
-<VV_Letter_EndingFailureLost>제단이나 영원꽃을 잃어 마지막 개화가 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다..</VV_Letter_EndingFailureLost>
+<VV_Letter_EndingFailureLost>제단이나 영원꽃을 잃어 만개 의식이 중단되었습니다. 하지만 제단과 영원꽃을 다시 갖추면 만개 의식을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>끊어진 공명</VV_Letter_EndingFailureResonatorLabel>
-<VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화가 중단되었습니다.\n\n새로운 공명자가 나타나면 다시금 제단에서 만개 의식을 시작할 수 있습니다.</VV_Letter_EndingFailureResonator>
+<VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 만개 의식이 중단되었습니다.\n\n새로운 공명자가 나타나면 다시금 제단에서 만개 의식을 시작할 수 있습니다.</VV_Letter_EndingFailureResonator>
 <VV_Letter_FederationReactionLabel>비비 연방의 전갈</VV_Letter_FederationReactionLabel>
 <VV_Letter_FederationReaction>정착지에서 피어오른 만개의 파동을 확인한 비비 연방에서 축하 전갈을 보내왔습니다.\n\n연방에서도 왜 새 둥지에 옛 동화책을 보내왔는지 본래 이유는 알지 못했으나, 수백 년 만에 전설 속 거대한 꽃그늘이 실제로 다시 피어난 광경을 보고 깊은 경외를 느꼈다고 전해 왔습니다.\n\n비비 연방은 새로운 여왕이 이끄는 정착지에 경의를 표하며 변함없는 우호를 약속했습니다.</VV_Letter_FederationReaction>
 <VV_Letter_QueenLifeResonanceLabel>생명 공명: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>

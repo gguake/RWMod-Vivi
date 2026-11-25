@@ -51,7 +51,7 @@
 <VV_QueensCoronation.comps.0.labelAbstract>공명자의 정신 감응력</VV_QueensCoronation.comps.0.labelAbstract>
 <VV_QueensCoronation.comps.1.label>참여자 수</VV_QueensCoronation.comps.1.label>
 
-<VV_WindOfRest.description>의식이 완료되면 정화의 바람이 지역 전체를 지나가며 독가스·부패가스·오염을 제거하고 유독성 낙진을 강제 종료합니다. 지역 내 모든 생물의 중독·부패가스 노출·폐 부패·스카리아·각종 질병(노화 질환 제외)을 치유하며 거대 말벌은 정화되어 소멸합니다.
+<VV_WindOfRest.description>의식이 완료되면 지역 전체를 휩쓰는 정화의 바람이 지나가며 모든 오염을 제거합니다.
 \n의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
 \n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_WindOfRest.description>
 <VV_WindOfRest.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_WindOfRest.comps.0.label>

@@ -23,8 +23,8 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>saved</label>
-        <description>Returned before the everflower from the empress's embrace. Every ache and weariness has washed away in warm golden light.</description>
+        <label>salvation</label>
+        <description>It feels like I just had a sleep so sweet I never wanted to wake up, but it's time to get moving.</description>
         <baseMoodEffect>40</baseMoodEffect>
       </li>
     </stages>

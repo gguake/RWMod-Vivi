@@ -449,6 +449,7 @@ namespace VVRace
         public bool GrantReplacementCore(Map map)
         {
             if (map == null || !_coreExtracted || VVThingDefOf.VV_AncientAmberCore == null) { return false; }
+            if (ViviEndingUtility.FindFederation(requireNonHostile: true) == null) { return false; }
 
             var core = ThingMaker.MakeThing(VVThingDefOf.VV_AncientAmberCore);
             DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(map), map, new[] { core }, forbid: false);

@@ -4,7 +4,7 @@
   <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_QueensCoronation</defName>
     <label>coronation</label>
-    <description>Crowns the resonator queen and completes the everflower's final bloom.</description>
+    <description>Crowns the resonator queen and completes the everflower's full bloom ritual.</description>
     <ritualPatternBase>VV_QueensCoronation</ritualPatternBase>
     <iconPath>UI/Commands/VV_QueensCoronation</iconPath>
     <displayOrderInImpact>994</displayOrderInImpact>

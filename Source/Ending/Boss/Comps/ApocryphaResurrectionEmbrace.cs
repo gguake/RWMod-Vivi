@@ -288,9 +288,9 @@ namespace VVRace
         {
             if (pawn == null || pawn.Dead || pawn == Pawn || pawn.TryGetComp<CompApocrypha>() != null) { return false; }
             if (downedOnly && !pawn.Downed) { return false; }
-            if (pawn.Faction != Faction.OfPlayer || !pawn.IsVivi() || pawn.IsRoyalVivi()) { return false; }
+            if (pawn.Faction != Faction.OfPlayer) { return false; }
 
-            return pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) != true;
+            return ApocryphaUtility.CanFairyficateVivi(pawn);
         }
 
         private bool IsEligible(Corpse corpse, IntVec3 center, Map map)
@@ -298,7 +298,7 @@ namespace VVRace
             if (!corpse.Spawned || corpse.Map != map || !corpse.Position.InHorDistOf(center, Props.embraceRadius)) { return false; }
 
             var pawn = corpse.InnerPawn;
-            if (pawn == null || pawn.Discarded || pawn.Faction != Faction.OfPlayer || !pawn.IsVivi() || pawn.IsRoyalVivi()) { return false; }
+            if (pawn == null || pawn.Discarded || pawn.Faction != Faction.OfPlayer || !pawn.IsVivi() || pawn.DevelopmentalStage.Baby()) { return false; }
             if (pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_AsphodelBond) == true) { return false; }
 
             return corpse.GetRotStage() != RotStage.Dessicated;

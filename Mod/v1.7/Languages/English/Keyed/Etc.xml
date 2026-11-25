@@ -124,11 +124,13 @@
 <VV_Quest_EndingStageRuinsExtract>Extract the vivi archotech core from the central altar.</VV_Quest_EndingStageRuinsExtract>
 <VV_Quest_EndingStageAltar>Build an everflower altar with the vivi archotech core, enshrine the everflower, and perform the full bloom ritual.</VV_Quest_EndingStageAltar>
 <VV_Quest_EndingStageAltarCoreLost>If both the vivi archotech core and the altar are lost, you can contact the vivi federation via comms console to request recovery of the lost core.</VV_Quest_EndingStageAltarCoreLost>
-<VV_Quest_EndingStageBloom>The everflower is condensing mana for its final bloom.\n\nDefend the altar until it is ready, then have the resonator perform the coronation. If the altar, everflower, or resonator is lost, the bloom is interrupted.</VV_Quest_EndingStageBloom>
-<VV_Quest_EndingStageHostile>Progress has stopped because you are hostile to the vivi federation. Once relations recover, it will resume where it left off.</VV_Quest_EndingStageHostile>
+<VV_Quest_EndingStageBloom>The everflower is condensing mana to come into full bloom.\n\nDefend the altar until condensation is complete, then perform the coronation. If the altar or everflower is lost, the full bloom ritual is interrupted.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageCalm>Blocked by a strange psychic wave, the everflower's bloom condensation has halted. Something is approaching along the flow of mana.</VV_Quest_EndingStageCalm>
+<VV_Quest_EndingStageBoss>The empress of the nightshade seeks to seize the everflower. Defend the everflower on the altar and defeat the empress.</VV_Quest_EndingStageBoss>
+<VV_Quest_EndingStageCoronation>With the interference gone, the everflower's bloom condensation is complete. Perform the resonator's coronation at the altar to complete the full bloom ritual.</VV_Quest_EndingStageCoronation>
+<VV_Quest_EndingStageHostile>You are hostile to the vivi federation.</VV_Quest_EndingStageHostile>
 <VV_Quest_EndingStepAltar>Build the everflower altar</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>Enshrine an everflower of attunement level {0} at the center of the altar</VV_Quest_EndingStepEnshrine>
-<VV_Quest_EndingStepParticipants>Vivis to attend the full bloom ritual (excluding resonator): {0} / {1}</VV_Quest_EndingStepParticipants>
 <VV_Quest_EndingTruthLog>Left alone beneath the burning flower's shade, the old empress opened her circuits beyond their limit so as not to lose a single one of the children she had borne, and took the countless vivis beneath the shade into herself as little lights. But one soul could not bear that weight. Her attunement and her self collapsed, and the shade was left empty.\n\nThe little lights remembered her last kindness. They did not leave the twisted empress, staying by her side and wrapping around her through the long ages. Even after her monstrous shell fell, they gathered once more to shield her—until at last the bond came undone, the empress fell asleep, and the freed lights returned to rest within the everflower on the altar, waiting for the spring when they will wake again.</VV_Quest_EndingTruthLog>
 <VV_FairyTale1_Label>flowershade tales I</VV_FairyTale1_Label>
 <VV_FairyTale1_Title>Flowershade Tales I: The Spring That Never Wilted</VV_FairyTale1_Title>
@@ -142,33 +144,32 @@
 <VV_FairyTale4_Label>flowershade tales IV</VV_FairyTale4_Label>
 <VV_FairyTale4_Title>Flowershade Tales IV: A Dream Happy Forever</VV_FairyTale4_Title>
 <VV_FairyTale4_Desc>At last, on the day a fierce darkness from outside fell upon the flower's shade, the kind queen turned all the children beneath it into little lights, so that not a single one would be hurt.\n\nThe queen had taken in so many lights that she grew terribly weary, and the little lights wrapped her up warmly, carried her far away, and tucked her in to sleep. In a warm dream where no cold wind could reach, the queen and the children never parted again and lived happily ever after.</VV_FairyTale4_Desc>
-<VV_EndingCredits>{PAWN_nameDef} completes the coronation. Golden petals settle into a crown above {PAWN_possessive} head.\n\nThe great flower's shade, once found only in old fairy tales, has spread again after centuries. The weight of the bond now flows into the bloomed flower as well, and the little lights of a past age have found rest in its embrace. Beneath the warm shade, vivis will live longer lives.\n\n{PAWN_nameDef} has become queen of the vivis.</VV_EndingCredits>
-<VV_EndingCreditsNoQueen>The great flower's shade, once found only in old fairy tales, has spread again after centuries. The little lights of a past age have found rest in its embrace, and beneath the warm shade, vivis will live longer lives.</VV_EndingCreditsNoQueen>
+<VV_EndingCredits>{PAWN_nameDef} completes the coronation. Golden petals settle into a crown above {PAWN_possessive} head.\n\nThe great flower's shade, once found only in old fairy tales, has spread again after centuries. The burden the old empress once tried to bear alone has now begun to be shared by the bloomed flower and countless vivis, and the little lights of a past age have found rest in its embrace. Beneath the warm shade, vivis will live longer lives.</VV_EndingCredits>
+<VV_EndingCreditsNoQueen>The great flower's shade, once found only in old fairy tales, has spread again after centuries. The little lights of a past age have found rest in its embrace, and beneath the warm shade, vivis will live longer, more peaceful lives.</VV_EndingCreditsNoQueen>
 <VV_EndingCreditsExiled>The royal vivi who had to leave her home nest because of her small body has raised a fine new nest here.</VV_EndingCreditsExiled>
 <VV_EndingCreditsRefugee>The refugees who lost their home to the titanic hornets and fled before them now have the strength to defend their own nest.</VV_EndingCreditsRefugee>
-<VV_EndingCreditsOutro>The long season of sleeplessness has passed, and spring has come again to the cold fields. And beneath this flower's shade, your story continues...</VV_EndingCreditsOutro>
+<VV_EndingCreditsOutro>The long winter has passed, and spring has come again to the cold fields. And beneath the new flower's shade, your story continues...</VV_EndingCreditsOutro>
 <VV_Ending_ResonatorFallback>the resonator</VV_Ending_ResonatorFallback>
 <VV_FailReason_GoldenBloomHoldsWeather>The blooming everflower is sustaining the golden mist, preventing weather changes</VV_FailReason_GoldenBloomHoldsWeather>
 <VV_FloatMenu_ResonateFairyFlower>Resonate with fairy bloom</VV_FloatMenu_ResonateFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>not a vivi</VV_FailReason_FairyFlowerNotVivi>
-<VV_FailReason_FairyFlowerRoyalVivi>royal vivis cannot resonate</VV_FailReason_FairyFlowerRoyalVivi>
 <VV_FailReason_FairyFlowerNotAdult>babies cannot resonate</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_CannotMove>cannot move</VV_FailReason_CannotMove>
 <VV_FailReason_FairyFlowerAlreadyBound>already bound to the empress</VV_FailReason_FairyFlowerAlreadyBound>
-<VV_Hediff_DoomBlightLevel>Curse level: {0} / {1}</VV_Hediff_DoomBlightLevel>
+<VV_Hediff_DoomBlightLevel>Curse: {0} / {1}</VV_Hediff_DoomBlightLevel>
 <VV_ManaBarrierTargetMana>Environment mana in radius: {0}/{1}</VV_ManaBarrierTargetMana>
-<VV_FailReason_EndingInProgress>No other rituals can be performed on this everflower while Dawn in full bloom is underway.</VV_FailReason_EndingInProgress>
+<VV_FailReason_EndingInProgress>No other rituals can be performed on this everflower while the full bloom ritual is underway.</VV_FailReason_EndingInProgress>
 <VV_FailReason_RequiresEverflowerAltar>Must be enshrined on the everflower altar.</VV_FailReason_RequiresEverflowerAltar>
-<VV_FailReason_GrandAttunementLocked>Can only be performed after extracting the ancient amber core from the ancient ruins.</VV_FailReason_GrandAttunementLocked>
+<VV_FailReason_GrandAttunementLocked>Can only be performed after extracting the vivi archotech core from the ancient ruins.</VV_FailReason_GrandAttunementLocked>
 <VV_FailReason_GrandAttunementMinVivis>At least {0} vivi participants besides the resonator are required.</VV_FailReason_GrandAttunementMinVivis>
-<VV_FailReason_GrandAttunementInProgress>The final bloom is already underway.</VV_FailReason_GrandAttunementInProgress>
-<VV_FailReason_GrandAttunementCompleted>The final bloom is already complete.</VV_FailReason_GrandAttunementCompleted>
-<VV_FailReason_GrandAttunementFailed>The final bloom has been interrupted.</VV_FailReason_GrandAttunementFailed>
-<VV_FailReason_CoronationNotAnchor>Requires the everflower awakened by the full bloom ritual.</VV_FailReason_CoronationNotAnchor>
-<VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
+<VV_FailReason_GrandAttunementInProgress>The full bloom ritual is already underway.</VV_FailReason_GrandAttunementInProgress>
+<VV_FailReason_GrandAttunementCompleted>The full bloom ritual is already complete.</VV_FailReason_GrandAttunementCompleted>
+<VV_FailReason_GrandAttunementFailed>The full bloom ritual has been interrupted.</VV_FailReason_GrandAttunementFailed>
+<VV_FailReason_CoronationNotAnchor>Can only be performed on the everflower undergoing the full bloom ritual.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_CoronationLocked>Can only be performed once bloom condensation is complete.</VV_FailReason_CoronationLocked>
 <VV_FailReason_RuinNotQualified>only a royal vivi linked to an everflower of attunement level {0} or higher can do this</VV_FailReason_RuinNotQualified>
 <VV_FailReason_RuinPreviousFlower>the previous fairy bloom must be investigated first</VV_FailReason_RuinPreviousFlower>
-<VV_FailReason_RuinCoreLocked>the last fairy bloom must be investigated first</VV_FailReason_RuinCoreLocked>
+<VV_FailReason_RuinCoreLocked>the fairy bloom must be investigated first</VV_FailReason_RuinCoreLocked>
 <VV_FailReason_RuinCoreExtracted>the core has already been extracted</VV_FailReason_RuinCoreExtracted>
 <VV_FailReason_RuinPuzzleSolved>the seal has already been lifted</VV_FailReason_RuinPuzzleSolved>
 </LanguageData>

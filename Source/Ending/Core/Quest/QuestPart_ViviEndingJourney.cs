@@ -47,10 +47,10 @@ namespace VVRace
 
         private static int DescriptionKey(ViviEndingQuest ending)
         {
-            var hasFederation = ViviEndingUtility.FindFederation(requireNonHostile: true) != null ? 1 : 0;
+            var flags = (IsFederationHostile() ? 1 : 0) | (ending.IsCoreLost ? 2 : 0);
             return Gen.HashCombineInt(
                 Gen.HashCombineInt((int)ending.Stage, ending.Tales.Delivered),
-                Gen.HashCombineInt(ending.Ruins.Investigated, hasFederation));
+                Gen.HashCombineInt(ending.Ruins.Investigated, flags));
         }
 
         public override IEnumerable<GlobalTargetInfo> QuestLookTargets
@@ -105,14 +105,24 @@ namespace VVRace
                     if (ending.IsCoreLost)
                     {
                         sb.Append("\n\n").Append(LocalizeString_Etc.VV_Quest_EndingStageAltarCoreLost.Translate().Resolve());
+                        AppendHostility(sb);
                     }
                     break;
 
                 case ViviEndingStage.Siege:
-                case ViviEndingStage.Calm:
-                case ViviEndingStage.Boss:
-                case ViviEndingStage.Coronation:
                     sb.Append(LocalizeString_Etc.VV_Quest_EndingStageBloom.Translate().Resolve());
+                    break;
+
+                case ViviEndingStage.Calm:
+                    sb.Append(LocalizeString_Etc.VV_Quest_EndingStageCalm.Translate().Resolve());
+                    break;
+
+                case ViviEndingStage.Boss:
+                    sb.Append(LocalizeString_Etc.VV_Quest_EndingStageBoss.Translate().Resolve());
+                    break;
+
+                case ViviEndingStage.Coronation:
+                    sb.Append(LocalizeString_Etc.VV_Quest_EndingStageCoronation.Translate().Resolve());
                     break;
 
                 default:
@@ -122,9 +132,15 @@ namespace VVRace
             return sb.ToString();
         }
 
+        private static bool IsFederationHostile()
+        {
+            var federation = ViviEndingUtility.FindFederation(requireNonHostile: false);
+            return federation != null && federation.HostileTo(Faction.OfPlayer);
+        }
+
         private static void AppendHostility(StringBuilder sb)
         {
-            if (ViviEndingUtility.FindFederation(requireNonHostile: true) != null) { return; }
+            if (!IsFederationHostile()) { return; }
 
             sb.Append("\n\n").Append(LocalizeString_Etc.VV_Quest_EndingStageHostile.Translate().Resolve().Colorize(ColorLibrary.RedReadable));
         }
