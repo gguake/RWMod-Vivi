@@ -234,10 +234,9 @@ namespace VVRace
         }
         #endregion
 
-        public int GetBondDurationTicks(FairyFlowerChain chain)
+        public int GetBondDurationTicks()
         {
-            var relayStep = Mathf.Max(1, chain?.flowers.Count ?? 1);
-            return Props.asphodelBondDurationTicks * relayStep;
+            return Props.asphodelBondDurationTicks;
         }
 
         #region 이벤트 처리
@@ -253,7 +252,7 @@ namespace VVRace
 
             RemoveBondHediffSilently(pawn);
             var bond = pawn.health.AddHediff(VVHediffDefOf.VV_AsphodelBond) as Hediff_AsphodelBond;
-            bond?.Configure(GetBondDurationTicks(chain));
+            bond?.Configure(GetBondDurationTicks());
 
             chain.state = FairyChainState.TetheredToPawn;
             chain.tetheredPawn = pawn;

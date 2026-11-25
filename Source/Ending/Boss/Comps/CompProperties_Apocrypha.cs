@@ -30,7 +30,7 @@ namespace VVRace
         public float fairyFlowerExpireBondRecover = 0.10f;
         public float fairyFlowerDispelBondDrain = 0.03f;
         public float fairyChainAltarRadius = 6.5f;
-        public int asphodelBondDurationTicks = 750;
+        public int asphodelBondDurationTicks = 900;
         public FloatRange fairyFlowerDistance = new FloatRange(6f, 18f);
 
         public int resolveMaxStacks = 5;
