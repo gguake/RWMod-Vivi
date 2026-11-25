@@ -27,7 +27,7 @@
     <rotatable>false</rotatable>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <Flammability>0.5</Flammability>
       <Beauty>-15</Beauty>
     </statBases>
@@ -94,7 +94,7 @@
     <rotatable>false</rotatable>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <statBases>
-      <MaxHitPoints>2000</MaxHitPoints>
+      <MaxHitPoints>500</MaxHitPoints>
       <Flammability>0</Flammability>
       <Beauty>15</Beauty>
     </statBases>

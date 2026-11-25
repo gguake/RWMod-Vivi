@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 고대 유적 요정꽃: 번호(index) 순서대로만 조사할 수 있다 -->
   <ThingDef Name="VV_AncientRuinFairyFlowerBase" ParentName="BuildingBase" Abstract="True">
     <label>fairy bloom</label>
     <description>An unknown, mysterious arcane flower. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
@@ -88,7 +87,6 @@
     </comps>
   </ThingDef>
 
-  <!-- 고대 유적 중심 제단: 마지막 요정꽃을 조사한 뒤 고대 호박 코어를 한 번 추출할 수 있다 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AncientRuinAltar</defName>
     <label>ancient everflower altar</label>
@@ -137,7 +135,6 @@
     </comps>
   </ThingDef>
 
-  <!-- 공간 왜곡 결계: 봉인된 유적 외곽을 가로막는 투명 장벽 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinSpatialBarrier</defName>
     <label>spatial distortion barrier</label>
@@ -179,7 +176,6 @@
     </building>
   </ThingDef>
 
-  <!-- 고대 유적 외곽 미로 벽 (풍화된 불멸 벌집 벽) -->
   <ThingDef ParentName="Wall">
     <defName>VV_AncientRuinWall</defName>
     <label>ancient honeycomb wall</label>
@@ -216,7 +212,6 @@
     <stuffCategories Inherit="False" />
   </ThingDef>
 
-  <!-- 고대 성소 내부 벽 (온전히 보존된 황금빛 강화 벌집 벽) -->
   <ThingDef ParentName="Wall">
     <defName>VV_AncientSanctumWall</defName>
     <label>ancient sanctum wall</label>
@@ -254,7 +249,6 @@
     <stuffCategories Inherit="False" />
   </ThingDef>
 
-  <!-- 고대 유적 전용 연쇄 붕괴 크림 벽: 살덩이처럼 파괴 시 연결된 일부분이 함께 무너진다 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinCreamWall</defName>
     <label>hardened cream wall</label>
@@ -322,7 +316,6 @@
     </comps>
   </ThingDef>
 
-  <!-- 고대 성소 등불 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AncientSanctumLamp</defName>
     <label>ancient mana emitter</label>
@@ -370,7 +363,6 @@
     </comps>
   </ThingDef>
 
-  <!-- 유적 시련 복도 입구 멸망꽃 (스스로 만개하지 않음 · 파괴 시 길 안내 잔향 생성 및 재생성) -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinDoomFlower</defName>
     <label>doom bloom</label>
@@ -415,7 +407,6 @@
     </comps>
   </ThingDef>
 
-  <!-- 마지막 구간 육각형 공명 화분 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinPuzzlePot</defName>
     <label>ancient vivi pot</label>
@@ -460,7 +451,6 @@
     </building>
   </ThingDef>
 
-  <!-- 마지막 구간 육각형 재정렬 퍼즐용 공명 요정꽃 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_RuinPuzzleFairyFlower</defName>
     <label>fairy bloom</label>
