@@ -87,7 +87,7 @@
     <designationCategory Inherit="False" />
     <comps>
       <li Class="VVRace.CompProperties_CompWallReplace">
-        <replaceTicks>420000</replaceTicks>
+        <replaceTicks>300000</replaceTicks>
         <replaceThing>VV_ViviHoneycombWall</replaceThing>
       </li>
 
@@ -118,8 +118,8 @@
     <uiIconPath>Things/Building/VV_HoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>620</MaxHitPoints>
-      <Flammability>0.55</Flammability>
+      <MaxHitPoints>600</MaxHitPoints>
+      <Flammability>0.5</Flammability>
     </statBases>
     <building>
       <relatedBuildCommands>
@@ -165,7 +165,7 @@
     <uiIconPath>Things/Building/VV_HardenHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>620</MaxHitPoints>
+      <MaxHitPoints>660</MaxHitPoints>
       <Flammability>0</Flammability>
     </statBases>
     <building>
